@@ -65,29 +65,41 @@ export async function registerRoutes(
       if (retry.length === 0) return res.json([]); 
     }
 
-    // Generate questions for each candidate
     const quizQuestions = await Promise.all(candidates.map(async (word) => {
-      // Get 3 distractors
-      const allWords = await storage.getWords(100);
-      const distractors = allWords
+      // 1 correct, 3 distractors
+      // PRD Distractor Priority: Same cluster -> Same part of speech -> Similar transliteration -> Random
+      const clusterWords = await storage.getWordsByCluster(clusterId || 0);
+      const allWords = await storage.getWords(200);
+      
+      const potentialDistractors = allWords
         .filter(w => w.id !== word.id)
-        .sort(() => 0.5 - Math.random())
-        .slice(0, 3);
+        .sort((a, b) => {
+          const aInCluster = clusterWords.some(cw => cw.id === a.id);
+          const bInCluster = clusterWords.some(cw => cw.id === b.id);
+          if (aInCluster && !bInCluster) return -1;
+          if (!aInCluster && bInCluster) return 1;
+          
+          if (a.partOfSpeech === word.partOfSpeech && b.partOfSpeech !== word.partOfSpeech) return -1;
+          if (a.partOfSpeech !== word.partOfSpeech && b.partOfSpeech === word.partOfSpeech) return 1;
+          
+          return 0;
+        });
+
+      const distractors = potentialDistractors.slice(0, 3);
+      
+      const type = ['telugu_to_english', 'english_to_telugu', 'fill_in_blank'][Math.floor(Math.random() * 3)];
       
       const options = [word, ...distractors]
         .sort(() => 0.5 - Math.random())
         .map(w => ({
           id: w.id,
-          text: w.english // For Telugu->English question
+          text: type === 'telugu_to_english' || type === 'fill_in_blank' ? w.english : w.telugu
         }));
-
-      // Randomize question type (Simple implementation: mostly Telugu -> English)
-      const type = 'telugu_to_english'; 
 
       return {
         wordId: word.id,
         type,
-        questionText: word.telugu, // Show Telugu word
+        questionText: type === 'telugu_to_english' || type === 'fill_in_blank' ? word.telugu : word.english,
         audioUrl: word.audioUrl,
         options,
       };

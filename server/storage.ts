@@ -122,65 +122,49 @@ export class DatabaseStorage implements IStorage {
 
   // Implementation of the "Word Selection Algorithm" from PRD
   async getQuizCandidates(userId: string, limit: number = 10, clusterId?: number): Promise<Word[]> {
-    // 1. Get all words (optionally filtered by cluster)
+    // 1. Get pool of words
     let candidateWords: Word[] = [];
     if (clusterId) {
       candidateWords = await this.getWordsByCluster(clusterId);
     } else {
-      candidateWords = await this.getWords(1000); // Get enough pool
+      candidateWords = await this.getWords(500);
     }
 
-    // 2. Get user progress for these words
+    // 2. Get user progress
     const progressList = await this.getUserProgress(userId);
     const progressMap = new Map(progressList.map(p => [p.wordId, p]));
 
-    // 3. Score each word
-    // Score = difficulty_weight + days_since_last_seen + (wrong_count * 2) - correct_streak
+    // 3. Score based on PRD: difficulty_weight + days_since_last_seen + (wrong_count * 2) - correct_streak
     const scoredWords = candidateWords.map(word => {
       const progress = progressMap.get(word.id);
       
       let score = 0;
-      
       if (!progress) {
-        // New word: High priority to introduce it
-        score = 100 + (word.difficulty || 1) * 5; 
+        // New words have baseline priority
+        score = (word.difficulty || 1) * 2 + 50; 
       } else {
-        // Existing word logic
-        const daysSinceLastSeen = progress.lastSeen 
-          ? (Date.now() - new Date(progress.lastSeen).getTime()) / (1000 * 60 * 60 * 24)
-          : 0;
-          
-        score = (word.difficulty || 1) * 2 
-          + daysSinceLastSeen * 5 
-          + (progress.wrongCount || 0) * 2 
-          - (progress.correctStreak || 0);
-          
-        // Boost if overdue (nextReview < now)
-        if (progress.nextReview && new Date(progress.nextReview) < new Date()) {
-          score += 50;
-        }
+        const lastSeenDate = progress.lastSeen ? new Date(progress.lastSeen) : new Date(0);
+        const daysSinceLastSeen = Math.floor((Date.now() - lastSeenDate.getTime()) / (1000 * 60 * 60 * 24));
         
-        // Lower score if mastered (masteryLevel >= 4)
+        score = (word.difficulty || 1) 
+          + daysSinceLastSeen 
+          + ((progress.wrongCount || 0) * 2) 
+          - (progress.correctStreak || 0);
+
+        // Filter out mastered words unless they are due for review
         if ((progress.masteryLevel || 0) >= 4) {
-          score -= 100;
+          const isDue = progress.nextReview && new Date(progress.nextReview) <= new Date();
+          if (!isDue) score = -1000; // Deprioritize significantly
         }
       }
-      
       return { word, score };
     });
 
-    // 4. Sort descending and pick top N
-    scoredWords.sort((a, b) => b.score - a.score);
-    
-    // Add some randomness for variety (shuffle top 2*limit)
-    const topCandidates = scoredWords.slice(0, limit * 2);
-    // Fisher-Yates shuffle
-    for (let i = topCandidates.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [topCandidates[i], topCandidates[j]] = [topCandidates[j], topCandidates[i]];
-    }
-
-    return topCandidates.slice(0, limit).map(item => item.word);
+    // 4. Sort and return top N
+    return scoredWords
+      .sort((a, b) => b.score - a.score)
+      .slice(0, limit)
+      .map(item => item.word);
   }
 
   async getUserStats(userId: string): Promise<{
