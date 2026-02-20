@@ -38,6 +38,21 @@ export interface IStorage {
   
   // Quiz
   logQuizAttempt(attempt: Omit<QuizAttempt, "id" | "createdAt">): Promise<QuizAttempt>;
+  getUserAttemptHistory(userId: string, limit?: number): Promise<Array<{
+    id: number;
+    wordId: number;
+    isCorrect: boolean;
+    confidenceLevel: number | null;
+    direction: string | null;
+    questionType: string | null;
+    responseTimeMs: number | null;
+    createdAt: Date | null;
+    word: {
+      telugu: string;
+      transliteration: string;
+      english: string;
+    };
+  }>>;
   getQuizCandidates(userId: string, limit?: number, clusterId?: number, mode?: QuizMode): Promise<Word[]>;
   
   // Stats
@@ -210,6 +225,58 @@ export class DatabaseStorage implements IStorage {
   async logQuizAttempt(attempt: Omit<QuizAttempt, "id" | "createdAt">): Promise<QuizAttempt> {
     const [log] = await db.insert(quizAttempts).values(attempt).returning();
     return log;
+  }
+
+  async getUserAttemptHistory(userId: string, limit: number = 100): Promise<Array<{
+    id: number;
+    wordId: number;
+    isCorrect: boolean;
+    confidenceLevel: number | null;
+    direction: string | null;
+    questionType: string | null;
+    responseTimeMs: number | null;
+    createdAt: Date | null;
+    word: {
+      telugu: string;
+      transliteration: string;
+      english: string;
+    };
+  }>> {
+    const rows = await db
+      .select({
+        id: quizAttempts.id,
+        wordId: quizAttempts.wordId,
+        isCorrect: quizAttempts.isCorrect,
+        confidenceLevel: quizAttempts.confidenceLevel,
+        direction: quizAttempts.direction,
+        questionType: quizAttempts.questionType,
+        responseTimeMs: quizAttempts.responseTimeMs,
+        createdAt: quizAttempts.createdAt,
+        telugu: words.telugu,
+        transliteration: words.transliteration,
+        english: words.english,
+      })
+      .from(quizAttempts)
+      .innerJoin(words, eq(quizAttempts.wordId, words.id))
+      .where(eq(quizAttempts.userId, userId))
+      .orderBy(sql`${quizAttempts.createdAt} desc`)
+      .limit(limit);
+
+    return rows.map((row) => ({
+      id: row.id,
+      wordId: row.wordId,
+      isCorrect: row.isCorrect,
+      confidenceLevel: row.confidenceLevel ?? null,
+      direction: row.direction ?? null,
+      questionType: row.questionType ?? null,
+      responseTimeMs: row.responseTimeMs ?? null,
+      createdAt: row.createdAt ?? null,
+      word: {
+        telugu: row.telugu,
+        transliteration: row.transliteration,
+        english: row.english,
+      },
+    }));
   }
 
   // Implementation of the "Word Selection Algorithm" from PRD

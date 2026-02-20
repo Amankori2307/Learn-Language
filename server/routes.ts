@@ -230,6 +230,18 @@ export async function registerRoutes(
     res.json(stats);
   });
 
+  // Attempt history trail
+  app.get(api.attempts.history.path, isAuthenticated, async (req, res) => {
+    const userId = (req.user as any).claims.sub;
+    const parsed = api.attempts.history.input?.parse(req.query) ?? { limit: 100 };
+    const limit = parsed.limit ?? 100;
+    const history = await storage.getUserAttemptHistory(userId, limit);
+    res.json(history.map((item) => ({
+      ...item,
+      createdAt: item.createdAt?.toISOString() ?? null,
+    })));
+  });
+
   // Leaderboard
   app.get(api.leaderboard.list.path, isAuthenticated, async (req, res) => {
     const parsed = api.leaderboard.list.input?.parse(req.query) ?? { window: "weekly", limit: 25 };

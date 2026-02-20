@@ -147,6 +147,33 @@ export const api = {
       },
     },
   },
+  attempts: {
+    history: {
+      method: "GET" as const,
+      path: "/api/attempts/history" as const,
+      input: z.object({
+        limit: z.coerce.number().int().positive().max(200).default(100),
+      }).optional(),
+      responses: {
+        200: z.array(z.object({
+          id: z.number(),
+          wordId: z.number(),
+          isCorrect: z.boolean(),
+          confidenceLevel: z.number().nullable(),
+          direction: z.string().nullable(),
+          questionType: z.string().nullable(),
+          responseTimeMs: z.number().nullable(),
+          createdAt: z.string().nullable(),
+          word: z.object({
+            telugu: z.string(),
+            transliteration: z.string(),
+            english: z.string(),
+          }),
+        })),
+        401: errorSchemas.unauthorized,
+      },
+    },
+  },
   leaderboard: {
     list: {
       method: "GET" as const,

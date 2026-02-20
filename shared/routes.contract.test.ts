@@ -67,6 +67,29 @@ test("leaderboard contract accepts ranked entries", () => {
   assert.equal(parsed[0].rank, 1);
 });
 
+test("attempt history contract accepts payload", () => {
+  const payload = [
+    {
+      id: 99,
+      wordId: 1,
+      isCorrect: true,
+      confidenceLevel: 3,
+      direction: "telugu_to_english",
+      questionType: "telugu_to_english",
+      responseTimeMs: 1820,
+      createdAt: "2026-02-20T12:00:00.000Z",
+      word: {
+        telugu: "నీరు",
+        transliteration: "neeru",
+        english: "water",
+      },
+    },
+  ];
+
+  const parsed = api.attempts.history.responses[200].parse(payload);
+  assert.equal(parsed[0].wordId, 1);
+});
+
 test("profile update contract rejects invalid avatar URL", () => {
   assert.throws(() => {
     api.profile.update.input.parse({

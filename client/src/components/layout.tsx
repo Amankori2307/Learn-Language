@@ -6,6 +6,7 @@ import {
   Trophy, 
   UserCircle, 
   ShieldCheck,
+  History,
   LogOut, 
   Menu,
   Moon,
@@ -46,6 +47,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
     { name: 'Clusters', href: '/clusters', icon: Layers },
     { name: 'Leaderboard', href: '/leaderboard', icon: Trophy },
     { name: 'Profile', href: '/profile', icon: UserCircle },
+    { name: 'History', href: '/history', icon: History },
     ...((user?.role === "reviewer" || user?.role === "admin")
       ? [{ name: "Review", href: "/review", icon: ShieldCheck }]
       : []),

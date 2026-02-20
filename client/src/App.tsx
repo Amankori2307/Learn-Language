@@ -14,6 +14,7 @@ import TutorPage from "@/pages/tutor";
 import LeaderboardPage from "@/pages/leaderboard";
 import ProfilePage from "@/pages/profile";
 import ReviewPage from "@/pages/review";
+import HistoryPage from "@/pages/history";
 import AuthPage from "@/pages/auth";
 import NotFound from "@/pages/not-found";
 
@@ -52,6 +53,9 @@ function Router() {
       </Route>
       <Route path="/profile">
         {() => <ProtectedRoute component={ProfilePage} />}
+      </Route>
+      <Route path="/history">
+        {() => <ProtectedRoute component={HistoryPage} />}
       </Route>
       <Route path="/review">
         {() => <ProtectedRoute component={ReviewPage} />}
