@@ -9,20 +9,20 @@ Only active and pending tasks are listed here. Completed tasks are intentionally
 | ID | Status | Task | Depends On | Effort | Done When |
 |---|---|---|---|---|---|
 | P4-005 | doing | Beta readiness checklist and release gate sign-off | - | S | core release criteria are green and documented |
-| P4B-007 | doing | Build reviewer queue and reviewer role permissions | P4B-006 | M | only reviewer/admin can approve/reject entries |
-| P4B-008 | todo | Enforce approval gate in learning flows (exclude non-approved vocab from learner sessions) | P4B-007 | M | quiz/search/stats default to approved vocabulary only |
-| P4B-009 | todo | Add source evidence and change history on each vocab item | P4B-006 | M | reviewer can inspect source + edit trail for each word |
-| P4B-010 | todo | Add reviewer productivity tooling (bulk approve/reject, reviewer notes, conflict handling) | P4B-007 | M | reviewer throughput improved with auditable actions |
-| P4B-011 | todo | Keep AI/manual vocabulary creation draft-only until reviewer action | P4B-006 | S | generated entries never auto-publish to learner flows |
+| P4B-007 | blocked | Build reviewer queue and reviewer role permissions | P4B-006 | M | only reviewer/admin can approve/reject entries |
+| P4B-008 | done | Enforce approval gate in learning flows (exclude non-approved vocab from learner sessions) | P4B-007 | M | quiz/search/stats default to approved vocabulary only |
+| P4B-009 | done | Add source evidence and change history on each vocab item | P4B-006 | M | reviewer can inspect source + edit trail for each word |
+| P4B-010 | done | Add reviewer productivity tooling (bulk approve/reject, reviewer notes, conflict handling) | P4B-007 | M | reviewer throughput improved with auditable actions |
+| P4B-011 | done | Keep AI/manual vocabulary creation draft-only until reviewer action | P4B-006 | S | generated entries never auto-publish to learner flows |
 
 ## Platform and DX
 
 | ID | Status | Task | Depends On | Effort | Done When |
 |---|---|---|---|---|---|
-| P4B-013 | todo | Docker compose hot reload validation and docs update | - | S | backend + frontend reflect code changes without rebuilding image |
-| P4B-014 | todo | Add role bootstrap flow for first reviewer/admin user | P4B-007 | S | secure way exists to assign reviewer/admin roles |
-| P4B-015 | todo | Add DB migration/backfill scripts for new review/role columns | P4B-006 | S | existing environments migrate safely |
-| P4B-016 | todo | Add endpoint-level authorization tests for reviewer actions | P4B-007 | M | non-reviewers blocked and reviewers allowed in tests |
+| P4B-013 | doing | Docker compose hot reload validation and docs update | - | S | backend + frontend reflect code changes without rebuilding image |
+| P4B-014 | done | Add role bootstrap flow for first reviewer/admin user | P4B-007 | S | secure way exists to assign reviewer/admin roles |
+| P4B-015 | done | Add DB migration/backfill scripts for new review/role columns | P4B-006 | S | existing environments migrate safely |
+| P4B-016 | done | Add endpoint-level authorization tests for reviewer actions | P4B-007 | M | non-reviewers blocked and reviewers allowed in tests |
 | P4B-017 | todo | Add UI integration tests for profile save + reviewer queue actions | P4B-007 | M | regression suite covers critical user paths |
 
 ## Deferred media phase (last)

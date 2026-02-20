@@ -7,6 +7,7 @@ import { setupAuth, registerAuthRoutes, isAuthenticated } from "./auth";
 import { logApiEvent, sendError } from "./http";
 import { chooseDistractors } from "./services/distractors";
 import { applySrsUpdate } from "./services/srs";
+import { requireReviewer } from "./auth/permissions";
 
 function formatPronunciationFirst(word: { transliteration?: string | null; telugu: string }) {
   const transliteration = word.transliteration?.trim();
@@ -231,7 +232,7 @@ export async function registerRoutes(
   });
 
   // Review queue
-  app.get(api.review.queue.path, isAuthenticated, async (req, res) => {
+  app.get(api.review.queue.path, isAuthenticated, requireReviewer, async (req, res) => {
     const parsed = api.review.queue.input?.parse(req.query) ?? { status: "pending_review", limit: 50 };
     const status = parsed.status ?? "pending_review";
     const limit = parsed.limit ?? 50;
@@ -246,7 +247,7 @@ export async function registerRoutes(
   });
 
   // Review transition
-  app.patch(api.review.transition.path, isAuthenticated, async (req, res) => {
+  app.patch(api.review.transition.path, isAuthenticated, requireReviewer, async (req, res) => {
     const reviewerId = (req.user as any).claims.sub;
     const wordId = Number(req.params.id);
     if (!Number.isFinite(wordId) || wordId <= 0) {
@@ -271,6 +272,94 @@ export async function registerRoutes(
         return sendError(req, res, 400, "VALIDATION_ERROR", error.errors[0]?.message ?? "Invalid request");
       }
       return sendError(req, res, 500, "INTERNAL_ERROR", "Failed to update review status");
+    }
+  });
+
+  // Review transition (bulk)
+  app.patch(api.review.bulkTransition.path, isAuthenticated, requireReviewer, async (req, res) => {
+    const reviewerId = (req.user as any).claims.sub;
+    try {
+      const parsed = api.review.bulkTransition.input.parse(req.body);
+      let updated = 0;
+      let skipped = 0;
+
+      for (const id of parsed.ids) {
+        const row = await storage.transitionWordReview(id, reviewerId, parsed.toStatus, parsed.notes);
+        if (row) {
+          updated += 1;
+        } else {
+          skipped += 1;
+        }
+      }
+
+      res.json({ updated, skipped });
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        return sendError(req, res, 400, "VALIDATION_ERROR", error.errors[0]?.message ?? "Invalid request");
+      }
+      return sendError(req, res, 500, "INTERNAL_ERROR", "Failed to bulk update review status");
+    }
+  });
+
+  // Review history
+  app.get(api.review.history.path, isAuthenticated, requireReviewer, async (req, res) => {
+    const wordId = Number(req.params.id);
+    if (!Number.isFinite(wordId) || wordId <= 0) {
+      return sendError(req, res, 400, "VALIDATION_ERROR", "Invalid word id");
+    }
+
+    const result = await storage.getWordWithReviewHistory(wordId);
+    if (!result) {
+      return sendError(req, res, 404, "NOT_FOUND", "Word not found");
+    }
+
+    res.json({
+      word: {
+        id: result.word.id,
+        telugu: result.word.telugu,
+        transliteration: result.word.transliteration,
+        english: result.word.english,
+        reviewStatus: result.word.reviewStatus,
+        sourceUrl: result.word.sourceUrl ?? null,
+        sourceCapturedAt: result.word.sourceCapturedAt?.toISOString() ?? null,
+        reviewNotes: result.word.reviewNotes ?? null,
+      },
+      events: result.events.map((e) => ({
+        id: e.id,
+        fromStatus: e.fromStatus,
+        toStatus: e.toStatus,
+        changedBy: e.changedBy,
+        notes: e.notes ?? null,
+        sourceUrl: e.sourceUrl ?? null,
+        sourceCapturedAt: e.sourceCapturedAt?.toISOString() ?? null,
+        createdAt: e.createdAt?.toISOString() ?? null,
+      })),
+    });
+  });
+
+  // Submit manual/AI word as draft only
+  app.post(api.review.submitDraft.path, isAuthenticated, async (req, res) => {
+    const submittedBy = (req.user as any).claims.sub;
+    try {
+      const parsed = api.review.submitDraft.input.parse(req.body);
+      const created = await storage.createWordDraft({
+        submittedBy,
+        telugu: parsed.telugu,
+        transliteration: parsed.transliteration,
+        english: parsed.english,
+        partOfSpeech: parsed.partOfSpeech,
+        sourceUrl: parsed.sourceUrl,
+        tags: parsed.tags,
+      });
+      res.json({
+        id: created.id,
+        reviewStatus: "draft",
+      });
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        return sendError(req, res, 400, "VALIDATION_ERROR", error.errors[0]?.message ?? "Invalid request");
+      }
+      return sendError(req, res, 500, "INTERNAL_ERROR", "Failed to create draft");
     }
   });
 

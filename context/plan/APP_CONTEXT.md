@@ -26,10 +26,12 @@ Build a Telugu learning app focused on text-first retention and beginner-friendl
   - Seed files now sourced from `assets/processed/`
   - Beginner model seed: `assets/processed/telugu_basic_seed_model_draft.json`
   - MVP seed: `assets/processed/words.mvp.json`
-- Review governance (in progress):
+- Review governance:
   - Word review lifecycle fields (`draft`, `pending_review`, `approved`, `rejected`)
-  - Review transition API and queue API
-  - Review audit events table
+  - Review queue, transition, bulk transition, history, and draft submission APIs
+  - Review audit events table with source metadata
+  - Reviewer/admin permission middleware + role bootstrap script (`pnpm run user:set-role`)
+  - Migration/backfill scripts for governance schema (`pnpm run db:migrate:review-governance`, `pnpm run db:backfill:review-governance`)
 
 ## Stack
 

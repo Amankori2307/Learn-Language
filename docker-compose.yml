@@ -27,6 +27,9 @@ services:
     environment:
       NODE_ENV: development
       PORT: 3000
+      CHOKIDAR_USEPOLLING: "true"
+      CHOKIDAR_INTERVAL: "300"
+      WATCHPACK_POLLING: "true"
       DATABASE_URL: postgresql://postgres:postgres@db:5432/mydb
       SESSION_SECRET: ${SESSION_SECRET:-change-me-in-prod-please-123456}
       AUTH_PROVIDER: ${AUTH_PROVIDER:-google}

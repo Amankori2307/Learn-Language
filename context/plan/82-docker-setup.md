@@ -8,8 +8,9 @@ The app container startup sequence:
 1. Wait for Postgres readiness
 2. Install dependencies (`pnpm install`)
 3. Run `db:push`
-4. Run `content:import:mvp` (if seed exists)
-5. Start `pnpm run dev` (watch mode)
+4. Run review governance migration + backfill scripts
+5. Run `content:import:mvp` (if seed exists)
+6. Start `pnpm run dev` (watch mode)
 
 ## Run
 
@@ -22,6 +23,7 @@ App URL:
 
 Notes:
 - Compose mounts the repo into `/app`; backend and frontend changes should auto-refresh without rebuilding image.
+- Polling is enabled (`CHOKIDAR_USEPOLLING`, `WATCHPACK_POLLING`) for stable file watching on Docker Desktop/macOS.
 - If you change dependencies (`package.json`), restart compose once.
 - For Google OAuth, set `AUTH_PROVIDER=google` and provide `GOOGLE_CLIENT_ID` + `GOOGLE_CLIENT_SECRET`.
 

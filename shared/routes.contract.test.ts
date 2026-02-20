@@ -106,3 +106,43 @@ test("review transition contract rejects invalid status", () => {
     });
   });
 });
+
+test("review bulk transition contract accepts payload", () => {
+  const parsed = api.review.bulkTransition.input.parse({
+    ids: [1, 2, 3],
+    toStatus: "approved",
+    notes: "Looks good",
+  });
+  assert.equal(parsed.ids.length, 3);
+});
+
+test("review history contract accepts payload", () => {
+  const payload = {
+    word: {
+      id: 1,
+      telugu: "నమస్తే",
+      transliteration: "namaste",
+      english: "hello",
+      reviewStatus: "pending_review",
+      sourceUrl: null,
+      sourceCapturedAt: null,
+      reviewNotes: null,
+    },
+    events: [
+      {
+        id: 10,
+        fromStatus: "draft",
+        toStatus: "pending_review",
+        changedBy: "u-1",
+        notes: "submitted",
+        sourceUrl: "https://example.com/source",
+        sourceCapturedAt: "2026-02-20T11:00:00.000Z",
+        createdAt: null,
+      },
+    ],
+  };
+
+  const parsed = api.review.history.responses[200].parse(payload);
+  assert.equal(parsed.word.id, 1);
+  assert.equal(parsed.events.length, 1);
+});

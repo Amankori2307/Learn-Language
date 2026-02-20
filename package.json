@@ -15,7 +15,7 @@
     "check": "tsc --noEmit",
     "typecheck": "pnpm run check",
     "lint": "pnpm run check",
-    "test": "node --import tsx --test server/**/*.test.ts shared/**/*.test.ts",
+    "test": "DATABASE_URL=${DATABASE_URL:-postgresql://postgres:postgres@localhost:5432/mydb} node --import tsx --test server/**/*.test.ts shared/**/*.test.ts",
     "ci": "pnpm run lint && pnpm run typecheck && pnpm run test",
     "content:validate": "node --import tsx script/validate-content.ts",
     "content:import": "node --import tsx script/import-content.ts",
@@ -23,6 +23,9 @@
     "content:generate:basic": "node --import tsx script/generate-basic-telugu-seed.ts",
     "content:prepare:mvp": "pnpm run content:generate:mvp && node --import tsx script/validate-content.ts assets/processed/words.mvp.json",
     "content:import:mvp": "node --import tsx script/import-content.ts assets/processed/words.mvp.json",
+    "db:migrate:review-governance": "node --import tsx script/migrate-review-governance.ts",
+    "db:backfill:review-governance": "node --import tsx script/backfill-review-governance.ts",
+    "user:set-role": "node --import tsx script/set-user-role.ts",
     "benchmark:quiz": "node --import tsx script/benchmark-quiz-selection.ts",
     "smoke:core": "node --import tsx script/smoke-core.ts",
     "db:push": "drizzle-kit push"

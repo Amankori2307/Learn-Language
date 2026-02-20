@@ -66,12 +66,31 @@ export interface IStorage {
     status: "draft" | "pending_review" | "approved" | "rejected",
     limit?: number,
   ): Promise<Word[]>;
+  getWordWithReviewHistory(wordId: number): Promise<{ word: Word; events: Array<{
+    id: number;
+    fromStatus: string;
+    toStatus: string;
+    changedBy: string;
+    notes: string | null;
+    sourceUrl: string | null;
+    sourceCapturedAt: Date | null;
+    createdAt: Date | null;
+  }> } | undefined>;
   transitionWordReview(
     wordId: number,
     reviewerId: string,
     toStatus: "draft" | "pending_review" | "approved" | "rejected",
     notes?: string,
   ): Promise<Word | undefined>;
+  createWordDraft(input: {
+    submittedBy: string;
+    telugu: string;
+    transliteration: string;
+    english: string;
+    partOfSpeech: string;
+    sourceUrl?: string;
+    tags?: string[];
+  }): Promise<Word>;
 
   // Admin/Seed
   seedInitialData(): Promise<void>;
@@ -79,11 +98,18 @@ export interface IStorage {
 
 export class DatabaseStorage implements IStorage {
   async getWords(limit: number = 100): Promise<Word[]> {
-    return await db.select().from(words).limit(limit);
+    return await db
+      .select()
+      .from(words)
+      .where(eq(words.reviewStatus, "approved"))
+      .limit(limit);
   }
 
   async getWord(id: number): Promise<Word | undefined> {
-    const [word] = await db.select().from(words).where(eq(words.id, id));
+    const [word] = await db
+      .select()
+      .from(words)
+      .where(and(eq(words.id, id), eq(words.reviewStatus, "approved")));
     return word;
   }
 
@@ -93,7 +119,7 @@ export class DatabaseStorage implements IStorage {
     })
     .from(wordClusters)
     .innerJoin(words, eq(wordClusters.wordId, words.id))
-    .where(eq(wordClusters.clusterId, clusterId));
+    .where(and(eq(wordClusters.clusterId, clusterId), eq(words.reviewStatus, "approved")));
     
     return results.map(r => r.word);
   }
@@ -309,6 +335,73 @@ export class DatabaseStorage implements IStorage {
     });
 
     return updated;
+  }
+
+  async getWordWithReviewHistory(wordId: number): Promise<{ word: Word; events: Array<{
+    id: number;
+    fromStatus: string;
+    toStatus: string;
+    changedBy: string;
+    notes: string | null;
+    sourceUrl: string | null;
+    sourceCapturedAt: Date | null;
+    createdAt: Date | null;
+  }> } | undefined> {
+    const [word] = await db.select().from(words).where(eq(words.id, wordId));
+    if (!word) return undefined;
+
+    const events = await db
+      .select({
+        id: wordReviewEvents.id,
+        fromStatus: wordReviewEvents.fromStatus,
+        toStatus: wordReviewEvents.toStatus,
+        changedBy: wordReviewEvents.changedBy,
+        notes: wordReviewEvents.notes,
+        sourceUrl: wordReviewEvents.sourceUrl,
+        sourceCapturedAt: wordReviewEvents.sourceCapturedAt,
+        createdAt: wordReviewEvents.createdAt,
+      })
+      .from(wordReviewEvents)
+      .where(eq(wordReviewEvents.wordId, wordId))
+      .orderBy(sql`${wordReviewEvents.createdAt} desc`);
+
+    return { word, events };
+  }
+
+  async createWordDraft(input: {
+    submittedBy: string;
+    telugu: string;
+    transliteration: string;
+    english: string;
+    partOfSpeech: string;
+    sourceUrl?: string;
+    tags?: string[];
+  }): Promise<Word> {
+    const now = new Date();
+    const [created] = await db.insert(words).values({
+      telugu: input.telugu,
+      transliteration: input.transliteration,
+      english: input.english,
+      partOfSpeech: input.partOfSpeech,
+      tags: input.tags ?? ["manual-draft"],
+      reviewStatus: "draft",
+      submittedBy: input.submittedBy,
+      submittedAt: now,
+      sourceUrl: input.sourceUrl ?? null,
+      sourceCapturedAt: input.sourceUrl ? now : null,
+    }).returning();
+
+    await db.insert(wordReviewEvents).values({
+      wordId: created.id,
+      fromStatus: "draft",
+      toStatus: "draft",
+      changedBy: input.submittedBy,
+      notes: "Initial draft submission",
+      sourceUrl: created.sourceUrl ?? null,
+      sourceCapturedAt: created.sourceCapturedAt ?? null,
+    });
+
+    return created;
   }
 
   async getUserStats(userId: string): Promise<{

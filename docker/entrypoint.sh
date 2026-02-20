@@ -14,6 +14,10 @@ done
 echo "Applying schema..."
 pnpm run db:push
 
+echo "Applying review governance migration/backfill..."
+pnpm run db:migrate:review-governance
+pnpm run db:backfill:review-governance
+
 echo "Importing MVP dataset..."
 pnpm run content:import:mvp
 
