@@ -14,9 +14,14 @@ const authConfig = getAuthConfig();
 
 const getOidcConfig = memoize(
   async () => {
+    if (!authConfig.ISSUER_URL || !authConfig.CLIENT_ID) {
+      throw new Error("OIDC config is not available for current auth provider");
+    }
+
     return await client.discovery(
       new URL(authConfig.ISSUER_URL),
-      authConfig.REPL_ID
+      authConfig.CLIENT_ID,
+      authConfig.CLIENT_SECRET
     );
   },
   { maxAge: 3600 * 1000 }
@@ -58,9 +63,9 @@ async function upsertUser(claims: any) {
   await authStorage.upsertUser({
     id: claims["sub"],
     email: claims["email"],
-    firstName: claims["first_name"],
-    lastName: claims["last_name"],
-    profileImageUrl: claims["profile_image_url"],
+    firstName: claims["first_name"] ?? claims["given_name"],
+    lastName: claims["last_name"] ?? claims["family_name"],
+    profileImageUrl: claims["profile_image_url"] ?? claims["picture"],
   });
 }
 
@@ -69,6 +74,15 @@ export async function setupAuth(app: Express) {
   app.use(getSession());
   app.use(passport.initialize());
   app.use(passport.session());
+
+  if (authConfig.AUTH_PROVIDER === "dev") {
+    app.get("/api/login", (_req, res) => res.redirect("/"));
+    app.get("/api/callback", (_req, res) => res.redirect("/"));
+    app.get("/api/logout", (req, res) => {
+      req.logout(() => res.redirect("/"));
+    });
+    return;
+  }
 
   const oidcConfig = await getOidcConfig();
 
@@ -82,19 +96,27 @@ export async function setupAuth(app: Express) {
     verified(null, user);
   };
 
-  // Keep track of registered strategies
   const registeredStrategies = new Set<string>();
 
-  // Helper function to ensure strategy exists for a domain
-  const ensureStrategy = (domain: string) => {
-    const strategyName = `replitauth:${domain}`;
+  const ensureStrategy = (req: any) => {
+    const strategyName = `${authConfig.AUTH_PROVIDER}:${req.hostname}`;
     if (!registeredStrategies.has(strategyName)) {
+      const callbackURL =
+        authConfig.AUTH_PROVIDER === "replit"
+          ? `https://${req.hostname}/api/callback`
+          : `${req.protocol}://${req.get("host")}/api/callback`;
+
+      const scope =
+        authConfig.AUTH_PROVIDER === "google"
+          ? "openid email profile"
+          : "openid email profile offline_access";
+
       const strategy = new Strategy(
         {
           name: strategyName,
           config: oidcConfig,
-          scope: "openid email profile offline_access",
-          callbackURL: `https://${domain}/api/callback`,
+          scope,
+          callbackURL,
         },
         verify
       );
@@ -107,16 +129,19 @@ export async function setupAuth(app: Express) {
   passport.deserializeUser((user: Express.User, cb) => cb(null, user));
 
   app.get("/api/login", (req, res, next) => {
-    ensureStrategy(req.hostname);
-    passport.authenticate(`replitauth:${req.hostname}`, {
-      prompt: "login consent",
-      scope: ["openid", "email", "profile", "offline_access"],
-    })(req, res, next);
+    ensureStrategy(req);
+    const strategyName = `${authConfig.AUTH_PROVIDER}:${req.hostname}`;
+    const authOptions =
+      authConfig.AUTH_PROVIDER === "google"
+        ? { prompt: "consent", scope: ["openid", "email", "profile"] }
+        : { prompt: "login consent", scope: ["openid", "email", "profile", "offline_access"] };
+
+    passport.authenticate(strategyName, authOptions)(req, res, next);
   });
 
   app.get("/api/callback", (req, res, next) => {
-    ensureStrategy(req.hostname);
-    passport.authenticate(`replitauth:${req.hostname}`, {
+    ensureStrategy(req);
+    passport.authenticate(`${authConfig.AUTH_PROVIDER}:${req.hostname}`, {
       successReturnToOrRedirect: "/",
       failureRedirect: "/api/login",
     })(req, res, next);
@@ -124,17 +149,38 @@ export async function setupAuth(app: Express) {
 
   app.get("/api/logout", (req, res) => {
     req.logout(() => {
-      res.redirect(
-        client.buildEndSessionUrl(oidcConfig, {
-          client_id: authConfig.REPL_ID,
-          post_logout_redirect_uri: `${req.protocol}://${req.hostname}`,
-        }).href
-      );
+      if (authConfig.AUTH_PROVIDER === "google") {
+        res.redirect("/");
+        return;
+      }
+
+      if (!authConfig.CLIENT_ID) {
+        sendError(req, res, 500, "INTERNAL_ERROR", "OIDC client configuration missing");
+        return;
+      }
+
+      res.redirect(client.buildEndSessionUrl(oidcConfig, {
+        client_id: authConfig.CLIENT_ID,
+        post_logout_redirect_uri: `${req.protocol}://${req.hostname}`,
+      }).href);
     });
   });
 }
 
 export const isAuthenticated: RequestHandler = async (req, res, next) => {
+  if (authConfig.AUTH_PROVIDER === "dev") {
+    (req as any).user = {
+      claims: {
+        sub: "dev-user",
+        email: "dev@example.com",
+        first_name: "Dev",
+        last_name: "User",
+      },
+      expires_at: Math.floor(Date.now() / 1000) + 3600,
+    };
+    return next();
+  }
+
   const user = req.user as any;
 
   if (!req.isAuthenticated() || !user.expires_at) {
