@@ -13,25 +13,39 @@ export function registerAuthRoutes(app: Express): void {
     try {
       const userId = req.user.claims.sub;
       let user = await authStorage.getUser(userId);
+      const claimEmail = req.user.claims.email ?? null;
+      const claimFirstName = req.user.claims.first_name ?? req.user.claims.given_name ?? null;
+      const claimLastName = req.user.claims.last_name ?? req.user.claims.family_name ?? null;
+      const claimProfileImageUrl = req.user.claims.profile_image_url ?? req.user.claims.picture ?? null;
       const resolvedRole = resolveRoleFromEmail(req.user.claims.email ?? user?.email ?? null);
       if (!user) {
         user = await authStorage.upsertUser({
           id: userId,
-          email: req.user.claims.email ?? null,
-          firstName: req.user.claims.first_name ?? req.user.claims.given_name ?? null,
-          lastName: req.user.claims.last_name ?? req.user.claims.family_name ?? null,
-          profileImageUrl: req.user.claims.profile_image_url ?? req.user.claims.picture ?? null,
+          email: claimEmail,
+          firstName: claimFirstName,
+          lastName: claimLastName,
+          profileImageUrl: claimProfileImageUrl,
           role: userId === "dev-user" ? "admin" : resolvedRole,
         });
-      } else if (userId !== "dev-user" && user.role !== resolvedRole) {
+      } else {
+        const shouldSyncRole = userId !== "dev-user" && user.role !== resolvedRole;
+        const shouldBackfillProfile = Boolean(
+          (!user.email && claimEmail) ||
+          (!user.firstName && claimFirstName) ||
+          (!user.lastName && claimLastName) ||
+          (!user.profileImageUrl && claimProfileImageUrl)
+        );
+
+        if (shouldSyncRole || shouldBackfillProfile) {
         user = await authStorage.upsertUser({
           id: user.id,
-          email: user.email ?? req.user.claims.email ?? null,
-          firstName: user.firstName ?? req.user.claims.first_name ?? req.user.claims.given_name ?? null,
-          lastName: user.lastName ?? req.user.claims.last_name ?? req.user.claims.family_name ?? null,
-          profileImageUrl: user.profileImageUrl ?? req.user.claims.profile_image_url ?? req.user.claims.picture ?? null,
+          email: user.email ?? claimEmail,
+          firstName: user.firstName ?? claimFirstName,
+          lastName: user.lastName ?? claimLastName,
+          profileImageUrl: user.profileImageUrl ?? claimProfileImageUrl,
           role: resolvedRole,
         });
+      }
       }
       res.json(user);
     } catch (error) {
