@@ -9,7 +9,7 @@ Objective: make the core product reliable, observable, and ready for sustained p
 ## Tasks
 
 ### P4-001 - API contract hardening
-Status: `todo`
+Status: `done`
 
 Scope:
 - Validate request/response schemas for all public routes.
@@ -29,7 +29,7 @@ Acceptance:
 - Quiz generation response target under 200ms on reference dataset.
 
 ### P4-003 - Observability baseline
-Status: `todo`
+Status: `done`
 
 Scope:
 - Structured logs with request IDs.

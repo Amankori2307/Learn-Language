@@ -4,7 +4,7 @@ import { storage } from "./storage";
 import { api } from "@shared/routes";
 import { z } from "zod";
 import { setupAuth, registerAuthRoutes, isAuthenticated } from "./replit_integrations/auth";
-import { sendError } from "./http";
+import { logApiEvent, sendError } from "./http";
 import { chooseDistractors } from "./services/distractors";
 import { applySrsUpdate } from "./services/srs";
 
@@ -103,6 +103,14 @@ export async function registerRoutes(
       };
     }));
 
+    logApiEvent(req, "quiz_session_generated", {
+      userId,
+      mode,
+      countRequested: limit,
+      countGenerated: quizQuestions.length,
+      clusterId: clusterId ?? null,
+    });
+
     res.json(quizQuestions);
   });
 
@@ -152,6 +160,14 @@ export async function registerRoutes(
         responseTimeMs: input.responseTimeMs ?? null,
         isCorrect,
         confidenceLevel: input.confidenceLevel
+      });
+
+      logApiEvent(req, "quiz_answer_submitted", {
+        userId,
+        wordId: word.id,
+        isCorrect,
+        direction: input.direction ?? null,
+        responseTimeMs: input.responseTimeMs ?? null,
       });
 
       res.json({

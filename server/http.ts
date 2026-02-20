@@ -39,3 +39,17 @@ export function sendError(
   return res.status(status).json(body);
 }
 
+export function logApiEvent(
+  req: Request,
+  event: string,
+  payload: Record<string, unknown> = {},
+) {
+  const entry = {
+    requestId: getRequestId(req),
+    event,
+    ts: new Date().toISOString(),
+    ...payload,
+  };
+
+  console.log(`[api-event] ${JSON.stringify(entry)}`);
+}
