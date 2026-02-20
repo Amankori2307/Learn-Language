@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { buildAvatarUrl } from "@/lib/avatar";
 
 function initials(firstName: string | null, lastName: string | null, email: string | null) {
   const name = `${firstName ?? ""} ${lastName ?? ""}`.trim();
@@ -33,7 +34,14 @@ export default function ProfilePage() {
     setAvatarUrl(profile.profileImageUrl ?? "");
   }, [profile]);
 
-  const avatarPreview = useMemo(() => avatarUrl.trim(), [avatarUrl]);
+  const avatarPreview = useMemo(() => {
+    return buildAvatarUrl({
+      profileImageUrl: avatarUrl.trim(),
+      firstName: firstName || profile?.firstName,
+      lastName: lastName || profile?.lastName,
+      email: profile?.email,
+    });
+  }, [avatarUrl, firstName, lastName, profile]);
   const isDirty = profile
     ? firstName !== (profile.firstName ?? "") ||
       lastName !== (profile.lastName ?? "") ||
@@ -69,7 +77,7 @@ export default function ProfilePage() {
           <div className="rounded-2xl border border-border/50 bg-card p-6 md:p-8 space-y-6">
             <div className="flex items-center gap-4 pb-2 border-b border-border/40">
               <Avatar className="h-16 w-16 border border-border">
-                <AvatarImage src={avatarPreview || undefined} />
+                <AvatarImage src={avatarPreview} />
                 <AvatarFallback>{initials(firstName || null, lastName || null, profile.email)}</AvatarFallback>
               </Avatar>
               <div className="min-w-0">

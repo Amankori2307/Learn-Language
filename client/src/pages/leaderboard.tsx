@@ -3,6 +3,7 @@ import { useLeaderboard, type LeaderboardWindow } from "@/hooks/use-leaderboard"
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { cn } from "@/lib/utils";
+import { buildAvatarUrl } from "@/lib/avatar";
 import { Trophy } from "lucide-react";
 import { useState } from "react";
 
@@ -16,6 +17,20 @@ function initials(firstName: string | null, lastName: string | null, email: stri
       .join("");
   }
   return (email?.[0] ?? "U").toUpperCase();
+}
+
+function avatarFor(entry: {
+  profileImageUrl: string | null;
+  firstName: string | null;
+  lastName: string | null;
+  email: string | null;
+}) {
+  return buildAvatarUrl({
+    profileImageUrl: entry.profileImageUrl,
+    firstName: entry.firstName,
+    lastName: entry.lastName,
+    email: entry.email,
+  });
 }
 
 const WINDOW_OPTIONS: Array<{ key: LeaderboardWindow; label: string }> = [
@@ -82,7 +97,7 @@ export default function LeaderboardPage() {
                   <div className="flex items-center justify-between gap-3">
                     <div className="flex items-center gap-3 min-w-0">
                       <Avatar className="h-10 w-10">
-                        <AvatarImage src={entry.profileImageUrl ?? undefined} />
+                        <AvatarImage src={avatarFor(entry)} />
                         <AvatarFallback>{initials(entry.firstName, entry.lastName, entry.email)}</AvatarFallback>
                       </Avatar>
                       <div className="min-w-0">
@@ -120,7 +135,7 @@ export default function LeaderboardPage() {
                   <div className="col-span-1 font-bold text-lg">#{entry.rank}</div>
                   <div className="col-span-5 flex items-center gap-3 min-w-0">
                     <Avatar className="h-9 w-9">
-                      <AvatarImage src={entry.profileImageUrl ?? undefined} />
+                      <AvatarImage src={avatarFor(entry)} />
                       <AvatarFallback>{initials(entry.firstName, entry.lastName, entry.email)}</AvatarFallback>
                     </Avatar>
                     <div className="min-w-0">

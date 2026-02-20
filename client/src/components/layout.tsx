@@ -18,6 +18,7 @@ import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useTheme } from "next-themes";
+import { buildAvatarUrl } from "@/lib/avatar";
 
 function getInitials(firstName?: string | null, lastName?: string | null, email?: string | null) {
   const fromNames = `${firstName ?? ""} ${lastName ?? ""}`.trim();
@@ -52,6 +53,12 @@ export function Layout({ children }: { children: React.ReactNode }) {
       ? [{ name: "Review", href: "/review", icon: ShieldCheck }]
       : []),
   ];
+  const avatarUrl = buildAvatarUrl({
+    profileImageUrl: user?.profileImageUrl,
+    firstName: user?.firstName,
+    lastName: user?.lastName,
+    email: user?.email,
+  });
 
   const NavContent = () => (
     <div className="flex flex-col h-full">
@@ -98,7 +105,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
       <div className="p-4 mt-auto border-t border-border/50 bg-secondary/30">
         <div className="flex items-center gap-3 mb-4 px-2">
           <Avatar className="w-10 h-10 border border-border">
-            <AvatarImage src={user?.profileImageUrl ?? undefined} alt={user?.firstName || "User"} />
+            <AvatarImage src={avatarUrl} alt={user?.firstName || "User"} />
             <AvatarFallback>{getInitials(user?.firstName, user?.lastName, user?.email)}</AvatarFallback>
           </Avatar>
           <div className="flex-1 overflow-hidden">

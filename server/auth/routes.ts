@@ -33,7 +33,7 @@ export function registerAuthRoutes(app: Express): void {
           (!user.email && claimEmail) ||
           (!user.firstName && claimFirstName) ||
           (!user.lastName && claimLastName) ||
-          (!user.profileImageUrl && claimProfileImageUrl)
+          (!user.profileImageUrl?.trim() && claimProfileImageUrl)
         );
 
         if (shouldSyncRole || shouldBackfillProfile) {
