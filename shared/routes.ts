@@ -1,6 +1,7 @@
 import { z } from 'zod';
 import { insertWordSchema, insertClusterSchema, words, clusters, userWordProgress, quizAttempts } from './schema';
 import {
+  LanguageEnum,
   QuizDirectionEnum,
   QuizModeEnum,
   QuizQuestionTypeEnum,
@@ -172,6 +173,7 @@ export const api = {
           responseTimeMs: z.number().nullable(),
           createdAt: z.string().nullable(),
           word: z.object({
+            language: z.nativeEnum(LanguageEnum),
             telugu: z.string(),
             transliteration: z.string(),
             english: z.string(),
@@ -261,6 +263,8 @@ export const api = {
       responses: {
         200: z.array(z.object({
           id: z.number(),
+          language: z.nativeEnum(LanguageEnum),
+          originalScript: z.string(),
           telugu: z.string(),
           transliteration: z.string(),
           english: z.string(),
@@ -324,6 +328,8 @@ export const api = {
         200: z.object({
           word: z.object({
             id: z.number(),
+            language: z.nativeEnum(LanguageEnum),
+            originalScript: z.string(),
             telugu: z.string(),
             transliteration: z.string(),
             english: z.string(),
@@ -353,6 +359,8 @@ export const api = {
       path: "/api/review/words" as const,
       input: z.object({
         telugu: z.string().trim().min(1),
+        language: z.nativeEnum(LanguageEnum).default(LanguageEnum.TELUGU),
+        originalScript: z.string().trim().min(1).optional(),
         transliteration: z.string().trim().min(1),
         english: z.string().trim().min(1),
         partOfSpeech: z.string().trim().min(1),

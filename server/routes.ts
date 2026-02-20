@@ -196,7 +196,7 @@ export async function registerRoutes(
       const fallbackPronunciation = word.transliteration;
       const bestExamplePronunciation = firstExample?.pronunciation ?? fallbackPronunciation;
       const feedbackExample = firstExample ? {
-        telugu: firstExample.teluguSentence,
+        telugu: firstExample.originalScript,
         pronunciation: bestExamplePronunciation,
         meaning: firstExample.englishSentence,
       } : {
@@ -338,6 +338,8 @@ export async function registerRoutes(
     res.json({
       word: {
         id: result.word.id,
+        language: result.word.language,
+        originalScript: result.word.originalScript,
         telugu: result.word.telugu,
         transliteration: result.word.transliteration,
         english: result.word.english,
@@ -366,6 +368,8 @@ export async function registerRoutes(
       const parsed = api.review.submitDraft.input.parse(req.body);
       const created = await storage.createWordDraft({
         submittedBy,
+        language: parsed.language,
+        originalScript: parsed.originalScript,
         telugu: parsed.telugu,
         transliteration: parsed.transliteration,
         english: parsed.english,

@@ -2,6 +2,7 @@ import fs from "fs/promises";
 import path from "path";
 import { and, eq, inArray, sql } from "drizzle-orm";
 import { db } from "../server/db";
+import { LanguageEnum } from "../shared/domain/enums";
 import {
   clusters,
   quizAttempts,
@@ -13,6 +14,7 @@ import {
 } from "../shared/schema";
 
 type ContentExample = {
+  language?: LanguageEnum;
   telugu: string;
   english: string;
   pronunciation?: string;
@@ -21,6 +23,8 @@ type ContentExample = {
 };
 
 type ContentWord = {
+  language?: LanguageEnum;
+  originalScript?: string;
   telugu: string;
   transliteration: string;
   english: string;
@@ -39,6 +43,10 @@ type ContentWord = {
     sourceUrl?: string;
   };
 };
+
+function normalizeLanguage(value?: LanguageEnum): LanguageEnum {
+  return value ?? LanguageEnum.TELUGU;
+}
 
 function parseListField(value?: string): string[] {
   if (!value) return [];
@@ -105,6 +113,7 @@ function parseCsv(raw: string): ContentWord[] {
       : [];
 
     return {
+      language: (row.language as LanguageEnum) || LanguageEnum.TELUGU,
       telugu: row.telugu,
       transliteration: row.transliteration,
       english: row.english,
@@ -153,16 +162,20 @@ async function ensureCluster(name: string) {
 }
 
 async function upsertWord(input: ContentWord) {
+  const language = normalizeLanguage(input.language);
+  const originalScript = input.originalScript?.trim() || input.telugu;
   const reviewStatus = input.source?.reviewStatus ?? ((input.tags ?? []).includes("needs-review") ? "pending_review" : "approved");
   const [existing] = await db
     .select()
     .from(words)
-    .where(and(eq(words.telugu, input.telugu), eq(words.english, input.english)));
+    .where(and(eq(words.language, language), eq(words.telugu, input.telugu), eq(words.english, input.english)));
 
   if (existing) {
     const [updated] = await db
       .update(words)
       .set({
+        language,
+        originalScript,
         transliteration: input.transliteration,
         partOfSpeech: input.partOfSpeech,
         difficulty: input.difficulty ?? 1,
@@ -183,6 +196,8 @@ async function upsertWord(input: ContentWord) {
   const [created] = await db
     .insert(words)
     .values({
+      language,
+      originalScript,
       telugu: input.telugu,
       english: input.english,
       transliteration: input.transliteration,
@@ -203,15 +218,23 @@ async function upsertWord(input: ContentWord) {
 }
 
 async function ensureWordExample(wordId: number, example: ContentExample) {
+  const language = normalizeLanguage(example.language);
   const [existing] = await db
     .select()
     .from(wordExamples)
-    .where(and(eq(wordExamples.wordId, wordId), eq(wordExamples.teluguSentence, example.telugu)));
+    .where(
+      and(
+        eq(wordExamples.wordId, wordId),
+        eq(wordExamples.language, language),
+        eq(wordExamples.originalScript, example.telugu),
+      ),
+    );
 
   if (existing) {
     await db
       .update(wordExamples)
       .set({
+        language,
         pronunciation: example.pronunciation ?? null,
         englishSentence: example.english,
         contextTag: example.contextTag ?? "general",
@@ -223,7 +246,8 @@ async function ensureWordExample(wordId: number, example: ContentExample) {
 
   await db.insert(wordExamples).values({
     wordId,
-    teluguSentence: example.telugu,
+    language,
+    originalScript: example.telugu,
     pronunciation: example.pronunciation ?? null,
     englishSentence: example.english,
     contextTag: example.contextTag ?? "general",
@@ -308,6 +332,7 @@ async function main() {
       }
       await ensureWordExample(word.id, {
         ...example,
+        language: example.language ?? item.language ?? LanguageEnum.TELUGU,
         pronunciation: normalizedPronunciation,
       });
       exampleCount += 1;

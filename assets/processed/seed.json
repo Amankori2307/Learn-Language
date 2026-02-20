@@ -1,6 +1,6 @@
 [
   {
-    "telugu": "నమస్తే",
+    "originalScript": "నమస్తే",
     "transliteration": "namaste",
     "english": "hello",
     "partOfSpeech": "phrase",
@@ -19,20 +19,21 @@
     "examples": [
       {
         "pronunciation": "namastee, miiru elaa unnaaru?",
-        "telugu": "నమస్తే, మీరు ఎలా ఉన్నారు?",
+        "originalScript": "నమస్తే, మీరు ఎలా ఉన్నారు?",
         "english": "Hello, how are you?",
         "contextTag": "daily-use",
-        "difficulty": 1
+        "difficulty": 1,
+        "language": "telugu"
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    }
-  },
+    },
+    "language": "telugu"
   {
-    "telugu": "ధన్యవాదాలు",
+    "originalScript": "ధన్యవాదాలు",
     "transliteration": "dhanyavaadalu",
     "english": "thank you",
     "partOfSpeech": "phrase",
@@ -51,20 +52,22 @@
     "examples": [
       {
         "pronunciation": "mii sahaayaaniki dhanyavaadaalu.",
-        "telugu": "మీ సహాయానికి ధన్యవాదాలు.",
+        "originalScript": "మీ సహాయానికి ధన్యవాదాలు.",
         "english": "Thank you for your help.",
         "contextTag": "daily-use",
-        "difficulty": 1
+        "difficulty": 1,
+        "language": "telugu"
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    }
+    },
+    "language": "telugu"
   },
   {
-    "telugu": "దయచేసి",
+    "originalScript": "దయచేసి",
     "transliteration": "dayachesi",
     "english": "please",
     "partOfSpeech": "adverb",
@@ -83,20 +86,22 @@
     "examples": [
       {
         "pronunciation": "dayacheesi kuurchoomdi.",
-        "telugu": "దయచేసి కూర్చోండి.",
+        "originalScript": "దయచేసి కూర్చోండి.",
         "english": "Please sit down.",
         "contextTag": "daily-use",
-        "difficulty": 1
+        "difficulty": 1,
+        "language": "telugu"
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    }
+    },
+    "language": "telugu"
   },
   {
-    "telugu": "క్షమించండి",
+    "originalScript": "క్షమించండి",
     "transliteration": "kshaminchandi",
     "english": "sorry / excuse me",
     "partOfSpeech": "phrase",
@@ -115,20 +120,22 @@
     "examples": [
       {
         "pronunciation": "kshamimchamdi, naaku artham kaaleedu.",
-        "telugu": "క్షమించండి, నాకు అర్థం కాలేదు.",
+        "originalScript": "క్షమించండి, నాకు అర్థం కాలేదు.",
         "english": "Sorry, I did not understand.",
         "contextTag": "daily-use",
-        "difficulty": 1
+        "difficulty": 1,
+        "language": "telugu"
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    }
+    },
+    "language": "telugu"
   },
   {
-    "telugu": "అవును",
+    "originalScript": "అవును",
     "transliteration": "avunu",
     "english": "yes",
     "partOfSpeech": "adverb",
@@ -146,20 +153,22 @@
     "examples": [
       {
         "pronunciation": "avunu, neenu vastaanu.",
-        "telugu": "అవును, నేను వస్తాను.",
+        "originalScript": "అవును, నేను వస్తాను.",
         "english": "Yes, I will come.",
         "contextTag": "daily-use",
-        "difficulty": 1
+        "difficulty": 1,
+        "language": "telugu"
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    }
+    },
+    "language": "telugu"
   },
   {
-    "telugu": "కాదు",
+    "originalScript": "కాదు",
     "transliteration": "kaadu",
     "english": "no / not",
     "partOfSpeech": "adverb",
@@ -177,20 +186,22 @@
     "examples": [
       {
         "pronunciation": "kaadu, adi naa pustakam kaadu.",
-        "telugu": "కాదు, అది నా పుస్తకం కాదు.",
+        "originalScript": "కాదు, అది నా పుస్తకం కాదు.",
         "english": "No, that is not my book.",
         "contextTag": "daily-use",
-        "difficulty": 1
+        "difficulty": 1,
+        "language": "telugu"
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    }
+    },
+    "language": "telugu"
   },
   {
-    "telugu": "సరే",
+    "originalScript": "సరే",
     "transliteration": "sare",
     "english": "okay",
     "partOfSpeech": "phrase",
@@ -208,20 +219,22 @@
     "examples": [
       {
         "pronunciation": "saree, manam velludaam.",
-        "telugu": "సరే, మనం వెళ్లుదాం.",
+        "originalScript": "సరే, మనం వెళ్లుదాం.",
         "english": "Okay, let us go.",
         "contextTag": "daily-use",
-        "difficulty": 1
+        "difficulty": 1,
+        "language": "telugu"
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    }
+    },
+    "language": "telugu"
   },
   {
-    "telugu": "బాగుంది",
+    "originalScript": "బాగుంది",
     "transliteration": "bagundi",
     "english": "it is good",
     "partOfSpeech": "phrase",
@@ -239,20 +252,22 @@
     "examples": [
       {
         "pronunciation": "ii aaloochana baagumdi.",
-        "telugu": "ఈ ఆలోచన బాగుంది.",
+        "originalScript": "ఈ ఆలోచన బాగుంది.",
         "english": "This idea is good.",
         "contextTag": "daily-use",
-        "difficulty": 1
+        "difficulty": 1,
+        "language": "telugu"
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    }
+    },
+    "language": "telugu"
   },
   {
-    "telugu": "నేను",
+    "originalScript": "నేను",
     "transliteration": "nenu",
     "english": "I",
     "partOfSpeech": "pronoun",
@@ -271,20 +286,22 @@
     "examples": [
       {
         "pronunciation": "neenu telugu neerchukumtunnaanu.",
-        "telugu": "నేను తెలుగు నేర్చుకుంటున్నాను.",
+        "originalScript": "నేను తెలుగు నేర్చుకుంటున్నాను.",
         "english": "I am learning Telugu.",
         "contextTag": "daily-use",
-        "difficulty": 1
+        "difficulty": 1,
+        "language": "telugu"
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    }
+    },
+    "language": "telugu"
   },
   {
-    "telugu": "నువ్వు",
+    "originalScript": "నువ్వు",
     "transliteration": "nuvvu",
     "english": "you (informal)",
     "partOfSpeech": "pronoun",
@@ -303,20 +320,22 @@
     "examples": [
       {
         "pronunciation": "nuvvu ekkada umtaavu?",
-        "telugu": "నువ్వు ఎక్కడ ఉంటావు?",
+        "originalScript": "నువ్వు ఎక్కడ ఉంటావు?",
         "english": "Where do you live?",
         "contextTag": "daily-use",
-        "difficulty": 1
+        "difficulty": 1,
+        "language": "telugu"
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    }
+    },
+    "language": "telugu"
   },
   {
-    "telugu": "మీరు",
+    "originalScript": "మీరు",
     "transliteration": "meeru",
     "english": "you (formal/plural)",
     "partOfSpeech": "pronoun",
@@ -335,20 +354,22 @@
     "examples": [
       {
         "pronunciation": "miiru eemi cheestaaru?",
-        "telugu": "మీరు ఏమి చేస్తారు?",
+        "originalScript": "మీరు ఏమి చేస్తారు?",
         "english": "What do you do?",
         "contextTag": "daily-use",
-        "difficulty": 1
+        "difficulty": 1,
+        "language": "telugu"
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    }
+    },
+    "language": "telugu"
   },
   {
-    "telugu": "అతను",
+    "originalScript": "అతను",
     "transliteration": "atanu",
     "english": "he",
     "partOfSpeech": "pronoun",
@@ -366,20 +387,22 @@
     "examples": [
       {
         "pronunciation": "atanu naa sneehitudu.",
-        "telugu": "అతను నా స్నేహితుడు.",
+        "originalScript": "అతను నా స్నేహితుడు.",
         "english": "He is my friend.",
         "contextTag": "daily-use",
-        "difficulty": 1
+        "difficulty": 1,
+        "language": "telugu"
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    }
+    },
+    "language": "telugu"
   },
   {
-    "telugu": "ఆమె",
+    "originalScript": "ఆమె",
     "transliteration": "aame",
     "english": "she",
     "partOfSpeech": "pronoun",
@@ -397,20 +420,22 @@
     "examples": [
       {
         "pronunciation": "aame mamchi tiichar.",
-        "telugu": "ఆమె మంచి టీచర్.",
+        "originalScript": "ఆమె మంచి టీచర్.",
         "english": "She is a good teacher.",
         "contextTag": "daily-use",
-        "difficulty": 1
+        "difficulty": 1,
+        "language": "telugu"
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    }
+    },
+    "language": "telugu"
   },
   {
-    "telugu": "ఇది",
+    "originalScript": "ఇది",
     "transliteration": "idi",
     "english": "this",
     "partOfSpeech": "pronoun",
@@ -428,20 +453,22 @@
     "examples": [
       {
         "pronunciation": "idi naa phoon.",
-        "telugu": "ఇది నా ఫోన్.",
+        "originalScript": "ఇది నా ఫోన్.",
         "english": "This is my phone.",
         "contextTag": "daily-use",
-        "difficulty": 1
+        "difficulty": 1,
+        "language": "telugu"
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    }
+    },
+    "language": "telugu"
   },
   {
-    "telugu": "అది",
+    "originalScript": "అది",
     "transliteration": "adi",
     "english": "that",
     "partOfSpeech": "pronoun",
@@ -459,20 +486,22 @@
     "examples": [
       {
         "pronunciation": "adi maa illu.",
-        "telugu": "అది మా ఇల్లు.",
+        "originalScript": "అది మా ఇల్లు.",
         "english": "That is our house.",
         "contextTag": "daily-use",
-        "difficulty": 1
+        "difficulty": 1,
+        "language": "telugu"
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    }
+    },
+    "language": "telugu"
   },
   {
-    "telugu": "మనం",
+    "originalScript": "మనం",
     "transliteration": "manam",
     "english": "we (inclusive)",
     "partOfSpeech": "pronoun",
@@ -490,20 +519,22 @@
     "examples": [
       {
         "pronunciation": "manam ippudu modalupedadaam.",
-        "telugu": "మనం ఇప్పుడు మొదలుపెడదాం.",
+        "originalScript": "మనం ఇప్పుడు మొదలుపెడదాం.",
         "english": "Let us start now.",
         "contextTag": "daily-use",
-        "difficulty": 1
+        "difficulty": 1,
+        "language": "telugu"
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    }
+    },
+    "language": "telugu"
   },
   {
-    "telugu": "మేము",
+    "originalScript": "మేము",
     "transliteration": "memu",
     "english": "we (exclusive)",
     "partOfSpeech": "pronoun",
@@ -521,20 +552,22 @@
     "examples": [
       {
         "pronunciation": "meemu haidaraabaad‌loo umtaam.",
-        "telugu": "మేము హైదరాబాద్‌లో ఉంటాం.",
+        "originalScript": "మేము హైదరాబాద్‌లో ఉంటాం.",
         "english": "We live in Hyderabad.",
         "contextTag": "daily-use",
-        "difficulty": 1
+        "difficulty": 1,
+        "language": "telugu"
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    }
+    },
+    "language": "telugu"
   },
   {
-    "telugu": "వాళ్లు",
+    "originalScript": "వాళ్లు",
     "transliteration": "vaallu",
     "english": "they",
     "partOfSpeech": "pronoun",
@@ -552,20 +585,22 @@
     "examples": [
       {
         "pronunciation": "vaallu skuul‌ki vellaaru.",
-        "telugu": "వాళ్లు స్కూల్‌కి వెళ్లారు.",
+        "originalScript": "వాళ్లు స్కూల్‌కి వెళ్లారు.",
         "english": "They went to school.",
         "contextTag": "daily-use",
-        "difficulty": 1
+        "difficulty": 1,
+        "language": "telugu"
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    }
+    },
+    "language": "telugu"
   },
   {
-    "telugu": "ఏమి",
+    "originalScript": "ఏమి",
     "transliteration": "emi",
     "english": "what",
     "partOfSpeech": "pronoun",
@@ -584,20 +619,22 @@
     "examples": [
       {
         "pronunciation": "idi eemi?",
-        "telugu": "ఇది ఏమి?",
+        "originalScript": "ఇది ఏమి?",
         "english": "What is this?",
         "contextTag": "daily-use",
-        "difficulty": 1
+        "difficulty": 1,
+        "language": "telugu"
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    }
+    },
+    "language": "telugu"
   },
   {
-    "telugu": "ఎవరు",
+    "originalScript": "ఎవరు",
     "transliteration": "evaru",
     "english": "who",
     "partOfSpeech": "pronoun",
@@ -616,20 +653,22 @@
     "examples": [
       {
         "pronunciation": "atanu evaru?",
-        "telugu": "అతను ఎవరు?",
+        "originalScript": "అతను ఎవరు?",
         "english": "Who is he?",
         "contextTag": "daily-use",
-        "difficulty": 1
+        "difficulty": 1,
+        "language": "telugu"
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    }
+    },
+    "language": "telugu"
   },
   {
-    "telugu": "ఎక్కడ",
+    "originalScript": "ఎక్కడ",
     "transliteration": "ekkada",
     "english": "where",
     "partOfSpeech": "adverb",
@@ -648,20 +687,22 @@
     "examples": [
       {
         "pronunciation": "mii illu ekkada?",
-        "telugu": "మీ ఇల్లు ఎక్కడ?",
+        "originalScript": "మీ ఇల్లు ఎక్కడ?",
         "english": "Where is your house?",
         "contextTag": "daily-use",
-        "difficulty": 1
+        "difficulty": 1,
+        "language": "telugu"
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    }
+    },
+    "language": "telugu"
   },
   {
-    "telugu": "ఎప్పుడు",
+    "originalScript": "ఎప్పుడు",
     "transliteration": "eppudu",
     "english": "when",
     "partOfSpeech": "adverb",
@@ -680,20 +721,22 @@
     "examples": [
       {
         "pronunciation": "miiru eppudu vastaaru?",
-        "telugu": "మీరు ఎప్పుడు వస్తారు?",
+        "originalScript": "మీరు ఎప్పుడు వస్తారు?",
         "english": "When will you come?",
         "contextTag": "daily-use",
-        "difficulty": 1
+        "difficulty": 1,
+        "language": "telugu"
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    }
+    },
+    "language": "telugu"
   },
   {
-    "telugu": "ఎలా",
+    "originalScript": "ఎలా",
     "transliteration": "ela",
     "english": "how",
     "partOfSpeech": "adverb",
@@ -712,20 +755,22 @@
     "examples": [
       {
         "pronunciation": "idi elaa panicheestumdi?",
-        "telugu": "ఇది ఎలా పనిచేస్తుంది?",
+        "originalScript": "ఇది ఎలా పనిచేస్తుంది?",
         "english": "How does this work?",
         "contextTag": "daily-use",
-        "difficulty": 1
+        "difficulty": 1,
+        "language": "telugu"
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    }
+    },
+    "language": "telugu"
   },
   {
-    "telugu": "ఎందుకు",
+    "originalScript": "ఎందుకు",
     "transliteration": "enduku",
     "english": "why",
     "partOfSpeech": "adverb",
@@ -744,20 +789,22 @@
     "examples": [
       {
         "pronunciation": "nuvvu emduku aalasyamgaa vachchaavu?",
-        "telugu": "నువ్వు ఎందుకు ఆలస్యంగా వచ్చావు?",
+        "originalScript": "నువ్వు ఎందుకు ఆలస్యంగా వచ్చావు?",
         "english": "Why did you come late?",
         "contextTag": "daily-use",
-        "difficulty": 1
+        "difficulty": 1,
+        "language": "telugu"
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    }
+    },
+    "language": "telugu"
   },
   {
-    "telugu": "ఒకటి",
+    "originalScript": "ఒకటి",
     "transliteration": "okati",
     "english": "one",
     "partOfSpeech": "numeral",
@@ -775,20 +822,22 @@
     "examples": [
       {
         "pronunciation": "naa daggara okati pustakam umdi.",
-        "telugu": "నా దగ్గర ఒకటి పుస్తకం ఉంది.",
+        "originalScript": "నా దగ్గర ఒకటి పుస్తకం ఉంది.",
         "english": "I have one book.",
         "contextTag": "daily-use",
-        "difficulty": 1
+        "difficulty": 1,
+        "language": "telugu"
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    }
+    },
+    "language": "telugu"
   },
   {
-    "telugu": "రెండు",
+    "originalScript": "రెండు",
     "transliteration": "rendu",
     "english": "two",
     "partOfSpeech": "numeral",
@@ -806,20 +855,22 @@
     "examples": [
       {
         "pronunciation": "maaku remdu pillalu unnaaru.",
-        "telugu": "మాకు రెండు పిల్లలు ఉన్నారు.",
+        "originalScript": "మాకు రెండు పిల్లలు ఉన్నారు.",
         "english": "We have two children.",
         "contextTag": "daily-use",
-        "difficulty": 1
+        "difficulty": 1,
+        "language": "telugu"
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    }
+    },
+    "language": "telugu"
   },
   {
-    "telugu": "మూడు",
+    "originalScript": "మూడు",
     "transliteration": "moodu",
     "english": "three",
     "partOfSpeech": "numeral",
@@ -837,20 +888,22 @@
     "examples": [
       {
         "pronunciation": "muudu roojula tarvaata ramdi.",
-        "telugu": "మూడు రోజుల తర్వాత రండి.",
+        "originalScript": "మూడు రోజుల తర్వాత రండి.",
         "english": "Come after three days.",
         "contextTag": "daily-use",
-        "difficulty": 1
+        "difficulty": 1,
+        "language": "telugu"
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    }
+    },
+    "language": "telugu"
   },
   {
-    "telugu": "నాలుగు",
+    "originalScript": "నాలుగు",
     "transliteration": "naalugu",
     "english": "four",
     "partOfSpeech": "numeral",
@@ -868,20 +921,22 @@
     "examples": [
       {
         "pronunciation": "naalugu kurchiilu kaavaali.",
-        "telugu": "నాలుగు కుర్చీలు కావాలి.",
+        "originalScript": "నాలుగు కుర్చీలు కావాలి.",
         "english": "We need four chairs.",
         "contextTag": "daily-use",
-        "difficulty": 1
+        "difficulty": 1,
+        "language": "telugu"
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    }
+    },
+    "language": "telugu"
   },
   {
-    "telugu": "ఐదు",
+    "originalScript": "ఐదు",
     "transliteration": "aidu",
     "english": "five",
     "partOfSpeech": "numeral",
@@ -899,20 +954,22 @@
     "examples": [
       {
         "pronunciation": "aidu nimishaalu veechi umdamdi.",
-        "telugu": "ఐదు నిమిషాలు వేచి ఉండండి.",
+        "originalScript": "ఐదు నిమిషాలు వేచి ఉండండి.",
         "english": "Please wait five minutes.",
         "contextTag": "daily-use",
-        "difficulty": 1
+        "difficulty": 1,
+        "language": "telugu"
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    }
+    },
+    "language": "telugu"
   },
   {
-    "telugu": "పది",
+    "originalScript": "పది",
     "transliteration": "padi",
     "english": "ten",
     "partOfSpeech": "numeral",
@@ -930,20 +987,22 @@
     "examples": [
       {
         "pronunciation": "padi gamtalaku miitimg umdi.",
-        "telugu": "పది గంటలకు మీటింగ్ ఉంది.",
+        "originalScript": "పది గంటలకు మీటింగ్ ఉంది.",
         "english": "There is a meeting at ten o'clock.",
         "contextTag": "daily-use",
-        "difficulty": 1
+        "difficulty": 1,
+        "language": "telugu"
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    }
+    },
+    "language": "telugu"
   },
   {
-    "telugu": "ఇరవై",
+    "originalScript": "ఇరవై",
     "transliteration": "iravai",
     "english": "twenty",
     "partOfSpeech": "numeral",
@@ -961,20 +1020,22 @@
     "examples": [
       {
         "pronunciation": "iravai mamdi vidyaarthulu unnaaru.",
-        "telugu": "ఇరవై మంది విద్యార్థులు ఉన్నారు.",
+        "originalScript": "ఇరవై మంది విద్యార్థులు ఉన్నారు.",
         "english": "There are twenty students.",
         "contextTag": "daily-use",
-        "difficulty": 1
+        "difficulty": 1,
+        "language": "telugu"
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    }
+    },
+    "language": "telugu"
   },
   {
-    "telugu": "ఈరోజు",
+    "originalScript": "ఈరోజు",
     "transliteration": "eeroju",
     "english": "today",
     "partOfSpeech": "noun",
@@ -993,20 +1054,22 @@
     "examples": [
       {
         "pronunciation": "iirooju vaataavaranam challagaa umdi.",
-        "telugu": "ఈరోజు వాతావరణం చల్లగా ఉంది.",
+        "originalScript": "ఈరోజు వాతావరణం చల్లగా ఉంది.",
         "english": "Today the weather is cool.",
         "contextTag": "daily-use",
-        "difficulty": 1
+        "difficulty": 1,
+        "language": "telugu"
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    }
+    },
+    "language": "telugu"
   },
   {
-    "telugu": "రేపు",
+    "originalScript": "రేపు",
     "transliteration": "repu",
     "english": "tomorrow",
     "partOfSpeech": "noun",
@@ -1025,20 +1088,22 @@
     "examples": [
       {
         "pronunciation": "reepu kaluddaam.",
-        "telugu": "రేపు కలుద్దాం.",
+        "originalScript": "రేపు కలుద్దాం.",
         "english": "Let us meet tomorrow.",
         "contextTag": "daily-use",
-        "difficulty": 1
+        "difficulty": 1,
+        "language": "telugu"
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    }
+    },
+    "language": "telugu"
   },
   {
-    "telugu": "నిన్న",
+    "originalScript": "నిన్న",
     "transliteration": "ninna",
     "english": "yesterday",
     "partOfSpeech": "noun",
@@ -1057,20 +1122,22 @@
     "examples": [
       {
         "pronunciation": "ninna neenu imtloonee unnaanu.",
-        "telugu": "నిన్న నేను ఇంట్లోనే ఉన్నాను.",
+        "originalScript": "నిన్న నేను ఇంట్లోనే ఉన్నాను.",
         "english": "Yesterday I stayed at home.",
         "contextTag": "daily-use",
-        "difficulty": 1
+        "difficulty": 1,
+        "language": "telugu"
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    }
+    },
+    "language": "telugu"
   },
   {
-    "telugu": "ఇప్పుడు",
+    "originalScript": "ఇప్పుడు",
     "transliteration": "ippudu",
     "english": "now",
     "partOfSpeech": "adverb",
@@ -1089,20 +1156,22 @@
     "examples": [
       {
         "pronunciation": "ippudu modalu pedadaam.",
-        "telugu": "ఇప్పుడు మొదలు పెడదాం.",
+        "originalScript": "ఇప్పుడు మొదలు పెడదాం.",
         "english": "Let us start now.",
         "contextTag": "daily-use",
-        "difficulty": 1
+        "difficulty": 1,
+        "language": "telugu"
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    }
+    },
+    "language": "telugu"
   },
   {
-    "telugu": "తర్వాత",
+    "originalScript": "తర్వాత",
     "transliteration": "taruvata",
     "english": "later / after",
     "partOfSpeech": "adverb",
@@ -1121,20 +1190,22 @@
     "examples": [
       {
         "pronunciation": "neenu tarvaata phoon cheestaanu.",
-        "telugu": "నేను తర్వాత ఫోన్ చేస్తాను.",
+        "originalScript": "నేను తర్వాత ఫోన్ చేస్తాను.",
         "english": "I will call later.",
         "contextTag": "daily-use",
-        "difficulty": 1
+        "difficulty": 1,
+        "language": "telugu"
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    }
+    },
+    "language": "telugu"
   },
   {
-    "telugu": "ఉదయం",
+    "originalScript": "ఉదయం",
     "transliteration": "udayam",
     "english": "morning",
     "partOfSpeech": "noun",
@@ -1152,20 +1223,22 @@
     "examples": [
       {
         "pronunciation": "udayam neenu nadakaku veltaanu.",
-        "telugu": "ఉదయం నేను నడకకు వెళ్తాను.",
+        "originalScript": "ఉదయం నేను నడకకు వెళ్తాను.",
         "english": "I go for a walk in the morning.",
         "contextTag": "daily-use",
-        "difficulty": 1
+        "difficulty": 1,
+        "language": "telugu"
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    }
+    },
+    "language": "telugu"
   },
   {
-    "telugu": "సాయంత్రం",
+    "originalScript": "సాయంత్రం",
     "transliteration": "saayantram",
     "english": "evening",
     "partOfSpeech": "noun",
@@ -1183,20 +1256,22 @@
     "examples": [
       {
         "pronunciation": "saayamtram tii taagudaam.",
-        "telugu": "సాయంత్రం టీ తాగుదాం.",
+        "originalScript": "సాయంత్రం టీ తాగుదాం.",
         "english": "Let us drink tea in the evening.",
         "contextTag": "daily-use",
-        "difficulty": 1
+        "difficulty": 1,
+        "language": "telugu"
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    }
+    },
+    "language": "telugu"
   },
   {
-    "telugu": "రాత్రి",
+    "originalScript": "రాత్రి",
     "transliteration": "raatri",
     "english": "night",
     "partOfSpeech": "noun",
@@ -1214,20 +1289,22 @@
     "examples": [
       {
         "pronunciation": "raatri tvaragaa nidrapoo.",
-        "telugu": "రాత్రి త్వరగా నిద్రపో.",
+        "originalScript": "రాత్రి త్వరగా నిద్రపో.",
         "english": "Sleep early at night.",
         "contextTag": "daily-use",
-        "difficulty": 1
+        "difficulty": 1,
+        "language": "telugu"
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    }
+    },
+    "language": "telugu"
   },
   {
-    "telugu": "సమయం",
+    "originalScript": "సమయం",
     "transliteration": "samayam",
     "english": "time",
     "partOfSpeech": "noun",
@@ -1245,20 +1322,22 @@
     "examples": [
       {
         "pronunciation": "nii samayam viluvainadi.",
-        "telugu": "నీ సమయం విలువైనది.",
+        "originalScript": "నీ సమయం విలువైనది.",
         "english": "Your time is valuable.",
         "contextTag": "daily-use",
-        "difficulty": 1
+        "difficulty": 1,
+        "language": "telugu"
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    }
+    },
+    "language": "telugu"
   },
   {
-    "telugu": "అమ్మ",
+    "originalScript": "అమ్మ",
     "transliteration": "amma",
     "english": "mother",
     "partOfSpeech": "noun",
@@ -1277,20 +1356,22 @@
     "examples": [
       {
         "pronunciation": "naa amma chaalaa mamchidi.",
-        "telugu": "నా అమ్మ చాలా మంచిది.",
+        "originalScript": "నా అమ్మ చాలా మంచిది.",
         "english": "My mother is very kind.",
         "contextTag": "daily-use",
-        "difficulty": 1
+        "difficulty": 1,
+        "language": "telugu"
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    }
+    },
+    "language": "telugu"
   },
   {
-    "telugu": "నాన్న",
+    "originalScript": "నాన్న",
     "transliteration": "nanna",
     "english": "father",
     "partOfSpeech": "noun",
@@ -1309,20 +1390,22 @@
     "examples": [
       {
         "pronunciation": "naa naanna aaphiisuki vellaaru.",
-        "telugu": "నా నాన్న ఆఫీసుకి వెళ్లారు.",
+        "originalScript": "నా నాన్న ఆఫీసుకి వెళ్లారు.",
         "english": "My father went to the office.",
         "contextTag": "daily-use",
-        "difficulty": 1
+        "difficulty": 1,
+        "language": "telugu"
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    }
+    },
+    "language": "telugu"
   },
   {
-    "telugu": "అన్న",
+    "originalScript": "అన్న",
     "transliteration": "anna",
     "english": "elder brother",
     "partOfSpeech": "noun",
@@ -1341,20 +1424,22 @@
     "examples": [
       {
         "pronunciation": "naa anna haidaraabaad‌loo umtaadu.",
-        "telugu": "నా అన్న హైదరాబాద్‌లో ఉంటాడు.",
+        "originalScript": "నా అన్న హైదరాబాద్‌లో ఉంటాడు.",
         "english": "My elder brother lives in Hyderabad.",
         "contextTag": "daily-use",
-        "difficulty": 1
+        "difficulty": 1,
+        "language": "telugu"
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    }
+    },
+    "language": "telugu"
   },
   {
-    "telugu": "అక్క",
+    "originalScript": "అక్క",
     "transliteration": "akka",
     "english": "elder sister",
     "partOfSpeech": "noun",
@@ -1373,20 +1458,22 @@
     "examples": [
       {
         "pronunciation": "naa akka daaktar.",
-        "telugu": "నా అక్క డాక్టర్.",
+        "originalScript": "నా అక్క డాక్టర్.",
         "english": "My elder sister is a doctor.",
         "contextTag": "daily-use",
-        "difficulty": 1
+        "difficulty": 1,
+        "language": "telugu"
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    }
+    },
+    "language": "telugu"
   },
   {
-    "telugu": "తమ్ముడు",
+    "originalScript": "తమ్ముడు",
     "transliteration": "tammudu",
     "english": "younger brother",
     "partOfSpeech": "noun",
@@ -1405,20 +1492,22 @@
     "examples": [
       {
         "pronunciation": "naa tammudu kriket aadutaadu.",
-        "telugu": "నా తమ్ముడు క్రికెట్ ఆడుతాడు.",
+        "originalScript": "నా తమ్ముడు క్రికెట్ ఆడుతాడు.",
         "english": "My younger brother plays cricket.",
         "contextTag": "daily-use",
-        "difficulty": 1
+        "difficulty": 1,
+        "language": "telugu"
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    }
+    },
+    "language": "telugu"
   },
   {
-    "telugu": "చెల్లి",
+    "originalScript": "చెల్లి",
     "transliteration": "chelli",
     "english": "younger sister",
     "partOfSpeech": "noun",
@@ -1437,20 +1526,22 @@
     "examples": [
       {
         "pronunciation": "naa chelli paata paadutumdi.",
-        "telugu": "నా చెల్లి పాట పాడుతుంది.",
+        "originalScript": "నా చెల్లి పాట పాడుతుంది.",
         "english": "My younger sister sings songs.",
         "contextTag": "daily-use",
-        "difficulty": 1
+        "difficulty": 1,
+        "language": "telugu"
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    }
+    },
+    "language": "telugu"
   },
   {
-    "telugu": "కుటుంబం",
+    "originalScript": "కుటుంబం",
     "transliteration": "kutumbam",
     "english": "family",
     "partOfSpeech": "noun",
@@ -1469,20 +1560,22 @@
     "examples": [
       {
         "pronunciation": "maa kutumbam peddadi.",
-        "telugu": "మా కుటుంబం పెద్దది.",
+        "originalScript": "మా కుటుంబం పెద్దది.",
         "english": "Our family is big.",
         "contextTag": "daily-use",
-        "difficulty": 1
+        "difficulty": 1,
+        "language": "telugu"
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    }
+    },
+    "language": "telugu"
   },
   {
-    "telugu": "స్నేహితుడు",
+    "originalScript": "స్నేహితుడు",
     "transliteration": "snehitudu",
     "english": "friend (male)",
     "partOfSpeech": "noun",
@@ -1501,20 +1594,22 @@
     "examples": [
       {
         "pronunciation": "atanu naa mamchi sneehitudu.",
-        "telugu": "అతను నా మంచి స్నేహితుడు.",
+        "originalScript": "అతను నా మంచి స్నేహితుడు.",
         "english": "He is my good friend.",
         "contextTag": "daily-use",
-        "difficulty": 1
+        "difficulty": 1,
+        "language": "telugu"
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    }
+    },
+    "language": "telugu"
   },
   {
-    "telugu": "స్నేహితురాలు",
+    "originalScript": "స్నేహితురాలు",
     "transliteration": "snehituralu",
     "english": "friend (female)",
     "partOfSpeech": "noun",
@@ -1533,20 +1628,22 @@
     "examples": [
       {
         "pronunciation": "aame naa sneehituraalu.",
-        "telugu": "ఆమె నా స్నేహితురాలు.",
+        "originalScript": "ఆమె నా స్నేహితురాలు.",
         "english": "She is my friend.",
         "contextTag": "daily-use",
-        "difficulty": 1
+        "difficulty": 1,
+        "language": "telugu"
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    }
+    },
+    "language": "telugu"
   },
   {
-    "telugu": "ఇల్లు",
+    "originalScript": "ఇల్లు",
     "transliteration": "illu",
     "english": "house",
     "partOfSpeech": "noun",
@@ -1565,20 +1662,22 @@
     "examples": [
       {
         "pronunciation": "maa illu peddadi.",
-        "telugu": "మా ఇల్లు పెద్దది.",
+        "originalScript": "మా ఇల్లు పెద్దది.",
         "english": "Our house is big.",
         "contextTag": "daily-use",
-        "difficulty": 1
+        "difficulty": 1,
+        "language": "telugu"
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    }
+    },
+    "language": "telugu"
   },
   {
-    "telugu": "పుస్తకం",
+    "originalScript": "పుస్తకం",
     "transliteration": "pustakam",
     "english": "book",
     "partOfSpeech": "noun",
@@ -1597,20 +1696,22 @@
     "examples": [
       {
         "pronunciation": "neenu telugu pustakam chaduvutunnaanu.",
-        "telugu": "నేను తెలుగు పుస్తకం చదువుతున్నాను.",
+        "originalScript": "నేను తెలుగు పుస్తకం చదువుతున్నాను.",
         "english": "I am reading a Telugu book.",
         "contextTag": "daily-use",
-        "difficulty": 1
+        "difficulty": 1,
+        "language": "telugu"
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    }
+    },
+    "language": "telugu"
   },
   {
-    "telugu": "పాఠశాల",
+    "originalScript": "పాఠశాల",
     "transliteration": "paatashaala",
     "english": "school",
     "partOfSpeech": "noun",
@@ -1628,20 +1729,22 @@
     "examples": [
       {
         "pronunciation": "pillalu paathashaalaku vellaaru.",
-        "telugu": "పిల్లలు పాఠశాలకు వెళ్లారు.",
+        "originalScript": "పిల్లలు పాఠశాలకు వెళ్లారు.",
         "english": "The children went to school.",
         "contextTag": "daily-use",
-        "difficulty": 1
+        "difficulty": 1,
+        "language": "telugu"
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    }
+    },
+    "language": "telugu"
   },
   {
-    "telugu": "నీరు",
+    "originalScript": "నీరు",
     "transliteration": "neeru",
     "english": "water",
     "partOfSpeech": "noun",
@@ -1660,20 +1763,22 @@
     "examples": [
       {
         "pronunciation": "naaku niiru kaavaali.",
-        "telugu": "నాకు నీరు కావాలి.",
+        "originalScript": "నాకు నీరు కావాలి.",
         "english": "I need water.",
         "contextTag": "daily-use",
-        "difficulty": 1
+        "difficulty": 1,
+        "language": "telugu"
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    }
+    },
+    "language": "telugu"
   },
   {
-    "telugu": "అన్నం",
+    "originalScript": "అన్నం",
     "transliteration": "annam",
     "english": "cooked rice / meal",
     "partOfSpeech": "noun",
@@ -1692,20 +1797,22 @@
     "examples": [
       {
         "pronunciation": "annam veedigaa umdi.",
-        "telugu": "అన్నం వేడిగా ఉంది.",
+        "originalScript": "అన్నం వేడిగా ఉంది.",
         "english": "The rice is hot.",
         "contextTag": "daily-use",
-        "difficulty": 1
+        "difficulty": 1,
+        "language": "telugu"
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    }
+    },
+    "language": "telugu"
   },
   {
-    "telugu": "పండు",
+    "originalScript": "పండు",
     "transliteration": "pandu",
     "english": "fruit",
     "partOfSpeech": "noun",
@@ -1723,20 +1830,22 @@
     "examples": [
       {
         "pronunciation": "neenu prati rooju pamdu timtaanu.",
-        "telugu": "నేను ప్రతి రోజు పండు తింటాను.",
+        "originalScript": "నేను ప్రతి రోజు పండు తింటాను.",
         "english": "I eat fruit every day.",
         "contextTag": "daily-use",
-        "difficulty": 1
+        "difficulty": 1,
+        "language": "telugu"
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    }
+    },
+    "language": "telugu"
   },
   {
-    "telugu": "బస్సు",
+    "originalScript": "బస్సు",
     "transliteration": "bassu",
     "english": "bus",
     "partOfSpeech": "noun",
@@ -1755,20 +1864,22 @@
     "examples": [
       {
         "pronunciation": "bassu samayaaniki vachchimdi.",
-        "telugu": "బస్సు సమయానికి వచ్చింది.",
+        "originalScript": "బస్సు సమయానికి వచ్చింది.",
         "english": "The bus arrived on time.",
         "contextTag": "daily-use",
-        "difficulty": 1
+        "difficulty": 1,
+        "language": "telugu"
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    }
+    },
+    "language": "telugu"
   },
   {
-    "telugu": "రోడు",
+    "originalScript": "రోడు",
     "transliteration": "rodu",
     "english": "road",
     "partOfSpeech": "noun",
@@ -1787,20 +1898,22 @@
     "examples": [
       {
         "pronunciation": "ii roodu nagaraaniki veltumdi.",
-        "telugu": "ఈ రోడు నగరానికి వెళ్తుంది.",
+        "originalScript": "ఈ రోడు నగరానికి వెళ్తుంది.",
         "english": "This road goes to the city.",
         "contextTag": "daily-use",
-        "difficulty": 1
+        "difficulty": 1,
+        "language": "telugu"
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    }
+    },
+    "language": "telugu"
   },
   {
-    "telugu": "గ్రామం",
+    "originalScript": "గ్రామం",
     "transliteration": "graamam",
     "english": "village",
     "partOfSpeech": "noun",
@@ -1818,20 +1931,22 @@
     "examples": [
       {
         "pronunciation": "naa graamam chaalaa amdamgaa umtumdi.",
-        "telugu": "నా గ్రామం చాలా అందంగా ఉంటుంది.",
+        "originalScript": "నా గ్రామం చాలా అందంగా ఉంటుంది.",
         "english": "My village is very beautiful.",
         "contextTag": "daily-use",
-        "difficulty": 1
+        "difficulty": 1,
+        "language": "telugu"
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    }
+    },
+    "language": "telugu"
   },
   {
-    "telugu": "నగరం",
+    "originalScript": "నగరం",
     "transliteration": "nagaram",
     "english": "city",
     "partOfSpeech": "noun",
@@ -1849,20 +1964,22 @@
     "examples": [
       {
         "pronunciation": "haidaraabaad oka pedda nagaram.",
-        "telugu": "హైదరాబాద్ ఒక పెద్ద నగరం.",
+        "originalScript": "హైదరాబాద్ ఒక పెద్ద నగరం.",
         "english": "Hyderabad is a big city.",
         "contextTag": "daily-use",
-        "difficulty": 1
+        "difficulty": 1,
+        "language": "telugu"
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    }
+    },
+    "language": "telugu"
   },
   {
-    "telugu": "పని",
+    "originalScript": "పని",
     "transliteration": "pani",
     "english": "work",
     "partOfSpeech": "noun",
@@ -1880,20 +1997,22 @@
     "examples": [
       {
         "pronunciation": "naaku iirooju chaalaa pani umdi.",
-        "telugu": "నాకు ఈరోజు చాలా పని ఉంది.",
+        "originalScript": "నాకు ఈరోజు చాలా పని ఉంది.",
         "english": "I have a lot of work today.",
         "contextTag": "daily-use",
-        "difficulty": 1
+        "difficulty": 1,
+        "language": "telugu"
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    }
+    },
+    "language": "telugu"
   },
   {
-    "telugu": "డబ్బు",
+    "originalScript": "డబ్బు",
     "transliteration": "dabbu",
     "english": "money",
     "partOfSpeech": "noun",
@@ -1911,20 +2030,22 @@
     "examples": [
       {
         "pronunciation": "naaku komchem dabbu kaavaali.",
-        "telugu": "నాకు కొంచెం డబ్బు కావాలి.",
+        "originalScript": "నాకు కొంచెం డబ్బు కావాలి.",
         "english": "I need some money.",
         "contextTag": "daily-use",
-        "difficulty": 1
+        "difficulty": 1,
+        "language": "telugu"
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    }
+    },
+    "language": "telugu"
   },
   {
-    "telugu": "భాష",
+    "originalScript": "భాష",
     "transliteration": "bhaasha",
     "english": "language",
     "partOfSpeech": "noun",
@@ -1943,20 +2064,22 @@
     "examples": [
       {
         "pronunciation": "telugu oka amdamaina bhaasha.",
-        "telugu": "తెలుగు ఒక అందమైన భాష.",
+        "originalScript": "తెలుగు ఒక అందమైన భాష.",
         "english": "Telugu is a beautiful language.",
         "contextTag": "daily-use",
-        "difficulty": 1
+        "difficulty": 1,
+        "language": "telugu"
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    }
+    },
+    "language": "telugu"
   },
   {
-    "telugu": "సహాయం",
+    "originalScript": "సహాయం",
     "transliteration": "sahaayam",
     "english": "help",
     "partOfSpeech": "noun",
@@ -1974,20 +2097,22 @@
     "examples": [
       {
         "pronunciation": "mii sahaayam naaku avasaram.",
-        "telugu": "మీ సహాయం నాకు అవసరం.",
+        "originalScript": "మీ సహాయం నాకు అవసరం.",
         "english": "I need your help.",
         "contextTag": "daily-use",
-        "difficulty": 1
+        "difficulty": 1,
+        "language": "telugu"
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    }
+    },
+    "language": "telugu"
   },
   {
-    "telugu": "వెళ్ళు",
+    "originalScript": "వెళ్ళు",
     "transliteration": "vellu",
     "english": "go",
     "partOfSpeech": "verb",
@@ -2006,20 +2131,22 @@
     "examples": [
       {
         "pronunciation": "manamu maarket‌ki veldaam.",
-        "telugu": "మనము మార్కెట్‌కి వెళ్దాం.",
+        "originalScript": "మనము మార్కెట్‌కి వెళ్దాం.",
         "english": "Let us go to the market.",
         "contextTag": "daily-use",
-        "difficulty": 1
+        "difficulty": 1,
+        "language": "telugu"
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    }
+    },
+    "language": "telugu"
   },
   {
-    "telugu": "రా",
+    "originalScript": "రా",
     "transliteration": "raa",
     "english": "come",
     "partOfSpeech": "verb",
@@ -2037,20 +2164,22 @@
     "examples": [
       {
         "pronunciation": "ikkadiki raa.",
-        "telugu": "ఇక్కడికి రా.",
+        "originalScript": "ఇక్కడికి రా.",
         "english": "Come here.",
         "contextTag": "daily-use",
-        "difficulty": 1
+        "difficulty": 1,
+        "language": "telugu"
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    }
+    },
+    "language": "telugu"
   },
   {
-    "telugu": "తిను",
+    "originalScript": "తిను",
     "transliteration": "tinu",
     "english": "eat",
     "partOfSpeech": "verb",
@@ -2069,20 +2198,22 @@
     "examples": [
       {
         "pronunciation": "samayaaniki bhoojanam tinu.",
-        "telugu": "సమయానికి భోజనం తిను.",
+        "originalScript": "సమయానికి భోజనం తిను.",
         "english": "Eat your meal on time.",
         "contextTag": "daily-use",
-        "difficulty": 1
+        "difficulty": 1,
+        "language": "telugu"
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    }
+    },
+    "language": "telugu"
   },
   {
-    "telugu": "తాగు",
+    "originalScript": "తాగు",
     "transliteration": "taagu",
     "english": "drink",
     "partOfSpeech": "verb",
@@ -2101,20 +2232,22 @@
     "examples": [
       {
         "pronunciation": "roojuu ekkuva niiru taagu.",
-        "telugu": "రోజూ ఎక్కువ నీరు తాగు.",
+        "originalScript": "రోజూ ఎక్కువ నీరు తాగు.",
         "english": "Drink more water daily.",
         "contextTag": "daily-use",
-        "difficulty": 1
+        "difficulty": 1,
+        "language": "telugu"
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    }
+    },
+    "language": "telugu"
   },
   {
-    "telugu": "చదువు",
+    "originalScript": "చదువు",
     "transliteration": "chaduvu",
     "english": "study / read",
     "partOfSpeech": "verb",
@@ -2133,20 +2266,22 @@
     "examples": [
       {
         "pronunciation": "prati rooju telugu chaduvu.",
-        "telugu": "ప్రతి రోజు తెలుగు చదువు.",
+        "originalScript": "ప్రతి రోజు తెలుగు చదువు.",
         "english": "Study Telugu every day.",
         "contextTag": "daily-use",
-        "difficulty": 1
+        "difficulty": 1,
+        "language": "telugu"
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    }
+    },
+    "language": "telugu"
   },
   {
-    "telugu": "రాయి",
+    "originalScript": "రాయి",
     "transliteration": "raayi",
     "english": "write",
     "partOfSpeech": "verb",
@@ -2165,20 +2300,22 @@
     "examples": [
       {
         "pronunciation": "nii peeru ikkada raayi.",
-        "telugu": "నీ పేరు ఇక్కడ రాయి.",
+        "originalScript": "నీ పేరు ఇక్కడ రాయి.",
         "english": "Write your name here.",
         "contextTag": "daily-use",
-        "difficulty": 1
+        "difficulty": 1,
+        "language": "telugu"
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    }
+    },
+    "language": "telugu"
   },
   {
-    "telugu": "చూడు",
+    "originalScript": "చూడు",
     "transliteration": "choodu",
     "english": "see / look",
     "partOfSpeech": "verb",
@@ -2196,20 +2333,22 @@
     "examples": [
       {
         "pronunciation": "ii chitram chuudu.",
-        "telugu": "ఈ చిత్రం చూడు.",
+        "originalScript": "ఈ చిత్రం చూడు.",
         "english": "Look at this picture.",
         "contextTag": "daily-use",
-        "difficulty": 1
+        "difficulty": 1,
+        "language": "telugu"
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    }
+    },
+    "language": "telugu"
   },
   {
-    "telugu": "మాట్లాడు",
+    "originalScript": "మాట్లాడు",
     "transliteration": "maatlaadu",
     "english": "speak / talk",
     "partOfSpeech": "verb",
@@ -2227,20 +2366,22 @@
     "examples": [
       {
         "pronunciation": "nemmadigaa maatlaadu.",
-        "telugu": "నెమ్మదిగా మాట్లాడు.",
+        "originalScript": "నెమ్మదిగా మాట్లాడు.",
         "english": "Speak slowly.",
         "contextTag": "daily-use",
-        "difficulty": 1
+        "difficulty": 1,
+        "language": "telugu"
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    }
+    },
+    "language": "telugu"
   },
   {
-    "telugu": "విను",
+    "originalScript": "విను",
     "transliteration": "vinu",
     "english": "listen / hear",
     "partOfSpeech": "verb",
@@ -2258,20 +2399,22 @@
     "examples": [
       {
         "pronunciation": "jaagrattagaa vinu.",
-        "telugu": "జాగ్రత్తగా విను.",
+        "originalScript": "జాగ్రత్తగా విను.",
         "english": "Listen carefully.",
         "contextTag": "daily-use",
-        "difficulty": 1
+        "difficulty": 1,
+        "language": "telugu"
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    }
+    },
+    "language": "telugu"
   },
   {
-    "telugu": "నిద్రపో",
+    "originalScript": "నిద్రపో",
     "transliteration": "nidrapo",
     "english": "sleep",
     "partOfSpeech": "verb",
@@ -2290,20 +2433,22 @@
     "examples": [
       {
         "pronunciation": "raatri tomdaragaa nidrapoo.",
-        "telugu": "రాత్రి తొందరగా నిద్రపో.",
+        "originalScript": "రాత్రి తొందరగా నిద్రపో.",
         "english": "Sleep early at night.",
         "contextTag": "daily-use",
-        "difficulty": 1
+        "difficulty": 1,
+        "language": "telugu"
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    }
+    },
+    "language": "telugu"
   },
   {
-    "telugu": "కూర్చో",
+    "originalScript": "కూర్చో",
     "transliteration": "koorcho",
     "english": "sit",
     "partOfSpeech": "verb",
@@ -2321,20 +2466,22 @@
     "examples": [
       {
         "pronunciation": "ikkada kuurchoo.",
-        "telugu": "ఇక్కడ కూర్చో.",
+        "originalScript": "ఇక్కడ కూర్చో.",
         "english": "Sit here.",
         "contextTag": "daily-use",
-        "difficulty": 1
+        "difficulty": 1,
+        "language": "telugu"
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    }
+    },
+    "language": "telugu"
   },
   {
-    "telugu": "నిలబడు",
+    "originalScript": "నిలబడు",
     "transliteration": "nilabadu",
     "english": "stand",
     "partOfSpeech": "verb",
@@ -2352,20 +2499,22 @@
     "examples": [
       {
         "pronunciation": "lainloo nilabadu.",
-        "telugu": "లైన్లో నిలబడు.",
+        "originalScript": "లైన్లో నిలబడు.",
         "english": "Stand in the line.",
         "contextTag": "daily-use",
-        "difficulty": 1
+        "difficulty": 1,
+        "language": "telugu"
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    }
+    },
+    "language": "telugu"
   },
   {
-    "telugu": "ఇవ్వు",
+    "originalScript": "ఇవ్వు",
     "transliteration": "ivvu",
     "english": "give",
     "partOfSpeech": "verb",
@@ -2383,20 +2532,22 @@
     "examples": [
       {
         "pronunciation": "dayacheesi naaku nii pustakam ivvu.",
-        "telugu": "దయచేసి నాకు నీ పుస్తకం ఇవ్వు.",
+        "originalScript": "దయచేసి నాకు నీ పుస్తకం ఇవ్వు.",
         "english": "Please give me your book.",
         "contextTag": "daily-use",
-        "difficulty": 1
+        "difficulty": 1,
+        "language": "telugu"
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    }
+    },
+    "language": "telugu"
   },
   {
-    "telugu": "తీసుకో",
+    "originalScript": "తీసుకో",
     "transliteration": "teesuko",
     "english": "take",
     "partOfSpeech": "verb",
@@ -2414,20 +2565,22 @@
     "examples": [
       {
         "pronunciation": "ii pennu tiisukoo.",
-        "telugu": "ఈ పెన్ను తీసుకో.",
+        "originalScript": "ఈ పెన్ను తీసుకో.",
         "english": "Take this pen.",
         "contextTag": "daily-use",
-        "difficulty": 1
+        "difficulty": 1,
+        "language": "telugu"
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    }
+    },
+    "language": "telugu"
   },
   {
-    "telugu": "చేయి",
+    "originalScript": "చేయి",
     "transliteration": "cheyi",
     "english": "do",
     "partOfSpeech": "verb",
@@ -2445,20 +2598,22 @@
     "examples": [
       {
         "pronunciation": "ii pani ippudee cheeyi.",
-        "telugu": "ఈ పని ఇప్పుడే చేయి.",
+        "originalScript": "ఈ పని ఇప్పుడే చేయి.",
         "english": "Do this work now.",
         "contextTag": "daily-use",
-        "difficulty": 1
+        "difficulty": 1,
+        "language": "telugu"
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    }
+    },
+    "language": "telugu"
   },
   {
-    "telugu": "తెలుసు",
+    "originalScript": "తెలుసు",
     "transliteration": "telusu",
     "english": "know",
     "partOfSpeech": "verb",
@@ -2477,20 +2632,22 @@
     "examples": [
       {
         "pronunciation": "naaku ii padam telusu.",
-        "telugu": "నాకు ఈ పదం తెలుసు.",
+        "originalScript": "నాకు ఈ పదం తెలుసు.",
         "english": "I know this word.",
         "contextTag": "daily-use",
-        "difficulty": 1
+        "difficulty": 1,
+        "language": "telugu"
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    }
+    },
+    "language": "telugu"
   },
   {
-    "telugu": "అర్థం అవు",
+    "originalScript": "అర్థం అవు",
     "transliteration": "artham avu",
     "english": "understand",
     "partOfSpeech": "verb",
@@ -2509,20 +2666,22 @@
     "examples": [
       {
         "pronunciation": "ippudu naaku artham ayimdi.",
-        "telugu": "ఇప్పుడు నాకు అర్థం అయింది.",
+        "originalScript": "ఇప్పుడు నాకు అర్థం అయింది.",
         "english": "Now I understood.",
         "contextTag": "daily-use",
-        "difficulty": 1
+        "difficulty": 1,
+        "language": "telugu"
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    }
+    },
+    "language": "telugu"
   },
   {
-    "telugu": "మంచి",
+    "originalScript": "మంచి",
     "transliteration": "manchi",
     "english": "good",
     "partOfSpeech": "adjective",
@@ -2541,20 +2700,22 @@
     "examples": [
       {
         "pronunciation": "atanu mamchi manishi.",
-        "telugu": "అతను మంచి మనిషి.",
+        "originalScript": "అతను మంచి మనిషి.",
         "english": "He is a good person.",
         "contextTag": "daily-use",
-        "difficulty": 1
+        "difficulty": 1,
+        "language": "telugu"
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    }
+    },
+    "language": "telugu"
   },
   {
-    "telugu": "చెడు",
+    "originalScript": "చెడు",
     "transliteration": "chedu",
     "english": "bad",
     "partOfSpeech": "adjective",
@@ -2572,20 +2733,22 @@
     "examples": [
       {
         "pronunciation": "idi chedu alavaatu.",
-        "telugu": "ఇది చెడు అలవాటు.",
+        "originalScript": "ఇది చెడు అలవాటు.",
         "english": "This is a bad habit.",
         "contextTag": "daily-use",
-        "difficulty": 1
+        "difficulty": 1,
+        "language": "telugu"
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    }
+    },
+    "language": "telugu"
   },
   {
-    "telugu": "పెద్ద",
+    "originalScript": "పెద్ద",
     "transliteration": "pedda",
     "english": "big",
     "partOfSpeech": "adjective",
@@ -2603,20 +2766,22 @@
     "examples": [
       {
         "pronunciation": "idi pedda illu.",
-        "telugu": "ఇది పెద్ద ఇల్లు.",
+        "originalScript": "ఇది పెద్ద ఇల్లు.",
         "english": "This is a big house.",
         "contextTag": "daily-use",
-        "difficulty": 1
+        "difficulty": 1,
+        "language": "telugu"
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    }
+    },
+    "language": "telugu"
   },
   {
-    "telugu": "చిన్న",
+    "originalScript": "చిన్న",
     "transliteration": "chinna",
     "english": "small",
     "partOfSpeech": "adjective",
@@ -2634,20 +2799,22 @@
     "examples": [
       {
         "pronunciation": "adi chinna pustakam.",
-        "telugu": "అది చిన్న పుస్తకం.",
+        "originalScript": "అది చిన్న పుస్తకం.",
         "english": "That is a small book.",
         "contextTag": "daily-use",
-        "difficulty": 1
+        "difficulty": 1,
+        "language": "telugu"
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    }
+    },
+    "language": "telugu"
   },
   {
-    "telugu": "కొత్త",
+    "originalScript": "కొత్త",
     "transliteration": "kotta",
     "english": "new",
     "partOfSpeech": "adjective",
@@ -2665,20 +2832,22 @@
     "examples": [
       {
         "pronunciation": "neenu kotta phoon konnaanu.",
-        "telugu": "నేను కొత్త ఫోన్ కొన్నాను.",
+        "originalScript": "నేను కొత్త ఫోన్ కొన్నాను.",
         "english": "I bought a new phone.",
         "contextTag": "daily-use",
-        "difficulty": 1
+        "difficulty": 1,
+        "language": "telugu"
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    }
+    },
+    "language": "telugu"
   },
   {
-    "telugu": "పాత",
+    "originalScript": "పాత",
     "transliteration": "paata",
     "english": "old",
     "partOfSpeech": "adjective",
@@ -2696,20 +2865,22 @@
     "examples": [
       {
         "pronunciation": "idi paata illu.",
-        "telugu": "ఇది పాత ఇల్లు.",
+        "originalScript": "ఇది పాత ఇల్లు.",
         "english": "This is an old house.",
         "contextTag": "daily-use",
-        "difficulty": 1
+        "difficulty": 1,
+        "language": "telugu"
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    }
+    },
+    "language": "telugu"
   },
   {
-    "telugu": "చాలా",
+    "originalScript": "చాలా",
     "transliteration": "chaala",
     "english": "very / much",
     "partOfSpeech": "adverb",
@@ -2727,20 +2898,22 @@
     "examples": [
       {
         "pronunciation": "aame chaalaa telivainadi.",
-        "telugu": "ఆమె చాలా తెలివైనది.",
+        "originalScript": "ఆమె చాలా తెలివైనది.",
         "english": "She is very smart.",
         "contextTag": "daily-use",
-        "difficulty": 1
+        "difficulty": 1,
+        "language": "telugu"
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    }
+    },
+    "language": "telugu"
   },
   {
-    "telugu": "నెమ్మదిగా",
+    "originalScript": "నెమ్మదిగా",
     "transliteration": "nemmadiga",
     "english": "slowly",
     "partOfSpeech": "adverb",
@@ -2758,20 +2931,22 @@
     "examples": [
       {
         "pronunciation": "dayacheesi nemmadigaa maatlaadu.",
-        "telugu": "దయచేసి నెమ్మదిగా మాట్లాడు.",
+        "originalScript": "దయచేసి నెమ్మదిగా మాట్లాడు.",
         "english": "Please speak slowly.",
         "contextTag": "daily-use",
-        "difficulty": 1
+        "difficulty": 1,
+        "language": "telugu"
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    }
+    },
+    "language": "telugu"
   },
   {
-    "telugu": "వేగంగా",
+    "originalScript": "వేగంగా",
     "transliteration": "veganga",
     "english": "quickly",
     "partOfSpeech": "adverb",
@@ -2789,20 +2964,22 @@
     "examples": [
       {
         "pronunciation": "atanu veegamgaa parugettaadu.",
-        "telugu": "అతను వేగంగా పరుగెత్తాడు.",
+        "originalScript": "అతను వేగంగా పరుగెత్తాడు.",
         "english": "He ran quickly.",
         "contextTag": "daily-use",
-        "difficulty": 1
+        "difficulty": 1,
+        "language": "telugu"
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    }
+    },
+    "language": "telugu"
   },
   {
-    "telugu": "ఇక్కడ",
+    "originalScript": "ఇక్కడ",
     "transliteration": "ikkada",
     "english": "here",
     "partOfSpeech": "adverb",
@@ -2821,20 +2998,22 @@
     "examples": [
       {
         "pronunciation": "ikkada veechi umdu.",
-        "telugu": "ఇక్కడ వేచి ఉండు.",
+        "originalScript": "ఇక్కడ వేచి ఉండు.",
         "english": "Wait here.",
         "contextTag": "daily-use",
-        "difficulty": 1
+        "difficulty": 1,
+        "language": "telugu"
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    }
+    },
+    "language": "telugu"
   },
   {
-    "telugu": "అక్కడ",
+    "originalScript": "అక్కడ",
     "transliteration": "akkada",
     "english": "there",
     "partOfSpeech": "adverb",
@@ -2853,16 +3032,18 @@
     "examples": [
       {
         "pronunciation": "akkada oka dukaanam umdi.",
-        "telugu": "అక్కడ ఒక దుకాణం ఉంది.",
+        "originalScript": "అక్కడ ఒక దుకాణం ఉంది.",
         "english": "There is a shop there.",
         "contextTag": "daily-use",
-        "difficulty": 1
+        "difficulty": 1,
+        "language": "telugu"
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    }
+    },
+    "language": "telugu"
   }
 ]

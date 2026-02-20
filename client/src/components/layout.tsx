@@ -66,7 +66,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
       <div className="p-6 pb-4">
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-2xl font-semibold text-foreground">Learn Telugu</h1>
+            <h1 className="text-2xl font-semibold text-foreground">Learn Language</h1>
             <p className="text-sm text-muted-foreground mt-1">Language Practice</p>
           </div>
           <Button
@@ -135,7 +135,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
 
       {/* Mobile Header */}
       <div className="md:hidden fixed top-0 left-0 right-0 h-16 bg-card/90 backdrop-blur-md border-b border-border/60 z-20 flex items-center justify-between px-4">
-        <h1 className="text-xl font-semibold text-foreground">Learn Telugu</h1>
+        <h1 className="text-xl font-semibold text-foreground">Learn Language</h1>
         <div className="flex items-center gap-2">
           <Button
             type="button"

@@ -1,6 +1,6 @@
 import { db } from "./db";
 import { eq, sql, and } from "drizzle-orm";
-import { QuizDirectionEnum, QuizModeEnum, QuizQuestionTypeEnum, ReviewStatusEnum } from "@shared/domain/enums";
+import { LanguageEnum, QuizDirectionEnum, QuizModeEnum, QuizQuestionTypeEnum, ReviewStatusEnum } from "@shared/domain/enums";
 import {
   words, clusters, wordClusters, userWordProgress, quizAttempts, wordExamples, users,
   wordReviewEvents,
@@ -11,6 +11,13 @@ import { rankQuizCandidates } from "./services/quiz-candidate-scoring";
 import { generateSessionWords, type QuizMode } from "./services/session-generator";
 import { computeStreak, computeXp } from "./services/stats";
 import { computeLeaderboard } from "./services/leaderboard";
+
+function normalizeLanguage(value?: string): LanguageEnum {
+  if (value && Object.values(LanguageEnum).includes(value as LanguageEnum)) {
+    return value as LanguageEnum;
+  }
+  return LanguageEnum.TELUGU;
+}
 
 export interface IStorage {
   // Words & Clusters
@@ -25,7 +32,8 @@ export interface IStorage {
   addWordToCluster(wordId: number, clusterId: number): Promise<void>;
   getWordClusterLinks(): Promise<Array<{ wordId: number; clusterId: number }>>;
   getWordExamples(wordId: number): Promise<Array<{
-    teluguSentence: string;
+    language: LanguageEnum;
+    originalScript: string;
     pronunciation: string | null;
     englishSentence: string;
     contextTag: string | null;
@@ -50,6 +58,7 @@ export interface IStorage {
     responseTimeMs: number | null;
     createdAt: Date | null;
     word: {
+      language: LanguageEnum;
       telugu: string;
       transliteration: string;
       english: string;
@@ -107,6 +116,8 @@ export interface IStorage {
   ): Promise<Word | undefined>;
   createWordDraft(input: {
     submittedBy: string;
+    language: LanguageEnum;
+    originalScript?: string;
     telugu: string;
     transliteration: string;
     english: string;
@@ -158,7 +169,12 @@ export class DatabaseStorage implements IStorage {
       : ReviewStatusEnum.APPROVED;
     const [newWord] = await db
       .insert(words)
-      .values({ ...word, reviewStatus: normalizedReviewStatus })
+      .values({
+        ...word,
+        language: normalizeLanguage(word.language),
+        originalScript: word.originalScript ?? word.telugu,
+        reviewStatus: normalizedReviewStatus,
+      })
       .returning();
     return newWord;
   }
@@ -189,7 +205,8 @@ export class DatabaseStorage implements IStorage {
   }
 
   async getWordExamples(wordId: number): Promise<Array<{
-    teluguSentence: string;
+    language: LanguageEnum;
+    originalScript: string;
     pronunciation: string | null;
     englishSentence: string;
     contextTag: string | null;
@@ -197,7 +214,8 @@ export class DatabaseStorage implements IStorage {
   }>> {
     return db
       .select({
-        teluguSentence: wordExamples.teluguSentence,
+        language: wordExamples.language,
+        originalScript: wordExamples.originalScript,
         pronunciation: wordExamples.pronunciation,
         englishSentence: wordExamples.englishSentence,
         contextTag: wordExamples.contextTag,
@@ -252,6 +270,7 @@ export class DatabaseStorage implements IStorage {
     responseTimeMs: number | null;
     createdAt: Date | null;
     word: {
+      language: LanguageEnum;
       telugu: string;
       transliteration: string;
       english: string;
@@ -267,6 +286,7 @@ export class DatabaseStorage implements IStorage {
         questionType: quizAttempts.questionType,
         responseTimeMs: quizAttempts.responseTimeMs,
         createdAt: quizAttempts.createdAt,
+        language: words.language,
         telugu: words.telugu,
         transliteration: words.transliteration,
         english: words.english,
@@ -295,6 +315,7 @@ export class DatabaseStorage implements IStorage {
       responseTimeMs: row.responseTimeMs ?? null,
       createdAt: row.createdAt ?? null,
       word: {
+        language: row.language as LanguageEnum,
         telugu: row.telugu,
         transliteration: row.transliteration,
         english: row.english,
@@ -484,6 +505,8 @@ export class DatabaseStorage implements IStorage {
 
   async createWordDraft(input: {
     submittedBy: string;
+    language: LanguageEnum;
+    originalScript?: string;
     telugu: string;
     transliteration: string;
     english: string;
@@ -493,6 +516,8 @@ export class DatabaseStorage implements IStorage {
   }): Promise<Word> {
     const now = new Date();
     const [created] = await db.insert(words).values({
+      language: input.language,
+      originalScript: input.originalScript?.trim() || input.telugu,
       telugu: input.telugu,
       transliteration: input.transliteration,
       english: input.english,
@@ -618,7 +643,13 @@ export class DatabaseStorage implements IStorage {
       const [existingWord] = await db
         .select()
         .from(words)
-        .where(and(eq(words.telugu, word.telugu), eq(words.english, word.english)));
+        .where(
+          and(
+            eq(words.language, normalizeLanguage(word.language)),
+            eq(words.telugu, word.telugu),
+            eq(words.english, word.english),
+          ),
+        );
 
       if (existingWord) {
         return existingWord;
@@ -629,7 +660,7 @@ export class DatabaseStorage implements IStorage {
 
     const ensureWordExample = async (
       wordId: number,
-      teluguSentence: string,
+      originalScript: string,
       pronunciation: string,
       englishSentence: string,
       contextTag: string,
@@ -639,7 +670,8 @@ export class DatabaseStorage implements IStorage {
         .from(wordExamples)
         .where(and(
           eq(wordExamples.wordId, wordId),
-          eq(wordExamples.teluguSentence, teluguSentence),
+          eq(wordExamples.language, LanguageEnum.TELUGU),
+          eq(wordExamples.originalScript, originalScript),
         ));
 
       if (existingExample) {
@@ -648,7 +680,8 @@ export class DatabaseStorage implements IStorage {
 
       await db.insert(wordExamples).values({
         wordId,
-        teluguSentence,
+        language: LanguageEnum.TELUGU,
+        originalScript,
         pronunciation,
         englishSentence,
         contextTag,
@@ -683,7 +716,11 @@ export class DatabaseStorage implements IStorage {
 
     for (const w of wordsData) {
       const { clusterId, exampleTelugu, exampleEnglish, ...wordData } = w;
-      const word = await ensureWord(wordData);
+      const word = await ensureWord({
+        ...wordData,
+        language: LanguageEnum.TELUGU,
+        originalScript: wordData.telugu,
+      });
       await this.addWordToCluster(word.id, clusterId);
       await ensureWordExample(
         word.id,

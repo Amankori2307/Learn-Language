@@ -4,6 +4,17 @@ export enum UserTypeEnum {
   ADMIN = "admin",
 }
 
+export enum LanguageEnum {
+  TELUGU = "telugu",
+  HINDI = "hindi",
+  TAMIL = "tamil",
+  KANNADA = "kannada",
+  MALAYALAM = "malayalam",
+  SPANISH = "spanish",
+  FRENCH = "french",
+  GERMAN = "german",
+}
+
 export enum ReviewStatusEnum {
   DRAFT = "draft",
   PENDING_REVIEW = "pending_review",

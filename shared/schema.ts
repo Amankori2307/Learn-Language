@@ -2,7 +2,7 @@ import { pgTable, text, varchar, timestamp, serial, integer, boolean, jsonb, rea
 import { relations, sql } from "drizzle-orm";
 import { createInsertSchema } from "drizzle-zod";
 import { z } from "zod";
-import { QuizQuestionTypeEnum, ReviewStatusEnum, UserTypeEnum } from "./domain/enums";
+import { LanguageEnum, QuizQuestionTypeEnum, ReviewStatusEnum, UserTypeEnum } from "./domain/enums";
 
 // === AUTH MODELS (Inlined for simplicity and consistency with PRD) ===
 
@@ -30,6 +30,8 @@ export const users = pgTable("users", {
 
 export const words = pgTable("words", {
   id: serial("id").primaryKey(),
+  language: text("language").$type<LanguageEnum>().default(LanguageEnum.TELUGU).notNull(),
+  originalScript: text("original_script").notNull(),
   telugu: text("telugu").notNull(),
   transliteration: text("transliteration").notNull(),
   english: text("english").notNull(),
@@ -71,6 +73,7 @@ export const wordClusters = pgTable("word_clusters", {
 
 export const sentences = pgTable("sentences", {
   id: serial("id").primaryKey(),
+  language: text("language").$type<LanguageEnum>().default(LanguageEnum.TELUGU).notNull(),
   telugu: text("telugu").notNull(),
   english: text("english").notNull(),
   difficulty: integer("difficulty").default(1),
@@ -79,7 +82,8 @@ export const sentences = pgTable("sentences", {
 export const wordExamples = pgTable("word_examples", {
   id: serial("id").primaryKey(),
   wordId: integer("word_id").references(() => words.id).notNull(),
-  teluguSentence: text("telugu_sentence").notNull(),
+  language: text("language").$type<LanguageEnum>().default(LanguageEnum.TELUGU).notNull(),
+  originalScript: text("telugu_sentence").notNull(),
   pronunciation: text("pronunciation"),
   englishSentence: text("english_sentence").notNull(),
   contextTag: text("context_tag").default("general"),
