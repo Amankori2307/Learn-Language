@@ -6,10 +6,11 @@ This folder is intentionally compact and keeps only active context.
 
 1. `context/plan/APP_CONTEXT.md`: current product scope and supported features.
 2. `context/plan/01-master-task-registry.md`: active backlog only (no completed tasks).
-3. `context/plan/55-phase-4b-critical-fixes-and-review-governance.md`: active detailed phase doc.
-4. `context/plan/60-phase-5-media-expansion-last.md`: deferred media-phase backlog.
-5. `context/plan/82-docker-setup.md`: Docker usage and hot-reload notes.
-6. `context/plan/99-daily-run-log.md`: latest progress snapshot and resume pointer.
+3. `context/plan/40-phase-4-release-gate-checklist.md`: phase-4 beta release gate evidence and decision.
+4. `context/plan/55-phase-4b-critical-fixes-and-review-governance.md`: active detailed phase doc.
+5. `context/plan/60-phase-5-media-expansion-last.md`: deferred media-phase backlog.
+6. `context/plan/82-docker-setup.md`: Docker usage and hot-reload notes.
+7. `context/plan/99-daily-run-log.md`: latest progress snapshot and resume pointer.
 
 ## Operating rule
 

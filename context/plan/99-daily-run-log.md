@@ -2,8 +2,8 @@
 
 Date: 2026-02-20  
 Session owner: Codex  
-Last completed task ID: P4B-018  
-Current in-progress task ID: P4-005  
+Last completed task ID: P4-005  
+Current in-progress task ID: P5-001  
 Next task ID: P5-001
 
 ## Current state
@@ -20,6 +20,7 @@ Next task ID: P5-001
 - Compose dev runtime validated with backend auto-restart and frontend HMR signal.
 - UI integration tests are in place for profile save and reviewer queue actions (`vitest`).
 - MVP seed now uses realistic Telugu vocabulary from internal knowledge (91 rows), replacing placeholders.
+- Phase 4 release gate checklist is documented and marked passed.
 
 ## Current blockers
 
@@ -27,6 +28,6 @@ Next task ID: P5-001
 
 ## Immediate next actions
 
-1. Continue release gate hardening under `P4-005`.
+1. Start deferred media backlog when needed (`P5-001` onward).
 2. Keep reviewer governance checks in CI (`pnpm run test` + `pnpm run test:ui`).
-3. Start deferred media phase only after release gate sign-off.
+3. Preserve text-first defaults while media remains optional.
