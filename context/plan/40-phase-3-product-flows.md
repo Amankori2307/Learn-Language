@@ -67,7 +67,7 @@ Acceptance:
 - User can launch all major learning flows from dashboard.
 
 ### P3-006 - Engagement mechanics
-Status: `todo`
+Status: `done`
 
 Scope:
 - Daily streak.

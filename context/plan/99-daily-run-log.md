@@ -340,3 +340,31 @@ Blockers:
 
 Resume notes:
 - Continue with Phase 3 engagement and UX completion tasks.
+
+Date: 2026-02-20
+Session owner: Codex
+Last completed task ID: P3-005
+Current in-progress task ID: None
+Next task ID: P3-003
+
+Completed today:
+- Implemented real streak calculation from quiz attempt dates.
+- Implemented XP calculation with hard-word correctness bonus.
+- Added stats service tests for streak and XP calculations.
+
+Files changed:
+- server/services/stats.ts
+- server/services/stats.test.ts
+- server/storage.ts
+- context/plan/01-master-task-registry.md
+- context/plan/40-phase-3-product-flows.md
+- context/plan/99-daily-run-log.md
+
+Tests/checks run:
+- `npm run ci` (pass)
+
+Blockers:
+- None.
+
+Resume notes:
+- Remaining product-flow tasks include quiz feedback UX/session summary polish from registry.

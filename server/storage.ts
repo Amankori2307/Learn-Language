@@ -7,6 +7,7 @@ import {
 } from "@shared/schema";
 import { rankQuizCandidates } from "./services/quiz-candidate-scoring";
 import { generateSessionWords, type QuizMode } from "./services/session-generator";
+import { computeStreak, computeXp } from "./services/stats";
 
 export interface IStorage {
   // Words & Clusters
@@ -209,15 +210,27 @@ export class DatabaseStorage implements IStorage {
       (p.nextReview && new Date(p.nextReview) < now)
     ).length;
 
-    // Calculate streak from quizAttempts (simplified: count unique days with activity in last N days)
-    // For MVP, just using a stored value or simple count
-    const streak = 0; // TODO: Implement real streak logic
-    
-    // Calculate XP: sum of correct attempts * 10
-    const [xpResult] = await db.select({ 
-      xp: sql<number>`count(*) * 10` 
-    }).from(quizAttempts)
-    .where(and(eq(quizAttempts.userId, userId), eq(quizAttempts.isCorrect, true)));
+    const attemptRows = await db
+      .select({
+        createdAt: quizAttempts.createdAt,
+        isCorrect: quizAttempts.isCorrect,
+        difficulty: words.difficulty,
+      })
+      .from(quizAttempts)
+      .leftJoin(words, eq(quizAttempts.wordId, words.id))
+      .where(eq(quizAttempts.userId, userId));
+
+    const streak = computeStreak(
+      attemptRows
+        .map((row) => row.createdAt)
+        .filter((date): date is Date => Boolean(date)),
+    );
+
+    const correctAttempts = attemptRows.filter((row) => row.isCorrect).length;
+    const hardCorrectAttempts = attemptRows.filter(
+      (row) => row.isCorrect && (row.difficulty ?? 1) >= 3,
+    ).length;
+    const xp = computeXp({ correctAttempts, hardCorrectAttempts });
 
     const directionAttempts = await db
       .select({
@@ -243,7 +256,7 @@ export class DatabaseStorage implements IStorage {
       learning,
       weak,
       streak,
-      xp: Number(xpResult?.xp || 0),
+      xp,
       recognitionAccuracy: Number((recognitionAccuracy * 100).toFixed(1)),
       recallAccuracy: Number((recallAccuracy * 100).toFixed(1)),
       recommendedDirection,
