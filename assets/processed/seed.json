@@ -18,7 +18,7 @@
     ],
     "examples": [
       {
-        "pronunciation": "namaste (నమస్తే)",
+        "pronunciation": "namastee, miiru elaa unnaaru?",
         "telugu": "నమస్తే, మీరు ఎలా ఉన్నారు?",
         "english": "Hello, how are you?",
         "contextTag": "daily-use",
@@ -50,7 +50,7 @@
     ],
     "examples": [
       {
-        "pronunciation": "dhanyavaadalu (ధన్యవాదాలు)",
+        "pronunciation": "mii sahaayaaniki dhanyavaadaalu.",
         "telugu": "మీ సహాయానికి ధన్యవాదాలు.",
         "english": "Thank you for your help.",
         "contextTag": "daily-use",
@@ -82,7 +82,7 @@
     ],
     "examples": [
       {
-        "pronunciation": "dayachesi (దయచేసి)",
+        "pronunciation": "dayacheesi kuurchoomdi.",
         "telugu": "దయచేసి కూర్చోండి.",
         "english": "Please sit down.",
         "contextTag": "daily-use",
@@ -114,7 +114,7 @@
     ],
     "examples": [
       {
-        "pronunciation": "kshaminchandi (క్షమించండి)",
+        "pronunciation": "kshamimchamdi, naaku artham kaaleedu.",
         "telugu": "క్షమించండి, నాకు అర్థం కాలేదు.",
         "english": "Sorry, I did not understand.",
         "contextTag": "daily-use",
@@ -145,7 +145,7 @@
     ],
     "examples": [
       {
-        "pronunciation": "avunu (అవును)",
+        "pronunciation": "avunu, neenu vastaanu.",
         "telugu": "అవును, నేను వస్తాను.",
         "english": "Yes, I will come.",
         "contextTag": "daily-use",
@@ -176,7 +176,7 @@
     ],
     "examples": [
       {
-        "pronunciation": "kaadu (కాదు)",
+        "pronunciation": "kaadu, adi naa pustakam kaadu.",
         "telugu": "కాదు, అది నా పుస్తకం కాదు.",
         "english": "No, that is not my book.",
         "contextTag": "daily-use",
@@ -207,7 +207,7 @@
     ],
     "examples": [
       {
-        "pronunciation": "sare (సరే)",
+        "pronunciation": "saree, manam velludaam.",
         "telugu": "సరే, మనం వెళ్లుదాం.",
         "english": "Okay, let us go.",
         "contextTag": "daily-use",
@@ -238,7 +238,7 @@
     ],
     "examples": [
       {
-        "pronunciation": "bagundi (బాగుంది)",
+        "pronunciation": "ii aaloochana baagumdi.",
         "telugu": "ఈ ఆలోచన బాగుంది.",
         "english": "This idea is good.",
         "contextTag": "daily-use",
@@ -270,7 +270,7 @@
     ],
     "examples": [
       {
-        "pronunciation": "nenu (నేను)",
+        "pronunciation": "neenu telugu neerchukumtunnaanu.",
         "telugu": "నేను తెలుగు నేర్చుకుంటున్నాను.",
         "english": "I am learning Telugu.",
         "contextTag": "daily-use",
@@ -302,7 +302,7 @@
     ],
     "examples": [
       {
-        "pronunciation": "nuvvu (నువ్వు)",
+        "pronunciation": "nuvvu ekkada umtaavu?",
         "telugu": "నువ్వు ఎక్కడ ఉంటావు?",
         "english": "Where do you live?",
         "contextTag": "daily-use",
@@ -334,7 +334,7 @@
     ],
     "examples": [
       {
-        "pronunciation": "meeru (మీరు)",
+        "pronunciation": "miiru eemi cheestaaru?",
         "telugu": "మీరు ఏమి చేస్తారు?",
         "english": "What do you do?",
         "contextTag": "daily-use",
@@ -365,7 +365,7 @@
     ],
     "examples": [
       {
-        "pronunciation": "atanu (అతను)",
+        "pronunciation": "atanu naa sneehitudu.",
         "telugu": "అతను నా స్నేహితుడు.",
         "english": "He is my friend.",
         "contextTag": "daily-use",
@@ -396,7 +396,7 @@
     ],
     "examples": [
       {
-        "pronunciation": "aame (ఆమె)",
+        "pronunciation": "aame mamchi tiichar.",
         "telugu": "ఆమె మంచి టీచర్.",
         "english": "She is a good teacher.",
         "contextTag": "daily-use",
@@ -427,7 +427,7 @@
     ],
     "examples": [
       {
-        "pronunciation": "idi (ఇది)",
+        "pronunciation": "idi naa phoon.",
         "telugu": "ఇది నా ఫోన్.",
         "english": "This is my phone.",
         "contextTag": "daily-use",
@@ -458,7 +458,7 @@
     ],
     "examples": [
       {
-        "pronunciation": "adi (అది)",
+        "pronunciation": "adi maa illu.",
         "telugu": "అది మా ఇల్లు.",
         "english": "That is our house.",
         "contextTag": "daily-use",
@@ -489,7 +489,7 @@
     ],
     "examples": [
       {
-        "pronunciation": "manam (మనం)",
+        "pronunciation": "manam ippudu modalupedadaam.",
         "telugu": "మనం ఇప్పుడు మొదలుపెడదాం.",
         "english": "Let us start now.",
         "contextTag": "daily-use",
@@ -520,7 +520,7 @@
     ],
     "examples": [
       {
-        "pronunciation": "memu (మేము)",
+        "pronunciation": "meemu haidaraabaad‌loo umtaam.",
         "telugu": "మేము హైదరాబాద్‌లో ఉంటాం.",
         "english": "We live in Hyderabad.",
         "contextTag": "daily-use",
@@ -551,7 +551,7 @@
     ],
     "examples": [
       {
-        "pronunciation": "vaallu (వాళ్లు)",
+        "pronunciation": "vaallu skuul‌ki vellaaru.",
         "telugu": "వాళ్లు స్కూల్‌కి వెళ్లారు.",
         "english": "They went to school.",
         "contextTag": "daily-use",
@@ -583,7 +583,7 @@
     ],
     "examples": [
       {
-        "pronunciation": "emi (ఏమి)",
+        "pronunciation": "idi eemi?",
         "telugu": "ఇది ఏమి?",
         "english": "What is this?",
         "contextTag": "daily-use",
@@ -615,7 +615,7 @@
     ],
     "examples": [
       {
-        "pronunciation": "evaru (ఎవరు)",
+        "pronunciation": "atanu evaru?",
         "telugu": "అతను ఎవరు?",
         "english": "Who is he?",
         "contextTag": "daily-use",
@@ -647,7 +647,7 @@
     ],
     "examples": [
       {
-        "pronunciation": "ekkada (ఎక్కడ)",
+        "pronunciation": "mii illu ekkada?",
         "telugu": "మీ ఇల్లు ఎక్కడ?",
         "english": "Where is your house?",
         "contextTag": "daily-use",
@@ -679,7 +679,7 @@
     ],
     "examples": [
       {
-        "pronunciation": "eppudu (ఎప్పుడు)",
+        "pronunciation": "miiru eppudu vastaaru?",
         "telugu": "మీరు ఎప్పుడు వస్తారు?",
         "english": "When will you come?",
         "contextTag": "daily-use",
@@ -711,7 +711,7 @@
     ],
     "examples": [
       {
-        "pronunciation": "ela (ఎలా)",
+        "pronunciation": "idi elaa panicheestumdi?",
         "telugu": "ఇది ఎలా పనిచేస్తుంది?",
         "english": "How does this work?",
         "contextTag": "daily-use",
@@ -743,7 +743,7 @@
     ],
     "examples": [
       {
-        "pronunciation": "enduku (ఎందుకు)",
+        "pronunciation": "nuvvu emduku aalasyamgaa vachchaavu?",
         "telugu": "నువ్వు ఎందుకు ఆలస్యంగా వచ్చావు?",
         "english": "Why did you come late?",
         "contextTag": "daily-use",
@@ -774,7 +774,7 @@
     ],
     "examples": [
       {
-        "pronunciation": "okati (ఒకటి)",
+        "pronunciation": "naa daggara okati pustakam umdi.",
         "telugu": "నా దగ్గర ఒకటి పుస్తకం ఉంది.",
         "english": "I have one book.",
         "contextTag": "daily-use",
@@ -805,7 +805,7 @@
     ],
     "examples": [
       {
-        "pronunciation": "rendu (రెండు)",
+        "pronunciation": "maaku remdu pillalu unnaaru.",
         "telugu": "మాకు రెండు పిల్లలు ఉన్నారు.",
         "english": "We have two children.",
         "contextTag": "daily-use",
@@ -836,7 +836,7 @@
     ],
     "examples": [
       {
-        "pronunciation": "moodu (మూడు)",
+        "pronunciation": "muudu roojula tarvaata ramdi.",
         "telugu": "మూడు రోజుల తర్వాత రండి.",
         "english": "Come after three days.",
         "contextTag": "daily-use",
@@ -867,7 +867,7 @@
     ],
     "examples": [
       {
-        "pronunciation": "naalugu (నాలుగు)",
+        "pronunciation": "naalugu kurchiilu kaavaali.",
         "telugu": "నాలుగు కుర్చీలు కావాలి.",
         "english": "We need four chairs.",
         "contextTag": "daily-use",
@@ -898,7 +898,7 @@
     ],
     "examples": [
       {
-        "pronunciation": "aidu (ఐదు)",
+        "pronunciation": "aidu nimishaalu veechi umdamdi.",
         "telugu": "ఐదు నిమిషాలు వేచి ఉండండి.",
         "english": "Please wait five minutes.",
         "contextTag": "daily-use",
@@ -929,7 +929,7 @@
     ],
     "examples": [
       {
-        "pronunciation": "padi (పది)",
+        "pronunciation": "padi gamtalaku miitimg umdi.",
         "telugu": "పది గంటలకు మీటింగ్ ఉంది.",
         "english": "There is a meeting at ten o'clock.",
         "contextTag": "daily-use",
@@ -960,7 +960,7 @@
     ],
     "examples": [
       {
-        "pronunciation": "iravai (ఇరవై)",
+        "pronunciation": "iravai mamdi vidyaarthulu unnaaru.",
         "telugu": "ఇరవై మంది విద్యార్థులు ఉన్నారు.",
         "english": "There are twenty students.",
         "contextTag": "daily-use",
@@ -992,7 +992,7 @@
     ],
     "examples": [
       {
-        "pronunciation": "eeroju (ఈరోజు)",
+        "pronunciation": "iirooju vaataavaranam challagaa umdi.",
         "telugu": "ఈరోజు వాతావరణం చల్లగా ఉంది.",
         "english": "Today the weather is cool.",
         "contextTag": "daily-use",
@@ -1024,7 +1024,7 @@
     ],
     "examples": [
       {
-        "pronunciation": "repu (రేపు)",
+        "pronunciation": "reepu kaluddaam.",
         "telugu": "రేపు కలుద్దాం.",
         "english": "Let us meet tomorrow.",
         "contextTag": "daily-use",
@@ -1056,7 +1056,7 @@
     ],
     "examples": [
       {
-        "pronunciation": "ninna (నిన్న)",
+        "pronunciation": "ninna neenu imtloonee unnaanu.",
         "telugu": "నిన్న నేను ఇంట్లోనే ఉన్నాను.",
         "english": "Yesterday I stayed at home.",
         "contextTag": "daily-use",
@@ -1088,7 +1088,7 @@
     ],
     "examples": [
       {
-        "pronunciation": "ippudu (ఇప్పుడు)",
+        "pronunciation": "ippudu modalu pedadaam.",
         "telugu": "ఇప్పుడు మొదలు పెడదాం.",
         "english": "Let us start now.",
         "contextTag": "daily-use",
@@ -1120,7 +1120,7 @@
     ],
     "examples": [
       {
-        "pronunciation": "taruvata (తర్వాత)",
+        "pronunciation": "neenu tarvaata phoon cheestaanu.",
         "telugu": "నేను తర్వాత ఫోన్ చేస్తాను.",
         "english": "I will call later.",
         "contextTag": "daily-use",
@@ -1151,7 +1151,7 @@
     ],
     "examples": [
       {
-        "pronunciation": "udayam (ఉదయం)",
+        "pronunciation": "udayam neenu nadakaku veltaanu.",
         "telugu": "ఉదయం నేను నడకకు వెళ్తాను.",
         "english": "I go for a walk in the morning.",
         "contextTag": "daily-use",
@@ -1182,7 +1182,7 @@
     ],
     "examples": [
       {
-        "pronunciation": "saayantram (సాయంత్రం)",
+        "pronunciation": "saayamtram tii taagudaam.",
         "telugu": "సాయంత్రం టీ తాగుదాం.",
         "english": "Let us drink tea in the evening.",
         "contextTag": "daily-use",
@@ -1213,7 +1213,7 @@
     ],
     "examples": [
       {
-        "pronunciation": "raatri (రాత్రి)",
+        "pronunciation": "raatri tvaragaa nidrapoo.",
         "telugu": "రాత్రి త్వరగా నిద్రపో.",
         "english": "Sleep early at night.",
         "contextTag": "daily-use",
@@ -1244,7 +1244,7 @@
     ],
     "examples": [
       {
-        "pronunciation": "samayam (సమయం)",
+        "pronunciation": "nii samayam viluvainadi.",
         "telugu": "నీ సమయం విలువైనది.",
         "english": "Your time is valuable.",
         "contextTag": "daily-use",
@@ -1276,7 +1276,7 @@
     ],
     "examples": [
       {
-        "pronunciation": "amma (అమ్మ)",
+        "pronunciation": "naa amma chaalaa mamchidi.",
         "telugu": "నా అమ్మ చాలా మంచిది.",
         "english": "My mother is very kind.",
         "contextTag": "daily-use",
@@ -1308,7 +1308,7 @@
     ],
     "examples": [
       {
-        "pronunciation": "nanna (నాన్న)",
+        "pronunciation": "naa naanna aaphiisuki vellaaru.",
         "telugu": "నా నాన్న ఆఫీసుకి వెళ్లారు.",
         "english": "My father went to the office.",
         "contextTag": "daily-use",
@@ -1340,7 +1340,7 @@
     ],
     "examples": [
       {
-        "pronunciation": "anna (అన్న)",
+        "pronunciation": "naa anna haidaraabaad‌loo umtaadu.",
         "telugu": "నా అన్న హైదరాబాద్‌లో ఉంటాడు.",
         "english": "My elder brother lives in Hyderabad.",
         "contextTag": "daily-use",
@@ -1372,7 +1372,7 @@
     ],
     "examples": [
       {
-        "pronunciation": "akka (అక్క)",
+        "pronunciation": "naa akka daaktar.",
         "telugu": "నా అక్క డాక్టర్.",
         "english": "My elder sister is a doctor.",
         "contextTag": "daily-use",
@@ -1404,7 +1404,7 @@
     ],
     "examples": [
       {
-        "pronunciation": "tammudu (తమ్ముడు)",
+        "pronunciation": "naa tammudu kriket aadutaadu.",
         "telugu": "నా తమ్ముడు క్రికెట్ ఆడుతాడు.",
         "english": "My younger brother plays cricket.",
         "contextTag": "daily-use",
@@ -1436,7 +1436,7 @@
     ],
     "examples": [
       {
-        "pronunciation": "chelli (చెల్లి)",
+        "pronunciation": "naa chelli paata paadutumdi.",
         "telugu": "నా చెల్లి పాట పాడుతుంది.",
         "english": "My younger sister sings songs.",
         "contextTag": "daily-use",
@@ -1468,7 +1468,7 @@
     ],
     "examples": [
       {
-        "pronunciation": "kutumbam (కుటుంబం)",
+        "pronunciation": "maa kutumbam peddadi.",
         "telugu": "మా కుటుంబం పెద్దది.",
         "english": "Our family is big.",
         "contextTag": "daily-use",
@@ -1500,7 +1500,7 @@
     ],
     "examples": [
       {
-        "pronunciation": "snehitudu (స్నేహితుడు)",
+        "pronunciation": "atanu naa mamchi sneehitudu.",
         "telugu": "అతను నా మంచి స్నేహితుడు.",
         "english": "He is my good friend.",
         "contextTag": "daily-use",
@@ -1532,7 +1532,7 @@
     ],
     "examples": [
       {
-        "pronunciation": "snehituralu (స్నేహితురాలు)",
+        "pronunciation": "aame naa sneehituraalu.",
         "telugu": "ఆమె నా స్నేహితురాలు.",
         "english": "She is my friend.",
         "contextTag": "daily-use",
@@ -1564,7 +1564,7 @@
     ],
     "examples": [
       {
-        "pronunciation": "illu (ఇల్లు)",
+        "pronunciation": "maa illu peddadi.",
         "telugu": "మా ఇల్లు పెద్దది.",
         "english": "Our house is big.",
         "contextTag": "daily-use",
@@ -1596,7 +1596,7 @@
     ],
     "examples": [
       {
-        "pronunciation": "pustakam (పుస్తకం)",
+        "pronunciation": "neenu telugu pustakam chaduvutunnaanu.",
         "telugu": "నేను తెలుగు పుస్తకం చదువుతున్నాను.",
         "english": "I am reading a Telugu book.",
         "contextTag": "daily-use",
@@ -1627,7 +1627,7 @@
     ],
     "examples": [
       {
-        "pronunciation": "paatashaala (పాఠశాల)",
+        "pronunciation": "pillalu paathashaalaku vellaaru.",
         "telugu": "పిల్లలు పాఠశాలకు వెళ్లారు.",
         "english": "The children went to school.",
         "contextTag": "daily-use",
@@ -1659,7 +1659,7 @@
     ],
     "examples": [
       {
-        "pronunciation": "neeru (నీరు)",
+        "pronunciation": "naaku niiru kaavaali.",
         "telugu": "నాకు నీరు కావాలి.",
         "english": "I need water.",
         "contextTag": "daily-use",
@@ -1691,7 +1691,7 @@
     ],
     "examples": [
       {
-        "pronunciation": "annam (అన్నం)",
+        "pronunciation": "annam veedigaa umdi.",
         "telugu": "అన్నం వేడిగా ఉంది.",
         "english": "The rice is hot.",
         "contextTag": "daily-use",
@@ -1722,7 +1722,7 @@
     ],
     "examples": [
       {
-        "pronunciation": "pandu (పండు)",
+        "pronunciation": "neenu prati rooju pamdu timtaanu.",
         "telugu": "నేను ప్రతి రోజు పండు తింటాను.",
         "english": "I eat fruit every day.",
         "contextTag": "daily-use",
@@ -1754,7 +1754,7 @@
     ],
     "examples": [
       {
-        "pronunciation": "bassu (బస్సు)",
+        "pronunciation": "bassu samayaaniki vachchimdi.",
         "telugu": "బస్సు సమయానికి వచ్చింది.",
         "english": "The bus arrived on time.",
         "contextTag": "daily-use",
@@ -1786,7 +1786,7 @@
     ],
     "examples": [
       {
-        "pronunciation": "rodu (రోడు)",
+        "pronunciation": "ii roodu nagaraaniki veltumdi.",
         "telugu": "ఈ రోడు నగరానికి వెళ్తుంది.",
         "english": "This road goes to the city.",
         "contextTag": "daily-use",
@@ -1817,7 +1817,7 @@
     ],
     "examples": [
       {
-        "pronunciation": "graamam (గ్రామం)",
+        "pronunciation": "naa graamam chaalaa amdamgaa umtumdi.",
         "telugu": "నా గ్రామం చాలా అందంగా ఉంటుంది.",
         "english": "My village is very beautiful.",
         "contextTag": "daily-use",
@@ -1848,7 +1848,7 @@
     ],
     "examples": [
       {
-        "pronunciation": "nagaram (నగరం)",
+        "pronunciation": "haidaraabaad oka pedda nagaram.",
         "telugu": "హైదరాబాద్ ఒక పెద్ద నగరం.",
         "english": "Hyderabad is a big city.",
         "contextTag": "daily-use",
@@ -1879,7 +1879,7 @@
     ],
     "examples": [
       {
-        "pronunciation": "pani (పని)",
+        "pronunciation": "naaku iirooju chaalaa pani umdi.",
         "telugu": "నాకు ఈరోజు చాలా పని ఉంది.",
         "english": "I have a lot of work today.",
         "contextTag": "daily-use",
@@ -1910,7 +1910,7 @@
     ],
     "examples": [
       {
-        "pronunciation": "dabbu (డబ్బు)",
+        "pronunciation": "naaku komchem dabbu kaavaali.",
         "telugu": "నాకు కొంచెం డబ్బు కావాలి.",
         "english": "I need some money.",
         "contextTag": "daily-use",
@@ -1942,7 +1942,7 @@
     ],
     "examples": [
       {
-        "pronunciation": "bhaasha (భాష)",
+        "pronunciation": "telugu oka amdamaina bhaasha.",
         "telugu": "తెలుగు ఒక అందమైన భాష.",
         "english": "Telugu is a beautiful language.",
         "contextTag": "daily-use",
@@ -1973,7 +1973,7 @@
     ],
     "examples": [
       {
-        "pronunciation": "sahaayam (సహాయం)",
+        "pronunciation": "mii sahaayam naaku avasaram.",
         "telugu": "మీ సహాయం నాకు అవసరం.",
         "english": "I need your help.",
         "contextTag": "daily-use",
@@ -2005,7 +2005,7 @@
     ],
     "examples": [
       {
-        "pronunciation": "vellu (వెళ్ళు)",
+        "pronunciation": "manamu maarket‌ki veldaam.",
         "telugu": "మనము మార్కెట్‌కి వెళ్దాం.",
         "english": "Let us go to the market.",
         "contextTag": "daily-use",
@@ -2036,7 +2036,7 @@
     ],
     "examples": [
       {
-        "pronunciation": "raa (రా)",
+        "pronunciation": "ikkadiki raa.",
         "telugu": "ఇక్కడికి రా.",
         "english": "Come here.",
         "contextTag": "daily-use",
@@ -2068,7 +2068,7 @@
     ],
     "examples": [
       {
-        "pronunciation": "tinu (తిను)",
+        "pronunciation": "samayaaniki bhoojanam tinu.",
         "telugu": "సమయానికి భోజనం తిను.",
         "english": "Eat your meal on time.",
         "contextTag": "daily-use",
@@ -2100,7 +2100,7 @@
     ],
     "examples": [
       {
-        "pronunciation": "taagu (తాగు)",
+        "pronunciation": "roojuu ekkuva niiru taagu.",
         "telugu": "రోజూ ఎక్కువ నీరు తాగు.",
         "english": "Drink more water daily.",
         "contextTag": "daily-use",
@@ -2132,7 +2132,7 @@
     ],
     "examples": [
       {
-        "pronunciation": "chaduvu (చదువు)",
+        "pronunciation": "prati rooju telugu chaduvu.",
         "telugu": "ప్రతి రోజు తెలుగు చదువు.",
         "english": "Study Telugu every day.",
         "contextTag": "daily-use",
@@ -2164,7 +2164,7 @@
     ],
     "examples": [
       {
-        "pronunciation": "raayi (రాయి)",
+        "pronunciation": "nii peeru ikkada raayi.",
         "telugu": "నీ పేరు ఇక్కడ రాయి.",
         "english": "Write your name here.",
         "contextTag": "daily-use",
@@ -2195,7 +2195,7 @@
     ],
     "examples": [
       {
-        "pronunciation": "choodu (చూడు)",
+        "pronunciation": "ii chitram chuudu.",
         "telugu": "ఈ చిత్రం చూడు.",
         "english": "Look at this picture.",
         "contextTag": "daily-use",
@@ -2226,7 +2226,7 @@
     ],
     "examples": [
       {
-        "pronunciation": "maatlaadu (మాట్లాడు)",
+        "pronunciation": "nemmadigaa maatlaadu.",
         "telugu": "నెమ్మదిగా మాట్లాడు.",
         "english": "Speak slowly.",
         "contextTag": "daily-use",
@@ -2257,7 +2257,7 @@
     ],
     "examples": [
       {
-        "pronunciation": "vinu (విను)",
+        "pronunciation": "jaagrattagaa vinu.",
         "telugu": "జాగ్రత్తగా విను.",
         "english": "Listen carefully.",
         "contextTag": "daily-use",
@@ -2289,7 +2289,7 @@
     ],
     "examples": [
       {
-        "pronunciation": "nidrapo (నిద్రపో)",
+        "pronunciation": "raatri tomdaragaa nidrapoo.",
         "telugu": "రాత్రి తొందరగా నిద్రపో.",
         "english": "Sleep early at night.",
         "contextTag": "daily-use",
@@ -2320,7 +2320,7 @@
     ],
     "examples": [
       {
-        "pronunciation": "koorcho (కూర్చో)",
+        "pronunciation": "ikkada kuurchoo.",
         "telugu": "ఇక్కడ కూర్చో.",
         "english": "Sit here.",
         "contextTag": "daily-use",
@@ -2351,7 +2351,7 @@
     ],
     "examples": [
       {
-        "pronunciation": "nilabadu (నిలబడు)",
+        "pronunciation": "lainloo nilabadu.",
         "telugu": "లైన్లో నిలబడు.",
         "english": "Stand in the line.",
         "contextTag": "daily-use",
@@ -2382,7 +2382,7 @@
     ],
     "examples": [
       {
-        "pronunciation": "ivvu (ఇవ్వు)",
+        "pronunciation": "dayacheesi naaku nii pustakam ivvu.",
         "telugu": "దయచేసి నాకు నీ పుస్తకం ఇవ్వు.",
         "english": "Please give me your book.",
         "contextTag": "daily-use",
@@ -2413,7 +2413,7 @@
     ],
     "examples": [
       {
-        "pronunciation": "teesuko (తీసుకో)",
+        "pronunciation": "ii pennu tiisukoo.",
         "telugu": "ఈ పెన్ను తీసుకో.",
         "english": "Take this pen.",
         "contextTag": "daily-use",
@@ -2444,7 +2444,7 @@
     ],
     "examples": [
       {
-        "pronunciation": "cheyi (చేయి)",
+        "pronunciation": "ii pani ippudee cheeyi.",
         "telugu": "ఈ పని ఇప్పుడే చేయి.",
         "english": "Do this work now.",
         "contextTag": "daily-use",
@@ -2476,7 +2476,7 @@
     ],
     "examples": [
       {
-        "pronunciation": "telusu (తెలుసు)",
+        "pronunciation": "naaku ii padam telusu.",
         "telugu": "నాకు ఈ పదం తెలుసు.",
         "english": "I know this word.",
         "contextTag": "daily-use",
@@ -2508,7 +2508,7 @@
     ],
     "examples": [
       {
-        "pronunciation": "artham avu (అర్థం అవు)",
+        "pronunciation": "ippudu naaku artham ayimdi.",
         "telugu": "ఇప్పుడు నాకు అర్థం అయింది.",
         "english": "Now I understood.",
         "contextTag": "daily-use",
@@ -2540,7 +2540,7 @@
     ],
     "examples": [
       {
-        "pronunciation": "manchi (మంచి)",
+        "pronunciation": "atanu mamchi manishi.",
         "telugu": "అతను మంచి మనిషి.",
         "english": "He is a good person.",
         "contextTag": "daily-use",
@@ -2571,7 +2571,7 @@
     ],
     "examples": [
       {
-        "pronunciation": "chedu (చెడు)",
+        "pronunciation": "idi chedu alavaatu.",
         "telugu": "ఇది చెడు అలవాటు.",
         "english": "This is a bad habit.",
         "contextTag": "daily-use",
@@ -2602,7 +2602,7 @@
     ],
     "examples": [
       {
-        "pronunciation": "pedda (పెద్ద)",
+        "pronunciation": "idi pedda illu.",
         "telugu": "ఇది పెద్ద ఇల్లు.",
         "english": "This is a big house.",
         "contextTag": "daily-use",
@@ -2633,7 +2633,7 @@
     ],
     "examples": [
       {
-        "pronunciation": "chinna (చిన్న)",
+        "pronunciation": "adi chinna pustakam.",
         "telugu": "అది చిన్న పుస్తకం.",
         "english": "That is a small book.",
         "contextTag": "daily-use",
@@ -2664,7 +2664,7 @@
     ],
     "examples": [
       {
-        "pronunciation": "kotta (కొత్త)",
+        "pronunciation": "neenu kotta phoon konnaanu.",
         "telugu": "నేను కొత్త ఫోన్ కొన్నాను.",
         "english": "I bought a new phone.",
         "contextTag": "daily-use",
@@ -2695,7 +2695,7 @@
     ],
     "examples": [
       {
-        "pronunciation": "paata (పాత)",
+        "pronunciation": "idi paata illu.",
         "telugu": "ఇది పాత ఇల్లు.",
         "english": "This is an old house.",
         "contextTag": "daily-use",
@@ -2726,7 +2726,7 @@
     ],
     "examples": [
       {
-        "pronunciation": "chaala (చాలా)",
+        "pronunciation": "aame chaalaa telivainadi.",
         "telugu": "ఆమె చాలా తెలివైనది.",
         "english": "She is very smart.",
         "contextTag": "daily-use",
@@ -2757,7 +2757,7 @@
     ],
     "examples": [
       {
-        "pronunciation": "nemmadiga (నెమ్మదిగా)",
+        "pronunciation": "dayacheesi nemmadigaa maatlaadu.",
         "telugu": "దయచేసి నెమ్మదిగా మాట్లాడు.",
         "english": "Please speak slowly.",
         "contextTag": "daily-use",
@@ -2788,7 +2788,7 @@
     ],
     "examples": [
       {
-        "pronunciation": "veganga (వేగంగా)",
+        "pronunciation": "atanu veegamgaa parugettaadu.",
         "telugu": "అతను వేగంగా పరుగెత్తాడు.",
         "english": "He ran quickly.",
         "contextTag": "daily-use",
@@ -2820,7 +2820,7 @@
     ],
     "examples": [
       {
-        "pronunciation": "ikkada (ఇక్కడ)",
+        "pronunciation": "ikkada veechi umdu.",
         "telugu": "ఇక్కడ వేచి ఉండు.",
         "english": "Wait here.",
         "contextTag": "daily-use",
@@ -2852,7 +2852,7 @@
     ],
     "examples": [
       {
-        "pronunciation": "akkada (అక్కడ)",
+        "pronunciation": "akkada oka dukaanam umdi.",
         "telugu": "అక్కడ ఒక దుకాణం ఉంది.",
         "english": "There is a shop there.",
         "contextTag": "daily-use",

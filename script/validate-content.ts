@@ -155,7 +155,7 @@ async function main() {
           errors.push(`[row ${row}] Example ${exampleIndex + 1} must include telugu and english`);
         }
         if (!example.pronunciation || example.pronunciation.trim().length === 0) {
-          warnings.push(`[row ${row}] Example ${exampleIndex + 1} should include pronunciation text`);
+          errors.push(`[row ${row}] Example ${exampleIndex + 1} must include pronunciation text`);
         }
       }
     }

@@ -193,10 +193,11 @@ export async function registerRoutes(
       });
 
       const fallbackSentence = word.exampleSentences?.[0] ?? word.telugu;
-      const fallbackPronunciation = `${word.transliteration} (${fallbackSentence})`;
+      const fallbackPronunciation = word.transliteration;
+      const bestExamplePronunciation = firstExample?.pronunciation ?? fallbackPronunciation;
       const feedbackExample = firstExample ? {
         telugu: firstExample.teluguSentence,
-        pronunciation: firstExample.pronunciation ?? fallbackPronunciation,
+        pronunciation: bestExamplePronunciation,
         meaning: firstExample.englishSentence,
       } : {
         telugu: fallbackSentence,

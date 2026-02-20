@@ -300,9 +300,15 @@ async function main() {
     }
 
     for (const example of item.examples ?? []) {
+      const normalizedPronunciation = example.pronunciation?.trim();
+      if (!normalizedPronunciation) {
+        throw new Error(
+          `Missing sentence pronunciation for word "${item.transliteration}" example "${example.telugu}"`,
+        );
+      }
       await ensureWordExample(word.id, {
         ...example,
-        pronunciation: example.pronunciation ?? `${item.transliteration} (${example.telugu})`,
+        pronunciation: normalizedPronunciation,
       });
       exampleCount += 1;
     }
