@@ -28,7 +28,8 @@ Primary delivery rule:
 3. Phase 2: Quiz engine + adaptive SRS (core)
 4. Phase 3: UX flows + dashboard + gamification (text-first)
 5. Phase 4: Advanced text features + quality/hardening
-6. Phase 5: Media expansion (audio/video/images) - last
+6. Phase 4B: Critical UX fixes + vocabulary reviewer governance
+7. Phase 5: Media expansion (audio/video/images) - last
 
 ## Files in this folder
 
@@ -39,6 +40,7 @@ Primary delivery rule:
 - `30-phase-2-quiz-and-srs.md`
 - `40-phase-3-product-flows.md`
 - `50-phase-4-hardening-and-release.md`
+- `55-phase-4b-critical-fixes-and-review-governance.md`
 - `60-phase-5-media-expansion-last.md`
 - `70-schema-and-api-contracts.md`
 - `80-production-runbook.md`

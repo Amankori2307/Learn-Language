@@ -58,6 +58,22 @@ Status legend: `todo` | `doing` | `done` | `blocked`
 | P4-008 | done | Add reinforcement loops after each lesson | P3-003 | M | auto-review of weak/related words runs after session |
 | P4-009 | done | Add optional AI tutor mode (text chat) behind feature flag | P4-007 | L | tutor uses known vocabulary and evaluates user responses |
 
+## Phase 4B - Critical UX Fixes + Vocabulary Review Governance
+
+| ID | Status | Task | Depends On | Effort | Done When |
+|---|---|---|---|---|---|
+| P4B-001 | todo | Fix leaderboard pipeline (API query, aggregation window, UI rendering state) | P4-001 | M | leaderboard shows non-empty deterministic ranks for seeded/test users |
+| P4B-002 | todo | Fix profile page data loading and mutation flows | P4-001 | M | profile view/edit works and persists after reload |
+| P4B-003 | todo | Fix avatar/image handling (upload/save/display/fallback) | P4B-002 | M | avatar updates immediately and survives new sessions |
+| P4B-004 | todo | UI styling cleanup pass (spacing, responsive breakpoints, typography consistency) | P3-006 | M | key app screens pass visual QA checklist on mobile + desktop |
+| P4B-005 | todo | Add regression test suite for leaderboard/profile/avatar/styling critical paths | P4B-001,P4B-002,P4B-003,P4B-004 | M | failing tests reproduce old bugs and pass on fixes |
+| P4B-006 | todo | Add vocabulary review schema (draft/pending/approved/rejected + reviewer metadata) | P1-001 | M | DB + API support review state transitions with audit fields |
+| P4B-007 | todo | Build reviewer queue and reviewer role permissions | P4B-006 | M | only reviewers can approve/reject pending vocabulary items |
+| P4B-008 | todo | Enforce approval gate in learning flows (exclude non-approved vocab from production sessions) | P4B-007 | M | learners only receive approved vocabulary by default |
+| P4B-009 | todo | Add source evidence and change history on each vocab item | P4B-006 | M | reviewer can inspect source URL, extraction time, and edit history |
+| P4B-010 | todo | Add reviewer productivity tooling (bulk approve/reject, comments, conflict re-open) | P4B-007 | M | reviewer can process queue efficiently with full traceability |
+| P4B-011 | todo | Allow AI-assisted/manual vocabulary creation as DRAFT only | P4B-006 | S | generated entries never go live without reviewer approval |
+
 ## Phase 5 - Media Expansion (Final)
 
 | ID | Status | Task | Depends On | Effort | Done When |
@@ -71,5 +87,5 @@ Status legend: `todo` | `doing` | `done` | `blocked`
 ## Global exit criteria
 
 - Phase 2 complete before any media-heavy work.
-- All Phase 4 release gates complete before Phase 5 starts.
+- All Phase 4 and Phase 4B release gates complete before Phase 5 starts.
 - Daily resume log maintained with task-level continuity.
