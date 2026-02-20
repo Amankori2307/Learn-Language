@@ -1,0 +1,26 @@
+#!/usr/bin/env sh
+set -e
+
+if [ -z "$DATABASE_URL" ]; then
+  echo "DATABASE_URL is required"
+  exit 1
+fi
+
+echo "Waiting for Postgres..."
+until pg_isready -d "$DATABASE_URL" >/dev/null 2>&1; do
+  sleep 1
+done
+
+echo "Installing dependencies..."
+pnpm install --frozen-lockfile
+
+echo "Applying schema..."
+pnpm run db:push
+
+if [ -f "assets/processed/words.mvp.json" ]; then
+  echo "Importing MVP dataset..."
+  pnpm run content:import:mvp
+fi
+
+echo "Starting dev server with hot reload..."
+exec pnpm run dev

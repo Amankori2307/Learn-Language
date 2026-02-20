@@ -208,6 +208,54 @@ export const api = {
       },
     },
   },
+  review: {
+    queue: {
+      method: "GET" as const,
+      path: "/api/review/queue" as const,
+      input: z.object({
+        status: z.enum(["draft", "pending_review", "approved", "rejected"]).default("pending_review"),
+        limit: z.coerce.number().int().positive().max(200).default(50),
+      }).optional(),
+      responses: {
+        200: z.array(z.object({
+          id: z.number(),
+          telugu: z.string(),
+          transliteration: z.string(),
+          english: z.string(),
+          partOfSpeech: z.string(),
+          reviewStatus: z.string(),
+          sourceUrl: z.string().nullable(),
+          sourceCapturedAt: z.string().nullable(),
+          submittedBy: z.string().nullable(),
+          submittedAt: z.string().nullable(),
+          reviewedBy: z.string().nullable(),
+          reviewedAt: z.string().nullable(),
+          reviewNotes: z.string().nullable(),
+        })),
+        401: errorSchemas.unauthorized,
+      },
+    },
+    transition: {
+      method: "PATCH" as const,
+      path: "/api/review/words/:id" as const,
+      input: z.object({
+        toStatus: z.enum(["draft", "pending_review", "approved", "rejected"]),
+        notes: z.string().max(1000).optional(),
+      }),
+      responses: {
+        200: z.object({
+          id: z.number(),
+          reviewStatus: z.string(),
+          reviewedBy: z.string().nullable(),
+          reviewedAt: z.string().nullable(),
+          reviewNotes: z.string().nullable(),
+        }),
+        400: errorSchemas.validation,
+        401: errorSchemas.unauthorized,
+        404: errorSchemas.notFound,
+      },
+    },
+  },
   admin: {
     seed: {
       method: 'POST' as const,

@@ -25,7 +25,7 @@ services:
       db:
         condition: service_healthy
     environment:
-      NODE_ENV: production
+      NODE_ENV: development
       PORT: 3000
       DATABASE_URL: postgresql://postgres:postgres@db:5432/mydb
       SESSION_SECRET: ${SESSION_SECRET:-change-me-in-prod-please-123456}
@@ -34,8 +34,13 @@ services:
       GOOGLE_CLIENT_SECRET: ${GOOGLE_CLIENT_SECRET}
       GOOGLE_ISSUER_URL: ${GOOGLE_ISSUER_URL:-https://accounts.google.com}
       VITE_ENABLE_TUTOR: ${VITE_ENABLE_TUTOR:-true}
+    volumes:
+      - ./:/app
+      - app_node_modules:/app/node_modules
+    entrypoint: ["/app/docker/entrypoint.dev.sh"]
     ports:
       - "3000:3000"
 
 volumes:
   pg_data:
+  app_node_modules:

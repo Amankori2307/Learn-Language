@@ -75,3 +75,34 @@ test("profile update contract rejects invalid avatar URL", () => {
     });
   });
 });
+
+test("review queue contract accepts pending review payload", () => {
+  const payload = [
+    {
+      id: 10,
+      telugu: "నమస్తే",
+      transliteration: "namaste",
+      english: "hello",
+      partOfSpeech: "phrase",
+      reviewStatus: "pending_review",
+      sourceUrl: null,
+      sourceCapturedAt: null,
+      submittedBy: null,
+      submittedAt: null,
+      reviewedBy: null,
+      reviewedAt: null,
+      reviewNotes: null,
+    },
+  ];
+
+  const parsed = api.review.queue.responses[200].parse(payload);
+  assert.equal(parsed[0].reviewStatus, "pending_review");
+});
+
+test("review transition contract rejects invalid status", () => {
+  assert.throws(() => {
+    api.review.transition.input.parse({
+      toStatus: "published",
+    });
+  });
+});

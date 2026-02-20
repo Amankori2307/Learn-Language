@@ -1,15 +1,15 @@
-# Docker Compose Single-Command Setup
+# Docker Compose Setup (Hot Reload)
 
 This setup brings up:
 - PostgreSQL (`db`)
-- App server + UI (`app`)
+- App server + UI dev runtime (`app`)
 
 The app container startup sequence:
 1. Wait for Postgres readiness
-2. Run `db:push`
-3. Run `content:import:mvp`
-4. Build app
-5. Start app
+2. Install dependencies (`pnpm install`)
+3. Run `db:push`
+4. Run `content:import:mvp` (if seed exists)
+5. Start `pnpm run dev` (watch mode)
 
 ## Run
 
@@ -21,8 +21,9 @@ App URL:
 - [http://localhost:3000](http://localhost:3000)
 
 Notes:
-- Compose defaults `AUTH_PROVIDER=dev` so you can use the app locally without external OAuth setup.
-- For Google OAuth, set `AUTH_PROVIDER=google` and provide `GOOGLE_CLIENT_ID` + `GOOGLE_CLIENT_SECRET` + callback registration.
+- Compose mounts the repo into `/app`; backend and frontend changes should auto-refresh without rebuilding image.
+- If you change dependencies (`package.json`), restart compose once.
+- For Google OAuth, set `AUTH_PROVIDER=google` and provide `GOOGLE_CLIENT_ID` + `GOOGLE_CLIENT_SECRET`.
 
 ## Reset DB
 

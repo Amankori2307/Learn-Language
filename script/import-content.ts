@@ -23,6 +23,12 @@ type ContentWord = {
   tags?: string[];
   clusters?: string[];
   examples?: ContentExample[];
+  source?: {
+    type?: string;
+    generatedAt?: string;
+    reviewStatus?: "draft" | "pending_review" | "approved" | "rejected";
+    sourceUrl?: string;
+  };
 };
 
 function parseListField(value?: string): string[] {
@@ -138,6 +144,7 @@ async function ensureCluster(name: string) {
 }
 
 async function upsertWord(input: ContentWord) {
+  const reviewStatus = input.source?.reviewStatus ?? ((input.tags ?? []).includes("needs-review") ? "pending_review" : "approved");
   const [existing] = await db
     .select()
     .from(words)
@@ -154,6 +161,9 @@ async function upsertWord(input: ContentWord) {
         frequencyScore: input.frequencyScore ?? 0.5,
         cefrLevel: input.cefrLevel ?? null,
         tags: input.tags ?? [],
+        reviewStatus,
+        sourceUrl: input.source?.sourceUrl ?? null,
+        sourceCapturedAt: input.source?.generatedAt ? new Date(input.source.generatedAt) : null,
       })
       .where(eq(words.id, existing.id))
       .returning();
@@ -173,6 +183,9 @@ async function upsertWord(input: ContentWord) {
       frequencyScore: input.frequencyScore ?? 0.5,
       cefrLevel: input.cefrLevel ?? null,
       tags: input.tags ?? [],
+      reviewStatus,
+      sourceUrl: input.source?.sourceUrl ?? null,
+      sourceCapturedAt: input.source?.generatedAt ? new Date(input.source.generatedAt) : null,
       exampleSentences: (input.examples ?? []).map((e) => e.telugu),
     })
     .returning();

@@ -20,6 +20,7 @@ export const users = pgTable("users", {
   firstName: varchar("first_name"),
   lastName: varchar("last_name"),
   profileImageUrl: varchar("profile_image_url"),
+  role: text("role").default("learner").notNull(), // learner | reviewer | admin
   createdAt: timestamp("created_at").defaultNow(),
   updatedAt: timestamp("updated_at").defaultNow(),
 });
@@ -39,8 +40,18 @@ export const words = pgTable("words", {
   audioUrl: text("audio_url"),
   exampleSentences: jsonb("example_sentences").$type<string[]>().default([]),
   tags: jsonb("tags").$type<string[]>().default([]),
+  reviewStatus: text("review_status").default("approved").notNull(), // draft | pending_review | approved | rejected
+  submittedBy: varchar("submitted_by"),
+  submittedAt: timestamp("submitted_at").defaultNow(),
+  reviewedBy: varchar("reviewed_by"),
+  reviewedAt: timestamp("reviewed_at"),
+  reviewNotes: text("review_notes"),
+  sourceUrl: text("source_url"),
+  sourceCapturedAt: timestamp("source_captured_at"),
   createdAt: timestamp("created_at").defaultNow(),
-});
+}, (t) => ({
+  reviewStatusIdx: index("words_review_status_idx").on(t.reviewStatus),
+}));
 
 export const clusters = pgTable("clusters", {
   id: serial("id").primaryKey(),
@@ -103,6 +114,20 @@ export const quizAttempts = pgTable("quiz_attempts", {
   userCreatedIdx: index("quiz_attempts_user_created_idx").on(t.userId, t.createdAt),
 }));
 
+export const wordReviewEvents = pgTable("word_review_events", {
+  id: serial("id").primaryKey(),
+  wordId: integer("word_id").references(() => words.id).notNull(),
+  fromStatus: text("from_status").notNull(),
+  toStatus: text("to_status").notNull(),
+  changedBy: varchar("changed_by").references(() => users.id).notNull(),
+  notes: text("notes"),
+  sourceUrl: text("source_url"),
+  sourceCapturedAt: timestamp("source_captured_at"),
+  createdAt: timestamp("created_at").defaultNow(),
+}, (t) => ({
+  wordCreatedIdx: index("word_review_events_word_created_idx").on(t.wordId, t.createdAt),
+}));
+
 // === RELATIONS ===
 
 export const usersRelations = relations(users, ({ many }) => ({
@@ -115,6 +140,7 @@ export const wordsRelations = relations(words, ({ many }) => ({
   progress: many(userWordProgress),
   attempts: many(quizAttempts),
   examples: many(wordExamples),
+  reviewEvents: many(wordReviewEvents),
 }));
 
 export const clustersRelations = relations(clusters, ({ many }) => ({
@@ -140,6 +166,11 @@ export const quizAttemptsRelations = relations(quizAttempts, ({ one }) => ({
   word: one(words, { fields: [quizAttempts.wordId], references: [words.id] }),
 }));
 
+export const wordReviewEventsRelations = relations(wordReviewEvents, ({ one }) => ({
+  word: one(words, { fields: [wordReviewEvents.wordId], references: [words.id] }),
+  reviewer: one(users, { fields: [wordReviewEvents.changedBy], references: [users.id] }),
+}));
+
 // === BASE SCHEMAS ===
 
 export const insertUserSchema = createInsertSchema(users).omit({ id: true, createdAt: true, updatedAt: true });
@@ -155,6 +186,7 @@ export type Word = typeof words.$inferSelect;
 export type Cluster = typeof clusters.$inferSelect;
 export type UserWordProgress = typeof userWordProgress.$inferSelect;
 export type QuizAttempt = typeof quizAttempts.$inferSelect;
+export type WordReviewEvent = typeof wordReviewEvents.$inferSelect;
 
 export type CreateWordRequest = z.infer<typeof insertWordSchema>;
 export type CreateClusterRequest = z.infer<typeof insertClusterSchema>;

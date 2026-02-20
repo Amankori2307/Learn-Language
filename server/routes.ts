@@ -230,6 +230,50 @@ export async function registerRoutes(
     res.json(leaderboard);
   });
 
+  // Review queue
+  app.get(api.review.queue.path, isAuthenticated, async (req, res) => {
+    const parsed = api.review.queue.input?.parse(req.query) ?? { status: "pending_review", limit: 50 };
+    const status = parsed.status ?? "pending_review";
+    const limit = parsed.limit ?? 50;
+    const queue = await storage.getReviewQueue(status, limit);
+    res.json(queue.map((word) => ({
+      ...word,
+      sourceCapturedAt: word.sourceCapturedAt?.toISOString() ?? null,
+      submittedAt: word.submittedAt?.toISOString() ?? null,
+      reviewedAt: word.reviewedAt?.toISOString() ?? null,
+      createdAt: word.createdAt?.toISOString() ?? null,
+    })));
+  });
+
+  // Review transition
+  app.patch(api.review.transition.path, isAuthenticated, async (req, res) => {
+    const reviewerId = (req.user as any).claims.sub;
+    const wordId = Number(req.params.id);
+    if (!Number.isFinite(wordId) || wordId <= 0) {
+      return sendError(req, res, 400, "VALIDATION_ERROR", "Invalid word id");
+    }
+
+    try {
+      const parsed = api.review.transition.input.parse(req.body);
+      const updated = await storage.transitionWordReview(wordId, reviewerId, parsed.toStatus, parsed.notes);
+      if (!updated) {
+        return sendError(req, res, 404, "NOT_FOUND", "Word not found");
+      }
+      res.json({
+        id: updated.id,
+        reviewStatus: updated.reviewStatus,
+        reviewedBy: updated.reviewedBy,
+        reviewedAt: updated.reviewedAt?.toISOString() ?? null,
+        reviewNotes: updated.reviewNotes ?? null,
+      });
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        return sendError(req, res, 400, "VALIDATION_ERROR", error.errors[0]?.message ?? "Invalid request");
+      }
+      return sendError(req, res, 500, "INTERNAL_ERROR", "Failed to update review status");
+    }
+  });
+
   // Admin Seed
   app.post(api.admin.seed.path, isAuthenticated, async (req, res) => {
     await storage.seedInitialData();

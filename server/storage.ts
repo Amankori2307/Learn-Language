@@ -2,6 +2,7 @@ import { db } from "./db";
 import { eq, sql, and } from "drizzle-orm";
 import {
   words, clusters, wordClusters, userWordProgress, quizAttempts, wordExamples, users,
+  wordReviewEvents,
   type Word, type Cluster, type UserWordProgress, type QuizAttempt,
   type CreateWordRequest, type CreateClusterRequest
 } from "@shared/schema";
@@ -61,6 +62,16 @@ export interface IStorage {
     attempts: number;
     accuracy: number;
   }>>;
+  getReviewQueue(
+    status: "draft" | "pending_review" | "approved" | "rejected",
+    limit?: number,
+  ): Promise<Word[]>;
+  transitionWordReview(
+    wordId: number,
+    reviewerId: string,
+    toStatus: "draft" | "pending_review" | "approved" | "rejected",
+    notes?: string,
+  ): Promise<Word | undefined>;
 
   // Admin/Seed
   seedInitialData(): Promise<void>;
@@ -253,6 +264,51 @@ export class DatabaseStorage implements IStorage {
       })),
       limit,
     );
+  }
+
+  async getReviewQueue(
+    status: "draft" | "pending_review" | "approved" | "rejected",
+    limit: number = 50,
+  ): Promise<Word[]> {
+    return db
+      .select()
+      .from(words)
+      .where(eq(words.reviewStatus, status))
+      .orderBy(sql`${words.submittedAt} desc nulls last`, sql`${words.createdAt} desc`)
+      .limit(limit);
+  }
+
+  async transitionWordReview(
+    wordId: number,
+    reviewerId: string,
+    toStatus: "draft" | "pending_review" | "approved" | "rejected",
+    notes?: string,
+  ): Promise<Word | undefined> {
+    const [existing] = await db.select().from(words).where(eq(words.id, wordId));
+    if (!existing) return undefined;
+
+    const now = new Date();
+    const [updated] = await db.update(words)
+      .set({
+        reviewStatus: toStatus,
+        reviewedBy: reviewerId,
+        reviewedAt: now,
+        reviewNotes: notes ?? null,
+      })
+      .where(eq(words.id, wordId))
+      .returning();
+
+    await db.insert(wordReviewEvents).values({
+      wordId,
+      fromStatus: existing.reviewStatus ?? "approved",
+      toStatus,
+      changedBy: reviewerId,
+      notes: notes ?? null,
+      sourceUrl: updated.sourceUrl ?? null,
+      sourceCapturedAt: updated.sourceCapturedAt ?? null,
+    });
+
+    return updated;
   }
 
   async getUserStats(userId: string): Promise<{
