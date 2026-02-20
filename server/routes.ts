@@ -100,7 +100,7 @@ export async function registerRoutes(
 
       const questionText =
         type === QuizQuestionTypeEnum.TELUGU_TO_ENGLISH
-          ? formatPronunciationFirst(word)
+          ? word.telugu
           : word.english;
       
       const options = [word, ...distractors]
@@ -117,7 +117,7 @@ export async function registerRoutes(
         wordId: word.id,
         type,
         questionText,
-        pronunciation: type === QuizQuestionTypeEnum.ENGLISH_TO_TELUGU ? null : formatPronunciationFirst(word),
+        pronunciation: type === QuizQuestionTypeEnum.TELUGU_TO_ENGLISH ? (word.transliteration ?? null) : null,
         audioUrl: word.audioUrl,
         options,
       };
