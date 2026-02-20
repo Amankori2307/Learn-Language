@@ -18,6 +18,7 @@
     "content:prepare:mvp": "npm run content:generate:mvp && npm run content:validate -- content/seed/words.mvp.json",
     "content:import:mvp": "npm run content:import -- content/seed/words.mvp.json",
     "benchmark:quiz": "node --import tsx script/benchmark-quiz-selection.ts",
+    "smoke:core": "node --import tsx script/smoke-core.ts",
     "db:push": "drizzle-kit push"
   },
   "dependencies": {

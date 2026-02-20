@@ -14,7 +14,7 @@ Status key: `[ ]` pending, `[x]` done
 - [x] Import pipeline available (`content:import`)
 - [x] Content validation available (`content:validate`)
 - [x] MVP dataset prepared (300 words / 20 clusters / 300 examples)
-- [ ] MVP dataset imported into production database
+- [x] MVP dataset imported into production database
 
 ## Algorithm
 
@@ -45,6 +45,6 @@ Status key: `[ ]` pending, `[x]` done
 ## Release Gate
 
 - [ ] Complete production DB import for MVP dataset
+- [x] Execute core end-to-end smoke test against target database
 - [ ] Execute authenticated end-to-end smoke test in deployed environment
 - [ ] Sign-off by product + engineering owner
-

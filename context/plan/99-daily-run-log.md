@@ -454,3 +454,34 @@ Blockers:
 
 Resume notes:
 - Phase 5 should remain blocked until P4-005 release-gate sign-off is completed.
+
+Date: 2026-02-20
+Session owner: Codex
+Last completed task ID: P4-005 (PART 2 - data import + smoke)
+Current in-progress task ID: P4-005
+Next task ID: P4-005
+
+Completed today:
+- Applied schema to local Postgres `mydb` with `db:push`.
+- Imported MVP dataset into local Postgres (`300 words, 20 clusters, 300 examples, 600 links`).
+- Verified database counts via SQL query.
+- Added and ran core smoke script against DB-backed storage flows.
+
+Files changed:
+- script/smoke-core.ts
+- package.json
+- context/plan/81-beta-readiness-checklist.md
+- context/plan/99-daily-run-log.md
+
+Commands/results:
+- `DATABASE_URL=... npm run db:push` (pass)
+- `DATABASE_URL=... npm run content:import:mvp` (pass)
+- `psql ... count query` -> words=300, clusters=20, examples=300, links=600
+- `DATABASE_URL=... npm run smoke:core` (pass)
+- `npm run ci` (pass)
+
+Blockers:
+- Final release gate still requires explicit product + engineering owner sign-off.
+
+Resume notes:
+- P4-005 can be closed once human sign-off is recorded.
