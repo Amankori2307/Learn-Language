@@ -72,7 +72,7 @@ Acceptance:
 - Advanced workouts improve challenge while using only text input/output.
 
 ### P4-007 - Contextual learning mode
-Status: `todo`
+Status: `done`
 
 Scope:
 - Introduce short story/dialogue learning units.
@@ -82,7 +82,7 @@ Acceptance:
 - Context units can launch quizzes with linked vocabulary lists.
 
 ### P4-008 - Reinforcement loops
-Status: `todo`
+Status: `done`
 
 Scope:
 - After lesson completion, auto-generate micro-review with weak words.
@@ -92,7 +92,7 @@ Acceptance:
 - Every completed lesson offers immediate targeted reinforcement set.
 
 ### P4-009 - Optional AI tutor mode (text)
-Status: `todo`
+Status: `done`
 
 Scope:
 - Add conversational tutor that uses user's known vocabulary.

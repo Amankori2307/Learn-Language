@@ -8,6 +8,8 @@ import { useAuth } from "@/hooks/use-auth";
 import Dashboard from "@/pages/dashboard";
 import QuizPage from "@/pages/quiz";
 import ClustersPage from "@/pages/clusters";
+import ContextualPage from "@/pages/contextual";
+import TutorPage from "@/pages/tutor";
 import AuthPage from "@/pages/auth";
 import NotFound from "@/pages/not-found";
 
@@ -40,6 +42,12 @@ function Router() {
       </Route>
       <Route path="/clusters">
         {() => <ProtectedRoute component={ClustersPage} />}
+      </Route>
+      <Route path="/contextual">
+        {() => <ProtectedRoute component={ContextualPage} />}
+      </Route>
+      <Route path="/tutor">
+        {() => <ProtectedRoute component={TutorPage} />}
       </Route>
 
       {/* Fallback */}

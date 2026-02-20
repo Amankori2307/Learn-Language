@@ -54,9 +54,9 @@ Status legend: `todo` | `doing` | `done` | `blocked`
 | P4-004 | done | Add production runbook and incident playbook | P4-003 | S | docs cover deploy, rollback, common failures |
 | P4-005 | doing | Beta readiness checklist and release gate sign-off | P4-001,P4-002,P4-004 | S | all release criteria satisfied |
 | P4-006 | done | Add complex sentence workouts (text-only) | P3-004 | M | advanced text exercises run without media dependency |
-| P4-007 | todo | Add contextual learning mode (stories/dialogues text) | P4-006 | M | users can learn words inside short text contexts |
-| P4-008 | todo | Add reinforcement loops after each lesson | P3-003 | M | auto-review of weak/related words runs after session |
-| P4-009 | todo | Add optional AI tutor mode (text chat) behind feature flag | P4-007 | L | tutor uses known vocabulary and evaluates user responses |
+| P4-007 | done | Add contextual learning mode (stories/dialogues text) | P4-006 | M | users can learn words inside short text contexts |
+| P4-008 | done | Add reinforcement loops after each lesson | P3-003 | M | auto-review of weak/related words runs after session |
+| P4-009 | done | Add optional AI tutor mode (text chat) behind feature flag | P4-007 | L | tutor uses known vocabulary and evaluates user responses |
 
 ## Phase 5 - Media Expansion (Final)
 

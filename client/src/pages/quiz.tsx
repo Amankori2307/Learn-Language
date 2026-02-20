@@ -104,6 +104,7 @@ export default function QuizPage() {
 
   if (isFinished) {
     const percentage = Math.round((sessionStats.correct / sessionStats.total) * 100);
+    const incorrectCount = Math.max(0, sessionStats.total - sessionStats.correct);
     const recommendedMode = percentage < 70 ? "weak_words" : "daily_review";
     return (
       <div className="min-h-screen bg-background flex flex-col items-center justify-center p-4">
@@ -126,6 +127,24 @@ export default function QuizPage() {
           </div>
 
           <div className="space-y-3">
+            {incorrectCount > 0 && (
+              <Button
+                variant="secondary"
+                className="w-full h-12 text-lg rounded-xl"
+                onClick={() => setLocation("/quiz?mode=weak_words")}
+              >
+                Start Reinforcement Loop ({incorrectCount} missed)
+              </Button>
+            )}
+            {clusterId && (
+              <Button
+                variant="outline"
+                className="w-full h-12 text-lg rounded-xl"
+                onClick={() => setLocation(`/quiz?mode=cluster&clusterId=${clusterId}`)}
+              >
+                Review Related Cluster Words
+              </Button>
+            )}
             <Button
               className="w-full h-12 text-lg rounded-xl shadow-lg shadow-primary/20"
               onClick={() => setLocation(`/quiz?mode=${recommendedMode}`)}

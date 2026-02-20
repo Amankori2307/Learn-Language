@@ -13,7 +13,8 @@ import {
   BookOpen, 
   Dumbbell,
   Layers3,
-  PlayCircle
+  PlayCircle,
+  MessageSquareQuote
 } from "lucide-react";
 import { motion } from "framer-motion";
 
@@ -46,6 +47,7 @@ export default function Dashboard() {
   const s = stats || defaultStats;
 
   const continueMode = s.weak > 0 ? "weak_words" : "daily_review";
+  const tutorEnabled = import.meta.env.VITE_ENABLE_TUTOR === "true";
 
   const cards = [
     {
@@ -101,7 +103,27 @@ export default function Dashboard() {
       color: "bg-indigo-100 text-indigo-700",
       buttonColor: "bg-indigo-600 hover:bg-indigo-700",
       count: Math.max(5, Math.round(s.learning / 2)),
-    }
+    },
+    {
+      title: "Contextual Mode",
+      description: "Study short story/dialogue snippets before practice",
+      icon: MessageSquareQuote,
+      href: "/contextual",
+      color: "bg-teal-100 text-teal-700",
+      buttonColor: "bg-teal-600 hover:bg-teal-700",
+      count: 6,
+    },
+    ...(tutorEnabled
+      ? [{
+          title: "Tutor Mode",
+          description: "Text tutor for guided vocabulary feedback",
+          icon: BrainCircuit,
+          href: "/tutor",
+          color: "bg-cyan-100 text-cyan-700",
+          buttonColor: "bg-cyan-600 hover:bg-cyan-700",
+          count: s.learning,
+        }]
+      : []),
   ];
 
   return (
@@ -167,7 +189,7 @@ export default function Dashboard() {
 
         {/* Action Cards */}
         <h3 className="text-xl font-bold mt-8 mb-4">Start Learning</h3>
-        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-5 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-6 gap-6">
           {cards.map((card, idx) => (
             <motion.div
               key={card.title}
