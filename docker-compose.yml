@@ -28,9 +28,12 @@ services:
       NODE_ENV: production
       PORT: 3000
       DATABASE_URL: postgresql://postgres:postgres@db:5432/mydb
-      SESSION_SECRET: change-me-in-prod-please-123456
-      AUTH_PROVIDER: dev
-      VITE_ENABLE_TUTOR: "true"
+      SESSION_SECRET: ${SESSION_SECRET:-change-me-in-prod-please-123456}
+      AUTH_PROVIDER: ${AUTH_PROVIDER:-google}
+      GOOGLE_CLIENT_ID: ${GOOGLE_CLIENT_ID}
+      GOOGLE_CLIENT_SECRET: ${GOOGLE_CLIENT_SECRET}
+      GOOGLE_ISSUER_URL: ${GOOGLE_ISSUER_URL:-https://accounts.google.com}
+      VITE_ENABLE_TUTOR: ${VITE_ENABLE_TUTOR:-true}
     ports:
       - "3000:3000"
 
