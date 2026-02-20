@@ -124,7 +124,7 @@ export async function registerRoutes(
         wordId: word.id,
         type,
         questionText,
-        pronunciation: formatPronunciationFirst(word),
+        pronunciation: type === "english_to_telugu" ? null : formatPronunciationFirst(word),
         audioUrl: word.audioUrl,
         options,
       };
