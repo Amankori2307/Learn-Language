@@ -47,6 +47,8 @@ export default function Dashboard() {
   const s = stats || defaultStats;
 
   const continueMode = s.weak > 0 ? "weak_words" : "daily_review";
+  const primaryLearningHref = `/quiz?mode=${continueMode}`;
+  const primaryLearningLabel = continueMode === "weak_words" ? "Resume Weak Spots" : "Start Daily Review";
   const tutorEnabled = import.meta.env.VITE_ENABLE_TUTOR === "true";
 
   const cards = [
@@ -113,21 +115,52 @@ export default function Dashboard() {
   return (
     <Layout>
       <div className="space-y-7">
+        {/* Learning First Hero */}
+        <section className="rounded-2xl border border-border/60 bg-card p-5 md:p-6">
+          <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-5">
+            <div>
+              <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">Primary Action</p>
+              <h1 className="text-3xl md:text-4xl font-semibold mt-1">Start Learning</h1>
+              <p className="text-muted-foreground mt-2 max-w-2xl">
+                Jump directly into your next best session. This is the core flow for daily progress.
+              </p>
+              <p className="text-sm text-muted-foreground mt-1">
+                Focus next on:{" "}
+                <span className="font-semibold text-foreground">
+                  {s.recommendedDirection === "telugu_to_english" ? "Telugu -> English recall" : "English -> Telugu recognition"}
+                </span>
+              </p>
+            </div>
+            <div className="flex flex-col sm:flex-row gap-3 shrink-0">
+              <Link href={primaryLearningHref}>
+                <Button size="lg" className="min-w-[220px] gap-2">
+                  <PlayCircle className="w-5 h-5" />
+                  {primaryLearningLabel}
+                </Button>
+              </Link>
+              <Link href="/quiz?mode=new_words">
+                <Button size="lg" variant="outline" className="min-w-[220px] gap-2">
+                  <BookOpen className="w-5 h-5" />
+                  Learn New Words
+                </Button>
+              </Link>
+            </div>
+          </div>
+          <div className="mt-4 inline-flex items-center gap-2 bg-secondary px-3 py-2 rounded-lg border border-border text-sm">
+            <Flame className="w-4 h-4 text-foreground" />
+            <span className="font-medium">{s.streak} day streak</span>
+          </div>
+        </section>
+
         {/* Header Section */}
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
           <div>
-            <h2 className="text-3xl font-semibold tracking-tight">Welcome back, {user?.firstName || 'Learner'}</h2>
+            <h2 className="text-2xl font-semibold tracking-tight">Welcome back, {user?.firstName || 'Learner'}</h2>
             <p className="text-muted-foreground mt-1">Your daily language learning dashboard.</p>
-            <p className="text-sm text-muted-foreground mt-1">
-              Focus next on:{" "}
-              <span className="font-semibold text-foreground">
-                {s.recommendedDirection === "telugu_to_english" ? "Telugu -> English recall" : "English -> Telugu recognition"}
-              </span>
-            </p>
           </div>
-          <div className="flex items-center gap-2 bg-card px-3 py-2 rounded-lg border border-border">
-            <Flame className="w-4 h-4 text-foreground" />
-            <span className="font-medium text-sm">{s.streak} day streak</span>
+          <div className="flex items-center gap-2 bg-card px-3 py-2 rounded-lg border border-border/60">
+            <Target className="w-4 h-4 text-foreground" />
+            <span className="font-medium text-sm">{s.mastered} mastered</span>
           </div>
         </div>
 
@@ -174,8 +207,8 @@ export default function Dashboard() {
         {/* Action Cards */}
         <section className="rounded-2xl border border-border/60 bg-card/70 p-4 md:p-5">
           <div className="mb-4">
-            <h3 className="text-xl font-semibold">Start Learning</h3>
-            <p className="text-sm text-muted-foreground mt-1">Pick one focused session and keep momentum.</p>
+            <h3 className="text-xl font-semibold">Quick Modes</h3>
+            <p className="text-sm text-muted-foreground mt-1">Alternative session types based on your goal.</p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4 items-stretch">
           {cards.map((card, idx) => (
