@@ -209,12 +209,22 @@ async function ensureWordExample(wordId: number, example: ContentExample) {
     .where(and(eq(wordExamples.wordId, wordId), eq(wordExamples.teluguSentence, example.telugu)));
 
   if (existing) {
+    await db
+      .update(wordExamples)
+      .set({
+        pronunciation: example.pronunciation ?? null,
+        englishSentence: example.english,
+        contextTag: example.contextTag ?? "general",
+        difficulty: example.difficulty ?? 1,
+      })
+      .where(eq(wordExamples.id, existing.id));
     return;
   }
 
   await db.insert(wordExamples).values({
     wordId,
     teluguSentence: example.telugu,
+    pronunciation: example.pronunciation ?? null,
     englishSentence: example.english,
     contextTag: example.contextTag ?? "general",
     difficulty: example.difficulty ?? 1,
@@ -290,7 +300,10 @@ async function main() {
     }
 
     for (const example of item.examples ?? []) {
-      await ensureWordExample(word.id, example);
+      await ensureWordExample(word.id, {
+        ...example,
+        pronunciation: example.pronunciation ?? `${item.transliteration} (${example.telugu})`,
+      });
       exampleCount += 1;
     }
   }

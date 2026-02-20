@@ -25,6 +25,7 @@ export interface IStorage {
   getWordClusterLinks(): Promise<Array<{ wordId: number; clusterId: number }>>;
   getWordExamples(wordId: number): Promise<Array<{
     teluguSentence: string;
+    pronunciation: string | null;
     englishSentence: string;
     contextTag: string | null;
     difficulty: number | null;
@@ -177,6 +178,7 @@ export class DatabaseStorage implements IStorage {
 
   async getWordExamples(wordId: number): Promise<Array<{
     teluguSentence: string;
+    pronunciation: string | null;
     englishSentence: string;
     contextTag: string | null;
     difficulty: number | null;
@@ -184,6 +186,7 @@ export class DatabaseStorage implements IStorage {
     return db
       .select({
         teluguSentence: wordExamples.teluguSentence,
+        pronunciation: wordExamples.pronunciation,
         englishSentence: wordExamples.englishSentence,
         contextTag: wordExamples.contextTag,
         difficulty: wordExamples.difficulty,
@@ -605,6 +608,7 @@ export class DatabaseStorage implements IStorage {
     const ensureWordExample = async (
       wordId: number,
       teluguSentence: string,
+      pronunciation: string,
       englishSentence: string,
       contextTag: string,
     ) => {
@@ -623,6 +627,7 @@ export class DatabaseStorage implements IStorage {
       await db.insert(wordExamples).values({
         wordId,
         teluguSentence,
+        pronunciation,
         englishSentence,
         contextTag,
       });
@@ -658,7 +663,13 @@ export class DatabaseStorage implements IStorage {
       const { clusterId, exampleTelugu, exampleEnglish, ...wordData } = w;
       const word = await ensureWord(wordData);
       await this.addWordToCluster(word.id, clusterId);
-      await ensureWordExample(word.id, exampleTelugu, exampleEnglish, "general");
+      await ensureWordExample(
+        word.id,
+        exampleTelugu,
+        `${word.transliteration} (${word.telugu})`,
+        exampleEnglish,
+        "general"
+      );
     }
 
     const [{ count: wordsCount }] = await db.select({ count: sql<number>`count(*)` }).from(words);

@@ -94,28 +94,20 @@ export async function registerRoutes(
         count: 3,
       });
 
-      const workoutTypes = ['fill_in_blank', 'sentence_meaning'] as const;
-      const defaultTypes = ['telugu_to_english', 'english_to_telugu', 'fill_in_blank', 'sentence_meaning'] as const;
-      const typePool = mode === "complex_workout" ? workoutTypes : defaultTypes;
+      const typePool = ['telugu_to_english', 'english_to_telugu'] as const;
       const type = typePool[Math.floor(Math.random() * typePool.length)];
 
-      const sourceSentence = word.exampleSentences?.[0];
-      const fillBlankText = sourceSentence?.replace(word.telugu, "_____") || word.telugu;
       const questionText =
-        type === "fill_in_blank"
-          ? fillBlankText
-          : type === "sentence_meaning"
-            ? sourceSentence || word.telugu
-            : type === "telugu_to_english"
-              ? formatPronunciationFirst(word)
-              : word.english;
+        type === "telugu_to_english"
+          ? formatPronunciationFirst(word)
+          : word.english;
       
       const options = [word, ...distractors]
         .sort(() => 0.5 - Math.random())
         .map(w => ({
           id: w.id,
           text:
-            type === 'telugu_to_english' || type === 'fill_in_blank' || type === "sentence_meaning"
+            type === 'telugu_to_english'
               ? w.english
               : formatPronunciationFirst(w)
         }));
@@ -199,14 +191,22 @@ export async function registerRoutes(
         responseTimeMs: input.responseTimeMs ?? null,
       });
 
+      const fallbackSentence = word.exampleSentences?.[0] ?? word.telugu;
+      const fallbackPronunciation = `${word.transliteration} (${fallbackSentence})`;
+      const feedbackExample = firstExample ? {
+        telugu: firstExample.teluguSentence,
+        pronunciation: firstExample.pronunciation ?? fallbackPronunciation,
+        meaning: firstExample.englishSentence,
+      } : {
+        telugu: fallbackSentence,
+        pronunciation: fallbackPronunciation,
+        meaning: word.english,
+      };
+
       res.json({
         isCorrect,
         correctAnswer: word,
-        example: firstExample ? {
-          telugu: firstExample.teluguSentence,
-          pronunciation: formatPronunciationFirst(word),
-          meaning: firstExample.englishSentence,
-        } : null,
+        example: feedbackExample,
         progressUpdate: {
           streak: progress.correctStreak || 0,
           masteryLevel: progress.masteryLevel || 0,

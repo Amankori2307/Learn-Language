@@ -22,6 +22,8 @@ Build a Telugu learning app focused on text-first retention and beginner-friendl
   - Leaderboard page (daily/weekly/all-time windows)
   - Profile page (name + avatar URL updates)
   - Pronunciation-first display style for Telugu prompts (transliteration first, Telugu in brackets)
+  - Words-first quiz prompts (word/phrase only in current phase)
+  - Post-answer sentence example triplet in feedback (sentence + pronunciation + meaning)
 - Content/data:
   - Seed files now sourced from `assets/processed/`
   - Beginner model seed: `assets/processed/telugu_basic_seed_model_draft.json`

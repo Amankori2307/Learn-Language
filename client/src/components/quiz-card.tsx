@@ -13,7 +13,7 @@ interface QuizOption {
 interface QuizCardProps {
   question: string;
   pronunciation?: string | null;
-  type: 'telugu_to_english' | 'english_to_telugu' | 'fill_in_blank' | 'sentence_meaning';
+  type: 'telugu_to_english' | 'english_to_telugu';
   options: QuizOption[];
   confidenceLevel: 1 | 2 | 3;
   onConfidenceChange: (value: 1 | 2 | 3) => void;
@@ -28,11 +28,11 @@ interface QuizCardProps {
       transliteration: string;
       exampleSentences: string[];
     };
-    example?: {
+    example: {
       telugu: string;
       pronunciation: string;
       meaning: string;
-    } | null;
+    };
   } | null;
   onNext: () => void;
 }
@@ -71,11 +71,7 @@ export function QuizCard({
   const promptLabel =
     type === "telugu_to_english"
       ? "Translate to English"
-      : type === "english_to_telugu"
-        ? "Translate to Telugu"
-        : type === "fill_in_blank"
-          ? "Fill in the blank"
-          : "Sentence meaning";
+      : "Translate to Telugu";
 
   return (
     <div className="w-full max-w-2xl mx-auto">
@@ -233,24 +229,24 @@ export function QuizCard({
                         <span className="mx-2">•</span>
                         <span>{result.correctAnswer.english}</span>
                       </p>
-                      {(result.example || result.correctAnswer.exampleSentences?.[0]) && (
+                      {result.example && (
                         <div className="text-sm mt-3 p-3 rounded-lg border border-border/70 bg-background/90 dark:bg-background/60 space-y-1 text-foreground">
                           <p>
-                            <span className="font-semibold">Example:</span>{" "}
+                            <span className="font-semibold">Sentence:</span>{" "}
                             <span className="font-telugu text-foreground/95">
-                              {result.example?.telugu ?? result.correctAnswer.exampleSentences[0]}
+                              {result.example.telugu}
                             </span>
                           </p>
                           <p>
                             <span className="font-semibold">Pronunciation:</span>{" "}
                             <span className="font-medium text-foreground/95">
-                              {result.example?.pronunciation ?? `${result.correctAnswer.transliteration} (${result.correctAnswer.telugu})`}
+                              {result.example.pronunciation}
                             </span>
                           </p>
                           <p>
                             <span className="font-semibold">Meaning:</span>{" "}
                             <span className="font-medium text-foreground/95">
-                              {result.example?.meaning ?? result.correctAnswer.english}
+                              {result.example.meaning}
                             </span>
                           </p>
                         </div>

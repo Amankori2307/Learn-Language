@@ -26,6 +26,17 @@ Only active and pending tasks are listed here. Completed tasks are intentionally
 | P4B-017 | done | Add UI integration tests for profile save + reviewer queue actions | P4B-007 | M | regression suite covers critical user paths |
 | P4B-018 | done | Replace dummy MVP seed with real Telugu core vocabulary from internal knowledge | P4B-011 | M | assets seed provides realistic beginner Telugu words/phrases with transliteration/examples |
 
+## Phase 4C - Words-first learning flow (active)
+
+| ID | Status | Task | Depends On | Effort | Done When |
+|---|---|---|---|---|---|
+| P4C-001 | done | Finalize product prompt/spec for words-first flow and sentence-as-feedback behavior | P4B-018 | S | spec clearly defines word vs sentence responsibilities and acceptance criteria |
+| P4C-002 | done | Persist sentence pronunciation in `word_examples` and wire importer/backfill behavior | P4C-001 | M | each example row stores sentence + pronunciation + meaning |
+| P4C-003 | done | Restrict quiz question generation to word-only directions (no sentence question prompts) | P4C-001 | S | learner question prompt is always a word/phrase item |
+| P4C-004 | done | Update submit/feedback payload to always return example sentence triplet | P4C-002,P4C-003 | M | feedback shows sentence + pronunciation + meaning after answer |
+| P4C-005 | done | Update quiz feedback UI copy/layout for words-first + example triplet rendering | P4C-004 | M | result panel consistently shows readable sentence/pronunciation/meaning block |
+| P4C-006 | done | Add tests + docs updates for words-first flow and example guarantees | P4C-002,P4C-005 | M | automated checks cover behavior and docs reflect new flow |
+
 ## Deferred media phase (last)
 
 | ID | Status | Task | Depends On | Effort | Done When |

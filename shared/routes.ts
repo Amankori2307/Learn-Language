@@ -83,7 +83,7 @@ export const api = {
       responses: {
         200: z.array(z.object({
           wordId: z.number(),
-          type: z.enum(['telugu_to_english', 'english_to_telugu', 'fill_in_blank', 'sentence_meaning']),
+          type: z.enum(['telugu_to_english', 'english_to_telugu']),
           questionText: z.string(),
           pronunciation: z.string().optional().nullable(),
           audioUrl: z.string().optional().nullable(),
@@ -102,7 +102,7 @@ export const api = {
       input: z.object({
         wordId: z.number(),
         selectedOptionId: z.number(), // The ID of the word selected as the answer
-        questionType: z.enum(['telugu_to_english', 'english_to_telugu', 'fill_in_blank', 'sentence_meaning']).optional(),
+        questionType: z.enum(['telugu_to_english', 'english_to_telugu']).optional(),
         direction: z.enum(['telugu_to_english', 'english_to_telugu']).optional(),
         confidenceLevel: z.number().min(1).max(3),
         responseTimeMs: z.number().int().positive().optional(),
@@ -115,7 +115,7 @@ export const api = {
             telugu: z.string(),
             pronunciation: z.string(),
             meaning: z.string(),
-          }).nullable().optional(),
+          }),
           progressUpdate: z.object({
             streak: z.number(),
             masteryLevel: z.number(),

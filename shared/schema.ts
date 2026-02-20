@@ -79,6 +79,7 @@ export const wordExamples = pgTable("word_examples", {
   id: serial("id").primaryKey(),
   wordId: integer("word_id").references(() => words.id).notNull(),
   teluguSentence: text("telugu_sentence").notNull(),
+  pronunciation: text("pronunciation"),
   englishSentence: text("english_sentence").notNull(),
   contextTag: text("context_tag").default("general"),
   difficulty: integer("difficulty").default(1),
@@ -193,7 +194,7 @@ export type CreateClusterRequest = z.infer<typeof insertClusterSchema>;
 
 export type QuizQuestion = {
   wordId: number;
-  type: 'telugu_to_english' | 'english_to_telugu' | 'fill_in_blank' | 'sentence_meaning';
+  type: 'telugu_to_english' | 'english_to_telugu';
   questionText: string;
   audioUrl?: string | null;
   options: {

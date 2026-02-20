@@ -30,6 +30,59 @@ test("quiz submit contract rejects out-of-range confidence", () => {
   });
 });
 
+test("quiz submit contract rejects sentence-style question types in words-first mode", () => {
+  assert.throws(() => {
+    api.quiz.submit.input.parse({
+      wordId: 1,
+      selectedOptionId: 2,
+      questionType: "fill_in_blank",
+      confidenceLevel: 2,
+    });
+  });
+});
+
+test("quiz submit response contract requires example triplet", () => {
+  const payload = {
+    isCorrect: true,
+    correctAnswer: {
+      id: 1,
+      telugu: "నీరు",
+      transliteration: "neeru",
+      english: "water",
+      partOfSpeech: "noun",
+      difficulty: 1,
+      difficultyLevel: "beginner",
+      frequencyScore: 0.9,
+      cefrLevel: "A1",
+      audioUrl: null,
+      exampleSentences: ["నేను నీరు తాగాను."],
+      tags: [],
+      reviewStatus: "approved",
+      submittedBy: null,
+      submittedAt: null,
+      reviewedBy: null,
+      reviewedAt: null,
+      reviewNotes: null,
+      sourceUrl: null,
+      sourceCapturedAt: null,
+      createdAt: null,
+    },
+    example: {
+      telugu: "నేను నీరు తాగాను.",
+      pronunciation: "nenu neeru taagaanu",
+      meaning: "I drank water.",
+    },
+    progressUpdate: {
+      streak: 1,
+      masteryLevel: 1,
+      nextReview: "2026-02-21T10:00:00.000Z",
+    },
+  };
+
+  const parsed = api.quiz.submit.responses[200].parse(payload);
+  assert.equal(parsed.example.meaning, "I drank water.");
+});
+
 test("stats contract accepts direction metrics", () => {
   const payload = {
     totalWords: 300,
