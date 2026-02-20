@@ -221,6 +221,15 @@ export async function registerRoutes(
     res.json(stats);
   });
 
+  // Leaderboard
+  app.get(api.leaderboard.list.path, isAuthenticated, async (req, res) => {
+    const parsed = api.leaderboard.list.input?.parse(req.query) ?? { window: "weekly", limit: 25 };
+    const window = parsed.window ?? "weekly";
+    const limit = parsed.limit ?? 25;
+    const leaderboard = await storage.getLeaderboard(window, limit);
+    res.json(leaderboard);
+  });
+
   // Admin Seed
   app.post(api.admin.seed.path, isAuthenticated, async (req, res) => {
     await storage.seedInitialData();

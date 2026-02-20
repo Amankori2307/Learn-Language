@@ -13,6 +13,19 @@ import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+
+function getInitials(firstName?: string | null, lastName?: string | null, email?: string | null) {
+  const fromNames = `${firstName ?? ""} ${lastName ?? ""}`.trim();
+  if (fromNames) {
+    return fromNames
+      .split(/\s+/)
+      .slice(0, 2)
+      .map((part) => part[0]?.toUpperCase() ?? "")
+      .join("");
+  }
+  return (email?.[0] ?? "U").toUpperCase();
+}
 
 export function Layout({ children }: { children: React.ReactNode }) {
   const [location] = useLocation();
@@ -59,13 +72,10 @@ export function Layout({ children }: { children: React.ReactNode }) {
 
       <div className="p-4 mt-auto border-t border-border/50">
         <div className="flex items-center gap-3 mb-4 px-2">
-          {user?.profileImageUrl && (
-            <img 
-              src={user.profileImageUrl} 
-              alt={user.firstName || 'User'} 
-              className="w-10 h-10 rounded-full border-2 border-primary/20"
-            />
-          )}
+          <Avatar className="w-10 h-10 border-2 border-primary/20">
+            <AvatarImage src={user?.profileImageUrl ?? undefined} alt={user?.firstName || "User"} />
+            <AvatarFallback>{getInitials(user?.firstName, user?.lastName, user?.email)}</AvatarFallback>
+          </Avatar>
           <div className="flex-1 overflow-hidden">
             <p className="text-sm font-semibold truncate">{user?.firstName || 'User'}</p>
             <p className="text-xs text-muted-foreground truncate">{user?.email}</p>

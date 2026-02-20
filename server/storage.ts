@@ -1,7 +1,7 @@
 import { db } from "./db";
 import { eq, sql, and } from "drizzle-orm";
 import {
-  words, clusters, wordClusters, userWordProgress, quizAttempts, wordExamples,
+  words, clusters, wordClusters, userWordProgress, quizAttempts, wordExamples, users,
   type Word, type Cluster, type UserWordProgress, type QuizAttempt,
   type CreateWordRequest, type CreateClusterRequest
 } from "@shared/schema";
@@ -45,6 +45,21 @@ export interface IStorage {
     recommendedDirection: "telugu_to_english" | "english_to_telugu";
   }>;
   getRecentAccuracy(userId: string, limit?: number): Promise<number>;
+  getLeaderboard(
+    window: "daily" | "weekly" | "all_time",
+    limit?: number,
+  ): Promise<Array<{
+    rank: number;
+    userId: string;
+    firstName: string | null;
+    lastName: string | null;
+    email: string | null;
+    profileImageUrl: string | null;
+    xp: number;
+    streak: number;
+    attempts: number;
+    accuracy: number;
+  }>>;
 
   // Admin/Seed
   seedInitialData(): Promise<void>;
@@ -181,6 +196,89 @@ export class DatabaseStorage implements IStorage {
 
     const correct = attempts.filter((a) => a.isCorrect).length;
     return correct / attempts.length;
+  }
+
+  async getLeaderboard(
+    window: "daily" | "weekly" | "all_time",
+    limit: number = 25,
+  ): Promise<Array<{
+    rank: number;
+    userId: string;
+    firstName: string | null;
+    lastName: string | null;
+    email: string | null;
+    profileImageUrl: string | null;
+    xp: number;
+    streak: number;
+    attempts: number;
+    accuracy: number;
+  }>> {
+    const now = new Date();
+    const from = new Date(now);
+    if (window === "daily") {
+      from.setDate(from.getDate() - 1);
+    } else if (window === "weekly") {
+      from.setDate(from.getDate() - 7);
+    }
+
+    const allUsers = await db.select().from(users);
+    const attemptsQuery = db
+      .select({
+        userId: quizAttempts.userId,
+        createdAt: quizAttempts.createdAt,
+        isCorrect: quizAttempts.isCorrect,
+        difficulty: words.difficulty,
+      })
+      .from(quizAttempts)
+      .leftJoin(words, eq(quizAttempts.wordId, words.id));
+
+    const attempts = window === "all_time"
+      ? await attemptsQuery
+      : await attemptsQuery.where(sql`${quizAttempts.createdAt} >= ${from}`);
+
+    const byUser = new Map<string, typeof attempts>();
+    for (const attempt of attempts) {
+      const list = byUser.get(attempt.userId) ?? [];
+      list.push(attempt);
+      byUser.set(attempt.userId, list);
+    }
+
+    const rows = allUsers.map((user) => {
+      const userAttempts = byUser.get(user.id) ?? [];
+      const correctAttempts = userAttempts.filter((a) => a.isCorrect).length;
+      const hardCorrectAttempts = userAttempts.filter((a) => a.isCorrect && (a.difficulty ?? 1) >= 3).length;
+      const streak = computeStreak(
+        userAttempts
+          .map((row) => row.createdAt)
+          .filter((date): date is Date => Boolean(date)),
+      );
+      const xp = computeXp({ correctAttempts, hardCorrectAttempts });
+      const accuracy = userAttempts.length > 0
+        ? Number(((correctAttempts / userAttempts.length) * 100).toFixed(1))
+        : 0;
+
+      return {
+        rank: 0,
+        userId: user.id,
+        firstName: user.firstName ?? null,
+        lastName: user.lastName ?? null,
+        email: user.email ?? null,
+        profileImageUrl: user.profileImageUrl ?? null,
+        xp,
+        streak,
+        attempts: userAttempts.length,
+        accuracy,
+      };
+    });
+
+    rows.sort((a, b) => {
+      if (b.xp !== a.xp) return b.xp - a.xp;
+      if (b.streak !== a.streak) return b.streak - a.streak;
+      if (b.accuracy !== a.accuracy) return b.accuracy - a.accuracy;
+      return a.userId.localeCompare(b.userId);
+    });
+
+    return rows.slice(0, limit).map((row, idx) => ({ ...row, rank: idx + 1 }));
   }
 
   async getUserStats(userId: string): Promise<{

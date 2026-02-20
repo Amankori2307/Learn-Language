@@ -62,9 +62,9 @@ Status legend: `todo` | `doing` | `done` | `blocked`
 
 | ID | Status | Task | Depends On | Effort | Done When |
 |---|---|---|---|---|---|
-| P4B-001 | todo | Fix leaderboard pipeline (API query, aggregation window, UI rendering state) | P4-001 | M | leaderboard shows non-empty deterministic ranks for seeded/test users |
-| P4B-002 | todo | Fix profile page data loading and mutation flows | P4-001 | M | profile view/edit works and persists after reload |
-| P4B-003 | todo | Fix avatar/image handling (upload/save/display/fallback) | P4B-002 | M | avatar updates immediately and survives new sessions |
+| P4B-001 | done | Fix leaderboard pipeline (API query, aggregation window, UI rendering state) | P4-001 | M | leaderboard shows non-empty deterministic ranks for seeded/test users |
+| P4B-002 | done | Fix profile page data loading and mutation flows | P4-001 | M | profile view/edit works and persists after reload |
+| P4B-003 | done | Fix avatar/image handling (upload/save/display/fallback) | P4B-002 | M | avatar updates immediately and survives new sessions |
 | P4B-004 | todo | UI styling cleanup pass (spacing, responsive breakpoints, typography consistency) | P3-006 | M | key app screens pass visual QA checklist on mobile + desktop |
 | P4B-005 | todo | Add regression test suite for leaderboard/profile/avatar/styling critical paths | P4B-001,P4B-002,P4B-003,P4B-004 | M | failing tests reproduce old bugs and pass on fixes |
 | P4B-006 | todo | Add vocabulary review schema (draft/pending/approved/rejected + reviewer metadata) | P1-001 | M | DB + API support review state transitions with audit fields |
@@ -73,7 +73,7 @@ Status legend: `todo` | `doing` | `done` | `blocked`
 | P4B-009 | todo | Add source evidence and change history on each vocab item | P4B-006 | M | reviewer can inspect source URL, extraction time, and edit history |
 | P4B-010 | todo | Add reviewer productivity tooling (bulk approve/reject, comments, conflict re-open) | P4B-007 | M | reviewer can process queue efficiently with full traceability |
 | P4B-011 | todo | Allow AI-assisted/manual vocabulary creation as DRAFT only | P4B-006 | S | generated entries never go live without reviewer approval |
-| P4B-012 | todo | Pronunciation-first learning UX (transliteration primary, Telugu script secondary in brackets) | P3-003 | M | quiz/cards/feedback consistently prioritize pronunciation text |
+| P4B-012 | done | Pronunciation-first learning UX (transliteration primary, Telugu script secondary in brackets) | P3-003 | M | quiz/cards/feedback consistently prioritize pronunciation text |
 
 ## Phase 5 - Media Expansion (Final)
 

@@ -10,7 +10,7 @@ Objective: stabilize broken user-facing modules (leaderboard/profile/avatar/styl
 ## Ordered tasks
 
 ### P4B-001 - Leaderboard fix end-to-end
-Status: `todo`
+Status: `done`
 
 Scope:
 - Trace leaderboard data path: source metric tables, aggregation query, API serialization, UI state handling.
@@ -23,7 +23,7 @@ Acceptance:
 - API and UI snapshots align for rank, XP, streak columns.
 
 ### P4B-002 - Profile module repair
-Status: `todo`
+Status: `done`
 
 Scope:
 - Audit profile read path (`/api/auth/user` + profile enrich endpoint if present).
@@ -35,7 +35,7 @@ Acceptance:
 - Validation errors show clearly and do not break page rendering.
 
 ### P4B-003 - Avatar/image reliability
-Status: `todo`
+Status: `done`
 
 Scope:
 - Standardize avatar storage contract (`url`, `updated_at`, `source`).
@@ -138,7 +138,7 @@ Acceptance:
 - No generated vocabulary reaches learner sessions without explicit reviewer approval.
 
 ### P4B-012 - Pronunciation-first UI/UX mode
-Status: `todo`
+Status: `done`
 
 Scope:
 - Make transliteration (English pronunciation) the primary display for vocabulary prompts.

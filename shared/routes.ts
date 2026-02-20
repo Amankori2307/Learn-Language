@@ -141,6 +141,73 @@ export const api = {
       },
     },
   },
+  leaderboard: {
+    list: {
+      method: "GET" as const,
+      path: "/api/leaderboard" as const,
+      input: z.object({
+        window: z.enum(["daily", "weekly", "all_time"]).default("weekly"),
+        limit: z.coerce.number().int().positive().max(100).default(25),
+      }).optional(),
+      responses: {
+        200: z.array(z.object({
+          rank: z.number(),
+          userId: z.string(),
+          firstName: z.string().nullable(),
+          lastName: z.string().nullable(),
+          email: z.string().nullable(),
+          profileImageUrl: z.string().nullable(),
+          xp: z.number(),
+          streak: z.number(),
+          attempts: z.number(),
+          accuracy: z.number(),
+        })),
+        401: errorSchemas.unauthorized,
+      },
+    },
+  },
+  profile: {
+    get: {
+      method: "GET" as const,
+      path: "/api/profile" as const,
+      responses: {
+        200: z.object({
+          id: z.string(),
+          email: z.string().nullable(),
+          firstName: z.string().nullable(),
+          lastName: z.string().nullable(),
+          profileImageUrl: z.string().nullable(),
+          createdAt: z.string().nullable(),
+          updatedAt: z.string().nullable(),
+        }),
+        401: errorSchemas.unauthorized,
+        404: errorSchemas.notFound,
+      },
+    },
+    update: {
+      method: "PATCH" as const,
+      path: "/api/profile" as const,
+      input: z.object({
+        firstName: z.string().trim().min(1).max(80).optional(),
+        lastName: z.string().trim().min(1).max(80).optional(),
+        profileImageUrl: z.string().url().or(z.literal("")).optional(),
+      }),
+      responses: {
+        200: z.object({
+          id: z.string(),
+          email: z.string().nullable(),
+          firstName: z.string().nullable(),
+          lastName: z.string().nullable(),
+          profileImageUrl: z.string().nullable(),
+          createdAt: z.string().nullable(),
+          updatedAt: z.string().nullable(),
+        }),
+        401: errorSchemas.unauthorized,
+        404: errorSchemas.notFound,
+        400: errorSchemas.validation,
+      },
+    },
+  },
   admin: {
     seed: {
       method: 'POST' as const,

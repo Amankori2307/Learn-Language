@@ -29,6 +29,45 @@ Resume notes:
 
 Date: 2026-02-20
 Session owner: Codex
+Last completed task ID: P4B-003
+Current in-progress task ID: None
+Next task ID: P4B-004
+
+Completed today:
+- Implemented leaderboard backend + UI module with time-window filtering (`daily`, `weekly`, `all_time`) and deterministic rank ordering.
+- Implemented profile backend + UI module with editable first name, last name, and avatar URL.
+- Fixed avatar fallback behavior globally in navigation layout using initials when image is missing/broken.
+- Added explicit API contracts for `leaderboard` and `profile` endpoints.
+- Wired new routes/pages into app router (`/leaderboard`, `/profile`).
+
+Files changed:
+- shared/routes.ts
+- server/storage.ts
+- server/routes.ts
+- server/auth/routes.ts
+- server/auth/storage.ts
+- client/src/hooks/use-leaderboard.ts
+- client/src/hooks/use-profile.ts
+- client/src/pages/leaderboard.tsx
+- client/src/pages/profile.tsx
+- client/src/components/layout.tsx
+- client/src/App.tsx
+- context/plan/01-master-task-registry.md
+- context/plan/55-phase-4b-critical-fixes-and-review-governance.md
+- context/plan/99-daily-run-log.md
+
+Tests/checks run:
+- `pnpm run check` (pass)
+- `pnpm run test` (pass)
+
+Blockers:
+- None.
+
+Resume notes:
+- Continue with `P4B-004` styling cleanup pass across dashboard, quiz, profile, and leaderboard.
+
+Date: 2026-02-20
+Session owner: Codex
 Last completed task ID: Basic model seed + pronunciation-first UX update
 Current in-progress task ID: None
 Next task ID: P4B-001
