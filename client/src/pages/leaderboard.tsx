@@ -69,41 +69,74 @@ export default function LeaderboardPage() {
             No leaderboard data yet. Complete quiz attempts to appear here.
           </div>
         ) : (
-          <div className="rounded-2xl border border-border/50 bg-card overflow-hidden">
-            <div className="grid grid-cols-12 gap-2 px-4 py-3 text-xs font-semibold uppercase tracking-wide text-muted-foreground border-b border-border/50">
-              <div className="col-span-1">Rank</div>
-              <div className="col-span-5">Learner</div>
-              <div className="col-span-2 text-right">XP</div>
-              <div className="col-span-2 text-right">Streak</div>
-              <div className="col-span-2 text-right">Accuracy</div>
-            </div>
-            {data.map((entry) => (
-              <div
-                key={entry.userId}
-                className={cn(
-                  "grid grid-cols-12 gap-2 px-4 py-3 items-center border-b border-border/30 last:border-b-0",
-                  entry.rank <= 3 && "bg-amber-50/30",
-                )}
-              >
-                <div className="col-span-1 font-bold text-lg">#{entry.rank}</div>
-                <div className="col-span-5 flex items-center gap-3 min-w-0">
-                  <Avatar className="h-9 w-9">
-                    <AvatarImage src={entry.profileImageUrl ?? undefined} />
-                    <AvatarFallback>{initials(entry.firstName, entry.lastName, entry.email)}</AvatarFallback>
-                  </Avatar>
-                  <div className="min-w-0">
-                    <p className="font-medium truncate">
-                      {[entry.firstName, entry.lastName].filter(Boolean).join(" ") || entry.email || "Learner"}
-                    </p>
-                    <p className="text-xs text-muted-foreground truncate">{entry.attempts} attempts</p>
+          <>
+            <div className="md:hidden space-y-3">
+              {data.map((entry) => (
+                <div
+                  key={entry.userId}
+                  className={cn(
+                    "rounded-2xl border border-border/50 bg-card p-4",
+                    entry.rank <= 3 && "bg-amber-50/40",
+                  )}
+                >
+                  <div className="flex items-center justify-between gap-3">
+                    <div className="flex items-center gap-3 min-w-0">
+                      <Avatar className="h-10 w-10">
+                        <AvatarImage src={entry.profileImageUrl ?? undefined} />
+                        <AvatarFallback>{initials(entry.firstName, entry.lastName, entry.email)}</AvatarFallback>
+                      </Avatar>
+                      <div className="min-w-0">
+                        <p className="font-medium truncate">
+                          {[entry.firstName, entry.lastName].filter(Boolean).join(" ") || entry.email || "Learner"}
+                        </p>
+                        <p className="text-xs text-muted-foreground truncate">#{entry.rank} • {entry.attempts} attempts</p>
+                      </div>
+                    </div>
+                    <div className="text-right shrink-0">
+                      <p className="font-semibold">{entry.xp} XP</p>
+                      <p className="text-xs text-muted-foreground">{entry.streak}d • {entry.accuracy}%</p>
+                    </div>
                   </div>
                 </div>
-                <div className="col-span-2 text-right font-semibold">{entry.xp}</div>
-                <div className="col-span-2 text-right">{entry.streak}d</div>
-                <div className="col-span-2 text-right">{entry.accuracy}%</div>
+              ))}
+            </div>
+
+            <div className="hidden md:block rounded-2xl border border-border/50 bg-card overflow-hidden">
+              <div className="grid grid-cols-12 gap-2 px-4 py-3 text-xs font-semibold uppercase tracking-wide text-muted-foreground border-b border-border/50">
+                <div className="col-span-1">Rank</div>
+                <div className="col-span-5">Learner</div>
+                <div className="col-span-2 text-right">XP</div>
+                <div className="col-span-2 text-right">Streak</div>
+                <div className="col-span-2 text-right">Accuracy</div>
               </div>
-            ))}
-          </div>
+              {data.map((entry) => (
+                <div
+                  key={entry.userId}
+                  className={cn(
+                    "grid grid-cols-12 gap-2 px-4 py-3 items-center border-b border-border/30 last:border-b-0",
+                    entry.rank <= 3 && "bg-amber-50/30",
+                  )}
+                >
+                  <div className="col-span-1 font-bold text-lg">#{entry.rank}</div>
+                  <div className="col-span-5 flex items-center gap-3 min-w-0">
+                    <Avatar className="h-9 w-9">
+                      <AvatarImage src={entry.profileImageUrl ?? undefined} />
+                      <AvatarFallback>{initials(entry.firstName, entry.lastName, entry.email)}</AvatarFallback>
+                    </Avatar>
+                    <div className="min-w-0">
+                      <p className="font-medium truncate">
+                        {[entry.firstName, entry.lastName].filter(Boolean).join(" ") || entry.email || "Learner"}
+                      </p>
+                      <p className="text-xs text-muted-foreground truncate">{entry.attempts} attempts</p>
+                    </div>
+                  </div>
+                  <div className="col-span-2 text-right font-semibold">{entry.xp}</div>
+                  <div className="col-span-2 text-right">{entry.streak}d</div>
+                  <div className="col-span-2 text-right">{entry.accuracy}%</div>
+                </div>
+              ))}
+            </div>
+          </>
         )}
       </div>
     </Layout>

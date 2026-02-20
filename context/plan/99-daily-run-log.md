@@ -29,6 +29,38 @@ Resume notes:
 
 Date: 2026-02-20
 Session owner: Codex
+Last completed task ID: P4B-004
+Current in-progress task ID: P4B-005
+Next task ID: P4B-005
+
+Completed today:
+- Added responsive leaderboard rendering for mobile cards + desktop table.
+- Polished profile layout spacing/truncation and improved save feedback flow presentation.
+- Improved quiz card text wrapping/typography for long transliteration strings.
+- Added contract tests for new leaderboard/profile route schemas.
+
+Files changed:
+- client/src/pages/leaderboard.tsx
+- client/src/pages/profile.tsx
+- client/src/components/quiz-card.tsx
+- client/src/components/layout.tsx
+- shared/routes.contract.test.ts
+- context/plan/01-master-task-registry.md
+- context/plan/55-phase-4b-critical-fixes-and-review-governance.md
+- context/plan/99-daily-run-log.md
+
+Tests/checks run:
+- `pnpm run check`
+- `pnpm run test`
+
+Blockers:
+- None.
+
+Resume notes:
+- Continue P4B-005 with deeper route/integration tests around profile update persistence and leaderboard ranking behavior.
+
+Date: 2026-02-20
+Session owner: Codex
 Last completed task ID: P4B-003
 Current in-progress task ID: None
 Next task ID: P4B-004

@@ -48,7 +48,7 @@ Acceptance:
 - Broken URLs render fallback avatar, not broken-image icon.
 
 ### P4B-004 - Styling consistency pass
-Status: `todo`
+Status: `done`
 
 Scope:
 - Build screen-by-screen QA checklist (dashboard, quiz, profile, leaderboard, auth, contextual mode).
@@ -60,7 +60,7 @@ Acceptance:
 - No critical overlap/cutoff issues in major flows.
 
 ### P4B-005 - Regression tests for critical UX modules
-Status: `todo`
+Status: `doing`
 
 Scope:
 - Add backend tests for leaderboard/profile/avatar APIs.

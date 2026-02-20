@@ -67,14 +67,14 @@ export default function ProfilePage() {
           </div>
         ) : (
           <div className="rounded-2xl border border-border/50 bg-card p-6 md:p-8 space-y-6">
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-4 pb-2 border-b border-border/40">
               <Avatar className="h-16 w-16 border border-border">
                 <AvatarImage src={avatarPreview || undefined} />
                 <AvatarFallback>{initials(firstName || null, lastName || null, profile.email)}</AvatarFallback>
               </Avatar>
-              <div>
-                <p className="font-semibold text-lg">{[firstName, lastName].filter(Boolean).join(" ") || "Learner"}</p>
-                <p className="text-sm text-muted-foreground">{profile.email || "No email available"}</p>
+              <div className="min-w-0">
+                <p className="font-semibold text-lg truncate">{[firstName, lastName].filter(Boolean).join(" ") || "Learner"}</p>
+                <p className="text-sm text-muted-foreground truncate">{profile.email || "No email available"}</p>
               </div>
             </div>
 
@@ -112,7 +112,7 @@ export default function ProfilePage() {
               </p>
             </div>
 
-            <div className="flex items-center gap-3">
+            <div className="flex flex-col sm:flex-row sm:items-center gap-3">
               <Button onClick={onSave} disabled={!isDirty || updateProfile.isPending}>
                 {updateProfile.isPending ? "Saving..." : "Save Profile"}
               </Button>

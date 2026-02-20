@@ -1,6 +1,6 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { CheckCircle2, XCircle, Volume2, ArrowRight, HelpCircle } from "lucide-react";
+import { CheckCircle2, XCircle, Volume2, ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 import confetti from "canvas-confetti";
 import { useEffect, useState } from "react";
@@ -81,7 +81,7 @@ export function QuizCard({
             
             <h2 className={cn(
               "text-3xl md:text-5xl font-bold mb-6 text-foreground leading-relaxed",
-              "font-sans"
+              "font-sans break-words"
             )}>
               {question}
             </h2>
@@ -132,7 +132,6 @@ export function QuizCard({
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {options.map((option) => {
                 const isSelected = selectedOption === option.id;
-                let variant = "outline";
                 let className = "hover:border-primary hover:bg-primary/5";
 
                 if (result) {
@@ -159,7 +158,7 @@ export function QuizCard({
                     onClick={() => handleOptionClick(option.id)}
                     aria-label={`Option ${option.text}`}
                     className={cn(
-                      "p-4 rounded-xl text-lg font-medium border-2 transition-all duration-200 text-left relative overflow-hidden group",
+                      "p-4 rounded-xl text-base md:text-lg font-medium border-2 transition-all duration-200 text-left relative overflow-hidden group break-words",
                       !isTeluguQuestion && "text-xl",
                       className
                     )}
@@ -203,7 +202,7 @@ export function QuizCard({
                         {result.isCorrect ? "Excellent!" : "Not quite right"}
                       </h4>
                       <p className="text-muted-foreground mt-1">
-                        <span className="italic">{result.correctAnswer.transliteration}</span>
+                        <span className="italic break-words">{result.correctAnswer.transliteration}</span>
                         <span className="mx-2">•</span>
                         <span className="font-semibold text-foreground">({result.correctAnswer.telugu})</span>
                         <span className="mx-2">•</span>

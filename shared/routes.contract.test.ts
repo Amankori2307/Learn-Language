@@ -46,3 +46,32 @@ test("stats contract accepts direction metrics", () => {
   const parsed = api.stats.get.responses[200].parse(payload);
   assert.equal(parsed.recommendedDirection, "telugu_to_english");
 });
+
+test("leaderboard contract accepts ranked entries", () => {
+  const payload = [
+    {
+      rank: 1,
+      userId: "u-1",
+      firstName: "Aman",
+      lastName: "K",
+      email: "a@example.com",
+      profileImageUrl: null,
+      xp: 180,
+      streak: 5,
+      attempts: 24,
+      accuracy: 83.3,
+    },
+  ];
+
+  const parsed = api.leaderboard.list.responses[200].parse(payload);
+  assert.equal(parsed[0].rank, 1);
+});
+
+test("profile update contract rejects invalid avatar URL", () => {
+  assert.throws(() => {
+    api.profile.update.input.parse({
+      firstName: "Aman",
+      profileImageUrl: "not-a-url",
+    });
+  });
+});
