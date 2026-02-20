@@ -1,4 +1,4 @@
-import { pgTable, text, varchar, timestamp, serial, integer, boolean, jsonb, real, primaryKey } from "drizzle-orm/pg-core";
+import { pgTable, text, varchar, timestamp, serial, integer, boolean, jsonb, real, primaryKey, index } from "drizzle-orm/pg-core";
 import { relations, sql } from "drizzle-orm";
 import { createInsertSchema } from "drizzle-zod";
 import { z } from "zod";
@@ -54,6 +54,7 @@ export const wordClusters = pgTable("word_clusters", {
   clusterId: integer("cluster_id").references(() => clusters.id).notNull(),
 }, (t) => ({
   pk: primaryKey({ columns: [t.wordId, t.clusterId] }),
+  clusterWordIdx: index("word_clusters_cluster_word_idx").on(t.clusterId, t.wordId),
 }));
 
 export const sentences = pgTable("sentences", {
@@ -85,6 +86,7 @@ export const userWordProgress = pgTable("user_word_progress", {
   masteryLevel: integer("mastery_level").default(0),
 }, (t) => ({
   pk: primaryKey({ columns: [t.userId, t.wordId] }),
+  userReviewIdx: index("user_word_progress_user_review_idx").on(t.userId, t.nextReview),
 }));
 
 export const quizAttempts = pgTable("quiz_attempts", {
@@ -94,7 +96,9 @@ export const quizAttempts = pgTable("quiz_attempts", {
   isCorrect: boolean("is_correct").notNull(),
   confidenceLevel: integer("confidence_level"),
   createdAt: timestamp("created_at").defaultNow(),
-});
+}, (t) => ({
+  userCreatedIdx: index("quiz_attempts_user_created_idx").on(t.userId, t.createdAt),
+}));
 
 // === RELATIONS ===
 

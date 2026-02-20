@@ -16,7 +16,7 @@ Maps to conversation chunks:
 ## Tasks
 
 ### P1-001 - Core lexical data model
-Status: `doing`
+Status: `done`
 
 Scope:
 - Word/phrase base fields.
@@ -28,58 +28,48 @@ Acceptance:
 - CRUD-safe schema deployed.
 - Data contract documented in `70-schema-and-api-contracts.md`.
 
-### P1-002 - Context and examples model
-Status: `todo`
+### P1-002 - DB indexes for quiz/review
+Status: `done`
 
 Scope:
-- Example sentences with Telugu/English pairs.
-- Context tags (travel, food, greetings, etc.).
-- Basic synonyms/antonyms fields (optional in MVP, nullable).
+- Add index for due-review lookups on user progress.
+- Add index for user attempt history scans.
+- Add index to optimize cluster-word joins.
 
 Acceptance:
-- Every seeded word has at least one example sentence.
+- Index definitions exist in schema and are ready for DB push.
 
-### P1-003 - User progress (basic)
+### P1-003 - Content import format (CSV/JSON)
 Status: `todo`
 
 Scope:
-- Track last seen, correct count, incorrect count.
-- Store attempt log baseline fields (timestamp, result, direction).
+- Define canonical input format for text content ingestion.
+- Validate required fields and sanitize malformed entries.
+- Upsert vocabulary content without duplicating rows.
 
 Acceptance:
-- After each question, progress state is persisted and retrievable.
+- Import script can load validated content in bulk.
 
-### P1-004 - Cluster taxonomy
+### P1-004 - Text dataset expansion
 Status: `todo`
 
 Scope:
-- Beginner/Easy/Medium/Hard.
-- Frequency-based clusters.
-- Functional clusters (travel, food, daily-use).
-
-Acceptance:
-- User can fetch and practice by cluster.
-
-### P1-005 - Reverse practice modes
-Status: `todo`
-
-Scope:
-- Telugu -> English.
-- English -> Telugu.
-- Direction metadata logged per attempt.
-
-Acceptance:
-- Both directions available in quiz generation.
-
-### P1-006 - Text dataset expansion
-Status: `todo`
-
-Scope:
-- Increase seed content toward MVP size.
-- Quality checks for duplicates and missing translations.
+- Expand seeded content to MVP target.
+- Ensure each word has context/examples in normalized structure.
 
 Acceptance:
 - Target dataset reached: 300 words, 20 clusters, 100 sentences.
+
+### P1-005 - Content quality checks
+Status: `todo`
+
+Scope:
+- Detect duplicate lexical items and cluster links.
+- Validate transliteration formatting conventions.
+- Report missing/low-quality example coverage.
+
+Acceptance:
+- Quality report is generated and clean before import/seed completion.
 
 ## Exit criteria
 
