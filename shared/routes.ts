@@ -102,6 +102,7 @@ export const api = {
         wordId: z.number(),
         selectedOptionId: z.number(), // The ID of the word selected as the answer
         confidenceLevel: z.number().min(1).max(3),
+        responseTimeMs: z.number().int().positive().optional(),
       }),
       responses: {
         200: z.object({

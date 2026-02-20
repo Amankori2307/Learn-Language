@@ -1,0 +1,107 @@
+import test from "node:test";
+import assert from "node:assert/strict";
+import { generateSessionWords } from "./session-generator";
+
+const now = new Date("2026-02-20T00:00:00.000Z");
+
+function makeWord(id: number) {
+  return {
+    id,
+    telugu: `పదం${id}`,
+    transliteration: `padam${id}`,
+    english: `word-${id}`,
+    partOfSpeech: "noun",
+    difficulty: 1,
+    difficultyLevel: "beginner",
+    frequencyScore: 0.5,
+    cefrLevel: null,
+    audioUrl: null,
+    exampleSentences: [],
+    tags: [],
+    createdAt: null,
+  };
+}
+
+function makeProgress(wordId: number, nextReview: Date | null, wrongCount = 0) {
+  return {
+    userId: "u1",
+    wordId,
+    correctStreak: 0,
+    wrongCount,
+    easeFactor: 2.5,
+    interval: 1,
+    lastSeen: now,
+    nextReview,
+    masteryLevel: 1,
+  };
+}
+
+test("daily_review prioritizes due/new/weak mix", () => {
+  const words = Array.from({ length: 10 }, (_, i) => makeWord(i + 1)) as any;
+  const progressMap = new Map<number, any>([
+    [1, makeProgress(1, new Date("2026-02-19T00:00:00.000Z"), 2)],
+    [2, makeProgress(2, new Date("2026-02-18T00:00:00.000Z"), 0)],
+    [3, makeProgress(3, new Date("2026-03-01T00:00:00.000Z"), 3)],
+    [4, makeProgress(4, new Date("2026-02-17T00:00:00.000Z"), 1)],
+  ]);
+
+  const result = generateSessionWords({
+    mode: "daily_review",
+    count: 6,
+    words,
+    progressMap,
+    now,
+  });
+
+  assert.equal(result.length, 6);
+  assert.ok(result.some((w: any) => [1, 2, 4].includes(w.id)), "expected at least one due review item");
+  assert.ok(result.some((w: any) => [1, 3, 4].includes(w.id)), "expected at least one weak item");
+  assert.ok(result.some((w: any) => w.id >= 5), "expected at least one new item");
+});
+
+test("weak_words mode prioritizes weak items first", () => {
+  const words = [makeWord(1), makeWord(2), makeWord(3), makeWord(4)] as any;
+  const progressMap = new Map<number, any>([
+    [1, makeProgress(1, new Date("2026-03-01T00:00:00.000Z"), 4)],
+    [2, makeProgress(2, new Date("2026-03-01T00:00:00.000Z"), 3)],
+  ]);
+
+  const result = generateSessionWords({ mode: "weak_words", count: 3, words, progressMap, now });
+
+  assert.equal(result.length, 3);
+  assert.deepEqual(
+    result.slice(0, 2).map((w: any) => w.id),
+    [1, 2],
+  );
+});
+
+test("daily_review handles empty candidate pool", () => {
+  const result = generateSessionWords({
+    mode: "daily_review",
+    count: 10,
+    words: [] as any,
+    progressMap: new Map(),
+    now,
+  });
+
+  assert.equal(result.length, 0);
+});
+
+test("daily_review falls back to ranked words when no due items exist", () => {
+  const words = [makeWord(1), makeWord(2), makeWord(3), makeWord(4)] as any;
+  const progressMap = new Map<number, any>([
+    [1, makeProgress(1, new Date("2026-03-20T00:00:00.000Z"), 0)],
+    [2, makeProgress(2, new Date("2026-03-21T00:00:00.000Z"), 0)],
+  ]);
+
+  const result = generateSessionWords({
+    mode: "daily_review",
+    count: 3,
+    words,
+    progressMap,
+    now,
+  });
+
+  assert.equal(result.length, 3);
+  assert.ok(result.every((word: any) => [1, 2, 3, 4].includes(word.id)));
+});

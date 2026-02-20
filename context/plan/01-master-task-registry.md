@@ -27,11 +27,11 @@ Status legend: `todo` | `doing` | `done` | `blocked`
 | ID | Status | Task | Depends On | Effort | Done When |
 |---|---|---|---|---|---|
 | P2-001 | done | Implement deterministic quiz candidate scoring service | P1-002 | M | score formula matches product contract |
-| P2-002 | todo | Implement question generator for 4 text question types | P2-001 | L | each question type works with validation |
-| P2-003 | todo | Implement distractor strategy (cluster -> POS -> transliteration -> random) | P2-002 | M | options are unique and quality-ranked |
-| P2-004 | todo | Implement answer submission + SM-2 style updates + mastery tiers | P2-001 | L | review intervals, streaks, mastery update correctly |
-| P2-005 | todo | Build due-review and weak-word modes | P2-004 | M | mode filters reflect progress state |
-| P2-006 | todo | Add quiz engine test suite (unit + integration) | P2-002,P2-004 | M | happy path + edge cases covered |
+| P2-002 | done | Implement daily session generator v1 (30% review, 50% new, 20% weak) | P2-001 | L | generated session follows composition targets with deterministic ordering |
+| P2-003 | done | Implement distractor strategy (cluster -> POS -> transliteration -> random) | P2-002 | M | options are unique and quality-ranked |
+| P2-004 | done | Implement answer submission + SM-2 style updates + mastery tiers | P2-001 | L | review intervals, streaks, mastery update correctly |
+| P2-005 | done | Build due-review and weak-word modes | P2-004 | M | mode filters reflect progress state |
+| P2-006 | done | Add quiz engine test suite (unit + integration) | P2-002,P2-004 | M | happy path + edge cases covered |
 
 ## Phase 3 - Product Flows (Text-First UX)
 

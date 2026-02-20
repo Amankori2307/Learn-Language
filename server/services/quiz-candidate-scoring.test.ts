@@ -54,3 +54,24 @@ test("rankQuizCandidates is deterministic for ties", () => {
     [1, 2, 3],
   );
 });
+
+test("rankQuizCandidates deprioritizes mastered words that are not due", () => {
+  const now = new Date("2026-02-20T00:00:00.000Z");
+  const words = [makeWord(1, 2), makeWord(2, 2)] as any;
+  const progressMap = new Map<number, any>([
+    [1, {
+      userId: "u1",
+      wordId: 1,
+      correctStreak: 8,
+      wrongCount: 0,
+      easeFactor: 2.5,
+      interval: 10,
+      lastSeen: new Date("2026-02-19T00:00:00.000Z"),
+      nextReview: new Date("2026-03-10T00:00:00.000Z"),
+      masteryLevel: 4,
+    }],
+  ]);
+
+  const ranked = rankQuizCandidates(words, progressMap, now);
+  assert.deepEqual(ranked.map((w: any) => w.id), [2, 1]);
+});

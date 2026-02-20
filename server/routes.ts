@@ -5,6 +5,8 @@ import { api } from "@shared/routes";
 import { z } from "zod";
 import { setupAuth, registerAuthRoutes, isAuthenticated } from "./replit_integrations/auth";
 import { sendError } from "./http";
+import { chooseDistractors } from "./services/distractors";
+import { applySrsUpdate } from "./services/srs";
 
 export async function registerRoutes(
   httpServer: Server,
@@ -50,12 +52,12 @@ export async function registerRoutes(
   // Generate Quiz
   app.get(api.quiz.generate.path, isAuthenticated, async (req, res) => {
     const userId = (req.user as any).claims.sub; // From Replit Auth
-    
-    // Parse params manually or use z.coerce in schemas
-    const limit = req.query.count ? Number(req.query.count) : 10;
-    const clusterId = req.query.clusterId ? Number(req.query.clusterId) : undefined;
-    
-    const candidates = await storage.getQuizCandidates(userId, limit, clusterId);
+    const parsed = api.quiz.generate.input?.parse(req.query) ?? { mode: "daily_review", count: 10 };
+    const limit = parsed.count ?? 10;
+    const clusterId = parsed.clusterId;
+    const mode = parsed.mode ?? "daily_review";
+
+    const candidates = await storage.getQuizCandidates(userId, limit, clusterId, mode);
     
     if (candidates.length === 0) {
       // If no words found, maybe seed data or return empty
@@ -66,30 +68,25 @@ export async function registerRoutes(
       if (retry.length === 0) return res.json([]); 
     }
 
-    const quizQuestions = await Promise.all(candidates.map(async (word) => {
-      // 1 correct, 3 distractors
-      // PRD Distractor Priority: Same cluster -> Same part of speech -> Similar transliteration -> Random
-      const clusterWords = await storage.getWordsByCluster(clusterId || 0);
-      const allWords = await storage.getWords(200);
-      
-      const potentialDistractors = allWords
-        .filter(w => w.id !== word.id)
-        .sort((a, b) => {
-          const aInCluster = clusterWords.some(cw => cw.id === a.id);
-          const bInCluster = clusterWords.some(cw => cw.id === b.id);
-          if (aInCluster && !bInCluster) return -1;
-          if (!aInCluster && bInCluster) return 1;
-          
-          if (a.partOfSpeech === word.partOfSpeech && b.partOfSpeech !== word.partOfSpeech) return -1;
-          if (a.partOfSpeech !== word.partOfSpeech && b.partOfSpeech === word.partOfSpeech) return 1;
-          
-          return 0;
-        });
+    const allWords = await storage.getWords(500);
+    const links = await storage.getWordClusterLinks();
+    const clusterByWord = new Map<number, Set<number>>();
+    for (const link of links) {
+      const set = clusterByWord.get(link.wordId) ?? new Set<number>();
+      set.add(link.clusterId);
+      clusterByWord.set(link.wordId, set);
+    }
 
-      const distractors = potentialDistractors.slice(0, 3);
-      
+    const quizQuestions = await Promise.all(candidates.map(async (word) => {
+      const distractors = chooseDistractors({
+        word,
+        allWords,
+        clusterByWord,
+        count: 3,
+      });
+
       const type = ['telugu_to_english', 'english_to_telugu', 'fill_in_blank'][Math.floor(Math.random() * 3)];
-      
+
       const options = [word, ...distractors]
         .sort(() => 0.5 - Math.random())
         .map(w => ({
@@ -137,46 +134,14 @@ export async function registerRoutes(
         });
       }
 
-      // Update progress based on simplified SM-2 (from PRD)
       const now = new Date();
-      
-      if (isCorrect) {
-        progress.correctStreak = (progress.correctStreak || 0) + 1;
-        
-        // Ease factor adjustment
-        // If confidence high (3), +0.1. If low, maybe -0.1? PRD says "+0.1 (if confidence high)"
-        if (input.confidenceLevel === 3) {
-          progress.easeFactor = (progress.easeFactor || 2.5) + 0.1;
-        }
-
-        // Interval calc
-        if (progress.correctStreak === 1) {
-          progress.interval = 1;
-        } else if (progress.correctStreak === 2) {
-          progress.interval = 6;
-        } else {
-          progress.interval = Math.ceil((progress.interval || 1) * (progress.easeFactor || 2.5));
-        }
-
-        // Mastery Level
-        // 1->Learning, 3->Familiar, 5->Strong, 7->Mastered
-        if (progress.correctStreak >= 7) progress.masteryLevel = 4; // Mastered
-        else if (progress.correctStreak >= 5) progress.masteryLevel = 3; // Strong
-        else if (progress.correctStreak >= 3) progress.masteryLevel = 2; // Familiar
-        else progress.masteryLevel = 1; // Learning
-
-      } else {
-        progress.correctStreak = 0;
-        progress.wrongCount = (progress.wrongCount || 0) + 1;
-        progress.interval = 1; // Reset to 1 day
-        progress.easeFactor = Math.max(1.3, (progress.easeFactor || 2.5) - 0.2); // Penalty
-      }
-
-      // Next review date
-      const nextDate = new Date();
-      nextDate.setDate(now.getDate() + (progress.interval || 1));
-      progress.nextReview = nextDate;
-      progress.lastSeen = now;
+      progress = applySrsUpdate({
+        progress,
+        isCorrect,
+        confidenceLevel: input.confidenceLevel,
+        responseTimeMs: input.responseTimeMs,
+        now,
+      });
 
       await storage.updateUserProgress(progress);
       await storage.logQuizAttempt({
@@ -192,7 +157,7 @@ export async function registerRoutes(
         progressUpdate: {
           streak: progress.correctStreak || 0,
           masteryLevel: progress.masteryLevel || 0,
-          nextReview: nextDate.toISOString()
+          nextReview: progress.nextReview?.toISOString() ?? now.toISOString()
         }
       });
 

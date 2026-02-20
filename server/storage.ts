@@ -6,6 +6,7 @@ import {
   type CreateWordRequest, type CreateClusterRequest
 } from "@shared/schema";
 import { rankQuizCandidates } from "./services/quiz-candidate-scoring";
+import { generateSessionWords, type QuizMode } from "./services/session-generator";
 
 export interface IStorage {
   // Words & Clusters
@@ -18,6 +19,7 @@ export interface IStorage {
   getCluster(id: number): Promise<(Cluster & { words: Word[] }) | undefined>;
   createCluster(cluster: CreateClusterRequest): Promise<Cluster>;
   addWordToCluster(wordId: number, clusterId: number): Promise<void>;
+  getWordClusterLinks(): Promise<Array<{ wordId: number; clusterId: number }>>;
 
   // User Progress
   getUserProgress(userId: string): Promise<UserWordProgress[]>;
@@ -27,7 +29,7 @@ export interface IStorage {
   
   // Quiz
   logQuizAttempt(attempt: Omit<QuizAttempt, "id" | "createdAt">): Promise<QuizAttempt>;
-  getQuizCandidates(userId: string, limit?: number, clusterId?: number): Promise<Word[]>;
+  getQuizCandidates(userId: string, limit?: number, clusterId?: number, mode?: QuizMode): Promise<Word[]>;
   
   // Stats
   getUserStats(userId: string): Promise<{
@@ -90,6 +92,10 @@ export class DatabaseStorage implements IStorage {
     await db.insert(wordClusters).values({ wordId, clusterId }).onConflictDoNothing();
   }
 
+  async getWordClusterLinks(): Promise<Array<{ wordId: number; clusterId: number }>> {
+    return db.select({ wordId: wordClusters.wordId, clusterId: wordClusters.clusterId }).from(wordClusters);
+  }
+
   async getUserProgress(userId: string): Promise<UserWordProgress[]> {
     return await db.select().from(userWordProgress).where(eq(userWordProgress.userId, userId));
   }
@@ -125,7 +131,12 @@ export class DatabaseStorage implements IStorage {
   }
 
   // Implementation of the "Word Selection Algorithm" from PRD
-  async getQuizCandidates(userId: string, limit: number = 10, clusterId?: number): Promise<Word[]> {
+  async getQuizCandidates(
+    userId: string,
+    limit: number = 10,
+    clusterId?: number,
+    mode: QuizMode = "daily_review",
+  ): Promise<Word[]> {
     let candidateWords: Word[] = [];
     if (clusterId) {
       candidateWords = await this.getWordsByCluster(clusterId);
@@ -136,8 +147,17 @@ export class DatabaseStorage implements IStorage {
     const progressList = await this.getUserProgress(userId);
     const progressMap = new Map(progressList.map(p => [p.wordId, p]));
 
-    const ranked = rankQuizCandidates(candidateWords, progressMap);
-    return ranked.slice(0, limit);
+    if (mode === "cluster") {
+      const ranked = rankQuizCandidates(candidateWords, progressMap);
+      return ranked.slice(0, limit);
+    }
+
+    return generateSessionWords({
+      mode,
+      count: limit,
+      words: candidateWords,
+      progressMap,
+    });
   }
 
   async getUserStats(userId: string): Promise<{

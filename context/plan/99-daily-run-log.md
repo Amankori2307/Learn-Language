@@ -218,3 +218,38 @@ Blockers:
 
 Resume notes:
 - Start `P2-002` daily session generator mix (review/new/weak ratios).
+
+Date: 2026-02-20
+Session owner: Codex
+Last completed task ID: P2-006
+Current in-progress task ID: None
+Next task ID: P3-001
+
+Completed today:
+- Implemented daily session generator logic for `daily_review`, `new_words`, `weak_words`, and `cluster` modes.
+- Implemented full distractor strategy (`same cluster -> same POS -> transliteration similarity -> random`) via service.
+- Refactored answer submission to use standalone SRS update service with confidence/response-time handling and mastery tiers.
+- Expanded unit coverage for scoring, session generation, distractors, and SRS edge cases.
+
+Files changed:
+- server/routes.ts
+- server/storage.ts
+- server/services/session-generator.ts
+- server/services/session-generator.test.ts
+- server/services/distractors.ts
+- server/services/distractors.test.ts
+- server/services/srs.ts
+- server/services/srs.test.ts
+- shared/routes.ts
+- context/plan/01-master-task-registry.md
+- context/plan/30-phase-2-quiz-and-srs.md
+- context/plan/99-daily-run-log.md
+
+Tests/checks run:
+- `npm run ci` (pass)
+
+Blockers:
+- None.
+
+Resume notes:
+- Start Phase 3 with dashboard task `P3-001`.

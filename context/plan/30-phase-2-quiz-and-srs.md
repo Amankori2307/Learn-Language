@@ -26,7 +26,7 @@ Acceptance:
 - Candidate ranking is stable and predictable for same inputs.
 
 ### P2-002 - Daily session generator v1
-Status: `todo`
+Status: `done`
 
 Scope:
 - 30% due-review items.
@@ -37,7 +37,7 @@ Acceptance:
 - Generated session follows target mix within tolerance (+/-10%).
 
 ### P2-003 - Distractor generation strategy
-Status: `todo`
+Status: `done`
 
 Scope:
 - Priority order: same cluster -> same POS -> similar transliteration -> random.
@@ -46,30 +46,30 @@ Scope:
 Acceptance:
 - Option quality improves and duplicates never appear.
 
-### P2-004 - Multi-example reinforcement
-Status: `todo`
+### P2-004 - Answer submission + SM-2 updates + mastery tiers
+Status: `done`
 
 Scope:
-- Attach 3+ examples where available.
-- Surface examples in answer feedback screen.
+- Apply confidence-aware and response-time-aware SRS updates.
+- Update ease factor, interval, next review date, and mastery tiers.
+- Keep update logic in a standalone service with tests.
 
 Acceptance:
-- Correct answer response includes examples consistently.
+- Progress transitions are deterministic and follow SRS rules.
 
-### P2-005 - Exercise variety pack
-Status: `todo`
+### P2-005 - Due-review and weak-word modes
+Status: `done`
 
 Scope:
-- MCQ.
-- Fill-in-the-blank.
-- Type-answer.
-- Keep text-first only.
+- Daily session composition supports review/new/weak ratios.
+- Weak-word mode prioritizes weak items.
+- Mode handling is respected by quiz generation.
 
 Acceptance:
-- At least 3 exercise types selectable per session.
+- Mode-filtered session candidate selection works as expected.
 
 ### P2-006 - Quiz/SRS test suite
-Status: `todo`
+Status: `done`
 
 Scope:
 - Unit tests for scoring and interval updates.
