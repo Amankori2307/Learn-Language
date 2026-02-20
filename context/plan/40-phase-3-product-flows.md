@@ -57,7 +57,7 @@ Acceptance:
 - Dashboard and session planner reflect direction-specific weakness.
 
 ### P3-005 - Dashboard and progress UX
-Status: `todo`
+Status: `done`
 
 Scope:
 - Show total learned, mastered, weak words, streak, XP.
@@ -82,4 +82,3 @@ Acceptance:
 
 - App feels adaptive and personalized for text-only usage.
 - Users can identify and work on weak areas without manual filtering.
-

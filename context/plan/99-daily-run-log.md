@@ -253,3 +253,29 @@ Blockers:
 
 Resume notes:
 - Start Phase 3 with dashboard task `P3-001`.
+
+Date: 2026-02-20
+Session owner: Codex
+Last completed task ID: P3-002
+Current in-progress task ID: None
+Next task ID: P3-003
+
+Completed today:
+- Added dashboard entry points for Continue Learning and Practice by Cluster.
+- Kept Daily Review, New Words, and Weak Spots in the same surface for quick-start flow.
+- Updated Phase 3 task status tracking in plan docs.
+
+Files changed:
+- client/src/pages/dashboard.tsx
+- context/plan/01-master-task-registry.md
+- context/plan/40-phase-3-product-flows.md
+- context/plan/99-daily-run-log.md
+
+Tests/checks run:
+- `npm run ci` (pass)
+
+Blockers:
+- None.
+
+Resume notes:
+- Continue with `P3-003` adaptive session generator v2 refinements.

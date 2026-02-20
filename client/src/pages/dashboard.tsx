@@ -11,7 +11,9 @@ import {
   Zap, 
   ArrowRight, 
   BookOpen, 
-  Dumbbell 
+  Dumbbell,
+  Layers3,
+  PlayCircle
 } from "lucide-react";
 import { motion } from "framer-motion";
 
@@ -40,7 +42,18 @@ export default function Dashboard() {
 
   const s = stats || defaultStats;
 
+  const continueMode = s.weak > 0 ? "weak_words" : "daily_review";
+
   const cards = [
+    {
+      title: "Continue Learning",
+      description: "Jump back into your best next session",
+      icon: PlayCircle,
+      href: `/quiz?mode=${continueMode}`,
+      color: "bg-sky-100 text-sky-700",
+      buttonColor: "bg-sky-600 hover:bg-sky-700",
+      count: Math.max(1, s.weak),
+    },
     {
       title: "Daily Review",
       description: "Review words due for repetition",
@@ -67,6 +80,15 @@ export default function Dashboard() {
       color: "bg-rose-100 text-rose-700",
       buttonColor: "bg-rose-500 hover:bg-rose-600",
       count: s.weak
+    },
+    {
+      title: "Practice by Cluster",
+      description: "Choose a topic cluster and practice in context",
+      icon: Layers3,
+      href: "/clusters",
+      color: "bg-violet-100 text-violet-700",
+      buttonColor: "bg-violet-600 hover:bg-violet-700",
+      count: s.totalWords,
     }
   ];
 
@@ -115,7 +137,7 @@ export default function Dashboard() {
 
         {/* Action Cards */}
         <h3 className="text-xl font-bold mt-8 mb-4">Start Learning</h3>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
           {cards.map((card, idx) => (
             <motion.div
               key={card.title}
