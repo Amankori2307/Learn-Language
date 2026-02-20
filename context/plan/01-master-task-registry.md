@@ -65,6 +65,7 @@ Only active and pending tasks are listed here. Completed tasks are intentionally
 | P4E-003 | done | Setup Drizzle migration workflow (generate/migrate scripts + migration folder conventions) and stop relying on schema push for lifecycle changes | P4E-002 | M | versioned migrations are generated/applied via scripts and validated in docs/compose flow |
 | P4E-004 | todo | Add language selector in UI and scope progress/statistics/session state by `(userId, language)` combination | P4E-003 | L | learners can switch language context and all progress/review/stats/attempts are isolated per language |
 | P4E-005 | todo | Enforce single source of truth for seed data (`assets/processed/seed.json`) and remove in-code hardcoded vocab arrays (e.g., `wordsData`) | P4E-003 | M | runtime/admin seed flow imports only from `seed.json`, and no fallback content arrays remain in code |
+| P4E-006 | todo | Add root-level lint/validation command and keep it green (typecheck + content schema + tests) | P4E-005 | S | `pnpm run lint:root` passes and is the single health-check command for repo quality |
 
 ## Exit criteria
 

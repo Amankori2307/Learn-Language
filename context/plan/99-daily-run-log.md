@@ -33,5 +33,6 @@ Next task ID: P5-001
 ## Immediate next actions
 
 1. Execute `P4E-005`: keep `assets/processed/seed.json` as single seed source and remove hardcoded content arrays.
-2. Execute `P4E-004`: add language selector and scope progress/stats/session state by `(userId, language)`.
-3. Keep all new modules aligned with `context/plan/02-code-guidelines.md`.
+2. Execute `P4E-006`: add/standardize a root-level lint validation command and keep it green.
+3. Execute `P4E-004`: add language selector and scope progress/stats/session state by `(userId, language)`.
+4. Keep all new modules aligned with `context/plan/02-code-guidelines.md`.
