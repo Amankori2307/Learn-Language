@@ -7,7 +7,7 @@ import type { Express, RequestHandler } from "express";
 import memoize from "memoizee";
 import connectPg from "connect-pg-simple";
 import { authStorage } from "./storage";
-import { getAuthConfig } from "../config";
+import { config, getAuthConfig } from "../config";
 import { sendError } from "../http";
 
 const authConfig = getAuthConfig();
@@ -60,12 +60,34 @@ function updateUserSession(
 }
 
 async function upsertUser(claims: any) {
+  const email = claims["email"] as string | undefined;
+  const reviewerEmails = new Set(
+    (config.REVIEWER_EMAILS ?? "")
+      .split(",")
+      .map((v) => v.trim().toLowerCase())
+      .filter(Boolean),
+  );
+  const adminEmails = new Set(
+    (config.ADMIN_EMAILS ?? "")
+      .split(",")
+      .map((v) => v.trim().toLowerCase())
+      .filter(Boolean),
+  );
+
+  const role =
+    email && adminEmails.has(email.toLowerCase())
+      ? "admin"
+      : email && reviewerEmails.has(email.toLowerCase())
+        ? "reviewer"
+        : undefined;
+
   await authStorage.upsertUser({
     id: claims["sub"],
-    email: claims["email"],
+    email,
     firstName: claims["first_name"] ?? claims["given_name"],
     lastName: claims["last_name"] ?? claims["family_name"],
     profileImageUrl: claims["profile_image_url"] ?? claims["picture"],
+    role,
   });
 }
 

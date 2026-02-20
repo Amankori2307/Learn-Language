@@ -9,6 +9,8 @@ const envSchema = z.object({
   GOOGLE_CLIENT_SECRET: z.string().min(1).optional(),
   SESSION_SECRET: z.string().min(16).optional(),
   GOOGLE_ISSUER_URL: z.string().url().default("https://accounts.google.com"),
+  REVIEWER_EMAILS: z.string().optional(),
+  ADMIN_EMAILS: z.string().optional(),
 });
 
 const parsed = envSchema.safeParse(process.env);

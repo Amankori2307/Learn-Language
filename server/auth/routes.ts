@@ -11,7 +11,17 @@ export function registerAuthRoutes(app: Express): void {
   app.get("/api/auth/user", isAuthenticated, async (req: any, res) => {
     try {
       const userId = req.user.claims.sub;
-      const user = await authStorage.getUser(userId);
+      let user = await authStorage.getUser(userId);
+      if (!user) {
+        user = await authStorage.upsertUser({
+          id: userId,
+          email: req.user.claims.email ?? null,
+          firstName: req.user.claims.first_name ?? req.user.claims.given_name ?? null,
+          lastName: req.user.claims.last_name ?? req.user.claims.family_name ?? null,
+          profileImageUrl: req.user.claims.profile_image_url ?? req.user.claims.picture ?? null,
+          role: userId === "dev-user" ? "admin" : "learner",
+        });
+      }
       res.json(user);
     } catch (error) {
       console.error("Error fetching user:", error);

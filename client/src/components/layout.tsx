@@ -5,6 +5,7 @@ import {
   Layers, 
   Trophy, 
   UserCircle, 
+  ShieldCheck,
   LogOut, 
   Menu
 } from "lucide-react";
@@ -36,6 +37,9 @@ export function Layout({ children }: { children: React.ReactNode }) {
     { name: 'Clusters', href: '/clusters', icon: Layers },
     { name: 'Leaderboard', href: '/leaderboard', icon: Trophy },
     { name: 'Profile', href: '/profile', icon: UserCircle },
+    ...((user?.role === "reviewer" || user?.role === "admin")
+      ? [{ name: "Review", href: "/review", icon: ShieldCheck }]
+      : []),
   ];
 
   const NavContent = () => (
