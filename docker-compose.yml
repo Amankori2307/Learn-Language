@@ -26,13 +26,13 @@ services:
         condition: service_healthy
     environment:
       NODE_ENV: production
-      PORT: 5000
+      PORT: 3000
       DATABASE_URL: postgresql://postgres:postgres@db:5432/mydb
       SESSION_SECRET: change-me-in-prod-please-123456
       AUTH_PROVIDER: dev
       VITE_ENABLE_TUTOR: "true"
     ports:
-      - "5000:5000"
+      - "3000:3000"
 
 volumes:
   pg_data:

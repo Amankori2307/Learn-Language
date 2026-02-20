@@ -18,7 +18,7 @@ docker compose up --build
 ```
 
 App URL:
-- [http://localhost:5000](http://localhost:5000)
+- [http://localhost:3000](http://localhost:3000)
 
 Notes:
 - Compose defaults `AUTH_PROVIDER=dev` so you can use the app locally without external OAuth setup.
@@ -31,4 +31,3 @@ docker compose down -v
 ```
 
 Then re-run `docker compose up --build`.
-
