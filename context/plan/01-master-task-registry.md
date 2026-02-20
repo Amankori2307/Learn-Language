@@ -64,6 +64,7 @@ Only active and pending tasks are listed here. Completed tasks are intentionally
 | P4E-002 | done | Enforce naming consistency repo-wide after generic pivot (single canonical naming for source script/text across schema, API, UI, scripts, tests) | P4E-001 | M | no mixed legacy naming remains and lint/type/tests pass with a uniform vocabulary |
 | P4E-003 | done | Setup Drizzle migration workflow (generate/migrate scripts + migration folder conventions) and stop relying on schema push for lifecycle changes | P4E-002 | M | versioned migrations are generated/applied via scripts and validated in docs/compose flow |
 | P4E-004 | todo | Add language selector in UI and scope progress/statistics/session state by `(userId, language)` combination | P4E-003 | L | learners can switch language context and all progress/review/stats/attempts are isolated per language |
+| P4E-005 | todo | Enforce single source of truth for seed data (`assets/processed/seed.json`) and remove in-code hardcoded vocab arrays (e.g., `wordsData`) | P4E-003 | M | runtime/admin seed flow imports only from `seed.json`, and no fallback content arrays remain in code |
 
 ## Exit criteria
 

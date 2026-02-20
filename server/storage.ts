@@ -1,5 +1,7 @@
 import { db } from "./db";
 import { eq, sql, and } from "drizzle-orm";
+import fs from "fs/promises";
+import path from "path";
 import { DEFAULT_LANGUAGE, LanguageEnum, QuizDirectionEnum, QuizModeEnum, QuizQuestionTypeEnum, ReviewStatusEnum } from "@shared/domain/enums";
 import {
   words, clusters, wordClusters, userWordProgress, quizAttempts, wordExamples, users,
@@ -623,6 +625,30 @@ export class DatabaseStorage implements IStorage {
   }
 
   async seedInitialData(): Promise<void> {
+    type SeedExample = {
+      originalScript: string;
+      pronunciation: string;
+      english: string;
+      contextTag?: string;
+      difficulty?: number;
+      language?: LanguageEnum;
+    };
+
+    type SeedWord = {
+      originalScript: string;
+      transliteration: string;
+      english: string;
+      partOfSpeech: string;
+      language?: LanguageEnum;
+      difficulty?: number;
+      difficultyLevel?: "beginner" | "easy" | "medium" | "hard";
+      frequencyScore?: number;
+      cefrLevel?: string;
+      tags?: string[];
+      clusters?: string[];
+      examples?: SeedExample[];
+    };
+
     const ensureCluster = async (cluster: CreateClusterRequest): Promise<Cluster> => {
       const [existingCluster] = await db
         .select()
@@ -657,17 +683,19 @@ export class DatabaseStorage implements IStorage {
 
     const ensureWordExample = async (
       wordId: number,
+      language: LanguageEnum,
       originalScript: string,
       pronunciation: string,
       englishSentence: string,
       contextTag: string,
+      difficulty: number,
     ) => {
       const [existingExample] = await db
         .select()
         .from(wordExamples)
         .where(and(
           eq(wordExamples.wordId, wordId),
-          eq(wordExamples.language, DEFAULT_LANGUAGE),
+          eq(wordExamples.language, language),
           eq(wordExamples.originalScript, originalScript),
         ));
 
@@ -677,55 +705,65 @@ export class DatabaseStorage implements IStorage {
 
       await db.insert(wordExamples).values({
         wordId,
-        language: DEFAULT_LANGUAGE,
+        language,
         originalScript,
         pronunciation,
         englishSentence,
         contextTag,
+        difficulty,
       });
     };
 
-    // Clusters
-    const c_basics = await ensureCluster({ name: "Basics", type: "semantic", description: "Essential survival words" });
-    const c_food = await ensureCluster({ name: "Food", type: "semantic", description: "Fruits, vegetables, and dining" });
-    const c_pronouns = await ensureCluster({ name: "Pronouns", type: "grammar", description: "I, You, We, They" });
+    const seedPath = path.resolve(process.cwd(), "assets/processed/seed.json");
+    const raw = await fs.readFile(seedPath, "utf-8");
+    const items = JSON.parse(raw) as SeedWord[];
+    if (!Array.isArray(items) || items.length === 0) {
+      throw new Error("Seed file has no rows: assets/processed/seed.json");
+    }
 
-    // Words
-    const wordsData = [
-      // Pronouns
-      { originalScript: "నేను", transliteration: "nēnu", english: "I", partOfSpeech: "pronoun", clusterId: c_pronouns.id, difficultyLevel: "beginner", frequencyScore: 0.95, exampleSourceText: "నేను స్కూల్‌కి వెళ్తాను.", exampleEnglish: "I go to school." },
-      { originalScript: "నువ్వు", transliteration: "nuvvu", english: "You (informal)", partOfSpeech: "pronoun", clusterId: c_pronouns.id, difficultyLevel: "beginner", frequencyScore: 0.9, exampleSourceText: "నువ్వు ఎలా ఉన్నావు?", exampleEnglish: "How are you?" },
-      { originalScript: "మీరు", transliteration: "mīru", english: "You (formal)", partOfSpeech: "pronoun", clusterId: c_pronouns.id, difficultyLevel: "beginner", frequencyScore: 0.85, exampleSourceText: "మీరు ఎక్కడ ఉంటారు?", exampleEnglish: "Where do you live?" },
-      { originalScript: "మేము", transliteration: "mēmu", english: "We", partOfSpeech: "pronoun", clusterId: c_pronouns.id, difficultyLevel: "beginner", frequencyScore: 0.8, exampleSourceText: "మేము కలిసి చదువుతాము.", exampleEnglish: "We study together." },
-      
-      // Basics
-      { originalScript: "నమస్కారం", transliteration: "namaskāram", english: "Hello / Greetings", partOfSpeech: "noun", clusterId: c_basics.id, difficultyLevel: "beginner", frequencyScore: 0.92, exampleSourceText: "నమస్కారం! ఎలా ఉన్నారు?", exampleEnglish: "Hello! How are you?" },
-      { originalScript: "ధన్యవాదాలు", transliteration: "dhanyavādālu", english: "Thank you", partOfSpeech: "noun", clusterId: c_basics.id, difficultyLevel: "beginner", frequencyScore: 0.88, exampleSourceText: "మీ సహాయానికి ధన్యవాదాలు.", exampleEnglish: "Thank you for your help." },
-      { originalScript: "అవును", transliteration: "avunu", english: "Yes", partOfSpeech: "adverb", clusterId: c_basics.id, difficultyLevel: "beginner", frequencyScore: 0.9, exampleSourceText: "అవును, నేను వస్తాను.", exampleEnglish: "Yes, I will come." },
-      { originalScript: "కాదు", transliteration: "kādu", english: "No", partOfSpeech: "adverb", clusterId: c_basics.id, difficultyLevel: "beginner", frequencyScore: 0.9, exampleSourceText: "కాదు, అది సరైంది కాదు.", exampleEnglish: "No, that is not correct." },
-      
-      // Food
-      { originalScript: "ఆపిల్", transliteration: "āpil", english: "Apple", partOfSpeech: "noun", clusterId: c_food.id, difficultyLevel: "beginner", frequencyScore: 0.7, exampleSourceText: "నాకు ఆపిల్ ఇష్టం.", exampleEnglish: "I like apples." },
-      { originalScript: "నీరు", transliteration: "nīru", english: "Water", partOfSpeech: "noun", clusterId: c_food.id, difficultyLevel: "beginner", frequencyScore: 0.96, exampleSourceText: "దయచేసి నీరు ఇవ్వండి.", exampleEnglish: "Please give me water." },
-      { originalScript: "ఆహారం", transliteration: "āhāram", english: "Food", partOfSpeech: "noun", clusterId: c_food.id, difficultyLevel: "beginner", frequencyScore: 0.86, exampleSourceText: "ఆహారం సిద్ధంగా ఉంది.", exampleEnglish: "Food is ready." },
-      { originalScript: "పాలు", transliteration: "pālu", english: "Milk", partOfSpeech: "noun", clusterId: c_food.id, difficultyLevel: "beginner", frequencyScore: 0.84, exampleSourceText: "పిల్లాడు పాలు తాగుతున్నాడు.", exampleEnglish: "The child is drinking milk." },
-    ];
+    const clusterByName = new Map<string, Cluster>();
 
-    for (const w of wordsData) {
-      const { clusterId, exampleSourceText, exampleEnglish, ...wordData } = w;
+    for (const item of items) {
+      const language = normalizeLanguage(item.language);
       const word = await ensureWord({
-        ...wordData,
-        language: DEFAULT_LANGUAGE,
-        originalScript: wordData.originalScript,
+        language,
+        originalScript: item.originalScript,
+        transliteration: item.transliteration,
+        english: item.english,
+        partOfSpeech: item.partOfSpeech,
+        difficulty: item.difficulty ?? 1,
+        difficultyLevel: item.difficultyLevel ?? "beginner",
+        frequencyScore: item.frequencyScore ?? 0.5,
+        cefrLevel: item.cefrLevel ?? null,
+        tags: item.tags ?? [],
+        exampleSentences: (item.examples ?? []).map((example) => example.originalScript),
       });
-      await this.addWordToCluster(word.id, clusterId);
-      await ensureWordExample(
-        word.id,
-        exampleSourceText,
-        `${word.transliteration} (${word.originalScript})`,
-        exampleEnglish,
-        "general"
-      );
+
+      for (const clusterName of item.clusters ?? []) {
+        let cluster = clusterByName.get(clusterName);
+        if (!cluster) {
+          cluster = await ensureCluster({
+            name: clusterName,
+            type: "semantic",
+            description: `${clusterName} imported cluster`,
+          });
+          clusterByName.set(clusterName, cluster);
+        }
+        await this.addWordToCluster(word.id, cluster.id);
+      }
+
+      for (const example of item.examples ?? []) {
+        const exampleLanguage = normalizeLanguage(example.language ?? language);
+        await ensureWordExample(
+          word.id,
+          exampleLanguage,
+          example.originalScript,
+          example.pronunciation,
+          example.english,
+          example.contextTag ?? "general",
+          example.difficulty ?? 1,
+        );
+      }
     }
 
     const [{ count: wordsCount }] = await db.select({ count: sql<number>`count(*)` }).from(words);
