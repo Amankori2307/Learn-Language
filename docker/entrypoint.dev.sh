@@ -21,7 +21,7 @@ echo "Applying review governance migration/backfill..."
 pnpm run db:migrate:review-governance
 pnpm run db:backfill:review-governance
 
-if [ -f "assets/processed/words.mvp.json" ]; then
+if [ -f "assets/processed/seed.json" ]; then
   echo "Importing MVP dataset..."
   pnpm run content:import:mvp
 fi

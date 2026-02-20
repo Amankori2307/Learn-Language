@@ -26,8 +26,7 @@ Build a Telugu learning app focused on text-first retention and beginner-friendl
   - Post-answer sentence example triplet in feedback (sentence + pronunciation + meaning)
 - Content/data:
   - Seed files now sourced from `assets/processed/`
-  - Beginner model seed: `assets/processed/telugu_basic_seed_model_draft.json`
-  - MVP seed: `assets/processed/words.mvp.json` (realistic Telugu beginner set, 91 rows)
+  - Single processed seed source: `assets/processed/seed.json` (realistic Telugu beginner set, 91 rows)
 - Review governance:
   - Word review lifecycle fields (`draft`, `pending_review`, `approved`, `rejected`)
   - Review queue, transition, bulk transition, history, and draft submission APIs

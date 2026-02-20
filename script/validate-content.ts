@@ -108,7 +108,7 @@ function isLikelyTransliteration(input: string): boolean {
 }
 
 async function main() {
-  const inputPath = process.argv[2] ?? "assets/processed/telugu_basic_seed_model_draft.json";
+  const inputPath = process.argv[2] ?? "assets/processed/seed.json";
   const fullPath = path.resolve(process.cwd(), inputPath);
 
   const raw = await fs.readFile(fullPath, "utf-8");

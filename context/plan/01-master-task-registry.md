@@ -53,6 +53,7 @@ Only active and pending tasks are listed here. Completed tasks are intentionally
 |---|---|---|---|---|---|
 | P4D-001 | done | Publish code guidelines for modularity + enums + interface naming | P4C-006 | S | guideline doc is present and referenced in planning context |
 | P4D-002 | done | Introduce shared enums/interfaces baseline and migrate core auth/quiz/review contracts | P4D-001 | M | core domains no longer rely on duplicated literal unions |
+| P4D-004 | done | Consolidate processed seed artifacts into single source file (`assets/processed/seed.json`) | P4D-002 | S | only one processed seed file is used by scripts/runtime/docs |
 | P4D-003 | todo | Incrementally replace remaining magic strings and unprefixed reusable interfaces repo-wide | P4D-002 | L | majority of feature modules consume shared enums/interfaces |
 
 ## Exit criteria

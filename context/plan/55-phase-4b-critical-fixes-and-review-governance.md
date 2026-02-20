@@ -101,7 +101,7 @@ Acceptance:
 Status: `done`
 
 Scope:
-- Replace placeholder/dummy seed entries in `assets/processed/words.mvp.json` with practical beginner Telugu vocabulary.
+- Replace placeholder/dummy seed entries in `assets/processed/seed.json` with practical beginner Telugu vocabulary.
 - Keep transliteration-first style and ensure English gloss + short usage examples per entry.
 
 Acceptance:

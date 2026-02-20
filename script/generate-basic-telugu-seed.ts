@@ -148,7 +148,7 @@ async function main() {
     },
   }));
 
-  const assetsSeedPath = path.join(process.cwd(), "assets/processed/telugu_basic_seed_model_draft.json");
+  const assetsSeedPath = path.join(process.cwd(), "assets/processed/seed.json");
 
   await fs.mkdir(path.dirname(assetsSeedPath), { recursive: true });
 

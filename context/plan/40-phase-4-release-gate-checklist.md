@@ -32,7 +32,7 @@ Result: `pass`
 Result: `pass`
 
 ### 3) Content Quality
-- `assets/processed/words.mvp.json` uses realistic Telugu seed rows.
+- `assets/processed/seed.json` uses realistic Telugu seed rows.
 - Import pipeline purges legacy placeholder rows (`పదం*`, `word-*`, `padam-*`) before MVP import.
 - Content validator passes on MVP file.
 

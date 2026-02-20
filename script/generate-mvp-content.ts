@@ -104,7 +104,7 @@ function buildItem(index: number): Item {
 
 async function main() {
   const total = Number(process.argv[2] ?? 300);
-  const outputPath = process.argv[3] ?? "assets/processed/words.mvp.json";
+  const outputPath = process.argv[3] ?? "assets/processed/seed.json";
 
   if (!Number.isInteger(total) || total < 1) {
     throw new Error("Total must be a positive integer");
