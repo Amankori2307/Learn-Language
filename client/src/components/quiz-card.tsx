@@ -22,6 +22,7 @@ interface QuizCardProps {
   result: {
     isCorrect: boolean;
     correctAnswer: {
+      id?: number;
       telugu: string;
       english: string;
       transliteration: string;
@@ -151,20 +152,21 @@ export function QuizCard({
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {options.map((option) => {
                 const isSelected = selectedOption === option.id;
+                const correctOptionId = result?.correctAnswer?.id;
+                const isCorrectOption = result
+                  ? (typeof correctOptionId === "number"
+                      ? option.id === correctOptionId
+                      : option.text === result.correctAnswer.english)
+                  : false;
                 let className = "hover:border-primary hover:bg-primary/5";
 
                 if (result) {
-                  // Show result state
-                  if (result.isCorrect && isSelected) {
-                    className = "bg-green-100 border-green-500 text-green-800 ring-2 ring-green-500 ring-offset-2";
+                  if (isCorrectOption) {
+                    className = "border-emerald-500 bg-emerald-500/12 text-emerald-900 dark:text-emerald-200 ring-2 ring-emerald-500/60 ring-offset-2 ring-offset-background";
                   } else if (!result.isCorrect && isSelected) {
-                    className = "bg-red-100 border-red-500 text-red-800 ring-2 ring-red-500 ring-offset-2";
-                  } else if (!result.isCorrect && option.text === result.correctAnswer.english) { 
-                    // Ideally we'd highlight the correct answer here, but logic needs option ID match
-                    // For now, keep simple feedback
-                    className = "opacity-50";
+                    className = "border-rose-500 bg-rose-500/12 text-rose-900 dark:text-rose-200 ring-2 ring-rose-500/60 ring-offset-2 ring-offset-background";
                   } else {
-                    className = "opacity-50";
+                    className = "opacity-70";
                   }
                 } else if (isSelected) {
                   className = "border-primary bg-primary/10 text-primary ring-2 ring-primary ring-offset-2";
@@ -202,25 +204,29 @@ export function QuizCard({
                 aria-live="polite"
                 className={cn(
                   "border-t p-6 md:p-8",
-                  result.isCorrect ? "bg-green-50/50 border-green-100" : "bg-red-50/50 border-red-100"
+                  result.isCorrect
+                    ? "bg-emerald-50/80 border-emerald-200 dark:bg-emerald-950/30 dark:border-emerald-800/70"
+                    : "bg-rose-50/80 border-rose-200 dark:bg-rose-950/30 dark:border-rose-800/70"
                 )}
               >
                 <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
                   <div className="flex gap-4">
                     <div className={cn(
                       "p-3 rounded-full shrink-0",
-                      result.isCorrect ? "bg-green-100 text-green-600" : "bg-red-100 text-red-600"
+                      result.isCorrect
+                        ? "bg-emerald-100 text-emerald-700 dark:bg-emerald-900/60 dark:text-emerald-300"
+                        : "bg-rose-100 text-rose-700 dark:bg-rose-900/60 dark:text-rose-300"
                     )}>
                       {result.isCorrect ? <CheckCircle2 className="w-6 h-6" /> : <XCircle className="w-6 h-6" />}
                     </div>
                     <div>
                       <h4 className={cn(
                         "text-lg font-bold",
-                        result.isCorrect ? "text-green-700" : "text-red-700"
+                        result.isCorrect ? "text-emerald-800 dark:text-emerald-300" : "text-rose-800 dark:text-rose-300"
                       )}>
                         {result.isCorrect ? "Excellent!" : "Not quite right"}
                       </h4>
-                      <p className="text-muted-foreground mt-1">
+                      <p className="text-sm md:text-base text-foreground/90 dark:text-foreground mt-1">
                         <span className="italic break-words">{result.correctAnswer.transliteration}</span>
                         <span className="mx-2">•</span>
                         <span className="font-semibold text-foreground">({result.correctAnswer.telugu})</span>
@@ -228,22 +234,22 @@ export function QuizCard({
                         <span>{result.correctAnswer.english}</span>
                       </p>
                       {(result.example || result.correctAnswer.exampleSentences?.[0]) && (
-                        <div className="text-sm text-muted-foreground mt-2 bg-white/50 p-2 rounded-lg inline-block border border-black/5 space-y-1">
+                        <div className="text-sm mt-3 p-3 rounded-lg border border-border/70 bg-background/90 dark:bg-background/60 space-y-1 text-foreground">
                           <p>
-                            Example:{" "}
-                            <span className="font-telugu text-foreground">
+                            <span className="font-semibold">Example:</span>{" "}
+                            <span className="font-telugu text-foreground/95">
                               {result.example?.telugu ?? result.correctAnswer.exampleSentences[0]}
                             </span>
                           </p>
                           <p>
-                            Pronunciation:{" "}
-                            <span className="font-medium text-foreground">
+                            <span className="font-semibold">Pronunciation:</span>{" "}
+                            <span className="font-medium text-foreground/95">
                               {result.example?.pronunciation ?? `${result.correctAnswer.transliteration} (${result.correctAnswer.telugu})`}
                             </span>
                           </p>
                           <p>
-                            Meaning:{" "}
-                            <span className="font-medium text-foreground">
+                            <span className="font-semibold">Meaning:</span>{" "}
+                            <span className="font-medium text-foreground/95">
                               {result.example?.meaning ?? result.correctAnswer.english}
                             </span>
                           </p>
