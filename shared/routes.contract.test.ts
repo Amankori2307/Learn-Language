@@ -1,12 +1,13 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { api } from "./routes";
+import { QuizDirectionEnum, QuizQuestionTypeEnum, ReviewStatusEnum } from "./domain/enums";
 
 test("quiz generate contract accepts expected payload", () => {
   const payload = [
     {
       wordId: 1,
-      type: "telugu_to_english",
+      type: QuizQuestionTypeEnum.TELUGU_TO_ENGLISH,
       questionText: "నేను",
       audioUrl: null,
       options: [
@@ -57,7 +58,7 @@ test("quiz submit response contract requires example triplet", () => {
       audioUrl: null,
       exampleSentences: ["నేను నీరు తాగాను."],
       tags: [],
-      reviewStatus: "approved",
+      reviewStatus: ReviewStatusEnum.APPROVED,
       submittedBy: null,
       submittedAt: null,
       reviewedBy: null,
@@ -93,11 +94,11 @@ test("stats contract accepts direction metrics", () => {
     xp: 120,
     recognitionAccuracy: 72.5,
     recallAccuracy: 61.2,
-    recommendedDirection: "telugu_to_english",
+    recommendedDirection: QuizDirectionEnum.TELUGU_TO_ENGLISH,
   };
 
   const parsed = api.stats.get.responses[200].parse(payload);
-  assert.equal(parsed.recommendedDirection, "telugu_to_english");
+  assert.equal(parsed.recommendedDirection, QuizDirectionEnum.TELUGU_TO_ENGLISH);
 });
 
 test("leaderboard contract accepts ranked entries", () => {
@@ -127,8 +128,8 @@ test("attempt history contract accepts payload", () => {
       wordId: 1,
       isCorrect: true,
       confidenceLevel: 3,
-      direction: "telugu_to_english",
-      questionType: "telugu_to_english",
+      direction: QuizDirectionEnum.TELUGU_TO_ENGLISH,
+      questionType: QuizQuestionTypeEnum.TELUGU_TO_ENGLISH,
       responseTimeMs: 1820,
       createdAt: "2026-02-20T12:00:00.000Z",
       word: {
@@ -160,7 +161,7 @@ test("review queue contract accepts pending review payload", () => {
       transliteration: "namaste",
       english: "hello",
       partOfSpeech: "phrase",
-      reviewStatus: "pending_review",
+      reviewStatus: ReviewStatusEnum.PENDING_REVIEW,
       sourceUrl: null,
       sourceCapturedAt: null,
       submittedBy: null,
@@ -172,7 +173,7 @@ test("review queue contract accepts pending review payload", () => {
   ];
 
   const parsed = api.review.queue.responses[200].parse(payload);
-  assert.equal(parsed[0].reviewStatus, "pending_review");
+  assert.equal(parsed[0].reviewStatus, ReviewStatusEnum.PENDING_REVIEW);
 });
 
 test("review transition contract rejects invalid status", () => {
@@ -186,7 +187,7 @@ test("review transition contract rejects invalid status", () => {
 test("review bulk transition contract accepts payload", () => {
   const parsed = api.review.bulkTransition.input.parse({
     ids: [1, 2, 3],
-    toStatus: "approved",
+    toStatus: ReviewStatusEnum.APPROVED,
     notes: "Looks good",
   });
   assert.equal(parsed.ids.length, 3);
@@ -199,7 +200,7 @@ test("review history contract accepts payload", () => {
       telugu: "నమస్తే",
       transliteration: "namaste",
       english: "hello",
-      reviewStatus: "pending_review",
+      reviewStatus: ReviewStatusEnum.PENDING_REVIEW,
       sourceUrl: null,
       sourceCapturedAt: null,
       reviewNotes: null,
@@ -207,8 +208,8 @@ test("review history contract accepts payload", () => {
     events: [
       {
         id: 10,
-        fromStatus: "draft",
-        toStatus: "pending_review",
+        fromStatus: ReviewStatusEnum.DRAFT,
+        toStatus: ReviewStatusEnum.PENDING_REVIEW,
         changedBy: "u-1",
         notes: "submitted",
         sourceUrl: "https://example.com/source",

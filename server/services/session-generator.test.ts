@@ -1,6 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { generateSessionWords } from "./session-generator";
+import { QuizModeEnum } from "@shared/domain/enums";
 
 const now = new Date("2026-02-20T00:00:00.000Z");
 
@@ -46,7 +47,7 @@ test("daily_review prioritizes due/new/weak mix", () => {
   ]);
 
   const result = generateSessionWords({
-    mode: "daily_review",
+    mode: QuizModeEnum.DAILY_REVIEW,
     count: 6,
     words,
     progressMap,
@@ -66,7 +67,7 @@ test("weak_words mode prioritizes weak items first", () => {
     [2, makeProgress(2, new Date("2026-03-01T00:00:00.000Z"), 3)],
   ]);
 
-  const result = generateSessionWords({ mode: "weak_words", count: 3, words, progressMap, now });
+  const result = generateSessionWords({ mode: QuizModeEnum.WEAK_WORDS, count: 3, words, progressMap, now });
 
   assert.equal(result.length, 3);
   assert.deepEqual(
@@ -77,7 +78,7 @@ test("weak_words mode prioritizes weak items first", () => {
 
 test("daily_review handles empty candidate pool", () => {
   const result = generateSessionWords({
-    mode: "daily_review",
+    mode: QuizModeEnum.DAILY_REVIEW,
     count: 10,
     words: [] as any,
     progressMap: new Map(),
@@ -95,7 +96,7 @@ test("daily_review falls back to ranked words when no due items exist", () => {
   ]);
 
   const result = generateSessionWords({
-    mode: "daily_review",
+    mode: QuizModeEnum.DAILY_REVIEW,
     count: 3,
     words,
     progressMap,
@@ -116,7 +117,7 @@ test("daily_review throttles new content when recent accuracy is low", () => {
   ]);
 
   const lowAccuracyResult = generateSessionWords({
-    mode: "daily_review",
+    mode: QuizModeEnum.DAILY_REVIEW,
     count: 10,
     words,
     progressMap,
@@ -125,7 +126,7 @@ test("daily_review throttles new content when recent accuracy is low", () => {
   });
 
   const baselineResult = generateSessionWords({
-    mode: "daily_review",
+    mode: QuizModeEnum.DAILY_REVIEW,
     count: 10,
     words,
     progressMap,
@@ -152,7 +153,7 @@ test("complex_workout prioritizes weak/harder candidates", () => {
   ]);
 
   const result = generateSessionWords({
-    mode: "complex_workout",
+    mode: QuizModeEnum.COMPLEX_WORKOUT,
     count: 3,
     words,
     progressMap,

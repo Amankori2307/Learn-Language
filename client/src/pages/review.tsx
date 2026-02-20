@@ -6,9 +6,14 @@ import { Input } from "@/components/ui/input";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
 import { useAuth } from "@/hooks/use-auth";
-import { UserTypeEnum } from "@shared/domain/enums";
+import { ReviewStatusEnum, UserTypeEnum } from "@shared/domain/enums";
 
-const STATUS_OPTIONS: ReviewStatus[] = ["pending_review", "draft", "approved", "rejected"];
+const STATUS_OPTIONS: ReviewStatus[] = [
+  ReviewStatusEnum.PENDING_REVIEW,
+  ReviewStatusEnum.DRAFT,
+  ReviewStatusEnum.APPROVED,
+  ReviewStatusEnum.REJECTED,
+];
 function formatDate(value?: string | null) {
   if (!value) return "n/a";
   const date = new Date(value);
@@ -20,7 +25,7 @@ export default function ReviewPage() {
   const { user } = useAuth();
   const canReview = user?.role === UserTypeEnum.REVIEWER || user?.role === UserTypeEnum.ADMIN;
 
-  const [status, setStatus] = useState<ReviewStatus>("pending_review");
+  const [status, setStatus] = useState<ReviewStatus>(ReviewStatusEnum.PENDING_REVIEW);
   const [selectedIds, setSelectedIds] = useState<number[]>([]);
   const [activeWordId, setActiveWordId] = useState<number | undefined>(undefined);
   const [notes, setNotes] = useState("");
@@ -82,10 +87,10 @@ export default function ReviewPage() {
             placeholder="Optional notes for audit trail"
           />
           <div className="flex flex-wrap gap-2">
-            <Button onClick={() => runBulk("approved")} disabled={selectedIds.length === 0 || bulk.isPending}>
+            <Button onClick={() => runBulk(ReviewStatusEnum.APPROVED)} disabled={selectedIds.length === 0 || bulk.isPending}>
               Bulk Approve
             </Button>
-            <Button variant="destructive" onClick={() => runBulk("rejected")} disabled={selectedIds.length === 0 || bulk.isPending}>
+            <Button variant="destructive" onClick={() => runBulk(ReviewStatusEnum.REJECTED)} disabled={selectedIds.length === 0 || bulk.isPending}>
               Bulk Reject
             </Button>
             <Button variant="outline" onClick={() => setSelectedIds([])} disabled={selectedIds.length === 0}>
@@ -137,7 +142,7 @@ export default function ReviewPage() {
                           </Button>
                           <Button
                             size="sm"
-                            onClick={() => transition.mutate({ id: word.id, toStatus: "approved", notes: notes || undefined })}
+                            onClick={() => transition.mutate({ id: word.id, toStatus: ReviewStatusEnum.APPROVED, notes: notes || undefined })}
                             disabled={transition.isPending}
                           >
                             Approve
@@ -145,7 +150,7 @@ export default function ReviewPage() {
                           <Button
                             size="sm"
                             variant="destructive"
-                            onClick={() => transition.mutate({ id: word.id, toStatus: "rejected", notes: notes || undefined })}
+                            onClick={() => transition.mutate({ id: word.id, toStatus: ReviewStatusEnum.REJECTED, notes: notes || undefined })}
                             disabled={transition.isPending}
                           >
                             Reject

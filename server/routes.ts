@@ -374,7 +374,7 @@ export async function registerRoutes(
       });
       res.json({
         id: created.id,
-        reviewStatus: "draft",
+        reviewStatus: ReviewStatusEnum.DRAFT,
       });
     } catch (error) {
       if (error instanceof z.ZodError) {

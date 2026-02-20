@@ -1,7 +1,8 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { api } from "@shared/routes";
+import { ReviewStatusEnum } from "@shared/domain/enums";
 
-export type ReviewStatus = "draft" | "pending_review" | "approved" | "rejected";
+export type ReviewStatus = ReviewStatusEnum;
 
 export function useReviewQueue(status: ReviewStatus, limit = 50) {
   return useQuery({

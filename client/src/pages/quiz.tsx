@@ -152,14 +152,14 @@ export default function QuizPage() {
               className="w-full h-12 text-lg rounded-xl shadow-lg shadow-primary/20"
               onClick={() => setLocation(`/quiz?mode=${recommendedMode}`)}
             >
-              {recommendedMode === "weak_words" ? "Practice Weak Words" : "Start Daily Review"}
+              {recommendedMode === QuizModeEnum.WEAK_WORDS ? "Practice Weak Words" : "Start Daily Review"}
             </Button>
             <Button variant="outline" className="w-full h-12 text-lg rounded-xl" onClick={() => setLocation('/')}>
               Back to Dashboard
             </Button>
           </div>
           <p className="text-xs text-muted-foreground mt-3">
-            Next recommendation: {recommendedMode === "weak_words" ? "focus on weak words" : "continue daily review"}.
+            Next recommendation: {recommendedMode === QuizModeEnum.WEAK_WORDS ? "focus on weak words" : "continue daily review"}.
           </p>
         </div>
       </div>

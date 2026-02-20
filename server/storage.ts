@@ -1,6 +1,6 @@
 import { db } from "./db";
 import { eq, sql, and } from "drizzle-orm";
-import { QuizDirectionEnum, QuizQuestionTypeEnum, ReviewStatusEnum } from "@shared/domain/enums";
+import { QuizDirectionEnum, QuizModeEnum, QuizQuestionTypeEnum, ReviewStatusEnum } from "@shared/domain/enums";
 import {
   words, clusters, wordClusters, userWordProgress, quizAttempts, wordExamples, users,
   wordReviewEvents,
@@ -67,7 +67,7 @@ export interface IStorage {
     xp: number;
     recognitionAccuracy: number;
     recallAccuracy: number;
-    recommendedDirection: "telugu_to_english" | "english_to_telugu";
+    recommendedDirection: QuizDirectionEnum;
   }>;
   getRecentAccuracy(userId: string, limit?: number): Promise<number>;
   getLeaderboard(
@@ -124,7 +124,7 @@ export class DatabaseStorage implements IStorage {
     return await db
       .select()
       .from(words)
-      .where(eq(words.reviewStatus, "approved"))
+      .where(eq(words.reviewStatus, ReviewStatusEnum.APPROVED))
       .limit(limit);
   }
 
@@ -132,7 +132,7 @@ export class DatabaseStorage implements IStorage {
     const [word] = await db
       .select()
       .from(words)
-      .where(and(eq(words.id, id), eq(words.reviewStatus, "approved")));
+      .where(and(eq(words.id, id), eq(words.reviewStatus, ReviewStatusEnum.APPROVED)));
     return word;
   }
 
@@ -142,13 +142,24 @@ export class DatabaseStorage implements IStorage {
     })
     .from(wordClusters)
     .innerJoin(words, eq(wordClusters.wordId, words.id))
-    .where(and(eq(wordClusters.clusterId, clusterId), eq(words.reviewStatus, "approved")));
+    .where(and(eq(wordClusters.clusterId, clusterId), eq(words.reviewStatus, ReviewStatusEnum.APPROVED)));
     
     return results.map(r => r.word);
   }
 
   async createWord(word: CreateWordRequest): Promise<Word> {
-    const [newWord] = await db.insert(words).values(word).returning();
+    const normalizedReviewStatus = (
+      word.reviewStatus === ReviewStatusEnum.DRAFT ||
+      word.reviewStatus === ReviewStatusEnum.PENDING_REVIEW ||
+      word.reviewStatus === ReviewStatusEnum.APPROVED ||
+      word.reviewStatus === ReviewStatusEnum.REJECTED
+    )
+      ? word.reviewStatus
+      : ReviewStatusEnum.APPROVED;
+    const [newWord] = await db
+      .insert(words)
+      .values({ ...word, reviewStatus: normalizedReviewStatus })
+      .returning();
     return newWord;
   }
 
@@ -296,7 +307,7 @@ export class DatabaseStorage implements IStorage {
     userId: string,
     limit: number = 10,
     clusterId?: number,
-    mode: QuizMode = "daily_review",
+    mode: QuizMode = QuizModeEnum.DAILY_REVIEW,
   ): Promise<Word[]> {
     let candidateWords: Word[] = [];
     if (clusterId) {
@@ -516,7 +527,7 @@ export class DatabaseStorage implements IStorage {
     xp: number;
     recognitionAccuracy: number;
     recallAccuracy: number;
-    recommendedDirection: "telugu_to_english" | "english_to_telugu";
+    recommendedDirection: QuizDirectionEnum;
   }> {
     const progressList = await this.getUserProgress(userId);
     
@@ -564,15 +575,17 @@ export class DatabaseStorage implements IStorage {
       .from(quizAttempts)
       .where(eq(quizAttempts.userId, userId));
 
-    const recallAttempts = directionAttempts.filter((a) => a.direction === "telugu_to_english");
-    const recognitionAttempts = directionAttempts.filter((a) => a.direction === "english_to_telugu");
+    const recallAttempts = directionAttempts.filter((a) => a.direction === QuizDirectionEnum.TELUGU_TO_ENGLISH);
+    const recognitionAttempts = directionAttempts.filter((a) => a.direction === QuizDirectionEnum.ENGLISH_TO_TELUGU);
 
     const recallCorrect = recallAttempts.filter((a) => a.isCorrect).length;
     const recognitionCorrect = recognitionAttempts.filter((a) => a.isCorrect).length;
 
     const recallAccuracy = recallAttempts.length > 0 ? recallCorrect / recallAttempts.length : 1;
     const recognitionAccuracy = recognitionAttempts.length > 0 ? recognitionCorrect / recognitionAttempts.length : 1;
-    const recommendedDirection = recallAccuracy < recognitionAccuracy ? "telugu_to_english" : "english_to_telugu";
+    const recommendedDirection = recallAccuracy < recognitionAccuracy
+      ? QuizDirectionEnum.TELUGU_TO_ENGLISH
+      : QuizDirectionEnum.ENGLISH_TO_TELUGU;
     
     return {
       totalWords,

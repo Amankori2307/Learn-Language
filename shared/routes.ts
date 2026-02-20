@@ -167,8 +167,8 @@ export const api = {
           wordId: z.number(),
           isCorrect: z.boolean(),
           confidenceLevel: z.number().nullable(),
-          direction: z.string().nullable(),
-          questionType: z.string().nullable(),
+          direction: z.nativeEnum(QuizDirectionEnum).nullable(),
+          questionType: z.nativeEnum(QuizQuestionTypeEnum).nullable(),
           responseTimeMs: z.number().nullable(),
           createdAt: z.string().nullable(),
           word: z.object({

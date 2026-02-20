@@ -1,7 +1,8 @@
 import type { UserWordProgress, Word } from "@shared/schema";
+import { QuizModeEnum } from "@shared/domain/enums";
 import { rankQuizCandidates } from "./quiz-candidate-scoring";
 
-export type QuizMode = "daily_review" | "new_words" | "cluster" | "weak_words" | "complex_workout";
+export type QuizMode = QuizModeEnum;
 
 function isDue(progress?: UserWordProgress, now = new Date()): boolean {
   if (!progress?.nextReview) return false;
@@ -46,19 +47,19 @@ export function generateSessionWords(params: {
   const weak = ranked.filter((word) => isWeak(params.progressMap.get(word.id), now));
   const fresh = ranked.filter((word) => !params.progressMap.has(word.id));
 
-  if (params.mode === "new_words") {
+  if (params.mode === QuizModeEnum.NEW_WORDS) {
     return uniqueById([...take(fresh, params.count), ...ranked]).slice(0, params.count);
   }
 
-  if (params.mode === "weak_words") {
+  if (params.mode === QuizModeEnum.WEAK_WORDS) {
     return uniqueById([...take(weak, params.count), ...ranked]).slice(0, params.count);
   }
 
-  if (params.mode === "cluster") {
+  if (params.mode === QuizModeEnum.CLUSTER) {
     return ranked.slice(0, params.count);
   }
 
-  if (params.mode === "complex_workout") {
+  if (params.mode === QuizModeEnum.COMPLEX_WORKOUT) {
     const hardFirst = ranked
       .filter((word) => (word.difficulty ?? 1) >= 2)
       .concat(ranked.filter((word) => (word.difficulty ?? 1) < 2));

@@ -2,10 +2,11 @@ import { Layout } from "@/components/layout";
 import { useAttemptHistory } from "@/hooks/use-attempt-history";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { QuizDirectionEnum } from "@shared/domain/enums";
 
-function toLabel(direction: string | null) {
-  if (direction === "telugu_to_english") return "Telugu -> English";
-  if (direction === "english_to_telugu") return "English -> Telugu";
+function toLabel(direction: QuizDirectionEnum | null) {
+  if (direction === QuizDirectionEnum.TELUGU_TO_ENGLISH) return "Telugu -> English";
+  if (direction === QuizDirectionEnum.ENGLISH_TO_TELUGU) return "English -> Telugu";
   return "Mixed";
 }
 

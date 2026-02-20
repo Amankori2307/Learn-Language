@@ -4,6 +4,7 @@ import { CheckCircle2, XCircle, Volume2, ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 import confetti from "canvas-confetti";
 import { useEffect, useState } from "react";
+import { QuizQuestionTypeEnum } from "@shared/domain/enums";
 
 interface QuizOption {
   id: number;
@@ -13,7 +14,7 @@ interface QuizOption {
 interface QuizCardProps {
   question: string;
   pronunciation?: string | null;
-  type: 'telugu_to_english' | 'english_to_telugu';
+  type: QuizQuestionTypeEnum;
   options: QuizOption[];
   confidenceLevel: 1 | 2 | 3;
   onConfidenceChange: (value: 1 | 2 | 3) => void;
@@ -69,7 +70,7 @@ export function QuizCard({
   };
 
   const promptLabel =
-    type === "telugu_to_english"
+    type === QuizQuestionTypeEnum.TELUGU_TO_ENGLISH
       ? "Translate to English"
       : "Translate to Telugu";
 
@@ -176,7 +177,7 @@ export function QuizCard({
                     aria-label={`Option ${option.text}`}
                       className={cn(
                         "p-4 rounded-xl text-base md:text-lg font-medium border-2 transition-all duration-200 text-left relative overflow-hidden group break-words",
-                        type !== "telugu_to_english" && "text-xl",
+                        type !== QuizQuestionTypeEnum.TELUGU_TO_ENGLISH && "text-xl",
                         className
                       )}
                   >

@@ -2,9 +2,9 @@
 
 Date: 2026-02-20  
 Session owner: Codex  
-Last completed task ID: P4D-004  
+Last completed task ID: P4D-003  
 Current in-progress task ID: -  
-Next task ID: P4D-003
+Next task ID: P5-001
 
 ## Current state
 
@@ -24,6 +24,7 @@ Next task ID: P4D-003
 - Phase 4C words-first flow completed (word-only prompts + sentence feedback triplet).
 - Code guideline baseline added for modularity + enum/interface standards.
 - Processed content seed consolidated to single file: `assets/processed/seed.json`.
+- Enum/interface cleanup completed across active modules (auth, review, quiz, history, dashboard, session generator).
 
 ## Current blockers
 
@@ -31,5 +32,5 @@ Next task ID: P4D-003
 
 ## Immediate next actions
 
-1. Continue incremental cleanup of remaining magic strings (`P4D-003`).
+1. Resume deferred media backlog when prioritized (`P5-001` onward).
 2. Keep all new modules aligned with `context/plan/02-code-guidelines.md`.

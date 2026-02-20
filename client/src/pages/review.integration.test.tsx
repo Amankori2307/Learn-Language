@@ -2,6 +2,7 @@ import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import type { ReactNode } from "react";
 import { describe, expect, it, vi } from "vitest";
+import { ReviewStatusEnum, UserTypeEnum } from "@shared/domain/enums";
 import ReviewPage from "./review";
 
 const transitionMutate = vi.fn();
@@ -15,7 +16,7 @@ vi.mock("@/hooks/use-auth", () => ({
   useAuth: () => ({
     user: {
       id: "reviewer-1",
-      role: "reviewer",
+      role: UserTypeEnum.REVIEWER,
       email: "reviewer@example.com",
     },
   }),
@@ -30,7 +31,7 @@ vi.mock("@/hooks/use-review", () => ({
         transliteration: "namaste",
         english: "hello",
         partOfSpeech: "phrase",
-        reviewStatus: "pending_review",
+        reviewStatus: ReviewStatusEnum.PENDING_REVIEW,
         sourceUrl: "https://example.com/source",
         sourceCapturedAt: "2026-02-20T11:00:00.000Z",
         submittedBy: "u-1",
@@ -51,7 +52,7 @@ vi.mock("@/hooks/use-review", () => ({
         telugu: "నమస్తే",
         transliteration: "namaste",
         english: "hello",
-        reviewStatus: "pending_review",
+        reviewStatus: ReviewStatusEnum.PENDING_REVIEW,
         sourceUrl: "https://example.com/source",
         sourceCapturedAt: "2026-02-20T11:00:00.000Z",
         reviewNotes: null,
@@ -88,7 +89,7 @@ describe("ReviewPage integration", () => {
     expect(bulkMutateAsync).toHaveBeenCalledTimes(1);
     expect(bulkMutateAsync).toHaveBeenCalledWith({
       ids: [11],
-      toStatus: "approved",
+      toStatus: ReviewStatusEnum.APPROVED,
       notes: "verified by reviewer",
     });
   });
@@ -105,7 +106,7 @@ describe("ReviewPage integration", () => {
 
     expect(transitionMutate).toHaveBeenCalledWith({
       id: 11,
-      toStatus: "approved",
+      toStatus: ReviewStatusEnum.APPROVED,
       notes: undefined,
     });
   });

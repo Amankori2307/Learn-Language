@@ -1,21 +1,21 @@
 import { computeStreak, computeXp } from "./stats";
 
-type UserIdentity = {
+interface IUserIdentity {
   id: string;
   firstName: string | null;
   lastName: string | null;
   email: string | null;
   profileImageUrl: string | null;
-};
+}
 
-type AttemptRow = {
+interface IAttemptRow {
   userId: string;
   createdAt: Date | null;
   isCorrect: boolean;
   difficulty: number | null;
-};
+}
 
-export type LeaderboardEntry = {
+export interface ILeaderboardEntry {
   rank: number;
   userId: string;
   firstName: string | null;
@@ -26,21 +26,21 @@ export type LeaderboardEntry = {
   streak: number;
   attempts: number;
   accuracy: number;
-};
+}
 
 export function computeLeaderboard(
-  users: UserIdentity[],
-  attempts: AttemptRow[],
+  users: IUserIdentity[],
+  attempts: IAttemptRow[],
   limit: number,
-): LeaderboardEntry[] {
-  const byUser = new Map<string, AttemptRow[]>();
+): ILeaderboardEntry[] {
+  const byUser = new Map<string, IAttemptRow[]>();
   for (const attempt of attempts) {
     const list = byUser.get(attempt.userId) ?? [];
     list.push(attempt);
     byUser.set(attempt.userId, list);
   }
 
-  const rows: LeaderboardEntry[] = users.map((user) => {
+  const rows: ILeaderboardEntry[] = users.map((user) => {
     const userAttempts = byUser.get(user.id) ?? [];
     const correctAttempts = userAttempts.filter((a) => a.isCorrect).length;
     const hardCorrectAttempts = userAttempts.filter((a) => a.isCorrect && (a.difficulty ?? 1) >= 3).length;

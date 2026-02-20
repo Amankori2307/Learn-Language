@@ -17,6 +17,7 @@ import {
   MessageSquareQuote
 } from "lucide-react";
 import { motion } from "framer-motion";
+import { QuizDirectionEnum, QuizModeEnum } from "@shared/domain/enums";
 
 export default function Dashboard() {
   const { user } = useAuth();
@@ -41,14 +42,14 @@ export default function Dashboard() {
     xp: 0,
     recognitionAccuracy: 0,
     recallAccuracy: 0,
-    recommendedDirection: "telugu_to_english" as const,
+    recommendedDirection: QuizDirectionEnum.TELUGU_TO_ENGLISH as const,
   };
 
   const s = stats || defaultStats;
 
-  const continueMode = s.weak > 0 ? "weak_words" : "daily_review";
+  const continueMode = s.weak > 0 ? QuizModeEnum.WEAK_WORDS : QuizModeEnum.DAILY_REVIEW;
   const primaryLearningHref = `/quiz?mode=${continueMode}`;
-  const primaryLearningLabel = continueMode === "weak_words" ? "Resume Weak Spots" : "Start Daily Review";
+  const primaryLearningLabel = continueMode === QuizModeEnum.WEAK_WORDS ? "Resume Weak Spots" : "Start Daily Review";
   const tutorEnabled = import.meta.env.VITE_ENABLE_TUTOR === "true";
 
   const cards = [
@@ -63,21 +64,21 @@ export default function Dashboard() {
       title: "Daily Review",
       description: "Review words due for repetition",
       icon: Zap,
-      href: "/quiz?mode=daily_review",
+      href: `/quiz?mode=${QuizModeEnum.DAILY_REVIEW}`,
       count: s.learning
     },
     {
       title: "New Words",
       description: "Learn 10 new words today",
       icon: BookOpen,
-      href: "/quiz?mode=new_words",
+      href: `/quiz?mode=${QuizModeEnum.NEW_WORDS}`,
       count: 10
     },
     {
       title: "Weak Spots",
       description: "Practice words you struggle with",
       icon: Dumbbell,
-      href: "/quiz?mode=weak_words",
+      href: `/quiz?mode=${QuizModeEnum.WEAK_WORDS}`,
       count: s.weak
     },
     {
@@ -91,7 +92,7 @@ export default function Dashboard() {
       title: "Complex Workout",
       description: "Harder sentence-based drills to deepen retention",
       icon: BrainCircuit,
-      href: "/quiz?mode=complex_workout",
+      href: `/quiz?mode=${QuizModeEnum.COMPLEX_WORKOUT}`,
       count: Math.max(5, Math.round(s.learning / 2)),
     },
     {
@@ -127,7 +128,7 @@ export default function Dashboard() {
               <p className="text-sm text-muted-foreground mt-1">
                 Focus next on:{" "}
                 <span className="font-semibold text-foreground">
-                  {s.recommendedDirection === "telugu_to_english" ? "Telugu -> English recall" : "English -> Telugu recognition"}
+                  {s.recommendedDirection === QuizDirectionEnum.TELUGU_TO_ENGLISH ? "Telugu -> English recall" : "English -> Telugu recognition"}
                 </span>
               </p>
             </div>
@@ -138,7 +139,7 @@ export default function Dashboard() {
                   {primaryLearningLabel}
                 </Button>
               </Link>
-              <Link href="/quiz?mode=new_words">
+              <Link href={`/quiz?mode=${QuizModeEnum.NEW_WORDS}`}>
                 <Button size="lg" variant="outline" className="min-w-[220px] gap-2">
                   <BookOpen className="w-5 h-5" />
                   Learn New Words
