@@ -12,6 +12,8 @@
     "lint": "npm run check",
     "test": "node --import tsx --test server/**/*.test.ts shared/**/*.test.ts",
     "ci": "npm run lint && npm run typecheck && npm run test",
+    "content:validate": "node --import tsx script/validate-content.ts",
+    "content:import": "node --import tsx script/import-content.ts",
     "db:push": "drizzle-kit push"
   },
   "dependencies": {

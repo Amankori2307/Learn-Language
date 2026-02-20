@@ -18,9 +18,9 @@ Status legend: `todo` | `doing` | `done` | `blocked`
 |---|---|---|---|---|---|
 | P1-001 | done | Normalize schema for words/clusters/sentences/progress fields | P0-003 | M | schema reflects contract in `70-schema-and-api-contracts.md` |
 | P1-002 | done | Add DB indexes for quiz selection and review due lookups | P1-001 | S | query plans use indexes for target endpoints |
-| P1-003 | todo | Implement content import format (CSV/JSON) for text-only vocabulary | P1-001 | M | import script validates and upserts content |
+| P1-003 | done | Implement content import format (CSV/JSON) for text-only vocabulary | P1-001 | M | import script validates and upserts content |
 | P1-004 | todo | Expand seed dataset to MVP target (300 words, 20 clusters, 100 sentences) | P1-003 | L | seeded DB meets minimum target counts |
-| P1-005 | todo | Add content quality validation rules (duplicates, transliteration format, missing examples) | P1-003 | M | validation report generated and clean |
+| P1-005 | done | Add content quality validation rules (duplicates, transliteration format, missing examples) | P1-003 | M | validation report generated and clean |
 
 ## Phase 2 - Quiz + Adaptive SRS (Core)
 

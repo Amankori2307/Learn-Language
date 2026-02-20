@@ -129,3 +129,34 @@ Blockers:
 
 Resume notes:
 - Finish P1-001 by updating API/storage consumers to read from normalized structures where needed.
+
+Date: 2026-02-20
+Session owner: Codex
+Last completed task ID: P1-005
+Current in-progress task ID: None
+Next task ID: P1-004
+
+Completed today:
+- Implemented content import pipeline with CSV/JSON support and DB upsert behavior.
+- Added content validation script for duplicate lexical keys, transliteration quality checks, and example coverage checks.
+- Added sample seed content format docs and sample dataset.
+
+Files changed:
+- script/import-content.ts
+- script/validate-content.ts
+- content/seed/README.md
+- content/seed/words.sample.json
+- package.json
+- context/plan/01-master-task-registry.md
+- context/plan/20-phase-1-data-and-content.md
+- context/plan/99-daily-run-log.md
+
+Tests/checks run:
+- `npm run content:validate -- content/seed/words.sample.json` (pass)
+- `npm run ci` (pass)
+
+Blockers:
+- None.
+
+Resume notes:
+- Proceed with P1-004 dataset expansion toward 300 words / 20 clusters / 100 sentences.

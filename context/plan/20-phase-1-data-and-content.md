@@ -40,7 +40,7 @@ Acceptance:
 - Index definitions exist in schema and are ready for DB push.
 
 ### P1-003 - Content import format (CSV/JSON)
-Status: `todo`
+Status: `done`
 
 Scope:
 - Define canonical input format for text content ingestion.
@@ -61,7 +61,7 @@ Acceptance:
 - Target dataset reached: 300 words, 20 clusters, 100 sentences.
 
 ### P1-005 - Content quality checks
-Status: `todo`
+Status: `done`
 
 Scope:
 - Detect duplicate lexical items and cluster links.
