@@ -485,3 +485,34 @@ Blockers:
 
 Resume notes:
 - P4-005 can be closed once human sign-off is recorded.
+
+Date: 2026-02-20
+Session owner: Codex
+Last completed task ID: P4-006
+Current in-progress task ID: None
+Next task ID: P4-007
+
+Completed today:
+- Added `complex_workout` quiz mode for harder text/sentence-heavy practice.
+- Updated session generator and question generation logic for advanced workout behavior.
+- Added dashboard entry point for complex workouts.
+
+Files changed:
+- shared/routes.ts
+- client/src/hooks/use-quiz.ts
+- server/services/session-generator.ts
+- server/services/session-generator.test.ts
+- server/routes.ts
+- client/src/pages/dashboard.tsx
+- context/plan/01-master-task-registry.md
+- context/plan/50-phase-4-hardening-and-release.md
+- context/plan/99-daily-run-log.md
+
+Tests/checks run:
+- `npm run ci` (pass)
+
+Blockers:
+- None.
+
+Resume notes:
+- Continue with P4-007 contextual learning mode.

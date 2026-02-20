@@ -61,7 +61,7 @@ Acceptance:
 - Another engineer can deploy and rollback using docs only.
 
 ### P4-006 - Complex sentence workouts (text-only)
-Status: `todo`
+Status: `done`
 
 Scope:
 - Add advanced fill-in-the-blank sentence flows.

@@ -3,7 +3,7 @@ import { api, buildUrl } from "@shared/routes";
 import { z } from "zod";
 
 // Types derived from API definition
-export type QuizMode = 'daily_review' | 'new_words' | 'cluster' | 'weak_words';
+export type QuizMode = 'daily_review' | 'new_words' | 'cluster' | 'weak_words' | 'complex_workout';
 type QuizSubmitInput = z.infer<typeof api.quiz.submit.input>;
 
 export function useGenerateQuiz(mode: QuizMode = 'daily_review', clusterId?: number) {

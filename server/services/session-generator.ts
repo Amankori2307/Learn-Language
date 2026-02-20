@@ -1,7 +1,7 @@
 import type { UserWordProgress, Word } from "@shared/schema";
 import { rankQuizCandidates } from "./quiz-candidate-scoring";
 
-export type QuizMode = "daily_review" | "new_words" | "cluster" | "weak_words";
+export type QuizMode = "daily_review" | "new_words" | "cluster" | "weak_words" | "complex_workout";
 
 function isDue(progress?: UserWordProgress, now = new Date()): boolean {
   if (!progress?.nextReview) return false;
@@ -56,6 +56,13 @@ export function generateSessionWords(params: {
 
   if (params.mode === "cluster") {
     return ranked.slice(0, params.count);
+  }
+
+  if (params.mode === "complex_workout") {
+    const hardFirst = ranked
+      .filter((word) => (word.difficulty ?? 1) >= 2)
+      .concat(ranked.filter((word) => (word.difficulty ?? 1) < 2));
+    return uniqueById([...weak, ...hardFirst]).slice(0, params.count);
   }
 
   let reviewTarget = Math.round(params.count * 0.3);

@@ -85,19 +85,36 @@ export async function registerRoutes(
         count: 3,
       });
 
-      const type = ['telugu_to_english', 'english_to_telugu', 'fill_in_blank'][Math.floor(Math.random() * 3)];
+      const workoutTypes = ['fill_in_blank', 'sentence_meaning'] as const;
+      const defaultTypes = ['telugu_to_english', 'english_to_telugu', 'fill_in_blank', 'sentence_meaning'] as const;
+      const typePool = mode === "complex_workout" ? workoutTypes : defaultTypes;
+      const type = typePool[Math.floor(Math.random() * typePool.length)];
 
+      const sourceSentence = word.exampleSentences?.[0];
+      const fillBlankText = sourceSentence?.replace(word.telugu, "_____") || word.telugu;
+      const questionText =
+        type === "fill_in_blank"
+          ? fillBlankText
+          : type === "sentence_meaning"
+            ? sourceSentence || word.telugu
+            : type === "telugu_to_english"
+              ? word.telugu
+              : word.english;
+      
       const options = [word, ...distractors]
         .sort(() => 0.5 - Math.random())
         .map(w => ({
           id: w.id,
-          text: type === 'telugu_to_english' || type === 'fill_in_blank' ? w.english : w.telugu
+          text:
+            type === 'telugu_to_english' || type === 'fill_in_blank' || type === "sentence_meaning"
+              ? w.english
+              : w.telugu
         }));
 
       return {
         wordId: word.id,
         type,
-        questionText: type === 'telugu_to_english' || type === 'fill_in_blank' ? word.telugu : word.english,
+        questionText,
         audioUrl: word.audioUrl,
         options,
       };

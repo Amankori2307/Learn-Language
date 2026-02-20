@@ -92,6 +92,15 @@ export default function Dashboard() {
       color: "bg-violet-100 text-violet-700",
       buttonColor: "bg-violet-600 hover:bg-violet-700",
       count: s.totalWords,
+    },
+    {
+      title: "Complex Workout",
+      description: "Harder sentence-based drills to deepen retention",
+      icon: BrainCircuit,
+      href: "/quiz?mode=complex_workout",
+      color: "bg-indigo-100 text-indigo-700",
+      buttonColor: "bg-indigo-600 hover:bg-indigo-700",
+      count: Math.max(5, Math.round(s.learning / 2)),
     }
   ];
 
@@ -158,7 +167,7 @@ export default function Dashboard() {
 
         {/* Action Cards */}
         <h3 className="text-xl font-bold mt-8 mb-4">Start Learning</h3>
-        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-5 gap-6">
           {cards.map((card, idx) => (
             <motion.div
               key={card.title}

@@ -137,3 +137,28 @@ test("daily_review throttles new content when recent accuracy is low", () => {
   const baselineNewCount = baselineResult.filter((w: any) => !progressMap.has(w.id)).length;
   assert.ok(lowAccuracyNewCount <= baselineNewCount);
 });
+
+test("complex_workout prioritizes weak/harder candidates", () => {
+  const words = [
+    { ...makeWord(1), difficulty: 1 },
+    { ...makeWord(2), difficulty: 3 },
+    { ...makeWord(3), difficulty: 4 },
+    { ...makeWord(4), difficulty: 1 },
+  ] as any;
+
+  const progressMap = new Map<number, any>([
+    [1, makeProgress(1, new Date("2026-03-20T00:00:00.000Z"), 0)],
+    [2, makeProgress(2, new Date("2026-03-20T00:00:00.000Z"), 3)],
+  ]);
+
+  const result = generateSessionWords({
+    mode: "complex_workout",
+    count: 3,
+    words,
+    progressMap,
+    now,
+  });
+
+  assert.equal(result.length, 3);
+  assert.equal(result[0].id, 2);
+});

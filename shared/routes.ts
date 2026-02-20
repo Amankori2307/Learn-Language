@@ -76,7 +76,7 @@ export const api = {
       method: 'GET' as const,
       path: '/api/quiz/generate' as const,
       input: z.object({
-        mode: z.enum(['daily_review', 'new_words', 'cluster', 'weak_words']).default('daily_review'),
+        mode: z.enum(['daily_review', 'new_words', 'cluster', 'weak_words', 'complex_workout']).default('daily_review'),
         clusterId: z.coerce.number().optional(),
         count: z.coerce.number().default(10),
       }).optional(),
