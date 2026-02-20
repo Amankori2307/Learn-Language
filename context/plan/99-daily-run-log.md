@@ -2,9 +2,9 @@
 
 Date: 2026-02-20  
 Session owner: Codex  
-Last completed task ID: P4B-013  
-Current in-progress task ID: P4B-007  
-Next task ID: P4B-017
+Last completed task ID: P4B-018  
+Current in-progress task ID: P4-005  
+Next task ID: P5-001
 
 ## Current state
 
@@ -18,6 +18,8 @@ Next task ID: P4B-017
 - Review governance migration/backfill scripts are available and wired into container startup.
 - Reviewer authorization tests are in place and passing.
 - Compose dev runtime validated with backend auto-restart and frontend HMR signal.
+- UI integration tests are in place for profile save and reviewer queue actions (`vitest`).
+- MVP seed now uses realistic Telugu vocabulary from internal knowledge (91 rows), replacing placeholders.
 
 ## Current blockers
 
@@ -25,6 +27,6 @@ Next task ID: P4B-017
 
 ## Immediate next actions
 
-1. Add UI integration tests for profile save + reviewer queue actions (`P4B-017`).
-2. Promote at least one real user to reviewer/admin and validate permissions end-to-end (`P4B-007`).
-3. Decide whether to keep `pnpm install` at container startup or optimize first-boot runtime.
+1. Continue release gate hardening under `P4-005`.
+2. Keep reviewer governance checks in CI (`pnpm run test` + `pnpm run test:ui`).
+3. Start deferred media phase only after release gate sign-off.

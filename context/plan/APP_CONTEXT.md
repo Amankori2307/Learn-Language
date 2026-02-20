@@ -25,7 +25,7 @@ Build a Telugu learning app focused on text-first retention and beginner-friendl
 - Content/data:
   - Seed files now sourced from `assets/processed/`
   - Beginner model seed: `assets/processed/telugu_basic_seed_model_draft.json`
-  - MVP seed: `assets/processed/words.mvp.json`
+  - MVP seed: `assets/processed/words.mvp.json` (realistic Telugu beginner set, 91 rows)
 - Review governance:
   - Word review lifecycle fields (`draft`, `pending_review`, `approved`, `rejected`)
   - Review queue, transition, bulk transition, history, and draft submission APIs
@@ -40,6 +40,7 @@ Build a Telugu learning app focused on text-first retention and beginner-friendl
 - DB: PostgreSQL + Drizzle ORM
 - Package manager: pnpm
 - Container: Docker Compose
+- UI test runtime: Vitest + Testing Library
 
 ## Important runtime notes
 

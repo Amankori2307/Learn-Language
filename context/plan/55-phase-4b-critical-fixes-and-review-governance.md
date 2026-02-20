@@ -5,7 +5,7 @@ Objective: enforce vocabulary quality through reviewer controls and safe publish
 ## In progress
 
 ### P4B-007 - Reviewer queue and permissions
-Status: `blocked`
+Status: `done`
 
 Scope:
 - Add reviewer/admin-only guards for review actions.
@@ -14,6 +14,10 @@ Scope:
 Acceptance:
 - Non-reviewers cannot approve/reject.
 - Reviewer can move items across review states from UI.
+
+Validation:
+- Endpoint-level middleware tests enforce learner block and reviewer/admin allow paths.
+- Dev runtime path validated with reviewer UI routes and guarded actions.
 
 ## Pending
 
@@ -82,3 +86,23 @@ Scope:
 
 Acceptance:
 - Non-reviewers are blocked and reviewer/admin paths are allowed in tests.
+
+### P4B-017 - UI integration tests for profile + review flows
+Status: `done`
+
+Scope:
+- Add UI-level integration coverage for profile save interactions.
+- Add UI-level integration coverage for reviewer queue approve actions.
+
+Acceptance:
+- Regression tests catch profile form and reviewer queue action breakages.
+
+### P4B-018 - Replace dummy MVP seed with realistic Telugu vocabulary
+Status: `done`
+
+Scope:
+- Replace placeholder/dummy seed entries in `assets/processed/words.mvp.json` with practical beginner Telugu vocabulary.
+- Keep transliteration-first style and ensure English gloss + short usage examples per entry.
+
+Acceptance:
+- Imported dataset feels realistic for early learners and no obvious placeholder content remains.
