@@ -29,6 +29,37 @@ Resume notes:
 
 Date: 2026-02-20
 Session owner: Codex
+Last completed task ID: P4B-005
+Current in-progress task ID: None
+Next task ID: P4B-006
+
+Completed today:
+- Added testable leaderboard ranking service (`computeLeaderboard`) with explicit deterministic tie-break behavior.
+- Refactored storage leaderboard endpoint logic to use the service.
+- Added regression tests for leaderboard ranking edge cases and profile/leaderboard route contracts.
+- Completed P4B-005 and moved queue to reviewer-governance implementation (`P4B-006`).
+
+Files changed:
+- server/services/leaderboard.ts
+- server/services/leaderboard.test.ts
+- server/storage.ts
+- shared/routes.contract.test.ts
+- context/plan/01-master-task-registry.md
+- context/plan/55-phase-4b-critical-fixes-and-review-governance.md
+- context/plan/99-daily-run-log.md
+
+Tests/checks run:
+- `pnpm run check`
+- `pnpm run test`
+
+Blockers:
+- None.
+
+Resume notes:
+- Start `P4B-006`: review-state schema and lifecycle fields (`draft/pending_review/approved/rejected`) with audit support.
+
+Date: 2026-02-20
+Session owner: Codex
 Last completed task ID: P4B-004
 Current in-progress task ID: P4B-005
 Next task ID: P4B-005

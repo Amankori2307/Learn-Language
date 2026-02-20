@@ -66,7 +66,7 @@ Status legend: `todo` | `doing` | `done` | `blocked`
 | P4B-002 | done | Fix profile page data loading and mutation flows | P4-001 | M | profile view/edit works and persists after reload |
 | P4B-003 | done | Fix avatar/image handling (upload/save/display/fallback) | P4B-002 | M | avatar updates immediately and survives new sessions |
 | P4B-004 | done | UI styling cleanup pass (spacing, responsive breakpoints, typography consistency) | P3-006 | M | key app screens pass visual QA checklist on mobile + desktop |
-| P4B-005 | doing | Add regression test suite for leaderboard/profile/avatar/styling critical paths | P4B-001,P4B-002,P4B-003,P4B-004 | M | failing tests reproduce old bugs and pass on fixes |
+| P4B-005 | done | Add regression test suite for leaderboard/profile/avatar/styling critical paths | P4B-001,P4B-002,P4B-003,P4B-004 | M | failing tests reproduce old bugs and pass on fixes |
 | P4B-006 | todo | Add vocabulary review schema (draft/pending/approved/rejected + reviewer metadata) | P1-001 | M | DB + API support review state transitions with audit fields |
 | P4B-007 | todo | Build reviewer queue and reviewer role permissions | P4B-006 | M | only reviewers can approve/reject pending vocabulary items |
 | P4B-008 | todo | Enforce approval gate in learning flows (exclude non-approved vocab from production sessions) | P4B-007 | M | learners only receive approved vocabulary by default |

@@ -60,7 +60,7 @@ Acceptance:
 - No critical overlap/cutoff issues in major flows.
 
 ### P4B-005 - Regression tests for critical UX modules
-Status: `doing`
+Status: `done`
 
 Scope:
 - Add backend tests for leaderboard/profile/avatar APIs.
