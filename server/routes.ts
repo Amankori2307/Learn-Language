@@ -3,7 +3,7 @@ import { createServer, type Server } from "http";
 import { storage } from "./storage";
 import { api } from "@shared/routes";
 import { z } from "zod";
-import { setupAuth, registerAuthRoutes, isAuthenticated } from "./replit_integrations/auth";
+import { setupAuth, registerAuthRoutes, isAuthenticated } from "./auth";
 import { logApiEvent, sendError } from "./http";
 import { chooseDistractors } from "./services/distractors";
 import { applySrsUpdate } from "./services/srs";
@@ -51,7 +51,7 @@ export async function registerRoutes(
 
   // Generate Quiz
   app.get(api.quiz.generate.path, isAuthenticated, async (req, res) => {
-    const userId = (req.user as any).claims.sub; // From Replit Auth
+    const userId = (req.user as any).claims.sub;
     const parsed = api.quiz.generate.input?.parse(req.query) ?? { mode: "daily_review", count: 10 };
     const limit = parsed.count ?? 10;
     const clusterId = parsed.clusterId;

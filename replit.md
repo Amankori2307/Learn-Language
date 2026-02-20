@@ -24,15 +24,15 @@ Preferred communication style: Simple, everyday language.
 - **Framework**: Express.js running on Node with TypeScript (via tsx)
 - **Architecture**: Monolithic server serving both the API and the static frontend
 - **API Pattern**: RESTful JSON API under `/api/` prefix with typed route contracts defined in `shared/routes.ts` using Zod schemas
-- **Authentication**: Replit Auth (OpenID Connect) with Passport.js, sessions stored in PostgreSQL via `connect-pg-simple`
-- **Auth files are in**: `server/replit_integrations/auth/` — these are critical and should not be deleted
+- **Authentication**: Google OAuth (OpenID Connect) with Passport.js, sessions stored in PostgreSQL via `connect-pg-simple`
+- **Auth files are in**: `server/auth/` — these are critical and should not be deleted
 - **Dev Mode**: Vite dev server middleware with HMR is integrated into Express during development
 - **Production**: Client is built with Vite to `dist/public`, server is bundled with esbuild to `dist/index.cjs`
 
 ### Shared Layer (`shared/`)
 - **Schema** (`shared/schema.ts`): Drizzle ORM table definitions for all models — words, clusters, word_clusters, user_word_progress, quiz_attempts, users, sessions
 - **Route Contracts** (`shared/routes.ts`): Typed API contract using Zod schemas, shared between client and server for type safety
-- **Auth Models** (`shared/models/auth.ts`): User and session table definitions required by Replit Auth
+- **Auth Models** (`shared/models/auth.ts`): User and session table definitions required by OAuth login
 
 ### Database
 - **Database**: PostgreSQL (required, provisioned via Replit)
@@ -47,7 +47,7 @@ Preferred communication style: Simple, everyday language.
 - `word_clusters` — Many-to-many join between words and clusters
 - `user_word_progress` — Per-user spaced repetition tracking (mastery level, next review date, confidence)
 - `quiz_attempts` — Log of individual quiz answers
-- `users` — User profiles (managed by Replit Auth)
+- `users` — User profiles (managed by OAuth login)
 - `sessions` — Session storage for auth
 
 ### Storage Pattern
@@ -67,7 +67,7 @@ Preferred communication style: Simple, everyday language.
 - All API routes require authentication via `isAuthenticated` middleware
 
 ### Client Pages
-- `/auth` — Login page using Replit Auth
+- `/auth` — Login page using OAuth login
 - `/` — Dashboard with stats, streak, XP, and quick-start quiz cards
 - `/quiz` — Quiz interface with animated question cards, progress bar, session summary
 - `/clusters` — Browse word clusters and start cluster-specific quizzes
@@ -75,7 +75,7 @@ Preferred communication style: Simple, everyday language.
 ## External Dependencies
 
 - **PostgreSQL** — Primary database, connected via `DATABASE_URL` env var
-- **Replit Auth (OpenID Connect)** — Authentication provider, requires `ISSUER_URL`, `REPL_ID`, `SESSION_SECRET` env vars
+- **Google OAuth (OpenID Connect)** — Authentication provider, requires `GOOGLE_CLIENT_ID`, `GOOGLE_CLIENT_SECRET`, `SESSION_SECRET` env vars
 - **Google Fonts** — Outfit and Noto Sans Telugu fonts loaded via CDN
 - **shadcn/ui + Radix UI** — Component library primitives
 - **Drizzle ORM + drizzle-kit** — Database ORM and migration tooling

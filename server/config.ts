@@ -4,12 +4,10 @@ const envSchema = z.object({
   NODE_ENV: z.enum(["development", "test", "production"]).default("development"),
   PORT: z.coerce.number().int().positive().default(5000),
   DATABASE_URL: z.string().min(1, "DATABASE_URL is required"),
-  AUTH_PROVIDER: z.enum(["replit", "google", "dev"]).default("replit"),
-  REPL_ID: z.string().min(1).optional(),
+  AUTH_PROVIDER: z.enum(["google", "dev"]).default("google"),
   GOOGLE_CLIENT_ID: z.string().min(1).optional(),
   GOOGLE_CLIENT_SECRET: z.string().min(1).optional(),
   SESSION_SECRET: z.string().min(16).optional(),
-  ISSUER_URL: z.string().url().default("https://replit.com/oidc"),
   GOOGLE_ISSUER_URL: z.string().url().default("https://accounts.google.com"),
 });
 
@@ -29,30 +27,16 @@ export function getAuthConfig() {
     throw new Error("Invalid environment configuration: SESSION_SECRET is required for auth setup");
   }
 
-  if (config.AUTH_PROVIDER === "replit" && !config.REPL_ID) {
-    throw new Error("Invalid environment configuration: REPL_ID is required for replit auth");
-  }
-
   if (config.AUTH_PROVIDER === "google" && !config.GOOGLE_CLIENT_ID) {
     throw new Error("Invalid environment configuration: GOOGLE_CLIENT_ID is required for google auth");
   }
 
   return {
     AUTH_PROVIDER: config.AUTH_PROVIDER,
-    CLIENT_ID:
-      config.AUTH_PROVIDER === "google"
-        ? config.GOOGLE_CLIENT_ID
-        : config.AUTH_PROVIDER === "replit"
-          ? config.REPL_ID
-          : undefined,
+    CLIENT_ID: config.AUTH_PROVIDER === "google" ? config.GOOGLE_CLIENT_ID : undefined,
     CLIENT_SECRET: config.AUTH_PROVIDER === "google" ? config.GOOGLE_CLIENT_SECRET : undefined,
     SESSION_SECRET: config.SESSION_SECRET,
-    ISSUER_URL:
-      config.AUTH_PROVIDER === "google"
-        ? config.GOOGLE_ISSUER_URL
-        : config.AUTH_PROVIDER === "replit"
-          ? config.ISSUER_URL
-          : undefined,
+    ISSUER_URL: config.AUTH_PROVIDER === "google" ? config.GOOGLE_ISSUER_URL : undefined,
     DATABASE_URL: config.DATABASE_URL,
   };
 }

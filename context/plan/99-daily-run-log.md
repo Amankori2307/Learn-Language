@@ -83,8 +83,8 @@ Files changed:
 - server/db.ts
 - server/http.ts
 - server/index.ts
-- server/replit_integrations/auth/replitAuth.ts
-- server/replit_integrations/auth/routes.ts
+- server/auth/oidcAuth.ts
+- server/auth/routes.ts
 - server/routes.ts
 - server/storage.ts
 - server/types/pg.d.ts
@@ -553,3 +553,40 @@ Blockers:
 
 Resume notes:
 - All remaining code tasks in current registry are complete; only release sign-off remains before Phase 5.
+
+Date: 2026-02-20
+Session owner: Codex
+Last completed task ID: Auth migration cleanup
+Current in-progress task ID: None
+Next task ID: Local dependency restore by user
+
+Completed today:
+- Removed Replit auth support entirely from config and auth flow.
+- Migrated to Google OAuth + optional dev auth mode only.
+- Removed Replit-specific Vite plugins and package references.
+- Renamed auth module path to `server/auth/*` and updated imports.
+
+Files changed:
+- server/config.ts
+- server/auth/oidcAuth.ts
+- server/auth/routes.ts
+- server/auth/storage.ts
+- server/auth/index.ts
+- server/routes.ts
+- vite.config.ts
+- package.json
+- package-lock.json
+- .env.example
+- shared/models/auth.ts
+- client/requirements.md
+- replit.md
+- context/plan/99-daily-run-log.md
+
+Tests/checks run:
+- Could not complete post-change `pnpm install` / `npm ci` in this environment due network DNS blocks to registry.
+
+Blockers:
+- Dependency reinstall blocked by `ENOTFOUND registry.npmjs.org` in sandbox.
+
+Resume notes:
+- On a networked machine, run `pnpm install` then `pnpm run ci` to verify lockfile/runtime after package-manager switch.

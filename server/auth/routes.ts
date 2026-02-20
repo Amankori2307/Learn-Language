@@ -1,7 +1,7 @@
 import type { Express } from "express";
 import { authStorage } from "./storage";
-import { isAuthenticated } from "./replitAuth";
-import { sendError } from "../../http";
+import { isAuthenticated } from "./oidcAuth";
+import { sendError } from "../http";
 
 // Register auth-specific routes
 export function registerAuthRoutes(app: Express): void {

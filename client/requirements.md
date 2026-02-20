@@ -6,7 +6,7 @@ clsx | Class name utility
 tailwind-merge | Class name merging
 
 ## Notes
-- Using Replit Auth for user management.
+- Using OAuth-based auth for user management.
 - Quiz interface requires smooth transitions between questions.
 - Dashboard visualizes progress with charts/stats.
 - Fonts: 'Outfit' for headings, 'Noto Sans Telugu' for Telugu script (via Google Fonts).

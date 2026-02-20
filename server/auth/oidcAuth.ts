@@ -7,8 +7,8 @@ import type { Express, RequestHandler } from "express";
 import memoize from "memoizee";
 import connectPg from "connect-pg-simple";
 import { authStorage } from "./storage";
-import { getAuthConfig } from "../../config";
-import { sendError } from "../../http";
+import { getAuthConfig } from "../config";
+import { sendError } from "../http";
 
 const authConfig = getAuthConfig();
 
@@ -99,17 +99,10 @@ export async function setupAuth(app: Express) {
   const registeredStrategies = new Set<string>();
 
   const ensureStrategy = (req: any) => {
-    const strategyName = `${authConfig.AUTH_PROVIDER}:${req.hostname}`;
+    const strategyName = `google:${req.hostname}`;
     if (!registeredStrategies.has(strategyName)) {
-      const callbackURL =
-        authConfig.AUTH_PROVIDER === "replit"
-          ? `https://${req.hostname}/api/callback`
-          : `${req.protocol}://${req.get("host")}/api/callback`;
-
-      const scope =
-        authConfig.AUTH_PROVIDER === "google"
-          ? "openid email profile"
-          : "openid email profile offline_access";
+      const callbackURL = `${req.protocol}://${req.get("host")}/api/callback`;
+      const scope = "openid email profile";
 
       const strategy = new Strategy(
         {
@@ -130,18 +123,19 @@ export async function setupAuth(app: Express) {
 
   app.get("/api/login", (req, res, next) => {
     ensureStrategy(req);
-    const strategyName = `${authConfig.AUTH_PROVIDER}:${req.hostname}`;
-    const authOptions =
-      authConfig.AUTH_PROVIDER === "google"
-        ? { prompt: "consent", scope: ["openid", "email", "profile"] }
-        : { prompt: "login consent", scope: ["openid", "email", "profile", "offline_access"] };
+    const strategyName = `google:${req.hostname}`;
+    const authOptions = {
+      prompt: "consent",
+      access_type: "offline",
+      scope: ["openid", "email", "profile"],
+    };
 
     passport.authenticate(strategyName, authOptions)(req, res, next);
   });
 
   app.get("/api/callback", (req, res, next) => {
     ensureStrategy(req);
-    passport.authenticate(`${authConfig.AUTH_PROVIDER}:${req.hostname}`, {
+    passport.authenticate(`google:${req.hostname}`, {
       successReturnToOrRedirect: "/",
       failureRedirect: "/api/login",
     })(req, res, next);
@@ -149,20 +143,7 @@ export async function setupAuth(app: Express) {
 
   app.get("/api/logout", (req, res) => {
     req.logout(() => {
-      if (authConfig.AUTH_PROVIDER === "google") {
-        res.redirect("/");
-        return;
-      }
-
-      if (!authConfig.CLIENT_ID) {
-        sendError(req, res, 500, "INTERNAL_ERROR", "OIDC client configuration missing");
-        return;
-      }
-
-      res.redirect(client.buildEndSessionUrl(oidcConfig, {
-        client_id: authConfig.CLIENT_ID,
-        post_logout_redirect_uri: `${req.protocol}://${req.hostname}`,
-      }).href);
+      res.redirect("/");
     });
   });
 }
