@@ -4,8 +4,10 @@ WORKDIR /app
 
 RUN apk add --no-cache postgresql-client
 
-COPY package*.json ./
-RUN npm ci
+RUN corepack enable && corepack prepare pnpm@10.29.3 --activate
+
+COPY package.json pnpm-lock.yaml ./
+RUN pnpm install --frozen-lockfile
 
 COPY . .
 

@@ -12,13 +12,13 @@ until pg_isready -d "$DATABASE_URL" >/dev/null 2>&1; do
 done
 
 echo "Applying schema..."
-npm run db:push
+pnpm run db:push
 
 echo "Importing MVP dataset..."
-npm run content:import:mvp
+pnpm run content:import:mvp
 
 echo "Building app..."
-npm run build
+pnpm run build
 
 echo "Starting app..."
-exec npm run start
+exec pnpm run start
