@@ -55,8 +55,6 @@ export default function Dashboard() {
       description: "Jump back into your best next session",
       icon: PlayCircle,
       href: `/quiz?mode=${continueMode}`,
-      color: "bg-sky-100 text-sky-700",
-      buttonColor: "bg-sky-600 hover:bg-sky-700",
       count: Math.max(1, s.weak),
     },
     {
@@ -64,8 +62,6 @@ export default function Dashboard() {
       description: "Review words due for repetition",
       icon: Zap,
       href: "/quiz?mode=daily_review",
-      color: "bg-amber-100 text-amber-700",
-      buttonColor: "bg-amber-500 hover:bg-amber-600",
       count: s.learning
     },
     {
@@ -73,8 +69,6 @@ export default function Dashboard() {
       description: "Learn 10 new words today",
       icon: BookOpen,
       href: "/quiz?mode=new_words",
-      color: "bg-emerald-100 text-emerald-700",
-      buttonColor: "bg-emerald-600 hover:bg-emerald-700",
       count: 10
     },
     {
@@ -82,8 +76,6 @@ export default function Dashboard() {
       description: "Practice words you struggle with",
       icon: Dumbbell,
       href: "/quiz?mode=weak_words",
-      color: "bg-rose-100 text-rose-700",
-      buttonColor: "bg-rose-500 hover:bg-rose-600",
       count: s.weak
     },
     {
@@ -91,8 +83,6 @@ export default function Dashboard() {
       description: "Choose a topic cluster and practice in context",
       icon: Layers3,
       href: "/clusters",
-      color: "bg-violet-100 text-violet-700",
-      buttonColor: "bg-violet-600 hover:bg-violet-700",
       count: s.totalWords,
     },
     {
@@ -100,8 +90,6 @@ export default function Dashboard() {
       description: "Harder sentence-based drills to deepen retention",
       icon: BrainCircuit,
       href: "/quiz?mode=complex_workout",
-      color: "bg-indigo-100 text-indigo-700",
-      buttonColor: "bg-indigo-600 hover:bg-indigo-700",
       count: Math.max(5, Math.round(s.learning / 2)),
     },
     {
@@ -109,8 +97,6 @@ export default function Dashboard() {
       description: "Study short story/dialogue snippets before practice",
       icon: MessageSquareQuote,
       href: "/contextual",
-      color: "bg-teal-100 text-teal-700",
-      buttonColor: "bg-teal-600 hover:bg-teal-700",
       count: 6,
     },
     ...(tutorEnabled
@@ -119,8 +105,6 @@ export default function Dashboard() {
           description: "Text tutor for guided vocabulary feedback",
           icon: BrainCircuit,
           href: "/tutor",
-          color: "bg-cyan-100 text-cyan-700",
-          buttonColor: "bg-cyan-600 hover:bg-cyan-700",
           count: s.learning,
         }]
       : []),
@@ -128,12 +112,12 @@ export default function Dashboard() {
 
   return (
     <Layout>
-      <div className="space-y-8">
+      <div className="space-y-7">
         {/* Header Section */}
-        <div className="flex flex-col md:flex-row justify-between items-end md:items-center gap-4">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
           <div>
-            <h2 className="text-3xl font-bold tracking-tight">Welcome back, {user?.firstName || 'Learner'}!</h2>
-            <p className="text-muted-foreground mt-1">You're making great progress with your Telugu.</p>
+            <h2 className="text-3xl font-semibold tracking-tight">Welcome back, {user?.firstName || 'Learner'}</h2>
+            <p className="text-muted-foreground mt-1">Your daily language learning dashboard.</p>
             <p className="text-sm text-muted-foreground mt-1">
               Focus next on:{" "}
               <span className="font-semibold text-foreground">
@@ -141,9 +125,9 @@ export default function Dashboard() {
               </span>
             </p>
           </div>
-          <div className="flex items-center gap-2 bg-orange-50 text-orange-700 px-4 py-2 rounded-full border border-orange-100 shadow-sm">
-            <Flame className="w-5 h-5 fill-orange-500 text-orange-500" />
-            <span className="font-bold">{s.streak} Day Streak</span>
+          <div className="flex items-center gap-2 bg-card px-3 py-2 rounded-lg border border-border">
+            <Flame className="w-4 h-4 text-foreground" />
+            <span className="font-medium text-sm">{s.streak} day streak</span>
           </div>
         </div>
 
@@ -188,7 +172,7 @@ export default function Dashboard() {
         </div>
 
         {/* Action Cards */}
-        <h3 className="text-xl font-bold mt-8 mb-4">Start Learning</h3>
+        <h3 className="text-xl font-semibold mt-8 mb-3">Start Learning</h3>
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-6 gap-6 items-stretch">
           {cards.map((card, idx) => (
             <motion.div
@@ -196,13 +180,13 @@ export default function Dashboard() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: idx * 0.1 }}
-              className="group relative bg-card rounded-3xl p-6 border border-border/50 shadow-sm hover:shadow-xl hover:border-border transition-all duration-300 flex flex-col justify-between min-h-[260px] h-full"
+              className="group bg-card rounded-2xl p-5 border border-border/60 hover:border-border transition-colors duration-200 flex flex-col justify-between min-h-[248px] h-full"
             >
               <div className="space-y-2">
-                <div className={`w-12 h-12 rounded-2xl flex items-center justify-center mb-4 ${card.color}`}>
-                  <card.icon className="w-6 h-6" />
+                <div className="w-10 h-10 rounded-xl flex items-center justify-center mb-2 bg-secondary text-foreground">
+                  <card.icon className="w-5 h-5" />
                 </div>
-                <h4 className="text-xl font-bold">{card.title}</h4>
+                <h4 className="text-lg font-semibold">{card.title}</h4>
                 <p className="text-muted-foreground text-sm leading-relaxed line-clamp-4">{card.description}</p>
               </div>
               
@@ -211,8 +195,8 @@ export default function Dashboard() {
                   {card.count} items
                 </span>
                 <Link href={card.href}>
-                  <Button className={`${card.buttonColor} text-white rounded-full w-10 h-10 p-0 shadow-lg group-hover:scale-110 transition-transform`}>
-                    <ArrowRight className="w-5 h-5" />
+                  <Button variant="outline" className="rounded-full w-9 h-9 p-0 border-border hover:bg-foreground hover:text-background transition-colors">
+                    <ArrowRight className="w-4 h-4" />
                   </Button>
                 </Link>
               </div>

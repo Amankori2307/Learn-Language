@@ -8,60 +8,60 @@
   --font-sans: 'Outfit', sans-serif;
   --font-telugu: 'Noto Sans Telugu', sans-serif;
 
-  /* Rich Emerald & Sand Palette */
-  --background: 40 33% 98%;
-  --foreground: 160 40% 10%;
-  
-  --primary: 160 84% 39%;
+  /* Minimal neutral + blue */
+  --background: 210 33% 98%;
+  --foreground: 222 47% 11%;
+
+  --primary: 217 91% 55%;
   --primary-foreground: 0 0% 100%;
-  
-  --secondary: 40 20% 92%;
-  --secondary-foreground: 160 40% 20%;
-  
-  --muted: 40 20% 90%;
-  --muted-foreground: 160 10% 40%;
-  
-  --accent: 35 90% 60%;
+
+  --secondary: 220 18% 95%;
+  --secondary-foreground: 222 25% 20%;
+
+  --muted: 220 16% 93%;
+  --muted-foreground: 215 16% 43%;
+
+  --accent: 193 89% 45%;
   --accent-foreground: 0 0% 100%;
-  
-  --destructive: 0 84% 60%;
+
+  --destructive: 0 72% 51%;
   --destructive-foreground: 0 0% 98%;
 
-  --border: 160 10% 90%;
-  --input: 160 10% 90%;
-  --ring: 160 84% 39%;
-  
-  --radius: 1rem;
-  
+  --border: 220 18% 88%;
+  --input: 220 18% 88%;
+  --ring: 217 91% 55%;
+
+  --radius: 0.85rem;
+
   --card: 0 0% 100%;
-  --card-foreground: 160 40% 10%;
+  --card-foreground: 222 47% 11%;
 }
 
 .dark {
-  --background: 160 40% 5%;
-  --foreground: 40 33% 98%;
-  
-  --primary: 160 60% 45%;
+  --background: 222 47% 8%;
+  --foreground: 210 40% 96%;
+
+  --primary: 217 91% 60%;
   --primary-foreground: 0 0% 100%;
-  
-  --secondary: 160 30% 15%;
-  --secondary-foreground: 40 33% 90%;
-  
-  --muted: 160 30% 15%;
-  --muted-foreground: 160 20% 60%;
-  
-  --accent: 35 90% 60%;
+
+  --secondary: 222 24% 14%;
+  --secondary-foreground: 210 40% 92%;
+
+  --muted: 222 24% 14%;
+  --muted-foreground: 215 20% 64%;
+
+  --accent: 193 89% 45%;
   --accent-foreground: 0 0% 100%;
-  
-  --destructive: 0 62% 30%;
+
+  --destructive: 0 63% 42%;
   --destructive-foreground: 0 0% 98%;
-  
-  --border: 160 30% 20%;
-  --input: 160 30% 20%;
-  --ring: 160 60% 45%;
-  
-  --card: 160 40% 8%;
-  --card-foreground: 40 33% 98%;
+
+  --border: 222 24% 19%;
+  --input: 222 24% 19%;
+  --ring: 217 91% 60%;
+
+  --card: 222 41% 10%;
+  --card-foreground: 210 40% 96%;
 }
 
 @layer base {
@@ -70,6 +70,7 @@
   }
   body {
     @apply bg-background text-foreground antialiased font-sans selection:bg-primary/20;
+    background-image: radial-gradient(circle at 100% 0%, hsl(var(--primary) / 0.06), transparent 28rem);
   }
   h1, h2, h3, h4, h5, h6 {
     @apply tracking-tight font-bold;

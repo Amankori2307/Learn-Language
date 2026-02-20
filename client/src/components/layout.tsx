@@ -44,11 +44,11 @@ export function Layout({ children }: { children: React.ReactNode }) {
 
   const NavContent = () => (
     <div className="flex flex-col h-full">
-      <div className="p-6">
-        <h1 className="text-2xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+      <div className="p-6 pb-4">
+        <h1 className="text-2xl font-semibold text-foreground">
           Learn Telugu
         </h1>
-        <p className="text-sm text-muted-foreground mt-1">Daily Practice</p>
+        <p className="text-sm text-muted-foreground mt-1">Language Practice</p>
       </div>
 
       <nav className="flex-1 px-4 space-y-2">
@@ -58,14 +58,14 @@ export function Layout({ children }: { children: React.ReactNode }) {
             <Link key={item.name} href={item.href}>
               <div
                 className={cn(
-                  "flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 cursor-pointer group",
+                  "flex items-center gap-3 px-4 py-2.5 rounded-lg transition-all duration-200 cursor-pointer group",
                   isActive 
-                    ? "bg-primary text-primary-foreground shadow-lg shadow-primary/25" 
-                    : "text-muted-foreground hover:bg-secondary hover:text-foreground"
+                    ? "bg-foreground text-background" 
+                    : "text-muted-foreground hover:bg-secondary/80 hover:text-foreground"
                 )}
                 onClick={() => setIsOpen(false)}
               >
-                <item.icon className={cn("w-5 h-5", isActive ? "text-primary-foreground" : "group-hover:text-primary transition-colors")} />
+                <item.icon className={cn("w-4 h-4", isActive ? "text-background" : "group-hover:text-foreground transition-colors")} />
                 <span className="font-medium">{item.name}</span>
               </div>
             </Link>
@@ -73,9 +73,9 @@ export function Layout({ children }: { children: React.ReactNode }) {
         })}
       </nav>
 
-      <div className="p-4 mt-auto border-t border-border/50">
+      <div className="p-4 mt-auto border-t border-border/50 bg-secondary/30">
         <div className="flex items-center gap-3 mb-4 px-2">
-          <Avatar className="w-10 h-10 border-2 border-primary/20">
+          <Avatar className="w-10 h-10 border border-border">
             <AvatarImage src={user?.profileImageUrl ?? undefined} alt={user?.firstName || "User"} />
             <AvatarFallback>{getInitials(user?.firstName, user?.lastName, user?.email)}</AvatarFallback>
           </Avatar>
@@ -104,8 +104,8 @@ export function Layout({ children }: { children: React.ReactNode }) {
       </aside>
 
       {/* Mobile Header */}
-      <div className="md:hidden fixed top-0 left-0 right-0 h-16 bg-card/80 backdrop-blur-md border-b border-border/50 z-20 flex items-center justify-between px-4">
-        <h1 className="text-xl font-bold text-primary">Learn Telugu</h1>
+      <div className="md:hidden fixed top-0 left-0 right-0 h-16 bg-card/90 backdrop-blur-md border-b border-border/60 z-20 flex items-center justify-between px-4">
+        <h1 className="text-xl font-semibold text-foreground">Learn Telugu</h1>
         <Sheet open={isOpen} onOpenChange={setIsOpen}>
           <SheetTrigger asChild>
             <Button variant="ghost" size="icon">
