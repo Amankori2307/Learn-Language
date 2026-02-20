@@ -5,6 +5,7 @@ import {
   type Word, type Cluster, type UserWordProgress, type QuizAttempt,
   type CreateWordRequest, type CreateClusterRequest
 } from "@shared/schema";
+import { rankQuizCandidates } from "./services/quiz-candidate-scoring";
 
 export interface IStorage {
   // Words & Clusters
@@ -125,7 +126,6 @@ export class DatabaseStorage implements IStorage {
 
   // Implementation of the "Word Selection Algorithm" from PRD
   async getQuizCandidates(userId: string, limit: number = 10, clusterId?: number): Promise<Word[]> {
-    // 1. Get pool of words
     let candidateWords: Word[] = [];
     if (clusterId) {
       candidateWords = await this.getWordsByCluster(clusterId);
@@ -133,41 +133,11 @@ export class DatabaseStorage implements IStorage {
       candidateWords = await this.getWords(500);
     }
 
-    // 2. Get user progress
     const progressList = await this.getUserProgress(userId);
     const progressMap = new Map(progressList.map(p => [p.wordId, p]));
 
-    // 3. Score based on PRD: difficulty_weight + days_since_last_seen + (wrong_count * 2) - correct_streak
-    const scoredWords = candidateWords.map(word => {
-      const progress = progressMap.get(word.id);
-      
-      let score = 0;
-      if (!progress) {
-        // New words have baseline priority
-        score = (word.difficulty || 1) * 2 + 50; 
-      } else {
-        const lastSeenDate = progress.lastSeen ? new Date(progress.lastSeen) : new Date(0);
-        const daysSinceLastSeen = Math.floor((Date.now() - lastSeenDate.getTime()) / (1000 * 60 * 60 * 24));
-        
-        score = (word.difficulty || 1) 
-          + daysSinceLastSeen 
-          + ((progress.wrongCount || 0) * 2) 
-          - (progress.correctStreak || 0);
-
-        // Filter out mastered words unless they are due for review
-        if ((progress.masteryLevel || 0) >= 4) {
-          const isDue = progress.nextReview && new Date(progress.nextReview) <= new Date();
-          if (!isDue) score = -1000; // Deprioritize significantly
-        }
-      }
-      return { word, score };
-    });
-
-    // 4. Sort and return top N
-    return scoredWords
-      .sort((a, b) => b.score - a.score)
-      .slice(0, limit)
-      .map(item => item.word);
+    const ranked = rankQuizCandidates(candidateWords, progressMap);
+    return ranked.slice(0, limit);
   }
 
   async getUserStats(userId: string): Promise<{

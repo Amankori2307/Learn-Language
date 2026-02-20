@@ -14,16 +14,16 @@ Maps to conversation chunks:
 
 ## Tasks
 
-### P2-001 - SRS Lite (SM-2 based)
-Status: `todo`
+### P2-001 - Deterministic candidate scoring service
+Status: `done`
 
 Scope:
-- Store ease factor, interval, next review date.
-- Correct vs incorrect branch updates.
-- Confidence-aware adjustment.
+- Extract scoring into standalone service.
+- Apply ranking tie-breakers for deterministic ordering.
+- Keep score formula aligned with product contract.
 
 Acceptance:
-- Next review date changes per attempt according to documented formula.
+- Candidate ranking is stable and predictable for same inputs.
 
 ### P2-002 - Daily session generator v1
 Status: `todo`
@@ -83,4 +83,3 @@ Acceptance:
 
 - Retention loop operational: generate -> answer -> update -> schedule next review.
 - No audio/video/image dependency exists in this phase.
-

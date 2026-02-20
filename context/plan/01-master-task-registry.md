@@ -26,7 +26,7 @@ Status legend: `todo` | `doing` | `done` | `blocked`
 
 | ID | Status | Task | Depends On | Effort | Done When |
 |---|---|---|---|---|---|
-| P2-001 | todo | Implement deterministic quiz candidate scoring service | P1-002 | M | score formula matches product contract |
+| P2-001 | done | Implement deterministic quiz candidate scoring service | P1-002 | M | score formula matches product contract |
 | P2-002 | todo | Implement question generator for 4 text question types | P2-001 | L | each question type works with validation |
 | P2-003 | todo | Implement distractor strategy (cluster -> POS -> transliteration -> random) | P2-002 | M | options are unique and quality-ranked |
 | P2-004 | todo | Implement answer submission + SM-2 style updates + mastery tiers | P2-001 | L | review intervals, streaks, mastery update correctly |

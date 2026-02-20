@@ -190,3 +190,31 @@ Blockers:
 
 Resume notes:
 - Start Phase 2 with `P2-001` (deterministic quiz candidate scoring service).
+
+Date: 2026-02-20
+Session owner: Codex
+Last completed task ID: P2-001
+Current in-progress task ID: None
+Next task ID: P2-002
+
+Completed today:
+- Extracted quiz candidate scoring into `server/services/quiz-candidate-scoring.ts`.
+- Added deterministic ranking/tie-break logic and unit tests.
+- Refactored storage candidate selection to use service.
+
+Files changed:
+- server/services/quiz-candidate-scoring.ts
+- server/services/quiz-candidate-scoring.test.ts
+- server/storage.ts
+- context/plan/01-master-task-registry.md
+- context/plan/30-phase-2-quiz-and-srs.md
+- context/plan/99-daily-run-log.md
+
+Tests/checks run:
+- `npm run ci` (pass)
+
+Blockers:
+- None.
+
+Resume notes:
+- Start `P2-002` daily session generator mix (review/new/weak ratios).
