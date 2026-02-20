@@ -22,11 +22,12 @@ export default function QuizPage() {
   const [sessionStats, setSessionStats] = useState({ correct: 0, total: 0 });
   const [isFinished, setIsFinished] = useState(false);
   const [questionStartedAt, setQuestionStartedAt] = useState<number>(Date.now());
+  const [confidenceLevel, setConfidenceLevel] = useState<1 | 2 | 3>(2);
 
   const currentQuestion = questions?.[currentIndex];
   const progress = questions ? ((currentIndex) / questions.length) * 100 : 0;
 
-  const handleAnswer = async (optionId: number) => {
+  const handleAnswer = async (optionId: number, answerConfidence: 1 | 2 | 3) => {
     if (!currentQuestion) return;
 
     try {
@@ -37,7 +38,7 @@ export default function QuizPage() {
         selectedOptionId: optionId,
         questionType: currentQuestion.type,
         direction,
-        confidenceLevel: 2, // Default for now
+        confidenceLevel: answerConfidence,
         responseTimeMs,
       });
 
@@ -53,6 +54,7 @@ export default function QuizPage() {
 
   const handleNext = () => {
     setResult(null);
+    setConfidenceLevel(2);
     setQuestionStartedAt(Date.now());
     if (questions && currentIndex < questions.length - 1) {
       setCurrentIndex(prev => prev + 1);
@@ -102,6 +104,7 @@ export default function QuizPage() {
 
   if (isFinished) {
     const percentage = Math.round((sessionStats.correct / sessionStats.total) * 100);
+    const recommendedMode = percentage < 70 ? "weak_words" : "daily_review";
     return (
       <div className="min-h-screen bg-background flex flex-col items-center justify-center p-4">
         <div className="max-w-md w-full bg-card rounded-3xl p-8 border border-border/50 shadow-2xl text-center">
@@ -122,9 +125,20 @@ export default function QuizPage() {
             </div>
           </div>
 
-          <Button className="w-full h-12 text-lg rounded-xl shadow-lg shadow-primary/20" onClick={() => setLocation('/')}>
-            Back to Dashboard
-          </Button>
+          <div className="space-y-3">
+            <Button
+              className="w-full h-12 text-lg rounded-xl shadow-lg shadow-primary/20"
+              onClick={() => setLocation(`/quiz?mode=${recommendedMode}`)}
+            >
+              {recommendedMode === "weak_words" ? "Practice Weak Words" : "Start Daily Review"}
+            </Button>
+            <Button variant="outline" className="w-full h-12 text-lg rounded-xl" onClick={() => setLocation('/')}>
+              Back to Dashboard
+            </Button>
+          </div>
+          <p className="text-xs text-muted-foreground mt-3">
+            Next recommendation: {recommendedMode === "weak_words" ? "focus on weak words" : "continue daily review"}.
+          </p>
         </div>
       </div>
     );
@@ -156,6 +170,8 @@ export default function QuizPage() {
           question={currentQuestion.questionText}
           type={currentQuestion.type}
           options={currentQuestion.options}
+          confidenceLevel={confidenceLevel}
+          onConfidenceChange={setConfidenceLevel}
           onAnswer={handleAnswer}
           isSubmitting={submitAnswer.isPending}
           result={result}

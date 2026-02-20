@@ -39,10 +39,10 @@ Status legend: `todo` | `doing` | `done` | `blocked`
 |---|---|---|---|---|---|
 | P3-001 | done | Dashboard cards for progress, weak words, streak, XP | P2-004 | M | stats render correctly from API |
 | P3-002 | done | Home flow: Continue, Daily Review, Cluster Practice, Weak Words | P2-005 | M | all entry points route to correct mode |
-| P3-003 | todo | Quiz feedback UX: correctness, answer explanation, confidence input | P2-004 | M | user can finish full session smoothly |
-| P3-004 | todo | Session summary screen and next recommended action | P3-003 | S | summary shows accuracy + next step |
+| P3-003 | done | Quiz feedback UX: correctness, answer explanation, confidence input | P2-004 | M | user can finish full session smoothly |
+| P3-004 | done | Session summary screen and next recommended action | P3-003 | S | summary shows accuracy + next step |
 | P3-005 | done | Basic gamification (XP, streak, cluster completion badge) | P3-001 | M | counters update correctly after sessions |
-| P3-006 | todo | Accessibility + Telugu text readability pass | P3-003 | M | contrast, keyboard nav, font legibility validated |
+| P3-006 | done | Accessibility + Telugu text readability pass | P3-003 | M | contrast, keyboard nav, font legibility validated |
 
 ## Phase 4 - Hardening + Release
 

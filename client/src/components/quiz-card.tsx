@@ -14,7 +14,9 @@ interface QuizCardProps {
   question: string;
   type: 'telugu_to_english' | 'english_to_telugu' | 'fill_in_blank' | 'sentence_meaning';
   options: QuizOption[];
-  onAnswer: (optionId: number) => void;
+  confidenceLevel: 1 | 2 | 3;
+  onConfidenceChange: (value: 1 | 2 | 3) => void;
+  onAnswer: (optionId: number, confidenceLevel: 1 | 2 | 3) => void;
   isSubmitting: boolean;
   result: {
     isCorrect: boolean;
@@ -32,6 +34,8 @@ export function QuizCard({
   question, 
   type, 
   options, 
+  confidenceLevel,
+  onConfidenceChange,
   onAnswer, 
   isSubmitting, 
   result,
@@ -53,7 +57,7 @@ export function QuizCard({
   const handleOptionClick = (id: number) => {
     if (result) return;
     setSelectedOption(id);
-    onAnswer(id);
+    onAnswer(id, confidenceLevel);
   };
 
   const isTeluguQuestion = type === 'telugu_to_english';
@@ -90,6 +94,41 @@ export function QuizCard({
 
           {/* Options Grid */}
           <div className="p-6 md:p-8 bg-card">
+            <div className="mb-4">
+              <p className="text-sm font-medium text-muted-foreground mb-2">How confident are you?</p>
+              <div className="flex gap-2" role="radiogroup" aria-label="Answer confidence">
+                <Button
+                  type="button"
+                  variant={confidenceLevel === 1 ? "default" : "outline"}
+                  size="sm"
+                  onClick={() => onConfidenceChange(1)}
+                  aria-pressed={confidenceLevel === 1}
+                  disabled={isSubmitting || !!result}
+                >
+                  Guess
+                </Button>
+                <Button
+                  type="button"
+                  variant={confidenceLevel === 2 ? "default" : "outline"}
+                  size="sm"
+                  onClick={() => onConfidenceChange(2)}
+                  aria-pressed={confidenceLevel === 2}
+                  disabled={isSubmitting || !!result}
+                >
+                  Somewhat Sure
+                </Button>
+                <Button
+                  type="button"
+                  variant={confidenceLevel === 3 ? "default" : "outline"}
+                  size="sm"
+                  onClick={() => onConfidenceChange(3)}
+                  aria-pressed={confidenceLevel === 3}
+                  disabled={isSubmitting || !!result}
+                >
+                  Very Sure
+                </Button>
+              </div>
+            </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {options.map((option) => {
                 const isSelected = selectedOption === option.id;
@@ -118,6 +157,7 @@ export function QuizCard({
                     key={option.id}
                     disabled={!!result || isSubmitting}
                     onClick={() => handleOptionClick(option.id)}
+                    aria-label={`Option ${option.text}`}
                     className={cn(
                       "p-4 rounded-xl text-lg font-medium border-2 transition-all duration-200 text-left relative overflow-hidden group",
                       !isTeluguQuestion && "font-telugu text-xl",
@@ -141,6 +181,7 @@ export function QuizCard({
                 initial={{ height: 0, opacity: 0 }}
                 animate={{ height: "auto", opacity: 1 }}
                 exit={{ height: 0, opacity: 0 }}
+                aria-live="polite"
                 className={cn(
                   "border-t p-6 md:p-8",
                   result.isCorrect ? "bg-green-50/50 border-green-100" : "bg-red-50/50 border-red-100"
