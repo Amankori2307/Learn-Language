@@ -148,17 +148,13 @@ async function main() {
     },
   }));
 
-  const contentSeedPath = path.join(process.cwd(), "content/seed/words.basic.model_draft.json");
   const assetsSeedPath = path.join(process.cwd(), "assets/processed/telugu_basic_seed_model_draft.json");
 
-  await fs.mkdir(path.dirname(contentSeedPath), { recursive: true });
   await fs.mkdir(path.dirname(assetsSeedPath), { recursive: true });
 
-  await fs.writeFile(contentSeedPath, JSON.stringify(output, null, 2));
   await fs.writeFile(assetsSeedPath, JSON.stringify(output, null, 2));
 
   console.log(`Generated ${output.length} beginner Telugu entries`);
-  console.log(`- ${contentSeedPath}`);
   console.log(`- ${assetsSeedPath}`);
 }
 

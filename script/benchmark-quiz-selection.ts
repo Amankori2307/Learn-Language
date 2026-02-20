@@ -45,7 +45,7 @@ function sample<T>(arr: T[]): T {
 }
 
 async function loadWords(): Promise<Word[]> {
-  const raw = await fs.readFile(path.resolve("content/seed/words.mvp.json"), "utf-8");
+  const raw = await fs.readFile(path.resolve("assets/processed/words.mvp.json"), "utf-8");
   const rows = JSON.parse(raw);
   return rows.map((row: any, idx: number) => ({
     id: idx + 1,
