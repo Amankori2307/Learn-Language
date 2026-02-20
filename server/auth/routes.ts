@@ -5,6 +5,7 @@ import { sendError } from "../http";
 import { api } from "@shared/routes";
 import { z } from "zod";
 import { resolveRoleFromEmail } from "./roles";
+import { UserTypeEnum } from "@shared/domain/enums";
 
 // Register auth-specific routes
 export function registerAuthRoutes(app: Express): void {
@@ -25,7 +26,7 @@ export function registerAuthRoutes(app: Express): void {
           firstName: claimFirstName,
           lastName: claimLastName,
           profileImageUrl: claimProfileImageUrl,
-          role: userId === "dev-user" ? "admin" : resolvedRole,
+          role: userId === "dev-user" ? UserTypeEnum.ADMIN : resolvedRole,
         });
       } else {
         const shouldSyncRole = userId !== "dev-user" && user.role !== resolvedRole;

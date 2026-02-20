@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
 import { useAuth } from "@/hooks/use-auth";
+import { UserTypeEnum } from "@shared/domain/enums";
 
 const STATUS_OPTIONS: ReviewStatus[] = ["pending_review", "draft", "approved", "rejected"];
 function formatDate(value?: string | null) {
@@ -17,7 +18,7 @@ function formatDate(value?: string | null) {
 
 export default function ReviewPage() {
   const { user } = useAuth();
-  const canReview = user?.role === "reviewer" || user?.role === "admin";
+  const canReview = user?.role === UserTypeEnum.REVIEWER || user?.role === UserTypeEnum.ADMIN;
 
   const [status, setStatus] = useState<ReviewStatus>("pending_review");
   const [selectedIds, setSelectedIds] = useState<number[]>([]);

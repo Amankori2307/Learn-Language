@@ -3,10 +3,11 @@ import assert from "node:assert/strict";
 import type { NextFunction, Request, Response } from "express";
 import { authStorage } from "./storage";
 import { requireReviewer } from "./permissions";
+import { UserTypeEnum } from "@shared/domain/enums";
 
 type MinimalUser = {
   id: string;
-  role: "learner" | "reviewer" | "admin";
+  role: UserTypeEnum;
 };
 
 function withMockedAuthStorage(
@@ -62,7 +63,7 @@ async function runRequireReviewer(userId?: string): Promise<{
 test("reviewer middleware blocks unauthenticated and learner users", async () => {
   await withMockedAuthStorage(
     {
-      "learner-1": { id: "learner-1", role: "learner" },
+      "learner-1": { id: "learner-1", role: UserTypeEnum.LEARNER },
     },
     async () => {
       const unauthenticated = await runRequireReviewer();
@@ -79,8 +80,8 @@ test("reviewer middleware blocks unauthenticated and learner users", async () =>
 test("reviewer middleware allows reviewer/admin and local dev bootstrap user", async () => {
   await withMockedAuthStorage(
     {
-      "reviewer-1": { id: "reviewer-1", role: "reviewer" },
-      "admin-1": { id: "admin-1", role: "admin" },
+      "reviewer-1": { id: "reviewer-1", role: UserTypeEnum.REVIEWER },
+      "admin-1": { id: "admin-1", role: UserTypeEnum.ADMIN },
     },
     async () => {
       const reviewer = await runRequireReviewer("reviewer-1");

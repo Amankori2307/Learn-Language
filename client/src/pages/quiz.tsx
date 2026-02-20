@@ -6,12 +6,13 @@ import { Button } from "@/components/ui/button";
 import { X } from "lucide-react";
 import { Progress } from "@/components/ui/progress";
 import { Layout } from "@/components/layout";
+import { QuizDirectionEnum, QuizModeEnum, QuizQuestionTypeEnum } from "@shared/domain/enums";
 
 export default function QuizPage() {
   const [location, setLocation] = useLocation();
   const searchStr = useSearch();
   const params = new URLSearchParams(searchStr);
-  const mode = (params.get("mode") as QuizMode) || "daily_review";
+  const mode = (params.get("mode") as QuizMode) || QuizModeEnum.DAILY_REVIEW;
   const clusterId = params.get("clusterId") ? Number(params.get("clusterId")) : undefined;
 
   const { data: questions, isLoading, isError } = useGenerateQuiz(mode, clusterId);
@@ -32,7 +33,9 @@ export default function QuizPage() {
 
     try {
       const responseTimeMs = Math.max(1, Date.now() - questionStartedAt);
-      const direction = currentQuestion.type === "english_to_telugu" ? "english_to_telugu" : "telugu_to_english";
+      const direction = currentQuestion.type === QuizQuestionTypeEnum.ENGLISH_TO_TELUGU
+        ? QuizDirectionEnum.ENGLISH_TO_TELUGU
+        : QuizDirectionEnum.TELUGU_TO_ENGLISH;
       const response = await submitAnswer.mutateAsync({
         wordId: currentQuestion.wordId,
         selectedOptionId: optionId,
@@ -105,7 +108,7 @@ export default function QuizPage() {
   if (isFinished) {
     const percentage = Math.round((sessionStats.correct / sessionStats.total) * 100);
     const incorrectCount = Math.max(0, sessionStats.total - sessionStats.correct);
-    const recommendedMode = percentage < 70 ? "weak_words" : "daily_review";
+    const recommendedMode = percentage < 70 ? QuizModeEnum.WEAK_WORDS : QuizModeEnum.DAILY_REVIEW;
     return (
       <div className="min-h-screen bg-background flex flex-col items-center justify-center p-4">
         <div className="max-w-md w-full bg-card rounded-3xl p-8 border border-border/50 shadow-2xl text-center">
@@ -131,7 +134,7 @@ export default function QuizPage() {
               <Button
                 variant="secondary"
                 className="w-full h-12 text-lg rounded-xl"
-                onClick={() => setLocation("/quiz?mode=weak_words")}
+                onClick={() => setLocation(`/quiz?mode=${QuizModeEnum.WEAK_WORDS}`)}
               >
                 Start Reinforcement Loop ({incorrectCount} missed)
               </Button>

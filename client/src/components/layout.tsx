@@ -19,6 +19,7 @@ import { cn } from "@/lib/utils";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useTheme } from "next-themes";
 import { buildAvatarUrl } from "@/lib/avatar";
+import { UserTypeEnum } from "@shared/domain/enums";
 
 function getInitials(firstName?: string | null, lastName?: string | null, email?: string | null) {
   const fromNames = `${firstName ?? ""} ${lastName ?? ""}`.trim();
@@ -49,7 +50,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
     { name: 'Leaderboard', href: '/leaderboard', icon: Trophy },
     { name: 'Profile', href: '/profile', icon: UserCircle },
     { name: 'History', href: '/history', icon: History },
-    ...((user?.role === "reviewer" || user?.role === "admin")
+    ...((user?.role === UserTypeEnum.REVIEWER || user?.role === UserTypeEnum.ADMIN)
       ? [{ name: "Review", href: "/review", icon: ShieldCheck }]
       : []),
   ];

@@ -47,6 +47,14 @@ Only active and pending tasks are listed here. Completed tasks are intentionally
 | P5-004 | todo | Add media moderation/storage policy and cost controls | P5-001 | S | quotas + policy are documented and enforced |
 | P5-005 | todo | Media QA + accessibility pass | P5-002,P5-003 | M | captions/alt/fallback behavior validated |
 
+## Phase 4D - Code standards rollout
+
+| ID | Status | Task | Depends On | Effort | Done When |
+|---|---|---|---|---|---|
+| P4D-001 | done | Publish code guidelines for modularity + enums + interface naming | P4C-006 | S | guideline doc is present and referenced in planning context |
+| P4D-002 | done | Introduce shared enums/interfaces baseline and migrate core auth/quiz/review contracts | P4D-001 | M | core domains no longer rely on duplicated literal unions |
+| P4D-003 | todo | Incrementally replace remaining magic strings and unprefixed reusable interfaces repo-wide | P4D-002 | L | majority of feature modules consume shared enums/interfaces |
+
 ## Exit criteria
 
 - Reviewer governance is fully enforced before broad content scaling.

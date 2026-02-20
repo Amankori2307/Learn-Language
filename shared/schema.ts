@@ -2,6 +2,7 @@ import { pgTable, text, varchar, timestamp, serial, integer, boolean, jsonb, rea
 import { relations, sql } from "drizzle-orm";
 import { createInsertSchema } from "drizzle-zod";
 import { z } from "zod";
+import { QuizQuestionTypeEnum, UserTypeEnum } from "./domain/enums";
 
 // === AUTH MODELS (Inlined for simplicity and consistency with PRD) ===
 
@@ -20,7 +21,7 @@ export const users = pgTable("users", {
   firstName: varchar("first_name"),
   lastName: varchar("last_name"),
   profileImageUrl: varchar("profile_image_url"),
-  role: text("role").default("learner").notNull(), // learner | reviewer | admin
+  role: text("role").$type<UserTypeEnum>().default(UserTypeEnum.LEARNER).notNull(),
   createdAt: timestamp("created_at").defaultNow(),
   updatedAt: timestamp("updated_at").defaultNow(),
 });
@@ -194,7 +195,7 @@ export type CreateClusterRequest = z.infer<typeof insertClusterSchema>;
 
 export type QuizQuestion = {
   wordId: number;
-  type: 'telugu_to_english' | 'english_to_telugu';
+  type: QuizQuestionTypeEnum;
   questionText: string;
   audioUrl?: string | null;
   options: {

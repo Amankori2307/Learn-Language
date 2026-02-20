@@ -1,5 +1,6 @@
 import { sql } from "drizzle-orm";
 import { index, jsonb, pgTable, timestamp, varchar } from "drizzle-orm/pg-core";
+import { UserTypeEnum } from "@shared/domain/enums";
 
 // Session storage table.
 // (IMPORTANT) This table is mandatory for OAuth session management, don't drop it.
@@ -21,10 +22,13 @@ export const users = pgTable("users", {
   firstName: varchar("first_name"),
   lastName: varchar("last_name"),
   profileImageUrl: varchar("profile_image_url"),
-  role: varchar("role").notNull().default("learner"),
+  role: varchar("role").$type<UserTypeEnum>().notNull().default(UserTypeEnum.LEARNER),
   createdAt: timestamp("created_at").defaultNow(),
   updatedAt: timestamp("updated_at").defaultNow(),
 });
 
 export type UpsertUser = typeof users.$inferInsert;
 export type User = typeof users.$inferSelect;
+
+export interface IUser extends User {}
+export interface IUpsertUser extends UpsertUser {}

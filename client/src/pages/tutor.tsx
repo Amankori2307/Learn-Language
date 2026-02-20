@@ -3,8 +3,9 @@ import { Layout } from "@/components/layout";
 import { useWords } from "@/hooks/use-words";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { TutorChatRoleEnum } from "@shared/domain/enums";
 
-type ChatItem = { role: "user" | "tutor"; text: string };
+type ChatItem = { role: TutorChatRoleEnum; text: string };
 
 function buildTutorFeedback(input: string, knownEnglish: Set<string>) {
   const tokens = input
@@ -34,7 +35,7 @@ export default function TutorPage() {
   const { data: words } = useWords();
   const [input, setInput] = useState("");
   const [chat, setChat] = useState<ChatItem[]>([
-    { role: "tutor", text: "Welcome. Write a sentence and I will give vocabulary-focused feedback." },
+    { role: TutorChatRoleEnum.TUTOR, text: "Welcome. Write a sentence and I will give vocabulary-focused feedback." },
   ]);
 
   const knownEnglish = useMemo(() => {
@@ -50,7 +51,7 @@ export default function TutorPage() {
     if (!value) return;
 
     const feedback = buildTutorFeedback(value, knownEnglish);
-    setChat((prev) => [...prev, { role: "user", text: value }, { role: "tutor", text: feedback }]);
+    setChat((prev) => [...prev, { role: TutorChatRoleEnum.USER, text: value }, { role: TutorChatRoleEnum.TUTOR, text: feedback }]);
     setInput("");
   };
 
@@ -68,9 +69,9 @@ export default function TutorPage() {
           {chat.map((msg, idx) => (
             <div
               key={`${msg.role}-${idx}`}
-              className={`rounded-xl px-4 py-3 text-sm ${msg.role === "user" ? "bg-primary/10" : "bg-secondary"}`}
+              className={`rounded-xl px-4 py-3 text-sm ${msg.role === TutorChatRoleEnum.USER ? "bg-primary/10" : "bg-secondary"}`}
             >
-              <span className="font-semibold mr-2">{msg.role === "user" ? "You" : "Tutor"}:</span>
+              <span className="font-semibold mr-2">{msg.role === TutorChatRoleEnum.USER ? "You" : "Tutor"}:</span>
               {msg.text}
             </div>
           ))}

@@ -8,6 +8,7 @@ import { logApiEvent, sendError } from "./http";
 import { chooseDistractors } from "./services/distractors";
 import { applySrsUpdate } from "./services/srs";
 import { requireReviewer } from "./auth/permissions";
+import { QuizModeEnum, QuizQuestionTypeEnum, ReviewStatusEnum } from "@shared/domain/enums";
 
 function formatPronunciationFirst(word: { transliteration?: string | null; telugu: string }) {
   const transliteration = word.transliteration?.trim();
@@ -61,10 +62,10 @@ export async function registerRoutes(
   // Generate Quiz
   app.get(api.quiz.generate.path, isAuthenticated, async (req, res) => {
     const userId = (req.user as any).claims.sub;
-    const parsed = api.quiz.generate.input?.parse(req.query) ?? { mode: "daily_review", count: 10 };
+    const parsed = api.quiz.generate.input?.parse(req.query) ?? { mode: QuizModeEnum.DAILY_REVIEW, count: 10 };
     const limit = parsed.count ?? 10;
     const clusterId = parsed.clusterId;
-    const mode = parsed.mode ?? "daily_review";
+    const mode = parsed.mode ?? QuizModeEnum.DAILY_REVIEW;
 
     const candidates = await storage.getQuizCandidates(userId, limit, clusterId, mode);
     
@@ -94,11 +95,11 @@ export async function registerRoutes(
         count: 3,
       });
 
-      const typePool = ['telugu_to_english', 'english_to_telugu'] as const;
+      const typePool = [QuizQuestionTypeEnum.TELUGU_TO_ENGLISH, QuizQuestionTypeEnum.ENGLISH_TO_TELUGU] as const;
       const type = typePool[Math.floor(Math.random() * typePool.length)];
 
       const questionText =
-        type === "telugu_to_english"
+        type === QuizQuestionTypeEnum.TELUGU_TO_ENGLISH
           ? formatPronunciationFirst(word)
           : word.english;
       
@@ -107,7 +108,7 @@ export async function registerRoutes(
         .map(w => ({
           id: w.id,
           text:
-            type === 'telugu_to_english'
+            type === QuizQuestionTypeEnum.TELUGU_TO_ENGLISH
               ? w.english
               : formatPronunciationFirst(w)
         }));
@@ -116,7 +117,7 @@ export async function registerRoutes(
         wordId: word.id,
         type,
         questionText,
-        pronunciation: type === "english_to_telugu" ? null : formatPronunciationFirst(word),
+        pronunciation: type === QuizQuestionTypeEnum.ENGLISH_TO_TELUGU ? null : formatPronunciationFirst(word),
         audioUrl: word.audioUrl,
         options,
       };
@@ -253,8 +254,8 @@ export async function registerRoutes(
 
   // Review queue
   app.get(api.review.queue.path, isAuthenticated, requireReviewer, async (req, res) => {
-    const parsed = api.review.queue.input?.parse(req.query) ?? { status: "pending_review", limit: 50 };
-    const status = parsed.status ?? "pending_review";
+    const parsed = api.review.queue.input?.parse(req.query) ?? { status: ReviewStatusEnum.PENDING_REVIEW, limit: 50 };
+    const status = parsed.status ?? ReviewStatusEnum.PENDING_REVIEW;
     const limit = parsed.limit ?? 50;
     const queue = await storage.getReviewQueue(status, limit);
     res.json(queue.map((word) => ({

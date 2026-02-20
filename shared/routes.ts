@@ -1,5 +1,12 @@
 import { z } from 'zod';
 import { insertWordSchema, insertClusterSchema, words, clusters, userWordProgress, quizAttempts } from './schema';
+import {
+  QuizDirectionEnum,
+  QuizModeEnum,
+  QuizQuestionTypeEnum,
+  ReviewStatusEnum,
+  UserTypeEnum,
+} from './domain/enums';
 
 // ============================================
 // SHARED ERROR SCHEMAS
@@ -76,14 +83,14 @@ export const api = {
       method: 'GET' as const,
       path: '/api/quiz/generate' as const,
       input: z.object({
-        mode: z.enum(['daily_review', 'new_words', 'cluster', 'weak_words', 'complex_workout']).default('daily_review'),
+        mode: z.nativeEnum(QuizModeEnum).default(QuizModeEnum.DAILY_REVIEW),
         clusterId: z.coerce.number().optional(),
         count: z.coerce.number().default(10),
       }).optional(),
       responses: {
         200: z.array(z.object({
           wordId: z.number(),
-          type: z.enum(['telugu_to_english', 'english_to_telugu']),
+          type: z.nativeEnum(QuizQuestionTypeEnum),
           questionText: z.string(),
           pronunciation: z.string().optional().nullable(),
           audioUrl: z.string().optional().nullable(),
@@ -102,8 +109,8 @@ export const api = {
       input: z.object({
         wordId: z.number(),
         selectedOptionId: z.number(), // The ID of the word selected as the answer
-        questionType: z.enum(['telugu_to_english', 'english_to_telugu']).optional(),
-        direction: z.enum(['telugu_to_english', 'english_to_telugu']).optional(),
+        questionType: z.nativeEnum(QuizQuestionTypeEnum).optional(),
+        direction: z.nativeEnum(QuizDirectionEnum).optional(),
         confidenceLevel: z.number().min(1).max(3),
         responseTimeMs: z.number().int().positive().optional(),
       }),
@@ -141,7 +148,7 @@ export const api = {
           xp: z.number(),
           recognitionAccuracy: z.number(),
           recallAccuracy: z.number(),
-          recommendedDirection: z.enum(['telugu_to_english', 'english_to_telugu']),
+          recommendedDirection: z.nativeEnum(QuizDirectionEnum),
         }),
         401: errorSchemas.unauthorized,
       },
@@ -210,6 +217,7 @@ export const api = {
           firstName: z.string().nullable(),
           lastName: z.string().nullable(),
           profileImageUrl: z.string().nullable(),
+          role: z.nativeEnum(UserTypeEnum).optional(),
           createdAt: z.string().nullable(),
           updatedAt: z.string().nullable(),
         }),
@@ -232,6 +240,7 @@ export const api = {
           firstName: z.string().nullable(),
           lastName: z.string().nullable(),
           profileImageUrl: z.string().nullable(),
+          role: z.nativeEnum(UserTypeEnum).optional(),
           createdAt: z.string().nullable(),
           updatedAt: z.string().nullable(),
         }),
@@ -246,7 +255,7 @@ export const api = {
       method: "GET" as const,
       path: "/api/review/queue" as const,
       input: z.object({
-        status: z.enum(["draft", "pending_review", "approved", "rejected"]).default("pending_review"),
+        status: z.nativeEnum(ReviewStatusEnum).default(ReviewStatusEnum.PENDING_REVIEW),
         limit: z.coerce.number().int().positive().max(200).default(50),
       }).optional(),
       responses: {
@@ -256,7 +265,7 @@ export const api = {
           transliteration: z.string(),
           english: z.string(),
           partOfSpeech: z.string(),
-          reviewStatus: z.string(),
+          reviewStatus: z.nativeEnum(ReviewStatusEnum),
           sourceUrl: z.string().nullable(),
           sourceCapturedAt: z.string().nullable(),
           submittedBy: z.string().nullable(),
@@ -273,13 +282,13 @@ export const api = {
       method: "PATCH" as const,
       path: "/api/review/words/:id" as const,
       input: z.object({
-        toStatus: z.enum(["draft", "pending_review", "approved", "rejected"]),
+        toStatus: z.nativeEnum(ReviewStatusEnum),
         notes: z.string().max(1000).optional(),
       }),
       responses: {
         200: z.object({
           id: z.number(),
-          reviewStatus: z.string(),
+          reviewStatus: z.nativeEnum(ReviewStatusEnum),
           reviewedBy: z.string().nullable(),
           reviewedAt: z.string().nullable(),
           reviewNotes: z.string().nullable(),
@@ -295,7 +304,7 @@ export const api = {
       path: "/api/review/words/bulk" as const,
       input: z.object({
         ids: z.array(z.number().int().positive()).min(1).max(200),
-        toStatus: z.enum(["draft", "pending_review", "approved", "rejected"]),
+        toStatus: z.nativeEnum(ReviewStatusEnum),
         notes: z.string().max(1000).optional(),
       }),
       responses: {
@@ -318,7 +327,7 @@ export const api = {
             telugu: z.string(),
             transliteration: z.string(),
             english: z.string(),
-            reviewStatus: z.string(),
+            reviewStatus: z.nativeEnum(ReviewStatusEnum),
             sourceUrl: z.string().nullable(),
             sourceCapturedAt: z.string().nullable(),
             reviewNotes: z.string().nullable(),
@@ -353,7 +362,7 @@ export const api = {
       responses: {
         200: z.object({
           id: z.number(),
-          reviewStatus: z.literal("draft"),
+          reviewStatus: z.literal(ReviewStatusEnum.DRAFT),
         }),
         400: errorSchemas.validation,
         401: errorSchemas.unauthorized,

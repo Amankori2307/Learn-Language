@@ -1,5 +1,6 @@
 import { db } from "./db";
 import { eq, sql, and } from "drizzle-orm";
+import { QuizDirectionEnum, QuizQuestionTypeEnum, ReviewStatusEnum } from "@shared/domain/enums";
 import {
   words, clusters, wordClusters, userWordProgress, quizAttempts, wordExamples, users,
   wordReviewEvents,
@@ -44,8 +45,8 @@ export interface IStorage {
     wordId: number;
     isCorrect: boolean;
     confidenceLevel: number | null;
-    direction: string | null;
-    questionType: string | null;
+    direction: QuizDirectionEnum | null;
+    questionType: QuizQuestionTypeEnum | null;
     responseTimeMs: number | null;
     createdAt: Date | null;
     word: {
@@ -85,7 +86,7 @@ export interface IStorage {
     accuracy: number;
   }>>;
   getReviewQueue(
-    status: "draft" | "pending_review" | "approved" | "rejected",
+    status: ReviewStatusEnum,
     limit?: number,
   ): Promise<Word[]>;
   getWordWithReviewHistory(wordId: number): Promise<{ word: Word; events: Array<{
@@ -101,7 +102,7 @@ export interface IStorage {
   transitionWordReview(
     wordId: number,
     reviewerId: string,
-    toStatus: "draft" | "pending_review" | "approved" | "rejected",
+    toStatus: ReviewStatusEnum,
     notes?: string,
   ): Promise<Word | undefined>;
   createWordDraft(input: {
@@ -235,8 +236,8 @@ export class DatabaseStorage implements IStorage {
     wordId: number;
     isCorrect: boolean;
     confidenceLevel: number | null;
-    direction: string | null;
-    questionType: string | null;
+    direction: QuizDirectionEnum | null;
+    questionType: QuizQuestionTypeEnum | null;
     responseTimeMs: number | null;
     createdAt: Date | null;
     word: {
@@ -270,8 +271,16 @@ export class DatabaseStorage implements IStorage {
       wordId: row.wordId,
       isCorrect: row.isCorrect,
       confidenceLevel: row.confidenceLevel ?? null,
-      direction: row.direction ?? null,
-      questionType: row.questionType ?? null,
+      direction:
+        row.direction === QuizDirectionEnum.TELUGU_TO_ENGLISH ||
+        row.direction === QuizDirectionEnum.ENGLISH_TO_TELUGU
+          ? row.direction
+          : null,
+      questionType:
+        row.questionType === QuizQuestionTypeEnum.TELUGU_TO_ENGLISH ||
+        row.questionType === QuizQuestionTypeEnum.ENGLISH_TO_TELUGU
+          ? row.questionType
+          : null,
       responseTimeMs: row.responseTimeMs ?? null,
       createdAt: row.createdAt ?? null,
       word: {
@@ -387,7 +396,7 @@ export class DatabaseStorage implements IStorage {
   }
 
   async getReviewQueue(
-    status: "draft" | "pending_review" | "approved" | "rejected",
+    status: ReviewStatusEnum,
     limit: number = 50,
   ): Promise<Word[]> {
     return db
@@ -401,7 +410,7 @@ export class DatabaseStorage implements IStorage {
   async transitionWordReview(
     wordId: number,
     reviewerId: string,
-    toStatus: "draft" | "pending_review" | "approved" | "rejected",
+    toStatus: ReviewStatusEnum,
     notes?: string,
   ): Promise<Word | undefined> {
     const [existing] = await db.select().from(words).where(eq(words.id, wordId));
@@ -420,7 +429,7 @@ export class DatabaseStorage implements IStorage {
 
     await db.insert(wordReviewEvents).values({
       wordId,
-      fromStatus: existing.reviewStatus ?? "approved",
+      fromStatus: existing.reviewStatus ?? ReviewStatusEnum.APPROVED,
       toStatus,
       changedBy: reviewerId,
       notes: notes ?? null,
@@ -478,7 +487,7 @@ export class DatabaseStorage implements IStorage {
       english: input.english,
       partOfSpeech: input.partOfSpeech,
       tags: input.tags ?? ["manual-draft"],
-      reviewStatus: "draft",
+      reviewStatus: ReviewStatusEnum.DRAFT,
       submittedBy: input.submittedBy,
       submittedAt: now,
       sourceUrl: input.sourceUrl ?? null,
@@ -487,8 +496,8 @@ export class DatabaseStorage implements IStorage {
 
     await db.insert(wordReviewEvents).values({
       wordId: created.id,
-      fromStatus: "draft",
-      toStatus: "draft",
+      fromStatus: ReviewStatusEnum.DRAFT,
+      toStatus: ReviewStatusEnum.DRAFT,
       changedBy: input.submittedBy,
       notes: "Initial draft submission",
       sourceUrl: created.sourceUrl ?? null,

@@ -1,12 +1,13 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { api, buildUrl } from "@shared/routes";
 import { z } from "zod";
+import { QuizModeEnum } from "@shared/domain/enums";
 
 // Types derived from API definition
-export type QuizMode = 'daily_review' | 'new_words' | 'cluster' | 'weak_words' | 'complex_workout';
+export type QuizMode = QuizModeEnum;
 type QuizSubmitInput = z.infer<typeof api.quiz.submit.input>;
 
-export function useGenerateQuiz(mode: QuizMode = 'daily_review', clusterId?: number) {
+export function useGenerateQuiz(mode: QuizMode = QuizModeEnum.DAILY_REVIEW, clusterId?: number) {
   return useQuery({
     queryKey: [api.quiz.generate.path, { mode, clusterId }],
     queryFn: async () => {

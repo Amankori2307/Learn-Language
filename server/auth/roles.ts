@@ -1,4 +1,5 @@
 import { config } from "../config";
+import { UserTypeEnum } from "@shared/domain/enums";
 
 function parseEmailList(value?: string): Set<string> {
   return new Set(
@@ -9,21 +10,21 @@ function parseEmailList(value?: string): Set<string> {
   );
 }
 
-export function resolveRoleFromEmail(email?: string | null): "learner" | "reviewer" | "admin" {
+export function resolveRoleFromEmail(email?: string | null): UserTypeEnum {
   const normalized = email?.trim().toLowerCase();
   if (!normalized) {
-    return "learner";
+    return UserTypeEnum.LEARNER;
   }
 
   const adminEmails = parseEmailList(config.ADMIN_EMAILS);
   if (adminEmails.has(normalized)) {
-    return "admin";
+    return UserTypeEnum.ADMIN;
   }
 
   const reviewerEmails = parseEmailList(config.REVIEWER_EMAILS);
   if (reviewerEmails.has(normalized)) {
-    return "reviewer";
+    return UserTypeEnum.REVIEWER;
   }
 
-  return "learner";
+  return UserTypeEnum.LEARNER;
 }
