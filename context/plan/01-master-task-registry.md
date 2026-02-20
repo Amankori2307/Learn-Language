@@ -73,6 +73,7 @@ Status legend: `todo` | `doing` | `done` | `blocked`
 | P4B-009 | todo | Add source evidence and change history on each vocab item | P4B-006 | M | reviewer can inspect source URL, extraction time, and edit history |
 | P4B-010 | todo | Add reviewer productivity tooling (bulk approve/reject, comments, conflict re-open) | P4B-007 | M | reviewer can process queue efficiently with full traceability |
 | P4B-011 | todo | Allow AI-assisted/manual vocabulary creation as DRAFT only | P4B-006 | S | generated entries never go live without reviewer approval |
+| P4B-012 | todo | Pronunciation-first learning UX (transliteration primary, Telugu script secondary in brackets) | P3-003 | M | quiz/cards/feedback consistently prioritize pronunciation text |
 
 ## Phase 5 - Media Expansion (Final)
 

@@ -29,6 +29,42 @@ Resume notes:
 
 Date: 2026-02-20
 Session owner: Codex
+Last completed task ID: Basic model seed + pronunciation-first UX update
+Current in-progress task ID: None
+Next task ID: P4B-001
+
+Completed today:
+- Added model-knowledge beginner seed generator and produced `91` high-confidence basic Telugu entries.
+- Wrote seed output to both `content/seed/words.basic.model_draft.json` and `assets/processed/telugu_basic_seed_model_draft.json`.
+- Updated quiz generation and rendering to prioritize transliteration with Telugu script in brackets.
+- Added pronunciation-first task to the master backlog (`P4B-012`).
+- Performed repo cleanup: removed scrape artifacts, removed Replit leftovers, removed duplicate npm lockfile, removed stale Vite alias for deleted attachment folder.
+
+Files changed:
+- script/generate-basic-telugu-seed.ts
+- content/seed/words.basic.model_draft.json
+- assets/processed/telugu_basic_seed_model_draft.json
+- server/routes.ts
+- client/src/components/quiz-card.tsx
+- package.json
+- vite.config.ts
+- context/plan/01-master-task-registry.md
+- context/plan/55-phase-4b-critical-fixes-and-review-governance.md
+- context/plan/99-daily-run-log.md
+
+Tests/checks run:
+- `pnpm run content:generate:basic`
+- `node --import tsx script/validate-content.ts content/seed/words.basic.model_draft.json`
+- `pnpm run check`
+
+Blockers:
+- None.
+
+Resume notes:
+- Start implementation from `P4B-001` (leaderboard fix) after importing/reviewing basic model seed.
+
+Date: 2026-02-20
+Session owner: Codex
 Last completed task ID: Planning update
 Current in-progress task ID: None
 Next task ID: P4B-001

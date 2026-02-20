@@ -137,6 +137,18 @@ Scope:
 Acceptance:
 - No generated vocabulary reaches learner sessions without explicit reviewer approval.
 
+### P4B-012 - Pronunciation-first UI/UX mode
+Status: `todo`
+
+Scope:
+- Make transliteration (English pronunciation) the primary display for vocabulary prompts.
+- Render Telugu script as secondary context in brackets.
+- Update quiz question surfaces, options, answer feedback, and word cards for consistency.
+
+Acceptance:
+- Learner can progress through core flows focusing on pronunciation-first text.
+- Telugu script remains visible but clearly secondary.
+
 ## Exit criteria
 
 - Leaderboard/profile/avatar/styling issues are closed with regression coverage.

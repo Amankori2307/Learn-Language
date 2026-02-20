@@ -80,8 +80,8 @@ export function QuizCard({
             </span>
             
             <h2 className={cn(
-              "text-3xl md:text-5xl font-bold mb-6 text-foreground",
-              isTeluguQuestion ? "font-telugu leading-relaxed" : "font-sans"
+              "text-3xl md:text-5xl font-bold mb-6 text-foreground leading-relaxed",
+              "font-sans"
             )}>
               {question}
             </h2>
@@ -160,7 +160,7 @@ export function QuizCard({
                     aria-label={`Option ${option.text}`}
                     className={cn(
                       "p-4 rounded-xl text-lg font-medium border-2 transition-all duration-200 text-left relative overflow-hidden group",
-                      !isTeluguQuestion && "font-telugu text-xl",
+                      !isTeluguQuestion && "text-xl",
                       className
                     )}
                   >
@@ -203,9 +203,9 @@ export function QuizCard({
                         {result.isCorrect ? "Excellent!" : "Not quite right"}
                       </h4>
                       <p className="text-muted-foreground mt-1">
-                        <span className="font-telugu font-semibold text-foreground">{result.correctAnswer.telugu}</span>
-                        <span className="mx-2">•</span>
                         <span className="italic">{result.correctAnswer.transliteration}</span>
+                        <span className="mx-2">•</span>
+                        <span className="font-semibold text-foreground">({result.correctAnswer.telugu})</span>
                         <span className="mx-2">•</span>
                         <span>{result.correctAnswer.english}</span>
                       </p>

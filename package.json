@@ -20,6 +20,7 @@
     "content:validate": "node --import tsx script/validate-content.ts",
     "content:import": "node --import tsx script/import-content.ts",
     "content:generate:mvp": "node --import tsx script/generate-mvp-content.ts 300 content/seed/words.mvp.json",
+    "content:generate:basic": "node --import tsx script/generate-basic-telugu-seed.ts",
     "content:prepare:mvp": "pnpm run content:generate:mvp && node --import tsx script/validate-content.ts content/seed/words.mvp.json",
     "content:import:mvp": "node --import tsx script/import-content.ts content/seed/words.mvp.json",
     "benchmark:quiz": "node --import tsx script/benchmark-quiz-selection.ts",

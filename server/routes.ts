@@ -8,6 +8,14 @@ import { logApiEvent, sendError } from "./http";
 import { chooseDistractors } from "./services/distractors";
 import { applySrsUpdate } from "./services/srs";
 
+function formatPronunciationFirst(word: { transliteration?: string | null; telugu: string }) {
+  const transliteration = word.transliteration?.trim();
+  if (!transliteration) {
+    return word.telugu;
+  }
+  return `${transliteration} (${word.telugu})`;
+}
+
 export async function registerRoutes(
   httpServer: Server,
   app: Express
@@ -98,7 +106,7 @@ export async function registerRoutes(
           : type === "sentence_meaning"
             ? sourceSentence || word.telugu
             : type === "telugu_to_english"
-              ? word.telugu
+              ? formatPronunciationFirst(word)
               : word.english;
       
       const options = [word, ...distractors]
@@ -108,7 +116,7 @@ export async function registerRoutes(
           text:
             type === 'telugu_to_english' || type === 'fill_in_blank' || type === "sentence_meaning"
               ? w.english
-              : w.telugu
+              : formatPronunciationFirst(w)
         }));
 
       return {
