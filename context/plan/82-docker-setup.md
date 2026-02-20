@@ -24,6 +24,7 @@ App URL:
 Notes:
 - Compose mounts the repo into `/app`; backend and frontend changes should auto-refresh without rebuilding image.
 - Polling is enabled (`CHOKIDAR_USEPOLLING`, `WATCHPACK_POLLING`) for stable file watching on Docker Desktop/macOS.
+- `CI=true` is set in compose so `pnpm install` can run non-interactively in container startup.
 - If you change dependencies (`package.json`), restart compose once.
 - For Google OAuth, set `AUTH_PROVIDER=google` and provide `GOOGLE_CLIENT_ID` + `GOOGLE_CLIENT_SECRET`.
 

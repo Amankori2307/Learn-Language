@@ -19,7 +19,7 @@ Only active and pending tasks are listed here. Completed tasks are intentionally
 
 | ID | Status | Task | Depends On | Effort | Done When |
 |---|---|---|---|---|---|
-| P4B-013 | doing | Docker compose hot reload validation and docs update | - | S | backend + frontend reflect code changes without rebuilding image |
+| P4B-013 | done | Docker compose hot reload validation and docs update | - | S | backend + frontend reflect code changes without rebuilding image |
 | P4B-014 | done | Add role bootstrap flow for first reviewer/admin user | P4B-007 | S | secure way exists to assign reviewer/admin roles |
 | P4B-015 | done | Add DB migration/backfill scripts for new review/role columns | P4B-006 | S | existing environments migrate safely |
 | P4B-016 | done | Add endpoint-level authorization tests for reviewer actions | P4B-007 | M | non-reviewers blocked and reviewers allowed in tests |

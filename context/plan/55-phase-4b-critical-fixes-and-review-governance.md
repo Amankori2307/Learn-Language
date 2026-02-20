@@ -54,7 +54,7 @@ Acceptance:
 - No auto-publish of unreviewed vocabulary.
 
 ### P4B-013 - Docker compose hot reload support
-Status: `doing`
+Status: `done`
 
 Scope:
 - Keep compose in dev/hot-reload mode with backend watch and live frontend updates.
@@ -62,6 +62,7 @@ Scope:
 
 Acceptance:
 - Editing backend/frontend files reflects live in running compose stack without image rebuild.
+- Runtime validation captured: backend `tsx` auto-restart and Vite HMR update observed under compose.
 
 ### P4B-015 - DB migration/backfill scripts for review governance
 Status: `done`
