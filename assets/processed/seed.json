@@ -8,14 +8,8 @@
     "difficultyLevel": "beginner",
     "frequencyScore": 0.9,
     "cefrLevel": "A1",
-    "tags": [
-      "model-seed",
-      "high-confidence-basic"
-    ],
-    "clusters": [
-      "greetings",
-      "daily-use"
-    ],
+    "tags": ["model-seed", "high-confidence-basic"],
+    "clusters": ["greetings", "daily-use"],
     "examples": [
       {
         "pronunciation": "namastee, miiru elaa unnaaru?",
@@ -32,6 +26,7 @@
       "reviewStatus": "approved"
     },
     "language": "telugu"
+  },
   {
     "originalScript": "ధన్యవాదాలు",
     "transliteration": "dhanyavaadalu",
@@ -41,14 +36,8 @@
     "difficultyLevel": "beginner",
     "frequencyScore": 0.9,
     "cefrLevel": "A1",
-    "tags": [
-      "model-seed",
-      "high-confidence-basic"
-    ],
-    "clusters": [
-      "greetings",
-      "daily-use"
-    ],
+    "tags": ["model-seed", "high-confidence-basic"],
+    "clusters": ["greetings", "daily-use"],
     "examples": [
       {
         "pronunciation": "mii sahaayaaniki dhanyavaadaalu.",
@@ -75,14 +64,8 @@
     "difficultyLevel": "beginner",
     "frequencyScore": 0.9,
     "cefrLevel": "A1",
-    "tags": [
-      "model-seed",
-      "high-confidence-basic"
-    ],
-    "clusters": [
-      "greetings",
-      "daily-use"
-    ],
+    "tags": ["model-seed", "high-confidence-basic"],
+    "clusters": ["greetings", "daily-use"],
     "examples": [
       {
         "pronunciation": "dayacheesi kuurchoomdi.",
@@ -109,14 +92,8 @@
     "difficultyLevel": "beginner",
     "frequencyScore": 0.9,
     "cefrLevel": "A1",
-    "tags": [
-      "model-seed",
-      "high-confidence-basic"
-    ],
-    "clusters": [
-      "greetings",
-      "daily-use"
-    ],
+    "tags": ["model-seed", "high-confidence-basic"],
+    "clusters": ["greetings", "daily-use"],
     "examples": [
       {
         "pronunciation": "kshamimchamdi, naaku artham kaaleedu.",
@@ -143,13 +120,8 @@
     "difficultyLevel": "beginner",
     "frequencyScore": 0.9,
     "cefrLevel": "A1",
-    "tags": [
-      "model-seed",
-      "high-confidence-basic"
-    ],
-    "clusters": [
-      "daily-use"
-    ],
+    "tags": ["model-seed", "high-confidence-basic"],
+    "clusters": ["daily-use"],
     "examples": [
       {
         "pronunciation": "avunu, neenu vastaanu.",
@@ -176,13 +148,8 @@
     "difficultyLevel": "beginner",
     "frequencyScore": 0.9,
     "cefrLevel": "A1",
-    "tags": [
-      "model-seed",
-      "high-confidence-basic"
-    ],
-    "clusters": [
-      "daily-use"
-    ],
+    "tags": ["model-seed", "high-confidence-basic"],
+    "clusters": ["daily-use"],
     "examples": [
       {
         "pronunciation": "kaadu, adi naa pustakam kaadu.",
@@ -209,13 +176,8 @@
     "difficultyLevel": "beginner",
     "frequencyScore": 0.9,
     "cefrLevel": "A1",
-    "tags": [
-      "model-seed",
-      "high-confidence-basic"
-    ],
-    "clusters": [
-      "daily-use"
-    ],
+    "tags": ["model-seed", "high-confidence-basic"],
+    "clusters": ["daily-use"],
     "examples": [
       {
         "pronunciation": "saree, manam velludaam.",
@@ -242,13 +204,8 @@
     "difficultyLevel": "beginner",
     "frequencyScore": 0.9,
     "cefrLevel": "A1",
-    "tags": [
-      "model-seed",
-      "high-confidence-basic"
-    ],
-    "clusters": [
-      "daily-use"
-    ],
+    "tags": ["model-seed", "high-confidence-basic"],
+    "clusters": ["daily-use"],
     "examples": [
       {
         "pronunciation": "ii aaloochana baagumdi.",
@@ -275,14 +232,8 @@
     "difficultyLevel": "beginner",
     "frequencyScore": 0.9,
     "cefrLevel": "A1",
-    "tags": [
-      "model-seed",
-      "high-confidence-basic"
-    ],
-    "clusters": [
-      "core-grammar",
-      "daily-use"
-    ],
+    "tags": ["model-seed", "high-confidence-basic"],
+    "clusters": ["core-grammar", "daily-use"],
     "examples": [
       {
         "pronunciation": "neenu telugu neerchukumtunnaanu.",
@@ -309,14 +260,8 @@
     "difficultyLevel": "beginner",
     "frequencyScore": 0.9,
     "cefrLevel": "A1",
-    "tags": [
-      "model-seed",
-      "high-confidence-basic"
-    ],
-    "clusters": [
-      "core-grammar",
-      "daily-use"
-    ],
+    "tags": ["model-seed", "high-confidence-basic"],
+    "clusters": ["core-grammar", "daily-use"],
     "examples": [
       {
         "pronunciation": "nuvvu ekkada umtaavu?",
@@ -343,14 +288,8 @@
     "difficultyLevel": "beginner",
     "frequencyScore": 0.9,
     "cefrLevel": "A1",
-    "tags": [
-      "model-seed",
-      "high-confidence-basic"
-    ],
-    "clusters": [
-      "core-grammar",
-      "daily-use"
-    ],
+    "tags": ["model-seed", "high-confidence-basic"],
+    "clusters": ["core-grammar", "daily-use"],
     "examples": [
       {
         "pronunciation": "miiru eemi cheestaaru?",
@@ -377,13 +316,8 @@
     "difficultyLevel": "beginner",
     "frequencyScore": 0.9,
     "cefrLevel": "A1",
-    "tags": [
-      "model-seed",
-      "high-confidence-basic"
-    ],
-    "clusters": [
-      "core-grammar"
-    ],
+    "tags": ["model-seed", "high-confidence-basic"],
+    "clusters": ["core-grammar"],
     "examples": [
       {
         "pronunciation": "atanu naa sneehitudu.",
@@ -410,13 +344,8 @@
     "difficultyLevel": "beginner",
     "frequencyScore": 0.9,
     "cefrLevel": "A1",
-    "tags": [
-      "model-seed",
-      "high-confidence-basic"
-    ],
-    "clusters": [
-      "core-grammar"
-    ],
+    "tags": ["model-seed", "high-confidence-basic"],
+    "clusters": ["core-grammar"],
     "examples": [
       {
         "pronunciation": "aame mamchi tiichar.",
@@ -443,13 +372,8 @@
     "difficultyLevel": "beginner",
     "frequencyScore": 0.9,
     "cefrLevel": "A1",
-    "tags": [
-      "model-seed",
-      "high-confidence-basic"
-    ],
-    "clusters": [
-      "core-grammar"
-    ],
+    "tags": ["model-seed", "high-confidence-basic"],
+    "clusters": ["core-grammar"],
     "examples": [
       {
         "pronunciation": "idi naa phoon.",
@@ -476,13 +400,8 @@
     "difficultyLevel": "beginner",
     "frequencyScore": 0.9,
     "cefrLevel": "A1",
-    "tags": [
-      "model-seed",
-      "high-confidence-basic"
-    ],
-    "clusters": [
-      "core-grammar"
-    ],
+    "tags": ["model-seed", "high-confidence-basic"],
+    "clusters": ["core-grammar"],
     "examples": [
       {
         "pronunciation": "adi maa illu.",
@@ -509,13 +428,8 @@
     "difficultyLevel": "beginner",
     "frequencyScore": 0.9,
     "cefrLevel": "A1",
-    "tags": [
-      "model-seed",
-      "high-confidence-basic"
-    ],
-    "clusters": [
-      "core-grammar"
-    ],
+    "tags": ["model-seed", "high-confidence-basic"],
+    "clusters": ["core-grammar"],
     "examples": [
       {
         "pronunciation": "manam ippudu modalupedadaam.",
@@ -542,13 +456,8 @@
     "difficultyLevel": "beginner",
     "frequencyScore": 0.9,
     "cefrLevel": "A1",
-    "tags": [
-      "model-seed",
-      "high-confidence-basic"
-    ],
-    "clusters": [
-      "core-grammar"
-    ],
+    "tags": ["model-seed", "high-confidence-basic"],
+    "clusters": ["core-grammar"],
     "examples": [
       {
         "pronunciation": "meemu haidaraabaad‌loo umtaam.",
@@ -575,13 +484,8 @@
     "difficultyLevel": "beginner",
     "frequencyScore": 0.9,
     "cefrLevel": "A1",
-    "tags": [
-      "model-seed",
-      "high-confidence-basic"
-    ],
-    "clusters": [
-      "core-grammar"
-    ],
+    "tags": ["model-seed", "high-confidence-basic"],
+    "clusters": ["core-grammar"],
     "examples": [
       {
         "pronunciation": "vaallu skuul‌ki vellaaru.",
@@ -608,14 +512,8 @@
     "difficultyLevel": "beginner",
     "frequencyScore": 0.9,
     "cefrLevel": "A1",
-    "tags": [
-      "model-seed",
-      "high-confidence-basic"
-    ],
-    "clusters": [
-      "question-words",
-      "core-grammar"
-    ],
+    "tags": ["model-seed", "high-confidence-basic"],
+    "clusters": ["question-words", "core-grammar"],
     "examples": [
       {
         "pronunciation": "idi eemi?",
@@ -642,14 +540,8 @@
     "difficultyLevel": "beginner",
     "frequencyScore": 0.9,
     "cefrLevel": "A1",
-    "tags": [
-      "model-seed",
-      "high-confidence-basic"
-    ],
-    "clusters": [
-      "question-words",
-      "core-grammar"
-    ],
+    "tags": ["model-seed", "high-confidence-basic"],
+    "clusters": ["question-words", "core-grammar"],
     "examples": [
       {
         "pronunciation": "atanu evaru?",
@@ -676,14 +568,8 @@
     "difficultyLevel": "beginner",
     "frequencyScore": 0.9,
     "cefrLevel": "A1",
-    "tags": [
-      "model-seed",
-      "high-confidence-basic"
-    ],
-    "clusters": [
-      "question-words",
-      "core-grammar"
-    ],
+    "tags": ["model-seed", "high-confidence-basic"],
+    "clusters": ["question-words", "core-grammar"],
     "examples": [
       {
         "pronunciation": "mii illu ekkada?",
@@ -710,14 +596,8 @@
     "difficultyLevel": "beginner",
     "frequencyScore": 0.9,
     "cefrLevel": "A1",
-    "tags": [
-      "model-seed",
-      "high-confidence-basic"
-    ],
-    "clusters": [
-      "question-words",
-      "core-grammar"
-    ],
+    "tags": ["model-seed", "high-confidence-basic"],
+    "clusters": ["question-words", "core-grammar"],
     "examples": [
       {
         "pronunciation": "miiru eppudu vastaaru?",
@@ -744,14 +624,8 @@
     "difficultyLevel": "beginner",
     "frequencyScore": 0.9,
     "cefrLevel": "A1",
-    "tags": [
-      "model-seed",
-      "high-confidence-basic"
-    ],
-    "clusters": [
-      "question-words",
-      "core-grammar"
-    ],
+    "tags": ["model-seed", "high-confidence-basic"],
+    "clusters": ["question-words", "core-grammar"],
     "examples": [
       {
         "pronunciation": "idi elaa panicheestumdi?",
@@ -778,14 +652,8 @@
     "difficultyLevel": "beginner",
     "frequencyScore": 0.9,
     "cefrLevel": "A1",
-    "tags": [
-      "model-seed",
-      "high-confidence-basic"
-    ],
-    "clusters": [
-      "question-words",
-      "core-grammar"
-    ],
+    "tags": ["model-seed", "high-confidence-basic"],
+    "clusters": ["question-words", "core-grammar"],
     "examples": [
       {
         "pronunciation": "nuvvu emduku aalasyamgaa vachchaavu?",
@@ -812,13 +680,8 @@
     "difficultyLevel": "beginner",
     "frequencyScore": 0.9,
     "cefrLevel": "A1",
-    "tags": [
-      "model-seed",
-      "high-confidence-basic"
-    ],
-    "clusters": [
-      "numbers"
-    ],
+    "tags": ["model-seed", "high-confidence-basic"],
+    "clusters": ["numbers"],
     "examples": [
       {
         "pronunciation": "naa daggara okati pustakam umdi.",
@@ -845,13 +708,8 @@
     "difficultyLevel": "beginner",
     "frequencyScore": 0.9,
     "cefrLevel": "A1",
-    "tags": [
-      "model-seed",
-      "high-confidence-basic"
-    ],
-    "clusters": [
-      "numbers"
-    ],
+    "tags": ["model-seed", "high-confidence-basic"],
+    "clusters": ["numbers"],
     "examples": [
       {
         "pronunciation": "maaku remdu pillalu unnaaru.",
@@ -878,13 +736,8 @@
     "difficultyLevel": "beginner",
     "frequencyScore": 0.9,
     "cefrLevel": "A1",
-    "tags": [
-      "model-seed",
-      "high-confidence-basic"
-    ],
-    "clusters": [
-      "numbers"
-    ],
+    "tags": ["model-seed", "high-confidence-basic"],
+    "clusters": ["numbers"],
     "examples": [
       {
         "pronunciation": "muudu roojula tarvaata ramdi.",
@@ -911,13 +764,8 @@
     "difficultyLevel": "beginner",
     "frequencyScore": 0.9,
     "cefrLevel": "A1",
-    "tags": [
-      "model-seed",
-      "high-confidence-basic"
-    ],
-    "clusters": [
-      "numbers"
-    ],
+    "tags": ["model-seed", "high-confidence-basic"],
+    "clusters": ["numbers"],
     "examples": [
       {
         "pronunciation": "naalugu kurchiilu kaavaali.",
@@ -944,13 +792,8 @@
     "difficultyLevel": "beginner",
     "frequencyScore": 0.9,
     "cefrLevel": "A1",
-    "tags": [
-      "model-seed",
-      "high-confidence-basic"
-    ],
-    "clusters": [
-      "numbers"
-    ],
+    "tags": ["model-seed", "high-confidence-basic"],
+    "clusters": ["numbers"],
     "examples": [
       {
         "pronunciation": "aidu nimishaalu veechi umdamdi.",
@@ -977,13 +820,8 @@
     "difficultyLevel": "beginner",
     "frequencyScore": 0.9,
     "cefrLevel": "A1",
-    "tags": [
-      "model-seed",
-      "high-confidence-basic"
-    ],
-    "clusters": [
-      "numbers"
-    ],
+    "tags": ["model-seed", "high-confidence-basic"],
+    "clusters": ["numbers"],
     "examples": [
       {
         "pronunciation": "padi gamtalaku miitimg umdi.",
@@ -1010,13 +848,8 @@
     "difficultyLevel": "beginner",
     "frequencyScore": 0.9,
     "cefrLevel": "A1",
-    "tags": [
-      "model-seed",
-      "high-confidence-basic"
-    ],
-    "clusters": [
-      "numbers"
-    ],
+    "tags": ["model-seed", "high-confidence-basic"],
+    "clusters": ["numbers"],
     "examples": [
       {
         "pronunciation": "iravai mamdi vidyaarthulu unnaaru.",
@@ -1043,14 +876,8 @@
     "difficultyLevel": "beginner",
     "frequencyScore": 0.9,
     "cefrLevel": "A1",
-    "tags": [
-      "model-seed",
-      "high-confidence-basic"
-    ],
-    "clusters": [
-      "time",
-      "daily-use"
-    ],
+    "tags": ["model-seed", "high-confidence-basic"],
+    "clusters": ["time", "daily-use"],
     "examples": [
       {
         "pronunciation": "iirooju vaataavaranam challagaa umdi.",
@@ -1077,14 +904,8 @@
     "difficultyLevel": "beginner",
     "frequencyScore": 0.9,
     "cefrLevel": "A1",
-    "tags": [
-      "model-seed",
-      "high-confidence-basic"
-    ],
-    "clusters": [
-      "time",
-      "daily-use"
-    ],
+    "tags": ["model-seed", "high-confidence-basic"],
+    "clusters": ["time", "daily-use"],
     "examples": [
       {
         "pronunciation": "reepu kaluddaam.",
@@ -1111,14 +932,8 @@
     "difficultyLevel": "beginner",
     "frequencyScore": 0.9,
     "cefrLevel": "A1",
-    "tags": [
-      "model-seed",
-      "high-confidence-basic"
-    ],
-    "clusters": [
-      "time",
-      "daily-use"
-    ],
+    "tags": ["model-seed", "high-confidence-basic"],
+    "clusters": ["time", "daily-use"],
     "examples": [
       {
         "pronunciation": "ninna neenu imtloonee unnaanu.",
@@ -1145,14 +960,8 @@
     "difficultyLevel": "beginner",
     "frequencyScore": 0.9,
     "cefrLevel": "A1",
-    "tags": [
-      "model-seed",
-      "high-confidence-basic"
-    ],
-    "clusters": [
-      "time",
-      "daily-use"
-    ],
+    "tags": ["model-seed", "high-confidence-basic"],
+    "clusters": ["time", "daily-use"],
     "examples": [
       {
         "pronunciation": "ippudu modalu pedadaam.",
@@ -1179,14 +988,8 @@
     "difficultyLevel": "beginner",
     "frequencyScore": 0.9,
     "cefrLevel": "A1",
-    "tags": [
-      "model-seed",
-      "high-confidence-basic"
-    ],
-    "clusters": [
-      "time",
-      "daily-use"
-    ],
+    "tags": ["model-seed", "high-confidence-basic"],
+    "clusters": ["time", "daily-use"],
     "examples": [
       {
         "pronunciation": "neenu tarvaata phoon cheestaanu.",
@@ -1213,13 +1016,8 @@
     "difficultyLevel": "beginner",
     "frequencyScore": 0.9,
     "cefrLevel": "A1",
-    "tags": [
-      "model-seed",
-      "high-confidence-basic"
-    ],
-    "clusters": [
-      "time"
-    ],
+    "tags": ["model-seed", "high-confidence-basic"],
+    "clusters": ["time"],
     "examples": [
       {
         "pronunciation": "udayam neenu nadakaku veltaanu.",
@@ -1246,13 +1044,8 @@
     "difficultyLevel": "beginner",
     "frequencyScore": 0.9,
     "cefrLevel": "A1",
-    "tags": [
-      "model-seed",
-      "high-confidence-basic"
-    ],
-    "clusters": [
-      "time"
-    ],
+    "tags": ["model-seed", "high-confidence-basic"],
+    "clusters": ["time"],
     "examples": [
       {
         "pronunciation": "saayamtram tii taagudaam.",
@@ -1279,13 +1072,8 @@
     "difficultyLevel": "beginner",
     "frequencyScore": 0.9,
     "cefrLevel": "A1",
-    "tags": [
-      "model-seed",
-      "high-confidence-basic"
-    ],
-    "clusters": [
-      "time"
-    ],
+    "tags": ["model-seed", "high-confidence-basic"],
+    "clusters": ["time"],
     "examples": [
       {
         "pronunciation": "raatri tvaragaa nidrapoo.",
@@ -1312,13 +1100,8 @@
     "difficultyLevel": "beginner",
     "frequencyScore": 0.9,
     "cefrLevel": "A1",
-    "tags": [
-      "model-seed",
-      "high-confidence-basic"
-    ],
-    "clusters": [
-      "time"
-    ],
+    "tags": ["model-seed", "high-confidence-basic"],
+    "clusters": ["time"],
     "examples": [
       {
         "pronunciation": "nii samayam viluvainadi.",
@@ -1345,14 +1128,8 @@
     "difficultyLevel": "beginner",
     "frequencyScore": 0.9,
     "cefrLevel": "A1",
-    "tags": [
-      "model-seed",
-      "high-confidence-basic"
-    ],
-    "clusters": [
-      "family",
-      "people"
-    ],
+    "tags": ["model-seed", "high-confidence-basic"],
+    "clusters": ["family", "people"],
     "examples": [
       {
         "pronunciation": "naa amma chaalaa mamchidi.",
@@ -1379,14 +1156,8 @@
     "difficultyLevel": "beginner",
     "frequencyScore": 0.9,
     "cefrLevel": "A1",
-    "tags": [
-      "model-seed",
-      "high-confidence-basic"
-    ],
-    "clusters": [
-      "family",
-      "people"
-    ],
+    "tags": ["model-seed", "high-confidence-basic"],
+    "clusters": ["family", "people"],
     "examples": [
       {
         "pronunciation": "naa naanna aaphiisuki vellaaru.",
@@ -1413,14 +1184,8 @@
     "difficultyLevel": "beginner",
     "frequencyScore": 0.9,
     "cefrLevel": "A1",
-    "tags": [
-      "model-seed",
-      "high-confidence-basic"
-    ],
-    "clusters": [
-      "family",
-      "people"
-    ],
+    "tags": ["model-seed", "high-confidence-basic"],
+    "clusters": ["family", "people"],
     "examples": [
       {
         "pronunciation": "naa anna haidaraabaad‌loo umtaadu.",
@@ -1447,14 +1212,8 @@
     "difficultyLevel": "beginner",
     "frequencyScore": 0.9,
     "cefrLevel": "A1",
-    "tags": [
-      "model-seed",
-      "high-confidence-basic"
-    ],
-    "clusters": [
-      "family",
-      "people"
-    ],
+    "tags": ["model-seed", "high-confidence-basic"],
+    "clusters": ["family", "people"],
     "examples": [
       {
         "pronunciation": "naa akka daaktar.",
@@ -1481,14 +1240,8 @@
     "difficultyLevel": "beginner",
     "frequencyScore": 0.9,
     "cefrLevel": "A1",
-    "tags": [
-      "model-seed",
-      "high-confidence-basic"
-    ],
-    "clusters": [
-      "family",
-      "people"
-    ],
+    "tags": ["model-seed", "high-confidence-basic"],
+    "clusters": ["family", "people"],
     "examples": [
       {
         "pronunciation": "naa tammudu kriket aadutaadu.",
@@ -1515,14 +1268,8 @@
     "difficultyLevel": "beginner",
     "frequencyScore": 0.9,
     "cefrLevel": "A1",
-    "tags": [
-      "model-seed",
-      "high-confidence-basic"
-    ],
-    "clusters": [
-      "family",
-      "people"
-    ],
+    "tags": ["model-seed", "high-confidence-basic"],
+    "clusters": ["family", "people"],
     "examples": [
       {
         "pronunciation": "naa chelli paata paadutumdi.",
@@ -1549,14 +1296,8 @@
     "difficultyLevel": "beginner",
     "frequencyScore": 0.9,
     "cefrLevel": "A1",
-    "tags": [
-      "model-seed",
-      "high-confidence-basic"
-    ],
-    "clusters": [
-      "family",
-      "people"
-    ],
+    "tags": ["model-seed", "high-confidence-basic"],
+    "clusters": ["family", "people"],
     "examples": [
       {
         "pronunciation": "maa kutumbam peddadi.",
@@ -1583,14 +1324,8 @@
     "difficultyLevel": "beginner",
     "frequencyScore": 0.9,
     "cefrLevel": "A1",
-    "tags": [
-      "model-seed",
-      "high-confidence-basic"
-    ],
-    "clusters": [
-      "people",
-      "daily-use"
-    ],
+    "tags": ["model-seed", "high-confidence-basic"],
+    "clusters": ["people", "daily-use"],
     "examples": [
       {
         "pronunciation": "atanu naa mamchi sneehitudu.",
@@ -1617,14 +1352,8 @@
     "difficultyLevel": "beginner",
     "frequencyScore": 0.9,
     "cefrLevel": "A1",
-    "tags": [
-      "model-seed",
-      "high-confidence-basic"
-    ],
-    "clusters": [
-      "people",
-      "daily-use"
-    ],
+    "tags": ["model-seed", "high-confidence-basic"],
+    "clusters": ["people", "daily-use"],
     "examples": [
       {
         "pronunciation": "aame naa sneehituraalu.",
@@ -1651,14 +1380,8 @@
     "difficultyLevel": "beginner",
     "frequencyScore": 0.9,
     "cefrLevel": "A1",
-    "tags": [
-      "model-seed",
-      "high-confidence-basic"
-    ],
-    "clusters": [
-      "home",
-      "daily-use"
-    ],
+    "tags": ["model-seed", "high-confidence-basic"],
+    "clusters": ["home", "daily-use"],
     "examples": [
       {
         "pronunciation": "maa illu peddadi.",
@@ -1685,14 +1408,8 @@
     "difficultyLevel": "beginner",
     "frequencyScore": 0.9,
     "cefrLevel": "A1",
-    "tags": [
-      "model-seed",
-      "high-confidence-basic"
-    ],
-    "clusters": [
-      "education",
-      "daily-use"
-    ],
+    "tags": ["model-seed", "high-confidence-basic"],
+    "clusters": ["education", "daily-use"],
     "examples": [
       {
         "pronunciation": "neenu telugu pustakam chaduvutunnaanu.",
@@ -1719,13 +1436,8 @@
     "difficultyLevel": "beginner",
     "frequencyScore": 0.9,
     "cefrLevel": "A1",
-    "tags": [
-      "model-seed",
-      "high-confidence-basic"
-    ],
-    "clusters": [
-      "education"
-    ],
+    "tags": ["model-seed", "high-confidence-basic"],
+    "clusters": ["education"],
     "examples": [
       {
         "pronunciation": "pillalu paathashaalaku vellaaru.",
@@ -1752,14 +1464,8 @@
     "difficultyLevel": "beginner",
     "frequencyScore": 0.9,
     "cefrLevel": "A1",
-    "tags": [
-      "model-seed",
-      "high-confidence-basic"
-    ],
-    "clusters": [
-      "food-and-drink",
-      "daily-use"
-    ],
+    "tags": ["model-seed", "high-confidence-basic"],
+    "clusters": ["food-and-drink", "daily-use"],
     "examples": [
       {
         "pronunciation": "naaku niiru kaavaali.",
@@ -1786,14 +1492,8 @@
     "difficultyLevel": "beginner",
     "frequencyScore": 0.9,
     "cefrLevel": "A1",
-    "tags": [
-      "model-seed",
-      "high-confidence-basic"
-    ],
-    "clusters": [
-      "food-and-drink",
-      "daily-use"
-    ],
+    "tags": ["model-seed", "high-confidence-basic"],
+    "clusters": ["food-and-drink", "daily-use"],
     "examples": [
       {
         "pronunciation": "annam veedigaa umdi.",
@@ -1820,13 +1520,8 @@
     "difficultyLevel": "beginner",
     "frequencyScore": 0.9,
     "cefrLevel": "A1",
-    "tags": [
-      "model-seed",
-      "high-confidence-basic"
-    ],
-    "clusters": [
-      "food-and-drink"
-    ],
+    "tags": ["model-seed", "high-confidence-basic"],
+    "clusters": ["food-and-drink"],
     "examples": [
       {
         "pronunciation": "neenu prati rooju pamdu timtaanu.",
@@ -1853,14 +1548,8 @@
     "difficultyLevel": "beginner",
     "frequencyScore": 0.9,
     "cefrLevel": "A1",
-    "tags": [
-      "model-seed",
-      "high-confidence-basic"
-    ],
-    "clusters": [
-      "travel",
-      "daily-use"
-    ],
+    "tags": ["model-seed", "high-confidence-basic"],
+    "clusters": ["travel", "daily-use"],
     "examples": [
       {
         "pronunciation": "bassu samayaaniki vachchimdi.",
@@ -1887,14 +1576,8 @@
     "difficultyLevel": "beginner",
     "frequencyScore": 0.9,
     "cefrLevel": "A1",
-    "tags": [
-      "model-seed",
-      "high-confidence-basic"
-    ],
-    "clusters": [
-      "travel",
-      "places"
-    ],
+    "tags": ["model-seed", "high-confidence-basic"],
+    "clusters": ["travel", "places"],
     "examples": [
       {
         "pronunciation": "ii roodu nagaraaniki veltumdi.",
@@ -1921,13 +1604,8 @@
     "difficultyLevel": "beginner",
     "frequencyScore": 0.9,
     "cefrLevel": "A1",
-    "tags": [
-      "model-seed",
-      "high-confidence-basic"
-    ],
-    "clusters": [
-      "places"
-    ],
+    "tags": ["model-seed", "high-confidence-basic"],
+    "clusters": ["places"],
     "examples": [
       {
         "pronunciation": "naa graamam chaalaa amdamgaa umtumdi.",
@@ -1954,13 +1632,8 @@
     "difficultyLevel": "beginner",
     "frequencyScore": 0.9,
     "cefrLevel": "A1",
-    "tags": [
-      "model-seed",
-      "high-confidence-basic"
-    ],
-    "clusters": [
-      "places"
-    ],
+    "tags": ["model-seed", "high-confidence-basic"],
+    "clusters": ["places"],
     "examples": [
       {
         "pronunciation": "haidaraabaad oka pedda nagaram.",
@@ -1987,13 +1660,8 @@
     "difficultyLevel": "beginner",
     "frequencyScore": 0.9,
     "cefrLevel": "A1",
-    "tags": [
-      "model-seed",
-      "high-confidence-basic"
-    ],
-    "clusters": [
-      "daily-use"
-    ],
+    "tags": ["model-seed", "high-confidence-basic"],
+    "clusters": ["daily-use"],
     "examples": [
       {
         "pronunciation": "naaku iirooju chaalaa pani umdi.",
@@ -2020,13 +1688,8 @@
     "difficultyLevel": "beginner",
     "frequencyScore": 0.9,
     "cefrLevel": "A1",
-    "tags": [
-      "model-seed",
-      "high-confidence-basic"
-    ],
-    "clusters": [
-      "daily-use"
-    ],
+    "tags": ["model-seed", "high-confidence-basic"],
+    "clusters": ["daily-use"],
     "examples": [
       {
         "pronunciation": "naaku komchem dabbu kaavaali.",
@@ -2053,14 +1716,8 @@
     "difficultyLevel": "beginner",
     "frequencyScore": 0.9,
     "cefrLevel": "A1",
-    "tags": [
-      "model-seed",
-      "high-confidence-basic"
-    ],
-    "clusters": [
-      "education",
-      "daily-use"
-    ],
+    "tags": ["model-seed", "high-confidence-basic"],
+    "clusters": ["education", "daily-use"],
     "examples": [
       {
         "pronunciation": "telugu oka amdamaina bhaasha.",
@@ -2087,13 +1744,8 @@
     "difficultyLevel": "beginner",
     "frequencyScore": 0.9,
     "cefrLevel": "A1",
-    "tags": [
-      "model-seed",
-      "high-confidence-basic"
-    ],
-    "clusters": [
-      "daily-use"
-    ],
+    "tags": ["model-seed", "high-confidence-basic"],
+    "clusters": ["daily-use"],
     "examples": [
       {
         "pronunciation": "mii sahaayam naaku avasaram.",
@@ -2120,14 +1772,8 @@
     "difficultyLevel": "beginner",
     "frequencyScore": 0.9,
     "cefrLevel": "A1",
-    "tags": [
-      "model-seed",
-      "high-confidence-basic"
-    ],
-    "clusters": [
-      "daily-actions",
-      "travel"
-    ],
+    "tags": ["model-seed", "high-confidence-basic"],
+    "clusters": ["daily-actions", "travel"],
     "examples": [
       {
         "pronunciation": "manamu maarket‌ki veldaam.",
@@ -2154,13 +1800,8 @@
     "difficultyLevel": "beginner",
     "frequencyScore": 0.9,
     "cefrLevel": "A1",
-    "tags": [
-      "model-seed",
-      "high-confidence-basic"
-    ],
-    "clusters": [
-      "daily-actions"
-    ],
+    "tags": ["model-seed", "high-confidence-basic"],
+    "clusters": ["daily-actions"],
     "examples": [
       {
         "pronunciation": "ikkadiki raa.",
@@ -2187,14 +1828,8 @@
     "difficultyLevel": "beginner",
     "frequencyScore": 0.9,
     "cefrLevel": "A1",
-    "tags": [
-      "model-seed",
-      "high-confidence-basic"
-    ],
-    "clusters": [
-      "daily-actions",
-      "food-and-drink"
-    ],
+    "tags": ["model-seed", "high-confidence-basic"],
+    "clusters": ["daily-actions", "food-and-drink"],
     "examples": [
       {
         "pronunciation": "samayaaniki bhoojanam tinu.",
@@ -2221,14 +1856,8 @@
     "difficultyLevel": "beginner",
     "frequencyScore": 0.9,
     "cefrLevel": "A1",
-    "tags": [
-      "model-seed",
-      "high-confidence-basic"
-    ],
-    "clusters": [
-      "daily-actions",
-      "food-and-drink"
-    ],
+    "tags": ["model-seed", "high-confidence-basic"],
+    "clusters": ["daily-actions", "food-and-drink"],
     "examples": [
       {
         "pronunciation": "roojuu ekkuva niiru taagu.",
@@ -2255,14 +1884,8 @@
     "difficultyLevel": "beginner",
     "frequencyScore": 0.9,
     "cefrLevel": "A1",
-    "tags": [
-      "model-seed",
-      "high-confidence-basic"
-    ],
-    "clusters": [
-      "daily-actions",
-      "education"
-    ],
+    "tags": ["model-seed", "high-confidence-basic"],
+    "clusters": ["daily-actions", "education"],
     "examples": [
       {
         "pronunciation": "prati rooju telugu chaduvu.",
@@ -2289,14 +1912,8 @@
     "difficultyLevel": "beginner",
     "frequencyScore": 0.9,
     "cefrLevel": "A1",
-    "tags": [
-      "model-seed",
-      "high-confidence-basic"
-    ],
-    "clusters": [
-      "daily-actions",
-      "education"
-    ],
+    "tags": ["model-seed", "high-confidence-basic"],
+    "clusters": ["daily-actions", "education"],
     "examples": [
       {
         "pronunciation": "nii peeru ikkada raayi.",
@@ -2323,13 +1940,8 @@
     "difficultyLevel": "beginner",
     "frequencyScore": 0.9,
     "cefrLevel": "A1",
-    "tags": [
-      "model-seed",
-      "high-confidence-basic"
-    ],
-    "clusters": [
-      "daily-actions"
-    ],
+    "tags": ["model-seed", "high-confidence-basic"],
+    "clusters": ["daily-actions"],
     "examples": [
       {
         "pronunciation": "ii chitram chuudu.",
@@ -2356,13 +1968,8 @@
     "difficultyLevel": "beginner",
     "frequencyScore": 0.9,
     "cefrLevel": "A1",
-    "tags": [
-      "model-seed",
-      "high-confidence-basic"
-    ],
-    "clusters": [
-      "daily-actions"
-    ],
+    "tags": ["model-seed", "high-confidence-basic"],
+    "clusters": ["daily-actions"],
     "examples": [
       {
         "pronunciation": "nemmadigaa maatlaadu.",
@@ -2389,13 +1996,8 @@
     "difficultyLevel": "beginner",
     "frequencyScore": 0.9,
     "cefrLevel": "A1",
-    "tags": [
-      "model-seed",
-      "high-confidence-basic"
-    ],
-    "clusters": [
-      "daily-actions"
-    ],
+    "tags": ["model-seed", "high-confidence-basic"],
+    "clusters": ["daily-actions"],
     "examples": [
       {
         "pronunciation": "jaagrattagaa vinu.",
@@ -2422,14 +2024,8 @@
     "difficultyLevel": "beginner",
     "frequencyScore": 0.9,
     "cefrLevel": "A1",
-    "tags": [
-      "model-seed",
-      "high-confidence-basic"
-    ],
-    "clusters": [
-      "daily-actions",
-      "time"
-    ],
+    "tags": ["model-seed", "high-confidence-basic"],
+    "clusters": ["daily-actions", "time"],
     "examples": [
       {
         "pronunciation": "raatri tomdaragaa nidrapoo.",
@@ -2456,13 +2052,8 @@
     "difficultyLevel": "beginner",
     "frequencyScore": 0.9,
     "cefrLevel": "A1",
-    "tags": [
-      "model-seed",
-      "high-confidence-basic"
-    ],
-    "clusters": [
-      "daily-actions"
-    ],
+    "tags": ["model-seed", "high-confidence-basic"],
+    "clusters": ["daily-actions"],
     "examples": [
       {
         "pronunciation": "ikkada kuurchoo.",
@@ -2489,13 +2080,8 @@
     "difficultyLevel": "beginner",
     "frequencyScore": 0.9,
     "cefrLevel": "A1",
-    "tags": [
-      "model-seed",
-      "high-confidence-basic"
-    ],
-    "clusters": [
-      "daily-actions"
-    ],
+    "tags": ["model-seed", "high-confidence-basic"],
+    "clusters": ["daily-actions"],
     "examples": [
       {
         "pronunciation": "lainloo nilabadu.",
@@ -2522,13 +2108,8 @@
     "difficultyLevel": "beginner",
     "frequencyScore": 0.9,
     "cefrLevel": "A1",
-    "tags": [
-      "model-seed",
-      "high-confidence-basic"
-    ],
-    "clusters": [
-      "daily-actions"
-    ],
+    "tags": ["model-seed", "high-confidence-basic"],
+    "clusters": ["daily-actions"],
     "examples": [
       {
         "pronunciation": "dayacheesi naaku nii pustakam ivvu.",
@@ -2555,13 +2136,8 @@
     "difficultyLevel": "beginner",
     "frequencyScore": 0.9,
     "cefrLevel": "A1",
-    "tags": [
-      "model-seed",
-      "high-confidence-basic"
-    ],
-    "clusters": [
-      "daily-actions"
-    ],
+    "tags": ["model-seed", "high-confidence-basic"],
+    "clusters": ["daily-actions"],
     "examples": [
       {
         "pronunciation": "ii pennu tiisukoo.",
@@ -2588,13 +2164,8 @@
     "difficultyLevel": "beginner",
     "frequencyScore": 0.9,
     "cefrLevel": "A1",
-    "tags": [
-      "model-seed",
-      "high-confidence-basic"
-    ],
-    "clusters": [
-      "daily-actions"
-    ],
+    "tags": ["model-seed", "high-confidence-basic"],
+    "clusters": ["daily-actions"],
     "examples": [
       {
         "pronunciation": "ii pani ippudee cheeyi.",
@@ -2621,14 +2192,8 @@
     "difficultyLevel": "beginner",
     "frequencyScore": 0.9,
     "cefrLevel": "A1",
-    "tags": [
-      "model-seed",
-      "high-confidence-basic"
-    ],
-    "clusters": [
-      "daily-actions",
-      "core-grammar"
-    ],
+    "tags": ["model-seed", "high-confidence-basic"],
+    "clusters": ["daily-actions", "core-grammar"],
     "examples": [
       {
         "pronunciation": "naaku ii padam telusu.",
@@ -2655,14 +2220,8 @@
     "difficultyLevel": "beginner",
     "frequencyScore": 0.9,
     "cefrLevel": "A1",
-    "tags": [
-      "model-seed",
-      "high-confidence-basic"
-    ],
-    "clusters": [
-      "daily-actions",
-      "education"
-    ],
+    "tags": ["model-seed", "high-confidence-basic"],
+    "clusters": ["daily-actions", "education"],
     "examples": [
       {
         "pronunciation": "ippudu naaku artham ayimdi.",
@@ -2689,14 +2248,8 @@
     "difficultyLevel": "beginner",
     "frequencyScore": 0.9,
     "cefrLevel": "A1",
-    "tags": [
-      "model-seed",
-      "high-confidence-basic"
-    ],
-    "clusters": [
-      "descriptions",
-      "daily-use"
-    ],
+    "tags": ["model-seed", "high-confidence-basic"],
+    "clusters": ["descriptions", "daily-use"],
     "examples": [
       {
         "pronunciation": "atanu mamchi manishi.",
@@ -2723,13 +2276,8 @@
     "difficultyLevel": "beginner",
     "frequencyScore": 0.9,
     "cefrLevel": "A1",
-    "tags": [
-      "model-seed",
-      "high-confidence-basic"
-    ],
-    "clusters": [
-      "descriptions"
-    ],
+    "tags": ["model-seed", "high-confidence-basic"],
+    "clusters": ["descriptions"],
     "examples": [
       {
         "pronunciation": "idi chedu alavaatu.",
@@ -2756,13 +2304,8 @@
     "difficultyLevel": "beginner",
     "frequencyScore": 0.9,
     "cefrLevel": "A1",
-    "tags": [
-      "model-seed",
-      "high-confidence-basic"
-    ],
-    "clusters": [
-      "descriptions"
-    ],
+    "tags": ["model-seed", "high-confidence-basic"],
+    "clusters": ["descriptions"],
     "examples": [
       {
         "pronunciation": "idi pedda illu.",
@@ -2789,13 +2332,8 @@
     "difficultyLevel": "beginner",
     "frequencyScore": 0.9,
     "cefrLevel": "A1",
-    "tags": [
-      "model-seed",
-      "high-confidence-basic"
-    ],
-    "clusters": [
-      "descriptions"
-    ],
+    "tags": ["model-seed", "high-confidence-basic"],
+    "clusters": ["descriptions"],
     "examples": [
       {
         "pronunciation": "adi chinna pustakam.",
@@ -2822,13 +2360,8 @@
     "difficultyLevel": "beginner",
     "frequencyScore": 0.9,
     "cefrLevel": "A1",
-    "tags": [
-      "model-seed",
-      "high-confidence-basic"
-    ],
-    "clusters": [
-      "descriptions"
-    ],
+    "tags": ["model-seed", "high-confidence-basic"],
+    "clusters": ["descriptions"],
     "examples": [
       {
         "pronunciation": "neenu kotta phoon konnaanu.",
@@ -2855,13 +2388,8 @@
     "difficultyLevel": "beginner",
     "frequencyScore": 0.9,
     "cefrLevel": "A1",
-    "tags": [
-      "model-seed",
-      "high-confidence-basic"
-    ],
-    "clusters": [
-      "descriptions"
-    ],
+    "tags": ["model-seed", "high-confidence-basic"],
+    "clusters": ["descriptions"],
     "examples": [
       {
         "pronunciation": "idi paata illu.",
@@ -2888,13 +2416,8 @@
     "difficultyLevel": "beginner",
     "frequencyScore": 0.9,
     "cefrLevel": "A1",
-    "tags": [
-      "model-seed",
-      "high-confidence-basic"
-    ],
-    "clusters": [
-      "daily-use"
-    ],
+    "tags": ["model-seed", "high-confidence-basic"],
+    "clusters": ["daily-use"],
     "examples": [
       {
         "pronunciation": "aame chaalaa telivainadi.",
@@ -2921,13 +2444,8 @@
     "difficultyLevel": "beginner",
     "frequencyScore": 0.9,
     "cefrLevel": "A1",
-    "tags": [
-      "model-seed",
-      "high-confidence-basic"
-    ],
-    "clusters": [
-      "daily-use"
-    ],
+    "tags": ["model-seed", "high-confidence-basic"],
+    "clusters": ["daily-use"],
     "examples": [
       {
         "pronunciation": "dayacheesi nemmadigaa maatlaadu.",
@@ -2954,13 +2472,8 @@
     "difficultyLevel": "beginner",
     "frequencyScore": 0.9,
     "cefrLevel": "A1",
-    "tags": [
-      "model-seed",
-      "high-confidence-basic"
-    ],
-    "clusters": [
-      "daily-use"
-    ],
+    "tags": ["model-seed", "high-confidence-basic"],
+    "clusters": ["daily-use"],
     "examples": [
       {
         "pronunciation": "atanu veegamgaa parugettaadu.",
@@ -2987,14 +2500,8 @@
     "difficultyLevel": "beginner",
     "frequencyScore": 0.9,
     "cefrLevel": "A1",
-    "tags": [
-      "model-seed",
-      "high-confidence-basic"
-    ],
-    "clusters": [
-      "places",
-      "daily-use"
-    ],
+    "tags": ["model-seed", "high-confidence-basic"],
+    "clusters": ["places", "daily-use"],
     "examples": [
       {
         "pronunciation": "ikkada veechi umdu.",
@@ -3021,14 +2528,8 @@
     "difficultyLevel": "beginner",
     "frequencyScore": 0.9,
     "cefrLevel": "A1",
-    "tags": [
-      "model-seed",
-      "high-confidence-basic"
-    ],
-    "clusters": [
-      "places",
-      "daily-use"
-    ],
+    "tags": ["model-seed", "high-confidence-basic"],
+    "clusters": ["places", "daily-use"],
     "examples": [
       {
         "pronunciation": "akkada oka dukaanam umdi.",
