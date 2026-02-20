@@ -52,7 +52,7 @@ export default function AuthPage() {
               className="w-full h-12 text-base font-semibold shadow-lg shadow-primary/20" 
               onClick={handleLogin}
             >
-              Sign In with Replit
+              Continue to Sign In
             </Button>
             
             <p className="mt-6 text-xs text-muted-foreground">
