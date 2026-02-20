@@ -27,7 +27,7 @@ export default function AuthPage() {
         <div className="relative z-10 max-w-lg text-center">
           {/* Decorative Source Language Script bg text */}
           <h1 className="text-9xl font-originalScript opacity-10 absolute -top-32 left-1/2 -translate-x-1/2 pointer-events-none whitespace-nowrap">
-            తెలుగు నేర్చుకోండి
+            Learn a language
           </h1>
           
           <h2 className="text-5xl font-bold mb-6 tracking-tight">Master Source Language the Natural Way.</h2>

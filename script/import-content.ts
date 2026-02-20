@@ -271,7 +271,7 @@ async function purgeLegacyPlaceholderWords() {
     .select({ id: words.id })
     .from(words)
     .where(
-      sql`${words.originalScript} LIKE 'పదం%'
+      sql`${words.originalScript} LIKE 'sample-word-%'
         OR ${words.english} LIKE 'word-%'
         OR ${words.transliteration} LIKE 'padam-%'`,
     );

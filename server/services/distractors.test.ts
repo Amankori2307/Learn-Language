@@ -5,7 +5,7 @@ import { chooseDistractors } from "./distractors";
 function makeWord(id: number, partOfSpeech: string, transliteration: string) {
   return {
     id,
-    originalScript: `పదం${id}`,
+    originalScript: `sample-word-${id}`,
     transliteration,
     english: `word-${id}`,
     partOfSpeech,

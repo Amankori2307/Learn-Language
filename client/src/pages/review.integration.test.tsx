@@ -27,7 +27,7 @@ vi.mock("@/hooks/use-review", () => ({
     data: [
       {
         id: 11,
-        originalScript: "నమస్తే",
+        originalScript: "namaste",
         transliteration: "namaste",
         english: "hello",
         partOfSpeech: "phrase",
@@ -49,7 +49,7 @@ vi.mock("@/hooks/use-review", () => ({
     data: {
       word: {
         id: 11,
-        originalScript: "నమస్తే",
+        originalScript: "namaste",
         transliteration: "namaste",
         english: "hello",
         reviewStatus: ReviewStatusEnum.PENDING_REVIEW,
@@ -98,7 +98,7 @@ describe("ReviewPage integration", () => {
     const user = userEvent.setup();
     render(<ReviewPage />);
 
-    const row = screen.getByText("namaste (నమస్తే)").closest("div");
+    const row = screen.getByText("namaste (namaste)").closest("div");
     expect(row).toBeTruthy();
 
     const approveButtons = screen.getAllByRole("button", { name: "Approve" });

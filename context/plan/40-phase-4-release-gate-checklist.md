@@ -33,7 +33,7 @@ Result: `pass`
 
 ### 3) Content Quality
 - `assets/processed/seed.json` uses realistic source language seed rows.
-- Import pipeline purges legacy placeholder rows (`పదం*`, `word-*`, `padam-*`) before MVP import.
+- Import pipeline purges legacy placeholder rows (`sample-word-*`, `word-*`, `padam-*`) before MVP import.
 - Content validator passes on MVP file.
 
 Result: `pass`

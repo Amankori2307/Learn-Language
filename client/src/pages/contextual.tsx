@@ -13,7 +13,7 @@ type StoryLine = {
 
 function buildStoryLines(words: Array<{ originalScript: string; transliteration?: string | null; english: string; exampleSentences?: string[] }>): StoryLine[] {
   return words.slice(0, 6).map((word) => ({
-    originalScript: word.exampleSentences?.[0] || `${word.originalScript} ఉపయోగించండి.`,
+    originalScript: word.exampleSentences?.[0] || `Use ${word.originalScript} in context.`,
     pronunciation: word.transliteration?.trim() ? `${word.transliteration} (${word.originalScript})` : word.originalScript,
     english: `Context hint: ${word.english}`,
   }));

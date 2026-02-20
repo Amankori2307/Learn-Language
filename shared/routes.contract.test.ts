@@ -8,7 +8,7 @@ test("quiz generate contract accepts expected payload", () => {
     {
       wordId: 1,
       type: QuizQuestionTypeEnum.SOURCE_TO_TARGET,
-      questionText: "నేను",
+      questionText: "nenu",
       audioUrl: null,
       options: [
         { id: 1, text: "I" },
@@ -47,7 +47,7 @@ test("quiz submit response contract requires example triplet", () => {
     isCorrect: true,
     correctAnswer: {
       id: 1,
-      originalScript: "నీరు",
+      originalScript: "neeru",
       transliteration: "neeru",
       english: "water",
       partOfSpeech: "noun",
@@ -56,7 +56,7 @@ test("quiz submit response contract requires example triplet", () => {
       frequencyScore: 0.9,
       cefrLevel: "A1",
       audioUrl: null,
-      exampleSentences: ["నేను నీరు తాగాను."],
+      exampleSentences: ["nenu neeru taaganu."],
       tags: [],
       reviewStatus: ReviewStatusEnum.APPROVED,
       submittedBy: null,
@@ -69,7 +69,7 @@ test("quiz submit response contract requires example triplet", () => {
       createdAt: null,
     },
     example: {
-      originalScript: "నేను నీరు తాగాను.",
+      originalScript: "nenu neeru taaganu.",
       pronunciation: "nenu neeru taagaanu",
       meaning: "I drank water.",
     },
@@ -134,7 +134,7 @@ test("attempt history contract accepts payload", () => {
       createdAt: "2026-02-20T12:00:00.000Z",
       word: {
         language: LanguageEnum.TELUGU,
-        originalScript: "నీరు",
+        originalScript: "neeru",
         transliteration: "neeru",
         english: "water",
       },
@@ -159,7 +159,7 @@ test("review queue contract accepts pending review payload", () => {
     {
       id: 10,
       language: LanguageEnum.TELUGU,
-      originalScript: "నమస్తే",
+      originalScript: "namaste",
       transliteration: "namaste",
       english: "hello",
       partOfSpeech: "phrase",
@@ -200,7 +200,7 @@ test("review history contract accepts payload", () => {
     word: {
       id: 1,
       language: LanguageEnum.TELUGU,
-      originalScript: "నమస్తే",
+      originalScript: "namaste",
       transliteration: "namaste",
       english: "hello",
       reviewStatus: ReviewStatusEnum.PENDING_REVIEW,

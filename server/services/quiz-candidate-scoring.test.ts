@@ -4,7 +4,7 @@ import { computeCandidateScore, rankQuizCandidates } from "./quiz-candidate-scor
 
 const makeWord = (id: number, difficulty: number) => ({
   id,
-  originalScript: `పదం${id}`,
+  originalScript: `sample-word-${id}`,
   transliteration: `padam${id}`,
   english: `word-${id}`,
   partOfSpeech: "noun",
