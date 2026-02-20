@@ -7,13 +7,16 @@ import {
   UserCircle, 
   ShieldCheck,
   LogOut, 
-  Menu
+  Menu,
+  Moon,
+  Sun
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { useTheme } from "next-themes";
 
 function getInitials(firstName?: string | null, lastName?: string | null, email?: string | null) {
   const fromNames = `${firstName ?? ""} ${lastName ?? ""}`.trim();
@@ -31,6 +34,12 @@ export function Layout({ children }: { children: React.ReactNode }) {
   const [location] = useLocation();
   const { logout, user } = useAuth();
   const [isOpen, setIsOpen] = useState(false);
+  const { resolvedTheme, setTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const navigation = [
     { name: 'Dashboard', href: '/', icon: LayoutDashboard },
@@ -45,10 +54,21 @@ export function Layout({ children }: { children: React.ReactNode }) {
   const NavContent = () => (
     <div className="flex flex-col h-full">
       <div className="p-6 pb-4">
-        <h1 className="text-2xl font-semibold text-foreground">
-          Learn Telugu
-        </h1>
-        <p className="text-sm text-muted-foreground mt-1">Language Practice</p>
+        <div className="flex items-center justify-between">
+          <div>
+            <h1 className="text-2xl font-semibold text-foreground">Learn Telugu</h1>
+            <p className="text-sm text-muted-foreground mt-1">Language Practice</p>
+          </div>
+          <Button
+            type="button"
+            variant="outline"
+            size="icon"
+            aria-label="Toggle theme"
+            onClick={() => setTheme((resolvedTheme ?? "light") === "dark" ? "light" : "dark")}
+          >
+            {mounted && resolvedTheme === "dark" ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+          </Button>
+        </div>
       </div>
 
       <nav className="flex-1 px-4 space-y-2">
@@ -106,16 +126,27 @@ export function Layout({ children }: { children: React.ReactNode }) {
       {/* Mobile Header */}
       <div className="md:hidden fixed top-0 left-0 right-0 h-16 bg-card/90 backdrop-blur-md border-b border-border/60 z-20 flex items-center justify-between px-4">
         <h1 className="text-xl font-semibold text-foreground">Learn Telugu</h1>
-        <Sheet open={isOpen} onOpenChange={setIsOpen}>
-          <SheetTrigger asChild>
-            <Button variant="ghost" size="icon">
-              <Menu className="w-6 h-6" />
-            </Button>
-          </SheetTrigger>
-          <SheetContent side="left" className="p-0 w-72">
-            <NavContent />
-          </SheetContent>
-        </Sheet>
+        <div className="flex items-center gap-2">
+          <Button
+            type="button"
+            variant="outline"
+            size="icon"
+            aria-label="Toggle theme"
+            onClick={() => setTheme((resolvedTheme ?? "light") === "dark" ? "light" : "dark")}
+          >
+            {mounted && resolvedTheme === "dark" ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+          </Button>
+          <Sheet open={isOpen} onOpenChange={setIsOpen}>
+            <SheetTrigger asChild>
+              <Button variant="ghost" size="icon">
+                <Menu className="w-6 h-6" />
+              </Button>
+            </SheetTrigger>
+            <SheetContent side="left" className="p-0 w-72">
+              <NavContent />
+            </SheetContent>
+          </Sheet>
+        </div>
       </div>
 
       {/* Main Content */}

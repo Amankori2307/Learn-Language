@@ -172,15 +172,19 @@ export default function Dashboard() {
         </div>
 
         {/* Action Cards */}
-        <h3 className="text-xl font-semibold mt-8 mb-3">Start Learning</h3>
-        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-6 gap-6 items-stretch">
+        <section className="rounded-2xl border border-border/60 bg-card/70 p-4 md:p-5">
+          <div className="mb-4">
+            <h3 className="text-xl font-semibold">Start Learning</h3>
+            <p className="text-sm text-muted-foreground mt-1">Pick one focused session and keep momentum.</p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4 items-stretch">
           {cards.map((card, idx) => (
             <motion.div
               key={card.title}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: idx * 0.1 }}
-              className="group bg-card rounded-2xl p-5 border border-border/60 hover:border-border transition-colors duration-200 flex flex-col justify-between min-h-[248px] h-full"
+              className="group bg-card rounded-xl p-4 border border-border/70 hover:border-border transition-colors duration-200 flex flex-col justify-between min-h-[220px] h-full"
             >
               <div className="space-y-2">
                 <div className="w-10 h-10 rounded-xl flex items-center justify-center mb-2 bg-secondary text-foreground">
@@ -202,7 +206,8 @@ export default function Dashboard() {
               </div>
             </motion.div>
           ))}
-        </div>
+          </div>
+        </section>
       </div>
     </Layout>
   );
