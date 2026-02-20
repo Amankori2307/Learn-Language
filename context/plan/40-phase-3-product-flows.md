@@ -37,7 +37,7 @@ Acceptance:
 - Weak area list available for each user.
 
 ### P3-003 - Adaptive session generator v2
-Status: `todo`
+Status: `done`
 
 Scope:
 - Prioritize weak items when pain score crosses threshold.
@@ -47,7 +47,7 @@ Acceptance:
 - Session composition changes based on user state, not static ratios only.
 
 ### P3-004 - Bidirectional proficiency model
-Status: `todo`
+Status: `doing`
 
 Scope:
 - Track Telugu->English and English->Telugu separately.

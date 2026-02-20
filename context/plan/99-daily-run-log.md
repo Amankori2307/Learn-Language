@@ -279,3 +279,34 @@ Blockers:
 
 Resume notes:
 - Continue with `P3-003` adaptive session generator v2 refinements.
+
+Date: 2026-02-20
+Session owner: Codex
+Last completed task ID: P3-003
+Current in-progress task ID: P3-004
+Next task ID: P3-004
+
+Completed today:
+- Added adaptive session composition using recent accuracy to throttle/boost new content share.
+- Added `questionType`, `direction`, and `responseTimeMs` tracking for quiz attempts.
+- Wired client submit flow to send response-time and direction metadata.
+
+Files changed:
+- server/services/session-generator.ts
+- server/services/session-generator.test.ts
+- server/storage.ts
+- shared/schema.ts
+- shared/routes.ts
+- server/routes.ts
+- client/src/pages/quiz.tsx
+- context/plan/40-phase-3-product-flows.md
+- context/plan/99-daily-run-log.md
+
+Tests/checks run:
+- `npm run ci` (pass)
+
+Blockers:
+- None.
+
+Resume notes:
+- Finish P3-004 by adding direction-specific proficiency stats and recommendation logic in dashboard/stats API.

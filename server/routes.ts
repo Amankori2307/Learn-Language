@@ -147,6 +147,9 @@ export async function registerRoutes(
       await storage.logQuizAttempt({
         userId,
         wordId: word.id,
+        questionType: input.questionType ?? null,
+        direction: input.direction ?? null,
+        responseTimeMs: input.responseTimeMs ?? null,
         isCorrect,
         confidenceLevel: input.confidenceLevel
       });

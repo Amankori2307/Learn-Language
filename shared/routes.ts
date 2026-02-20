@@ -101,6 +101,8 @@ export const api = {
       input: z.object({
         wordId: z.number(),
         selectedOptionId: z.number(), // The ID of the word selected as the answer
+        questionType: z.enum(['telugu_to_english', 'english_to_telugu', 'fill_in_blank', 'sentence_meaning']).optional(),
+        direction: z.enum(['telugu_to_english', 'english_to_telugu']).optional(),
         confidenceLevel: z.number().min(1).max(3),
         responseTimeMs: z.number().int().positive().optional(),
       }),

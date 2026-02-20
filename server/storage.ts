@@ -40,6 +40,7 @@ export interface IStorage {
     streak: number;
     xp: number;
   }>;
+  getRecentAccuracy(userId: string, limit?: number): Promise<number>;
 
   // Admin/Seed
   seedInitialData(): Promise<void>;
@@ -152,12 +153,30 @@ export class DatabaseStorage implements IStorage {
       return ranked.slice(0, limit);
     }
 
+    const recentAccuracy = await this.getRecentAccuracy(userId);
     return generateSessionWords({
       mode,
       count: limit,
       words: candidateWords,
       progressMap,
+      recentAccuracy,
     });
+  }
+
+  async getRecentAccuracy(userId: string, limit: number = 50): Promise<number> {
+    const attempts = await db
+      .select({ isCorrect: quizAttempts.isCorrect })
+      .from(quizAttempts)
+      .where(eq(quizAttempts.userId, userId))
+      .orderBy(sql`${quizAttempts.createdAt} desc`)
+      .limit(limit);
+
+    if (attempts.length === 0) {
+      return 1;
+    }
+
+    const correct = attempts.filter((a) => a.isCorrect).length;
+    return correct / attempts.length;
   }
 
   async getUserStats(userId: string): Promise<{

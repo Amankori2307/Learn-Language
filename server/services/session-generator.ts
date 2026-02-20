@@ -36,6 +36,7 @@ export function generateSessionWords(params: {
   count: number;
   words: Word[];
   progressMap: Map<number, UserWordProgress>;
+  recentAccuracy?: number;
   now?: Date;
 }): Word[] {
   const now = params.now ?? new Date();
@@ -57,8 +58,20 @@ export function generateSessionWords(params: {
     return ranked.slice(0, params.count);
   }
 
-  const reviewTarget = Math.round(params.count * 0.3);
-  const newTarget = Math.round(params.count * 0.5);
+  let reviewTarget = Math.round(params.count * 0.3);
+  let newTarget = Math.round(params.count * 0.5);
+
+  // Adaptive v2: throttle new content when learner is overloaded.
+  if (typeof params.recentAccuracy === "number") {
+    if (params.recentAccuracy < 0.6) {
+      newTarget = Math.round(params.count * 0.2);
+      reviewTarget = Math.round(params.count * 0.4);
+    } else if (params.recentAccuracy > 0.85) {
+      newTarget = Math.round(params.count * 0.6);
+      reviewTarget = Math.round(params.count * 0.25);
+    }
+  }
+
   const weakTarget = Math.max(0, params.count - reviewTarget - newTarget);
 
   const mixed = uniqueById([
@@ -70,4 +83,3 @@ export function generateSessionWords(params: {
 
   return mixed.slice(0, params.count);
 }
-

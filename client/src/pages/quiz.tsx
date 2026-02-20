@@ -21,6 +21,7 @@ export default function QuizPage() {
   const [result, setResult] = useState<any>(null);
   const [sessionStats, setSessionStats] = useState({ correct: 0, total: 0 });
   const [isFinished, setIsFinished] = useState(false);
+  const [questionStartedAt, setQuestionStartedAt] = useState<number>(Date.now());
 
   const currentQuestion = questions?.[currentIndex];
   const progress = questions ? ((currentIndex) / questions.length) * 100 : 0;
@@ -29,10 +30,15 @@ export default function QuizPage() {
     if (!currentQuestion) return;
 
     try {
+      const responseTimeMs = Math.max(1, Date.now() - questionStartedAt);
+      const direction = currentQuestion.type === "english_to_telugu" ? "english_to_telugu" : "telugu_to_english";
       const response = await submitAnswer.mutateAsync({
         wordId: currentQuestion.wordId,
         selectedOptionId: optionId,
+        questionType: currentQuestion.type,
+        direction,
         confidenceLevel: 2, // Default for now
+        responseTimeMs,
       });
 
       setResult(response);
@@ -47,12 +53,17 @@ export default function QuizPage() {
 
   const handleNext = () => {
     setResult(null);
+    setQuestionStartedAt(Date.now());
     if (questions && currentIndex < questions.length - 1) {
       setCurrentIndex(prev => prev + 1);
     } else {
       setIsFinished(true);
     }
   };
+
+  useEffect(() => {
+    setQuestionStartedAt(Date.now());
+  }, [currentIndex]);
 
   if (isLoading) {
     return (

@@ -105,3 +105,35 @@ test("daily_review falls back to ranked words when no due items exist", () => {
   assert.equal(result.length, 3);
   assert.ok(result.every((word: any) => [1, 2, 3, 4].includes(word.id)));
 });
+
+test("daily_review throttles new content when recent accuracy is low", () => {
+  const words = Array.from({ length: 12 }, (_, i) => makeWord(i + 1)) as any;
+  const progressMap = new Map<number, any>([
+    [1, makeProgress(1, new Date("2026-02-18T00:00:00.000Z"), 3)],
+    [2, makeProgress(2, new Date("2026-02-19T00:00:00.000Z"), 2)],
+    [3, makeProgress(3, new Date("2026-03-10T00:00:00.000Z"), 4)],
+    [4, makeProgress(4, new Date("2026-03-10T00:00:00.000Z"), 3)],
+  ]);
+
+  const lowAccuracyResult = generateSessionWords({
+    mode: "daily_review",
+    count: 10,
+    words,
+    progressMap,
+    recentAccuracy: 0.4,
+    now,
+  });
+
+  const baselineResult = generateSessionWords({
+    mode: "daily_review",
+    count: 10,
+    words,
+    progressMap,
+    recentAccuracy: 0.9,
+    now,
+  });
+
+  const lowAccuracyNewCount = lowAccuracyResult.filter((w: any) => !progressMap.has(w.id)).length;
+  const baselineNewCount = baselineResult.filter((w: any) => !progressMap.has(w.id)).length;
+  assert.ok(lowAccuracyNewCount <= baselineNewCount);
+});
