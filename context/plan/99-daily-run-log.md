@@ -160,3 +160,33 @@ Blockers:
 
 Resume notes:
 - Proceed with P1-004 dataset expansion toward 300 words / 20 clusters / 100 sentences.
+
+Date: 2026-02-20
+Session owner: Codex
+Last completed task ID: P1-004
+Current in-progress task ID: None
+Next task ID: P2-001
+
+Completed today:
+- Added deterministic MVP dataset generator producing 300 words, 20 clusters, and 300 sentence examples.
+- Added npm workflows for prepare/validate/import of MVP dataset.
+- Generated `content/seed/words.mvp.json` and validated it successfully.
+
+Files changed:
+- script/generate-mvp-content.ts
+- content/seed/words.mvp.json
+- content/seed/README.md
+- package.json
+- context/plan/01-master-task-registry.md
+- context/plan/20-phase-1-data-and-content.md
+- context/plan/99-daily-run-log.md
+
+Tests/checks run:
+- `npm run content:prepare:mvp` (pass)
+- `npm run ci` (pass)
+
+Blockers:
+- `npm run content:import:mvp` requires `DATABASE_URL` and could not run in current shell env.
+
+Resume notes:
+- Start Phase 2 with `P2-001` (deterministic quiz candidate scoring service).

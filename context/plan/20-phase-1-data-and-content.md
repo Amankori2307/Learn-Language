@@ -51,7 +51,7 @@ Acceptance:
 - Import script can load validated content in bulk.
 
 ### P1-004 - Text dataset expansion
-Status: `todo`
+Status: `done`
 
 Scope:
 - Expand seeded content to MVP target.

@@ -30,3 +30,10 @@ List fields (`clusters`, `tags`) use `|` separator.
 - Validate: `npm run content:validate -- content/seed/words.sample.json`
 - Import: `npm run content:import -- content/seed/words.sample.json`
 
+## MVP dataset workflow
+
+- Generate + validate full MVP dataset: `npm run content:prepare:mvp`
+- Import full MVP dataset: `npm run content:import:mvp`
+
+Note:
+- Import commands require `DATABASE_URL` to be set.

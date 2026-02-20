@@ -14,6 +14,9 @@
     "ci": "npm run lint && npm run typecheck && npm run test",
     "content:validate": "node --import tsx script/validate-content.ts",
     "content:import": "node --import tsx script/import-content.ts",
+    "content:generate:mvp": "node --import tsx script/generate-mvp-content.ts 300 content/seed/words.mvp.json",
+    "content:prepare:mvp": "npm run content:generate:mvp && npm run content:validate -- content/seed/words.mvp.json",
+    "content:import:mvp": "npm run content:import -- content/seed/words.mvp.json",
     "db:push": "drizzle-kit push"
   },
   "dependencies": {
