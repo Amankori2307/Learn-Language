@@ -12,6 +12,7 @@ interface QuizOption {
 
 interface QuizCardProps {
   question: string;
+  pronunciation?: string | null;
   type: 'telugu_to_english' | 'english_to_telugu' | 'fill_in_blank' | 'sentence_meaning';
   options: QuizOption[];
   confidenceLevel: 1 | 2 | 3;
@@ -26,12 +27,18 @@ interface QuizCardProps {
       transliteration: string;
       exampleSentences: string[];
     };
+    example?: {
+      telugu: string;
+      pronunciation: string;
+      meaning: string;
+    } | null;
   } | null;
   onNext: () => void;
 }
 
 export function QuizCard({ 
   question, 
+  pronunciation,
   type, 
   options, 
   confidenceLevel,
@@ -60,7 +67,14 @@ export function QuizCard({
     onAnswer(id, confidenceLevel);
   };
 
-  const isTeluguQuestion = type === 'telugu_to_english';
+  const promptLabel =
+    type === "telugu_to_english"
+      ? "Translate to English"
+      : type === "english_to_telugu"
+        ? "Translate to Telugu"
+        : type === "fill_in_blank"
+          ? "Fill in the blank"
+          : "Sentence meaning";
 
   return (
     <div className="w-full max-w-2xl mx-auto">
@@ -76,7 +90,7 @@ export function QuizCard({
           {/* Question Area */}
           <div className="p-8 md:p-12 text-center bg-gradient-to-b from-primary/5 to-transparent">
             <span className="inline-block px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-semibold mb-4 uppercase tracking-wider">
-              {isTeluguQuestion ? "Translate to English" : "Translate to Telugu"}
+              {promptLabel}
             </span>
             
             <h2 className={cn(
@@ -85,6 +99,11 @@ export function QuizCard({
             )}>
               {question}
             </h2>
+            {pronunciation && (
+              <p className="text-sm md:text-base text-muted-foreground mb-5">
+                Pronunciation: <span className="font-semibold text-foreground">{pronunciation}</span>
+              </p>
+            )}
 
             {/* Audio Button Placeholder if needed */}
             <Button variant="ghost" size="icon" className="rounded-full hover:bg-primary/10 hover:text-primary">
@@ -157,11 +176,11 @@ export function QuizCard({
                     disabled={!!result || isSubmitting}
                     onClick={() => handleOptionClick(option.id)}
                     aria-label={`Option ${option.text}`}
-                    className={cn(
-                      "p-4 rounded-xl text-base md:text-lg font-medium border-2 transition-all duration-200 text-left relative overflow-hidden group break-words",
-                      !isTeluguQuestion && "text-xl",
-                      className
-                    )}
+                      className={cn(
+                        "p-4 rounded-xl text-base md:text-lg font-medium border-2 transition-all duration-200 text-left relative overflow-hidden group break-words",
+                        type !== "telugu_to_english" && "text-xl",
+                        className
+                      )}
                   >
                     <span className="relative z-10">{option.text}</span>
                     {isSelected && isSubmitting && (
@@ -208,10 +227,27 @@ export function QuizCard({
                         <span className="mx-2">•</span>
                         <span>{result.correctAnswer.english}</span>
                       </p>
-                      {result.correctAnswer.exampleSentences?.[0] && (
-                         <p className="text-sm text-muted-foreground mt-2 bg-white/50 p-2 rounded-lg inline-block border border-black/5">
-                           Example: <span className="font-telugu">{result.correctAnswer.exampleSentences[0]}</span>
-                         </p>
+                      {(result.example || result.correctAnswer.exampleSentences?.[0]) && (
+                        <div className="text-sm text-muted-foreground mt-2 bg-white/50 p-2 rounded-lg inline-block border border-black/5 space-y-1">
+                          <p>
+                            Example:{" "}
+                            <span className="font-telugu text-foreground">
+                              {result.example?.telugu ?? result.correctAnswer.exampleSentences[0]}
+                            </span>
+                          </p>
+                          <p>
+                            Pronunciation:{" "}
+                            <span className="font-medium text-foreground">
+                              {result.example?.pronunciation ?? `${result.correctAnswer.transliteration} (${result.correctAnswer.telugu})`}
+                            </span>
+                          </p>
+                          <p>
+                            Meaning:{" "}
+                            <span className="font-medium text-foreground">
+                              {result.example?.meaning ?? result.correctAnswer.english}
+                            </span>
+                          </p>
+                        </div>
                       )}
                     </div>
                   </div>

@@ -85,6 +85,7 @@ export const api = {
           wordId: z.number(),
           type: z.enum(['telugu_to_english', 'english_to_telugu', 'fill_in_blank', 'sentence_meaning']),
           questionText: z.string(),
+          pronunciation: z.string().optional().nullable(),
           audioUrl: z.string().optional().nullable(),
           options: z.array(z.object({
             id: z.number(),
@@ -110,6 +111,11 @@ export const api = {
         200: z.object({
           isCorrect: z.boolean(),
           correctAnswer: z.custom<typeof words.$inferSelect>(),
+          example: z.object({
+            telugu: z.string(),
+            pronunciation: z.string(),
+            meaning: z.string(),
+          }).nullable().optional(),
           progressUpdate: z.object({
             streak: z.number(),
             masteryLevel: z.number(),

@@ -4,6 +4,7 @@ import { isAuthenticated } from "./oidcAuth";
 import { sendError } from "../http";
 import { api } from "@shared/routes";
 import { z } from "zod";
+import { resolveRoleFromEmail } from "./roles";
 
 // Register auth-specific routes
 export function registerAuthRoutes(app: Express): void {
@@ -12,6 +13,7 @@ export function registerAuthRoutes(app: Express): void {
     try {
       const userId = req.user.claims.sub;
       let user = await authStorage.getUser(userId);
+      const resolvedRole = resolveRoleFromEmail(req.user.claims.email ?? user?.email ?? null);
       if (!user) {
         user = await authStorage.upsertUser({
           id: userId,
@@ -19,7 +21,16 @@ export function registerAuthRoutes(app: Express): void {
           firstName: req.user.claims.first_name ?? req.user.claims.given_name ?? null,
           lastName: req.user.claims.last_name ?? req.user.claims.family_name ?? null,
           profileImageUrl: req.user.claims.profile_image_url ?? req.user.claims.picture ?? null,
-          role: userId === "dev-user" ? "admin" : "learner",
+          role: userId === "dev-user" ? "admin" : resolvedRole,
+        });
+      } else if (userId !== "dev-user" && user.role !== resolvedRole) {
+        user = await authStorage.upsertUser({
+          id: user.id,
+          email: user.email ?? req.user.claims.email ?? null,
+          firstName: user.firstName ?? req.user.claims.first_name ?? req.user.claims.given_name ?? null,
+          lastName: user.lastName ?? req.user.claims.last_name ?? req.user.claims.family_name ?? null,
+          profileImageUrl: user.profileImageUrl ?? req.user.claims.profile_image_url ?? req.user.claims.picture ?? null,
+          role: resolvedRole,
         });
       }
       res.json(user);

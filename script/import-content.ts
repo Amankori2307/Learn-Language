@@ -1,12 +1,21 @@
 import fs from "fs/promises";
 import path from "path";
-import { and, eq } from "drizzle-orm";
+import { and, eq, inArray, sql } from "drizzle-orm";
 import { db } from "../server/db";
-import { clusters, wordClusters, wordExamples, words } from "../shared/schema";
+import {
+  clusters,
+  quizAttempts,
+  userWordProgress,
+  wordClusters,
+  wordExamples,
+  wordReviewEvents,
+  words,
+} from "../shared/schema";
 
 type ContentExample = {
   telugu: string;
   english: string;
+  pronunciation?: string;
   contextTag?: string;
   difficulty?: number;
 };
@@ -216,6 +225,31 @@ async function linkWordToCluster(wordId: number, clusterId: number) {
   await db.insert(wordClusters).values({ wordId, clusterId }).onConflictDoNothing();
 }
 
+async function purgeLegacyPlaceholderWords() {
+  const placeholderRows = await db
+    .select({ id: words.id })
+    .from(words)
+    .where(
+      sql`${words.telugu} LIKE 'పదం%'
+        OR ${words.english} LIKE 'word-%'
+        OR ${words.transliteration} LIKE 'padam-%'`,
+    );
+
+  const ids = placeholderRows.map((row) => row.id);
+  if (ids.length === 0) {
+    return 0;
+  }
+
+  await db.delete(userWordProgress).where(inArray(userWordProgress.wordId, ids));
+  await db.delete(quizAttempts).where(inArray(quizAttempts.wordId, ids));
+  await db.delete(wordClusters).where(inArray(wordClusters.wordId, ids));
+  await db.delete(wordExamples).where(inArray(wordExamples.wordId, ids));
+  await db.delete(wordReviewEvents).where(inArray(wordReviewEvents.wordId, ids));
+  await db.delete(words).where(inArray(words.id, ids));
+
+  return ids.length;
+}
+
 async function main() {
   const inputPath = process.argv[2] ?? "assets/processed/telugu_basic_seed_model_draft.json";
   const fullPath = path.resolve(process.cwd(), inputPath);
@@ -225,6 +259,17 @@ async function main() {
 
   if (!Array.isArray(items) || items.length === 0) {
     throw new Error(`No content rows found in ${inputPath}`);
+  }
+
+  const shouldPurgePlaceholders =
+    path.basename(inputPath) === "words.mvp.json" &&
+    process.env.SKIP_PLACEHOLDER_PURGE !== "true";
+
+  if (shouldPurgePlaceholders) {
+    const removed = await purgeLegacyPlaceholderWords();
+    if (removed > 0) {
+      console.log(`Removed ${removed} legacy placeholder words before import.`);
+    }
   }
 
   let wordCount = 0;

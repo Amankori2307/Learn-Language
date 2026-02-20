@@ -124,6 +124,7 @@ export async function registerRoutes(
         wordId: word.id,
         type,
         questionText,
+        pronunciation: formatPronunciationFirst(word),
         audioUrl: word.audioUrl,
         options,
       };
@@ -148,6 +149,8 @@ export async function registerRoutes(
       
       const word = await storage.getWord(input.wordId);
       if (!word) return sendError(req, res, 404, "NOT_FOUND", "Word not found");
+      const examples = await storage.getWordExamples(word.id);
+      const firstExample = examples[0];
 
       const isCorrect = input.selectedOptionId === word.id; // Option ID is word ID of the choice
       
@@ -199,6 +202,11 @@ export async function registerRoutes(
       res.json({
         isCorrect,
         correctAnswer: word,
+        example: firstExample ? {
+          telugu: firstExample.teluguSentence,
+          pronunciation: formatPronunciationFirst(word),
+          meaning: firstExample.englishSentence,
+        } : null,
         progressUpdate: {
           streak: progress.correctStreak || 0,
           masteryLevel: progress.masteryLevel || 0,

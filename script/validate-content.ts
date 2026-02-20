@@ -4,6 +4,7 @@ import path from "path";
 type ContentExample = {
   telugu: string;
   english: string;
+  pronunciation?: string;
   contextTag?: string;
   difficulty?: number;
 };
@@ -148,6 +149,15 @@ async function main() {
 
     if (!item.examples || item.examples.length === 0) {
       warnings.push(`[row ${row}] Missing example sentence`);
+    } else {
+      for (const [exampleIndex, example] of item.examples.entries()) {
+        if (!example.telugu || !example.english) {
+          errors.push(`[row ${row}] Example ${exampleIndex + 1} must include telugu and english`);
+        }
+        if (!example.pronunciation || example.pronunciation.trim().length === 0) {
+          warnings.push(`[row ${row}] Example ${exampleIndex + 1} should include pronunciation text`);
+        }
+      }
     }
   }
 

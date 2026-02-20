@@ -37,6 +37,8 @@ services:
       GOOGLE_CLIENT_ID: ${GOOGLE_CLIENT_ID}
       GOOGLE_CLIENT_SECRET: ${GOOGLE_CLIENT_SECRET}
       GOOGLE_ISSUER_URL: ${GOOGLE_ISSUER_URL:-https://accounts.google.com}
+      REVIEWER_EMAILS: ${REVIEWER_EMAILS:-amankori2307@gmail.com}
+      ADMIN_EMAILS: ${ADMIN_EMAILS:-amankori2307@gmail.com}
       VITE_ENABLE_TUTOR: ${VITE_ENABLE_TUTOR:-true}
     volumes:
       - ./:/app

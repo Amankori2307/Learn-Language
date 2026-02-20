@@ -23,6 +23,12 @@ export interface IStorage {
   createCluster(cluster: CreateClusterRequest): Promise<Cluster>;
   addWordToCluster(wordId: number, clusterId: number): Promise<void>;
   getWordClusterLinks(): Promise<Array<{ wordId: number; clusterId: number }>>;
+  getWordExamples(wordId: number): Promise<Array<{
+    teluguSentence: string;
+    englishSentence: string;
+    contextTag: string | null;
+    difficulty: number | null;
+  }>>;
 
   // User Progress
   getUserProgress(userId: string): Promise<UserWordProgress[]>;
@@ -152,6 +158,24 @@ export class DatabaseStorage implements IStorage {
 
   async getWordClusterLinks(): Promise<Array<{ wordId: number; clusterId: number }>> {
     return db.select({ wordId: wordClusters.wordId, clusterId: wordClusters.clusterId }).from(wordClusters);
+  }
+
+  async getWordExamples(wordId: number): Promise<Array<{
+    teluguSentence: string;
+    englishSentence: string;
+    contextTag: string | null;
+    difficulty: number | null;
+  }>> {
+    return db
+      .select({
+        teluguSentence: wordExamples.teluguSentence,
+        englishSentence: wordExamples.englishSentence,
+        contextTag: wordExamples.contextTag,
+        difficulty: wordExamples.difficulty,
+      })
+      .from(wordExamples)
+      .where(eq(wordExamples.wordId, wordId))
+      .orderBy(sql`${wordExamples.id} asc`);
   }
 
   async getUserProgress(userId: string): Promise<UserWordProgress[]> {

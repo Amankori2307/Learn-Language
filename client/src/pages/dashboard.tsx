@@ -189,24 +189,24 @@ export default function Dashboard() {
 
         {/* Action Cards */}
         <h3 className="text-xl font-bold mt-8 mb-4">Start Learning</h3>
-        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-6 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-6 gap-6 items-stretch">
           {cards.map((card, idx) => (
             <motion.div
               key={card.title}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: idx * 0.1 }}
-              className="group relative bg-card rounded-3xl p-6 border border-border/50 shadow-sm hover:shadow-xl hover:border-border transition-all duration-300 flex flex-col justify-between h-64"
+              className="group relative bg-card rounded-3xl p-6 border border-border/50 shadow-sm hover:shadow-xl hover:border-border transition-all duration-300 flex flex-col justify-between min-h-[260px] h-full"
             >
-              <div>
+              <div className="space-y-2">
                 <div className={`w-12 h-12 rounded-2xl flex items-center justify-center mb-4 ${card.color}`}>
                   <card.icon className="w-6 h-6" />
                 </div>
                 <h4 className="text-xl font-bold">{card.title}</h4>
-                <p className="text-muted-foreground mt-2 text-sm leading-relaxed">{card.description}</p>
+                <p className="text-muted-foreground text-sm leading-relaxed line-clamp-4">{card.description}</p>
               </div>
               
-              <div className="flex items-center justify-between mt-6">
+              <div className="flex items-center justify-between mt-4 pt-3 border-t border-border/40">
                 <span className="text-xs font-medium text-muted-foreground bg-secondary px-2 py-1 rounded-md">
                   {card.count} items
                 </span>

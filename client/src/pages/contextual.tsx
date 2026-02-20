@@ -7,12 +7,14 @@ import { BookText, ArrowRight } from "lucide-react";
 
 type StoryLine = {
   telugu: string;
+  pronunciation: string;
   english: string;
 };
 
-function buildStoryLines(words: Array<{ telugu: string; english: string; exampleSentences?: string[] }>): StoryLine[] {
+function buildStoryLines(words: Array<{ telugu: string; transliteration?: string | null; english: string; exampleSentences?: string[] }>): StoryLine[] {
   return words.slice(0, 6).map((word) => ({
     telugu: word.exampleSentences?.[0] || `${word.telugu} ఉపయోగించండి.`,
+    pronunciation: word.transliteration?.trim() ? `${word.transliteration} (${word.telugu})` : word.telugu,
     english: `Context hint: ${word.english}`,
   }));
 }
@@ -78,6 +80,9 @@ export default function ContextualPage() {
                   <span className="text-xs font-semibold uppercase tracking-wide">Context {idx + 1}</span>
                 </div>
                 <p className="text-lg font-telugu leading-relaxed">{line.telugu}</p>
+                <p className="text-sm text-foreground/80 mt-2">
+                  Pronunciation: <span className="font-medium">{line.pronunciation}</span>
+                </p>
                 <p className="text-sm text-muted-foreground mt-2">{line.english}</p>
               </div>
             ))}

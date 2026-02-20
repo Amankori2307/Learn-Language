@@ -187,6 +187,7 @@ export default function QuizPage() {
       <div className="flex-1 flex items-center justify-center p-4">
         <QuizCard
           question={currentQuestion.questionText}
+          pronunciation={currentQuestion.pronunciation}
           type={currentQuestion.type}
           options={currentQuestion.options}
           confidenceLevel={confidenceLevel}
