@@ -1,7 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { api } from "./routes";
-import { DEFAULT_LANGUAGE, LanguageEnum, QuizDirectionEnum, QuizQuestionTypeEnum, ReviewStatusEnum } from "./domain/enums";
+import { LanguageEnum, QuizDirectionEnum, QuizQuestionTypeEnum, ReviewStatusEnum } from "./domain/enums";
 
 test("quiz generate contract accepts expected payload", () => {
   const payload = [
@@ -133,7 +133,7 @@ test("attempt history contract accepts payload", () => {
       responseTimeMs: 1820,
       createdAt: "2026-02-20T12:00:00.000Z",
       word: {
-        language: DEFAULT_LANGUAGE,
+        language: LanguageEnum.TELUGU,
         originalScript: "నీరు",
         transliteration: "neeru",
         english: "water",
@@ -158,8 +158,7 @@ test("review queue contract accepts pending review payload", () => {
   const payload = [
     {
       id: 10,
-      language: DEFAULT_LANGUAGE,
-      originalScript: "నమస్తే",
+      language: LanguageEnum.TELUGU,
       originalScript: "నమస్తే",
       transliteration: "namaste",
       english: "hello",
@@ -200,7 +199,7 @@ test("review history contract accepts payload", () => {
   const payload = {
     word: {
       id: 1,
-      language: DEFAULT_LANGUAGE,
+      language: LanguageEnum.TELUGU,
       originalScript: "నమస్తే",
       transliteration: "namaste",
       english: "hello",

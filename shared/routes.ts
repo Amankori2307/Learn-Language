@@ -1,7 +1,6 @@
 import { z } from 'zod';
 import { insertWordSchema, insertClusterSchema, words, clusters, userWordProgress, quizAttempts } from './schema';
 import {
-  DEFAULT_LANGUAGE,
   LanguageEnum,
   QuizDirectionEnum,
   QuizModeEnum,
@@ -358,7 +357,7 @@ export const api = {
       path: "/api/review/words" as const,
       input: z.object({
         originalScript: z.string().trim().min(1),
-        language: z.nativeEnum(LanguageEnum).default(DEFAULT_LANGUAGE),
+        language: z.nativeEnum(LanguageEnum),
         transliteration: z.string().trim().min(1),
         english: z.string().trim().min(1),
         partOfSpeech: z.string().trim().min(1),

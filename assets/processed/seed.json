@@ -22,14 +22,16 @@
         "originalScript": "నమస్తే, మీరు ఎలా ఉన్నారు?",
         "english": "Hello, how are you?",
         "contextTag": "daily-use",
-        "difficulty": 1
+        "difficulty": 1,
+        "language": "telugu"
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    }
+    },
+    "language": "telugu"
   },
   {
     "originalScript": "ధన్యవాదాలు",
@@ -54,14 +56,16 @@
         "originalScript": "మీ సహాయానికి ధన్యవాదాలు.",
         "english": "Thank you for your help.",
         "contextTag": "daily-use",
-        "difficulty": 1
+        "difficulty": 1,
+        "language": "telugu"
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    }
+    },
+    "language": "telugu"
   },
   {
     "originalScript": "దయచేసి",
@@ -86,14 +90,16 @@
         "originalScript": "దయచేసి కూర్చోండి.",
         "english": "Please sit down.",
         "contextTag": "daily-use",
-        "difficulty": 1
+        "difficulty": 1,
+        "language": "telugu"
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    }
+    },
+    "language": "telugu"
   },
   {
     "originalScript": "క్షమించండి",
@@ -118,14 +124,16 @@
         "originalScript": "క్షమించండి, నాకు అర్థం కాలేదు.",
         "english": "Sorry, I did not understand.",
         "contextTag": "daily-use",
-        "difficulty": 1
+        "difficulty": 1,
+        "language": "telugu"
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    }
+    },
+    "language": "telugu"
   },
   {
     "originalScript": "అవును",
@@ -149,14 +157,16 @@
         "originalScript": "అవును, నేను వస్తాను.",
         "english": "Yes, I will come.",
         "contextTag": "daily-use",
-        "difficulty": 1
+        "difficulty": 1,
+        "language": "telugu"
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    }
+    },
+    "language": "telugu"
   },
   {
     "originalScript": "కాదు",
@@ -180,14 +190,16 @@
         "originalScript": "కాదు, అది నా పుస్తకం కాదు.",
         "english": "No, that is not my book.",
         "contextTag": "daily-use",
-        "difficulty": 1
+        "difficulty": 1,
+        "language": "telugu"
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    }
+    },
+    "language": "telugu"
   },
   {
     "originalScript": "సరే",
@@ -211,14 +223,16 @@
         "originalScript": "సరే, మనం వెళ్లుదాం.",
         "english": "Okay, let us go.",
         "contextTag": "daily-use",
-        "difficulty": 1
+        "difficulty": 1,
+        "language": "telugu"
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    }
+    },
+    "language": "telugu"
   },
   {
     "originalScript": "బాగుంది",
@@ -242,14 +256,16 @@
         "originalScript": "ఈ ఆలోచన బాగుంది.",
         "english": "This idea is good.",
         "contextTag": "daily-use",
-        "difficulty": 1
+        "difficulty": 1,
+        "language": "telugu"
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    }
+    },
+    "language": "telugu"
   },
   {
     "originalScript": "నేను",
@@ -274,14 +290,16 @@
         "originalScript": "నేను తెలుగు నేర్చుకుంటున్నాను.",
         "english": "I am learning the language.",
         "contextTag": "daily-use",
-        "difficulty": 1
+        "difficulty": 1,
+        "language": "telugu"
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    }
+    },
+    "language": "telugu"
   },
   {
     "originalScript": "నువ్వు",
@@ -306,14 +324,16 @@
         "originalScript": "నువ్వు ఎక్కడ ఉంటావు?",
         "english": "Where do you live?",
         "contextTag": "daily-use",
-        "difficulty": 1
+        "difficulty": 1,
+        "language": "telugu"
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    }
+    },
+    "language": "telugu"
   },
   {
     "originalScript": "మీరు",
@@ -338,14 +358,16 @@
         "originalScript": "మీరు ఏమి చేస్తారు?",
         "english": "What do you do?",
         "contextTag": "daily-use",
-        "difficulty": 1
+        "difficulty": 1,
+        "language": "telugu"
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    }
+    },
+    "language": "telugu"
   },
   {
     "originalScript": "అతను",
@@ -369,14 +391,16 @@
         "originalScript": "అతను నా స్నేహితుడు.",
         "english": "He is my friend.",
         "contextTag": "daily-use",
-        "difficulty": 1
+        "difficulty": 1,
+        "language": "telugu"
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    }
+    },
+    "language": "telugu"
   },
   {
     "originalScript": "ఆమె",
@@ -400,14 +424,16 @@
         "originalScript": "ఆమె మంచి టీచర్.",
         "english": "She is a good teacher.",
         "contextTag": "daily-use",
-        "difficulty": 1
+        "difficulty": 1,
+        "language": "telugu"
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    }
+    },
+    "language": "telugu"
   },
   {
     "originalScript": "ఇది",
@@ -431,14 +457,16 @@
         "originalScript": "ఇది నా ఫోన్.",
         "english": "This is my phone.",
         "contextTag": "daily-use",
-        "difficulty": 1
+        "difficulty": 1,
+        "language": "telugu"
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    }
+    },
+    "language": "telugu"
   },
   {
     "originalScript": "అది",
@@ -462,14 +490,16 @@
         "originalScript": "అది మా ఇల్లు.",
         "english": "That is our house.",
         "contextTag": "daily-use",
-        "difficulty": 1
+        "difficulty": 1,
+        "language": "telugu"
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    }
+    },
+    "language": "telugu"
   },
   {
     "originalScript": "మనం",
@@ -493,14 +523,16 @@
         "originalScript": "మనం ఇప్పుడు మొదలుపెడదాం.",
         "english": "Let us start now.",
         "contextTag": "daily-use",
-        "difficulty": 1
+        "difficulty": 1,
+        "language": "telugu"
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    }
+    },
+    "language": "telugu"
   },
   {
     "originalScript": "మేము",
@@ -524,14 +556,16 @@
         "originalScript": "మేము హైదరాబాద్‌లో ఉంటాం.",
         "english": "We live in Hyderabad.",
         "contextTag": "daily-use",
-        "difficulty": 1
+        "difficulty": 1,
+        "language": "telugu"
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    }
+    },
+    "language": "telugu"
   },
   {
     "originalScript": "వాళ్లు",
@@ -555,14 +589,16 @@
         "originalScript": "వాళ్లు స్కూల్‌కి వెళ్లారు.",
         "english": "They went to school.",
         "contextTag": "daily-use",
-        "difficulty": 1
+        "difficulty": 1,
+        "language": "telugu"
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    }
+    },
+    "language": "telugu"
   },
   {
     "originalScript": "ఏమి",
@@ -587,14 +623,16 @@
         "originalScript": "ఇది ఏమి?",
         "english": "What is this?",
         "contextTag": "daily-use",
-        "difficulty": 1
+        "difficulty": 1,
+        "language": "telugu"
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    }
+    },
+    "language": "telugu"
   },
   {
     "originalScript": "ఎవరు",
@@ -619,14 +657,16 @@
         "originalScript": "అతను ఎవరు?",
         "english": "Who is he?",
         "contextTag": "daily-use",
-        "difficulty": 1
+        "difficulty": 1,
+        "language": "telugu"
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    }
+    },
+    "language": "telugu"
   },
   {
     "originalScript": "ఎక్కడ",
@@ -651,14 +691,16 @@
         "originalScript": "మీ ఇల్లు ఎక్కడ?",
         "english": "Where is your house?",
         "contextTag": "daily-use",
-        "difficulty": 1
+        "difficulty": 1,
+        "language": "telugu"
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    }
+    },
+    "language": "telugu"
   },
   {
     "originalScript": "ఎప్పుడు",
@@ -683,14 +725,16 @@
         "originalScript": "మీరు ఎప్పుడు వస్తారు?",
         "english": "When will you come?",
         "contextTag": "daily-use",
-        "difficulty": 1
+        "difficulty": 1,
+        "language": "telugu"
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    }
+    },
+    "language": "telugu"
   },
   {
     "originalScript": "ఎలా",
@@ -715,14 +759,16 @@
         "originalScript": "ఇది ఎలా పనిచేస్తుంది?",
         "english": "How does this work?",
         "contextTag": "daily-use",
-        "difficulty": 1
+        "difficulty": 1,
+        "language": "telugu"
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    }
+    },
+    "language": "telugu"
   },
   {
     "originalScript": "ఎందుకు",
@@ -747,14 +793,16 @@
         "originalScript": "నువ్వు ఎందుకు ఆలస్యంగా వచ్చావు?",
         "english": "Why did you come late?",
         "contextTag": "daily-use",
-        "difficulty": 1
+        "difficulty": 1,
+        "language": "telugu"
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    }
+    },
+    "language": "telugu"
   },
   {
     "originalScript": "ఒకటి",
@@ -778,14 +826,16 @@
         "originalScript": "నా దగ్గర ఒకటి పుస్తకం ఉంది.",
         "english": "I have one book.",
         "contextTag": "daily-use",
-        "difficulty": 1
+        "difficulty": 1,
+        "language": "telugu"
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    }
+    },
+    "language": "telugu"
   },
   {
     "originalScript": "రెండు",
@@ -809,14 +859,16 @@
         "originalScript": "మాకు రెండు పిల్లలు ఉన్నారు.",
         "english": "We have two children.",
         "contextTag": "daily-use",
-        "difficulty": 1
+        "difficulty": 1,
+        "language": "telugu"
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    }
+    },
+    "language": "telugu"
   },
   {
     "originalScript": "మూడు",
@@ -840,14 +892,16 @@
         "originalScript": "మూడు రోజుల తర్వాత రండి.",
         "english": "Come after three days.",
         "contextTag": "daily-use",
-        "difficulty": 1
+        "difficulty": 1,
+        "language": "telugu"
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    }
+    },
+    "language": "telugu"
   },
   {
     "originalScript": "నాలుగు",
@@ -871,14 +925,16 @@
         "originalScript": "నాలుగు కుర్చీలు కావాలి.",
         "english": "We need four chairs.",
         "contextTag": "daily-use",
-        "difficulty": 1
+        "difficulty": 1,
+        "language": "telugu"
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    }
+    },
+    "language": "telugu"
   },
   {
     "originalScript": "ఐదు",
@@ -902,14 +958,16 @@
         "originalScript": "ఐదు నిమిషాలు వేచి ఉండండి.",
         "english": "Please wait five minutes.",
         "contextTag": "daily-use",
-        "difficulty": 1
+        "difficulty": 1,
+        "language": "telugu"
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    }
+    },
+    "language": "telugu"
   },
   {
     "originalScript": "పది",
@@ -933,14 +991,16 @@
         "originalScript": "పది గంటలకు మీటింగ్ ఉంది.",
         "english": "There is a meeting at ten o'clock.",
         "contextTag": "daily-use",
-        "difficulty": 1
+        "difficulty": 1,
+        "language": "telugu"
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    }
+    },
+    "language": "telugu"
   },
   {
     "originalScript": "ఇరవై",
@@ -964,14 +1024,16 @@
         "originalScript": "ఇరవై మంది విద్యార్థులు ఉన్నారు.",
         "english": "There are twenty students.",
         "contextTag": "daily-use",
-        "difficulty": 1
+        "difficulty": 1,
+        "language": "telugu"
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    }
+    },
+    "language": "telugu"
   },
   {
     "originalScript": "ఈరోజు",
@@ -996,14 +1058,16 @@
         "originalScript": "ఈరోజు వాతావరణం చల్లగా ఉంది.",
         "english": "Today the weather is cool.",
         "contextTag": "daily-use",
-        "difficulty": 1
+        "difficulty": 1,
+        "language": "telugu"
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    }
+    },
+    "language": "telugu"
   },
   {
     "originalScript": "రేపు",
@@ -1028,14 +1092,16 @@
         "originalScript": "రేపు కలుద్దాం.",
         "english": "Let us meet tomorrow.",
         "contextTag": "daily-use",
-        "difficulty": 1
+        "difficulty": 1,
+        "language": "telugu"
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    }
+    },
+    "language": "telugu"
   },
   {
     "originalScript": "నిన్న",
@@ -1060,14 +1126,16 @@
         "originalScript": "నిన్న నేను ఇంట్లోనే ఉన్నాను.",
         "english": "Yesterday I stayed at home.",
         "contextTag": "daily-use",
-        "difficulty": 1
+        "difficulty": 1,
+        "language": "telugu"
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    }
+    },
+    "language": "telugu"
   },
   {
     "originalScript": "ఇప్పుడు",
@@ -1092,14 +1160,16 @@
         "originalScript": "ఇప్పుడు మొదలు పెడదాం.",
         "english": "Let us start now.",
         "contextTag": "daily-use",
-        "difficulty": 1
+        "difficulty": 1,
+        "language": "telugu"
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    }
+    },
+    "language": "telugu"
   },
   {
     "originalScript": "తర్వాత",
@@ -1124,14 +1194,16 @@
         "originalScript": "నేను తర్వాత ఫోన్ చేస్తాను.",
         "english": "I will call later.",
         "contextTag": "daily-use",
-        "difficulty": 1
+        "difficulty": 1,
+        "language": "telugu"
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    }
+    },
+    "language": "telugu"
   },
   {
     "originalScript": "ఉదయం",
@@ -1155,14 +1227,16 @@
         "originalScript": "ఉదయం నేను నడకకు వెళ్తాను.",
         "english": "I go for a walk in the morning.",
         "contextTag": "daily-use",
-        "difficulty": 1
+        "difficulty": 1,
+        "language": "telugu"
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    }
+    },
+    "language": "telugu"
   },
   {
     "originalScript": "సాయంత్రం",
@@ -1186,14 +1260,16 @@
         "originalScript": "సాయంత్రం టీ తాగుదాం.",
         "english": "Let us drink tea in the evening.",
         "contextTag": "daily-use",
-        "difficulty": 1
+        "difficulty": 1,
+        "language": "telugu"
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    }
+    },
+    "language": "telugu"
   },
   {
     "originalScript": "రాత్రి",
@@ -1217,14 +1293,16 @@
         "originalScript": "రాత్రి త్వరగా నిద్రపో.",
         "english": "Sleep early at night.",
         "contextTag": "daily-use",
-        "difficulty": 1
+        "difficulty": 1,
+        "language": "telugu"
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    }
+    },
+    "language": "telugu"
   },
   {
     "originalScript": "సమయం",
@@ -1248,14 +1326,16 @@
         "originalScript": "నీ సమయం విలువైనది.",
         "english": "Your time is valuable.",
         "contextTag": "daily-use",
-        "difficulty": 1
+        "difficulty": 1,
+        "language": "telugu"
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    }
+    },
+    "language": "telugu"
   },
   {
     "originalScript": "అమ్మ",
@@ -1280,14 +1360,16 @@
         "originalScript": "నా అమ్మ చాలా మంచిది.",
         "english": "My mother is very kind.",
         "contextTag": "daily-use",
-        "difficulty": 1
+        "difficulty": 1,
+        "language": "telugu"
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    }
+    },
+    "language": "telugu"
   },
   {
     "originalScript": "నాన్న",
@@ -1312,14 +1394,16 @@
         "originalScript": "నా నాన్న ఆఫీసుకి వెళ్లారు.",
         "english": "My father went to the office.",
         "contextTag": "daily-use",
-        "difficulty": 1
+        "difficulty": 1,
+        "language": "telugu"
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    }
+    },
+    "language": "telugu"
   },
   {
     "originalScript": "అన్న",
@@ -1344,14 +1428,16 @@
         "originalScript": "నా అన్న హైదరాబాద్‌లో ఉంటాడు.",
         "english": "My elder brother lives in Hyderabad.",
         "contextTag": "daily-use",
-        "difficulty": 1
+        "difficulty": 1,
+        "language": "telugu"
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    }
+    },
+    "language": "telugu"
   },
   {
     "originalScript": "అక్క",
@@ -1376,14 +1462,16 @@
         "originalScript": "నా అక్క డాక్టర్.",
         "english": "My elder sister is a doctor.",
         "contextTag": "daily-use",
-        "difficulty": 1
+        "difficulty": 1,
+        "language": "telugu"
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    }
+    },
+    "language": "telugu"
   },
   {
     "originalScript": "తమ్ముడు",
@@ -1408,14 +1496,16 @@
         "originalScript": "నా తమ్ముడు క్రికెట్ ఆడుతాడు.",
         "english": "My younger brother plays cricket.",
         "contextTag": "daily-use",
-        "difficulty": 1
+        "difficulty": 1,
+        "language": "telugu"
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    }
+    },
+    "language": "telugu"
   },
   {
     "originalScript": "చెల్లి",
@@ -1440,14 +1530,16 @@
         "originalScript": "నా చెల్లి పాట పాడుతుంది.",
         "english": "My younger sister sings songs.",
         "contextTag": "daily-use",
-        "difficulty": 1
+        "difficulty": 1,
+        "language": "telugu"
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    }
+    },
+    "language": "telugu"
   },
   {
     "originalScript": "కుటుంబం",
@@ -1472,14 +1564,16 @@
         "originalScript": "మా కుటుంబం పెద్దది.",
         "english": "Our family is big.",
         "contextTag": "daily-use",
-        "difficulty": 1
+        "difficulty": 1,
+        "language": "telugu"
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    }
+    },
+    "language": "telugu"
   },
   {
     "originalScript": "స్నేహితుడు",
@@ -1504,14 +1598,16 @@
         "originalScript": "అతను నా మంచి స్నేహితుడు.",
         "english": "He is my good friend.",
         "contextTag": "daily-use",
-        "difficulty": 1
+        "difficulty": 1,
+        "language": "telugu"
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    }
+    },
+    "language": "telugu"
   },
   {
     "originalScript": "స్నేహితురాలు",
@@ -1536,14 +1632,16 @@
         "originalScript": "ఆమె నా స్నేహితురాలు.",
         "english": "She is my friend.",
         "contextTag": "daily-use",
-        "difficulty": 1
+        "difficulty": 1,
+        "language": "telugu"
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    }
+    },
+    "language": "telugu"
   },
   {
     "originalScript": "ఇల్లు",
@@ -1568,14 +1666,16 @@
         "originalScript": "మా ఇల్లు పెద్దది.",
         "english": "Our house is big.",
         "contextTag": "daily-use",
-        "difficulty": 1
+        "difficulty": 1,
+        "language": "telugu"
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    }
+    },
+    "language": "telugu"
   },
   {
     "originalScript": "పుస్తకం",
@@ -1600,14 +1700,16 @@
         "originalScript": "నేను తెలుగు పుస్తకం చదువుతున్నాను.",
         "english": "I am reading a the language book.",
         "contextTag": "daily-use",
-        "difficulty": 1
+        "difficulty": 1,
+        "language": "telugu"
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    }
+    },
+    "language": "telugu"
   },
   {
     "originalScript": "పాఠశాల",
@@ -1631,14 +1733,16 @@
         "originalScript": "పిల్లలు పాఠశాలకు వెళ్లారు.",
         "english": "The children went to school.",
         "contextTag": "daily-use",
-        "difficulty": 1
+        "difficulty": 1,
+        "language": "telugu"
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    }
+    },
+    "language": "telugu"
   },
   {
     "originalScript": "నీరు",
@@ -1663,14 +1767,16 @@
         "originalScript": "నాకు నీరు కావాలి.",
         "english": "I need water.",
         "contextTag": "daily-use",
-        "difficulty": 1
+        "difficulty": 1,
+        "language": "telugu"
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    }
+    },
+    "language": "telugu"
   },
   {
     "originalScript": "అన్నం",
@@ -1695,14 +1801,16 @@
         "originalScript": "అన్నం వేడిగా ఉంది.",
         "english": "The rice is hot.",
         "contextTag": "daily-use",
-        "difficulty": 1
+        "difficulty": 1,
+        "language": "telugu"
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    }
+    },
+    "language": "telugu"
   },
   {
     "originalScript": "పండు",
@@ -1726,14 +1834,16 @@
         "originalScript": "నేను ప్రతి రోజు పండు తింటాను.",
         "english": "I eat fruit every day.",
         "contextTag": "daily-use",
-        "difficulty": 1
+        "difficulty": 1,
+        "language": "telugu"
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    }
+    },
+    "language": "telugu"
   },
   {
     "originalScript": "బస్సు",
@@ -1758,14 +1868,16 @@
         "originalScript": "బస్సు సమయానికి వచ్చింది.",
         "english": "The bus arrived on time.",
         "contextTag": "daily-use",
-        "difficulty": 1
+        "difficulty": 1,
+        "language": "telugu"
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    }
+    },
+    "language": "telugu"
   },
   {
     "originalScript": "రోడు",
@@ -1790,14 +1902,16 @@
         "originalScript": "ఈ రోడు నగరానికి వెళ్తుంది.",
         "english": "This road goes to the city.",
         "contextTag": "daily-use",
-        "difficulty": 1
+        "difficulty": 1,
+        "language": "telugu"
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    }
+    },
+    "language": "telugu"
   },
   {
     "originalScript": "గ్రామం",
@@ -1821,14 +1935,16 @@
         "originalScript": "నా గ్రామం చాలా అందంగా ఉంటుంది.",
         "english": "My village is very beautiful.",
         "contextTag": "daily-use",
-        "difficulty": 1
+        "difficulty": 1,
+        "language": "telugu"
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    }
+    },
+    "language": "telugu"
   },
   {
     "originalScript": "నగరం",
@@ -1852,14 +1968,16 @@
         "originalScript": "హైదరాబాద్ ఒక పెద్ద నగరం.",
         "english": "Hyderabad is a big city.",
         "contextTag": "daily-use",
-        "difficulty": 1
+        "difficulty": 1,
+        "language": "telugu"
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    }
+    },
+    "language": "telugu"
   },
   {
     "originalScript": "పని",
@@ -1883,14 +2001,16 @@
         "originalScript": "నాకు ఈరోజు చాలా పని ఉంది.",
         "english": "I have a lot of work today.",
         "contextTag": "daily-use",
-        "difficulty": 1
+        "difficulty": 1,
+        "language": "telugu"
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    }
+    },
+    "language": "telugu"
   },
   {
     "originalScript": "డబ్బు",
@@ -1914,14 +2034,16 @@
         "originalScript": "నాకు కొంచెం డబ్బు కావాలి.",
         "english": "I need some money.",
         "contextTag": "daily-use",
-        "difficulty": 1
+        "difficulty": 1,
+        "language": "telugu"
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    }
+    },
+    "language": "telugu"
   },
   {
     "originalScript": "భాష",
@@ -1946,14 +2068,16 @@
         "originalScript": "తెలుగు ఒక అందమైన భాష.",
         "english": "the language is a beautiful language.",
         "contextTag": "daily-use",
-        "difficulty": 1
+        "difficulty": 1,
+        "language": "telugu"
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    }
+    },
+    "language": "telugu"
   },
   {
     "originalScript": "సహాయం",
@@ -1977,14 +2101,16 @@
         "originalScript": "మీ సహాయం నాకు అవసరం.",
         "english": "I need your help.",
         "contextTag": "daily-use",
-        "difficulty": 1
+        "difficulty": 1,
+        "language": "telugu"
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    }
+    },
+    "language": "telugu"
   },
   {
     "originalScript": "వెళ్ళు",
@@ -2009,14 +2135,16 @@
         "originalScript": "మనము మార్కెట్‌కి వెళ్దాం.",
         "english": "Let us go to the market.",
         "contextTag": "daily-use",
-        "difficulty": 1
+        "difficulty": 1,
+        "language": "telugu"
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    }
+    },
+    "language": "telugu"
   },
   {
     "originalScript": "రా",
@@ -2040,14 +2168,16 @@
         "originalScript": "ఇక్కడికి రా.",
         "english": "Come here.",
         "contextTag": "daily-use",
-        "difficulty": 1
+        "difficulty": 1,
+        "language": "telugu"
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    }
+    },
+    "language": "telugu"
   },
   {
     "originalScript": "తిను",
@@ -2072,14 +2202,16 @@
         "originalScript": "సమయానికి భోజనం తిను.",
         "english": "Eat your meal on time.",
         "contextTag": "daily-use",
-        "difficulty": 1
+        "difficulty": 1,
+        "language": "telugu"
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    }
+    },
+    "language": "telugu"
   },
   {
     "originalScript": "తాగు",
@@ -2104,14 +2236,16 @@
         "originalScript": "రోజూ ఎక్కువ నీరు తాగు.",
         "english": "Drink more water daily.",
         "contextTag": "daily-use",
-        "difficulty": 1
+        "difficulty": 1,
+        "language": "telugu"
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    }
+    },
+    "language": "telugu"
   },
   {
     "originalScript": "చదువు",
@@ -2136,14 +2270,16 @@
         "originalScript": "ప్రతి రోజు తెలుగు చదువు.",
         "english": "Study the language every day.",
         "contextTag": "daily-use",
-        "difficulty": 1
+        "difficulty": 1,
+        "language": "telugu"
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    }
+    },
+    "language": "telugu"
   },
   {
     "originalScript": "రాయి",
@@ -2168,14 +2304,16 @@
         "originalScript": "నీ పేరు ఇక్కడ రాయి.",
         "english": "Write your name here.",
         "contextTag": "daily-use",
-        "difficulty": 1
+        "difficulty": 1,
+        "language": "telugu"
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    }
+    },
+    "language": "telugu"
   },
   {
     "originalScript": "చూడు",
@@ -2199,14 +2337,16 @@
         "originalScript": "ఈ చిత్రం చూడు.",
         "english": "Look at this picture.",
         "contextTag": "daily-use",
-        "difficulty": 1
+        "difficulty": 1,
+        "language": "telugu"
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    }
+    },
+    "language": "telugu"
   },
   {
     "originalScript": "మాట్లాడు",
@@ -2230,14 +2370,16 @@
         "originalScript": "నెమ్మదిగా మాట్లాడు.",
         "english": "Speak slowly.",
         "contextTag": "daily-use",
-        "difficulty": 1
+        "difficulty": 1,
+        "language": "telugu"
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    }
+    },
+    "language": "telugu"
   },
   {
     "originalScript": "విను",
@@ -2261,14 +2403,16 @@
         "originalScript": "జాగ్రత్తగా విను.",
         "english": "Listen carefully.",
         "contextTag": "daily-use",
-        "difficulty": 1
+        "difficulty": 1,
+        "language": "telugu"
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    }
+    },
+    "language": "telugu"
   },
   {
     "originalScript": "నిద్రపో",
@@ -2293,14 +2437,16 @@
         "originalScript": "రాత్రి తొందరగా నిద్రపో.",
         "english": "Sleep early at night.",
         "contextTag": "daily-use",
-        "difficulty": 1
+        "difficulty": 1,
+        "language": "telugu"
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    }
+    },
+    "language": "telugu"
   },
   {
     "originalScript": "కూర్చో",
@@ -2324,14 +2470,16 @@
         "originalScript": "ఇక్కడ కూర్చో.",
         "english": "Sit here.",
         "contextTag": "daily-use",
-        "difficulty": 1
+        "difficulty": 1,
+        "language": "telugu"
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    }
+    },
+    "language": "telugu"
   },
   {
     "originalScript": "నిలబడు",
@@ -2355,14 +2503,16 @@
         "originalScript": "లైన్లో నిలబడు.",
         "english": "Stand in the line.",
         "contextTag": "daily-use",
-        "difficulty": 1
+        "difficulty": 1,
+        "language": "telugu"
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    }
+    },
+    "language": "telugu"
   },
   {
     "originalScript": "ఇవ్వు",
@@ -2386,14 +2536,16 @@
         "originalScript": "దయచేసి నాకు నీ పుస్తకం ఇవ్వు.",
         "english": "Please give me your book.",
         "contextTag": "daily-use",
-        "difficulty": 1
+        "difficulty": 1,
+        "language": "telugu"
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    }
+    },
+    "language": "telugu"
   },
   {
     "originalScript": "తీసుకో",
@@ -2417,14 +2569,16 @@
         "originalScript": "ఈ పెన్ను తీసుకో.",
         "english": "Take this pen.",
         "contextTag": "daily-use",
-        "difficulty": 1
+        "difficulty": 1,
+        "language": "telugu"
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    }
+    },
+    "language": "telugu"
   },
   {
     "originalScript": "చేయి",
@@ -2448,14 +2602,16 @@
         "originalScript": "ఈ పని ఇప్పుడే చేయి.",
         "english": "Do this work now.",
         "contextTag": "daily-use",
-        "difficulty": 1
+        "difficulty": 1,
+        "language": "telugu"
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    }
+    },
+    "language": "telugu"
   },
   {
     "originalScript": "తెలుసు",
@@ -2480,14 +2636,16 @@
         "originalScript": "నాకు ఈ పదం తెలుసు.",
         "english": "I know this word.",
         "contextTag": "daily-use",
-        "difficulty": 1
+        "difficulty": 1,
+        "language": "telugu"
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    }
+    },
+    "language": "telugu"
   },
   {
     "originalScript": "అర్థం అవు",
@@ -2512,14 +2670,16 @@
         "originalScript": "ఇప్పుడు నాకు అర్థం అయింది.",
         "english": "Now I understood.",
         "contextTag": "daily-use",
-        "difficulty": 1
+        "difficulty": 1,
+        "language": "telugu"
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    }
+    },
+    "language": "telugu"
   },
   {
     "originalScript": "మంచి",
@@ -2544,14 +2704,16 @@
         "originalScript": "అతను మంచి మనిషి.",
         "english": "He is a good person.",
         "contextTag": "daily-use",
-        "difficulty": 1
+        "difficulty": 1,
+        "language": "telugu"
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    }
+    },
+    "language": "telugu"
   },
   {
     "originalScript": "చెడు",
@@ -2575,14 +2737,16 @@
         "originalScript": "ఇది చెడు అలవాటు.",
         "english": "This is a bad habit.",
         "contextTag": "daily-use",
-        "difficulty": 1
+        "difficulty": 1,
+        "language": "telugu"
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    }
+    },
+    "language": "telugu"
   },
   {
     "originalScript": "పెద్ద",
@@ -2606,14 +2770,16 @@
         "originalScript": "ఇది పెద్ద ఇల్లు.",
         "english": "This is a big house.",
         "contextTag": "daily-use",
-        "difficulty": 1
+        "difficulty": 1,
+        "language": "telugu"
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    }
+    },
+    "language": "telugu"
   },
   {
     "originalScript": "చిన్న",
@@ -2637,14 +2803,16 @@
         "originalScript": "అది చిన్న పుస్తకం.",
         "english": "That is a small book.",
         "contextTag": "daily-use",
-        "difficulty": 1
+        "difficulty": 1,
+        "language": "telugu"
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    }
+    },
+    "language": "telugu"
   },
   {
     "originalScript": "కొత్త",
@@ -2668,14 +2836,16 @@
         "originalScript": "నేను కొత్త ఫోన్ కొన్నాను.",
         "english": "I bought a new phone.",
         "contextTag": "daily-use",
-        "difficulty": 1
+        "difficulty": 1,
+        "language": "telugu"
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    }
+    },
+    "language": "telugu"
   },
   {
     "originalScript": "పాత",
@@ -2699,14 +2869,16 @@
         "originalScript": "ఇది పాత ఇల్లు.",
         "english": "This is an old house.",
         "contextTag": "daily-use",
-        "difficulty": 1
+        "difficulty": 1,
+        "language": "telugu"
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    }
+    },
+    "language": "telugu"
   },
   {
     "originalScript": "చాలా",
@@ -2730,14 +2902,16 @@
         "originalScript": "ఆమె చాలా తెలివైనది.",
         "english": "She is very smart.",
         "contextTag": "daily-use",
-        "difficulty": 1
+        "difficulty": 1,
+        "language": "telugu"
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    }
+    },
+    "language": "telugu"
   },
   {
     "originalScript": "నెమ్మదిగా",
@@ -2761,14 +2935,16 @@
         "originalScript": "దయచేసి నెమ్మదిగా మాట్లాడు.",
         "english": "Please speak slowly.",
         "contextTag": "daily-use",
-        "difficulty": 1
+        "difficulty": 1,
+        "language": "telugu"
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    }
+    },
+    "language": "telugu"
   },
   {
     "originalScript": "వేగంగా",
@@ -2792,14 +2968,16 @@
         "originalScript": "అతను వేగంగా పరుగెత్తాడు.",
         "english": "He ran quickly.",
         "contextTag": "daily-use",
-        "difficulty": 1
+        "difficulty": 1,
+        "language": "telugu"
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    }
+    },
+    "language": "telugu"
   },
   {
     "originalScript": "ఇక్కడ",
@@ -2824,14 +3002,16 @@
         "originalScript": "ఇక్కడ వేచి ఉండు.",
         "english": "Wait here.",
         "contextTag": "daily-use",
-        "difficulty": 1
+        "difficulty": 1,
+        "language": "telugu"
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    }
+    },
+    "language": "telugu"
   },
   {
     "originalScript": "అక్కడ",
@@ -2856,13 +3036,15 @@
         "originalScript": "అక్కడ ఒక దుకాణం ఉంది.",
         "english": "There is a shop there.",
         "contextTag": "daily-use",
-        "difficulty": 1
+        "difficulty": 1,
+        "language": "telugu"
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    }
+    },
+    "language": "telugu"
   }
 ]

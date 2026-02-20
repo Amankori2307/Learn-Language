@@ -35,9 +35,9 @@ export const words = pgTable("words", {
   transliteration: text("transliteration").notNull(),
   english: text("english").notNull(),
   partOfSpeech: text("part_of_speech").notNull(),
-  difficulty: integer("difficulty").default(1),
-  difficultyLevel: text("difficulty_level").default("beginner"),
-  frequencyScore: real("frequency_score").default(0.5),
+  difficulty: integer("difficulty").notNull(),
+  difficultyLevel: text("difficulty_level").notNull(),
+  frequencyScore: real("frequency_score").notNull(),
   cefrLevel: text("cefr_level"),
   audioUrl: text("audio_url"),
   exampleSentences: jsonb("example_sentences").$type<string[]>().default([]),
@@ -75,7 +75,7 @@ export const sentences = pgTable("sentences", {
   language: text("language").$type<LanguageEnum>().notNull(),
   originalScript: text("original_script").notNull(),
   english: text("english").notNull(),
-  difficulty: integer("difficulty").default(1),
+  difficulty: integer("difficulty").notNull(),
 });
 
 export const wordExamples = pgTable("word_examples", {
@@ -83,10 +83,10 @@ export const wordExamples = pgTable("word_examples", {
   wordId: integer("word_id").references(() => words.id).notNull(),
   language: text("language").$type<LanguageEnum>().notNull(),
   originalScript: text("source_sentence").notNull(),
-  pronunciation: text("pronunciation"),
+  pronunciation: text("pronunciation").notNull(),
   englishSentence: text("english_sentence").notNull(),
-  contextTag: text("context_tag").default("general"),
-  difficulty: integer("difficulty").default(1),
+  contextTag: text("context_tag").notNull(),
+  difficulty: integer("difficulty").notNull(),
   createdAt: timestamp("created_at").defaultNow(),
 });
 

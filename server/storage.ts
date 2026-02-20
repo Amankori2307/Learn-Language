@@ -2,7 +2,7 @@ import { db } from "./db";
 import { eq, sql, and } from "drizzle-orm";
 import fs from "fs/promises";
 import path from "path";
-import { DEFAULT_LANGUAGE, LanguageEnum, QuizDirectionEnum, QuizModeEnum, QuizQuestionTypeEnum, ReviewStatusEnum } from "@shared/domain/enums";
+import { LanguageEnum, QuizDirectionEnum, QuizModeEnum, QuizQuestionTypeEnum, ReviewStatusEnum } from "@shared/domain/enums";
 import {
   words, clusters, wordClusters, userWordProgress, quizAttempts, wordExamples, users,
   wordReviewEvents,
@@ -14,11 +14,11 @@ import { generateSessionWords, type QuizMode } from "./services/session-generato
 import { computeStreak, computeXp } from "./services/stats";
 import { computeLeaderboard } from "./services/leaderboard";
 
-function normalizeLanguage(value?: string): LanguageEnum {
-  if (value && Object.values(LanguageEnum).includes(value as LanguageEnum)) {
+function assertLanguage(value: string): LanguageEnum {
+  if (Object.values(LanguageEnum).includes(value as LanguageEnum)) {
     return value as LanguageEnum;
   }
-  return DEFAULT_LANGUAGE;
+  throw new Error(`Invalid language value: ${value}`);
 }
 
 export interface IStorage {
@@ -36,10 +36,10 @@ export interface IStorage {
   getWordExamples(wordId: number): Promise<Array<{
     language: LanguageEnum;
     originalScript: string;
-    pronunciation: string | null;
+    pronunciation: string;
     englishSentence: string;
-    contextTag: string | null;
-    difficulty: number | null;
+    contextTag: string;
+    difficulty: number;
   }>>;
 
   // User Progress
@@ -172,8 +172,8 @@ export class DatabaseStorage implements IStorage {
       .insert(words)
       .values({
         ...word,
-        language: normalizeLanguage(word.language),
-        originalScript: word.originalScript ?? word.originalScript,
+        language: assertLanguage(String(word.language)),
+        originalScript: word.originalScript,
         reviewStatus: normalizedReviewStatus,
       })
       .returning();
@@ -208,10 +208,10 @@ export class DatabaseStorage implements IStorage {
   async getWordExamples(wordId: number): Promise<Array<{
     language: LanguageEnum;
     originalScript: string;
-    pronunciation: string | null;
+    pronunciation: string;
     englishSentence: string;
-    contextTag: string | null;
-    difficulty: number | null;
+    contextTag: string;
+    difficulty: number;
   }>> {
     return db
       .select({
@@ -521,6 +521,10 @@ export class DatabaseStorage implements IStorage {
       transliteration: input.transliteration,
       english: input.english,
       partOfSpeech: input.partOfSpeech,
+      difficulty: 1,
+      difficultyLevel: "beginner",
+      frequencyScore: 0.5,
+      exampleSentences: [],
       tags: input.tags ?? ["manual-draft"],
       reviewStatus: ReviewStatusEnum.DRAFT,
       submittedBy: input.submittedBy,
@@ -629,9 +633,9 @@ export class DatabaseStorage implements IStorage {
       originalScript: string;
       pronunciation: string;
       english: string;
-      contextTag?: string;
-      difficulty?: number;
-      language?: LanguageEnum;
+      contextTag: string;
+      difficulty: number;
+      language: LanguageEnum;
     };
 
     type SeedWord = {
@@ -639,10 +643,10 @@ export class DatabaseStorage implements IStorage {
       transliteration: string;
       english: string;
       partOfSpeech: string;
-      language?: LanguageEnum;
-      difficulty?: number;
-      difficultyLevel?: "beginner" | "easy" | "medium" | "hard";
-      frequencyScore?: number;
+      language: LanguageEnum;
+      difficulty: number;
+      difficultyLevel: "beginner" | "easy" | "medium" | "hard";
+      frequencyScore: number;
       cefrLevel?: string;
       tags?: string[];
       clusters?: string[];
@@ -668,7 +672,7 @@ export class DatabaseStorage implements IStorage {
         .from(words)
         .where(
           and(
-            eq(words.language, normalizeLanguage(word.language)),
+            eq(words.language, assertLanguage(String(word.language))),
             eq(words.originalScript, word.originalScript),
             eq(words.english, word.english),
           ),
@@ -724,16 +728,16 @@ export class DatabaseStorage implements IStorage {
     const clusterByName = new Map<string, Cluster>();
 
     for (const item of items) {
-      const language = normalizeLanguage(item.language);
+      const language = assertLanguage(item.language);
       const word = await ensureWord({
         language,
         originalScript: item.originalScript,
         transliteration: item.transliteration,
         english: item.english,
         partOfSpeech: item.partOfSpeech,
-        difficulty: item.difficulty ?? 1,
-        difficultyLevel: item.difficultyLevel ?? "beginner",
-        frequencyScore: item.frequencyScore ?? 0.5,
+        difficulty: item.difficulty,
+        difficultyLevel: item.difficultyLevel,
+        frequencyScore: item.frequencyScore,
         cefrLevel: item.cefrLevel ?? null,
         tags: item.tags ?? [],
         exampleSentences: (item.examples ?? []).map((example) => example.originalScript),
@@ -753,15 +757,15 @@ export class DatabaseStorage implements IStorage {
       }
 
       for (const example of item.examples ?? []) {
-        const exampleLanguage = normalizeLanguage(example.language ?? language);
+        const exampleLanguage = assertLanguage(example.language);
         await ensureWordExample(
           word.id,
           exampleLanguage,
           example.originalScript,
           example.pronunciation,
           example.english,
-          example.contextTag ?? "general",
-          example.difficulty ?? 1,
+          example.contextTag,
+          example.difficulty,
         );
       }
     }

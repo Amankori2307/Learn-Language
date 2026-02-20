@@ -2,7 +2,7 @@ import fs from "fs/promises";
 import path from "path";
 import { and, eq, inArray, sql } from "drizzle-orm";
 import { db } from "../server/db";
-import { DEFAULT_LANGUAGE, LanguageEnum } from "../shared/domain/enums";
+import { LanguageEnum } from "../shared/domain/enums";
 import {
   clusters,
   quizAttempts,
@@ -14,24 +14,23 @@ import {
 } from "../shared/schema";
 
 type ContentExample = {
-  language?: LanguageEnum;
+  language: LanguageEnum;
   originalScript: string;
   english: string;
-  pronunciation?: string;
-  contextTag?: string;
-  difficulty?: number;
+  pronunciation: string;
+  contextTag: string;
+  difficulty: number;
 };
 
 type ContentWord = {
-  language?: LanguageEnum;
-  originalScript?: string;
+  language: LanguageEnum;
   originalScript: string;
   transliteration: string;
   english: string;
   partOfSpeech: string;
-  difficulty?: number;
-  difficultyLevel?: "beginner" | "easy" | "medium" | "hard";
-  frequencyScore?: number;
+  difficulty: number;
+  difficultyLevel: "beginner" | "easy" | "medium" | "hard";
+  frequencyScore: number;
   cefrLevel?: string;
   tags?: string[];
   clusters?: string[];
@@ -44,8 +43,11 @@ type ContentWord = {
   };
 };
 
-function normalizeLanguage(value?: LanguageEnum): LanguageEnum {
-  return value ?? DEFAULT_LANGUAGE;
+function assertLanguage(value: string): LanguageEnum {
+  if (!Object.values(LanguageEnum).includes(value as LanguageEnum)) {
+    throw new Error(`Invalid language value: ${value}`);
+  }
+  return value as LanguageEnum;
 }
 
 function parseListField(value?: string): string[] {
@@ -105,22 +107,24 @@ function parseCsv(raw: string): ContentWord[] {
 
     const examples: ContentExample[] = row.exampleSourceText && row.exampleEnglish
       ? [{
+          language: assertLanguage(row.language),
           originalScript: row.exampleSourceText,
           english: row.exampleEnglish,
-          contextTag: row.contextTag || "general",
-          difficulty: row.exampleDifficulty ? Number(row.exampleDifficulty) : 1,
+          pronunciation: row.examplePronunciation,
+          contextTag: row.contextTag,
+          difficulty: Number(row.exampleDifficulty),
         }]
       : [];
 
     return {
-      language: (row.language as LanguageEnum) || DEFAULT_LANGUAGE,
+      language: assertLanguage(row.language),
       originalScript: row.originalScript,
       transliteration: row.transliteration,
       english: row.english,
       partOfSpeech: row.partOfSpeech,
-      difficulty: row.difficulty ? Number(row.difficulty) : 1,
-      difficultyLevel: (row.difficultyLevel as ContentWord["difficultyLevel"]) || "beginner",
-      frequencyScore: row.frequencyScore ? Number(row.frequencyScore) : 0.5,
+      difficulty: Number(row.difficulty),
+      difficultyLevel: row.difficultyLevel as ContentWord["difficultyLevel"],
+      frequencyScore: Number(row.frequencyScore),
       cefrLevel: row.cefrLevel || undefined,
       tags: parseListField(row.tags),
       clusters: parseListField(row.clusters),
@@ -132,10 +136,14 @@ function parseCsv(raw: string): ContentWord[] {
 function assertWord(word: ContentWord, idx: number) {
   const missing: string[] = [];
 
+  if (!word.language) missing.push("language");
   if (!word.originalScript) missing.push("originalScript");
   if (!word.english) missing.push("english");
   if (!word.transliteration) missing.push("transliteration");
   if (!word.partOfSpeech) missing.push("partOfSpeech");
+  if (!word.difficulty) missing.push("difficulty");
+  if (!word.difficultyLevel) missing.push("difficultyLevel");
+  if (word.frequencyScore === undefined || word.frequencyScore === null) missing.push("frequencyScore");
 
   if (missing.length > 0) {
     throw new Error(`Invalid word at row ${idx + 1}: missing ${missing.join(", ")}`);
@@ -162,8 +170,8 @@ async function ensureCluster(name: string) {
 }
 
 async function upsertWord(input: ContentWord) {
-  const language = normalizeLanguage(input.language);
-  const originalScript = input.originalScript?.trim() || input.originalScript;
+  const language = assertLanguage(input.language);
+  const originalScript = input.originalScript.trim();
   const reviewStatus = input.source?.reviewStatus ?? ((input.tags ?? []).includes("needs-review") ? "pending_review" : "approved");
   const [existing] = await db
     .select()
@@ -178,9 +186,9 @@ async function upsertWord(input: ContentWord) {
         originalScript,
         transliteration: input.transliteration,
         partOfSpeech: input.partOfSpeech,
-        difficulty: input.difficulty ?? 1,
-        difficultyLevel: input.difficultyLevel ?? "beginner",
-        frequencyScore: input.frequencyScore ?? 0.5,
+        difficulty: input.difficulty,
+        difficultyLevel: input.difficultyLevel,
+        frequencyScore: input.frequencyScore,
         cefrLevel: input.cefrLevel ?? null,
         tags: input.tags ?? [],
         reviewStatus,
@@ -198,13 +206,12 @@ async function upsertWord(input: ContentWord) {
     .values({
       language,
       originalScript,
-      originalScript: input.originalScript,
       english: input.english,
       transliteration: input.transliteration,
       partOfSpeech: input.partOfSpeech,
-      difficulty: input.difficulty ?? 1,
-      difficultyLevel: input.difficultyLevel ?? "beginner",
-      frequencyScore: input.frequencyScore ?? 0.5,
+      difficulty: input.difficulty,
+      difficultyLevel: input.difficultyLevel,
+      frequencyScore: input.frequencyScore,
       cefrLevel: input.cefrLevel ?? null,
       tags: input.tags ?? [],
       reviewStatus,
@@ -218,7 +225,7 @@ async function upsertWord(input: ContentWord) {
 }
 
 async function ensureWordExample(wordId: number, example: ContentExample) {
-  const language = normalizeLanguage(example.language);
+  const language = assertLanguage(example.language);
   const [existing] = await db
     .select()
     .from(wordExamples)
@@ -235,10 +242,10 @@ async function ensureWordExample(wordId: number, example: ContentExample) {
       .update(wordExamples)
       .set({
         language,
-        pronunciation: example.pronunciation ?? null,
+        pronunciation: example.pronunciation,
         englishSentence: example.english,
-        contextTag: example.contextTag ?? "general",
-        difficulty: example.difficulty ?? 1,
+        contextTag: example.contextTag,
+        difficulty: example.difficulty,
       })
       .where(eq(wordExamples.id, existing.id));
     return;
@@ -248,10 +255,10 @@ async function ensureWordExample(wordId: number, example: ContentExample) {
     wordId,
     language,
     originalScript: example.originalScript,
-    pronunciation: example.pronunciation ?? null,
+    pronunciation: example.pronunciation,
     englishSentence: example.english,
-    contextTag: example.contextTag ?? "general",
-    difficulty: example.difficulty ?? 1,
+    contextTag: example.contextTag,
+    difficulty: example.difficulty,
   });
 }
 
@@ -332,7 +339,7 @@ async function main() {
       }
       await ensureWordExample(word.id, {
         ...example,
-        language: example.language ?? item.language ?? DEFAULT_LANGUAGE,
+        language: example.language,
         pronunciation: normalizedPronunciation,
       });
       exampleCount += 1;

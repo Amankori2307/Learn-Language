@@ -15,8 +15,6 @@ export enum LanguageEnum {
   GERMAN = "german",
 }
 
-export const DEFAULT_LANGUAGE: LanguageEnum = LanguageEnum.TELUGU;
-
 export enum ReviewStatusEnum {
   DRAFT = "draft",
   PENDING_REVIEW = "pending_review",

@@ -1,26 +1,25 @@
 import fs from "fs/promises";
 import path from "path";
-import { DEFAULT_LANGUAGE, LanguageEnum } from "../shared/domain/enums";
+import { LanguageEnum } from "../shared/domain/enums";
 
 type ContentExample = {
-  language?: LanguageEnum;
+  language: LanguageEnum;
   originalScript: string;
   pronunciation: string;
   english: string;
-  contextTag?: string;
-  difficulty?: number;
+  contextTag: string;
+  difficulty: number;
 };
 
 type ContentWord = {
-  language?: LanguageEnum;
-  originalScript?: string;
+  language: LanguageEnum;
   originalScript: string;
   transliteration: string;
   english: string;
   partOfSpeech: string;
-  difficulty?: number;
-  difficultyLevel?: "beginner" | "easy" | "medium" | "hard";
-  frequencyScore?: number;
+  difficulty: number;
+  difficultyLevel: "beginner" | "easy" | "medium" | "hard";
+  frequencyScore: number;
   cefrLevel?: string;
   tags?: string[];
   clusters?: string[];
@@ -61,7 +60,7 @@ async function main() {
       errors.push(`[row ${row}] originalScript cannot be empty`);
     }
 
-    const language = word.language ?? DEFAULT_LANGUAGE;
+    const language = word.language;
     if (!isLanguage(language)) {
       errors.push(`[row ${row}] Invalid language: ${String(word.language)}`);
     }
@@ -73,7 +72,7 @@ async function main() {
       keys.add(key);
     }
 
-    const frequency = word.frequencyScore ?? 0.5;
+    const frequency = word.frequencyScore;
     if (frequency < 0 || frequency > 1) {
       errors.push(`[row ${row}] frequencyScore must be between 0 and 1`);
     }
@@ -85,12 +84,15 @@ async function main() {
 
     examples.forEach((example, exampleIdx) => {
       const position = `${row}.${exampleIdx + 1}`;
-      if (!example.originalScript || !example.pronunciation || !example.english) {
-        errors.push(`[example ${position}] Missing originalScript/pronunciation/english`);
+      if (!example.originalScript || !example.pronunciation || !example.english || !example.contextTag) {
+        errors.push(`[example ${position}] Missing originalScript/pronunciation/english/contextTag`);
       }
-      const exampleLanguage = example.language ?? language;
+      const exampleLanguage = example.language;
       if (!isLanguage(exampleLanguage)) {
         errors.push(`[example ${position}] Invalid language: ${String(example.language)}`);
+      }
+      if (!Number.isInteger(example.difficulty) || example.difficulty < 1) {
+        errors.push(`[example ${position}] difficulty must be a positive integer`);
       }
     });
   });
