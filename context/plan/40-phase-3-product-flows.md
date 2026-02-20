@@ -47,7 +47,7 @@ Acceptance:
 - Session composition changes based on user state, not static ratios only.
 
 ### P3-004 - Bidirectional proficiency model
-Status: `doing`
+Status: `done`
 
 Scope:
 - Track Telugu->English and English->Telugu separately.

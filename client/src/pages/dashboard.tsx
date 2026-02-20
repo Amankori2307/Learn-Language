@@ -37,7 +37,10 @@ export default function Dashboard() {
     learning: 0,
     weak: 0,
     streak: 0,
-    xp: 0
+    xp: 0,
+    recognitionAccuracy: 0,
+    recallAccuracy: 0,
+    recommendedDirection: "telugu_to_english" as const,
   };
 
   const s = stats || defaultStats;
@@ -100,6 +103,12 @@ export default function Dashboard() {
           <div>
             <h2 className="text-3xl font-bold tracking-tight">Welcome back, {user?.firstName || 'Learner'}!</h2>
             <p className="text-muted-foreground mt-1">You're making great progress with your Telugu.</p>
+            <p className="text-sm text-muted-foreground mt-1">
+              Focus next on:{" "}
+              <span className="font-semibold text-foreground">
+                {s.recommendedDirection === "telugu_to_english" ? "Telugu -> English recall" : "English -> Telugu recognition"}
+              </span>
+            </p>
           </div>
           <div className="flex items-center gap-2 bg-orange-50 text-orange-700 px-4 py-2 rounded-full border border-orange-100 shadow-sm">
             <Flame className="w-5 h-5 fill-orange-500 text-orange-500" />
@@ -132,6 +141,18 @@ export default function Dashboard() {
             value={s.weak} 
             icon={Dumbbell} 
             color="orange" 
+          />
+          <StatCard
+            label="Recall %"
+            value={`${s.recallAccuracy}%`}
+            icon={BookOpen}
+            color="blue"
+          />
+          <StatCard
+            label="Recognition %"
+            value={`${s.recognitionAccuracy}%`}
+            icon={Layers3}
+            color="primary"
           />
         </div>
 

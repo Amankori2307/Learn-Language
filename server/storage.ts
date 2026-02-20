@@ -39,6 +39,9 @@ export interface IStorage {
     weak: number;
     streak: number;
     xp: number;
+    recognitionAccuracy: number;
+    recallAccuracy: number;
+    recommendedDirection: "telugu_to_english" | "english_to_telugu";
   }>;
   getRecentAccuracy(userId: string, limit?: number): Promise<number>;
 
@@ -186,6 +189,9 @@ export class DatabaseStorage implements IStorage {
     weak: number;
     streak: number;
     xp: number;
+    recognitionAccuracy: number;
+    recallAccuracy: number;
+    recommendedDirection: "telugu_to_english" | "english_to_telugu";
   }> {
     const progressList = await this.getUserProgress(userId);
     
@@ -212,6 +218,24 @@ export class DatabaseStorage implements IStorage {
       xp: sql<number>`count(*) * 10` 
     }).from(quizAttempts)
     .where(and(eq(quizAttempts.userId, userId), eq(quizAttempts.isCorrect, true)));
+
+    const directionAttempts = await db
+      .select({
+        direction: quizAttempts.direction,
+        isCorrect: quizAttempts.isCorrect,
+      })
+      .from(quizAttempts)
+      .where(eq(quizAttempts.userId, userId));
+
+    const recallAttempts = directionAttempts.filter((a) => a.direction === "telugu_to_english");
+    const recognitionAttempts = directionAttempts.filter((a) => a.direction === "english_to_telugu");
+
+    const recallCorrect = recallAttempts.filter((a) => a.isCorrect).length;
+    const recognitionCorrect = recognitionAttempts.filter((a) => a.isCorrect).length;
+
+    const recallAccuracy = recallAttempts.length > 0 ? recallCorrect / recallAttempts.length : 1;
+    const recognitionAccuracy = recognitionAttempts.length > 0 ? recognitionCorrect / recognitionAttempts.length : 1;
+    const recommendedDirection = recallAccuracy < recognitionAccuracy ? "telugu_to_english" : "english_to_telugu";
     
     return {
       totalWords,
@@ -219,7 +243,10 @@ export class DatabaseStorage implements IStorage {
       learning,
       weak,
       streak,
-      xp: Number(xpResult?.xp || 0)
+      xp: Number(xpResult?.xp || 0),
+      recognitionAccuracy: Number((recognitionAccuracy * 100).toFixed(1)),
+      recallAccuracy: Number((recallAccuracy * 100).toFixed(1)),
+      recommendedDirection,
     };
   }
 

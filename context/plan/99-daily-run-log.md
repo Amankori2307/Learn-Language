@@ -310,3 +310,33 @@ Blockers:
 
 Resume notes:
 - Finish P3-004 by adding direction-specific proficiency stats and recommendation logic in dashboard/stats API.
+
+Date: 2026-02-20
+Session owner: Codex
+Last completed task ID: P3-004
+Current in-progress task ID: None
+Next task ID: P3-005
+
+Completed today:
+- Added bidirectional attempt telemetry fields to schema and submit flow.
+- Added direction-specific accuracy metrics (`recallAccuracy`, `recognitionAccuracy`) and `recommendedDirection` in stats API.
+- Surfaced recommended direction and direction accuracy cards in dashboard UI.
+
+Files changed:
+- shared/schema.ts
+- shared/routes.ts
+- server/storage.ts
+- server/routes.ts
+- client/src/pages/quiz.tsx
+- client/src/pages/dashboard.tsx
+- context/plan/40-phase-3-product-flows.md
+- context/plan/99-daily-run-log.md
+
+Tests/checks run:
+- `npm run ci` (pass)
+
+Blockers:
+- None.
+
+Resume notes:
+- Continue with Phase 3 engagement and UX completion tasks.
