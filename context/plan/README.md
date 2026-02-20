@@ -41,6 +41,8 @@ Primary delivery rule:
 - `50-phase-4-hardening-and-release.md`
 - `60-phase-5-media-expansion-last.md`
 - `70-schema-and-api-contracts.md`
+- `80-production-runbook.md`
+- `81-beta-readiness-checklist.md`
 - `99-daily-run-log.md`
 
 ## Non-goals until Phase 5

@@ -49,10 +49,10 @@ Status legend: `todo` | `doing` | `done` | `blocked`
 | ID | Status | Task | Depends On | Effort | Done When |
 |---|---|---|---|---|---|
 | P4-001 | done | Add API contract tests for all public quiz/stats routes | P2-006 | M | route contracts validated in CI |
-| P4-002 | todo | Add performance pass for quiz generation (<200ms target) | P2-003 | M | benchmark report meets target |
+| P4-002 | done | Add performance pass for quiz generation (<200ms target) | P2-003 | M | benchmark report meets target |
 | P4-003 | done | Add logging and basic telemetry for quiz funnel | P3-004 | M | events visible for start/submit/finish |
-| P4-004 | todo | Add production runbook and incident playbook | P4-003 | S | docs cover deploy, rollback, common failures |
-| P4-005 | todo | Beta readiness checklist and release gate sign-off | P4-001,P4-002,P4-004 | S | all release criteria satisfied |
+| P4-004 | done | Add production runbook and incident playbook | P4-003 | S | docs cover deploy, rollback, common failures |
+| P4-005 | doing | Beta readiness checklist and release gate sign-off | P4-001,P4-002,P4-004 | S | all release criteria satisfied |
 | P4-006 | todo | Add complex sentence workouts (text-only) | P3-004 | M | advanced text exercises run without media dependency |
 | P4-007 | todo | Add contextual learning mode (stories/dialogues text) | P4-006 | M | users can learn words inside short text contexts |
 | P4-008 | todo | Add reinforcement loops after each lesson | P3-003 | M | auto-review of weak/related words runs after session |

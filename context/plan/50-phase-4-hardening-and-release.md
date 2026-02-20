@@ -19,7 +19,7 @@ Acceptance:
 - Contract tests pass for quiz, clusters, words, stats endpoints.
 
 ### P4-002 - Performance tuning for quiz generation
-Status: `todo`
+Status: `done`
 
 Scope:
 - Index tuning for progress lookups and due reviews.
@@ -39,7 +39,7 @@ Acceptance:
 - Debugging production issues is possible from logs alone.
 
 ### P4-004 - Quality gates
-Status: `todo`
+Status: `done`
 
 Scope:
 - Minimum test coverage for core engine paths.
@@ -49,7 +49,7 @@ Acceptance:
 - No direct deploy without passing gates.
 
 ### P4-005 - Release readiness and runbook
-Status: `todo`
+Status: `doing`
 
 Scope:
 - Deployment checklist.
