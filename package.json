@@ -7,7 +7,11 @@
     "dev": "NODE_ENV=development tsx server/index.ts",
     "build": "tsx script/build.ts",
     "start": "NODE_ENV=production node dist/index.cjs",
-    "check": "tsc",
+    "check": "tsc --noEmit",
+    "typecheck": "npm run check",
+    "lint": "npm run check",
+    "test": "node --import tsx --test server/**/*.test.ts shared/**/*.test.ts",
+    "ci": "npm run lint && npm run typecheck && npm run test",
     "db:push": "drizzle-kit push"
   },
   "dependencies": {

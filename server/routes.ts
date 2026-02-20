@@ -1,9 +1,10 @@
 import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
-import { api, errorSchemas } from "@shared/routes";
+import { api } from "@shared/routes";
 import { z } from "zod";
 import { setupAuth, registerAuthRoutes, isAuthenticated } from "./replit_integrations/auth";
+import { sendError } from "./http";
 
 export async function registerRoutes(
   httpServer: Server,
@@ -26,7 +27,7 @@ export async function registerRoutes(
   app.get(api.words.get.path, isAuthenticated, async (req, res) => {
     const word = await storage.getWord(Number(req.params.id));
     if (!word) {
-      return res.status(404).json({ message: "Word not found" });
+      return sendError(req, res, 404, "NOT_FOUND", "Word not found");
     }
     res.json(word);
   });
@@ -41,7 +42,7 @@ export async function registerRoutes(
   app.get(api.clusters.get.path, isAuthenticated, async (req, res) => {
     const cluster = await storage.getCluster(Number(req.params.id));
     if (!cluster) {
-      return res.status(404).json({ message: "Cluster not found" });
+      return sendError(req, res, 404, "NOT_FOUND", "Cluster not found");
     }
     res.json(cluster);
   });
@@ -115,7 +116,7 @@ export async function registerRoutes(
       const input = api.quiz.submit.input.parse(req.body);
       
       const word = await storage.getWord(input.wordId);
-      if (!word) return res.status(404).json({ message: "Word not found" });
+      if (!word) return sendError(req, res, 404, "NOT_FOUND", "Word not found");
 
       const isCorrect = input.selectedOptionId === word.id; // Option ID is word ID of the choice
       
@@ -130,7 +131,9 @@ export async function registerRoutes(
           wrongCount: 0,
           easeFactor: 2.5,
           interval: 0,
-          masteryLevel: 0
+          masteryLevel: 0,
+          lastSeen: null,
+          nextReview: null,
         });
       }
 
@@ -195,9 +198,9 @@ export async function registerRoutes(
 
     } catch (err) {
       if (err instanceof z.ZodError) {
-        res.status(400).json({ message: err.errors[0].message });
+        sendError(req, res, 400, "VALIDATION_ERROR", err.errors[0].message, err.errors);
       } else {
-        res.status(500).json({ message: "Internal Server Error" });
+        sendError(req, res, 500, "INTERNAL_ERROR", "Internal Server Error");
       }
     }
   });

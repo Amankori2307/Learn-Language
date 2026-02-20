@@ -1,9 +1,9 @@
 import { db } from "./db";
-import { eq, sql, and, desc, lt, gte } from "drizzle-orm";
+import { eq, sql, and } from "drizzle-orm";
 import {
-  words, clusters, wordClusters, userWordProgress, quizAttempts,
+  words, clusters, wordClusters, userWordProgress, quizAttempts, wordExamples,
   type Word, type Cluster, type UserWordProgress, type QuizAttempt,
-  type CreateWordRequest, type CreateClusterRequest, type SubmitAnswerRequest
+  type CreateWordRequest, type CreateClusterRequest
 } from "@shared/schema";
 
 export interface IStorage {
@@ -103,7 +103,10 @@ export class DatabaseStorage implements IStorage {
   async updateUserProgress(progress: UserWordProgress): Promise<UserWordProgress> {
     const [updated] = await db.update(userWordProgress)
       .set(progress)
-      .where(eq(userWordProgress.id, progress.id))
+      .where(and(
+        eq(userWordProgress.userId, progress.userId),
+        eq(userWordProgress.wordId, progress.wordId),
+      ))
       .returning();
     return updated;
   }
@@ -212,42 +215,97 @@ export class DatabaseStorage implements IStorage {
   }
 
   async seedInitialData(): Promise<void> {
-    const existing = await this.getWords(1);
-    if (existing.length > 0) return;
+    const ensureCluster = async (cluster: CreateClusterRequest): Promise<Cluster> => {
+      const [existingCluster] = await db
+        .select()
+        .from(clusters)
+        .where(and(eq(clusters.name, cluster.name), eq(clusters.type, cluster.type)));
+
+      if (existingCluster) {
+        return existingCluster;
+      }
+
+      return this.createCluster(cluster);
+    };
+
+    const ensureWord = async (word: CreateWordRequest): Promise<Word> => {
+      const [existingWord] = await db
+        .select()
+        .from(words)
+        .where(and(eq(words.telugu, word.telugu), eq(words.english, word.english)));
+
+      if (existingWord) {
+        return existingWord;
+      }
+
+      return this.createWord(word);
+    };
+
+    const ensureWordExample = async (
+      wordId: number,
+      teluguSentence: string,
+      englishSentence: string,
+      contextTag: string,
+    ) => {
+      const [existingExample] = await db
+        .select()
+        .from(wordExamples)
+        .where(and(
+          eq(wordExamples.wordId, wordId),
+          eq(wordExamples.teluguSentence, teluguSentence),
+        ));
+
+      if (existingExample) {
+        return;
+      }
+
+      await db.insert(wordExamples).values({
+        wordId,
+        teluguSentence,
+        englishSentence,
+        contextTag,
+      });
+    };
 
     // Clusters
-    const c_basics = await this.createCluster({ name: "Basics", type: "semantic", description: "Essential survival words" });
-    const c_food = await this.createCluster({ name: "Food", type: "semantic", description: "Fruits, vegetables, and dining" });
-    const c_pronouns = await this.createCluster({ name: "Pronouns", type: "grammar", description: "I, You, We, They" });
+    const c_basics = await ensureCluster({ name: "Basics", type: "semantic", description: "Essential survival words" });
+    const c_food = await ensureCluster({ name: "Food", type: "semantic", description: "Fruits, vegetables, and dining" });
+    const c_pronouns = await ensureCluster({ name: "Pronouns", type: "grammar", description: "I, You, We, They" });
 
     // Words
     const wordsData = [
       // Pronouns
-      { telugu: "నేను", transliteration: "nēnu", english: "I", partOfSpeech: "pronoun", clusterId: c_pronouns.id },
-      { telugu: "నువ్వు", transliteration: "nuvvu", english: "You (informal)", partOfSpeech: "pronoun", clusterId: c_pronouns.id },
-      { telugu: "మీరు", transliteration: "mīru", english: "You (formal)", partOfSpeech: "pronoun", clusterId: c_pronouns.id },
-      { telugu: "మేము", transliteration: "mēmu", english: "We", partOfSpeech: "pronoun", clusterId: c_pronouns.id },
+      { telugu: "నేను", transliteration: "nēnu", english: "I", partOfSpeech: "pronoun", clusterId: c_pronouns.id, difficultyLevel: "beginner", frequencyScore: 0.95, exampleTelugu: "నేను స్కూల్‌కి వెళ్తాను.", exampleEnglish: "I go to school." },
+      { telugu: "నువ్వు", transliteration: "nuvvu", english: "You (informal)", partOfSpeech: "pronoun", clusterId: c_pronouns.id, difficultyLevel: "beginner", frequencyScore: 0.9, exampleTelugu: "నువ్వు ఎలా ఉన్నావు?", exampleEnglish: "How are you?" },
+      { telugu: "మీరు", transliteration: "mīru", english: "You (formal)", partOfSpeech: "pronoun", clusterId: c_pronouns.id, difficultyLevel: "beginner", frequencyScore: 0.85, exampleTelugu: "మీరు ఎక్కడ ఉంటారు?", exampleEnglish: "Where do you live?" },
+      { telugu: "మేము", transliteration: "mēmu", english: "We", partOfSpeech: "pronoun", clusterId: c_pronouns.id, difficultyLevel: "beginner", frequencyScore: 0.8, exampleTelugu: "మేము కలిసి చదువుతాము.", exampleEnglish: "We study together." },
       
       // Basics
-      { telugu: "నమస్కారం", transliteration: "namaskāram", english: "Hello / Greetings", partOfSpeech: "noun", clusterId: c_basics.id },
-      { telugu: "ధన్యవాదాలు", transliteration: "dhanyavādālu", english: "Thank you", partOfSpeech: "noun", clusterId: c_basics.id },
-      { telugu: "అవును", transliteration: "avunu", english: "Yes", partOfSpeech: "adverb", clusterId: c_basics.id },
-      { telugu: "కాదు", transliteration: "kādu", english: "No", partOfSpeech: "adverb", clusterId: c_basics.id },
+      { telugu: "నమస్కారం", transliteration: "namaskāram", english: "Hello / Greetings", partOfSpeech: "noun", clusterId: c_basics.id, difficultyLevel: "beginner", frequencyScore: 0.92, exampleTelugu: "నమస్కారం! ఎలా ఉన్నారు?", exampleEnglish: "Hello! How are you?" },
+      { telugu: "ధన్యవాదాలు", transliteration: "dhanyavādālu", english: "Thank you", partOfSpeech: "noun", clusterId: c_basics.id, difficultyLevel: "beginner", frequencyScore: 0.88, exampleTelugu: "మీ సహాయానికి ధన్యవాదాలు.", exampleEnglish: "Thank you for your help." },
+      { telugu: "అవును", transliteration: "avunu", english: "Yes", partOfSpeech: "adverb", clusterId: c_basics.id, difficultyLevel: "beginner", frequencyScore: 0.9, exampleTelugu: "అవును, నేను వస్తాను.", exampleEnglish: "Yes, I will come." },
+      { telugu: "కాదు", transliteration: "kādu", english: "No", partOfSpeech: "adverb", clusterId: c_basics.id, difficultyLevel: "beginner", frequencyScore: 0.9, exampleTelugu: "కాదు, అది సరైంది కాదు.", exampleEnglish: "No, that is not correct." },
       
       // Food
-      { telugu: "ఆపిల్", transliteration: "āpil", english: "Apple", partOfSpeech: "noun", clusterId: c_food.id },
-      { telugu: "నీరు", transliteration: "nīru", english: "Water", partOfSpeech: "noun", clusterId: c_food.id },
-      { telugu: "ఆహారం", transliteration: "āhāram", english: "Food", partOfSpeech: "noun", clusterId: c_food.id },
-      { telugu: "పాలు", transliteration: "pālu", english: "Milk", partOfSpeech: "noun", clusterId: c_food.id },
+      { telugu: "ఆపిల్", transliteration: "āpil", english: "Apple", partOfSpeech: "noun", clusterId: c_food.id, difficultyLevel: "beginner", frequencyScore: 0.7, exampleTelugu: "నాకు ఆపిల్ ఇష్టం.", exampleEnglish: "I like apples." },
+      { telugu: "నీరు", transliteration: "nīru", english: "Water", partOfSpeech: "noun", clusterId: c_food.id, difficultyLevel: "beginner", frequencyScore: 0.96, exampleTelugu: "దయచేసి నీరు ఇవ్వండి.", exampleEnglish: "Please give me water." },
+      { telugu: "ఆహారం", transliteration: "āhāram", english: "Food", partOfSpeech: "noun", clusterId: c_food.id, difficultyLevel: "beginner", frequencyScore: 0.86, exampleTelugu: "ఆహారం సిద్ధంగా ఉంది.", exampleEnglish: "Food is ready." },
+      { telugu: "పాలు", transliteration: "pālu", english: "Milk", partOfSpeech: "noun", clusterId: c_food.id, difficultyLevel: "beginner", frequencyScore: 0.84, exampleTelugu: "పిల్లాడు పాలు తాగుతున్నాడు.", exampleEnglish: "The child is drinking milk." },
     ];
 
     for (const w of wordsData) {
-      const { clusterId, ...wordData } = w;
-      const word = await this.createWord(wordData);
+      const { clusterId, exampleTelugu, exampleEnglish, ...wordData } = w;
+      const word = await ensureWord(wordData);
       await this.addWordToCluster(word.id, clusterId);
+      await ensureWordExample(word.id, exampleTelugu, exampleEnglish, "general");
     }
-    
-    console.log("Database seeded successfully!");
+
+    const [{ count: wordsCount }] = await db.select({ count: sql<number>`count(*)` }).from(words);
+    const [{ count: clustersCount }] = await db.select({ count: sql<number>`count(*)` }).from(clusters);
+    const [{ count: linksCount }] = await db.select({ count: sql<number>`count(*)` }).from(wordClusters);
+    const [{ count: examplesCount }] = await db.select({ count: sql<number>`count(*)` }).from(wordExamples);
+
+    console.log(`Database seeded successfully! words=${wordsCount}, clusters=${clustersCount}, links=${linksCount}, examples=${examplesCount}`);
   }
 }
 

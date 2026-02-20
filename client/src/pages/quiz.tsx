@@ -77,6 +77,18 @@ export default function QuizPage() {
     );
   }
 
+  if (!currentQuestion) {
+    return (
+      <Layout>
+        <div className="text-center py-20">
+          <h2 className="text-2xl font-bold text-foreground">No active question</h2>
+          <p className="text-muted-foreground mt-2 mb-6">Please restart the session.</p>
+          <Button onClick={() => setLocation('/')}>Return Home</Button>
+        </div>
+      </Layout>
+    );
+  }
+
   if (isFinished) {
     const percentage = Math.round((sessionStats.correct / sessionStats.total) * 100);
     return (

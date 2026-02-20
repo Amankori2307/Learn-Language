@@ -33,6 +33,9 @@ export const words = pgTable("words", {
   english: text("english").notNull(),
   partOfSpeech: text("part_of_speech").notNull(),
   difficulty: integer("difficulty").default(1),
+  difficultyLevel: text("difficulty_level").default("beginner"),
+  frequencyScore: real("frequency_score").default(0.5),
+  cefrLevel: text("cefr_level"),
   audioUrl: text("audio_url"),
   exampleSentences: jsonb("example_sentences").$type<string[]>().default([]),
   tags: jsonb("tags").$type<string[]>().default([]),
@@ -58,6 +61,16 @@ export const sentences = pgTable("sentences", {
   telugu: text("telugu").notNull(),
   english: text("english").notNull(),
   difficulty: integer("difficulty").default(1),
+});
+
+export const wordExamples = pgTable("word_examples", {
+  id: serial("id").primaryKey(),
+  wordId: integer("word_id").references(() => words.id).notNull(),
+  teluguSentence: text("telugu_sentence").notNull(),
+  englishSentence: text("english_sentence").notNull(),
+  contextTag: text("context_tag").default("general"),
+  difficulty: integer("difficulty").default(1),
+  createdAt: timestamp("created_at").defaultNow(),
 });
 
 export const userWordProgress = pgTable("user_word_progress", {
@@ -94,6 +107,7 @@ export const wordsRelations = relations(words, ({ many }) => ({
   clusters: many(wordClusters),
   progress: many(userWordProgress),
   attempts: many(quizAttempts),
+  examples: many(wordExamples),
 }));
 
 export const clustersRelations = relations(clusters, ({ many }) => ({
@@ -108,6 +122,10 @@ export const wordClustersRelations = relations(wordClusters, ({ one }) => ({
 export const userWordProgressRelations = relations(userWordProgress, ({ one }) => ({
   user: one(users, { fields: [userWordProgress.userId], references: [users.id] }),
   word: one(words, { fields: [userWordProgress.wordId], references: [words.id] }),
+}));
+
+export const wordExamplesRelations = relations(wordExamples, ({ one }) => ({
+  word: one(words, { fields: [wordExamples.wordId], references: [words.id] }),
 }));
 
 export const quizAttemptsRelations = relations(quizAttempts, ({ one }) => ({

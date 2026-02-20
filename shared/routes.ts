@@ -6,17 +6,25 @@ import { insertWordSchema, insertClusterSchema, words, clusters, userWordProgres
 // ============================================
 export const errorSchemas = {
   validation: z.object({
+    code: z.literal("VALIDATION_ERROR"),
     message: z.string(),
-    field: z.string().optional(),
+    details: z.unknown().optional(),
+    requestId: z.string(),
   }),
   notFound: z.object({
+    code: z.literal("NOT_FOUND"),
     message: z.string(),
+    requestId: z.string(),
   }),
   internal: z.object({
+    code: z.literal("INTERNAL_ERROR"),
     message: z.string(),
+    requestId: z.string(),
   }),
   unauthorized: z.object({
+    code: z.literal("UNAUTHORIZED"),
     message: z.string(),
+    requestId: z.string(),
   }),
 };
 
@@ -75,7 +83,7 @@ export const api = {
       responses: {
         200: z.array(z.object({
           wordId: z.number(),
-          type: z.enum(['telugu_to_english', 'english_to_telugu', 'audio']),
+          type: z.enum(['telugu_to_english', 'english_to_telugu', 'fill_in_blank', 'sentence_meaning']),
           questionText: z.string(),
           audioUrl: z.string().optional().nullable(),
           options: z.array(z.object({

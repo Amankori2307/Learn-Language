@@ -12,7 +12,7 @@ interface QuizOption {
 
 interface QuizCardProps {
   question: string;
-  type: 'telugu_to_english' | 'english_to_telugu' | 'audio';
+  type: 'telugu_to_english' | 'english_to_telugu' | 'fill_in_blank' | 'sentence_meaning';
   options: QuizOption[];
   onAnswer: (optionId: number) => void;
   isSubmitting: boolean;
@@ -83,11 +83,9 @@ export function QuizCard({
             </h2>
 
             {/* Audio Button Placeholder if needed */}
-            {type !== 'audio' && (
-              <Button variant="ghost" size="icon" className="rounded-full hover:bg-primary/10 hover:text-primary">
-                <Volume2 className="w-6 h-6" />
-              </Button>
-            )}
+            <Button variant="ghost" size="icon" className="rounded-full hover:bg-primary/10 hover:text-primary">
+              <Volume2 className="w-6 h-6" />
+            </Button>
           </div>
 
           {/* Options Grid */}
