@@ -1,10 +1,10 @@
 import fs from "fs/promises";
 import path from "path";
-import { LanguageEnum } from "../shared/domain/enums";
+import { DEFAULT_LANGUAGE, LanguageEnum } from "../shared/domain/enums";
 
 type ContentExample = {
   language?: LanguageEnum;
-  telugu: string;
+  originalScript: string;
   pronunciation: string;
   english: string;
   contextTag?: string;
@@ -14,7 +14,7 @@ type ContentExample = {
 type ContentWord = {
   language?: LanguageEnum;
   originalScript?: string;
-  telugu: string;
+  originalScript: string;
   transliteration: string;
   english: string;
   partOfSpeech: string;
@@ -53,7 +53,7 @@ async function main() {
 
   words.forEach((word, idx) => {
     const row = idx + 1;
-    if (!word.telugu || !word.english || !word.transliteration || !word.partOfSpeech) {
+    if (!word.originalScript || !word.english || !word.transliteration || !word.partOfSpeech) {
       errors.push(`[row ${row}] Missing required lexical fields`);
       return;
     }
@@ -61,12 +61,12 @@ async function main() {
       errors.push(`[row ${row}] originalScript cannot be empty`);
     }
 
-    const language = word.language ?? LanguageEnum.TELUGU;
+    const language = word.language ?? DEFAULT_LANGUAGE;
     if (!isLanguage(language)) {
       errors.push(`[row ${row}] Invalid language: ${String(word.language)}`);
     }
 
-    const key = `${language}::${word.telugu}::${word.english}`;
+    const key = `${language}::${word.originalScript}::${word.english}`;
     if (keys.has(key)) {
       errors.push(`[row ${row}] Duplicate lexical key ${key}`);
     } else {
@@ -85,8 +85,8 @@ async function main() {
 
     examples.forEach((example, exampleIdx) => {
       const position = `${row}.${exampleIdx + 1}`;
-      if (!example.telugu || !example.pronunciation || !example.english) {
-        errors.push(`[example ${position}] Missing telugu/pronunciation/english`);
+      if (!example.originalScript || !example.pronunciation || !example.english) {
+        errors.push(`[example ${position}] Missing originalScript/pronunciation/english`);
       }
       const exampleLanguage = example.language ?? language;
       if (!isLanguage(exampleLanguage)) {

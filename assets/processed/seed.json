@@ -8,24 +8,28 @@
     "difficultyLevel": "beginner",
     "frequencyScore": 0.9,
     "cefrLevel": "A1",
-    "tags": ["model-seed", "high-confidence-basic"],
-    "clusters": ["greetings", "daily-use"],
+    "tags": [
+      "model-seed",
+      "high-confidence-basic"
+    ],
+    "clusters": [
+      "greetings",
+      "daily-use"
+    ],
     "examples": [
       {
         "pronunciation": "namastee, miiru elaa unnaaru?",
         "originalScript": "నమస్తే, మీరు ఎలా ఉన్నారు?",
         "english": "Hello, how are you?",
         "contextTag": "daily-use",
-        "difficulty": 1,
-        "language": "telugu"
+        "difficulty": 1
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    },
-    "language": "telugu"
+    }
   },
   {
     "originalScript": "ధన్యవాదాలు",
@@ -36,24 +40,28 @@
     "difficultyLevel": "beginner",
     "frequencyScore": 0.9,
     "cefrLevel": "A1",
-    "tags": ["model-seed", "high-confidence-basic"],
-    "clusters": ["greetings", "daily-use"],
+    "tags": [
+      "model-seed",
+      "high-confidence-basic"
+    ],
+    "clusters": [
+      "greetings",
+      "daily-use"
+    ],
     "examples": [
       {
         "pronunciation": "mii sahaayaaniki dhanyavaadaalu.",
         "originalScript": "మీ సహాయానికి ధన్యవాదాలు.",
         "english": "Thank you for your help.",
         "contextTag": "daily-use",
-        "difficulty": 1,
-        "language": "telugu"
+        "difficulty": 1
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    },
-    "language": "telugu"
+    }
   },
   {
     "originalScript": "దయచేసి",
@@ -64,24 +72,28 @@
     "difficultyLevel": "beginner",
     "frequencyScore": 0.9,
     "cefrLevel": "A1",
-    "tags": ["model-seed", "high-confidence-basic"],
-    "clusters": ["greetings", "daily-use"],
+    "tags": [
+      "model-seed",
+      "high-confidence-basic"
+    ],
+    "clusters": [
+      "greetings",
+      "daily-use"
+    ],
     "examples": [
       {
         "pronunciation": "dayacheesi kuurchoomdi.",
         "originalScript": "దయచేసి కూర్చోండి.",
         "english": "Please sit down.",
         "contextTag": "daily-use",
-        "difficulty": 1,
-        "language": "telugu"
+        "difficulty": 1
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    },
-    "language": "telugu"
+    }
   },
   {
     "originalScript": "క్షమించండి",
@@ -92,24 +104,28 @@
     "difficultyLevel": "beginner",
     "frequencyScore": 0.9,
     "cefrLevel": "A1",
-    "tags": ["model-seed", "high-confidence-basic"],
-    "clusters": ["greetings", "daily-use"],
+    "tags": [
+      "model-seed",
+      "high-confidence-basic"
+    ],
+    "clusters": [
+      "greetings",
+      "daily-use"
+    ],
     "examples": [
       {
         "pronunciation": "kshamimchamdi, naaku artham kaaleedu.",
         "originalScript": "క్షమించండి, నాకు అర్థం కాలేదు.",
         "english": "Sorry, I did not understand.",
         "contextTag": "daily-use",
-        "difficulty": 1,
-        "language": "telugu"
+        "difficulty": 1
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    },
-    "language": "telugu"
+    }
   },
   {
     "originalScript": "అవును",
@@ -120,24 +136,27 @@
     "difficultyLevel": "beginner",
     "frequencyScore": 0.9,
     "cefrLevel": "A1",
-    "tags": ["model-seed", "high-confidence-basic"],
-    "clusters": ["daily-use"],
+    "tags": [
+      "model-seed",
+      "high-confidence-basic"
+    ],
+    "clusters": [
+      "daily-use"
+    ],
     "examples": [
       {
         "pronunciation": "avunu, neenu vastaanu.",
         "originalScript": "అవును, నేను వస్తాను.",
         "english": "Yes, I will come.",
         "contextTag": "daily-use",
-        "difficulty": 1,
-        "language": "telugu"
+        "difficulty": 1
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    },
-    "language": "telugu"
+    }
   },
   {
     "originalScript": "కాదు",
@@ -148,24 +167,27 @@
     "difficultyLevel": "beginner",
     "frequencyScore": 0.9,
     "cefrLevel": "A1",
-    "tags": ["model-seed", "high-confidence-basic"],
-    "clusters": ["daily-use"],
+    "tags": [
+      "model-seed",
+      "high-confidence-basic"
+    ],
+    "clusters": [
+      "daily-use"
+    ],
     "examples": [
       {
         "pronunciation": "kaadu, adi naa pustakam kaadu.",
         "originalScript": "కాదు, అది నా పుస్తకం కాదు.",
         "english": "No, that is not my book.",
         "contextTag": "daily-use",
-        "difficulty": 1,
-        "language": "telugu"
+        "difficulty": 1
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    },
-    "language": "telugu"
+    }
   },
   {
     "originalScript": "సరే",
@@ -176,24 +198,27 @@
     "difficultyLevel": "beginner",
     "frequencyScore": 0.9,
     "cefrLevel": "A1",
-    "tags": ["model-seed", "high-confidence-basic"],
-    "clusters": ["daily-use"],
+    "tags": [
+      "model-seed",
+      "high-confidence-basic"
+    ],
+    "clusters": [
+      "daily-use"
+    ],
     "examples": [
       {
         "pronunciation": "saree, manam velludaam.",
         "originalScript": "సరే, మనం వెళ్లుదాం.",
         "english": "Okay, let us go.",
         "contextTag": "daily-use",
-        "difficulty": 1,
-        "language": "telugu"
+        "difficulty": 1
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    },
-    "language": "telugu"
+    }
   },
   {
     "originalScript": "బాగుంది",
@@ -204,24 +229,27 @@
     "difficultyLevel": "beginner",
     "frequencyScore": 0.9,
     "cefrLevel": "A1",
-    "tags": ["model-seed", "high-confidence-basic"],
-    "clusters": ["daily-use"],
+    "tags": [
+      "model-seed",
+      "high-confidence-basic"
+    ],
+    "clusters": [
+      "daily-use"
+    ],
     "examples": [
       {
         "pronunciation": "ii aaloochana baagumdi.",
         "originalScript": "ఈ ఆలోచన బాగుంది.",
         "english": "This idea is good.",
         "contextTag": "daily-use",
-        "difficulty": 1,
-        "language": "telugu"
+        "difficulty": 1
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    },
-    "language": "telugu"
+    }
   },
   {
     "originalScript": "నేను",
@@ -232,24 +260,28 @@
     "difficultyLevel": "beginner",
     "frequencyScore": 0.9,
     "cefrLevel": "A1",
-    "tags": ["model-seed", "high-confidence-basic"],
-    "clusters": ["core-grammar", "daily-use"],
+    "tags": [
+      "model-seed",
+      "high-confidence-basic"
+    ],
+    "clusters": [
+      "core-grammar",
+      "daily-use"
+    ],
     "examples": [
       {
-        "pronunciation": "neenu telugu neerchukumtunnaanu.",
+        "pronunciation": "neenu bhaasha neerchukumtunnaanu.",
         "originalScript": "నేను తెలుగు నేర్చుకుంటున్నాను.",
-        "english": "I am learning Telugu.",
+        "english": "I am learning the language.",
         "contextTag": "daily-use",
-        "difficulty": 1,
-        "language": "telugu"
+        "difficulty": 1
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    },
-    "language": "telugu"
+    }
   },
   {
     "originalScript": "నువ్వు",
@@ -260,24 +292,28 @@
     "difficultyLevel": "beginner",
     "frequencyScore": 0.9,
     "cefrLevel": "A1",
-    "tags": ["model-seed", "high-confidence-basic"],
-    "clusters": ["core-grammar", "daily-use"],
+    "tags": [
+      "model-seed",
+      "high-confidence-basic"
+    ],
+    "clusters": [
+      "core-grammar",
+      "daily-use"
+    ],
     "examples": [
       {
         "pronunciation": "nuvvu ekkada umtaavu?",
         "originalScript": "నువ్వు ఎక్కడ ఉంటావు?",
         "english": "Where do you live?",
         "contextTag": "daily-use",
-        "difficulty": 1,
-        "language": "telugu"
+        "difficulty": 1
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    },
-    "language": "telugu"
+    }
   },
   {
     "originalScript": "మీరు",
@@ -288,24 +324,28 @@
     "difficultyLevel": "beginner",
     "frequencyScore": 0.9,
     "cefrLevel": "A1",
-    "tags": ["model-seed", "high-confidence-basic"],
-    "clusters": ["core-grammar", "daily-use"],
+    "tags": [
+      "model-seed",
+      "high-confidence-basic"
+    ],
+    "clusters": [
+      "core-grammar",
+      "daily-use"
+    ],
     "examples": [
       {
         "pronunciation": "miiru eemi cheestaaru?",
         "originalScript": "మీరు ఏమి చేస్తారు?",
         "english": "What do you do?",
         "contextTag": "daily-use",
-        "difficulty": 1,
-        "language": "telugu"
+        "difficulty": 1
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    },
-    "language": "telugu"
+    }
   },
   {
     "originalScript": "అతను",
@@ -316,24 +356,27 @@
     "difficultyLevel": "beginner",
     "frequencyScore": 0.9,
     "cefrLevel": "A1",
-    "tags": ["model-seed", "high-confidence-basic"],
-    "clusters": ["core-grammar"],
+    "tags": [
+      "model-seed",
+      "high-confidence-basic"
+    ],
+    "clusters": [
+      "core-grammar"
+    ],
     "examples": [
       {
         "pronunciation": "atanu naa sneehitudu.",
         "originalScript": "అతను నా స్నేహితుడు.",
         "english": "He is my friend.",
         "contextTag": "daily-use",
-        "difficulty": 1,
-        "language": "telugu"
+        "difficulty": 1
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    },
-    "language": "telugu"
+    }
   },
   {
     "originalScript": "ఆమె",
@@ -344,24 +387,27 @@
     "difficultyLevel": "beginner",
     "frequencyScore": 0.9,
     "cefrLevel": "A1",
-    "tags": ["model-seed", "high-confidence-basic"],
-    "clusters": ["core-grammar"],
+    "tags": [
+      "model-seed",
+      "high-confidence-basic"
+    ],
+    "clusters": [
+      "core-grammar"
+    ],
     "examples": [
       {
         "pronunciation": "aame mamchi tiichar.",
         "originalScript": "ఆమె మంచి టీచర్.",
         "english": "She is a good teacher.",
         "contextTag": "daily-use",
-        "difficulty": 1,
-        "language": "telugu"
+        "difficulty": 1
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    },
-    "language": "telugu"
+    }
   },
   {
     "originalScript": "ఇది",
@@ -372,24 +418,27 @@
     "difficultyLevel": "beginner",
     "frequencyScore": 0.9,
     "cefrLevel": "A1",
-    "tags": ["model-seed", "high-confidence-basic"],
-    "clusters": ["core-grammar"],
+    "tags": [
+      "model-seed",
+      "high-confidence-basic"
+    ],
+    "clusters": [
+      "core-grammar"
+    ],
     "examples": [
       {
         "pronunciation": "idi naa phoon.",
         "originalScript": "ఇది నా ఫోన్.",
         "english": "This is my phone.",
         "contextTag": "daily-use",
-        "difficulty": 1,
-        "language": "telugu"
+        "difficulty": 1
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    },
-    "language": "telugu"
+    }
   },
   {
     "originalScript": "అది",
@@ -400,24 +449,27 @@
     "difficultyLevel": "beginner",
     "frequencyScore": 0.9,
     "cefrLevel": "A1",
-    "tags": ["model-seed", "high-confidence-basic"],
-    "clusters": ["core-grammar"],
+    "tags": [
+      "model-seed",
+      "high-confidence-basic"
+    ],
+    "clusters": [
+      "core-grammar"
+    ],
     "examples": [
       {
         "pronunciation": "adi maa illu.",
         "originalScript": "అది మా ఇల్లు.",
         "english": "That is our house.",
         "contextTag": "daily-use",
-        "difficulty": 1,
-        "language": "telugu"
+        "difficulty": 1
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    },
-    "language": "telugu"
+    }
   },
   {
     "originalScript": "మనం",
@@ -428,24 +480,27 @@
     "difficultyLevel": "beginner",
     "frequencyScore": 0.9,
     "cefrLevel": "A1",
-    "tags": ["model-seed", "high-confidence-basic"],
-    "clusters": ["core-grammar"],
+    "tags": [
+      "model-seed",
+      "high-confidence-basic"
+    ],
+    "clusters": [
+      "core-grammar"
+    ],
     "examples": [
       {
         "pronunciation": "manam ippudu modalupedadaam.",
         "originalScript": "మనం ఇప్పుడు మొదలుపెడదాం.",
         "english": "Let us start now.",
         "contextTag": "daily-use",
-        "difficulty": 1,
-        "language": "telugu"
+        "difficulty": 1
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    },
-    "language": "telugu"
+    }
   },
   {
     "originalScript": "మేము",
@@ -456,24 +511,27 @@
     "difficultyLevel": "beginner",
     "frequencyScore": 0.9,
     "cefrLevel": "A1",
-    "tags": ["model-seed", "high-confidence-basic"],
-    "clusters": ["core-grammar"],
+    "tags": [
+      "model-seed",
+      "high-confidence-basic"
+    ],
+    "clusters": [
+      "core-grammar"
+    ],
     "examples": [
       {
         "pronunciation": "meemu haidaraabaad‌loo umtaam.",
         "originalScript": "మేము హైదరాబాద్‌లో ఉంటాం.",
         "english": "We live in Hyderabad.",
         "contextTag": "daily-use",
-        "difficulty": 1,
-        "language": "telugu"
+        "difficulty": 1
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    },
-    "language": "telugu"
+    }
   },
   {
     "originalScript": "వాళ్లు",
@@ -484,24 +542,27 @@
     "difficultyLevel": "beginner",
     "frequencyScore": 0.9,
     "cefrLevel": "A1",
-    "tags": ["model-seed", "high-confidence-basic"],
-    "clusters": ["core-grammar"],
+    "tags": [
+      "model-seed",
+      "high-confidence-basic"
+    ],
+    "clusters": [
+      "core-grammar"
+    ],
     "examples": [
       {
         "pronunciation": "vaallu skuul‌ki vellaaru.",
         "originalScript": "వాళ్లు స్కూల్‌కి వెళ్లారు.",
         "english": "They went to school.",
         "contextTag": "daily-use",
-        "difficulty": 1,
-        "language": "telugu"
+        "difficulty": 1
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    },
-    "language": "telugu"
+    }
   },
   {
     "originalScript": "ఏమి",
@@ -512,24 +573,28 @@
     "difficultyLevel": "beginner",
     "frequencyScore": 0.9,
     "cefrLevel": "A1",
-    "tags": ["model-seed", "high-confidence-basic"],
-    "clusters": ["question-words", "core-grammar"],
+    "tags": [
+      "model-seed",
+      "high-confidence-basic"
+    ],
+    "clusters": [
+      "question-words",
+      "core-grammar"
+    ],
     "examples": [
       {
         "pronunciation": "idi eemi?",
         "originalScript": "ఇది ఏమి?",
         "english": "What is this?",
         "contextTag": "daily-use",
-        "difficulty": 1,
-        "language": "telugu"
+        "difficulty": 1
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    },
-    "language": "telugu"
+    }
   },
   {
     "originalScript": "ఎవరు",
@@ -540,24 +605,28 @@
     "difficultyLevel": "beginner",
     "frequencyScore": 0.9,
     "cefrLevel": "A1",
-    "tags": ["model-seed", "high-confidence-basic"],
-    "clusters": ["question-words", "core-grammar"],
+    "tags": [
+      "model-seed",
+      "high-confidence-basic"
+    ],
+    "clusters": [
+      "question-words",
+      "core-grammar"
+    ],
     "examples": [
       {
         "pronunciation": "atanu evaru?",
         "originalScript": "అతను ఎవరు?",
         "english": "Who is he?",
         "contextTag": "daily-use",
-        "difficulty": 1,
-        "language": "telugu"
+        "difficulty": 1
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    },
-    "language": "telugu"
+    }
   },
   {
     "originalScript": "ఎక్కడ",
@@ -568,24 +637,28 @@
     "difficultyLevel": "beginner",
     "frequencyScore": 0.9,
     "cefrLevel": "A1",
-    "tags": ["model-seed", "high-confidence-basic"],
-    "clusters": ["question-words", "core-grammar"],
+    "tags": [
+      "model-seed",
+      "high-confidence-basic"
+    ],
+    "clusters": [
+      "question-words",
+      "core-grammar"
+    ],
     "examples": [
       {
         "pronunciation": "mii illu ekkada?",
         "originalScript": "మీ ఇల్లు ఎక్కడ?",
         "english": "Where is your house?",
         "contextTag": "daily-use",
-        "difficulty": 1,
-        "language": "telugu"
+        "difficulty": 1
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    },
-    "language": "telugu"
+    }
   },
   {
     "originalScript": "ఎప్పుడు",
@@ -596,24 +669,28 @@
     "difficultyLevel": "beginner",
     "frequencyScore": 0.9,
     "cefrLevel": "A1",
-    "tags": ["model-seed", "high-confidence-basic"],
-    "clusters": ["question-words", "core-grammar"],
+    "tags": [
+      "model-seed",
+      "high-confidence-basic"
+    ],
+    "clusters": [
+      "question-words",
+      "core-grammar"
+    ],
     "examples": [
       {
         "pronunciation": "miiru eppudu vastaaru?",
         "originalScript": "మీరు ఎప్పుడు వస్తారు?",
         "english": "When will you come?",
         "contextTag": "daily-use",
-        "difficulty": 1,
-        "language": "telugu"
+        "difficulty": 1
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    },
-    "language": "telugu"
+    }
   },
   {
     "originalScript": "ఎలా",
@@ -624,24 +701,28 @@
     "difficultyLevel": "beginner",
     "frequencyScore": 0.9,
     "cefrLevel": "A1",
-    "tags": ["model-seed", "high-confidence-basic"],
-    "clusters": ["question-words", "core-grammar"],
+    "tags": [
+      "model-seed",
+      "high-confidence-basic"
+    ],
+    "clusters": [
+      "question-words",
+      "core-grammar"
+    ],
     "examples": [
       {
         "pronunciation": "idi elaa panicheestumdi?",
         "originalScript": "ఇది ఎలా పనిచేస్తుంది?",
         "english": "How does this work?",
         "contextTag": "daily-use",
-        "difficulty": 1,
-        "language": "telugu"
+        "difficulty": 1
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    },
-    "language": "telugu"
+    }
   },
   {
     "originalScript": "ఎందుకు",
@@ -652,24 +733,28 @@
     "difficultyLevel": "beginner",
     "frequencyScore": 0.9,
     "cefrLevel": "A1",
-    "tags": ["model-seed", "high-confidence-basic"],
-    "clusters": ["question-words", "core-grammar"],
+    "tags": [
+      "model-seed",
+      "high-confidence-basic"
+    ],
+    "clusters": [
+      "question-words",
+      "core-grammar"
+    ],
     "examples": [
       {
         "pronunciation": "nuvvu emduku aalasyamgaa vachchaavu?",
         "originalScript": "నువ్వు ఎందుకు ఆలస్యంగా వచ్చావు?",
         "english": "Why did you come late?",
         "contextTag": "daily-use",
-        "difficulty": 1,
-        "language": "telugu"
+        "difficulty": 1
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    },
-    "language": "telugu"
+    }
   },
   {
     "originalScript": "ఒకటి",
@@ -680,24 +765,27 @@
     "difficultyLevel": "beginner",
     "frequencyScore": 0.9,
     "cefrLevel": "A1",
-    "tags": ["model-seed", "high-confidence-basic"],
-    "clusters": ["numbers"],
+    "tags": [
+      "model-seed",
+      "high-confidence-basic"
+    ],
+    "clusters": [
+      "numbers"
+    ],
     "examples": [
       {
         "pronunciation": "naa daggara okati pustakam umdi.",
         "originalScript": "నా దగ్గర ఒకటి పుస్తకం ఉంది.",
         "english": "I have one book.",
         "contextTag": "daily-use",
-        "difficulty": 1,
-        "language": "telugu"
+        "difficulty": 1
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    },
-    "language": "telugu"
+    }
   },
   {
     "originalScript": "రెండు",
@@ -708,24 +796,27 @@
     "difficultyLevel": "beginner",
     "frequencyScore": 0.9,
     "cefrLevel": "A1",
-    "tags": ["model-seed", "high-confidence-basic"],
-    "clusters": ["numbers"],
+    "tags": [
+      "model-seed",
+      "high-confidence-basic"
+    ],
+    "clusters": [
+      "numbers"
+    ],
     "examples": [
       {
         "pronunciation": "maaku remdu pillalu unnaaru.",
         "originalScript": "మాకు రెండు పిల్లలు ఉన్నారు.",
         "english": "We have two children.",
         "contextTag": "daily-use",
-        "difficulty": 1,
-        "language": "telugu"
+        "difficulty": 1
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    },
-    "language": "telugu"
+    }
   },
   {
     "originalScript": "మూడు",
@@ -736,24 +827,27 @@
     "difficultyLevel": "beginner",
     "frequencyScore": 0.9,
     "cefrLevel": "A1",
-    "tags": ["model-seed", "high-confidence-basic"],
-    "clusters": ["numbers"],
+    "tags": [
+      "model-seed",
+      "high-confidence-basic"
+    ],
+    "clusters": [
+      "numbers"
+    ],
     "examples": [
       {
         "pronunciation": "muudu roojula tarvaata ramdi.",
         "originalScript": "మూడు రోజుల తర్వాత రండి.",
         "english": "Come after three days.",
         "contextTag": "daily-use",
-        "difficulty": 1,
-        "language": "telugu"
+        "difficulty": 1
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    },
-    "language": "telugu"
+    }
   },
   {
     "originalScript": "నాలుగు",
@@ -764,24 +858,27 @@
     "difficultyLevel": "beginner",
     "frequencyScore": 0.9,
     "cefrLevel": "A1",
-    "tags": ["model-seed", "high-confidence-basic"],
-    "clusters": ["numbers"],
+    "tags": [
+      "model-seed",
+      "high-confidence-basic"
+    ],
+    "clusters": [
+      "numbers"
+    ],
     "examples": [
       {
         "pronunciation": "naalugu kurchiilu kaavaali.",
         "originalScript": "నాలుగు కుర్చీలు కావాలి.",
         "english": "We need four chairs.",
         "contextTag": "daily-use",
-        "difficulty": 1,
-        "language": "telugu"
+        "difficulty": 1
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    },
-    "language": "telugu"
+    }
   },
   {
     "originalScript": "ఐదు",
@@ -792,24 +889,27 @@
     "difficultyLevel": "beginner",
     "frequencyScore": 0.9,
     "cefrLevel": "A1",
-    "tags": ["model-seed", "high-confidence-basic"],
-    "clusters": ["numbers"],
+    "tags": [
+      "model-seed",
+      "high-confidence-basic"
+    ],
+    "clusters": [
+      "numbers"
+    ],
     "examples": [
       {
         "pronunciation": "aidu nimishaalu veechi umdamdi.",
         "originalScript": "ఐదు నిమిషాలు వేచి ఉండండి.",
         "english": "Please wait five minutes.",
         "contextTag": "daily-use",
-        "difficulty": 1,
-        "language": "telugu"
+        "difficulty": 1
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    },
-    "language": "telugu"
+    }
   },
   {
     "originalScript": "పది",
@@ -820,24 +920,27 @@
     "difficultyLevel": "beginner",
     "frequencyScore": 0.9,
     "cefrLevel": "A1",
-    "tags": ["model-seed", "high-confidence-basic"],
-    "clusters": ["numbers"],
+    "tags": [
+      "model-seed",
+      "high-confidence-basic"
+    ],
+    "clusters": [
+      "numbers"
+    ],
     "examples": [
       {
         "pronunciation": "padi gamtalaku miitimg umdi.",
         "originalScript": "పది గంటలకు మీటింగ్ ఉంది.",
         "english": "There is a meeting at ten o'clock.",
         "contextTag": "daily-use",
-        "difficulty": 1,
-        "language": "telugu"
+        "difficulty": 1
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    },
-    "language": "telugu"
+    }
   },
   {
     "originalScript": "ఇరవై",
@@ -848,24 +951,27 @@
     "difficultyLevel": "beginner",
     "frequencyScore": 0.9,
     "cefrLevel": "A1",
-    "tags": ["model-seed", "high-confidence-basic"],
-    "clusters": ["numbers"],
+    "tags": [
+      "model-seed",
+      "high-confidence-basic"
+    ],
+    "clusters": [
+      "numbers"
+    ],
     "examples": [
       {
         "pronunciation": "iravai mamdi vidyaarthulu unnaaru.",
         "originalScript": "ఇరవై మంది విద్యార్థులు ఉన్నారు.",
         "english": "There are twenty students.",
         "contextTag": "daily-use",
-        "difficulty": 1,
-        "language": "telugu"
+        "difficulty": 1
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    },
-    "language": "telugu"
+    }
   },
   {
     "originalScript": "ఈరోజు",
@@ -876,24 +982,28 @@
     "difficultyLevel": "beginner",
     "frequencyScore": 0.9,
     "cefrLevel": "A1",
-    "tags": ["model-seed", "high-confidence-basic"],
-    "clusters": ["time", "daily-use"],
+    "tags": [
+      "model-seed",
+      "high-confidence-basic"
+    ],
+    "clusters": [
+      "time",
+      "daily-use"
+    ],
     "examples": [
       {
         "pronunciation": "iirooju vaataavaranam challagaa umdi.",
         "originalScript": "ఈరోజు వాతావరణం చల్లగా ఉంది.",
         "english": "Today the weather is cool.",
         "contextTag": "daily-use",
-        "difficulty": 1,
-        "language": "telugu"
+        "difficulty": 1
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    },
-    "language": "telugu"
+    }
   },
   {
     "originalScript": "రేపు",
@@ -904,24 +1014,28 @@
     "difficultyLevel": "beginner",
     "frequencyScore": 0.9,
     "cefrLevel": "A1",
-    "tags": ["model-seed", "high-confidence-basic"],
-    "clusters": ["time", "daily-use"],
+    "tags": [
+      "model-seed",
+      "high-confidence-basic"
+    ],
+    "clusters": [
+      "time",
+      "daily-use"
+    ],
     "examples": [
       {
         "pronunciation": "reepu kaluddaam.",
         "originalScript": "రేపు కలుద్దాం.",
         "english": "Let us meet tomorrow.",
         "contextTag": "daily-use",
-        "difficulty": 1,
-        "language": "telugu"
+        "difficulty": 1
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    },
-    "language": "telugu"
+    }
   },
   {
     "originalScript": "నిన్న",
@@ -932,24 +1046,28 @@
     "difficultyLevel": "beginner",
     "frequencyScore": 0.9,
     "cefrLevel": "A1",
-    "tags": ["model-seed", "high-confidence-basic"],
-    "clusters": ["time", "daily-use"],
+    "tags": [
+      "model-seed",
+      "high-confidence-basic"
+    ],
+    "clusters": [
+      "time",
+      "daily-use"
+    ],
     "examples": [
       {
         "pronunciation": "ninna neenu imtloonee unnaanu.",
         "originalScript": "నిన్న నేను ఇంట్లోనే ఉన్నాను.",
         "english": "Yesterday I stayed at home.",
         "contextTag": "daily-use",
-        "difficulty": 1,
-        "language": "telugu"
+        "difficulty": 1
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    },
-    "language": "telugu"
+    }
   },
   {
     "originalScript": "ఇప్పుడు",
@@ -960,24 +1078,28 @@
     "difficultyLevel": "beginner",
     "frequencyScore": 0.9,
     "cefrLevel": "A1",
-    "tags": ["model-seed", "high-confidence-basic"],
-    "clusters": ["time", "daily-use"],
+    "tags": [
+      "model-seed",
+      "high-confidence-basic"
+    ],
+    "clusters": [
+      "time",
+      "daily-use"
+    ],
     "examples": [
       {
         "pronunciation": "ippudu modalu pedadaam.",
         "originalScript": "ఇప్పుడు మొదలు పెడదాం.",
         "english": "Let us start now.",
         "contextTag": "daily-use",
-        "difficulty": 1,
-        "language": "telugu"
+        "difficulty": 1
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    },
-    "language": "telugu"
+    }
   },
   {
     "originalScript": "తర్వాత",
@@ -988,24 +1110,28 @@
     "difficultyLevel": "beginner",
     "frequencyScore": 0.9,
     "cefrLevel": "A1",
-    "tags": ["model-seed", "high-confidence-basic"],
-    "clusters": ["time", "daily-use"],
+    "tags": [
+      "model-seed",
+      "high-confidence-basic"
+    ],
+    "clusters": [
+      "time",
+      "daily-use"
+    ],
     "examples": [
       {
         "pronunciation": "neenu tarvaata phoon cheestaanu.",
         "originalScript": "నేను తర్వాత ఫోన్ చేస్తాను.",
         "english": "I will call later.",
         "contextTag": "daily-use",
-        "difficulty": 1,
-        "language": "telugu"
+        "difficulty": 1
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    },
-    "language": "telugu"
+    }
   },
   {
     "originalScript": "ఉదయం",
@@ -1016,24 +1142,27 @@
     "difficultyLevel": "beginner",
     "frequencyScore": 0.9,
     "cefrLevel": "A1",
-    "tags": ["model-seed", "high-confidence-basic"],
-    "clusters": ["time"],
+    "tags": [
+      "model-seed",
+      "high-confidence-basic"
+    ],
+    "clusters": [
+      "time"
+    ],
     "examples": [
       {
         "pronunciation": "udayam neenu nadakaku veltaanu.",
         "originalScript": "ఉదయం నేను నడకకు వెళ్తాను.",
         "english": "I go for a walk in the morning.",
         "contextTag": "daily-use",
-        "difficulty": 1,
-        "language": "telugu"
+        "difficulty": 1
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    },
-    "language": "telugu"
+    }
   },
   {
     "originalScript": "సాయంత్రం",
@@ -1044,24 +1173,27 @@
     "difficultyLevel": "beginner",
     "frequencyScore": 0.9,
     "cefrLevel": "A1",
-    "tags": ["model-seed", "high-confidence-basic"],
-    "clusters": ["time"],
+    "tags": [
+      "model-seed",
+      "high-confidence-basic"
+    ],
+    "clusters": [
+      "time"
+    ],
     "examples": [
       {
         "pronunciation": "saayamtram tii taagudaam.",
         "originalScript": "సాయంత్రం టీ తాగుదాం.",
         "english": "Let us drink tea in the evening.",
         "contextTag": "daily-use",
-        "difficulty": 1,
-        "language": "telugu"
+        "difficulty": 1
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    },
-    "language": "telugu"
+    }
   },
   {
     "originalScript": "రాత్రి",
@@ -1072,24 +1204,27 @@
     "difficultyLevel": "beginner",
     "frequencyScore": 0.9,
     "cefrLevel": "A1",
-    "tags": ["model-seed", "high-confidence-basic"],
-    "clusters": ["time"],
+    "tags": [
+      "model-seed",
+      "high-confidence-basic"
+    ],
+    "clusters": [
+      "time"
+    ],
     "examples": [
       {
         "pronunciation": "raatri tvaragaa nidrapoo.",
         "originalScript": "రాత్రి త్వరగా నిద్రపో.",
         "english": "Sleep early at night.",
         "contextTag": "daily-use",
-        "difficulty": 1,
-        "language": "telugu"
+        "difficulty": 1
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    },
-    "language": "telugu"
+    }
   },
   {
     "originalScript": "సమయం",
@@ -1100,24 +1235,27 @@
     "difficultyLevel": "beginner",
     "frequencyScore": 0.9,
     "cefrLevel": "A1",
-    "tags": ["model-seed", "high-confidence-basic"],
-    "clusters": ["time"],
+    "tags": [
+      "model-seed",
+      "high-confidence-basic"
+    ],
+    "clusters": [
+      "time"
+    ],
     "examples": [
       {
         "pronunciation": "nii samayam viluvainadi.",
         "originalScript": "నీ సమయం విలువైనది.",
         "english": "Your time is valuable.",
         "contextTag": "daily-use",
-        "difficulty": 1,
-        "language": "telugu"
+        "difficulty": 1
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    },
-    "language": "telugu"
+    }
   },
   {
     "originalScript": "అమ్మ",
@@ -1128,24 +1266,28 @@
     "difficultyLevel": "beginner",
     "frequencyScore": 0.9,
     "cefrLevel": "A1",
-    "tags": ["model-seed", "high-confidence-basic"],
-    "clusters": ["family", "people"],
+    "tags": [
+      "model-seed",
+      "high-confidence-basic"
+    ],
+    "clusters": [
+      "family",
+      "people"
+    ],
     "examples": [
       {
         "pronunciation": "naa amma chaalaa mamchidi.",
         "originalScript": "నా అమ్మ చాలా మంచిది.",
         "english": "My mother is very kind.",
         "contextTag": "daily-use",
-        "difficulty": 1,
-        "language": "telugu"
+        "difficulty": 1
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    },
-    "language": "telugu"
+    }
   },
   {
     "originalScript": "నాన్న",
@@ -1156,24 +1298,28 @@
     "difficultyLevel": "beginner",
     "frequencyScore": 0.9,
     "cefrLevel": "A1",
-    "tags": ["model-seed", "high-confidence-basic"],
-    "clusters": ["family", "people"],
+    "tags": [
+      "model-seed",
+      "high-confidence-basic"
+    ],
+    "clusters": [
+      "family",
+      "people"
+    ],
     "examples": [
       {
         "pronunciation": "naa naanna aaphiisuki vellaaru.",
         "originalScript": "నా నాన్న ఆఫీసుకి వెళ్లారు.",
         "english": "My father went to the office.",
         "contextTag": "daily-use",
-        "difficulty": 1,
-        "language": "telugu"
+        "difficulty": 1
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    },
-    "language": "telugu"
+    }
   },
   {
     "originalScript": "అన్న",
@@ -1184,24 +1330,28 @@
     "difficultyLevel": "beginner",
     "frequencyScore": 0.9,
     "cefrLevel": "A1",
-    "tags": ["model-seed", "high-confidence-basic"],
-    "clusters": ["family", "people"],
+    "tags": [
+      "model-seed",
+      "high-confidence-basic"
+    ],
+    "clusters": [
+      "family",
+      "people"
+    ],
     "examples": [
       {
         "pronunciation": "naa anna haidaraabaad‌loo umtaadu.",
         "originalScript": "నా అన్న హైదరాబాద్‌లో ఉంటాడు.",
         "english": "My elder brother lives in Hyderabad.",
         "contextTag": "daily-use",
-        "difficulty": 1,
-        "language": "telugu"
+        "difficulty": 1
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    },
-    "language": "telugu"
+    }
   },
   {
     "originalScript": "అక్క",
@@ -1212,24 +1362,28 @@
     "difficultyLevel": "beginner",
     "frequencyScore": 0.9,
     "cefrLevel": "A1",
-    "tags": ["model-seed", "high-confidence-basic"],
-    "clusters": ["family", "people"],
+    "tags": [
+      "model-seed",
+      "high-confidence-basic"
+    ],
+    "clusters": [
+      "family",
+      "people"
+    ],
     "examples": [
       {
         "pronunciation": "naa akka daaktar.",
         "originalScript": "నా అక్క డాక్టర్.",
         "english": "My elder sister is a doctor.",
         "contextTag": "daily-use",
-        "difficulty": 1,
-        "language": "telugu"
+        "difficulty": 1
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    },
-    "language": "telugu"
+    }
   },
   {
     "originalScript": "తమ్ముడు",
@@ -1240,24 +1394,28 @@
     "difficultyLevel": "beginner",
     "frequencyScore": 0.9,
     "cefrLevel": "A1",
-    "tags": ["model-seed", "high-confidence-basic"],
-    "clusters": ["family", "people"],
+    "tags": [
+      "model-seed",
+      "high-confidence-basic"
+    ],
+    "clusters": [
+      "family",
+      "people"
+    ],
     "examples": [
       {
         "pronunciation": "naa tammudu kriket aadutaadu.",
         "originalScript": "నా తమ్ముడు క్రికెట్ ఆడుతాడు.",
         "english": "My younger brother plays cricket.",
         "contextTag": "daily-use",
-        "difficulty": 1,
-        "language": "telugu"
+        "difficulty": 1
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    },
-    "language": "telugu"
+    }
   },
   {
     "originalScript": "చెల్లి",
@@ -1268,24 +1426,28 @@
     "difficultyLevel": "beginner",
     "frequencyScore": 0.9,
     "cefrLevel": "A1",
-    "tags": ["model-seed", "high-confidence-basic"],
-    "clusters": ["family", "people"],
+    "tags": [
+      "model-seed",
+      "high-confidence-basic"
+    ],
+    "clusters": [
+      "family",
+      "people"
+    ],
     "examples": [
       {
         "pronunciation": "naa chelli paata paadutumdi.",
         "originalScript": "నా చెల్లి పాట పాడుతుంది.",
         "english": "My younger sister sings songs.",
         "contextTag": "daily-use",
-        "difficulty": 1,
-        "language": "telugu"
+        "difficulty": 1
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    },
-    "language": "telugu"
+    }
   },
   {
     "originalScript": "కుటుంబం",
@@ -1296,24 +1458,28 @@
     "difficultyLevel": "beginner",
     "frequencyScore": 0.9,
     "cefrLevel": "A1",
-    "tags": ["model-seed", "high-confidence-basic"],
-    "clusters": ["family", "people"],
+    "tags": [
+      "model-seed",
+      "high-confidence-basic"
+    ],
+    "clusters": [
+      "family",
+      "people"
+    ],
     "examples": [
       {
         "pronunciation": "maa kutumbam peddadi.",
         "originalScript": "మా కుటుంబం పెద్దది.",
         "english": "Our family is big.",
         "contextTag": "daily-use",
-        "difficulty": 1,
-        "language": "telugu"
+        "difficulty": 1
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    },
-    "language": "telugu"
+    }
   },
   {
     "originalScript": "స్నేహితుడు",
@@ -1324,24 +1490,28 @@
     "difficultyLevel": "beginner",
     "frequencyScore": 0.9,
     "cefrLevel": "A1",
-    "tags": ["model-seed", "high-confidence-basic"],
-    "clusters": ["people", "daily-use"],
+    "tags": [
+      "model-seed",
+      "high-confidence-basic"
+    ],
+    "clusters": [
+      "people",
+      "daily-use"
+    ],
     "examples": [
       {
         "pronunciation": "atanu naa mamchi sneehitudu.",
         "originalScript": "అతను నా మంచి స్నేహితుడు.",
         "english": "He is my good friend.",
         "contextTag": "daily-use",
-        "difficulty": 1,
-        "language": "telugu"
+        "difficulty": 1
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    },
-    "language": "telugu"
+    }
   },
   {
     "originalScript": "స్నేహితురాలు",
@@ -1352,24 +1522,28 @@
     "difficultyLevel": "beginner",
     "frequencyScore": 0.9,
     "cefrLevel": "A1",
-    "tags": ["model-seed", "high-confidence-basic"],
-    "clusters": ["people", "daily-use"],
+    "tags": [
+      "model-seed",
+      "high-confidence-basic"
+    ],
+    "clusters": [
+      "people",
+      "daily-use"
+    ],
     "examples": [
       {
         "pronunciation": "aame naa sneehituraalu.",
         "originalScript": "ఆమె నా స్నేహితురాలు.",
         "english": "She is my friend.",
         "contextTag": "daily-use",
-        "difficulty": 1,
-        "language": "telugu"
+        "difficulty": 1
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    },
-    "language": "telugu"
+    }
   },
   {
     "originalScript": "ఇల్లు",
@@ -1380,24 +1554,28 @@
     "difficultyLevel": "beginner",
     "frequencyScore": 0.9,
     "cefrLevel": "A1",
-    "tags": ["model-seed", "high-confidence-basic"],
-    "clusters": ["home", "daily-use"],
+    "tags": [
+      "model-seed",
+      "high-confidence-basic"
+    ],
+    "clusters": [
+      "home",
+      "daily-use"
+    ],
     "examples": [
       {
         "pronunciation": "maa illu peddadi.",
         "originalScript": "మా ఇల్లు పెద్దది.",
         "english": "Our house is big.",
         "contextTag": "daily-use",
-        "difficulty": 1,
-        "language": "telugu"
+        "difficulty": 1
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    },
-    "language": "telugu"
+    }
   },
   {
     "originalScript": "పుస్తకం",
@@ -1408,24 +1586,28 @@
     "difficultyLevel": "beginner",
     "frequencyScore": 0.9,
     "cefrLevel": "A1",
-    "tags": ["model-seed", "high-confidence-basic"],
-    "clusters": ["education", "daily-use"],
+    "tags": [
+      "model-seed",
+      "high-confidence-basic"
+    ],
+    "clusters": [
+      "education",
+      "daily-use"
+    ],
     "examples": [
       {
-        "pronunciation": "neenu telugu pustakam chaduvutunnaanu.",
+        "pronunciation": "neenu bhaasha pustakam chaduvutunnaanu.",
         "originalScript": "నేను తెలుగు పుస్తకం చదువుతున్నాను.",
-        "english": "I am reading a Telugu book.",
+        "english": "I am reading a the language book.",
         "contextTag": "daily-use",
-        "difficulty": 1,
-        "language": "telugu"
+        "difficulty": 1
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    },
-    "language": "telugu"
+    }
   },
   {
     "originalScript": "పాఠశాల",
@@ -1436,24 +1618,27 @@
     "difficultyLevel": "beginner",
     "frequencyScore": 0.9,
     "cefrLevel": "A1",
-    "tags": ["model-seed", "high-confidence-basic"],
-    "clusters": ["education"],
+    "tags": [
+      "model-seed",
+      "high-confidence-basic"
+    ],
+    "clusters": [
+      "education"
+    ],
     "examples": [
       {
         "pronunciation": "pillalu paathashaalaku vellaaru.",
         "originalScript": "పిల్లలు పాఠశాలకు వెళ్లారు.",
         "english": "The children went to school.",
         "contextTag": "daily-use",
-        "difficulty": 1,
-        "language": "telugu"
+        "difficulty": 1
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    },
-    "language": "telugu"
+    }
   },
   {
     "originalScript": "నీరు",
@@ -1464,24 +1649,28 @@
     "difficultyLevel": "beginner",
     "frequencyScore": 0.9,
     "cefrLevel": "A1",
-    "tags": ["model-seed", "high-confidence-basic"],
-    "clusters": ["food-and-drink", "daily-use"],
+    "tags": [
+      "model-seed",
+      "high-confidence-basic"
+    ],
+    "clusters": [
+      "food-and-drink",
+      "daily-use"
+    ],
     "examples": [
       {
         "pronunciation": "naaku niiru kaavaali.",
         "originalScript": "నాకు నీరు కావాలి.",
         "english": "I need water.",
         "contextTag": "daily-use",
-        "difficulty": 1,
-        "language": "telugu"
+        "difficulty": 1
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    },
-    "language": "telugu"
+    }
   },
   {
     "originalScript": "అన్నం",
@@ -1492,24 +1681,28 @@
     "difficultyLevel": "beginner",
     "frequencyScore": 0.9,
     "cefrLevel": "A1",
-    "tags": ["model-seed", "high-confidence-basic"],
-    "clusters": ["food-and-drink", "daily-use"],
+    "tags": [
+      "model-seed",
+      "high-confidence-basic"
+    ],
+    "clusters": [
+      "food-and-drink",
+      "daily-use"
+    ],
     "examples": [
       {
         "pronunciation": "annam veedigaa umdi.",
         "originalScript": "అన్నం వేడిగా ఉంది.",
         "english": "The rice is hot.",
         "contextTag": "daily-use",
-        "difficulty": 1,
-        "language": "telugu"
+        "difficulty": 1
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    },
-    "language": "telugu"
+    }
   },
   {
     "originalScript": "పండు",
@@ -1520,24 +1713,27 @@
     "difficultyLevel": "beginner",
     "frequencyScore": 0.9,
     "cefrLevel": "A1",
-    "tags": ["model-seed", "high-confidence-basic"],
-    "clusters": ["food-and-drink"],
+    "tags": [
+      "model-seed",
+      "high-confidence-basic"
+    ],
+    "clusters": [
+      "food-and-drink"
+    ],
     "examples": [
       {
         "pronunciation": "neenu prati rooju pamdu timtaanu.",
         "originalScript": "నేను ప్రతి రోజు పండు తింటాను.",
         "english": "I eat fruit every day.",
         "contextTag": "daily-use",
-        "difficulty": 1,
-        "language": "telugu"
+        "difficulty": 1
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    },
-    "language": "telugu"
+    }
   },
   {
     "originalScript": "బస్సు",
@@ -1548,24 +1744,28 @@
     "difficultyLevel": "beginner",
     "frequencyScore": 0.9,
     "cefrLevel": "A1",
-    "tags": ["model-seed", "high-confidence-basic"],
-    "clusters": ["travel", "daily-use"],
+    "tags": [
+      "model-seed",
+      "high-confidence-basic"
+    ],
+    "clusters": [
+      "travel",
+      "daily-use"
+    ],
     "examples": [
       {
         "pronunciation": "bassu samayaaniki vachchimdi.",
         "originalScript": "బస్సు సమయానికి వచ్చింది.",
         "english": "The bus arrived on time.",
         "contextTag": "daily-use",
-        "difficulty": 1,
-        "language": "telugu"
+        "difficulty": 1
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    },
-    "language": "telugu"
+    }
   },
   {
     "originalScript": "రోడు",
@@ -1576,24 +1776,28 @@
     "difficultyLevel": "beginner",
     "frequencyScore": 0.9,
     "cefrLevel": "A1",
-    "tags": ["model-seed", "high-confidence-basic"],
-    "clusters": ["travel", "places"],
+    "tags": [
+      "model-seed",
+      "high-confidence-basic"
+    ],
+    "clusters": [
+      "travel",
+      "places"
+    ],
     "examples": [
       {
         "pronunciation": "ii roodu nagaraaniki veltumdi.",
         "originalScript": "ఈ రోడు నగరానికి వెళ్తుంది.",
         "english": "This road goes to the city.",
         "contextTag": "daily-use",
-        "difficulty": 1,
-        "language": "telugu"
+        "difficulty": 1
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    },
-    "language": "telugu"
+    }
   },
   {
     "originalScript": "గ్రామం",
@@ -1604,24 +1808,27 @@
     "difficultyLevel": "beginner",
     "frequencyScore": 0.9,
     "cefrLevel": "A1",
-    "tags": ["model-seed", "high-confidence-basic"],
-    "clusters": ["places"],
+    "tags": [
+      "model-seed",
+      "high-confidence-basic"
+    ],
+    "clusters": [
+      "places"
+    ],
     "examples": [
       {
         "pronunciation": "naa graamam chaalaa amdamgaa umtumdi.",
         "originalScript": "నా గ్రామం చాలా అందంగా ఉంటుంది.",
         "english": "My village is very beautiful.",
         "contextTag": "daily-use",
-        "difficulty": 1,
-        "language": "telugu"
+        "difficulty": 1
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    },
-    "language": "telugu"
+    }
   },
   {
     "originalScript": "నగరం",
@@ -1632,24 +1839,27 @@
     "difficultyLevel": "beginner",
     "frequencyScore": 0.9,
     "cefrLevel": "A1",
-    "tags": ["model-seed", "high-confidence-basic"],
-    "clusters": ["places"],
+    "tags": [
+      "model-seed",
+      "high-confidence-basic"
+    ],
+    "clusters": [
+      "places"
+    ],
     "examples": [
       {
         "pronunciation": "haidaraabaad oka pedda nagaram.",
         "originalScript": "హైదరాబాద్ ఒక పెద్ద నగరం.",
         "english": "Hyderabad is a big city.",
         "contextTag": "daily-use",
-        "difficulty": 1,
-        "language": "telugu"
+        "difficulty": 1
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    },
-    "language": "telugu"
+    }
   },
   {
     "originalScript": "పని",
@@ -1660,24 +1870,27 @@
     "difficultyLevel": "beginner",
     "frequencyScore": 0.9,
     "cefrLevel": "A1",
-    "tags": ["model-seed", "high-confidence-basic"],
-    "clusters": ["daily-use"],
+    "tags": [
+      "model-seed",
+      "high-confidence-basic"
+    ],
+    "clusters": [
+      "daily-use"
+    ],
     "examples": [
       {
         "pronunciation": "naaku iirooju chaalaa pani umdi.",
         "originalScript": "నాకు ఈరోజు చాలా పని ఉంది.",
         "english": "I have a lot of work today.",
         "contextTag": "daily-use",
-        "difficulty": 1,
-        "language": "telugu"
+        "difficulty": 1
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    },
-    "language": "telugu"
+    }
   },
   {
     "originalScript": "డబ్బు",
@@ -1688,24 +1901,27 @@
     "difficultyLevel": "beginner",
     "frequencyScore": 0.9,
     "cefrLevel": "A1",
-    "tags": ["model-seed", "high-confidence-basic"],
-    "clusters": ["daily-use"],
+    "tags": [
+      "model-seed",
+      "high-confidence-basic"
+    ],
+    "clusters": [
+      "daily-use"
+    ],
     "examples": [
       {
         "pronunciation": "naaku komchem dabbu kaavaali.",
         "originalScript": "నాకు కొంచెం డబ్బు కావాలి.",
         "english": "I need some money.",
         "contextTag": "daily-use",
-        "difficulty": 1,
-        "language": "telugu"
+        "difficulty": 1
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    },
-    "language": "telugu"
+    }
   },
   {
     "originalScript": "భాష",
@@ -1716,24 +1932,28 @@
     "difficultyLevel": "beginner",
     "frequencyScore": 0.9,
     "cefrLevel": "A1",
-    "tags": ["model-seed", "high-confidence-basic"],
-    "clusters": ["education", "daily-use"],
+    "tags": [
+      "model-seed",
+      "high-confidence-basic"
+    ],
+    "clusters": [
+      "education",
+      "daily-use"
+    ],
     "examples": [
       {
-        "pronunciation": "telugu oka amdamaina bhaasha.",
+        "pronunciation": "bhaasha oka amdamaina bhaasha.",
         "originalScript": "తెలుగు ఒక అందమైన భాష.",
-        "english": "Telugu is a beautiful language.",
+        "english": "the language is a beautiful language.",
         "contextTag": "daily-use",
-        "difficulty": 1,
-        "language": "telugu"
+        "difficulty": 1
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    },
-    "language": "telugu"
+    }
   },
   {
     "originalScript": "సహాయం",
@@ -1744,24 +1964,27 @@
     "difficultyLevel": "beginner",
     "frequencyScore": 0.9,
     "cefrLevel": "A1",
-    "tags": ["model-seed", "high-confidence-basic"],
-    "clusters": ["daily-use"],
+    "tags": [
+      "model-seed",
+      "high-confidence-basic"
+    ],
+    "clusters": [
+      "daily-use"
+    ],
     "examples": [
       {
         "pronunciation": "mii sahaayam naaku avasaram.",
         "originalScript": "మీ సహాయం నాకు అవసరం.",
         "english": "I need your help.",
         "contextTag": "daily-use",
-        "difficulty": 1,
-        "language": "telugu"
+        "difficulty": 1
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    },
-    "language": "telugu"
+    }
   },
   {
     "originalScript": "వెళ్ళు",
@@ -1772,24 +1995,28 @@
     "difficultyLevel": "beginner",
     "frequencyScore": 0.9,
     "cefrLevel": "A1",
-    "tags": ["model-seed", "high-confidence-basic"],
-    "clusters": ["daily-actions", "travel"],
+    "tags": [
+      "model-seed",
+      "high-confidence-basic"
+    ],
+    "clusters": [
+      "daily-actions",
+      "travel"
+    ],
     "examples": [
       {
         "pronunciation": "manamu maarket‌ki veldaam.",
         "originalScript": "మనము మార్కెట్‌కి వెళ్దాం.",
         "english": "Let us go to the market.",
         "contextTag": "daily-use",
-        "difficulty": 1,
-        "language": "telugu"
+        "difficulty": 1
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    },
-    "language": "telugu"
+    }
   },
   {
     "originalScript": "రా",
@@ -1800,24 +2027,27 @@
     "difficultyLevel": "beginner",
     "frequencyScore": 0.9,
     "cefrLevel": "A1",
-    "tags": ["model-seed", "high-confidence-basic"],
-    "clusters": ["daily-actions"],
+    "tags": [
+      "model-seed",
+      "high-confidence-basic"
+    ],
+    "clusters": [
+      "daily-actions"
+    ],
     "examples": [
       {
         "pronunciation": "ikkadiki raa.",
         "originalScript": "ఇక్కడికి రా.",
         "english": "Come here.",
         "contextTag": "daily-use",
-        "difficulty": 1,
-        "language": "telugu"
+        "difficulty": 1
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    },
-    "language": "telugu"
+    }
   },
   {
     "originalScript": "తిను",
@@ -1828,24 +2058,28 @@
     "difficultyLevel": "beginner",
     "frequencyScore": 0.9,
     "cefrLevel": "A1",
-    "tags": ["model-seed", "high-confidence-basic"],
-    "clusters": ["daily-actions", "food-and-drink"],
+    "tags": [
+      "model-seed",
+      "high-confidence-basic"
+    ],
+    "clusters": [
+      "daily-actions",
+      "food-and-drink"
+    ],
     "examples": [
       {
         "pronunciation": "samayaaniki bhoojanam tinu.",
         "originalScript": "సమయానికి భోజనం తిను.",
         "english": "Eat your meal on time.",
         "contextTag": "daily-use",
-        "difficulty": 1,
-        "language": "telugu"
+        "difficulty": 1
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    },
-    "language": "telugu"
+    }
   },
   {
     "originalScript": "తాగు",
@@ -1856,24 +2090,28 @@
     "difficultyLevel": "beginner",
     "frequencyScore": 0.9,
     "cefrLevel": "A1",
-    "tags": ["model-seed", "high-confidence-basic"],
-    "clusters": ["daily-actions", "food-and-drink"],
+    "tags": [
+      "model-seed",
+      "high-confidence-basic"
+    ],
+    "clusters": [
+      "daily-actions",
+      "food-and-drink"
+    ],
     "examples": [
       {
         "pronunciation": "roojuu ekkuva niiru taagu.",
         "originalScript": "రోజూ ఎక్కువ నీరు తాగు.",
         "english": "Drink more water daily.",
         "contextTag": "daily-use",
-        "difficulty": 1,
-        "language": "telugu"
+        "difficulty": 1
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    },
-    "language": "telugu"
+    }
   },
   {
     "originalScript": "చదువు",
@@ -1884,24 +2122,28 @@
     "difficultyLevel": "beginner",
     "frequencyScore": 0.9,
     "cefrLevel": "A1",
-    "tags": ["model-seed", "high-confidence-basic"],
-    "clusters": ["daily-actions", "education"],
+    "tags": [
+      "model-seed",
+      "high-confidence-basic"
+    ],
+    "clusters": [
+      "daily-actions",
+      "education"
+    ],
     "examples": [
       {
-        "pronunciation": "prati rooju telugu chaduvu.",
+        "pronunciation": "prati rooju bhaasha chaduvu.",
         "originalScript": "ప్రతి రోజు తెలుగు చదువు.",
-        "english": "Study Telugu every day.",
+        "english": "Study the language every day.",
         "contextTag": "daily-use",
-        "difficulty": 1,
-        "language": "telugu"
+        "difficulty": 1
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    },
-    "language": "telugu"
+    }
   },
   {
     "originalScript": "రాయి",
@@ -1912,24 +2154,28 @@
     "difficultyLevel": "beginner",
     "frequencyScore": 0.9,
     "cefrLevel": "A1",
-    "tags": ["model-seed", "high-confidence-basic"],
-    "clusters": ["daily-actions", "education"],
+    "tags": [
+      "model-seed",
+      "high-confidence-basic"
+    ],
+    "clusters": [
+      "daily-actions",
+      "education"
+    ],
     "examples": [
       {
         "pronunciation": "nii peeru ikkada raayi.",
         "originalScript": "నీ పేరు ఇక్కడ రాయి.",
         "english": "Write your name here.",
         "contextTag": "daily-use",
-        "difficulty": 1,
-        "language": "telugu"
+        "difficulty": 1
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    },
-    "language": "telugu"
+    }
   },
   {
     "originalScript": "చూడు",
@@ -1940,24 +2186,27 @@
     "difficultyLevel": "beginner",
     "frequencyScore": 0.9,
     "cefrLevel": "A1",
-    "tags": ["model-seed", "high-confidence-basic"],
-    "clusters": ["daily-actions"],
+    "tags": [
+      "model-seed",
+      "high-confidence-basic"
+    ],
+    "clusters": [
+      "daily-actions"
+    ],
     "examples": [
       {
         "pronunciation": "ii chitram chuudu.",
         "originalScript": "ఈ చిత్రం చూడు.",
         "english": "Look at this picture.",
         "contextTag": "daily-use",
-        "difficulty": 1,
-        "language": "telugu"
+        "difficulty": 1
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    },
-    "language": "telugu"
+    }
   },
   {
     "originalScript": "మాట్లాడు",
@@ -1968,24 +2217,27 @@
     "difficultyLevel": "beginner",
     "frequencyScore": 0.9,
     "cefrLevel": "A1",
-    "tags": ["model-seed", "high-confidence-basic"],
-    "clusters": ["daily-actions"],
+    "tags": [
+      "model-seed",
+      "high-confidence-basic"
+    ],
+    "clusters": [
+      "daily-actions"
+    ],
     "examples": [
       {
         "pronunciation": "nemmadigaa maatlaadu.",
         "originalScript": "నెమ్మదిగా మాట్లాడు.",
         "english": "Speak slowly.",
         "contextTag": "daily-use",
-        "difficulty": 1,
-        "language": "telugu"
+        "difficulty": 1
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    },
-    "language": "telugu"
+    }
   },
   {
     "originalScript": "విను",
@@ -1996,24 +2248,27 @@
     "difficultyLevel": "beginner",
     "frequencyScore": 0.9,
     "cefrLevel": "A1",
-    "tags": ["model-seed", "high-confidence-basic"],
-    "clusters": ["daily-actions"],
+    "tags": [
+      "model-seed",
+      "high-confidence-basic"
+    ],
+    "clusters": [
+      "daily-actions"
+    ],
     "examples": [
       {
         "pronunciation": "jaagrattagaa vinu.",
         "originalScript": "జాగ్రత్తగా విను.",
         "english": "Listen carefully.",
         "contextTag": "daily-use",
-        "difficulty": 1,
-        "language": "telugu"
+        "difficulty": 1
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    },
-    "language": "telugu"
+    }
   },
   {
     "originalScript": "నిద్రపో",
@@ -2024,24 +2279,28 @@
     "difficultyLevel": "beginner",
     "frequencyScore": 0.9,
     "cefrLevel": "A1",
-    "tags": ["model-seed", "high-confidence-basic"],
-    "clusters": ["daily-actions", "time"],
+    "tags": [
+      "model-seed",
+      "high-confidence-basic"
+    ],
+    "clusters": [
+      "daily-actions",
+      "time"
+    ],
     "examples": [
       {
         "pronunciation": "raatri tomdaragaa nidrapoo.",
         "originalScript": "రాత్రి తొందరగా నిద్రపో.",
         "english": "Sleep early at night.",
         "contextTag": "daily-use",
-        "difficulty": 1,
-        "language": "telugu"
+        "difficulty": 1
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    },
-    "language": "telugu"
+    }
   },
   {
     "originalScript": "కూర్చో",
@@ -2052,24 +2311,27 @@
     "difficultyLevel": "beginner",
     "frequencyScore": 0.9,
     "cefrLevel": "A1",
-    "tags": ["model-seed", "high-confidence-basic"],
-    "clusters": ["daily-actions"],
+    "tags": [
+      "model-seed",
+      "high-confidence-basic"
+    ],
+    "clusters": [
+      "daily-actions"
+    ],
     "examples": [
       {
         "pronunciation": "ikkada kuurchoo.",
         "originalScript": "ఇక్కడ కూర్చో.",
         "english": "Sit here.",
         "contextTag": "daily-use",
-        "difficulty": 1,
-        "language": "telugu"
+        "difficulty": 1
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    },
-    "language": "telugu"
+    }
   },
   {
     "originalScript": "నిలబడు",
@@ -2080,24 +2342,27 @@
     "difficultyLevel": "beginner",
     "frequencyScore": 0.9,
     "cefrLevel": "A1",
-    "tags": ["model-seed", "high-confidence-basic"],
-    "clusters": ["daily-actions"],
+    "tags": [
+      "model-seed",
+      "high-confidence-basic"
+    ],
+    "clusters": [
+      "daily-actions"
+    ],
     "examples": [
       {
         "pronunciation": "lainloo nilabadu.",
         "originalScript": "లైన్లో నిలబడు.",
         "english": "Stand in the line.",
         "contextTag": "daily-use",
-        "difficulty": 1,
-        "language": "telugu"
+        "difficulty": 1
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    },
-    "language": "telugu"
+    }
   },
   {
     "originalScript": "ఇవ్వు",
@@ -2108,24 +2373,27 @@
     "difficultyLevel": "beginner",
     "frequencyScore": 0.9,
     "cefrLevel": "A1",
-    "tags": ["model-seed", "high-confidence-basic"],
-    "clusters": ["daily-actions"],
+    "tags": [
+      "model-seed",
+      "high-confidence-basic"
+    ],
+    "clusters": [
+      "daily-actions"
+    ],
     "examples": [
       {
         "pronunciation": "dayacheesi naaku nii pustakam ivvu.",
         "originalScript": "దయచేసి నాకు నీ పుస్తకం ఇవ్వు.",
         "english": "Please give me your book.",
         "contextTag": "daily-use",
-        "difficulty": 1,
-        "language": "telugu"
+        "difficulty": 1
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    },
-    "language": "telugu"
+    }
   },
   {
     "originalScript": "తీసుకో",
@@ -2136,24 +2404,27 @@
     "difficultyLevel": "beginner",
     "frequencyScore": 0.9,
     "cefrLevel": "A1",
-    "tags": ["model-seed", "high-confidence-basic"],
-    "clusters": ["daily-actions"],
+    "tags": [
+      "model-seed",
+      "high-confidence-basic"
+    ],
+    "clusters": [
+      "daily-actions"
+    ],
     "examples": [
       {
         "pronunciation": "ii pennu tiisukoo.",
         "originalScript": "ఈ పెన్ను తీసుకో.",
         "english": "Take this pen.",
         "contextTag": "daily-use",
-        "difficulty": 1,
-        "language": "telugu"
+        "difficulty": 1
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    },
-    "language": "telugu"
+    }
   },
   {
     "originalScript": "చేయి",
@@ -2164,24 +2435,27 @@
     "difficultyLevel": "beginner",
     "frequencyScore": 0.9,
     "cefrLevel": "A1",
-    "tags": ["model-seed", "high-confidence-basic"],
-    "clusters": ["daily-actions"],
+    "tags": [
+      "model-seed",
+      "high-confidence-basic"
+    ],
+    "clusters": [
+      "daily-actions"
+    ],
     "examples": [
       {
         "pronunciation": "ii pani ippudee cheeyi.",
         "originalScript": "ఈ పని ఇప్పుడే చేయి.",
         "english": "Do this work now.",
         "contextTag": "daily-use",
-        "difficulty": 1,
-        "language": "telugu"
+        "difficulty": 1
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    },
-    "language": "telugu"
+    }
   },
   {
     "originalScript": "తెలుసు",
@@ -2192,24 +2466,28 @@
     "difficultyLevel": "beginner",
     "frequencyScore": 0.9,
     "cefrLevel": "A1",
-    "tags": ["model-seed", "high-confidence-basic"],
-    "clusters": ["daily-actions", "core-grammar"],
+    "tags": [
+      "model-seed",
+      "high-confidence-basic"
+    ],
+    "clusters": [
+      "daily-actions",
+      "core-grammar"
+    ],
     "examples": [
       {
         "pronunciation": "naaku ii padam telusu.",
         "originalScript": "నాకు ఈ పదం తెలుసు.",
         "english": "I know this word.",
         "contextTag": "daily-use",
-        "difficulty": 1,
-        "language": "telugu"
+        "difficulty": 1
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    },
-    "language": "telugu"
+    }
   },
   {
     "originalScript": "అర్థం అవు",
@@ -2220,24 +2498,28 @@
     "difficultyLevel": "beginner",
     "frequencyScore": 0.9,
     "cefrLevel": "A1",
-    "tags": ["model-seed", "high-confidence-basic"],
-    "clusters": ["daily-actions", "education"],
+    "tags": [
+      "model-seed",
+      "high-confidence-basic"
+    ],
+    "clusters": [
+      "daily-actions",
+      "education"
+    ],
     "examples": [
       {
         "pronunciation": "ippudu naaku artham ayimdi.",
         "originalScript": "ఇప్పుడు నాకు అర్థం అయింది.",
         "english": "Now I understood.",
         "contextTag": "daily-use",
-        "difficulty": 1,
-        "language": "telugu"
+        "difficulty": 1
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    },
-    "language": "telugu"
+    }
   },
   {
     "originalScript": "మంచి",
@@ -2248,24 +2530,28 @@
     "difficultyLevel": "beginner",
     "frequencyScore": 0.9,
     "cefrLevel": "A1",
-    "tags": ["model-seed", "high-confidence-basic"],
-    "clusters": ["descriptions", "daily-use"],
+    "tags": [
+      "model-seed",
+      "high-confidence-basic"
+    ],
+    "clusters": [
+      "descriptions",
+      "daily-use"
+    ],
     "examples": [
       {
         "pronunciation": "atanu mamchi manishi.",
         "originalScript": "అతను మంచి మనిషి.",
         "english": "He is a good person.",
         "contextTag": "daily-use",
-        "difficulty": 1,
-        "language": "telugu"
+        "difficulty": 1
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    },
-    "language": "telugu"
+    }
   },
   {
     "originalScript": "చెడు",
@@ -2276,24 +2562,27 @@
     "difficultyLevel": "beginner",
     "frequencyScore": 0.9,
     "cefrLevel": "A1",
-    "tags": ["model-seed", "high-confidence-basic"],
-    "clusters": ["descriptions"],
+    "tags": [
+      "model-seed",
+      "high-confidence-basic"
+    ],
+    "clusters": [
+      "descriptions"
+    ],
     "examples": [
       {
         "pronunciation": "idi chedu alavaatu.",
         "originalScript": "ఇది చెడు అలవాటు.",
         "english": "This is a bad habit.",
         "contextTag": "daily-use",
-        "difficulty": 1,
-        "language": "telugu"
+        "difficulty": 1
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    },
-    "language": "telugu"
+    }
   },
   {
     "originalScript": "పెద్ద",
@@ -2304,24 +2593,27 @@
     "difficultyLevel": "beginner",
     "frequencyScore": 0.9,
     "cefrLevel": "A1",
-    "tags": ["model-seed", "high-confidence-basic"],
-    "clusters": ["descriptions"],
+    "tags": [
+      "model-seed",
+      "high-confidence-basic"
+    ],
+    "clusters": [
+      "descriptions"
+    ],
     "examples": [
       {
         "pronunciation": "idi pedda illu.",
         "originalScript": "ఇది పెద్ద ఇల్లు.",
         "english": "This is a big house.",
         "contextTag": "daily-use",
-        "difficulty": 1,
-        "language": "telugu"
+        "difficulty": 1
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    },
-    "language": "telugu"
+    }
   },
   {
     "originalScript": "చిన్న",
@@ -2332,24 +2624,27 @@
     "difficultyLevel": "beginner",
     "frequencyScore": 0.9,
     "cefrLevel": "A1",
-    "tags": ["model-seed", "high-confidence-basic"],
-    "clusters": ["descriptions"],
+    "tags": [
+      "model-seed",
+      "high-confidence-basic"
+    ],
+    "clusters": [
+      "descriptions"
+    ],
     "examples": [
       {
         "pronunciation": "adi chinna pustakam.",
         "originalScript": "అది చిన్న పుస్తకం.",
         "english": "That is a small book.",
         "contextTag": "daily-use",
-        "difficulty": 1,
-        "language": "telugu"
+        "difficulty": 1
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    },
-    "language": "telugu"
+    }
   },
   {
     "originalScript": "కొత్త",
@@ -2360,24 +2655,27 @@
     "difficultyLevel": "beginner",
     "frequencyScore": 0.9,
     "cefrLevel": "A1",
-    "tags": ["model-seed", "high-confidence-basic"],
-    "clusters": ["descriptions"],
+    "tags": [
+      "model-seed",
+      "high-confidence-basic"
+    ],
+    "clusters": [
+      "descriptions"
+    ],
     "examples": [
       {
         "pronunciation": "neenu kotta phoon konnaanu.",
         "originalScript": "నేను కొత్త ఫోన్ కొన్నాను.",
         "english": "I bought a new phone.",
         "contextTag": "daily-use",
-        "difficulty": 1,
-        "language": "telugu"
+        "difficulty": 1
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    },
-    "language": "telugu"
+    }
   },
   {
     "originalScript": "పాత",
@@ -2388,24 +2686,27 @@
     "difficultyLevel": "beginner",
     "frequencyScore": 0.9,
     "cefrLevel": "A1",
-    "tags": ["model-seed", "high-confidence-basic"],
-    "clusters": ["descriptions"],
+    "tags": [
+      "model-seed",
+      "high-confidence-basic"
+    ],
+    "clusters": [
+      "descriptions"
+    ],
     "examples": [
       {
         "pronunciation": "idi paata illu.",
         "originalScript": "ఇది పాత ఇల్లు.",
         "english": "This is an old house.",
         "contextTag": "daily-use",
-        "difficulty": 1,
-        "language": "telugu"
+        "difficulty": 1
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    },
-    "language": "telugu"
+    }
   },
   {
     "originalScript": "చాలా",
@@ -2416,24 +2717,27 @@
     "difficultyLevel": "beginner",
     "frequencyScore": 0.9,
     "cefrLevel": "A1",
-    "tags": ["model-seed", "high-confidence-basic"],
-    "clusters": ["daily-use"],
+    "tags": [
+      "model-seed",
+      "high-confidence-basic"
+    ],
+    "clusters": [
+      "daily-use"
+    ],
     "examples": [
       {
         "pronunciation": "aame chaalaa telivainadi.",
         "originalScript": "ఆమె చాలా తెలివైనది.",
         "english": "She is very smart.",
         "contextTag": "daily-use",
-        "difficulty": 1,
-        "language": "telugu"
+        "difficulty": 1
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    },
-    "language": "telugu"
+    }
   },
   {
     "originalScript": "నెమ్మదిగా",
@@ -2444,24 +2748,27 @@
     "difficultyLevel": "beginner",
     "frequencyScore": 0.9,
     "cefrLevel": "A1",
-    "tags": ["model-seed", "high-confidence-basic"],
-    "clusters": ["daily-use"],
+    "tags": [
+      "model-seed",
+      "high-confidence-basic"
+    ],
+    "clusters": [
+      "daily-use"
+    ],
     "examples": [
       {
         "pronunciation": "dayacheesi nemmadigaa maatlaadu.",
         "originalScript": "దయచేసి నెమ్మదిగా మాట్లాడు.",
         "english": "Please speak slowly.",
         "contextTag": "daily-use",
-        "difficulty": 1,
-        "language": "telugu"
+        "difficulty": 1
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    },
-    "language": "telugu"
+    }
   },
   {
     "originalScript": "వేగంగా",
@@ -2472,24 +2779,27 @@
     "difficultyLevel": "beginner",
     "frequencyScore": 0.9,
     "cefrLevel": "A1",
-    "tags": ["model-seed", "high-confidence-basic"],
-    "clusters": ["daily-use"],
+    "tags": [
+      "model-seed",
+      "high-confidence-basic"
+    ],
+    "clusters": [
+      "daily-use"
+    ],
     "examples": [
       {
         "pronunciation": "atanu veegamgaa parugettaadu.",
         "originalScript": "అతను వేగంగా పరుగెత్తాడు.",
         "english": "He ran quickly.",
         "contextTag": "daily-use",
-        "difficulty": 1,
-        "language": "telugu"
+        "difficulty": 1
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    },
-    "language": "telugu"
+    }
   },
   {
     "originalScript": "ఇక్కడ",
@@ -2500,24 +2810,28 @@
     "difficultyLevel": "beginner",
     "frequencyScore": 0.9,
     "cefrLevel": "A1",
-    "tags": ["model-seed", "high-confidence-basic"],
-    "clusters": ["places", "daily-use"],
+    "tags": [
+      "model-seed",
+      "high-confidence-basic"
+    ],
+    "clusters": [
+      "places",
+      "daily-use"
+    ],
     "examples": [
       {
         "pronunciation": "ikkada veechi umdu.",
         "originalScript": "ఇక్కడ వేచి ఉండు.",
         "english": "Wait here.",
         "contextTag": "daily-use",
-        "difficulty": 1,
-        "language": "telugu"
+        "difficulty": 1
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    },
-    "language": "telugu"
+    }
   },
   {
     "originalScript": "అక్కడ",
@@ -2528,23 +2842,27 @@
     "difficultyLevel": "beginner",
     "frequencyScore": 0.9,
     "cefrLevel": "A1",
-    "tags": ["model-seed", "high-confidence-basic"],
-    "clusters": ["places", "daily-use"],
+    "tags": [
+      "model-seed",
+      "high-confidence-basic"
+    ],
+    "clusters": [
+      "places",
+      "daily-use"
+    ],
     "examples": [
       {
         "pronunciation": "akkada oka dukaanam umdi.",
         "originalScript": "అక్కడ ఒక దుకాణం ఉంది.",
         "english": "There is a shop there.",
         "contextTag": "daily-use",
-        "difficulty": 1,
-        "language": "telugu"
+        "difficulty": 1
       }
     ],
     "source": {
       "type": "model-knowledge",
       "generatedAt": "2026-02-20T12:05:21.257Z",
       "reviewStatus": "approved"
-    },
-    "language": "telugu"
+    }
   }
 ]

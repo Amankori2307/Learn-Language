@@ -27,7 +27,7 @@ vi.mock("@/hooks/use-review", () => ({
     data: [
       {
         id: 11,
-        telugu: "నమస్తే",
+        originalScript: "నమస్తే",
         transliteration: "namaste",
         english: "hello",
         partOfSpeech: "phrase",
@@ -49,7 +49,7 @@ vi.mock("@/hooks/use-review", () => ({
     data: {
       word: {
         id: 11,
-        telugu: "నమస్తే",
+        originalScript: "నమస్తే",
         transliteration: "namaste",
         english: "hello",
         reviewStatus: ReviewStatusEnum.PENDING_REVIEW,

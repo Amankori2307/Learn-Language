@@ -11,8 +11,8 @@ until pg_isready -d "$DATABASE_URL" >/dev/null 2>&1; do
   sleep 1
 done
 
-echo "Applying schema..."
-pnpm run db:push
+echo "Applying database migrations..."
+pnpm run db:migrate
 
 echo "Applying review governance migration/backfill..."
 pnpm run db:migrate:review-governance

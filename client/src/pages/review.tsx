@@ -127,7 +127,7 @@ export default function ReviewPage() {
                         onCheckedChange={() => toggleSelected(word.id)}
                       />
                       <div className="min-w-0 flex-1">
-                        <p className="font-medium">{word.transliteration} ({word.telugu})</p>
+                        <p className="font-medium">{word.transliteration} ({word.originalScript})</p>
                         <p className="text-sm text-muted-foreground">{word.english} • {word.partOfSpeech}</p>
                         <p className="text-xs text-muted-foreground mt-1">status: {word.reviewStatus}</p>
                         <p className="text-xs text-muted-foreground mt-1">
@@ -175,7 +175,7 @@ export default function ReviewPage() {
             ) : (
               <div className="p-4 space-y-3 max-h-[560px] overflow-auto">
                 <div className="rounded-xl border border-border/50 p-3">
-                  <p className="font-medium">{history.data.word.transliteration} ({history.data.word.telugu})</p>
+                  <p className="font-medium">{history.data.word.transliteration} ({history.data.word.originalScript})</p>
                   <p className="text-sm text-muted-foreground">{history.data.word.english}</p>
                   <p className="text-xs text-muted-foreground mt-2">
                     Source: {history.data.word.sourceUrl ? (

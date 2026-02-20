@@ -97,11 +97,11 @@ Scope:
 Acceptance:
 - Regression tests catch profile form and reviewer queue action breakages.
 
-### P4B-018 - Replace dummy MVP seed with realistic Telugu vocabulary
+### P4B-018 - Replace dummy MVP seed with realistic source language vocabulary
 Status: `done`
 
 Scope:
-- Replace placeholder/dummy seed entries in `assets/processed/seed.json` with practical beginner Telugu vocabulary.
+- Replace placeholder/dummy seed entries in `assets/processed/seed.json` with practical beginner source language vocabulary.
 - Keep transliteration-first style and ensure English gloss + short usage examples per entry.
 
 Acceptance:

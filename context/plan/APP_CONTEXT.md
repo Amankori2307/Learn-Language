@@ -2,7 +2,7 @@
 
 ## Purpose
 
-Build a Telugu learning app focused on text-first retention and beginner-friendly learning.
+Build a source language learning app focused on text-first retention and beginner-friendly learning.
 
 ## Current supported features
 
@@ -21,12 +21,12 @@ Build a Telugu learning app focused on text-first retention and beginner-friendl
   - Quiz flow with confidence capture
   - Leaderboard page (daily/weekly/all-time windows)
   - Profile page (name + avatar URL updates)
-  - Pronunciation-first display style for Telugu prompts (transliteration first, Telugu in brackets)
+  - Pronunciation-first display style for source language prompts (transliteration first, source language in brackets)
   - Words-first quiz prompts (word/phrase only in current phase)
   - Post-answer sentence example triplet in feedback (sentence + pronunciation + meaning)
 - Content/data:
   - Seed files now sourced from `assets/processed/`
-  - Single processed seed source: `assets/processed/seed.json` (realistic Telugu beginner set, 91 rows)
+  - Single processed seed source: `assets/processed/seed.json` (realistic source language beginner set, 91 rows)
 - Review governance:
   - Word review lifecycle fields (`draft`, `pending_review`, `approved`, `rejected`)
   - Review queue, transition, bulk transition, history, and draft submission APIs

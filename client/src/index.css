@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Telugu:wght@400;500;600;700&family=Outfit:wght@300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700&family=Outfit:wght@300;400;500;600;700;800&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -6,7 +6,7 @@
 
 :root {
   --font-sans: 'Outfit', sans-serif;
-  --font-telugu: 'Noto Sans Telugu', sans-serif;
+  --font-script: 'Noto Sans', sans-serif;
 
   /* Minimal neutral + blue */
   --background: 210 33% 98%;
@@ -78,8 +78,8 @@
 }
 
 @layer utilities {
-  .font-telugu {
-    font-family: var(--font-telugu);
+  .font-script {
+    font-family: var(--font-script);
   }
   
   .glass-card {

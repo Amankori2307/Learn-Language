@@ -6,15 +6,15 @@ import { Button } from "@/components/ui/button";
 import { BookText, ArrowRight } from "lucide-react";
 
 type StoryLine = {
-  telugu: string;
+  originalScript: string;
   pronunciation: string;
   english: string;
 };
 
-function buildStoryLines(words: Array<{ telugu: string; transliteration?: string | null; english: string; exampleSentences?: string[] }>): StoryLine[] {
+function buildStoryLines(words: Array<{ originalScript: string; transliteration?: string | null; english: string; exampleSentences?: string[] }>): StoryLine[] {
   return words.slice(0, 6).map((word) => ({
-    telugu: word.exampleSentences?.[0] || `${word.telugu} ఉపయోగించండి.`,
-    pronunciation: word.transliteration?.trim() ? `${word.transliteration} (${word.telugu})` : word.telugu,
+    originalScript: word.exampleSentences?.[0] || `${word.originalScript} ఉపయోగించండి.`,
+    pronunciation: word.transliteration?.trim() ? `${word.transliteration} (${word.originalScript})` : word.originalScript,
     english: `Context hint: ${word.english}`,
   }));
 }
@@ -40,7 +40,7 @@ export default function ContextualPage() {
           <div>
             <h2 className="text-3xl font-bold">Contextual Learning Mode</h2>
             <p className="text-muted-foreground mt-1">
-              Learn words inside short Telugu context lines, then jump into a focused workout.
+              Learn words inside short Source Language context lines, then jump into a focused workout.
             </p>
           </div>
           {activeClusterId && (
@@ -74,12 +74,12 @@ export default function ContextualPage() {
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {storyLines.map((line, idx) => (
-              <div key={`${line.telugu}-${idx}`} className="bg-card border border-border/50 rounded-2xl p-5 shadow-sm">
+              <div key={`${line.originalScript}-${idx}`} className="bg-card border border-border/50 rounded-2xl p-5 shadow-sm">
                 <div className="flex items-center gap-2 text-primary mb-2">
                   <BookText className="w-4 h-4" />
                   <span className="text-xs font-semibold uppercase tracking-wide">Context {idx + 1}</span>
                 </div>
-                <p className="text-lg font-telugu leading-relaxed">{line.telugu}</p>
+                <p className="text-lg font-originalScript leading-relaxed">{line.originalScript}</p>
                 <p className="text-sm text-foreground/80 mt-2">
                   Pronunciation: <span className="font-medium">{line.pronunciation}</span>
                 </p>

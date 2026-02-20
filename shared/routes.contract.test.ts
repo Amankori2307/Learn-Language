@@ -1,13 +1,13 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { api } from "./routes";
-import { LanguageEnum, QuizDirectionEnum, QuizQuestionTypeEnum, ReviewStatusEnum } from "./domain/enums";
+import { DEFAULT_LANGUAGE, LanguageEnum, QuizDirectionEnum, QuizQuestionTypeEnum, ReviewStatusEnum } from "./domain/enums";
 
 test("quiz generate contract accepts expected payload", () => {
   const payload = [
     {
       wordId: 1,
-      type: QuizQuestionTypeEnum.TELUGU_TO_ENGLISH,
+      type: QuizQuestionTypeEnum.SOURCE_TO_TARGET,
       questionText: "నేను",
       audioUrl: null,
       options: [
@@ -47,7 +47,7 @@ test("quiz submit response contract requires example triplet", () => {
     isCorrect: true,
     correctAnswer: {
       id: 1,
-      telugu: "నీరు",
+      originalScript: "నీరు",
       transliteration: "neeru",
       english: "water",
       partOfSpeech: "noun",
@@ -69,7 +69,7 @@ test("quiz submit response contract requires example triplet", () => {
       createdAt: null,
     },
     example: {
-      telugu: "నేను నీరు తాగాను.",
+      originalScript: "నేను నీరు తాగాను.",
       pronunciation: "nenu neeru taagaanu",
       meaning: "I drank water.",
     },
@@ -94,11 +94,11 @@ test("stats contract accepts direction metrics", () => {
     xp: 120,
     recognitionAccuracy: 72.5,
     recallAccuracy: 61.2,
-    recommendedDirection: QuizDirectionEnum.TELUGU_TO_ENGLISH,
+    recommendedDirection: QuizDirectionEnum.SOURCE_TO_TARGET,
   };
 
   const parsed = api.stats.get.responses[200].parse(payload);
-  assert.equal(parsed.recommendedDirection, QuizDirectionEnum.TELUGU_TO_ENGLISH);
+  assert.equal(parsed.recommendedDirection, QuizDirectionEnum.SOURCE_TO_TARGET);
 });
 
 test("leaderboard contract accepts ranked entries", () => {
@@ -128,13 +128,13 @@ test("attempt history contract accepts payload", () => {
       wordId: 1,
       isCorrect: true,
       confidenceLevel: 3,
-      direction: QuizDirectionEnum.TELUGU_TO_ENGLISH,
-      questionType: QuizQuestionTypeEnum.TELUGU_TO_ENGLISH,
+      direction: QuizDirectionEnum.SOURCE_TO_TARGET,
+      questionType: QuizQuestionTypeEnum.SOURCE_TO_TARGET,
       responseTimeMs: 1820,
       createdAt: "2026-02-20T12:00:00.000Z",
       word: {
-        language: LanguageEnum.TELUGU,
-        telugu: "నీరు",
+        language: DEFAULT_LANGUAGE,
+        originalScript: "నీరు",
         transliteration: "neeru",
         english: "water",
       },
@@ -158,9 +158,9 @@ test("review queue contract accepts pending review payload", () => {
   const payload = [
     {
       id: 10,
-      language: LanguageEnum.TELUGU,
+      language: DEFAULT_LANGUAGE,
       originalScript: "నమస్తే",
-      telugu: "నమస్తే",
+      originalScript: "నమస్తే",
       transliteration: "namaste",
       english: "hello",
       partOfSpeech: "phrase",
@@ -200,9 +200,8 @@ test("review history contract accepts payload", () => {
   const payload = {
     word: {
       id: 1,
-      language: LanguageEnum.TELUGU,
+      language: DEFAULT_LANGUAGE,
       originalScript: "నమస్తే",
-      telugu: "నమస్తే",
       transliteration: "namaste",
       english: "hello",
       reviewStatus: ReviewStatusEnum.PENDING_REVIEW,

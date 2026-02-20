@@ -10,12 +10,12 @@ import { applySrsUpdate } from "./services/srs";
 import { requireReviewer } from "./auth/permissions";
 import { QuizModeEnum, QuizQuestionTypeEnum, ReviewStatusEnum } from "@shared/domain/enums";
 
-function formatPronunciationFirst(word: { transliteration?: string | null; telugu: string }) {
+function formatPronunciationFirst(word: { transliteration?: string | null; originalScript: string }) {
   const transliteration = word.transliteration?.trim();
   if (!transliteration) {
-    return word.telugu;
+    return word.originalScript;
   }
-  return `${transliteration} (${word.telugu})`;
+  return `${transliteration} (${word.originalScript})`;
 }
 
 export async function registerRoutes(
@@ -95,12 +95,12 @@ export async function registerRoutes(
         count: 3,
       });
 
-      const typePool = [QuizQuestionTypeEnum.TELUGU_TO_ENGLISH, QuizQuestionTypeEnum.ENGLISH_TO_TELUGU] as const;
+      const typePool = [QuizQuestionTypeEnum.SOURCE_TO_TARGET, QuizQuestionTypeEnum.TARGET_TO_SOURCE] as const;
       const type = typePool[Math.floor(Math.random() * typePool.length)];
 
       const questionText =
-        type === QuizQuestionTypeEnum.TELUGU_TO_ENGLISH
-          ? word.telugu
+        type === QuizQuestionTypeEnum.SOURCE_TO_TARGET
+          ? word.originalScript
           : word.english;
       
       const options = [word, ...distractors]
@@ -108,7 +108,7 @@ export async function registerRoutes(
         .map(w => ({
           id: w.id,
           text:
-            type === QuizQuestionTypeEnum.TELUGU_TO_ENGLISH
+            type === QuizQuestionTypeEnum.SOURCE_TO_TARGET
               ? w.english
               : formatPronunciationFirst(w)
         }));
@@ -117,7 +117,7 @@ export async function registerRoutes(
         wordId: word.id,
         type,
         questionText,
-        pronunciation: type === QuizQuestionTypeEnum.TELUGU_TO_ENGLISH ? (word.transliteration ?? null) : null,
+        pronunciation: type === QuizQuestionTypeEnum.SOURCE_TO_TARGET ? (word.transliteration ?? null) : null,
         audioUrl: word.audioUrl,
         options,
       };
@@ -192,15 +192,15 @@ export async function registerRoutes(
         responseTimeMs: input.responseTimeMs ?? null,
       });
 
-      const fallbackSentence = word.exampleSentences?.[0] ?? word.telugu;
+      const fallbackSentence = word.exampleSentences?.[0] ?? word.originalScript;
       const fallbackPronunciation = word.transliteration;
       const bestExamplePronunciation = firstExample?.pronunciation ?? fallbackPronunciation;
       const feedbackExample = firstExample ? {
-        telugu: firstExample.originalScript,
+        originalScript: firstExample.originalScript,
         pronunciation: bestExamplePronunciation,
         meaning: firstExample.englishSentence,
       } : {
-        telugu: fallbackSentence,
+        originalScript: fallbackSentence,
         pronunciation: fallbackPronunciation,
         meaning: word.english,
       };
@@ -340,7 +340,6 @@ export async function registerRoutes(
         id: result.word.id,
         language: result.word.language,
         originalScript: result.word.originalScript,
-        telugu: result.word.telugu,
         transliteration: result.word.transliteration,
         english: result.word.english,
         reviewStatus: result.word.reviewStatus,
@@ -370,7 +369,6 @@ export async function registerRoutes(
         submittedBy,
         language: parsed.language,
         originalScript: parsed.originalScript,
-        telugu: parsed.telugu,
         transliteration: parsed.transliteration,
         english: parsed.english,
         partOfSpeech: parsed.partOfSpeech,

@@ -25,12 +25,12 @@ export default function AuthPage() {
         <div className="absolute inset-0 bg-gradient-to-b from-primary/80 to-primary" />
         
         <div className="relative z-10 max-w-lg text-center">
-          {/* Decorative Telugu Script bg text */}
-          <h1 className="text-9xl font-telugu opacity-10 absolute -top-32 left-1/2 -translate-x-1/2 pointer-events-none whitespace-nowrap">
+          {/* Decorative Source Language Script bg text */}
+          <h1 className="text-9xl font-originalScript opacity-10 absolute -top-32 left-1/2 -translate-x-1/2 pointer-events-none whitespace-nowrap">
             తెలుగు నేర్చుకోండి
           </h1>
           
-          <h2 className="text-5xl font-bold mb-6 tracking-tight">Master Telugu the Natural Way.</h2>
+          <h2 className="text-5xl font-bold mb-6 tracking-tight">Master Source Language the Natural Way.</h2>
           <p className="text-lg opacity-90 leading-relaxed">
             Learn vocabulary through semantic clusters, spaced repetition, and real-world examples. 
             The smartest way to fluency.

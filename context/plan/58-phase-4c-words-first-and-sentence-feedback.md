@@ -4,12 +4,12 @@ Objective: keep learning prompts word-first, and use sentences only as post-answ
 
 ## Improved implementation prompt/spec
 
-Build a text-first Telugu learning flow where:
+Build a text-first source language learning flow where:
 
 1. Quiz prompts are word/phrase only.
 2. Sentence content is not used as primary question prompt in this phase.
 3. After user selects an option, feedback must include one sentence example triplet:
-   - `sentence` (Telugu)
+   - `sentence` (source language)
    - `pronunciation` (English transliteration for that sentence)
    - `meaning` (English translation)
 4. This example triplet must be stored and served from structured data (`word_examples`), not ad-hoc UI strings.
@@ -44,8 +44,8 @@ Status: `done`
 
 Scope:
 - Restrict quiz generation to:
-  - `telugu_to_english`
-  - `english_to_telugu`
+  - `source_to_target`
+  - `target_to_source`
 - Do not generate sentence/fill-blank prompt types in this phase.
 
 Acceptance:

@@ -33,9 +33,9 @@ export default function QuizPage() {
 
     try {
       const responseTimeMs = Math.max(1, Date.now() - questionStartedAt);
-      const direction = currentQuestion.type === QuizQuestionTypeEnum.ENGLISH_TO_TELUGU
-        ? QuizDirectionEnum.ENGLISH_TO_TELUGU
-        : QuizDirectionEnum.TELUGU_TO_ENGLISH;
+      const direction = currentQuestion.type === QuizQuestionTypeEnum.TARGET_TO_SOURCE
+        ? QuizDirectionEnum.TARGET_TO_SOURCE
+        : QuizDirectionEnum.SOURCE_TO_TARGET;
       const response = await submitAnswer.mutateAsync({
         wordId: currentQuestion.wordId,
         selectedOptionId: optionId,

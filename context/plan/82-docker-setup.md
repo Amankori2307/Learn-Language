@@ -7,7 +7,7 @@ This setup brings up:
 The app container startup sequence:
 1. Wait for Postgres readiness
 2. Install dependencies (`pnpm install`)
-3. Run `db:push`
+3. Run `db:migrate`
 4. Run review governance migration + backfill scripts
 5. Run `content:import:mvp` (if seed exists)
 6. Start `pnpm run dev` (watch mode)

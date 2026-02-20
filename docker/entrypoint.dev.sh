@@ -14,8 +14,8 @@ done
 echo "Installing dependencies..."
 pnpm install --frozen-lockfile
 
-echo "Applying schema..."
-pnpm run db:push
+echo "Applying database migrations..."
+pnpm run db:migrate
 
 echo "Applying review governance migration/backfill..."
 pnpm run db:migrate:review-governance

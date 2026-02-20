@@ -15,6 +15,8 @@ export enum LanguageEnum {
   GERMAN = "german",
 }
 
+export const DEFAULT_LANGUAGE: LanguageEnum = LanguageEnum.TELUGU;
+
 export enum ReviewStatusEnum {
   DRAFT = "draft",
   PENDING_REVIEW = "pending_review",
@@ -31,13 +33,13 @@ export enum QuizModeEnum {
 }
 
 export enum QuizDirectionEnum {
-  TELUGU_TO_ENGLISH = "telugu_to_english",
-  ENGLISH_TO_TELUGU = "english_to_telugu",
+  SOURCE_TO_TARGET = "source_to_target",
+  TARGET_TO_SOURCE = "target_to_source",
 }
 
 export enum QuizQuestionTypeEnum {
-  TELUGU_TO_ENGLISH = "telugu_to_english",
-  ENGLISH_TO_TELUGU = "english_to_telugu",
+  SOURCE_TO_TARGET = "source_to_target",
+  TARGET_TO_SOURCE = "target_to_source",
 }
 
 export enum TutorChatRoleEnum {

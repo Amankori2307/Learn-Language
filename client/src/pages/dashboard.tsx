@@ -42,7 +42,7 @@ export default function Dashboard() {
     xp: 0,
     recognitionAccuracy: 0,
     recallAccuracy: 0,
-    recommendedDirection: QuizDirectionEnum.TELUGU_TO_ENGLISH as const,
+    recommendedDirection: QuizDirectionEnum.SOURCE_TO_TARGET as const,
   };
 
   const s = stats || defaultStats;
@@ -128,7 +128,7 @@ export default function Dashboard() {
               <p className="text-sm text-muted-foreground mt-1">
                 Focus next on:{" "}
                 <span className="font-semibold text-foreground">
-                  {s.recommendedDirection === QuizDirectionEnum.TELUGU_TO_ENGLISH ? "Telugu -> English recall" : "English -> Telugu recognition"}
+                  {s.recommendedDirection === QuizDirectionEnum.SOURCE_TO_TARGET ? "Source Language -> English recall" : "English -> Source Language recognition"}
                 </span>
               </p>
             </div>

@@ -1,4 +1,4 @@
-# Learn Telugu App - Active Execution Context
+# Learn source language App - Active Execution Context
 
 This folder is intentionally compact and keeps only active context.
 

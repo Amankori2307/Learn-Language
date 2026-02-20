@@ -2,7 +2,7 @@ import fs from "fs/promises";
 import path from "path";
 import { and, eq, inArray, sql } from "drizzle-orm";
 import { db } from "../server/db";
-import { LanguageEnum } from "../shared/domain/enums";
+import { DEFAULT_LANGUAGE, LanguageEnum } from "../shared/domain/enums";
 import {
   clusters,
   quizAttempts,
@@ -15,7 +15,7 @@ import {
 
 type ContentExample = {
   language?: LanguageEnum;
-  telugu: string;
+  originalScript: string;
   english: string;
   pronunciation?: string;
   contextTag?: string;
@@ -25,7 +25,7 @@ type ContentExample = {
 type ContentWord = {
   language?: LanguageEnum;
   originalScript?: string;
-  telugu: string;
+  originalScript: string;
   transliteration: string;
   english: string;
   partOfSpeech: string;
@@ -45,7 +45,7 @@ type ContentWord = {
 };
 
 function normalizeLanguage(value?: LanguageEnum): LanguageEnum {
-  return value ?? LanguageEnum.TELUGU;
+  return value ?? DEFAULT_LANGUAGE;
 }
 
 function parseListField(value?: string): string[] {
@@ -103,9 +103,9 @@ function parseCsv(raw: string): ContentWord[] {
     const values = parseCsvLine(line);
     const row = Object.fromEntries(headers.map((h, idx) => [h, values[idx] ?? ""]));
 
-    const examples: ContentExample[] = row.exampleTelugu && row.exampleEnglish
+    const examples: ContentExample[] = row.exampleSourceText && row.exampleEnglish
       ? [{
-          telugu: row.exampleTelugu,
+          originalScript: row.exampleSourceText,
           english: row.exampleEnglish,
           contextTag: row.contextTag || "general",
           difficulty: row.exampleDifficulty ? Number(row.exampleDifficulty) : 1,
@@ -113,8 +113,8 @@ function parseCsv(raw: string): ContentWord[] {
       : [];
 
     return {
-      language: (row.language as LanguageEnum) || LanguageEnum.TELUGU,
-      telugu: row.telugu,
+      language: (row.language as LanguageEnum) || DEFAULT_LANGUAGE,
+      originalScript: row.originalScript,
       transliteration: row.transliteration,
       english: row.english,
       partOfSpeech: row.partOfSpeech,
@@ -132,7 +132,7 @@ function parseCsv(raw: string): ContentWord[] {
 function assertWord(word: ContentWord, idx: number) {
   const missing: string[] = [];
 
-  if (!word.telugu) missing.push("telugu");
+  if (!word.originalScript) missing.push("originalScript");
   if (!word.english) missing.push("english");
   if (!word.transliteration) missing.push("transliteration");
   if (!word.partOfSpeech) missing.push("partOfSpeech");
@@ -163,12 +163,12 @@ async function ensureCluster(name: string) {
 
 async function upsertWord(input: ContentWord) {
   const language = normalizeLanguage(input.language);
-  const originalScript = input.originalScript?.trim() || input.telugu;
+  const originalScript = input.originalScript?.trim() || input.originalScript;
   const reviewStatus = input.source?.reviewStatus ?? ((input.tags ?? []).includes("needs-review") ? "pending_review" : "approved");
   const [existing] = await db
     .select()
     .from(words)
-    .where(and(eq(words.language, language), eq(words.telugu, input.telugu), eq(words.english, input.english)));
+    .where(and(eq(words.language, language), eq(words.originalScript, input.originalScript), eq(words.english, input.english)));
 
   if (existing) {
     const [updated] = await db
@@ -198,7 +198,7 @@ async function upsertWord(input: ContentWord) {
     .values({
       language,
       originalScript,
-      telugu: input.telugu,
+      originalScript: input.originalScript,
       english: input.english,
       transliteration: input.transliteration,
       partOfSpeech: input.partOfSpeech,
@@ -210,7 +210,7 @@ async function upsertWord(input: ContentWord) {
       reviewStatus,
       sourceUrl: input.source?.sourceUrl ?? null,
       sourceCapturedAt: input.source?.generatedAt ? new Date(input.source.generatedAt) : null,
-      exampleSentences: (input.examples ?? []).map((e) => e.telugu),
+      exampleSentences: (input.examples ?? []).map((e) => e.originalScript),
     })
     .returning();
 
@@ -226,7 +226,7 @@ async function ensureWordExample(wordId: number, example: ContentExample) {
       and(
         eq(wordExamples.wordId, wordId),
         eq(wordExamples.language, language),
-        eq(wordExamples.originalScript, example.telugu),
+        eq(wordExamples.originalScript, example.originalScript),
       ),
     );
 
@@ -247,7 +247,7 @@ async function ensureWordExample(wordId: number, example: ContentExample) {
   await db.insert(wordExamples).values({
     wordId,
     language,
-    originalScript: example.telugu,
+    originalScript: example.originalScript,
     pronunciation: example.pronunciation ?? null,
     englishSentence: example.english,
     contextTag: example.contextTag ?? "general",
@@ -264,7 +264,7 @@ async function purgeLegacyPlaceholderWords() {
     .select({ id: words.id })
     .from(words)
     .where(
-      sql`${words.telugu} LIKE 'పదం%'
+      sql`${words.originalScript} LIKE 'పదం%'
         OR ${words.english} LIKE 'word-%'
         OR ${words.transliteration} LIKE 'padam-%'`,
     );
@@ -327,12 +327,12 @@ async function main() {
       const normalizedPronunciation = example.pronunciation?.trim();
       if (!normalizedPronunciation) {
         throw new Error(
-          `Missing sentence pronunciation for word "${item.transliteration}" example "${example.telugu}"`,
+          `Missing sentence pronunciation for word "${item.transliteration}" example "${example.originalScript}"`,
         );
       }
       await ensureWordExample(word.id, {
         ...example,
-        language: example.language ?? item.language ?? LanguageEnum.TELUGU,
+        language: example.language ?? item.language ?? DEFAULT_LANGUAGE,
         pronunciation: normalizedPronunciation,
       });
       exampleCount += 1;

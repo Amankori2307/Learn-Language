@@ -1,6 +1,7 @@
 import { z } from 'zod';
 import { insertWordSchema, insertClusterSchema, words, clusters, userWordProgress, quizAttempts } from './schema';
 import {
+  DEFAULT_LANGUAGE,
   LanguageEnum,
   QuizDirectionEnum,
   QuizModeEnum,
@@ -120,7 +121,7 @@ export const api = {
           isCorrect: z.boolean(),
           correctAnswer: z.custom<typeof words.$inferSelect>(),
           example: z.object({
-            telugu: z.string(),
+            originalScript: z.string(),
             pronunciation: z.string(),
             meaning: z.string(),
           }),
@@ -174,7 +175,7 @@ export const api = {
           createdAt: z.string().nullable(),
           word: z.object({
             language: z.nativeEnum(LanguageEnum),
-            telugu: z.string(),
+            originalScript: z.string(),
             transliteration: z.string(),
             english: z.string(),
           }),
@@ -265,7 +266,6 @@ export const api = {
           id: z.number(),
           language: z.nativeEnum(LanguageEnum),
           originalScript: z.string(),
-          telugu: z.string(),
           transliteration: z.string(),
           english: z.string(),
           partOfSpeech: z.string(),
@@ -330,7 +330,6 @@ export const api = {
             id: z.number(),
             language: z.nativeEnum(LanguageEnum),
             originalScript: z.string(),
-            telugu: z.string(),
             transliteration: z.string(),
             english: z.string(),
             reviewStatus: z.nativeEnum(ReviewStatusEnum),
@@ -358,9 +357,8 @@ export const api = {
       method: "POST" as const,
       path: "/api/review/words" as const,
       input: z.object({
-        telugu: z.string().trim().min(1),
-        language: z.nativeEnum(LanguageEnum).default(LanguageEnum.TELUGU),
-        originalScript: z.string().trim().min(1).optional(),
+        originalScript: z.string().trim().min(1),
+        language: z.nativeEnum(LanguageEnum).default(DEFAULT_LANGUAGE),
         transliteration: z.string().trim().min(1),
         english: z.string().trim().min(1),
         partOfSpeech: z.string().trim().min(1),

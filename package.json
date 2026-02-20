@@ -24,6 +24,8 @@
     "db:migrate:review-governance": "node --import tsx script/migrate-review-governance.ts",
     "db:backfill:review-governance": "node --import tsx script/backfill-review-governance.ts",
     "user:set-role": "node --import tsx script/set-user-role.ts",
+    "db:generate": "drizzle-kit generate",
+    "db:migrate": "drizzle-kit migrate",
     "db:push": "drizzle-kit push"
   },
   "dependencies": {

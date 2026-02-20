@@ -24,13 +24,13 @@ interface QuizCardProps {
     isCorrect: boolean;
     correctAnswer: {
       id?: number;
-      telugu: string;
+      originalScript: string;
       english: string;
       transliteration: string;
       exampleSentences: string[];
     };
     example: {
-      telugu: string;
+      originalScript: string;
       pronunciation: string;
       meaning: string;
     };
@@ -70,9 +70,9 @@ export function QuizCard({
   };
 
   const promptLabel =
-    type === QuizQuestionTypeEnum.TELUGU_TO_ENGLISH
+    type === QuizQuestionTypeEnum.SOURCE_TO_TARGET
       ? "Translate to English"
-      : "Translate to Telugu";
+      : "Translate to Source Language";
 
   return (
     <div className="w-full max-w-2xl mx-auto">
@@ -177,7 +177,7 @@ export function QuizCard({
                     aria-label={`Option ${option.text}`}
                       className={cn(
                         "p-4 rounded-xl text-base md:text-lg font-medium border-2 transition-all duration-200 text-left relative overflow-hidden group break-words",
-                        type !== QuizQuestionTypeEnum.TELUGU_TO_ENGLISH && "text-xl",
+                        type !== QuizQuestionTypeEnum.SOURCE_TO_TARGET && "text-xl",
                         className
                       )}
                   >
@@ -226,7 +226,7 @@ export function QuizCard({
                       <p className="text-sm md:text-base text-foreground/90 dark:text-foreground mt-1">
                         <span className="italic break-words">{result.correctAnswer.transliteration}</span>
                         <span className="mx-2">•</span>
-                        <span className="font-semibold text-foreground">({result.correctAnswer.telugu})</span>
+                        <span className="font-semibold text-foreground">({result.correctAnswer.originalScript})</span>
                         <span className="mx-2">•</span>
                         <span>{result.correctAnswer.english}</span>
                       </p>
@@ -234,8 +234,8 @@ export function QuizCard({
                         <div className="text-sm mt-3 p-3 rounded-lg border border-border/70 bg-background/90 dark:bg-background/60 space-y-1 text-foreground">
                           <p>
                             <span className="font-semibold">Sentence:</span>{" "}
-                            <span className="font-telugu text-foreground/95">
-                              {result.example.telugu}
+                            <span className="font-originalScript text-foreground/95">
+                              {result.example.originalScript}
                             </span>
                           </p>
                           <p>

@@ -1,6 +1,6 @@
 import { db } from "./db";
 import { eq, sql, and } from "drizzle-orm";
-import { LanguageEnum, QuizDirectionEnum, QuizModeEnum, QuizQuestionTypeEnum, ReviewStatusEnum } from "@shared/domain/enums";
+import { DEFAULT_LANGUAGE, LanguageEnum, QuizDirectionEnum, QuizModeEnum, QuizQuestionTypeEnum, ReviewStatusEnum } from "@shared/domain/enums";
 import {
   words, clusters, wordClusters, userWordProgress, quizAttempts, wordExamples, users,
   wordReviewEvents,
@@ -16,7 +16,7 @@ function normalizeLanguage(value?: string): LanguageEnum {
   if (value && Object.values(LanguageEnum).includes(value as LanguageEnum)) {
     return value as LanguageEnum;
   }
-  return LanguageEnum.TELUGU;
+  return DEFAULT_LANGUAGE;
 }
 
 export interface IStorage {
@@ -59,7 +59,7 @@ export interface IStorage {
     createdAt: Date | null;
     word: {
       language: LanguageEnum;
-      telugu: string;
+      originalScript: string;
       transliteration: string;
       english: string;
     };
@@ -117,8 +117,7 @@ export interface IStorage {
   createWordDraft(input: {
     submittedBy: string;
     language: LanguageEnum;
-    originalScript?: string;
-    telugu: string;
+    originalScript: string;
     transliteration: string;
     english: string;
     partOfSpeech: string;
@@ -172,7 +171,7 @@ export class DatabaseStorage implements IStorage {
       .values({
         ...word,
         language: normalizeLanguage(word.language),
-        originalScript: word.originalScript ?? word.telugu,
+        originalScript: word.originalScript ?? word.originalScript,
         reviewStatus: normalizedReviewStatus,
       })
       .returning();
@@ -271,7 +270,7 @@ export class DatabaseStorage implements IStorage {
     createdAt: Date | null;
     word: {
       language: LanguageEnum;
-      telugu: string;
+      originalScript: string;
       transliteration: string;
       english: string;
     };
@@ -287,7 +286,7 @@ export class DatabaseStorage implements IStorage {
         responseTimeMs: quizAttempts.responseTimeMs,
         createdAt: quizAttempts.createdAt,
         language: words.language,
-        telugu: words.telugu,
+        originalScript: words.originalScript,
         transliteration: words.transliteration,
         english: words.english,
       })
@@ -303,20 +302,20 @@ export class DatabaseStorage implements IStorage {
       isCorrect: row.isCorrect,
       confidenceLevel: row.confidenceLevel ?? null,
       direction:
-        row.direction === QuizDirectionEnum.TELUGU_TO_ENGLISH ||
-        row.direction === QuizDirectionEnum.ENGLISH_TO_TELUGU
+        row.direction === QuizDirectionEnum.SOURCE_TO_TARGET ||
+        row.direction === QuizDirectionEnum.TARGET_TO_SOURCE
           ? row.direction
           : null,
       questionType:
-        row.questionType === QuizQuestionTypeEnum.TELUGU_TO_ENGLISH ||
-        row.questionType === QuizQuestionTypeEnum.ENGLISH_TO_TELUGU
+        row.questionType === QuizQuestionTypeEnum.SOURCE_TO_TARGET ||
+        row.questionType === QuizQuestionTypeEnum.TARGET_TO_SOURCE
           ? row.questionType
           : null,
       responseTimeMs: row.responseTimeMs ?? null,
       createdAt: row.createdAt ?? null,
       word: {
         language: row.language as LanguageEnum,
-        telugu: row.telugu,
+        originalScript: row.originalScript,
         transliteration: row.transliteration,
         english: row.english,
       },
@@ -506,8 +505,7 @@ export class DatabaseStorage implements IStorage {
   async createWordDraft(input: {
     submittedBy: string;
     language: LanguageEnum;
-    originalScript?: string;
-    telugu: string;
+    originalScript: string;
     transliteration: string;
     english: string;
     partOfSpeech: string;
@@ -517,8 +515,7 @@ export class DatabaseStorage implements IStorage {
     const now = new Date();
     const [created] = await db.insert(words).values({
       language: input.language,
-      originalScript: input.originalScript?.trim() || input.telugu,
-      telugu: input.telugu,
+      originalScript: input.originalScript,
       transliteration: input.transliteration,
       english: input.english,
       partOfSpeech: input.partOfSpeech,
@@ -600,8 +597,8 @@ export class DatabaseStorage implements IStorage {
       .from(quizAttempts)
       .where(eq(quizAttempts.userId, userId));
 
-    const recallAttempts = directionAttempts.filter((a) => a.direction === QuizDirectionEnum.TELUGU_TO_ENGLISH);
-    const recognitionAttempts = directionAttempts.filter((a) => a.direction === QuizDirectionEnum.ENGLISH_TO_TELUGU);
+    const recallAttempts = directionAttempts.filter((a) => a.direction === QuizDirectionEnum.SOURCE_TO_TARGET);
+    const recognitionAttempts = directionAttempts.filter((a) => a.direction === QuizDirectionEnum.TARGET_TO_SOURCE);
 
     const recallCorrect = recallAttempts.filter((a) => a.isCorrect).length;
     const recognitionCorrect = recognitionAttempts.filter((a) => a.isCorrect).length;
@@ -609,8 +606,8 @@ export class DatabaseStorage implements IStorage {
     const recallAccuracy = recallAttempts.length > 0 ? recallCorrect / recallAttempts.length : 1;
     const recognitionAccuracy = recognitionAttempts.length > 0 ? recognitionCorrect / recognitionAttempts.length : 1;
     const recommendedDirection = recallAccuracy < recognitionAccuracy
-      ? QuizDirectionEnum.TELUGU_TO_ENGLISH
-      : QuizDirectionEnum.ENGLISH_TO_TELUGU;
+      ? QuizDirectionEnum.SOURCE_TO_TARGET
+      : QuizDirectionEnum.TARGET_TO_SOURCE;
     
     return {
       totalWords,
@@ -646,7 +643,7 @@ export class DatabaseStorage implements IStorage {
         .where(
           and(
             eq(words.language, normalizeLanguage(word.language)),
-            eq(words.telugu, word.telugu),
+            eq(words.originalScript, word.originalScript),
             eq(words.english, word.english),
           ),
         );
@@ -670,7 +667,7 @@ export class DatabaseStorage implements IStorage {
         .from(wordExamples)
         .where(and(
           eq(wordExamples.wordId, wordId),
-          eq(wordExamples.language, LanguageEnum.TELUGU),
+          eq(wordExamples.language, DEFAULT_LANGUAGE),
           eq(wordExamples.originalScript, originalScript),
         ));
 
@@ -680,7 +677,7 @@ export class DatabaseStorage implements IStorage {
 
       await db.insert(wordExamples).values({
         wordId,
-        language: LanguageEnum.TELUGU,
+        language: DEFAULT_LANGUAGE,
         originalScript,
         pronunciation,
         englishSentence,
@@ -696,36 +693,36 @@ export class DatabaseStorage implements IStorage {
     // Words
     const wordsData = [
       // Pronouns
-      { telugu: "నేను", transliteration: "nēnu", english: "I", partOfSpeech: "pronoun", clusterId: c_pronouns.id, difficultyLevel: "beginner", frequencyScore: 0.95, exampleTelugu: "నేను స్కూల్‌కి వెళ్తాను.", exampleEnglish: "I go to school." },
-      { telugu: "నువ్వు", transliteration: "nuvvu", english: "You (informal)", partOfSpeech: "pronoun", clusterId: c_pronouns.id, difficultyLevel: "beginner", frequencyScore: 0.9, exampleTelugu: "నువ్వు ఎలా ఉన్నావు?", exampleEnglish: "How are you?" },
-      { telugu: "మీరు", transliteration: "mīru", english: "You (formal)", partOfSpeech: "pronoun", clusterId: c_pronouns.id, difficultyLevel: "beginner", frequencyScore: 0.85, exampleTelugu: "మీరు ఎక్కడ ఉంటారు?", exampleEnglish: "Where do you live?" },
-      { telugu: "మేము", transliteration: "mēmu", english: "We", partOfSpeech: "pronoun", clusterId: c_pronouns.id, difficultyLevel: "beginner", frequencyScore: 0.8, exampleTelugu: "మేము కలిసి చదువుతాము.", exampleEnglish: "We study together." },
+      { originalScript: "నేను", transliteration: "nēnu", english: "I", partOfSpeech: "pronoun", clusterId: c_pronouns.id, difficultyLevel: "beginner", frequencyScore: 0.95, exampleSourceText: "నేను స్కూల్‌కి వెళ్తాను.", exampleEnglish: "I go to school." },
+      { originalScript: "నువ్వు", transliteration: "nuvvu", english: "You (informal)", partOfSpeech: "pronoun", clusterId: c_pronouns.id, difficultyLevel: "beginner", frequencyScore: 0.9, exampleSourceText: "నువ్వు ఎలా ఉన్నావు?", exampleEnglish: "How are you?" },
+      { originalScript: "మీరు", transliteration: "mīru", english: "You (formal)", partOfSpeech: "pronoun", clusterId: c_pronouns.id, difficultyLevel: "beginner", frequencyScore: 0.85, exampleSourceText: "మీరు ఎక్కడ ఉంటారు?", exampleEnglish: "Where do you live?" },
+      { originalScript: "మేము", transliteration: "mēmu", english: "We", partOfSpeech: "pronoun", clusterId: c_pronouns.id, difficultyLevel: "beginner", frequencyScore: 0.8, exampleSourceText: "మేము కలిసి చదువుతాము.", exampleEnglish: "We study together." },
       
       // Basics
-      { telugu: "నమస్కారం", transliteration: "namaskāram", english: "Hello / Greetings", partOfSpeech: "noun", clusterId: c_basics.id, difficultyLevel: "beginner", frequencyScore: 0.92, exampleTelugu: "నమస్కారం! ఎలా ఉన్నారు?", exampleEnglish: "Hello! How are you?" },
-      { telugu: "ధన్యవాదాలు", transliteration: "dhanyavādālu", english: "Thank you", partOfSpeech: "noun", clusterId: c_basics.id, difficultyLevel: "beginner", frequencyScore: 0.88, exampleTelugu: "మీ సహాయానికి ధన్యవాదాలు.", exampleEnglish: "Thank you for your help." },
-      { telugu: "అవును", transliteration: "avunu", english: "Yes", partOfSpeech: "adverb", clusterId: c_basics.id, difficultyLevel: "beginner", frequencyScore: 0.9, exampleTelugu: "అవును, నేను వస్తాను.", exampleEnglish: "Yes, I will come." },
-      { telugu: "కాదు", transliteration: "kādu", english: "No", partOfSpeech: "adverb", clusterId: c_basics.id, difficultyLevel: "beginner", frequencyScore: 0.9, exampleTelugu: "కాదు, అది సరైంది కాదు.", exampleEnglish: "No, that is not correct." },
+      { originalScript: "నమస్కారం", transliteration: "namaskāram", english: "Hello / Greetings", partOfSpeech: "noun", clusterId: c_basics.id, difficultyLevel: "beginner", frequencyScore: 0.92, exampleSourceText: "నమస్కారం! ఎలా ఉన్నారు?", exampleEnglish: "Hello! How are you?" },
+      { originalScript: "ధన్యవాదాలు", transliteration: "dhanyavādālu", english: "Thank you", partOfSpeech: "noun", clusterId: c_basics.id, difficultyLevel: "beginner", frequencyScore: 0.88, exampleSourceText: "మీ సహాయానికి ధన్యవాదాలు.", exampleEnglish: "Thank you for your help." },
+      { originalScript: "అవును", transliteration: "avunu", english: "Yes", partOfSpeech: "adverb", clusterId: c_basics.id, difficultyLevel: "beginner", frequencyScore: 0.9, exampleSourceText: "అవును, నేను వస్తాను.", exampleEnglish: "Yes, I will come." },
+      { originalScript: "కాదు", transliteration: "kādu", english: "No", partOfSpeech: "adverb", clusterId: c_basics.id, difficultyLevel: "beginner", frequencyScore: 0.9, exampleSourceText: "కాదు, అది సరైంది కాదు.", exampleEnglish: "No, that is not correct." },
       
       // Food
-      { telugu: "ఆపిల్", transliteration: "āpil", english: "Apple", partOfSpeech: "noun", clusterId: c_food.id, difficultyLevel: "beginner", frequencyScore: 0.7, exampleTelugu: "నాకు ఆపిల్ ఇష్టం.", exampleEnglish: "I like apples." },
-      { telugu: "నీరు", transliteration: "nīru", english: "Water", partOfSpeech: "noun", clusterId: c_food.id, difficultyLevel: "beginner", frequencyScore: 0.96, exampleTelugu: "దయచేసి నీరు ఇవ్వండి.", exampleEnglish: "Please give me water." },
-      { telugu: "ఆహారం", transliteration: "āhāram", english: "Food", partOfSpeech: "noun", clusterId: c_food.id, difficultyLevel: "beginner", frequencyScore: 0.86, exampleTelugu: "ఆహారం సిద్ధంగా ఉంది.", exampleEnglish: "Food is ready." },
-      { telugu: "పాలు", transliteration: "pālu", english: "Milk", partOfSpeech: "noun", clusterId: c_food.id, difficultyLevel: "beginner", frequencyScore: 0.84, exampleTelugu: "పిల్లాడు పాలు తాగుతున్నాడు.", exampleEnglish: "The child is drinking milk." },
+      { originalScript: "ఆపిల్", transliteration: "āpil", english: "Apple", partOfSpeech: "noun", clusterId: c_food.id, difficultyLevel: "beginner", frequencyScore: 0.7, exampleSourceText: "నాకు ఆపిల్ ఇష్టం.", exampleEnglish: "I like apples." },
+      { originalScript: "నీరు", transliteration: "nīru", english: "Water", partOfSpeech: "noun", clusterId: c_food.id, difficultyLevel: "beginner", frequencyScore: 0.96, exampleSourceText: "దయచేసి నీరు ఇవ్వండి.", exampleEnglish: "Please give me water." },
+      { originalScript: "ఆహారం", transliteration: "āhāram", english: "Food", partOfSpeech: "noun", clusterId: c_food.id, difficultyLevel: "beginner", frequencyScore: 0.86, exampleSourceText: "ఆహారం సిద్ధంగా ఉంది.", exampleEnglish: "Food is ready." },
+      { originalScript: "పాలు", transliteration: "pālu", english: "Milk", partOfSpeech: "noun", clusterId: c_food.id, difficultyLevel: "beginner", frequencyScore: 0.84, exampleSourceText: "పిల్లాడు పాలు తాగుతున్నాడు.", exampleEnglish: "The child is drinking milk." },
     ];
 
     for (const w of wordsData) {
-      const { clusterId, exampleTelugu, exampleEnglish, ...wordData } = w;
+      const { clusterId, exampleSourceText, exampleEnglish, ...wordData } = w;
       const word = await ensureWord({
         ...wordData,
-        language: LanguageEnum.TELUGU,
-        originalScript: wordData.telugu,
+        language: DEFAULT_LANGUAGE,
+        originalScript: wordData.originalScript,
       });
       await this.addWordToCluster(word.id, clusterId);
       await ensureWordExample(
         word.id,
-        exampleTelugu,
-        `${word.transliteration} (${word.telugu})`,
+        exampleSourceText,
+        `${word.transliteration} (${word.originalScript})`,
         exampleEnglish,
         "general"
       );

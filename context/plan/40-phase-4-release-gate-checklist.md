@@ -15,7 +15,7 @@ Owner: Codex
 ## Verification Evidence
 
 ### 1) Core Flow Quality
-- Quiz generation returns real Telugu entries with transliteration pronunciation metadata.
+- Quiz generation returns real source language entries with transliteration pronunciation metadata.
 - Quiz result feedback shows:
   - word/sentence
   - pronunciation
@@ -32,7 +32,7 @@ Result: `pass`
 Result: `pass`
 
 ### 3) Content Quality
-- `assets/processed/seed.json` uses realistic Telugu seed rows.
+- `assets/processed/seed.json` uses realistic source language seed rows.
 - Import pipeline purges legacy placeholder rows (`పదం*`, `word-*`, `padam-*`) before MVP import.
 - Content validator passes on MVP file.
 

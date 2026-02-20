@@ -8,7 +8,7 @@ const now = new Date("2026-02-20T00:00:00.000Z");
 function makeWord(id: number) {
   return {
     id,
-    telugu: `పదం${id}`,
+    originalScript: `పదం${id}`,
     transliteration: `padam${id}`,
     english: `word-${id}`,
     partOfSpeech: "noun",

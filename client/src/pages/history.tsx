@@ -5,8 +5,8 @@ import { Button } from "@/components/ui/button";
 import { QuizDirectionEnum } from "@shared/domain/enums";
 
 function toLabel(direction: QuizDirectionEnum | null) {
-  if (direction === QuizDirectionEnum.TELUGU_TO_ENGLISH) return "Telugu -> English";
-  if (direction === QuizDirectionEnum.ENGLISH_TO_TELUGU) return "English -> Telugu";
+  if (direction === QuizDirectionEnum.SOURCE_TO_TARGET) return "Source Language -> English";
+  if (direction === QuizDirectionEnum.TARGET_TO_SOURCE) return "English -> Source Language";
   return "Mixed";
 }
 
@@ -70,7 +70,7 @@ export default function HistoryPage() {
                     </Badge>
                   </div>
                   <div className="col-span-9 md:col-span-4 min-w-0">
-                    <p className="font-medium truncate">{attempt.word.transliteration} ({attempt.word.telugu})</p>
+                    <p className="font-medium truncate">{attempt.word.transliteration} ({attempt.word.originalScript})</p>
                     <p className="text-sm text-muted-foreground truncate">{attempt.word.english}</p>
                   </div>
                   <div className="hidden md:block md:col-span-2 text-sm text-muted-foreground">

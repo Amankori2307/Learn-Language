@@ -24,7 +24,7 @@ Only active and pending tasks are listed here. Completed tasks are intentionally
 | P4B-015 | done | Add DB migration/backfill scripts for new review/role columns | P4B-006 | S | existing environments migrate safely |
 | P4B-016 | done | Add endpoint-level authorization tests for reviewer actions | P4B-007 | M | non-reviewers blocked and reviewers allowed in tests |
 | P4B-017 | done | Add UI integration tests for profile save + reviewer queue actions | P4B-007 | M | regression suite covers critical user paths |
-| P4B-018 | done | Replace dummy MVP seed with real Telugu core vocabulary from internal knowledge | P4B-011 | M | assets seed provides realistic beginner Telugu words/phrases with transliteration/examples |
+| P4B-018 | done | Replace dummy MVP seed with real source language core vocabulary from internal knowledge | P4B-011 | M | assets seed provides realistic beginner source language words/phrases with transliteration/examples |
 
 ## Phase 4C - Words-first learning flow (active)
 
@@ -55,6 +55,15 @@ Only active and pending tasks are listed here. Completed tasks are intentionally
 | P4D-002 | done | Introduce shared enums/interfaces baseline and migrate core auth/quiz/review contracts | P4D-001 | M | core domains no longer rely on duplicated literal unions |
 | P4D-004 | done | Consolidate processed seed artifacts into single source file (`assets/processed/seed.json`) | P4D-002 | S | only one processed seed file is used by scripts/runtime/docs |
 | P4D-003 | done | Incrementally replace remaining magic strings and unprefixed reusable interfaces repo-wide | P4D-002 | L | majority of feature modules consume shared enums/interfaces |
+
+## Phase 4E - Generic language pivot (active)
+
+| ID | Status | Task | Depends On | Effort | Done When |
+|---|---|---|---|---|---|
+| P4E-001 | done | Remove `source_language` naming from codebase and use generic source-language naming (keep `LanguageEnum.source_language` as single language-specific token) | P4D-003 | L | code identifiers, API contracts, storage interfaces, and UI copy no longer use `source_language`-specific naming |
+| P4E-002 | done | Enforce naming consistency repo-wide after generic pivot (single canonical naming for source script/text across schema, API, UI, scripts, tests) | P4E-001 | M | no mixed legacy naming remains and lint/type/tests pass with a uniform vocabulary |
+| P4E-003 | done | Setup Drizzle migration workflow (generate/migrate scripts + migration folder conventions) and stop relying on schema push for lifecycle changes | P4E-002 | M | versioned migrations are generated/applied via scripts and validated in docs/compose flow |
+| P4E-004 | todo | Add language selector in UI and scope progress/statistics/session state by `(userId, language)` combination | P4E-003 | L | learners can switch language context and all progress/review/stats/attempts are isolated per language |
 
 ## Exit criteria
 
