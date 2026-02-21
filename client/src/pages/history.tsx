@@ -26,7 +26,7 @@ type DirectionFilter = "all" | QuizDirectionEnum.SOURCE_TO_TARGET | QuizDirectio
 type SortOption = "newest" | "oldest" | "confidence_desc" | "response_time_desc";
 
 export default function HistoryPage() {
-  const history = useAttemptHistory(500);
+  const history = useAttemptHistory(200);
   const [search, setSearch] = useState("");
   const [resultFilter, setResultFilter] = useState<ResultFilter>("all");
   const [directionFilter, setDirectionFilter] = useState<DirectionFilter>("all");

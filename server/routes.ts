@@ -321,9 +321,11 @@ export async function registerRoutes(
   // Attempt history trail
   app.get(api.attempts.history.path, isAuthenticated, async (req, res) => {
     const userId = (req.user as any).claims.sub;
-    const parsed = api.attempts.history.input?.parse(req.query) ?? { limit: 100 };
-    const limit = parsed.limit ?? 100;
-    const history = await storage.getUserAttemptHistory(userId, limit, parsed.language);
+    const parsed = api.attempts.history.input?.safeParse(req.query);
+    const parsedData = parsed && parsed.success ? parsed.data : null;
+    const limit = parsedData?.limit ?? 100;
+    const language = parsedData?.language ?? parseLanguage(req.query.language);
+    const history = await storage.getUserAttemptHistory(userId, limit, language);
     res.json(history.map((item) => ({
       ...item,
       createdAt: item.createdAt?.toISOString() ?? null,
