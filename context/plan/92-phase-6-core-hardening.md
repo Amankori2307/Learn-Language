@@ -103,7 +103,7 @@ Deliverable:
 ---
 
 ## P6-005 - Strict content validator gates
-Status: `todo`
+Status: `done`
 Depends on: `P6-001`
 
 Scope:
@@ -116,6 +116,9 @@ Scope:
 Acceptance criteria:
 - Invalid seed rows fail with actionable errors.
 - Valid current seed passes without warnings.
+
+Deliverable:
+- `script/validate-content.ts` extended with collision/quality/consistency checks
 
 ---
 

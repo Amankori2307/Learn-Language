@@ -2,9 +2,9 @@
 
 Date: 2026-02-21  
 Session owner: Codex  
-Last completed task ID: P6-004  
+Last completed task ID: P6-005  
 Current in-progress task ID: -  
-Next task ID: P6-005
+Next task ID: P6-006
 
 ## Current state
 
@@ -16,6 +16,7 @@ Next task ID: P6-005
 - Cross-language leakage integration coverage added and running in default lint pipeline.
 - Storage query audit completed and submit-answer path now enforces selected language boundary.
 - Leaderboard language-window behavior validated with integration assertions (`daily`, `weekly`, `all_time`).
+- Content validator now enforces transliteration-collision, pronunciation-quality, and tag/cluster consistency gates.
 - Active pending work is now managed through:
   - `context/plan/01-master-task-registry.md`
   - `context/plan/92-phase-6-core-hardening.md`
@@ -27,7 +28,7 @@ Next task ID: P6-005
 
 ## Immediate next actions
 
-1. Execute `P6-005`: extend strict content validator gates.
-2. Execute `P6-006`: environment parity gate for local/docker/CI.
-3. Execute `P6-007`: review governance v2 schema.
+1. Execute `P6-006`: environment parity gate for local/docker/CI.
+2. Execute `P6-007`: review governance v2 schema.
+3. Execute `P6-008`: review governance v2 conflict queue/actions.
 4. Continue in strict order defined in `context/plan/92-phase-6-core-hardening.md`.
