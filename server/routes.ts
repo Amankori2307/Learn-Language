@@ -497,5 +497,11 @@ export async function registerRoutes(
     res.json({ message: "Seeded" });
   });
 
+  app.get(api.admin.srsDrift.path, isAuthenticated, requireReviewer, async (req, res) => {
+    const parsed = api.admin.srsDrift.input?.parse(req.query) ?? {};
+    const summary = await storage.getSrsDriftSummary(parsed.language);
+    res.json(summary);
+  });
+
   return httpServer;
 }

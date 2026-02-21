@@ -1,6 +1,6 @@
 # Phase 6 - Core Hardening Execution Plan
 
-Status: `active`
+Status: `complete`
 
 Objective: enforce data correctness, review-quality governance, and scheduling reliability before broader media expansion.
 
@@ -241,7 +241,7 @@ Deliverable:
 ---
 
 ## P6-011 - SRS drift monitor
-Status: `todo`
+Status: `done`
 Depends on: `P6-010`
 
 Scope:
@@ -254,6 +254,13 @@ Scope:
 Acceptance criteria:
 - Drift summary is available and testable.
 - Alert-friendly payload is documented and stable.
+
+Deliverable:
+- `server/services/srs-drift.ts`
+- `server/services/srs-drift.test.ts`
+- `server/storage.ts` (`getSrsDriftSummary`)
+- `shared/routes.ts` + `server/routes.ts` (`/api/admin/srs/drift`)
+- `shared/routes.contract.test.ts`
 
 ---
 

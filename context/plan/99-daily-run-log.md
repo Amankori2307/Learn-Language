@@ -2,9 +2,9 @@
 
 Date: 2026-02-21  
 Session owner: Codex  
-Last completed task ID: P6-010  
+Last completed task ID: P6-011  
 Current in-progress task ID: -  
-Next task ID: P6-011
+Next task ID: P6-012
 
 ## Current state
 
@@ -22,6 +22,8 @@ Next task ID: P6-011
 - Conflict queue + resolution workflow is active with reviewer-only endpoints and integration coverage validating disagreement -> resolved audit trace.
 - SRS config versioning is live with `srs_configs`, version-stamped progress updates, and fallback-safe default config resolution.
 - Per-direction memory strengths are now persisted and used for scheduling priority + stats (`source->target` vs `target->source`).
+- SRS drift monitoring is active with alert-friendly summary endpoint (`/api/admin/srs/drift`).
+- Phase 6 core hardening (`P6-001` to `P6-011`) is complete.
 - Active pending work is now managed through:
   - `context/plan/01-master-task-registry.md`
   - `context/plan/92-phase-6-core-hardening.md`
@@ -33,5 +35,6 @@ Next task ID: P6-011
 
 ## Immediate next actions
 
-1. Execute `P6-011`: SRS drift/overdue monitor.
-2. Continue in strict order defined in `context/plan/92-phase-6-core-hardening.md`.
+1. Execute `P6-012`: context hygiene pass (`APP_CONTEXT.md` as primary active source).
+2. Execute `P6-013`: reviewer/admin create-vocabulary flow.
+3. Continue with deferred Phase 5 items after active Phase 6 extension tasks.

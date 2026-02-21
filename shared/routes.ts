@@ -465,6 +465,31 @@ export const api = {
         200: z.object({ message: z.string() }),
       },
     },
+    srsDrift: {
+      method: "GET" as const,
+      path: "/api/admin/srs/drift" as const,
+      input: z.object({
+        language: z.nativeEnum(LanguageEnum).optional(),
+      }).optional(),
+      responses: {
+        200: z.object({
+          generatedAt: z.string(),
+          overdueCount: z.number(),
+          totalTracked: z.number(),
+          overdueRatio: z.number(),
+          highIntervalCount: z.number(),
+          highIntervalRatio: z.number(),
+          emptyReviewDays: z.number(),
+          alerts: z.array(z.object({
+            code: z.enum(["overdue_growth", "interval_spike", "empty_review_days"]),
+            severity: z.enum(["warning", "critical"]),
+            message: z.string(),
+          })),
+        }),
+        401: errorSchemas.unauthorized,
+        403: errorSchemas.unauthorized,
+      },
+    },
   },
 };
 

@@ -21,6 +21,7 @@ import { generateSessionWords, type QuizMode } from "./services/session-generato
 import { computeStreak, computeXp } from "./services/stats";
 import { computeLeaderboard } from "./services/leaderboard";
 import { type SrsConfigSnapshot, resolveSrsConfig } from "./services/srs-config";
+import { summarizeSrsDrift, type SrsDriftSummary } from "./services/srs-drift";
 
 function assertLanguage(value: string): LanguageEnum {
   if (Object.values(LanguageEnum).includes(value as LanguageEnum)) {
@@ -107,6 +108,7 @@ export interface IStorage {
     attempts: number;
     accuracy: number;
   }>>;
+  getSrsDriftSummary(language?: LanguageEnum): Promise<SrsDriftSummary>;
   getActiveSrsConfig(): Promise<SrsConfigSnapshot>;
   getReviewQueue(
     status: ReviewStatusEnum,
@@ -515,6 +517,65 @@ export class DatabaseStorage implements IStorage {
       })),
       limit,
     );
+  }
+
+  async getSrsDriftSummary(language?: LanguageEnum): Promise<SrsDriftSummary> {
+    const now = new Date();
+    const whereLanguage = language ? eq(words.language, language) : undefined;
+
+    const totalTrackedResult = language
+      ? await db
+          .select({ count: sql<number>`count(*)` })
+          .from(userWordProgress)
+          .innerJoin(words, eq(userWordProgress.wordId, words.id))
+          .where(whereLanguage)
+      : await db.select({ count: sql<number>`count(*)` }).from(userWordProgress);
+
+    const overdueResult = language
+      ? await db
+          .select({ count: sql<number>`count(*)` })
+          .from(userWordProgress)
+          .innerJoin(words, eq(userWordProgress.wordId, words.id))
+          .where(and(whereLanguage, sql`${userWordProgress.nextReview} < ${now}`))
+      : await db
+          .select({ count: sql<number>`count(*)` })
+          .from(userWordProgress)
+          .where(sql`${userWordProgress.nextReview} < ${now}`);
+
+    const highIntervalResult = language
+      ? await db
+          .select({ count: sql<number>`count(*)` })
+          .from(userWordProgress)
+          .innerJoin(words, eq(userWordProgress.wordId, words.id))
+          .where(and(whereLanguage, sql`${userWordProgress.interval} >= 45`))
+      : await db
+          .select({ count: sql<number>`count(*)` })
+          .from(userWordProgress)
+          .where(sql`${userWordProgress.interval} >= 45`);
+
+    const lastAttemptResult = language
+      ? await db
+          .select({ lastAttemptAt: sql<Date | null>`max(${quizAttempts.createdAt})` })
+          .from(quizAttempts)
+          .innerJoin(words, eq(quizAttempts.wordId, words.id))
+          .where(whereLanguage)
+      : await db.select({ lastAttemptAt: sql<Date | null>`max(${quizAttempts.createdAt})` }).from(quizAttempts);
+
+    const totalTracked = Number(totalTrackedResult[0]?.count ?? 0);
+    const overdueCount = Number(overdueResult[0]?.count ?? 0);
+    const highIntervalCount = Number(highIntervalResult[0]?.count ?? 0);
+    const lastAttemptAt = lastAttemptResult[0]?.lastAttemptAt ? new Date(lastAttemptResult[0].lastAttemptAt) : null;
+    const emptyReviewDays = lastAttemptAt
+      ? Math.max(0, Math.floor((now.getTime() - lastAttemptAt.getTime()) / (1000 * 60 * 60 * 24)))
+      : 999;
+
+    return summarizeSrsDrift({
+      overdueCount,
+      totalTracked,
+      highIntervalCount,
+      emptyReviewDays,
+      generatedAt: now,
+    });
   }
 
   async getActiveSrsConfig(): Promise<SrsConfigSnapshot> {

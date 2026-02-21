@@ -287,3 +287,24 @@ test("review resolve conflict contract accepts payload", () => {
   assert.equal(input.toStatus, ReviewStatusEnum.APPROVED);
   assert.equal(input.reviewerConfidenceScore, 4);
 });
+
+test("admin srs drift contract accepts alert summary payload", () => {
+  const payload = {
+    generatedAt: "2026-02-21T12:00:00.000Z",
+    overdueCount: 120,
+    totalTracked: 300,
+    overdueRatio: 0.4,
+    highIntervalCount: 20,
+    highIntervalRatio: 0.0667,
+    emptyReviewDays: 2,
+    alerts: [
+      {
+        code: "overdue_growth",
+        severity: "warning",
+        message: "Overdue queue exceeds 35% of tracked progress rows.",
+      },
+    ],
+  };
+  const parsed = api.admin.srsDrift.responses[200].parse(payload);
+  assert.equal(parsed.alerts[0].code, "overdue_growth");
+});
