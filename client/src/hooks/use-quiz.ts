@@ -67,6 +67,20 @@ export function useStats() {
   });
 }
 
+export function useLearningInsights() {
+  const { language } = useLearningLanguage();
+  return useQuery({
+    queryKey: [api.analytics.learning.path, language],
+    queryFn: async () => {
+      const params = new URLSearchParams({ language });
+      const res = await fetch(`${api.analytics.learning.path}?${params.toString()}`, { credentials: "include" });
+      if (res.status === 401) return null;
+      if (!res.ok) throw new Error("Failed to fetch learning insights");
+      return api.analytics.learning.responses[200].parse(await res.json());
+    },
+  });
+}
+
 export function useSeedData() {
   const queryClient = useQueryClient();
   return useMutation({

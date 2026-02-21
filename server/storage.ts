@@ -91,6 +91,36 @@ export interface IStorage {
     targetToSourceStrength: number;
     recommendedDirection: QuizDirectionEnum;
   }>;
+  getLearningInsights(userId: string, language?: LanguageEnum): Promise<{
+    clusters: Array<{
+      clusterId: number;
+      name: string;
+      wordCount: number;
+      attempts: number;
+      accuracy: number;
+    }>;
+    categories: Array<{
+      category: string;
+      attempts: number;
+      accuracy: number;
+    }>;
+    weakWords: Array<{
+      wordId: number;
+      originalScript: string;
+      transliteration: string;
+      english: string;
+      wrongCount: number;
+      masteryLevel: number;
+    }>;
+    strongWords: Array<{
+      wordId: number;
+      originalScript: string;
+      transliteration: string;
+      english: string;
+      masteryLevel: number;
+      averageStrength: number;
+    }>;
+  }>;
   getRecentAccuracy(userId: string, limit?: number, language?: LanguageEnum): Promise<number>;
   getLeaderboard(
     window: "daily" | "weekly" | "all_time",
@@ -792,6 +822,207 @@ export class DatabaseStorage implements IStorage {
 
       return { word: created, examplesCreated: input.examples.length };
     });
+  }
+
+  async getLearningInsights(userId: string, language?: LanguageEnum): Promise<{
+    clusters: Array<{
+      clusterId: number;
+      name: string;
+      wordCount: number;
+      attempts: number;
+      accuracy: number;
+    }>;
+    categories: Array<{
+      category: string;
+      attempts: number;
+      accuracy: number;
+    }>;
+    weakWords: Array<{
+      wordId: number;
+      originalScript: string;
+      transliteration: string;
+      english: string;
+      wrongCount: number;
+      masteryLevel: number;
+    }>;
+    strongWords: Array<{
+      wordId: number;
+      originalScript: string;
+      transliteration: string;
+      english: string;
+      masteryLevel: number;
+      averageStrength: number;
+    }>;
+  }> {
+    const attemptRows = language
+      ? await db
+          .select({
+            wordId: quizAttempts.wordId,
+            isCorrect: quizAttempts.isCorrect,
+            partOfSpeech: words.partOfSpeech,
+          })
+          .from(quizAttempts)
+          .innerJoin(words, eq(quizAttempts.wordId, words.id))
+          .where(and(eq(quizAttempts.userId, userId), eq(words.language, language)))
+      : await db
+          .select({
+            wordId: quizAttempts.wordId,
+            isCorrect: quizAttempts.isCorrect,
+            partOfSpeech: words.partOfSpeech,
+          })
+          .from(quizAttempts)
+          .innerJoin(words, eq(quizAttempts.wordId, words.id))
+          .where(eq(quizAttempts.userId, userId));
+
+    const wordAttemptMap = new Map<number, { attempts: number; correct: number }>();
+    const categoryMap = new Map<string, { attempts: number; correct: number }>();
+    for (const row of attemptRows) {
+      const existingWord = wordAttemptMap.get(row.wordId) ?? { attempts: 0, correct: 0 };
+      existingWord.attempts += 1;
+      existingWord.correct += row.isCorrect ? 1 : 0;
+      wordAttemptMap.set(row.wordId, existingWord);
+
+      const category = row.partOfSpeech || "unknown";
+      const existingCategory = categoryMap.get(category) ?? { attempts: 0, correct: 0 };
+      existingCategory.attempts += 1;
+      existingCategory.correct += row.isCorrect ? 1 : 0;
+      categoryMap.set(category, existingCategory);
+    }
+
+    const clusterRows = language
+      ? await db
+          .select({
+            clusterId: clusters.id,
+            name: clusters.name,
+            wordId: wordClusters.wordId,
+          })
+          .from(wordClusters)
+          .innerJoin(clusters, eq(wordClusters.clusterId, clusters.id))
+          .innerJoin(words, eq(wordClusters.wordId, words.id))
+          .where(and(eq(words.language, language), eq(words.reviewStatus, ReviewStatusEnum.APPROVED)))
+      : await db
+          .select({
+            clusterId: clusters.id,
+            name: clusters.name,
+            wordId: wordClusters.wordId,
+          })
+          .from(wordClusters)
+          .innerJoin(clusters, eq(wordClusters.clusterId, clusters.id))
+          .innerJoin(words, eq(wordClusters.wordId, words.id))
+          .where(eq(words.reviewStatus, ReviewStatusEnum.APPROVED));
+
+    const clusterMap = new Map<number, {
+      name: string;
+      wordIds: Set<number>;
+      attempts: number;
+      correct: number;
+    }>();
+    for (const row of clusterRows) {
+      const cluster = clusterMap.get(row.clusterId) ?? {
+        name: row.name,
+        wordIds: new Set<number>(),
+        attempts: 0,
+        correct: 0,
+      };
+      cluster.wordIds.add(row.wordId);
+      const attemptStats = wordAttemptMap.get(row.wordId);
+      if (attemptStats) {
+        cluster.attempts += attemptStats.attempts;
+        cluster.correct += attemptStats.correct;
+      }
+      clusterMap.set(row.clusterId, cluster);
+    }
+
+    const progressRows = language
+      ? await db
+          .select({
+            wordId: userWordProgress.wordId,
+            wrongCount: userWordProgress.wrongCount,
+            masteryLevel: userWordProgress.masteryLevel,
+            sourceToTargetStrength: userWordProgress.sourceToTargetStrength,
+            targetToSourceStrength: userWordProgress.targetToSourceStrength,
+            originalScript: words.originalScript,
+            transliteration: words.transliteration,
+            english: words.english,
+          })
+          .from(userWordProgress)
+          .innerJoin(words, eq(userWordProgress.wordId, words.id))
+          .where(and(eq(userWordProgress.userId, userId), eq(words.language, language)))
+      : await db
+          .select({
+            wordId: userWordProgress.wordId,
+            wrongCount: userWordProgress.wrongCount,
+            masteryLevel: userWordProgress.masteryLevel,
+            sourceToTargetStrength: userWordProgress.sourceToTargetStrength,
+            targetToSourceStrength: userWordProgress.targetToSourceStrength,
+            originalScript: words.originalScript,
+            transliteration: words.transliteration,
+            english: words.english,
+          })
+          .from(userWordProgress)
+          .innerJoin(words, eq(userWordProgress.wordId, words.id))
+          .where(eq(userWordProgress.userId, userId));
+
+    const clustersInsight = Array.from(clusterMap.entries())
+      .map(([clusterId, cluster]) => ({
+        clusterId,
+        name: cluster.name,
+        wordCount: cluster.wordIds.size,
+        attempts: cluster.attempts,
+        accuracy: cluster.attempts > 0 ? Number(((cluster.correct / cluster.attempts) * 100).toFixed(1)) : 0,
+      }))
+      .sort((left, right) => right.attempts - left.attempts);
+
+    const categoriesInsight = Array.from(categoryMap.entries())
+      .map(([category, stats]) => ({
+        category,
+        attempts: stats.attempts,
+        accuracy: stats.attempts > 0 ? Number(((stats.correct / stats.attempts) * 100).toFixed(1)) : 0,
+      }))
+      .sort((left, right) => right.attempts - left.attempts);
+
+    const weakWords = [...progressRows]
+      .sort((left, right) => {
+        const wrongDelta = (right.wrongCount ?? 0) - (left.wrongCount ?? 0);
+        if (wrongDelta !== 0) return wrongDelta;
+        return (left.masteryLevel ?? 0) - (right.masteryLevel ?? 0);
+      })
+      .slice(0, 5)
+      .map((row) => ({
+        wordId: row.wordId,
+        originalScript: row.originalScript,
+        transliteration: row.transliteration,
+        english: row.english,
+        wrongCount: row.wrongCount ?? 0,
+        masteryLevel: row.masteryLevel ?? 0,
+      }));
+
+    const strongWords = [...progressRows]
+      .map((row) => ({
+        ...row,
+        averageStrength: ((row.sourceToTargetStrength ?? 0.5) + (row.targetToSourceStrength ?? 0.5)) / 2,
+      }))
+      .sort((left, right) => {
+        const masteryDelta = (right.masteryLevel ?? 0) - (left.masteryLevel ?? 0);
+        if (masteryDelta !== 0) return masteryDelta;
+        return right.averageStrength - left.averageStrength;
+      })
+      .slice(0, 5)
+      .map((row) => ({
+        wordId: row.wordId,
+        originalScript: row.originalScript,
+        transliteration: row.transliteration,
+        english: row.english,
+        masteryLevel: row.masteryLevel ?? 0,
+        averageStrength: Number(row.averageStrength.toFixed(3)),
+      }));
+
+    return {
+      clusters: clustersInsight,
+      categories: categoriesInsight,
+      weakWords,
+      strongWords,
+    };
   }
 
   async getUserStats(userId: string, language?: LanguageEnum): Promise<{

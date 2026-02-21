@@ -269,6 +269,13 @@ export async function registerRoutes(
     res.json(stats);
   });
 
+  app.get(api.analytics.learning.path, isAuthenticated, async (req, res) => {
+    const userId = (req.user as any).claims.sub;
+    const parsed = api.analytics.learning.input?.parse(req.query) ?? {};
+    const insights = await storage.getLearningInsights(userId, parsed.language);
+    res.json(insights);
+  });
+
   // Attempt history trail
   app.get(api.attempts.history.path, isAuthenticated, async (req, res) => {
     const userId = (req.user as any).claims.sub;

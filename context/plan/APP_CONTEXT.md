@@ -9,7 +9,6 @@ Build a text-first language learning app with high data correctness, strong memo
 - Phase 4 complete.
 - Phase 6 core hardening complete (`P6-001` to `P6-011`).
 - Active tasks:
-  - `P6-018` learner analytics for strengths/gaps
   - `P6-019` pronunciation strategy note (non-implementation)
 
 ## Core capabilities live
@@ -37,6 +36,10 @@ Build a text-first language learning app with high data correctness, strong memo
   - recall vs recognition accuracy
   - direction strength averages
   - language-window leaderboard correctness (`daily`, `weekly`, `all_time`)
+  - language-scoped learning insights module:
+    - weakest clusters by accuracy/attempts
+    - strongest categories by part of speech
+    - weak words and strong words focus lists
   - SRS drift monitoring endpoint:
     - `GET /api/admin/srs/drift`
     - alerts for overdue growth, interval spikes, and empty-review-day anomalies
@@ -77,4 +80,4 @@ Build a text-first language learning app with high data correctness, strong memo
 
 ## Immediate next implementation
 
-- Execute in order: `P6-018` -> `P6-019`.
+- Execute in order: `P6-019`.

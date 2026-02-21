@@ -1,6 +1,6 @@
 import { Layout } from "@/components/layout";
 import { useAuth } from "@/hooks/use-auth";
-import { useStats } from "@/hooks/use-quiz";
+import { useLearningInsights, useStats } from "@/hooks/use-quiz";
 import { StatCard } from "@/components/stat-card";
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
@@ -23,6 +23,7 @@ import { QuizDirectionEnum, QuizModeEnum } from "@shared/domain/enums";
 export default function Dashboard() {
   const { user } = useAuth();
   const { data: stats, isLoading } = useStats();
+  const { data: insights } = useLearningInsights();
 
   if (isLoading) {
     return (
@@ -122,6 +123,14 @@ export default function Dashboard() {
         }]
       : []),
   ];
+  const weakestClusters = [...(insights?.clusters ?? [])]
+    .filter((cluster) => cluster.attempts > 0)
+    .sort((left, right) => left.accuracy - right.accuracy)
+    .slice(0, 3);
+  const strongestCategories = [...(insights?.categories ?? [])]
+    .filter((category) => category.attempts > 0)
+    .sort((left, right) => right.accuracy - left.accuracy)
+    .slice(0, 3);
 
   return (
     <Layout>
@@ -214,6 +223,70 @@ export default function Dashboard() {
             color="primary"
           />
         </div>
+
+        <section className="rounded-2xl border border-border/60 bg-card/70 p-4 md:p-5">
+          <div className="mb-4">
+            <h3 className="text-xl font-semibold">Learning Insights</h3>
+            <p className="text-sm text-muted-foreground mt-1">
+              Track where you are strong and what needs reinforcement.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
+            <div className="rounded-xl border border-border/60 bg-card p-4">
+              <h4 className="font-semibold mb-2">Needs Improvement (Clusters)</h4>
+              {weakestClusters.length === 0 ? (
+                <p className="text-sm text-muted-foreground">Not enough attempt history yet.</p>
+              ) : (
+                <div className="space-y-2">
+                  {weakestClusters.map((cluster) => (
+                    <div key={cluster.clusterId} className="flex items-center justify-between text-sm">
+                      <span className="font-medium">{cluster.name}</span>
+                      <span className="text-muted-foreground">
+                        {cluster.accuracy}% ({cluster.attempts} attempts)
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+            <div className="rounded-xl border border-border/60 bg-card p-4">
+              <h4 className="font-semibold mb-2">Strong Categories</h4>
+              {strongestCategories.length === 0 ? (
+                <p className="text-sm text-muted-foreground">Not enough attempt history yet.</p>
+              ) : (
+                <div className="space-y-2">
+                  {strongestCategories.map((category) => (
+                    <div key={category.category} className="flex items-center justify-between text-sm">
+                      <span className="font-medium">{category.category}</span>
+                      <span className="text-muted-foreground">
+                        {category.accuracy}% ({category.attempts} attempts)
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+            <div className="rounded-xl border border-border/60 bg-card p-4">
+              <h4 className="font-semibold mb-2">Words to Focus Next</h4>
+              {insights?.weakWords?.length ? (
+                <div className="space-y-2">
+                  {insights.weakWords.slice(0, 3).map((word) => (
+                    <div key={word.wordId} className="text-sm">
+                      <p className="font-medium">
+                        {word.transliteration} ({word.originalScript})
+                      </p>
+                      <p className="text-muted-foreground">
+                        {word.english} • wrong {word.wrongCount}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <p className="text-sm text-muted-foreground">No weak words detected yet.</p>
+              )}
+            </div>
+          </div>
+        </section>
 
         {/* Action Cards */}
         <section className="rounded-2xl border border-border/60 bg-card/70 p-4 md:p-5">

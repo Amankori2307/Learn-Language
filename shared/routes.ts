@@ -177,6 +177,48 @@ export const api = {
       },
     },
   },
+  analytics: {
+    learning: {
+      method: "GET" as const,
+      path: "/api/analytics/learning" as const,
+      input: z.object({
+        language: z.nativeEnum(LanguageEnum).optional(),
+      }).optional(),
+      responses: {
+        200: z.object({
+          clusters: z.array(z.object({
+            clusterId: z.number(),
+            name: z.string(),
+            wordCount: z.number(),
+            attempts: z.number(),
+            accuracy: z.number(),
+          })),
+          categories: z.array(z.object({
+            category: z.string(),
+            attempts: z.number(),
+            accuracy: z.number(),
+          })),
+          weakWords: z.array(z.object({
+            wordId: z.number(),
+            originalScript: z.string(),
+            transliteration: z.string(),
+            english: z.string(),
+            wrongCount: z.number(),
+            masteryLevel: z.number(),
+          })),
+          strongWords: z.array(z.object({
+            wordId: z.number(),
+            originalScript: z.string(),
+            transliteration: z.string(),
+            english: z.string(),
+            masteryLevel: z.number(),
+            averageStrength: z.number(),
+          })),
+        }),
+        401: errorSchemas.unauthorized,
+      },
+    },
+  },
   attempts: {
     history: {
       method: "GET" as const,
