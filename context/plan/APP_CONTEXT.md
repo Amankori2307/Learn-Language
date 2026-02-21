@@ -8,7 +8,13 @@ Build a text-first language learning app with high data correctness, strong memo
 
 - Phase 4 complete.
 - Phase 6 core hardening complete (`P6-001` to `P6-011`).
-- Active tasks: none.
+- Active tasks:
+  - `P6-014` completion/revision UX when new queue is empty
+  - `P6-015` split seed source into `words.json` + `sentences.json` with linkage
+  - `P6-016` cluster UX upgrade with per-cluster counts
+  - `P6-017` quiz feedback with multiple example sentences
+  - `P6-018` learner analytics for strengths/gaps
+  - `P6-019` pronunciation strategy note (non-implementation)
 
 ## Core capabilities live
 
@@ -54,6 +60,12 @@ Build a text-first language learning app with high data correctness, strong memo
   - words and example sentences store source script, pronunciation, and meaning directly
   - language is mandatory on content rows
 
+Planned migration (active):
+- move from single file to split source:
+  - `assets/processed/words.json`
+  - `assets/processed/sentences.json`
+- sentence records will explicitly link to words so example selection is deterministic and multi-example capable.
+
 ## Runtime and quality gates
 
 - Package manager: `pnpm`
@@ -68,4 +80,4 @@ Build a text-first language learning app with high data correctness, strong memo
 
 ## Immediate next implementation
 
-- No active pending tasks in current plan.
+- Execute in order: `P6-014` -> `P6-015` -> `P6-016` -> `P6-017` -> `P6-018` -> `P6-019`.
