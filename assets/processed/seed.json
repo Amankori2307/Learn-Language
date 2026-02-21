@@ -3046,5 +3046,1263 @@
       "reviewStatus": "approved"
     },
     "language": "telugu"
+  },
+  {
+    "originalScript": "తల్లి",
+    "transliteration": "talli",
+    "english": "mother",
+    "partOfSpeech": "noun",
+    "difficulty": 1,
+    "difficultyLevel": "beginner",
+    "frequencyScore": 0.86,
+    "cefrLevel": "A1",
+    "tags": [
+      "model-seed",
+      "high-confidence-basic"
+    ],
+    "clusters": [
+      "family",
+      "daily-use"
+    ],
+    "examples": [
+      {
+        "pronunciation": "naa talli intlo undi.",
+        "originalScript": "నా తల్లి ఇంట్లో ఉంది.",
+        "english": "My mother is at home.",
+        "contextTag": "family",
+        "difficulty": 1,
+        "language": "telugu"
+      }
+    ],
+    "source": {
+      "type": "model-knowledge",
+      "generatedAt": "2026-02-21T17:35:24.936Z",
+      "reviewStatus": "approved"
+    },
+    "language": "telugu"
+  },
+  {
+    "originalScript": "తండ్రి",
+    "transliteration": "tandri",
+    "english": "father",
+    "partOfSpeech": "noun",
+    "difficulty": 1,
+    "difficultyLevel": "beginner",
+    "frequencyScore": 0.85,
+    "cefrLevel": "A1",
+    "tags": [
+      "model-seed",
+      "high-confidence-basic"
+    ],
+    "clusters": [
+      "family",
+      "daily-use"
+    ],
+    "examples": [
+      {
+        "pronunciation": "naa tandri pani chestunnadu.",
+        "originalScript": "నా తండ్రి పని చేస్తున్నాడు.",
+        "english": "My father is working.",
+        "contextTag": "family",
+        "difficulty": 1,
+        "language": "telugu"
+      }
+    ],
+    "source": {
+      "type": "model-knowledge",
+      "generatedAt": "2026-02-21T17:35:24.936Z",
+      "reviewStatus": "approved"
+    },
+    "language": "telugu"
+  },
+  {
+    "originalScript": "బిడ్డ",
+    "transliteration": "bidda",
+    "english": "child",
+    "partOfSpeech": "noun",
+    "difficulty": 1,
+    "difficultyLevel": "beginner",
+    "frequencyScore": 0.79,
+    "cefrLevel": "A1",
+    "tags": [
+      "model-seed",
+      "high-confidence-basic"
+    ],
+    "clusters": [
+      "family",
+      "daily-use"
+    ],
+    "examples": [
+      {
+        "pronunciation": "aa bidda navvutondi.",
+        "originalScript": "ఆ బిడ్డ నవ్వుతోంది.",
+        "english": "That child is smiling.",
+        "contextTag": "family",
+        "difficulty": 1,
+        "language": "telugu"
+      }
+    ],
+    "source": {
+      "type": "model-knowledge",
+      "generatedAt": "2026-02-21T17:35:24.936Z",
+      "reviewStatus": "approved"
+    },
+    "language": "telugu"
+  },
+  {
+    "originalScript": "రహదారి",
+    "transliteration": "rahadaari",
+    "english": "road",
+    "partOfSpeech": "noun",
+    "difficulty": 1,
+    "difficultyLevel": "beginner",
+    "frequencyScore": 0.76,
+    "cefrLevel": "A1",
+    "tags": [
+      "model-seed",
+      "high-confidence-basic"
+    ],
+    "clusters": [
+      "travel",
+      "daily-use"
+    ],
+    "examples": [
+      {
+        "pronunciation": "ii rahadaari chala podavaindi.",
+        "originalScript": "ఈ రహదారి చాలా పొడవైంది.",
+        "english": "This road is very long.",
+        "contextTag": "travel",
+        "difficulty": 1,
+        "language": "telugu"
+      }
+    ],
+    "source": {
+      "type": "model-knowledge",
+      "generatedAt": "2026-02-21T17:35:24.936Z",
+      "reviewStatus": "approved"
+    },
+    "language": "telugu"
+  },
+  {
+    "originalScript": "బజారు",
+    "transliteration": "bazaaru",
+    "english": "market",
+    "partOfSpeech": "noun",
+    "difficulty": 1,
+    "difficultyLevel": "beginner",
+    "frequencyScore": 0.75,
+    "cefrLevel": "A1",
+    "tags": [
+      "model-seed",
+      "high-confidence-basic"
+    ],
+    "clusters": [
+      "shopping",
+      "daily-use"
+    ],
+    "examples": [
+      {
+        "pronunciation": "ame bazaaru ki vellindi.",
+        "originalScript": "ఆమె బజారు కి వెళ్లింది.",
+        "english": "She went to the market.",
+        "contextTag": "shopping",
+        "difficulty": 1,
+        "language": "telugu"
+      }
+    ],
+    "source": {
+      "type": "model-knowledge",
+      "generatedAt": "2026-02-21T17:35:24.936Z",
+      "reviewStatus": "approved"
+    },
+    "language": "telugu"
+  },
+  {
+    "originalScript": "గురువు",
+    "transliteration": "guruvu",
+    "english": "teacher",
+    "partOfSpeech": "noun",
+    "difficulty": 1,
+    "difficultyLevel": "beginner",
+    "frequencyScore": 0.83,
+    "cefrLevel": "A1",
+    "tags": [
+      "model-seed",
+      "high-confidence-basic"
+    ],
+    "clusters": [
+      "education",
+      "people"
+    ],
+    "examples": [
+      {
+        "pronunciation": "maa guruvu telugu bodhistaaru.",
+        "originalScript": "మా గురువు తెలుగు బోధిస్తారు.",
+        "english": "Our teacher teaches Telugu.",
+        "contextTag": "education",
+        "difficulty": 1,
+        "language": "telugu"
+      }
+    ],
+    "source": {
+      "type": "model-knowledge",
+      "generatedAt": "2026-02-21T17:35:24.936Z",
+      "reviewStatus": "approved"
+    },
+    "language": "telugu"
+  },
+  {
+    "originalScript": "విద్యార్థి",
+    "transliteration": "vidyarthi",
+    "english": "student",
+    "partOfSpeech": "noun",
+    "difficulty": 1,
+    "difficultyLevel": "beginner",
+    "frequencyScore": 0.82,
+    "cefrLevel": "A1",
+    "tags": [
+      "model-seed",
+      "high-confidence-basic"
+    ],
+    "clusters": [
+      "education",
+      "people"
+    ],
+    "examples": [
+      {
+        "pronunciation": "atanu manchi vidyarthi.",
+        "originalScript": "అతను మంచి విద్యార్థి.",
+        "english": "He is a good student.",
+        "contextTag": "education",
+        "difficulty": 1,
+        "language": "telugu"
+      }
+    ],
+    "source": {
+      "type": "model-knowledge",
+      "generatedAt": "2026-02-21T17:35:24.936Z",
+      "reviewStatus": "approved"
+    },
+    "language": "telugu"
+  },
+  {
+    "originalScript": "కూరగాయలు",
+    "transliteration": "kooragayalu",
+    "english": "vegetables",
+    "partOfSpeech": "noun",
+    "difficulty": 1,
+    "difficultyLevel": "beginner",
+    "frequencyScore": 0.77,
+    "cefrLevel": "A1",
+    "tags": [
+      "model-seed",
+      "high-confidence-basic"
+    ],
+    "clusters": [
+      "food",
+      "shopping"
+    ],
+    "examples": [
+      {
+        "pronunciation": "ame taaja kooragayalu konnindi.",
+        "originalScript": "ఆమె తాజా కూరగాయలు కొనింది.",
+        "english": "She bought fresh vegetables.",
+        "contextTag": "food",
+        "difficulty": 1,
+        "language": "telugu"
+      }
+    ],
+    "source": {
+      "type": "model-knowledge",
+      "generatedAt": "2026-02-21T17:35:24.936Z",
+      "reviewStatus": "approved"
+    },
+    "language": "telugu"
+  },
+  {
+    "originalScript": "పాలు",
+    "transliteration": "paalu",
+    "english": "milk",
+    "partOfSpeech": "noun",
+    "difficulty": 1,
+    "difficultyLevel": "beginner",
+    "frequencyScore": 0.81,
+    "cefrLevel": "A1",
+    "tags": [
+      "model-seed",
+      "high-confidence-basic"
+    ],
+    "clusters": [
+      "food",
+      "daily-use"
+    ],
+    "examples": [
+      {
+        "pronunciation": "naaku paalu kaavali.",
+        "originalScript": "నాకు పాలు కావాలి.",
+        "english": "I want milk.",
+        "contextTag": "food",
+        "difficulty": 1,
+        "language": "telugu"
+      }
+    ],
+    "source": {
+      "type": "model-knowledge",
+      "generatedAt": "2026-02-21T17:35:24.936Z",
+      "reviewStatus": "approved"
+    },
+    "language": "telugu"
+  },
+  {
+    "originalScript": "ప్రశ్న",
+    "transliteration": "prashna",
+    "english": "question",
+    "partOfSpeech": "noun",
+    "difficulty": 2,
+    "difficultyLevel": "easy",
+    "frequencyScore": 0.72,
+    "cefrLevel": "A1",
+    "tags": [
+      "model-seed",
+      "high-confidence-basic"
+    ],
+    "clusters": [
+      "education",
+      "daily-use"
+    ],
+    "examples": [
+      {
+        "pronunciation": "naaku oka prashna undi.",
+        "originalScript": "నాకు ఒక ప్రశ్న ఉంది.",
+        "english": "I have a question.",
+        "contextTag": "education",
+        "difficulty": 1,
+        "language": "telugu"
+      }
+    ],
+    "source": {
+      "type": "model-knowledge",
+      "generatedAt": "2026-02-21T17:35:24.936Z",
+      "reviewStatus": "approved"
+    },
+    "language": "telugu"
+  },
+  {
+    "originalScript": "సమాధానం",
+    "transliteration": "samaadhaanam",
+    "english": "answer",
+    "partOfSpeech": "noun",
+    "difficulty": 2,
+    "difficultyLevel": "easy",
+    "frequencyScore": 0.71,
+    "cefrLevel": "A1",
+    "tags": [
+      "model-seed",
+      "high-confidence-basic"
+    ],
+    "clusters": [
+      "education",
+      "daily-use"
+    ],
+    "examples": [
+      {
+        "pronunciation": "nee samaadhaanam sariyainadi.",
+        "originalScript": "నీ సమాధానం సరైనది.",
+        "english": "Your answer is correct.",
+        "contextTag": "education",
+        "difficulty": 1,
+        "language": "telugu"
+      }
+    ],
+    "source": {
+      "type": "model-knowledge",
+      "generatedAt": "2026-02-21T17:35:24.936Z",
+      "reviewStatus": "approved"
+    },
+    "language": "telugu"
+  },
+  {
+    "language": "telugu",
+    "tags": [
+      "model-seed",
+      "high-confidence-basic"
+    ],
+    "source": {
+      "type": "model-knowledge",
+      "generatedAt": "2026-02-21T17:37:26.505Z",
+      "reviewStatus": "approved"
+    },
+    "originalScript": "శుభోదయం",
+    "transliteration": "shubhodayam",
+    "english": "good morning",
+    "partOfSpeech": "phrase",
+    "difficulty": 1,
+    "difficultyLevel": "beginner",
+    "frequencyScore": 0.83,
+    "cefrLevel": "A1",
+    "clusters": [
+      "greetings",
+      "daily-use"
+    ],
+    "examples": [
+      {
+        "originalScript": "శుభోదయం! మీ రోజు బాగుండాలి.",
+        "pronunciation": "shubhodayam! mii roju baagundaali.",
+        "english": "Good morning! Have a good day.",
+        "contextTag": "greetings",
+        "difficulty": 1,
+        "language": "telugu"
+      }
+    ]
+  },
+  {
+    "language": "telugu",
+    "tags": [
+      "model-seed",
+      "high-confidence-basic"
+    ],
+    "source": {
+      "type": "model-knowledge",
+      "generatedAt": "2026-02-21T17:37:26.505Z",
+      "reviewStatus": "approved"
+    },
+    "originalScript": "శుభరాత్రి",
+    "transliteration": "shubharaatri",
+    "english": "good night",
+    "partOfSpeech": "phrase",
+    "difficulty": 1,
+    "difficultyLevel": "beginner",
+    "frequencyScore": 0.8,
+    "cefrLevel": "A1",
+    "clusters": [
+      "greetings",
+      "daily-use"
+    ],
+    "examples": [
+      {
+        "originalScript": "శుభరాత్రి, రేపు కలుద్దాం.",
+        "pronunciation": "shubharaatri, repu kaluddaam.",
+        "english": "Good night, see you tomorrow.",
+        "contextTag": "greetings",
+        "difficulty": 1,
+        "language": "telugu"
+      }
+    ]
+  },
+  {
+    "language": "telugu",
+    "tags": [
+      "model-seed",
+      "high-confidence-basic"
+    ],
+    "source": {
+      "type": "model-knowledge",
+      "generatedAt": "2026-02-21T17:37:26.505Z",
+      "reviewStatus": "approved"
+    },
+    "originalScript": "స్వాగతం",
+    "transliteration": "swaagatam",
+    "english": "welcome",
+    "partOfSpeech": "phrase",
+    "difficulty": 1,
+    "difficultyLevel": "beginner",
+    "frequencyScore": 0.79,
+    "cefrLevel": "A1",
+    "clusters": [
+      "greetings",
+      "daily-use"
+    ],
+    "examples": [
+      {
+        "originalScript": "మా ఇంటికి స్వాగతం.",
+        "pronunciation": "maa intiki swaagatam.",
+        "english": "Welcome to our home.",
+        "contextTag": "home",
+        "difficulty": 1,
+        "language": "telugu"
+      }
+    ]
+  },
+  {
+    "language": "telugu",
+    "tags": [
+      "model-seed",
+      "high-confidence-basic"
+    ],
+    "source": {
+      "type": "model-knowledge",
+      "generatedAt": "2026-02-21T17:37:26.505Z",
+      "reviewStatus": "approved"
+    },
+    "originalScript": "ఎంత",
+    "transliteration": "enta",
+    "english": "how much",
+    "partOfSpeech": "pronoun",
+    "difficulty": 1,
+    "difficultyLevel": "beginner",
+    "frequencyScore": 0.77,
+    "cefrLevel": "A1",
+    "clusters": [
+      "question-words",
+      "shopping"
+    ],
+    "examples": [
+      {
+        "originalScript": "ఇది ఎంత?",
+        "pronunciation": "idi enta?",
+        "english": "How much is this?",
+        "contextTag": "shopping",
+        "difficulty": 1,
+        "language": "telugu"
+      }
+    ]
+  },
+  {
+    "language": "telugu",
+    "tags": [
+      "model-seed",
+      "high-confidence-basic"
+    ],
+    "source": {
+      "type": "model-knowledge",
+      "generatedAt": "2026-02-21T17:37:26.505Z",
+      "reviewStatus": "approved"
+    },
+    "originalScript": "ఎడమ",
+    "transliteration": "edama",
+    "english": "left",
+    "partOfSpeech": "noun",
+    "difficulty": 1,
+    "difficultyLevel": "beginner",
+    "frequencyScore": 0.74,
+    "cefrLevel": "A1",
+    "clusters": [
+      "travel",
+      "places"
+    ],
+    "examples": [
+      {
+        "originalScript": "ఎడమ వైపు తిరుగు.",
+        "pronunciation": "edama vaipu tirugu.",
+        "english": "Turn left.",
+        "contextTag": "travel",
+        "difficulty": 1,
+        "language": "telugu"
+      }
+    ]
+  },
+  {
+    "language": "telugu",
+    "tags": [
+      "model-seed",
+      "high-confidence-basic"
+    ],
+    "source": {
+      "type": "model-knowledge",
+      "generatedAt": "2026-02-21T17:37:26.505Z",
+      "reviewStatus": "approved"
+    },
+    "originalScript": "కుడి",
+    "transliteration": "kudi",
+    "english": "right",
+    "partOfSpeech": "noun",
+    "difficulty": 1,
+    "difficultyLevel": "beginner",
+    "frequencyScore": 0.74,
+    "cefrLevel": "A1",
+    "clusters": [
+      "travel",
+      "places"
+    ],
+    "examples": [
+      {
+        "originalScript": "కుడి వైపు తిరుగు.",
+        "pronunciation": "kudi vaipu tirugu.",
+        "english": "Turn right.",
+        "contextTag": "travel",
+        "difficulty": 1,
+        "language": "telugu"
+      }
+    ]
+  },
+  {
+    "language": "telugu",
+    "tags": [
+      "model-seed",
+      "high-confidence-basic"
+    ],
+    "source": {
+      "type": "model-knowledge",
+      "generatedAt": "2026-02-21T17:37:26.505Z",
+      "reviewStatus": "approved"
+    },
+    "originalScript": "నేరుగా",
+    "transliteration": "neruga",
+    "english": "straight",
+    "partOfSpeech": "adverb",
+    "difficulty": 1,
+    "difficultyLevel": "beginner",
+    "frequencyScore": 0.73,
+    "cefrLevel": "A1",
+    "clusters": [
+      "travel",
+      "places"
+    ],
+    "examples": [
+      {
+        "originalScript": "నేరుగా వెళ్ళండి.",
+        "pronunciation": "neruga vellandi.",
+        "english": "Go straight.",
+        "contextTag": "travel",
+        "difficulty": 1,
+        "language": "telugu"
+      }
+    ]
+  },
+  {
+    "language": "telugu",
+    "tags": [
+      "model-seed",
+      "high-confidence-basic"
+    ],
+    "source": {
+      "type": "model-knowledge",
+      "generatedAt": "2026-02-21T17:37:26.505Z",
+      "reviewStatus": "approved"
+    },
+    "originalScript": "త్వరగా",
+    "transliteration": "tvaraga",
+    "english": "quickly",
+    "partOfSpeech": "adverb",
+    "difficulty": 1,
+    "difficultyLevel": "beginner",
+    "frequencyScore": 0.75,
+    "cefrLevel": "A1",
+    "clusters": [
+      "daily-use",
+      "descriptions"
+    ],
+    "examples": [
+      {
+        "originalScript": "త్వరగా రండి.",
+        "pronunciation": "tvaraga randi.",
+        "english": "Come quickly.",
+        "contextTag": "daily-use",
+        "difficulty": 1,
+        "language": "telugu"
+      }
+    ]
+  },
+  {
+    "language": "telugu",
+    "tags": [
+      "model-seed",
+      "high-confidence-basic"
+    ],
+    "source": {
+      "type": "model-knowledge",
+      "generatedAt": "2026-02-21T17:37:26.505Z",
+      "reviewStatus": "approved"
+    },
+    "originalScript": "ఒక నిమిషం",
+    "transliteration": "oka nimisham",
+    "english": "one minute",
+    "partOfSpeech": "phrase",
+    "difficulty": 1,
+    "difficultyLevel": "beginner",
+    "frequencyScore": 0.76,
+    "cefrLevel": "A1",
+    "clusters": [
+      "time",
+      "daily-use"
+    ],
+    "examples": [
+      {
+        "originalScript": "ఒక నిమిషం ఆగండి.",
+        "pronunciation": "oka nimisham aagandi.",
+        "english": "Please wait one minute.",
+        "contextTag": "time",
+        "difficulty": 1,
+        "language": "telugu"
+      }
+    ]
+  },
+  {
+    "language": "telugu",
+    "tags": [
+      "model-seed",
+      "high-confidence-basic"
+    ],
+    "source": {
+      "type": "model-knowledge",
+      "generatedAt": "2026-02-21T17:37:26.505Z",
+      "reviewStatus": "approved"
+    },
+    "originalScript": "కలం",
+    "transliteration": "kalam",
+    "english": "pen",
+    "partOfSpeech": "noun",
+    "difficulty": 1,
+    "difficultyLevel": "beginner",
+    "frequencyScore": 0.72,
+    "cefrLevel": "A1",
+    "clusters": [
+      "education",
+      "daily-use"
+    ],
+    "examples": [
+      {
+        "originalScript": "నా కలం ఎక్కడ ఉంది?",
+        "pronunciation": "naa kalam ekkada undi?",
+        "english": "Where is my pen?",
+        "contextTag": "education",
+        "difficulty": 1,
+        "language": "telugu"
+      }
+    ]
+  },
+  {
+    "language": "telugu",
+    "tags": [
+      "model-seed",
+      "high-confidence-basic"
+    ],
+    "source": {
+      "type": "model-knowledge",
+      "generatedAt": "2026-02-21T17:38:53.830Z",
+      "reviewStatus": "approved"
+    },
+    "originalScript": "రోజు",
+    "transliteration": "roju",
+    "english": "day",
+    "partOfSpeech": "noun",
+    "difficulty": 1,
+    "difficultyLevel": "beginner",
+    "frequencyScore": 0.85,
+    "cefrLevel": "A1",
+    "clusters": [
+      "time",
+      "daily-use"
+    ],
+    "examples": [
+      {
+        "originalScript": "ఈ రోజు చాలా పని ఉంది.",
+        "pronunciation": "ii roju chaalaa pani undi.",
+        "english": "There is a lot of work today.",
+        "contextTag": "time",
+        "difficulty": 1,
+        "language": "telugu"
+      }
+    ]
+  },
+  {
+    "language": "telugu",
+    "tags": [
+      "model-seed",
+      "high-confidence-basic"
+    ],
+    "source": {
+      "type": "model-knowledge",
+      "generatedAt": "2026-02-21T17:38:53.830Z",
+      "reviewStatus": "approved"
+    },
+    "originalScript": "వారం",
+    "transliteration": "vaaram",
+    "english": "week",
+    "partOfSpeech": "noun",
+    "difficulty": 1,
+    "difficultyLevel": "beginner",
+    "frequencyScore": 0.77,
+    "cefrLevel": "A1",
+    "clusters": [
+      "time",
+      "daily-use"
+    ],
+    "examples": [
+      {
+        "originalScript": "ఒక వారం తర్వాత పరీక్ష ఉంది.",
+        "pronunciation": "oka vaaram tarvaata pariksha undi.",
+        "english": "The exam is after one week.",
+        "contextTag": "time",
+        "difficulty": 1,
+        "language": "telugu"
+      }
+    ]
+  },
+  {
+    "language": "telugu",
+    "tags": [
+      "model-seed",
+      "high-confidence-basic"
+    ],
+    "source": {
+      "type": "model-knowledge",
+      "generatedAt": "2026-02-21T17:38:53.830Z",
+      "reviewStatus": "approved"
+    },
+    "originalScript": "నెల",
+    "transliteration": "nela",
+    "english": "month",
+    "partOfSpeech": "noun",
+    "difficulty": 1,
+    "difficultyLevel": "beginner",
+    "frequencyScore": 0.76,
+    "cefrLevel": "A1",
+    "clusters": [
+      "time",
+      "daily-use"
+    ],
+    "examples": [
+      {
+        "originalScript": "ఈ నెలలో మేము ప్రయాణం చేస్తాము.",
+        "pronunciation": "ii nelalo memu prayanam chestaamu.",
+        "english": "We will travel this month.",
+        "contextTag": "time",
+        "difficulty": 1,
+        "language": "telugu"
+      }
+    ]
+  },
+  {
+    "language": "telugu",
+    "tags": [
+      "model-seed",
+      "high-confidence-basic"
+    ],
+    "source": {
+      "type": "model-knowledge",
+      "generatedAt": "2026-02-21T17:38:53.830Z",
+      "reviewStatus": "approved"
+    },
+    "originalScript": "సంవత్సరం",
+    "transliteration": "samvatsaram",
+    "english": "year",
+    "partOfSpeech": "noun",
+    "difficulty": 1,
+    "difficultyLevel": "beginner",
+    "frequencyScore": 0.74,
+    "cefrLevel": "A1",
+    "clusters": [
+      "time",
+      "daily-use"
+    ],
+    "examples": [
+      {
+        "originalScript": "ఈ సంవత్సరం నేను తెలుగు నేర్చుకుంటున్నాను.",
+        "pronunciation": "ii samvatsaram nenu telugu nerchukuntunnaanu.",
+        "english": "I am learning Telugu this year.",
+        "contextTag": "time",
+        "difficulty": 1,
+        "language": "telugu"
+      }
+    ]
+  },
+  {
+    "language": "telugu",
+    "tags": [
+      "model-seed",
+      "high-confidence-basic"
+    ],
+    "source": {
+      "type": "model-knowledge",
+      "generatedAt": "2026-02-21T17:38:53.830Z",
+      "reviewStatus": "approved"
+    },
+    "originalScript": "పేరు",
+    "transliteration": "peru",
+    "english": "name",
+    "partOfSpeech": "noun",
+    "difficulty": 1,
+    "difficultyLevel": "beginner",
+    "frequencyScore": 0.88,
+    "cefrLevel": "A1",
+    "clusters": [
+      "people",
+      "daily-use"
+    ],
+    "examples": [
+      {
+        "originalScript": "నీ పేరు ఏమిటి?",
+        "pronunciation": "nii peru emiti?",
+        "english": "What is your name?",
+        "contextTag": "people",
+        "difficulty": 1,
+        "language": "telugu"
+      }
+    ]
+  },
+  {
+    "language": "telugu",
+    "tags": [
+      "model-seed",
+      "high-confidence-basic"
+    ],
+    "source": {
+      "type": "model-knowledge",
+      "generatedAt": "2026-02-21T17:38:53.830Z",
+      "reviewStatus": "approved"
+    },
+    "originalScript": "ధర",
+    "transliteration": "dhara",
+    "english": "price",
+    "partOfSpeech": "noun",
+    "difficulty": 1,
+    "difficultyLevel": "beginner",
+    "frequencyScore": 0.72,
+    "cefrLevel": "A1",
+    "clusters": [
+      "shopping",
+      "daily-use"
+    ],
+    "examples": [
+      {
+        "originalScript": "ఈ వస్తువు ధర ఎంత?",
+        "pronunciation": "ii vastuuvu dhara enta?",
+        "english": "What is the price of this item?",
+        "contextTag": "shopping",
+        "difficulty": 1,
+        "language": "telugu"
+      }
+    ]
+  },
+  {
+    "language": "telugu",
+    "tags": [
+      "model-seed",
+      "high-confidence-basic"
+    ],
+    "source": {
+      "type": "model-knowledge",
+      "generatedAt": "2026-02-21T17:38:53.830Z",
+      "reviewStatus": "approved"
+    },
+    "originalScript": "దగ్గర",
+    "transliteration": "daggara",
+    "english": "near",
+    "partOfSpeech": "adverb",
+    "difficulty": 1,
+    "difficultyLevel": "beginner",
+    "frequencyScore": 0.76,
+    "cefrLevel": "A1",
+    "clusters": [
+      "places",
+      "travel"
+    ],
+    "examples": [
+      {
+        "originalScript": "బస్ స్టాప్ దగ్గర ఉంది.",
+        "pronunciation": "bas stap daggara undi.",
+        "english": "The bus stop is near.",
+        "contextTag": "places",
+        "difficulty": 1,
+        "language": "telugu"
+      }
+    ]
+  },
+  {
+    "language": "telugu",
+    "tags": [
+      "model-seed",
+      "high-confidence-basic"
+    ],
+    "source": {
+      "type": "model-knowledge",
+      "generatedAt": "2026-02-21T17:38:53.830Z",
+      "reviewStatus": "approved"
+    },
+    "originalScript": "దూరం",
+    "transliteration": "dooram",
+    "english": "far",
+    "partOfSpeech": "adverb",
+    "difficulty": 1,
+    "difficultyLevel": "beginner",
+    "frequencyScore": 0.71,
+    "cefrLevel": "A1",
+    "clusters": [
+      "places",
+      "travel"
+    ],
+    "examples": [
+      {
+        "originalScript": "పాఠశాల ఇక్కడి నుండి దూరం కాదు.",
+        "pronunciation": "paathashaala ikkadi nundi dooram kaadu.",
+        "english": "The school is not far from here.",
+        "contextTag": "places",
+        "difficulty": 1,
+        "language": "telugu"
+      }
+    ]
+  },
+  {
+    "language": "telugu",
+    "tags": [
+      "model-seed",
+      "high-confidence-basic"
+    ],
+    "source": {
+      "type": "model-knowledge",
+      "generatedAt": "2026-02-21T17:38:53.830Z",
+      "reviewStatus": "approved"
+    },
+    "originalScript": "లోపల",
+    "transliteration": "lopala",
+    "english": "inside",
+    "partOfSpeech": "adverb",
+    "difficulty": 1,
+    "difficultyLevel": "beginner",
+    "frequencyScore": 0.7,
+    "cefrLevel": "A1",
+    "clusters": [
+      "home",
+      "places"
+    ],
+    "examples": [
+      {
+        "originalScript": "లోపలికి రండి.",
+        "pronunciation": "lopaliki randi.",
+        "english": "Please come inside.",
+        "contextTag": "home",
+        "difficulty": 1,
+        "language": "telugu"
+      }
+    ]
+  },
+  {
+    "language": "telugu",
+    "tags": [
+      "model-seed",
+      "high-confidence-basic"
+    ],
+    "source": {
+      "type": "model-knowledge",
+      "generatedAt": "2026-02-21T17:38:53.830Z",
+      "reviewStatus": "approved"
+    },
+    "originalScript": "బయట",
+    "transliteration": "bayata",
+    "english": "outside",
+    "partOfSpeech": "adverb",
+    "difficulty": 1,
+    "difficultyLevel": "beginner",
+    "frequencyScore": 0.7,
+    "cefrLevel": "A1",
+    "clusters": [
+      "home",
+      "places"
+    ],
+    "examples": [
+      {
+        "originalScript": "పిల్లలు బయట ఆడుతున్నారు.",
+        "pronunciation": "pillalu bayata aadutunnaaru.",
+        "english": "Children are playing outside.",
+        "contextTag": "home",
+        "difficulty": 1,
+        "language": "telugu"
+      }
+    ]
+  },
+  {
+    "language": "telugu",
+    "tags": [
+      "model-seed",
+      "high-confidence-basic"
+    ],
+    "source": {
+      "type": "model-knowledge",
+      "generatedAt": "2026-02-21T17:38:53.830Z",
+      "reviewStatus": "approved"
+    },
+    "originalScript": "ముందు",
+    "transliteration": "mundu",
+    "english": "before",
+    "partOfSpeech": "adverb",
+    "difficulty": 1,
+    "difficultyLevel": "beginner",
+    "frequencyScore": 0.72,
+    "cefrLevel": "A1",
+    "clusters": [
+      "time",
+      "daily-use"
+    ],
+    "examples": [
+      {
+        "originalScript": "భోజనం ముందు చేతులు కడుక్కో.",
+        "pronunciation": "bhojanam mundu chetulu kadukko.",
+        "english": "Wash your hands before food.",
+        "contextTag": "daily-use",
+        "difficulty": 1,
+        "language": "telugu"
+      }
+    ]
+  },
+  {
+    "language": "telugu",
+    "tags": [
+      "model-seed",
+      "high-confidence-basic"
+    ],
+    "source": {
+      "type": "model-knowledge",
+      "generatedAt": "2026-02-21T17:38:53.830Z",
+      "reviewStatus": "approved"
+    },
+    "originalScript": "తెరవు",
+    "transliteration": "teravu",
+    "english": "open",
+    "partOfSpeech": "verb",
+    "difficulty": 1,
+    "difficultyLevel": "beginner",
+    "frequencyScore": 0.7,
+    "cefrLevel": "A1",
+    "clusters": [
+      "daily-actions",
+      "home"
+    ],
+    "examples": [
+      {
+        "originalScript": "దయచేసి తలుపు తెరవు.",
+        "pronunciation": "dayachesi talupu teravu.",
+        "english": "Please open the door.",
+        "contextTag": "home",
+        "difficulty": 1,
+        "language": "telugu"
+      }
+    ]
+  },
+  {
+    "language": "telugu",
+    "tags": [
+      "model-seed",
+      "high-confidence-basic"
+    ],
+    "source": {
+      "type": "model-knowledge",
+      "generatedAt": "2026-02-21T17:38:53.830Z",
+      "reviewStatus": "approved"
+    },
+    "originalScript": "మూయి",
+    "transliteration": "muuyi",
+    "english": "close",
+    "partOfSpeech": "verb",
+    "difficulty": 1,
+    "difficultyLevel": "beginner",
+    "frequencyScore": 0.7,
+    "cefrLevel": "A1",
+    "clusters": [
+      "daily-actions",
+      "home"
+    ],
+    "examples": [
+      {
+        "originalScript": "తలుపు మూయి.",
+        "pronunciation": "talupu muuyi.",
+        "english": "Close the door.",
+        "contextTag": "home",
+        "difficulty": 1,
+        "language": "telugu"
+      }
+    ]
+  },
+  {
+    "language": "telugu",
+    "tags": [
+      "model-seed",
+      "high-confidence-basic"
+    ],
+    "source": {
+      "type": "model-knowledge",
+      "generatedAt": "2026-02-21T17:38:53.830Z",
+      "reviewStatus": "approved"
+    },
+    "originalScript": "ఆగు",
+    "transliteration": "aagu",
+    "english": "wait",
+    "partOfSpeech": "verb",
+    "difficulty": 1,
+    "difficultyLevel": "beginner",
+    "frequencyScore": 0.71,
+    "cefrLevel": "A1",
+    "clusters": [
+      "daily-actions",
+      "daily-use"
+    ],
+    "examples": [
+      {
+        "originalScript": "ఒక నిమిషం ఆగు.",
+        "pronunciation": "oka nimisham aagu.",
+        "english": "Wait for one minute.",
+        "contextTag": "daily-use",
+        "difficulty": 1,
+        "language": "telugu"
+      }
+    ]
+  },
+  {
+    "language": "telugu",
+    "tags": [
+      "model-seed",
+      "high-confidence-basic"
+    ],
+    "source": {
+      "type": "model-knowledge",
+      "generatedAt": "2026-02-21T17:38:53.830Z",
+      "reviewStatus": "approved"
+    },
+    "originalScript": "తిరుగు",
+    "transliteration": "tirugu",
+    "english": "turn",
+    "partOfSpeech": "verb",
+    "difficulty": 1,
+    "difficultyLevel": "beginner",
+    "frequencyScore": 0.7,
+    "cefrLevel": "A1",
+    "clusters": [
+      "travel",
+      "daily-actions"
+    ],
+    "examples": [
+      {
+        "originalScript": "రహదారి చివర ఎడమ వైపు తిరుగు.",
+        "pronunciation": "rahadaari chivara edama vaipu tirugu.",
+        "english": "Turn left at the end of the road.",
+        "contextTag": "travel",
+        "difficulty": 1,
+        "language": "telugu"
+      }
+    ]
+  },
+  {
+    "language": "telugu",
+    "tags": [
+      "model-seed",
+      "high-confidence-basic"
+    ],
+    "source": {
+      "type": "model-knowledge",
+      "generatedAt": "2026-02-21T17:38:53.830Z",
+      "reviewStatus": "approved"
+    },
+    "originalScript": "ఆపు",
+    "transliteration": "aapu",
+    "english": "stop",
+    "partOfSpeech": "verb",
+    "difficulty": 1,
+    "difficultyLevel": "beginner",
+    "frequencyScore": 0.71,
+    "cefrLevel": "A1",
+    "clusters": [
+      "daily-actions",
+      "daily-use"
+    ],
+    "examples": [
+      {
+        "originalScript": "ఇక్కడే ఆపు.",
+        "pronunciation": "ikkade aapu.",
+        "english": "Stop right here.",
+        "contextTag": "travel",
+        "difficulty": 1,
+        "language": "telugu"
+      }
+    ]
   }
 ]
