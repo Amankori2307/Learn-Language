@@ -49,3 +49,13 @@ Build a source language learning app focused on text-first retention and beginne
 - Compose is configured for dev hot reload (bind mount + `pnpm run dev` watch mode).
 - Database connection in compose: `postgresql://postgres:postgres@db:5432/mydb`.
 - Production-like startup still available via existing production entrypoint if needed.
+
+## Current execution focus
+
+- Phase 4 is complete.
+- Active next phase: Phase 6 core hardening (`context/plan/92-phase-6-core-hardening.md`).
+- Current priority order:
+  1. language isolation correctness and tests
+  2. strict content validation gates
+  3. env parity (local/docker/CI)
+  4. review governance v2 and SRS hardening

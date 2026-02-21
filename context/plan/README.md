@@ -12,7 +12,9 @@ This folder is intentionally compact and keeps only active context.
 6. `context/plan/58-phase-4c-words-first-and-sentence-feedback.md`: words-first learning flow implementation spec.
 7. `context/plan/60-phase-5-media-expansion-last.md`: deferred media-phase backlog.
 8. `context/plan/82-docker-setup.md`: Docker usage and hot-reload notes.
-9. `context/plan/99-daily-run-log.md`: latest progress snapshot and resume pointer.
+9. `context/plan/90-future-roadmap.md`: approved future product roadmap (must/should/good).
+10. `context/plan/92-phase-6-core-hardening.md`: active detailed execution plan for next core phase.
+11. `context/plan/99-daily-run-log.md`: latest progress snapshot and resume pointer.
 
 ## Operating rule
 
