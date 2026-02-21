@@ -12,13 +12,13 @@ Objective: define exact `(userId, language)` behavior for learner-facing endpoin
 
 | Endpoint | Method | Language input | User input | Expected scoped behavior | Empty-state behavior | Test ownership |
 |---|---|---|---|---|---|---|
-| `/api/quiz/generate` | `GET` | query `language` | auth session user | candidate pool only from selected language; scoring/progress lookups limited to selected language | returns `[]` when no candidates in selected language | `server/routes.language-isolation.integration.test.ts` (new) |
-| `/api/stats` | `GET` | query `language` | auth session user | totals, mastery, weak count, streak/xp, direction metrics computed only from selected language words/attempts | returns zero/neutral stats object for selected language | `server/routes.language-isolation.integration.test.ts` (new) |
-| `/api/attempts/history` | `GET` | query `language` | auth session user | attempt list includes only attempts joined to selected language words | returns `[]` | `server/routes.language-isolation.integration.test.ts` (new) |
-| `/api/clusters` | `GET` | query `language` | auth session user | cluster list contains clusters with at least one approved word in selected language | returns `[]` | `server/routes.language-isolation.integration.test.ts` (new) |
-| `/api/clusters/:id` | `GET` | query `language` | auth session user | cluster detail keeps cluster metadata, but words list limited to selected language approved words | returns cluster with empty `words` array if no matching words | `server/routes.language-isolation.integration.test.ts` (new) |
-| `/api/leaderboard` | `GET` | query `language` | auth session user | rank/xp/accuracy computed from selected language attempts only, across selected window | returns `[]` if no attempts in selected language window | `server/routes.language-isolation.integration.test.ts` (new), `server/services/leaderboard.test.ts` (window logic extension) |
-| `/api/words` | `GET` | query `language` | auth session user | only approved words from selected language are returned | returns `[]` | `server/routes.language-isolation.integration.test.ts` (new) |
+| `/api/quiz/generate` | `GET` | query `language` | auth session user | candidate pool only from selected language; scoring/progress lookups limited to selected language | returns `[]` when no candidates in selected language | `server/storage.language-isolation.integration.test.ts` |
+| `/api/stats` | `GET` | query `language` | auth session user | totals, mastery, weak count, streak/xp, direction metrics computed only from selected language words/attempts | returns zero/neutral stats object for selected language | `server/storage.language-isolation.integration.test.ts` |
+| `/api/attempts/history` | `GET` | query `language` | auth session user | attempt list includes only attempts joined to selected language words | returns `[]` | `server/storage.language-isolation.integration.test.ts` |
+| `/api/clusters` | `GET` | query `language` | auth session user | cluster list contains clusters with at least one approved word in selected language | returns `[]` | `server/storage.language-isolation.integration.test.ts` |
+| `/api/clusters/:id` | `GET` | query `language` | auth session user | cluster detail keeps cluster metadata, but words list limited to selected language approved words | returns cluster with empty `words` array if no matching words | `server/storage.language-isolation.integration.test.ts` |
+| `/api/leaderboard` | `GET` | query `language` | auth session user | rank/xp/accuracy computed from selected language attempts only, across selected window | returns `[]` if no attempts in selected language window | `server/storage.language-isolation.integration.test.ts`, `server/services/leaderboard.test.ts` |
+| `/api/words` | `GET` | query `language` | auth session user | only approved words from selected language are returned | returns `[]` | `server/storage.language-isolation.integration.test.ts` |
 
 ## Implementation checklist
 

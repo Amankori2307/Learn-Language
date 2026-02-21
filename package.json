@@ -17,7 +17,7 @@
     "lint": "pnpm exec eslint . && pnpm run check && pnpm run content:validate && pnpm run seed:verify-single-source && pnpm run test && pnpm run test:ui",
     "format": "pnpm exec prettier . --write",
     "format:check": "pnpm exec prettier . --check",
-    "test": "DATABASE_URL=${DATABASE_URL:-postgresql://postgres:postgres@localhost:5432/mydb} node --import tsx --test server/**/*.test.ts",
+    "test": "DATABASE_URL=${DATABASE_URL:-postgresql://postgres:postgres@localhost:5432/mydb} node --import tsx --test server/*.test.ts server/**/*.test.ts",
     "test:ui": "vitest run --config vitest.config.ts",
     "ci": "pnpm run lint && pnpm run typecheck && pnpm run test && pnpm run test:ui",
     "content:validate": "node --import tsx script/validate-content.ts assets/processed/seed.json",

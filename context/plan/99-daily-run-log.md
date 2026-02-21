@@ -2,9 +2,9 @@
 
 Date: 2026-02-21  
 Session owner: Codex  
-Last completed task ID: P6-001  
+Last completed task ID: P6-002  
 Current in-progress task ID: -  
-Next task ID: P6-002
+Next task ID: P6-003
 
 ## Current state
 
@@ -13,6 +13,7 @@ Next task ID: P6-002
 - Single command quality gate exists: `pnpm run lint`.
 - Future roadmap approved and converted into executable Phase 6 backlog.
 - Language-isolation endpoint matrix created with per-endpoint scoped behavior + test ownership.
+- Cross-language leakage integration coverage added and running in default lint pipeline.
 - Active pending work is now managed through:
   - `context/plan/01-master-task-registry.md`
   - `context/plan/92-phase-6-core-hardening.md`
@@ -24,7 +25,7 @@ Next task ID: P6-002
 
 ## Immediate next actions
 
-1. Execute `P6-002`: add cross-language leakage integration tests.
-2. Execute `P6-003`: harden storage queries with strict language scoping.
-3. Execute `P6-004`: validate language-aware leaderboard/stats windows.
+1. Execute `P6-003`: harden storage queries with strict language scoping.
+2. Execute `P6-004`: validate language-aware leaderboard/stats windows.
+3. Execute `P6-005`: extend strict content validator gates.
 4. Continue in strict order defined in `context/plan/92-phase-6-core-hardening.md`.

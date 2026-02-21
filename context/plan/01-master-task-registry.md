@@ -9,7 +9,7 @@ Only active and pending tasks are listed here. Completed tasks are intentionally
 | ID | Status | Task | Depends On | Effort | Done When |
 |---|---|---|---|---|---|
 | P6-001 | done | Build language-isolation endpoint matrix and implementation checklist for all learner-facing APIs (`quiz`, `stats`, `attempts`, `clusters`, `leaderboard`, `words`) | - | S | checklist maps every endpoint to expected `(userId, language)` behavior with test ownership |
-| P6-002 | todo | Add integration tests that prove no cross-language progress/stats leakage across endpoints | P6-001 | M | test suite fails if Telugu activity affects Hindi (or any other language) views for same user |
+| P6-002 | done | Add integration tests that prove no cross-language progress/stats leakage across endpoints | P6-001 | M | test suite fails if Telugu activity affects Hindi (or any other language) views for same user |
 | P6-003 | todo | Harden storage queries to enforce language filters consistently (including edge fallback paths) | P6-001 | M | query audit shows no unscoped learner data reads in core learning flows |
 | P6-004 | todo | Add language-aware leaderboard/stat analytics validation (windowed + all-time) | P6-002,P6-003 | M | leaderboard/stat windows reflect only selected language attempts/progress |
 | P6-005 | todo | Extend content validators with strict quality gates (duplicate transliteration collision, empty/low-quality pronunciation, inconsistent cluster/tag mappings) | P6-001 | M | invalid content fails `pnpm run lint` with actionable errors |

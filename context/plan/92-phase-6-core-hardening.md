@@ -49,7 +49,7 @@ Deliverable:
 ---
 
 ## P6-002 - Cross-language leakage integration tests
-Status: `todo`
+Status: `done`
 Depends on: `P6-001`
 
 Scope:
@@ -61,6 +61,9 @@ Scope:
 Acceptance criteria:
 - Failing behavior is reproducible if scoping is removed.
 - Passing tests cover quiz generation, stats, attempts, leaderboard at minimum.
+
+Deliverable:
+- `server/storage.language-isolation.integration.test.ts`
 
 ---
 
