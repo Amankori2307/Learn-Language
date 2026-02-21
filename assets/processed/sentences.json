@@ -1,0 +1,1410 @@
+[
+  {
+    "language": "telugu",
+    "originalScript": "నమస్తే, మీరు ఎలా ఉన్నారు?",
+    "pronunciation": "namastee, miiru elaa unnaaru?",
+    "english": "Hello, how are you?",
+    "contextTag": "daily-use",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::namaste::hello"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "మీ సహాయానికి ధన్యవాదాలు.",
+    "pronunciation": "mii sahaayaaniki dhanyavaadaalu.",
+    "english": "Thank you for your help.",
+    "contextTag": "daily-use",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::dhanyavaadalu::thank you"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "దయచేసి కూర్చోండి.",
+    "pronunciation": "dayacheesi kuurchoomdi.",
+    "english": "Please sit down.",
+    "contextTag": "daily-use",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::dayachesi::please"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "క్షమించండి, నాకు అర్థం కాలేదు.",
+    "pronunciation": "kshamimchamdi, naaku artham kaaleedu.",
+    "english": "Sorry, I did not understand.",
+    "contextTag": "daily-use",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::kshaminchandi::sorry / excuse me"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "అవును, నేను వస్తాను.",
+    "pronunciation": "avunu, neenu vastaanu.",
+    "english": "Yes, I will come.",
+    "contextTag": "daily-use",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::avunu::yes"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "కాదు, అది నా పుస్తకం కాదు.",
+    "pronunciation": "kaadu, adi naa pustakam kaadu.",
+    "english": "No, that is not my book.",
+    "contextTag": "daily-use",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::kaadu::no / not"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "సరే, మనం వెళ్లుదాం.",
+    "pronunciation": "saree, manam velludaam.",
+    "english": "Okay, let us go.",
+    "contextTag": "daily-use",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::sare::okay"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "ఈ ఆలోచన బాగుంది.",
+    "pronunciation": "ii aaloochana baagumdi.",
+    "english": "This idea is good.",
+    "contextTag": "daily-use",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::bagundi::it is good"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "నేను తెలుగు నేర్చుకుంటున్నాను.",
+    "pronunciation": "neenu bhaasha neerchukumtunnaanu.",
+    "english": "I am learning the language.",
+    "contextTag": "daily-use",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::nenu::i"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "నువ్వు ఎక్కడ ఉంటావు?",
+    "pronunciation": "nuvvu ekkada umtaavu?",
+    "english": "Where do you live?",
+    "contextTag": "daily-use",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::nuvvu::you (informal)"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "మీరు ఏమి చేస్తారు?",
+    "pronunciation": "miiru eemi cheestaaru?",
+    "english": "What do you do?",
+    "contextTag": "daily-use",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::meeru::you (formal/plural)"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "అతను నా స్నేహితుడు.",
+    "pronunciation": "atanu naa sneehitudu.",
+    "english": "He is my friend.",
+    "contextTag": "daily-use",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::atanu::he"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "ఆమె మంచి టీచర్.",
+    "pronunciation": "aame mamchi tiichar.",
+    "english": "She is a good teacher.",
+    "contextTag": "daily-use",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::aame::she"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "ఇది నా ఫోన్.",
+    "pronunciation": "idi naa phoon.",
+    "english": "This is my phone.",
+    "contextTag": "daily-use",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::idi::this"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "అది మా ఇల్లు.",
+    "pronunciation": "adi maa illu.",
+    "english": "That is our house.",
+    "contextTag": "daily-use",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::adi::that"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "మనం ఇప్పుడు మొదలుపెడదాం.",
+    "pronunciation": "manam ippudu modalupedadaam.",
+    "english": "Let us start now.",
+    "contextTag": "daily-use",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::manam::we (inclusive)"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "మేము హైదరాబాద్‌లో ఉంటాం.",
+    "pronunciation": "meemu haidaraabaad‌loo umtaam.",
+    "english": "We live in Hyderabad.",
+    "contextTag": "daily-use",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::memu::we (exclusive)"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "వాళ్లు స్కూల్‌కి వెళ్లారు.",
+    "pronunciation": "vaallu skuul‌ki vellaaru.",
+    "english": "They went to school.",
+    "contextTag": "daily-use",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::vaallu::they"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "ఇది ఏమి?",
+    "pronunciation": "idi eemi?",
+    "english": "What is this?",
+    "contextTag": "daily-use",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::emi::what"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "అతను ఎవరు?",
+    "pronunciation": "atanu evaru?",
+    "english": "Who is he?",
+    "contextTag": "daily-use",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::evaru::who"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "మీ ఇల్లు ఎక్కడ?",
+    "pronunciation": "mii illu ekkada?",
+    "english": "Where is your house?",
+    "contextTag": "daily-use",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::ekkada::where"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "మీరు ఎప్పుడు వస్తారు?",
+    "pronunciation": "miiru eppudu vastaaru?",
+    "english": "When will you come?",
+    "contextTag": "daily-use",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::eppudu::when"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "ఇది ఎలా పనిచేస్తుంది?",
+    "pronunciation": "idi elaa panicheestumdi?",
+    "english": "How does this work?",
+    "contextTag": "daily-use",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::ela::how"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "నువ్వు ఎందుకు ఆలస్యంగా వచ్చావు?",
+    "pronunciation": "nuvvu emduku aalasyamgaa vachchaavu?",
+    "english": "Why did you come late?",
+    "contextTag": "daily-use",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::enduku::why"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "నా దగ్గర ఒకటి పుస్తకం ఉంది.",
+    "pronunciation": "naa daggara okati pustakam umdi.",
+    "english": "I have one book.",
+    "contextTag": "daily-use",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::okati::one"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "మాకు రెండు పిల్లలు ఉన్నారు.",
+    "pronunciation": "maaku remdu pillalu unnaaru.",
+    "english": "We have two children.",
+    "contextTag": "daily-use",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::rendu::two"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "మూడు రోజుల తర్వాత రండి.",
+    "pronunciation": "muudu roojula tarvaata ramdi.",
+    "english": "Come after three days.",
+    "contextTag": "daily-use",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::moodu::three"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "నాలుగు కుర్చీలు కావాలి.",
+    "pronunciation": "naalugu kurchiilu kaavaali.",
+    "english": "We need four chairs.",
+    "contextTag": "daily-use",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::naalugu::four"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "ఐదు నిమిషాలు వేచి ఉండండి.",
+    "pronunciation": "aidu nimishaalu veechi umdamdi.",
+    "english": "Please wait five minutes.",
+    "contextTag": "daily-use",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::aidu::five"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "పది గంటలకు మీటింగ్ ఉంది.",
+    "pronunciation": "padi gamtalaku miitimg umdi.",
+    "english": "There is a meeting at ten o'clock.",
+    "contextTag": "daily-use",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::padi::ten"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "ఇరవై మంది విద్యార్థులు ఉన్నారు.",
+    "pronunciation": "iravai mamdi vidyaarthulu unnaaru.",
+    "english": "There are twenty students.",
+    "contextTag": "daily-use",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::iravai::twenty"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "ఈరోజు వాతావరణం చల్లగా ఉంది.",
+    "pronunciation": "iirooju vaataavaranam challagaa umdi.",
+    "english": "Today the weather is cool.",
+    "contextTag": "daily-use",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::eeroju::today"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "రేపు కలుద్దాం.",
+    "pronunciation": "reepu kaluddaam.",
+    "english": "Let us meet tomorrow.",
+    "contextTag": "daily-use",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::repu::tomorrow"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "నిన్న నేను ఇంట్లోనే ఉన్నాను.",
+    "pronunciation": "ninna neenu imtloonee unnaanu.",
+    "english": "Yesterday I stayed at home.",
+    "contextTag": "daily-use",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::ninna::yesterday"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "ఇప్పుడు మొదలు పెడదాం.",
+    "pronunciation": "ippudu modalu pedadaam.",
+    "english": "Let us start now.",
+    "contextTag": "daily-use",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::ippudu::now"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "నేను తర్వాత ఫోన్ చేస్తాను.",
+    "pronunciation": "neenu tarvaata phoon cheestaanu.",
+    "english": "I will call later.",
+    "contextTag": "daily-use",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::taruvata::later / after"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "ఉదయం నేను నడకకు వెళ్తాను.",
+    "pronunciation": "udayam neenu nadakaku veltaanu.",
+    "english": "I go for a walk in the morning.",
+    "contextTag": "daily-use",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::udayam::morning"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "సాయంత్రం టీ తాగుదాం.",
+    "pronunciation": "saayamtram tii taagudaam.",
+    "english": "Let us drink tea in the evening.",
+    "contextTag": "daily-use",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::saayantram::evening"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "రాత్రి త్వరగా నిద్రపో.",
+    "pronunciation": "raatri tvaragaa nidrapoo.",
+    "english": "Sleep early at night.",
+    "contextTag": "daily-use",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::raatri::night"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "నీ సమయం విలువైనది.",
+    "pronunciation": "nii samayam viluvainadi.",
+    "english": "Your time is valuable.",
+    "contextTag": "daily-use",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::samayam::time"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "నా అమ్మ చాలా మంచిది.",
+    "pronunciation": "naa amma chaalaa mamchidi.",
+    "english": "My mother is very kind.",
+    "contextTag": "daily-use",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::amma::mother"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "నా నాన్న ఆఫీసుకి వెళ్లారు.",
+    "pronunciation": "naa naanna aaphiisuki vellaaru.",
+    "english": "My father went to the office.",
+    "contextTag": "daily-use",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::nanna::father"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "నా అన్న హైదరాబాద్‌లో ఉంటాడు.",
+    "pronunciation": "naa anna haidaraabaad‌loo umtaadu.",
+    "english": "My elder brother lives in Hyderabad.",
+    "contextTag": "daily-use",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::anna::elder brother"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "నా అక్క డాక్టర్.",
+    "pronunciation": "naa akka daaktar.",
+    "english": "My elder sister is a doctor.",
+    "contextTag": "daily-use",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::akka::elder sister"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "నా తమ్ముడు క్రికెట్ ఆడుతాడు.",
+    "pronunciation": "naa tammudu kriket aadutaadu.",
+    "english": "My younger brother plays cricket.",
+    "contextTag": "daily-use",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::tammudu::younger brother"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "నా చెల్లి పాట పాడుతుంది.",
+    "pronunciation": "naa chelli paata paadutumdi.",
+    "english": "My younger sister sings songs.",
+    "contextTag": "daily-use",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::chelli::younger sister"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "మా కుటుంబం పెద్దది.",
+    "pronunciation": "maa kutumbam peddadi.",
+    "english": "Our family is big.",
+    "contextTag": "daily-use",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::kutumbam::family"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "అతను నా మంచి స్నేహితుడు.",
+    "pronunciation": "atanu naa mamchi sneehitudu.",
+    "english": "He is my good friend.",
+    "contextTag": "daily-use",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::snehitudu::friend (male)"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "ఆమె నా స్నేహితురాలు.",
+    "pronunciation": "aame naa sneehituraalu.",
+    "english": "She is my friend.",
+    "contextTag": "daily-use",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::snehituralu::friend (female)"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "మా ఇల్లు పెద్దది.",
+    "pronunciation": "maa illu peddadi.",
+    "english": "Our house is big.",
+    "contextTag": "daily-use",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::illu::house"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "నేను తెలుగు పుస్తకం చదువుతున్నాను.",
+    "pronunciation": "neenu bhaasha pustakam chaduvutunnaanu.",
+    "english": "I am reading a the language book.",
+    "contextTag": "daily-use",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::pustakam::book"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "పిల్లలు పాఠశాలకు వెళ్లారు.",
+    "pronunciation": "pillalu paathashaalaku vellaaru.",
+    "english": "The children went to school.",
+    "contextTag": "daily-use",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::paatashaala::school"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "నాకు నీరు కావాలి.",
+    "pronunciation": "naaku niiru kaavaali.",
+    "english": "I need water.",
+    "contextTag": "daily-use",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::neeru::water"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "అన్నం వేడిగా ఉంది.",
+    "pronunciation": "annam veedigaa umdi.",
+    "english": "The rice is hot.",
+    "contextTag": "daily-use",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::annam::cooked rice / meal"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "నేను ప్రతి రోజు పండు తింటాను.",
+    "pronunciation": "neenu prati rooju pamdu timtaanu.",
+    "english": "I eat fruit every day.",
+    "contextTag": "daily-use",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::pandu::fruit"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "బస్సు సమయానికి వచ్చింది.",
+    "pronunciation": "bassu samayaaniki vachchimdi.",
+    "english": "The bus arrived on time.",
+    "contextTag": "daily-use",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::bassu::bus"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "ఈ రోడు నగరానికి వెళ్తుంది.",
+    "pronunciation": "ii roodu nagaraaniki veltumdi.",
+    "english": "This road goes to the city.",
+    "contextTag": "daily-use",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::rodu::road"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "నా గ్రామం చాలా అందంగా ఉంటుంది.",
+    "pronunciation": "naa graamam chaalaa amdamgaa umtumdi.",
+    "english": "My village is very beautiful.",
+    "contextTag": "daily-use",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::graamam::village"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "హైదరాబాద్ ఒక పెద్ద నగరం.",
+    "pronunciation": "haidaraabaad oka pedda nagaram.",
+    "english": "Hyderabad is a big city.",
+    "contextTag": "daily-use",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::nagaram::city"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "నాకు ఈరోజు చాలా పని ఉంది.",
+    "pronunciation": "naaku iirooju chaalaa pani umdi.",
+    "english": "I have a lot of work today.",
+    "contextTag": "daily-use",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::pani::work"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "నాకు కొంచెం డబ్బు కావాలి.",
+    "pronunciation": "naaku komchem dabbu kaavaali.",
+    "english": "I need some money.",
+    "contextTag": "daily-use",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::dabbu::money"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "తెలుగు ఒక అందమైన భాష.",
+    "pronunciation": "bhaasha oka amdamaina bhaasha.",
+    "english": "the language is a beautiful language.",
+    "contextTag": "daily-use",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::bhaasha::language"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "మీ సహాయం నాకు అవసరం.",
+    "pronunciation": "mii sahaayam naaku avasaram.",
+    "english": "I need your help.",
+    "contextTag": "daily-use",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::sahaayam::help"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "మనము మార్కెట్‌కి వెళ్దాం.",
+    "pronunciation": "manamu maarket‌ki veldaam.",
+    "english": "Let us go to the market.",
+    "contextTag": "daily-use",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::vellu::go"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "ఇక్కడికి రా.",
+    "pronunciation": "ikkadiki raa.",
+    "english": "Come here.",
+    "contextTag": "daily-use",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::raa::come"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "సమయానికి భోజనం తిను.",
+    "pronunciation": "samayaaniki bhoojanam tinu.",
+    "english": "Eat your meal on time.",
+    "contextTag": "daily-use",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::tinu::eat"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "రోజూ ఎక్కువ నీరు తాగు.",
+    "pronunciation": "roojuu ekkuva niiru taagu.",
+    "english": "Drink more water daily.",
+    "contextTag": "daily-use",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::taagu::drink"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "ప్రతి రోజు తెలుగు చదువు.",
+    "pronunciation": "prati rooju bhaasha chaduvu.",
+    "english": "Study the language every day.",
+    "contextTag": "daily-use",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::chaduvu::study / read"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "నీ పేరు ఇక్కడ రాయి.",
+    "pronunciation": "nii peeru ikkada raayi.",
+    "english": "Write your name here.",
+    "contextTag": "daily-use",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::raayi::write"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "ఈ చిత్రం చూడు.",
+    "pronunciation": "ii chitram chuudu.",
+    "english": "Look at this picture.",
+    "contextTag": "daily-use",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::choodu::see / look"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "నెమ్మదిగా మాట్లాడు.",
+    "pronunciation": "nemmadigaa maatlaadu.",
+    "english": "Speak slowly.",
+    "contextTag": "daily-use",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::maatlaadu::speak / talk"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "జాగ్రత్తగా విను.",
+    "pronunciation": "jaagrattagaa vinu.",
+    "english": "Listen carefully.",
+    "contextTag": "daily-use",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::vinu::listen / hear"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "రాత్రి తొందరగా నిద్రపో.",
+    "pronunciation": "raatri tomdaragaa nidrapoo.",
+    "english": "Sleep early at night.",
+    "contextTag": "daily-use",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::nidrapo::sleep"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "ఇక్కడ కూర్చో.",
+    "pronunciation": "ikkada kuurchoo.",
+    "english": "Sit here.",
+    "contextTag": "daily-use",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::koorcho::sit"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "లైన్లో నిలబడు.",
+    "pronunciation": "lainloo nilabadu.",
+    "english": "Stand in the line.",
+    "contextTag": "daily-use",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::nilabadu::stand"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "దయచేసి నాకు నీ పుస్తకం ఇవ్వు.",
+    "pronunciation": "dayacheesi naaku nii pustakam ivvu.",
+    "english": "Please give me your book.",
+    "contextTag": "daily-use",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::ivvu::give"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "ఈ పెన్ను తీసుకో.",
+    "pronunciation": "ii pennu tiisukoo.",
+    "english": "Take this pen.",
+    "contextTag": "daily-use",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::teesuko::take"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "ఈ పని ఇప్పుడే చేయి.",
+    "pronunciation": "ii pani ippudee cheeyi.",
+    "english": "Do this work now.",
+    "contextTag": "daily-use",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::cheyi::do"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "నాకు ఈ పదం తెలుసు.",
+    "pronunciation": "naaku ii padam telusu.",
+    "english": "I know this word.",
+    "contextTag": "daily-use",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::telusu::know"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "ఇప్పుడు నాకు అర్థం అయింది.",
+    "pronunciation": "ippudu naaku artham ayimdi.",
+    "english": "Now I understood.",
+    "contextTag": "daily-use",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::artham avu::understand"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "అతను మంచి మనిషి.",
+    "pronunciation": "atanu mamchi manishi.",
+    "english": "He is a good person.",
+    "contextTag": "daily-use",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::manchi::good"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "ఇది చెడు అలవాటు.",
+    "pronunciation": "idi chedu alavaatu.",
+    "english": "This is a bad habit.",
+    "contextTag": "daily-use",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::chedu::bad"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "ఇది పెద్ద ఇల్లు.",
+    "pronunciation": "idi pedda illu.",
+    "english": "This is a big house.",
+    "contextTag": "daily-use",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::pedda::big"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "అది చిన్న పుస్తకం.",
+    "pronunciation": "adi chinna pustakam.",
+    "english": "That is a small book.",
+    "contextTag": "daily-use",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::chinna::small"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "నేను కొత్త ఫోన్ కొన్నాను.",
+    "pronunciation": "neenu kotta phoon konnaanu.",
+    "english": "I bought a new phone.",
+    "contextTag": "daily-use",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::kotta::new"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "ఇది పాత ఇల్లు.",
+    "pronunciation": "idi paata illu.",
+    "english": "This is an old house.",
+    "contextTag": "daily-use",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::paata::old"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "ఆమె చాలా తెలివైనది.",
+    "pronunciation": "aame chaalaa telivainadi.",
+    "english": "She is very smart.",
+    "contextTag": "daily-use",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::chaala::very / much"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "దయచేసి నెమ్మదిగా మాట్లాడు.",
+    "pronunciation": "dayacheesi nemmadigaa maatlaadu.",
+    "english": "Please speak slowly.",
+    "contextTag": "daily-use",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::nemmadiga::slowly"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "అతను వేగంగా పరుగెత్తాడు.",
+    "pronunciation": "atanu veegamgaa parugettaadu.",
+    "english": "He ran quickly.",
+    "contextTag": "daily-use",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::veganga::quickly"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "ఇక్కడ వేచి ఉండు.",
+    "pronunciation": "ikkada veechi umdu.",
+    "english": "Wait here.",
+    "contextTag": "daily-use",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::ikkada::here"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "అక్కడ ఒక దుకాణం ఉంది.",
+    "pronunciation": "akkada oka dukaanam umdi.",
+    "english": "There is a shop there.",
+    "contextTag": "daily-use",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::akkada::there"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "నా తల్లి ఇంట్లో ఉంది.",
+    "pronunciation": "naa talli intlo undi.",
+    "english": "My mother is at home.",
+    "contextTag": "family",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::talli::mother"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "నా తండ్రి పని చేస్తున్నాడు.",
+    "pronunciation": "naa tandri pani chestunnadu.",
+    "english": "My father is working.",
+    "contextTag": "family",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::tandri::father"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "ఆ బిడ్డ నవ్వుతోంది.",
+    "pronunciation": "aa bidda navvutondi.",
+    "english": "That child is smiling.",
+    "contextTag": "family",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::bidda::child"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "ఈ రహదారి చాలా పొడవైంది.",
+    "pronunciation": "ii rahadaari chala podavaindi.",
+    "english": "This road is very long.",
+    "contextTag": "travel",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::rahadaari::road"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "ఆమె బజారు కి వెళ్లింది.",
+    "pronunciation": "ame bazaaru ki vellindi.",
+    "english": "She went to the market.",
+    "contextTag": "shopping",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::bazaaru::market"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "మా గురువు తెలుగు బోధిస్తారు.",
+    "pronunciation": "maa guruvu telugu bodhistaaru.",
+    "english": "Our teacher teaches Telugu.",
+    "contextTag": "education",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::guruvu::teacher"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "అతను మంచి విద్యార్థి.",
+    "pronunciation": "atanu manchi vidyarthi.",
+    "english": "He is a good student.",
+    "contextTag": "education",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::vidyarthi::student"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "ఆమె తాజా కూరగాయలు కొనింది.",
+    "pronunciation": "ame taaja kooragayalu konnindi.",
+    "english": "She bought fresh vegetables.",
+    "contextTag": "food",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::kooragayalu::vegetables"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "నాకు పాలు కావాలి.",
+    "pronunciation": "naaku paalu kaavali.",
+    "english": "I want milk.",
+    "contextTag": "food",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::paalu::milk"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "నాకు ఒక ప్రశ్న ఉంది.",
+    "pronunciation": "naaku oka prashna undi.",
+    "english": "I have a question.",
+    "contextTag": "education",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::prashna::question"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "నీ సమాధానం సరైనది.",
+    "pronunciation": "nee samaadhaanam sariyainadi.",
+    "english": "Your answer is correct.",
+    "contextTag": "education",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::samaadhaanam::answer"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "శుభోదయం! మీ రోజు బాగుండాలి.",
+    "pronunciation": "shubhodayam! mii roju baagundaali.",
+    "english": "Good morning! Have a good day.",
+    "contextTag": "greetings",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::shubhodayam::good morning"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "శుభరాత్రి, రేపు కలుద్దాం.",
+    "pronunciation": "shubharaatri, repu kaluddaam.",
+    "english": "Good night, see you tomorrow.",
+    "contextTag": "greetings",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::shubharaatri::good night"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "మా ఇంటికి స్వాగతం.",
+    "pronunciation": "maa intiki swaagatam.",
+    "english": "Welcome to our home.",
+    "contextTag": "home",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::swaagatam::welcome"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "ఇది ఎంత?",
+    "pronunciation": "idi enta?",
+    "english": "How much is this?",
+    "contextTag": "shopping",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::enta::how much"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "ఎడమ వైపు తిరుగు.",
+    "pronunciation": "edama vaipu tirugu.",
+    "english": "Turn left.",
+    "contextTag": "travel",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::edama::left"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "కుడి వైపు తిరుగు.",
+    "pronunciation": "kudi vaipu tirugu.",
+    "english": "Turn right.",
+    "contextTag": "travel",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::kudi::right"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "నేరుగా వెళ్ళండి.",
+    "pronunciation": "neruga vellandi.",
+    "english": "Go straight.",
+    "contextTag": "travel",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::neruga::straight"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "త్వరగా రండి.",
+    "pronunciation": "tvaraga randi.",
+    "english": "Come quickly.",
+    "contextTag": "daily-use",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::tvaraga::quickly"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "ఒక నిమిషం ఆగండి.",
+    "pronunciation": "oka nimisham aagandi.",
+    "english": "Please wait one minute.",
+    "contextTag": "time",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::oka nimisham::one minute"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "నా కలం ఎక్కడ ఉంది?",
+    "pronunciation": "naa kalam ekkada undi?",
+    "english": "Where is my pen?",
+    "contextTag": "education",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::kalam::pen"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "ఈ రోజు చాలా పని ఉంది.",
+    "pronunciation": "ii roju chaalaa pani undi.",
+    "english": "There is a lot of work today.",
+    "contextTag": "time",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::roju::day"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "ఒక వారం తర్వాత పరీక్ష ఉంది.",
+    "pronunciation": "oka vaaram tarvaata pariksha undi.",
+    "english": "The exam is after one week.",
+    "contextTag": "time",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::vaaram::week"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "ఈ నెలలో మేము ప్రయాణం చేస్తాము.",
+    "pronunciation": "ii nelalo memu prayanam chestaamu.",
+    "english": "We will travel this month.",
+    "contextTag": "time",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::nela::month"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "ఈ సంవత్సరం నేను తెలుగు నేర్చుకుంటున్నాను.",
+    "pronunciation": "ii samvatsaram nenu telugu nerchukuntunnaanu.",
+    "english": "I am learning Telugu this year.",
+    "contextTag": "time",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::samvatsaram::year"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "నీ పేరు ఏమిటి?",
+    "pronunciation": "nii peru emiti?",
+    "english": "What is your name?",
+    "contextTag": "people",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::peru::name"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "ఈ వస్తువు ధర ఎంత?",
+    "pronunciation": "ii vastuuvu dhara enta?",
+    "english": "What is the price of this item?",
+    "contextTag": "shopping",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::dhara::price"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "బస్ స్టాప్ దగ్గర ఉంది.",
+    "pronunciation": "bas stap daggara undi.",
+    "english": "The bus stop is near.",
+    "contextTag": "places",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::daggara::near"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "పాఠశాల ఇక్కడి నుండి దూరం కాదు.",
+    "pronunciation": "paathashaala ikkadi nundi dooram kaadu.",
+    "english": "The school is not far from here.",
+    "contextTag": "places",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::dooram::far"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "లోపలికి రండి.",
+    "pronunciation": "lopaliki randi.",
+    "english": "Please come inside.",
+    "contextTag": "home",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::lopala::inside"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "పిల్లలు బయట ఆడుతున్నారు.",
+    "pronunciation": "pillalu bayata aadutunnaaru.",
+    "english": "Children are playing outside.",
+    "contextTag": "home",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::bayata::outside"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "భోజనం ముందు చేతులు కడుక్కో.",
+    "pronunciation": "bhojanam mundu chetulu kadukko.",
+    "english": "Wash your hands before food.",
+    "contextTag": "daily-use",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::mundu::before"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "దయచేసి తలుపు తెరవు.",
+    "pronunciation": "dayachesi talupu teravu.",
+    "english": "Please open the door.",
+    "contextTag": "home",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::teravu::open"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "తలుపు మూయి.",
+    "pronunciation": "talupu muuyi.",
+    "english": "Close the door.",
+    "contextTag": "home",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::muuyi::close"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "ఒక నిమిషం ఆగు.",
+    "pronunciation": "oka nimisham aagu.",
+    "english": "Wait for one minute.",
+    "contextTag": "daily-use",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::aagu::wait"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "రహదారి చివర ఎడమ వైపు తిరుగు.",
+    "pronunciation": "rahadaari chivara edama vaipu tirugu.",
+    "english": "Turn left at the end of the road.",
+    "contextTag": "travel",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::tirugu::turn"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "ఇక్కడే ఆపు.",
+    "pronunciation": "ikkade aapu.",
+    "english": "Stop right here.",
+    "contextTag": "travel",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::aapu::stop"
+    ]
+  }
+]

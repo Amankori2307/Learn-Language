@@ -3,7 +3,10 @@ import path from "path";
 
 const ROOT = process.cwd();
 const TARGET_DIRS = ["client", "server", "shared", "script", "docker"];
-const ALLOWED_SEED_PATH = "assets/processed/seed.json";
+const ALLOWED_SEED_PATHS = new Set([
+  "assets/processed/words.json",
+  "assets/processed/sentences.json",
+]);
 const CODE_EXTENSIONS = new Set([".ts", ".tsx", ".js", ".mjs", ".cjs", ".json"]);
 
 type Violation = {
@@ -80,10 +83,10 @@ async function main() {
     const processedSeedMatches = [...content.matchAll(/assets\/processed\/([a-zA-Z0-9._-]+\.json)/g)];
     for (const match of processedSeedMatches) {
       const matchedPath = `assets/processed/${match[1]}`;
-      if (matchedPath !== ALLOWED_SEED_PATH) {
+      if (!ALLOWED_SEED_PATHS.has(matchedPath)) {
         violations.push({
           filePath: relativePath,
-          reason: `Only ${ALLOWED_SEED_PATH} is allowed as seed source.`,
+          reason: `Only ${Array.from(ALLOWED_SEED_PATHS).join(" and ")} are allowed as seed sources.`,
           snippet: match[0],
         });
       }

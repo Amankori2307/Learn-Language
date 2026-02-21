@@ -899,16 +899,8 @@ export class DatabaseStorage implements IStorage {
   }
 
   async seedInitialData(): Promise<void> {
-    type SeedExample = {
-      originalScript: string;
-      pronunciation: string;
-      english: string;
-      contextTag: string;
-      difficulty: number;
-      language: LanguageEnum;
-    };
-
     type SeedWord = {
+      key: string;
       originalScript: string;
       transliteration: string;
       english: string;
@@ -920,7 +912,22 @@ export class DatabaseStorage implements IStorage {
       cefrLevel?: string;
       tags?: string[];
       clusters?: string[];
-      examples?: SeedExample[];
+      source?: {
+        type?: string;
+        generatedAt?: string;
+        reviewStatus?: "draft" | "pending_review" | "approved" | "rejected";
+        sourceUrl?: string;
+      };
+    };
+
+    type SeedSentence = {
+      language: LanguageEnum;
+      originalScript: string;
+      pronunciation: string;
+      english: string;
+      contextTag: string;
+      difficulty: number;
+      wordRefs: string[];
     };
 
     const ensureCluster = async (cluster: CreateClusterRequest): Promise<Cluster> => {
@@ -988,17 +995,34 @@ export class DatabaseStorage implements IStorage {
       });
     };
 
-    const seedPath = path.resolve(process.cwd(), "assets/processed/seed.json");
-    const raw = await fs.readFile(seedPath, "utf-8");
-    const items = JSON.parse(raw) as SeedWord[];
-    if (!Array.isArray(items) || items.length === 0) {
-      throw new Error("Seed file has no rows: assets/processed/seed.json");
+    const wordsPath = path.resolve(process.cwd(), "assets/processed/words.json");
+    const sentencesPath = path.resolve(process.cwd(), "assets/processed/sentences.json");
+    const wordsRaw = await fs.readFile(wordsPath, "utf-8");
+    const sentencesRaw = await fs.readFile(sentencesPath, "utf-8");
+    const wordItems = JSON.parse(wordsRaw) as SeedWord[];
+    const sentenceItems = JSON.parse(sentencesRaw) as SeedSentence[];
+    if (!Array.isArray(wordItems) || wordItems.length === 0) {
+      throw new Error("Seed file has no rows: assets/processed/words.json");
+    }
+    if (!Array.isArray(sentenceItems) || sentenceItems.length === 0) {
+      throw new Error("Seed file has no rows: assets/processed/sentences.json");
     }
 
     const clusterByName = new Map<string, Cluster>();
+    const wordByRef = new Map<string, Word>();
+    const sentencesByWordRef = new Map<string, SeedSentence[]>();
 
-    for (const item of items) {
+    for (const sentence of sentenceItems) {
+      for (const wordRef of sentence.wordRefs ?? []) {
+        const linked = sentencesByWordRef.get(wordRef) ?? [];
+        linked.push(sentence);
+        sentencesByWordRef.set(wordRef, linked);
+      }
+    }
+
+    for (const item of wordItems) {
       const language = assertLanguage(item.language);
+      const linkedSentences = sentencesByWordRef.get(item.key) ?? [];
       const word = await ensureWord({
         language,
         originalScript: item.originalScript,
@@ -1010,8 +1034,11 @@ export class DatabaseStorage implements IStorage {
         frequencyScore: item.frequencyScore,
         cefrLevel: item.cefrLevel ?? null,
         tags: item.tags ?? [],
-        exampleSentences: (item.examples ?? []).map((example) => example.originalScript),
+        exampleSentences: Array.from(
+          new Set(linkedSentences.map((sentence) => sentence.originalScript)),
+        ),
       });
+      wordByRef.set(item.key, word);
 
       for (const clusterName of item.clusters ?? []) {
         let cluster = clusterByName.get(clusterName);
@@ -1025,17 +1052,26 @@ export class DatabaseStorage implements IStorage {
         }
         await this.addWordToCluster(word.id, cluster.id);
       }
+    }
 
-      for (const example of item.examples ?? []) {
-        const exampleLanguage = assertLanguage(example.language);
+    for (const sentence of sentenceItems) {
+      const sentenceLanguage = assertLanguage(sentence.language);
+      for (const wordRef of sentence.wordRefs ?? []) {
+        const linkedWord = wordByRef.get(wordRef);
+        if (!linkedWord) {
+          throw new Error(`Sentence references unknown word key: ${wordRef}`);
+        }
+        if (linkedWord.language !== sentenceLanguage) {
+          throw new Error(`Sentence language mismatch for word key: ${wordRef}`);
+        }
         await ensureWordExample(
-          word.id,
-          exampleLanguage,
-          example.originalScript,
-          example.pronunciation,
-          example.english,
-          example.contextTag,
-          example.difficulty,
+          linkedWord.id,
+          sentenceLanguage,
+          sentence.originalScript,
+          sentence.pronunciation,
+          sentence.english,
+          sentence.contextTag,
+          sentence.difficulty,
         );
       }
     }

@@ -13,16 +13,8 @@ import {
   words,
 } from "../shared/schema";
 
-type ContentExample = {
-  language: LanguageEnum;
-  originalScript: string;
-  english: string;
-  pronunciation: string;
-  contextTag: string;
-  difficulty: number;
-};
-
 type ContentWord = {
+  key: string;
   language: LanguageEnum;
   originalScript: string;
   transliteration: string;
@@ -34,13 +26,22 @@ type ContentWord = {
   cefrLevel?: string;
   tags?: string[];
   clusters?: string[];
-  examples?: ContentExample[];
   source?: {
     type?: string;
     generatedAt?: string;
     reviewStatus?: "draft" | "pending_review" | "approved" | "rejected";
     sourceUrl?: string;
   };
+};
+
+type ContentSentence = {
+  language: LanguageEnum;
+  originalScript: string;
+  pronunciation: string;
+  english: string;
+  contextTag: string;
+  difficulty: number;
+  wordRefs: string[];
 };
 
 function assertLanguage(value: string): LanguageEnum {
@@ -50,92 +51,9 @@ function assertLanguage(value: string): LanguageEnum {
   return value as LanguageEnum;
 }
 
-function parseListField(value?: string): string[] {
-  if (!value) return [];
-  return value
-    .split("|")
-    .map((v) => v.trim())
-    .filter(Boolean);
-}
-
-function parseCsvLine(line: string): string[] {
-  const out: string[] = [];
-  let current = "";
-  let inQuotes = false;
-
-  for (let i = 0; i < line.length; i += 1) {
-    const ch = line[i];
-
-    if (ch === '"') {
-      if (inQuotes && line[i + 1] === '"') {
-        current += '"';
-        i += 1;
-      } else {
-        inQuotes = !inQuotes;
-      }
-      continue;
-    }
-
-    if (ch === "," && !inQuotes) {
-      out.push(current.trim());
-      current = "";
-      continue;
-    }
-
-    current += ch;
-  }
-
-  out.push(current.trim());
-  return out;
-}
-
-function parseCsv(raw: string): ContentWord[] {
-  const lines = raw
-    .split(/\r?\n/)
-    .map((l) => l.trim())
-    .filter(Boolean);
-
-  if (lines.length < 2) {
-    return [];
-  }
-
-  const headers = parseCsvLine(lines[0]);
-
-  return lines.slice(1).map((line) => {
-    const values = parseCsvLine(line);
-    const row = Object.fromEntries(headers.map((h, idx) => [h, values[idx] ?? ""]));
-
-    const examples: ContentExample[] = row.exampleSourceText && row.exampleEnglish
-      ? [{
-          language: assertLanguage(row.language),
-          originalScript: row.exampleSourceText,
-          english: row.exampleEnglish,
-          pronunciation: row.examplePronunciation,
-          contextTag: row.contextTag,
-          difficulty: Number(row.exampleDifficulty),
-        }]
-      : [];
-
-    return {
-      language: assertLanguage(row.language),
-      originalScript: row.originalScript,
-      transliteration: row.transliteration,
-      english: row.english,
-      partOfSpeech: row.partOfSpeech,
-      difficulty: Number(row.difficulty),
-      difficultyLevel: row.difficultyLevel as ContentWord["difficultyLevel"],
-      frequencyScore: Number(row.frequencyScore),
-      cefrLevel: row.cefrLevel || undefined,
-      tags: parseListField(row.tags),
-      clusters: parseListField(row.clusters),
-      examples,
-    };
-  });
-}
-
 function assertWord(word: ContentWord, idx: number) {
   const missing: string[] = [];
-
+  if (!word.key) missing.push("key");
   if (!word.language) missing.push("language");
   if (!word.originalScript) missing.push("originalScript");
   if (!word.english) missing.push("english");
@@ -144,18 +62,29 @@ function assertWord(word: ContentWord, idx: number) {
   if (!word.difficulty) missing.push("difficulty");
   if (!word.difficultyLevel) missing.push("difficultyLevel");
   if (word.frequencyScore === undefined || word.frequencyScore === null) missing.push("frequencyScore");
-
+  if (!word.tags || word.tags.length === 0) missing.push("tags");
+  if (!word.clusters || word.clusters.length === 0) missing.push("clusters");
   if (missing.length > 0) {
     throw new Error(`Invalid word at row ${idx + 1}: missing ${missing.join(", ")}`);
   }
 }
 
+function assertSentence(sentence: ContentSentence, idx: number) {
+  const missing: string[] = [];
+  if (!sentence.language) missing.push("language");
+  if (!sentence.originalScript) missing.push("originalScript");
+  if (!sentence.pronunciation) missing.push("pronunciation");
+  if (!sentence.english) missing.push("english");
+  if (!sentence.contextTag) missing.push("contextTag");
+  if (!sentence.wordRefs || sentence.wordRefs.length === 0) missing.push("wordRefs");
+  if (missing.length > 0) {
+    throw new Error(`Invalid sentence at row ${idx + 1}: missing ${missing.join(", ")}`);
+  }
+}
+
 async function ensureCluster(name: string) {
   const [existing] = await db.select().from(clusters).where(eq(clusters.name, name));
-
-  if (existing) {
-    return existing;
-  }
+  if (existing) return existing;
 
   const [created] = await db
     .insert(clusters)
@@ -169,14 +98,22 @@ async function ensureCluster(name: string) {
   return created;
 }
 
-async function upsertWord(input: ContentWord) {
+async function upsertWord(input: ContentWord, exampleSentences: string[]) {
   const language = assertLanguage(input.language);
   const originalScript = input.originalScript.trim();
-  const reviewStatus = input.source?.reviewStatus ?? ((input.tags ?? []).includes("needs-review") ? "pending_review" : "approved");
+  const reviewStatus =
+    input.source?.reviewStatus ??
+    ((input.tags ?? []).includes("needs-review") ? "pending_review" : "approved");
   const [existing] = await db
     .select()
     .from(words)
-    .where(and(eq(words.language, language), eq(words.originalScript, input.originalScript), eq(words.english, input.english)));
+    .where(
+      and(
+        eq(words.language, language),
+        eq(words.originalScript, input.originalScript),
+        eq(words.english, input.english),
+      ),
+    );
 
   if (existing) {
     const [updated] = await db
@@ -194,10 +131,10 @@ async function upsertWord(input: ContentWord) {
         reviewStatus,
         sourceUrl: input.source?.sourceUrl ?? null,
         sourceCapturedAt: input.source?.generatedAt ? new Date(input.source.generatedAt) : null,
+        exampleSentences,
       })
       .where(eq(words.id, existing.id))
       .returning();
-
     return updated;
   }
 
@@ -217,15 +154,14 @@ async function upsertWord(input: ContentWord) {
       reviewStatus,
       sourceUrl: input.source?.sourceUrl ?? null,
       sourceCapturedAt: input.source?.generatedAt ? new Date(input.source.generatedAt) : null,
-      exampleSentences: (input.examples ?? []).map((e) => e.originalScript),
+      exampleSentences,
     })
     .returning();
-
   return created;
 }
 
-async function ensureWordExample(wordId: number, example: ContentExample) {
-  const language = assertLanguage(example.language);
+async function ensureWordExample(wordId: number, sentence: ContentSentence) {
+  const language = assertLanguage(sentence.language);
   const [existing] = await db
     .select()
     .from(wordExamples)
@@ -233,7 +169,7 @@ async function ensureWordExample(wordId: number, example: ContentExample) {
       and(
         eq(wordExamples.wordId, wordId),
         eq(wordExamples.language, language),
-        eq(wordExamples.originalScript, example.originalScript),
+        eq(wordExamples.originalScript, sentence.originalScript),
       ),
     );
 
@@ -242,10 +178,10 @@ async function ensureWordExample(wordId: number, example: ContentExample) {
       .update(wordExamples)
       .set({
         language,
-        pronunciation: example.pronunciation,
-        englishSentence: example.english,
-        contextTag: example.contextTag,
-        difficulty: example.difficulty,
+        pronunciation: sentence.pronunciation,
+        englishSentence: sentence.english,
+        contextTag: sentence.contextTag,
+        difficulty: sentence.difficulty,
       })
       .where(eq(wordExamples.id, existing.id));
     return;
@@ -254,11 +190,11 @@ async function ensureWordExample(wordId: number, example: ContentExample) {
   await db.insert(wordExamples).values({
     wordId,
     language,
-    originalScript: example.originalScript,
-    pronunciation: example.pronunciation,
-    englishSentence: example.english,
-    contextTag: example.contextTag,
-    difficulty: example.difficulty,
+    originalScript: sentence.originalScript,
+    pronunciation: sentence.pronunciation,
+    englishSentence: sentence.english,
+    contextTag: sentence.contextTag,
+    difficulty: sentence.difficulty,
   });
 }
 
@@ -277,9 +213,7 @@ async function purgeLegacyPlaceholderWords() {
     );
 
   const ids = placeholderRows.map((row) => row.id);
-  if (ids.length === 0) {
-    return 0;
-  }
+  if (ids.length === 0) return 0;
 
   await db.delete(userWordProgress).where(inArray(userWordProgress.wordId, ids));
   await db.delete(quizAttempts).where(inArray(quizAttempts.wordId, ids));
@@ -287,25 +221,27 @@ async function purgeLegacyPlaceholderWords() {
   await db.delete(wordExamples).where(inArray(wordExamples.wordId, ids));
   await db.delete(wordReviewEvents).where(inArray(wordReviewEvents.wordId, ids));
   await db.delete(words).where(inArray(words.id, ids));
-
   return ids.length;
 }
 
 async function main() {
-  const inputPath = process.argv[2] ?? "assets/processed/seed.json";
-  const fullPath = path.resolve(process.cwd(), inputPath);
+  const wordsPath = process.argv[2] ?? "assets/processed/words.json";
+  const sentencesPath = process.argv[3] ?? "assets/processed/sentences.json";
+  const wordsRaw = await fs.readFile(path.resolve(process.cwd(), wordsPath), "utf-8");
+  const sentencesRaw = await fs.readFile(path.resolve(process.cwd(), sentencesPath), "utf-8");
+  const wordItems = JSON.parse(wordsRaw) as ContentWord[];
+  const sentenceItems = JSON.parse(sentencesRaw) as ContentSentence[];
 
-  const raw = await fs.readFile(fullPath, "utf-8");
-  const items: ContentWord[] = inputPath.endsWith(".csv") ? parseCsv(raw) : JSON.parse(raw);
+  if (!Array.isArray(wordItems) || wordItems.length === 0) {
+    throw new Error(`No content rows found in ${wordsPath}`);
+  }
 
-  if (!Array.isArray(items) || items.length === 0) {
-    throw new Error(`No content rows found in ${inputPath}`);
+  if (!Array.isArray(sentenceItems) || sentenceItems.length === 0) {
+    throw new Error(`No content rows found in ${sentencesPath}`);
   }
 
   const shouldPurgePlaceholders =
-    path.basename(inputPath) === "seed.json" &&
-    process.env.SKIP_PLACEHOLDER_PURGE !== "true";
-
+    path.basename(wordsPath) === "words.json" && process.env.SKIP_PLACEHOLDER_PURGE !== "true";
   if (shouldPurgePlaceholders) {
     const removed = await purgeLegacyPlaceholderWords();
     if (removed > 0) {
@@ -313,40 +249,56 @@ async function main() {
     }
   }
 
+  const sentencesByWordRef = new Map<string, ContentSentence[]>();
+  for (let i = 0; i < sentenceItems.length; i += 1) {
+    const sentence = sentenceItems[i];
+    assertSentence(sentence, i);
+    for (const wordRef of sentence.wordRefs) {
+      const list = sentencesByWordRef.get(wordRef) ?? [];
+      list.push(sentence);
+      sentencesByWordRef.set(wordRef, list);
+    }
+  }
+
   let wordCount = 0;
   let clusterLinks = 0;
   let exampleCount = 0;
 
-  for (let i = 0; i < items.length; i += 1) {
-    const item = items[i];
-    assertWord(item, i);
+  const wordIdByKey = new Map<string, { id: number; language: LanguageEnum }>();
 
-    const word = await upsertWord(item);
+  for (let i = 0; i < wordItems.length; i += 1) {
+    const item = wordItems[i];
+    assertWord(item, i);
+    const linkedSentences = sentencesByWordRef.get(item.key) ?? [];
+    const exampleSentences = [...new Set(linkedSentences.map((sentence) => sentence.originalScript))];
+    const word = await upsertWord(item, exampleSentences);
     wordCount += 1;
+    wordIdByKey.set(item.key, { id: word.id, language: assertLanguage(item.language) });
 
     for (const clusterName of item.clusters ?? []) {
       const cluster = await ensureCluster(clusterName);
       await linkWordToCluster(word.id, cluster.id);
       clusterLinks += 1;
     }
+  }
 
-    for (const example of item.examples ?? []) {
-      const normalizedPronunciation = example.pronunciation?.trim();
-      if (!normalizedPronunciation) {
-        throw new Error(
-          `Missing sentence pronunciation for word "${item.transliteration}" example "${example.originalScript}"`,
-        );
+  for (const sentence of sentenceItems) {
+    for (const wordRef of sentence.wordRefs) {
+      const mappedWord = wordIdByKey.get(wordRef);
+      if (!mappedWord) {
+        throw new Error(`Sentence references unknown word key: ${wordRef}`);
       }
-      await ensureWordExample(word.id, {
-        ...example,
-        language: example.language,
-        pronunciation: normalizedPronunciation,
-      });
+      if (mappedWord.language !== sentence.language) {
+        throw new Error(`Language mismatch for wordRef ${wordRef}`);
+      }
+      await ensureWordExample(mappedWord.id, sentence);
       exampleCount += 1;
     }
   }
 
-  console.log(`Imported ${wordCount} words, ${clusterLinks} cluster links, ${exampleCount} examples from ${inputPath}`);
+  console.log(
+    `Imported ${wordCount} words, ${clusterLinks} cluster links, ${exampleCount} sentence-word examples from ${wordsPath} + ${sentencesPath}`,
+  );
 }
 
 main().catch((err) => {

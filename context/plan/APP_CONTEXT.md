@@ -9,7 +9,6 @@ Build a text-first language learning app with high data correctness, strong memo
 - Phase 4 complete.
 - Phase 6 core hardening complete (`P6-001` to `P6-011`).
 - Active tasks:
-  - `P6-015` split seed source into `words.json` + `sentences.json` with linkage
   - `P6-016` cluster UX upgrade with per-cluster counts
   - `P6-017` quiz feedback with multiple example sentences
   - `P6-018` learner analytics for strengths/gaps
@@ -54,16 +53,13 @@ Build a text-first language learning app with high data correctness, strong memo
 
 ## Data/source of truth
 
-- Single seed source: `assets/processed/seed.json`
-- Text-first structure:
-  - words and example sentences store source script, pronunciation, and meaning directly
-  - language is mandatory on content rows
-
-Planned migration (active):
-- move from single file to split source:
+- Split seed source:
   - `assets/processed/words.json`
   - `assets/processed/sentences.json`
-- sentence records will explicitly link to words so example selection is deterministic and multi-example capable.
+- Text-first structure:
+  - words and sentences store source script, pronunciation, and meaning directly
+  - sentence records include `wordRefs` links so examples are deterministic and reusable
+  - language is mandatory on all content rows
 
 ## Runtime and quality gates
 
@@ -79,4 +75,4 @@ Planned migration (active):
 
 ## Immediate next implementation
 
-- Execute in order: `P6-015` -> `P6-016` -> `P6-017` -> `P6-018` -> `P6-019`.
+- Execute in order: `P6-016` -> `P6-017` -> `P6-018` -> `P6-019`.
