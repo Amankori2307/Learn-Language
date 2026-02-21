@@ -49,6 +49,7 @@ export default function ReviewPage() {
   const [draftPronunciation, setDraftPronunciation] = useState("");
   const [draftEnglish, setDraftEnglish] = useState("");
   const [draftPartOfSpeech, setDraftPartOfSpeech] = useState("noun");
+  const [draftAudioUrl, setDraftAudioUrl] = useState("");
   const [draftSourceUrl, setDraftSourceUrl] = useState("");
   const [draftTags, setDraftTags] = useState("");
   const [draftExamples, setDraftExamples] = useState<Array<{
@@ -114,6 +115,7 @@ export default function ReviewPage() {
         pronunciation: draftPronunciation.trim(),
         english: draftEnglish.trim(),
         partOfSpeech: draftPartOfSpeech.trim(),
+        audioUrl: draftAudioUrl.trim() || undefined,
         sourceUrl: draftSourceUrl.trim() || undefined,
         tags: draftTags
           .split(",")
@@ -134,6 +136,7 @@ export default function ReviewPage() {
       setDraftPronunciation("");
       setDraftEnglish("");
       setDraftPartOfSpeech("noun");
+      setDraftAudioUrl("");
       setDraftSourceUrl("");
       setDraftTags("");
       setDraftExamples([{ originalScript: "", pronunciation: "", englishSentence: "", contextTag: "general", difficulty: 1 }]);
@@ -209,6 +212,10 @@ export default function ReviewPage() {
             <div className="space-y-1">
               <Label htmlFor="draft-english">English Meaning</Label>
               <Input id="draft-english" value={draftEnglish} onChange={(e) => setDraftEnglish(e.target.value)} placeholder="Meaning in English" />
+            </div>
+            <div className="space-y-1">
+              <Label htmlFor="draft-audio-url">Audio URL (Optional)</Label>
+              <Input id="draft-audio-url" value={draftAudioUrl} onChange={(e) => setDraftAudioUrl(e.target.value)} placeholder="https://.../audio.mp3" />
             </div>
             <div className="space-y-1">
               <Label htmlFor="draft-source-url">Source URL (Optional)</Label>

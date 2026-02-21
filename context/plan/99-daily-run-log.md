@@ -2,9 +2,9 @@
 
 Date: 2026-02-21  
 Session owner: Codex  
-Last completed task ID: P6-013  
+Last completed task ID: P5-001  
 Current in-progress task ID: -  
-Next task ID: P5-001
+Next task ID: P5-002
 
 ## Current state
 
@@ -26,6 +26,7 @@ Next task ID: P5-001
 - Phase 6 core hardening (`P6-001` to `P6-011`) is complete.
 - Context hygiene pass is complete: active context is now minimized in `context/plan`, and completed phase docs are archived under `context/archive`.
 - Reviewer/admin create-vocabulary flow is now live in UI + API, with required pronunciation/meaning/examples and automatic insertion into draft review lifecycle.
+- Optional audio URL support is now available in reviewer/admin vocabulary creation flow and persisted on words without affecting text-first flows.
 
 ## Current blockers
 
@@ -33,5 +34,5 @@ Next task ID: P5-001
 
 ## Immediate next actions
 
-1. Execute `P5-001`: optional audio URL support end-to-end (non-blocking).
+1. Execute `P5-002`: optional listen-and-identify quiz mode.
 2. Continue deferred Phase 5 media tasks in order.

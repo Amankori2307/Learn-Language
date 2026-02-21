@@ -80,6 +80,7 @@ export function useCreateReviewDraft() {
       pronunciation: string;
       english: string;
       partOfSpeech: string;
+      audioUrl?: string;
       sourceUrl?: string;
       tags?: string[];
       examples: Array<{

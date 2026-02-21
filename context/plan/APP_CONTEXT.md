@@ -43,6 +43,7 @@ Build a text-first language learning app with high data correctness, strong memo
   - conflict workflow:
     - queue endpoint: `GET /api/review/conflicts`
     - resolution endpoint: `PATCH /api/review/words/:id/resolve-conflict`
+  - reviewer/admin draft creation now supports optional `audioUrl` for future media-enabled modes
   - complete audit trail in `word_review_events`
 
 ## Data/source of truth
@@ -66,5 +67,5 @@ Build a text-first language learning app with high data correctness, strong memo
 
 ## Immediate next implementation
 
-1. Start Phase 5 deferred media backlog with `P5-001` (optional audio URL support end-to-end, non-blocking).
-2. Continue `P5-002`..`P5-005` in strict order.
+1. Execute `P5-002` (optional listen-and-identify quiz mode).
+2. Continue `P5-003`..`P5-005` in strict order.

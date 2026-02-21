@@ -152,6 +152,7 @@ export interface IStorage {
     pronunciation: string;
     english: string;
     partOfSpeech: string;
+    audioUrl?: string;
     sourceUrl?: string;
     tags?: string[];
     examples: Array<{
@@ -716,6 +717,7 @@ export class DatabaseStorage implements IStorage {
     pronunciation: string;
     english: string;
     partOfSpeech: string;
+    audioUrl?: string;
     sourceUrl?: string;
     tags?: string[];
     examples: Array<{
@@ -734,6 +736,7 @@ export class DatabaseStorage implements IStorage {
         transliteration: input.pronunciation,
         english: input.english,
         partOfSpeech: input.partOfSpeech,
+        audioUrl: input.audioUrl ?? null,
         difficulty: 1,
         difficultyLevel: "beginner",
         frequencyScore: 0.5,

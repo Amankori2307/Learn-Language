@@ -476,6 +476,7 @@ export async function registerRoutes(
         pronunciation: parsed.pronunciation ?? parsed.transliteration ?? "",
         english: parsed.english,
         partOfSpeech: parsed.partOfSpeech,
+        audioUrl: parsed.audioUrl,
         sourceUrl: parsed.sourceUrl,
         tags: parsed.tags,
         examples: parsed.examples,
