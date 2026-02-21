@@ -1,6 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { api } from "@shared/routes";
-import { ReviewStatusEnum } from "@shared/domain/enums";
+import { LanguageEnum, ReviewStatusEnum } from "@shared/domain/enums";
 
 export type ReviewStatus = ReviewStatusEnum;
 
@@ -67,6 +67,40 @@ export function useBulkTransitionReview() {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: [api.review.queue.path] });
       queryClient.invalidateQueries({ queryKey: [api.review.history.path] });
+    },
+  });
+}
+
+export function useCreateReviewDraft() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (payload: {
+      language: LanguageEnum;
+      originalScript: string;
+      pronunciation: string;
+      english: string;
+      partOfSpeech: string;
+      sourceUrl?: string;
+      tags?: string[];
+      examples: Array<{
+        originalScript: string;
+        pronunciation: string;
+        englishSentence: string;
+        contextTag: string;
+        difficulty: number;
+      }>;
+    }) => {
+      const res = await fetch(api.review.submitDraft.path, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+        body: JSON.stringify(payload),
+      });
+      if (!res.ok) throw new Error("Failed to submit draft");
+      return api.review.submitDraft.responses[200].parse(await res.json());
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: [api.review.queue.path] });
     },
   });
 }

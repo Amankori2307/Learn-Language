@@ -149,12 +149,19 @@ export interface IStorage {
     submittedBy: string;
     language: LanguageEnum;
     originalScript: string;
-    transliteration: string;
+    pronunciation: string;
     english: string;
     partOfSpeech: string;
     sourceUrl?: string;
     tags?: string[];
-  }): Promise<Word>;
+    examples: Array<{
+      originalScript: string;
+      pronunciation: string;
+      englishSentence: string;
+      contextTag: string;
+      difficulty: number;
+    }>;
+  }): Promise<{ word: Word; examplesCreated: number }>;
 
   // Admin/Seed
   seedInitialData(): Promise<void>;
@@ -706,45 +713,66 @@ export class DatabaseStorage implements IStorage {
     submittedBy: string;
     language: LanguageEnum;
     originalScript: string;
-    transliteration: string;
+    pronunciation: string;
     english: string;
     partOfSpeech: string;
     sourceUrl?: string;
     tags?: string[];
-  }): Promise<Word> {
+    examples: Array<{
+      originalScript: string;
+      pronunciation: string;
+      englishSentence: string;
+      contextTag: string;
+      difficulty: number;
+    }>;
+  }): Promise<{ word: Word; examplesCreated: number }> {
     const now = new Date();
-    const [created] = await db.insert(words).values({
-      language: input.language,
-      originalScript: input.originalScript,
-      transliteration: input.transliteration,
-      english: input.english,
-      partOfSpeech: input.partOfSpeech,
-      difficulty: 1,
-      difficultyLevel: "beginner",
-      frequencyScore: 0.5,
-      exampleSentences: [],
-      tags: input.tags ?? ["manual-draft"],
-      reviewStatus: ReviewStatusEnum.DRAFT,
-      reviewerConfidenceScore: null,
-      requiresSecondaryReview: false,
-      disagreementStatus: ReviewDisagreementStatusEnum.NONE,
-      submittedBy: input.submittedBy,
-      submittedAt: now,
-      sourceUrl: input.sourceUrl ?? null,
-      sourceCapturedAt: input.sourceUrl ? now : null,
-    }).returning();
+    return db.transaction(async (tx) => {
+      const [created] = await tx.insert(words).values({
+        language: input.language,
+        originalScript: input.originalScript,
+        transliteration: input.pronunciation,
+        english: input.english,
+        partOfSpeech: input.partOfSpeech,
+        difficulty: 1,
+        difficultyLevel: "beginner",
+        frequencyScore: 0.5,
+        exampleSentences: [],
+        tags: input.tags ?? ["manual-draft"],
+        reviewStatus: ReviewStatusEnum.DRAFT,
+        reviewerConfidenceScore: null,
+        requiresSecondaryReview: false,
+        disagreementStatus: ReviewDisagreementStatusEnum.NONE,
+        submittedBy: input.submittedBy,
+        submittedAt: now,
+        sourceUrl: input.sourceUrl ?? null,
+        sourceCapturedAt: input.sourceUrl ? now : null,
+      }).returning();
 
-    await db.insert(wordReviewEvents).values({
-      wordId: created.id,
-      fromStatus: ReviewStatusEnum.DRAFT,
-      toStatus: ReviewStatusEnum.DRAFT,
-      changedBy: input.submittedBy,
-      notes: "Initial draft submission",
-      sourceUrl: created.sourceUrl ?? null,
-      sourceCapturedAt: created.sourceCapturedAt ?? null,
+      await tx.insert(wordExamples).values(
+        input.examples.map((example) => ({
+          wordId: created.id,
+          language: input.language,
+          originalScript: example.originalScript,
+          pronunciation: example.pronunciation,
+          englishSentence: example.englishSentence,
+          contextTag: example.contextTag,
+          difficulty: example.difficulty,
+        })),
+      );
+
+      await tx.insert(wordReviewEvents).values({
+        wordId: created.id,
+        fromStatus: ReviewStatusEnum.DRAFT,
+        toStatus: ReviewStatusEnum.DRAFT,
+        changedBy: input.submittedBy,
+        notes: "Initial draft submission",
+        sourceUrl: created.sourceUrl ?? null,
+        sourceCapturedAt: created.sourceCapturedAt ?? null,
+      });
+
+      return { word: created, examplesCreated: input.examples.length };
     });
-
-    return created;
   }
 
   async getUserStats(userId: string, language?: LanguageEnum): Promise<{

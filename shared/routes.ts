@@ -441,16 +441,25 @@ export const api = {
       input: z.object({
         originalScript: z.string().trim().min(1),
         language: z.nativeEnum(LanguageEnum),
-        transliteration: z.string().trim().min(1),
+        pronunciation: z.string().trim().min(1),
+        transliteration: z.string().trim().min(1).optional(),
         english: z.string().trim().min(1),
         partOfSpeech: z.string().trim().min(1),
         sourceUrl: z.string().url().optional(),
         tags: z.array(z.string()).optional(),
+        examples: z.array(z.object({
+          originalScript: z.string().trim().min(1),
+          pronunciation: z.string().trim().min(1),
+          englishSentence: z.string().trim().min(1),
+          contextTag: z.string().trim().min(1).default("general"),
+          difficulty: z.number().int().min(1).max(5).default(1),
+        })).min(1),
       }),
       responses: {
         200: z.object({
           id: z.number(),
           reviewStatus: z.literal(ReviewStatusEnum.DRAFT),
+          examplesCreated: z.number().int().nonnegative(),
         }),
         400: errorSchemas.validation,
         401: errorSchemas.unauthorized,

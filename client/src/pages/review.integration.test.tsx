@@ -2,11 +2,12 @@ import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import type { ReactNode } from "react";
 import { describe, expect, it, vi } from "vitest";
-import { ReviewStatusEnum, UserTypeEnum } from "@shared/domain/enums";
+import { LanguageEnum, ReviewStatusEnum, UserTypeEnum } from "@shared/domain/enums";
 import ReviewPage from "./review";
 
 const transitionMutate = vi.fn();
 const bulkMutateAsync = vi.fn().mockResolvedValue({ updated: 1, skipped: 0 });
+const createDraftMutateAsync = vi.fn().mockResolvedValue({ id: 99, reviewStatus: ReviewStatusEnum.DRAFT, examplesCreated: 1 });
 
 vi.mock("@/components/layout", () => ({
   Layout: ({ children }: { children: ReactNode }) => <div>{children}</div>,
@@ -27,6 +28,7 @@ vi.mock("@/hooks/use-review", () => ({
     data: [
       {
         id: 11,
+        language: LanguageEnum.TELUGU,
         originalScript: "namaste",
         transliteration: "namaste",
         english: "hello",
@@ -70,6 +72,10 @@ vi.mock("@/hooks/use-review", () => ({
     mutateAsync: bulkMutateAsync,
     isPending: false,
   }),
+  useCreateReviewDraft: () => ({
+    mutateAsync: createDraftMutateAsync,
+    isPending: false,
+  }),
 }));
 
 describe("ReviewPage integration", () => {
@@ -109,5 +115,31 @@ describe("ReviewPage integration", () => {
       toStatus: ReviewStatusEnum.APPROVED,
       notes: undefined,
     });
+  });
+
+  it("creates a draft with example payload", async () => {
+    const user = userEvent.setup();
+    render(<ReviewPage />);
+
+    await user.type(screen.getByPlaceholderText("Original script word/phrase"), "నమస్కారం");
+    await user.type(screen.getByPlaceholderText("Romanized pronunciation"), "namaskaaram");
+    await user.type(screen.getByPlaceholderText("Meaning in English"), "hello");
+    await user.clear(screen.getByLabelText("Part of Speech"));
+    await user.type(screen.getByLabelText("Part of Speech"), "phrase");
+    await user.type(screen.getByPlaceholderText("Example sentence in source script"), "ఆమె నమస్కారం చెప్పింది.");
+    await user.type(screen.getByPlaceholderText("Example pronunciation"), "aame namaskaaram cheppindi");
+    await user.type(screen.getByPlaceholderText("Example meaning in English"), "She said hello.");
+
+    await user.click(screen.getByRole("button", { name: "Create Draft" }));
+
+    expect(createDraftMutateAsync).toHaveBeenCalledTimes(1);
+    expect(createDraftMutateAsync).toHaveBeenCalledWith(
+      expect.objectContaining({
+        language: LanguageEnum.TELUGU,
+        pronunciation: "namaskaaram",
+        english: "hello",
+        partOfSpeech: "phrase",
+      }),
+    );
   });
 });

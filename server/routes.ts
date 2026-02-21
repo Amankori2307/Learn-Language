@@ -473,15 +473,17 @@ export async function registerRoutes(
         submittedBy,
         language: parsed.language,
         originalScript: parsed.originalScript,
-        transliteration: parsed.transliteration,
+        pronunciation: parsed.pronunciation ?? parsed.transliteration ?? "",
         english: parsed.english,
         partOfSpeech: parsed.partOfSpeech,
         sourceUrl: parsed.sourceUrl,
         tags: parsed.tags,
+        examples: parsed.examples,
       });
       res.json({
-        id: created.id,
+        id: created.word.id,
         reviewStatus: ReviewStatusEnum.DRAFT,
+        examplesCreated: created.examplesCreated,
       });
     } catch (error) {
       if (error instanceof z.ZodError) {

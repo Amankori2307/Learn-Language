@@ -66,5 +66,5 @@ Build a text-first language learning app with high data correctness, strong memo
 
 ## Immediate next implementation
 
-1. `P6-013`: Add reviewer/admin create-vocabulary UI + API flow into normal review lifecycle.
-2. Then execute deferred Phase 5 media backlog in order.
+1. Start Phase 5 deferred media backlog with `P5-001` (optional audio URL support end-to-end, non-blocking).
+2. Continue `P5-002`..`P5-005` in strict order.
