@@ -8,8 +8,7 @@ Build a text-first language learning app with high data correctness, strong memo
 
 - Phase 4 complete.
 - Phase 6 core hardening complete (`P6-001` to `P6-011`).
-- Active tasks:
-  - `P6-019` pronunciation strategy note (non-implementation)
+- Active tasks: none.
 
 ## Core capabilities live
 
@@ -80,4 +79,5 @@ Build a text-first language learning app with high data correctness, strong memo
 
 ## Immediate next implementation
 
-- Execute in order: `P6-019`.
+- No active pending tasks.
+- Latest planning artifact: `context/plan/61-pronunciation-strategy.md`.

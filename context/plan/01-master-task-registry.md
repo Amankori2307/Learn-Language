@@ -15,7 +15,7 @@ Only active and pending tasks are listed here. Completed tasks are intentionally
 
 | ID | Status | Task | Depends On | Effort | Done When |
 |---|---|---|---|---|---|
-| P6-019 | todo | Pronunciation strategy decision note (non-implementation): evaluate sources for word/sentence pronunciation quality, cost, and licensing | P6-018 | S | plan doc added with options (manual reviewer text, transliteration rules, TTS fallback), tradeoffs, and recommended phased rollout; no runtime code changes |
+| _none_ | - | No active Phase 6 extension tasks pending | - | - | - |
 
 ## Phase 5 - Media expansion (deferred)
 
