@@ -9,6 +9,7 @@ import {
   History,
   LogOut, 
   Menu,
+  MessageSquare,
   Moon,
   Sun
 } from "lucide-react";
@@ -51,6 +52,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
     { name: 'Clusters', href: '/clusters', icon: Layers },
     { name: 'Leaderboard', href: '/leaderboard', icon: Trophy },
     { name: 'Profile', href: '/profile', icon: UserCircle },
+    { name: "Feedback", href: "/feedback", icon: MessageSquare },
     { name: 'History', href: '/history', icon: History },
     ...((user?.role === UserTypeEnum.REVIEWER || user?.role === UserTypeEnum.ADMIN)
       ? [

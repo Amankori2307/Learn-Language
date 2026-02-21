@@ -39,6 +39,13 @@ services:
       GOOGLE_ISSUER_URL: ${GOOGLE_ISSUER_URL:-https://accounts.google.com}
       REVIEWER_EMAILS: ${REVIEWER_EMAILS:-amankori2307@gmail.com}
       ADMIN_EMAILS: ${ADMIN_EMAILS:-amankori2307@gmail.com}
+      FEEDBACK_EMAIL_TO: ${FEEDBACK_EMAIL_TO:-amankori2307@gmail.com}
+      SMTP_HOST: ${SMTP_HOST:-}
+      SMTP_PORT: ${SMTP_PORT:-587}
+      SMTP_SECURE: ${SMTP_SECURE:-false}
+      SMTP_USER: ${SMTP_USER:-}
+      SMTP_PASS: ${SMTP_PASS:-}
+      SMTP_FROM: ${SMTP_FROM:-Learn Language <no-reply@learn-language.local>}
       VITE_ENABLE_TUTOR: ${VITE_ENABLE_TUTOR:-true}
     volumes:
       - ./:/app

@@ -84,6 +84,7 @@ export function useCreateReviewDraft() {
       imageUrl?: string;
       sourceUrl?: string;
       tags?: VocabularyTagEnum[];
+      clusterIds?: number[];
       examples: Array<{
         originalScript: string;
         pronunciation: string;

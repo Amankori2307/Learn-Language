@@ -1,5 +1,5 @@
 import { db } from "./db";
-import { eq, sql, and } from "drizzle-orm";
+import { eq, sql, and, inArray } from "drizzle-orm";
 import fs from "fs/promises";
 import path from "path";
 import {
@@ -197,6 +197,7 @@ export interface IStorage {
     imageUrl?: string;
     sourceUrl?: string;
     tags?: VocabularyTagEnum[];
+    clusterIds?: number[];
     examples: Array<{
       originalScript: string;
       pronunciation: string;
@@ -795,6 +796,7 @@ export class DatabaseStorage implements IStorage {
     imageUrl?: string;
     sourceUrl?: string;
     tags?: VocabularyTagEnum[];
+    clusterIds?: number[];
     examples: Array<{
       originalScript: string;
       pronunciation: string;
@@ -839,6 +841,21 @@ export class DatabaseStorage implements IStorage {
           difficulty: example.difficulty,
         })),
       );
+
+      if (input.clusterIds && input.clusterIds.length > 0) {
+        const uniqueClusterIds = Array.from(new Set(input.clusterIds));
+        const existingClusters = await tx
+          .select({ id: clusters.id })
+          .from(clusters)
+          .where(inArray(clusters.id, uniqueClusterIds));
+
+        if (existingClusters.length > 0) {
+          await tx
+            .insert(wordClusters)
+            .values(existingClusters.map((cluster) => ({ wordId: created.id, clusterId: cluster.id })))
+            .onConflictDoNothing();
+        }
+      }
 
       await tx.insert(wordReviewEvents).values({
         wordId: created.id,

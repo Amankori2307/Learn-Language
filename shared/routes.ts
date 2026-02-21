@@ -320,6 +320,27 @@ export const api = {
       },
     },
   },
+  feedback: {
+    submit: {
+      method: "POST" as const,
+      path: "/api/feedback" as const,
+      input: z.object({
+        subject: z.string().trim().min(3).max(120),
+        message: z.string().trim().min(10).max(4000),
+        pageUrl: z.string().url().optional(),
+        rating: z.number().int().min(1).max(5).optional(),
+      }),
+      responses: {
+        200: z.object({
+          ok: z.literal(true),
+          sentTo: z.string().email(),
+        }),
+        400: errorSchemas.validation,
+        401: errorSchemas.unauthorized,
+        500: errorSchemas.internal,
+      },
+    },
+  },
   review: {
     queue: {
       method: "GET" as const,
@@ -500,6 +521,7 @@ export const api = {
         imageUrl: z.string().url().optional(),
         sourceUrl: z.string().url().optional(),
         tags: z.array(z.nativeEnum(VocabularyTagEnum)).optional(),
+        clusterIds: z.array(z.number().int().positive()).max(200).optional(),
         examples: z.array(z.object({
           originalScript: z.string().trim().min(1),
           pronunciation: z.string().trim().min(1),

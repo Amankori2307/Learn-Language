@@ -162,6 +162,16 @@ test("profile update contract rejects invalid avatar URL", () => {
   });
 });
 
+test("feedback submit contract validates payload", () => {
+  const parsed = api.feedback.submit.input.parse({
+    subject: "UI feedback",
+    message: "The quiz flow is good but feedback contrast can be improved.",
+    pageUrl: "https://example.com/quiz",
+    rating: 4,
+  });
+  assert.equal(parsed.rating, 4);
+});
+
 test("review queue contract accepts pending review payload", () => {
   const payload = [
     {
@@ -286,6 +296,28 @@ test("review resolve conflict contract accepts payload", () => {
   });
   assert.equal(input.toStatus, ReviewStatusEnum.APPROVED);
   assert.equal(input.reviewerConfidenceScore, 4);
+});
+
+test("review submit draft contract accepts optional cluster links", () => {
+  const parsed = api.review.submitDraft.input.parse({
+    language: LanguageEnum.TELUGU,
+    originalScript: "ప్రేమ",
+    pronunciation: "prema",
+    english: "love",
+    partOfSpeech: "noun",
+    clusterIds: [1, 2],
+    tags: ["manual-draft"],
+    examples: [
+      {
+        originalScript: "ఆమె ప్రేమతో మాట్లాడింది.",
+        pronunciation: "aame premato maatladindi",
+        englishSentence: "She spoke with love.",
+        contextTag: "daily-use",
+        difficulty: 1,
+      },
+    ],
+  });
+  assert.equal(parsed.clusterIds?.length, 2);
 });
 
 test("admin srs drift contract accepts alert summary payload", () => {

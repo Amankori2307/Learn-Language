@@ -13,6 +13,7 @@ import ContextualPage from "@/pages/contextual";
 import TutorPage from "@/pages/tutor";
 import LeaderboardPage from "@/pages/leaderboard";
 import ProfilePage from "@/pages/profile";
+import FeedbackPage from "@/pages/feedback";
 import ReviewPage from "@/pages/review";
 import AddVocabularyPage from "@/pages/add-vocabulary";
 import HistoryPage from "@/pages/history";
@@ -54,6 +55,9 @@ function Router() {
       </Route>
       <Route path="/profile">
         {() => <ProtectedRoute component={ProfilePage} />}
+      </Route>
+      <Route path="/feedback">
+        {() => <ProtectedRoute component={FeedbackPage} />}
       </Route>
       <Route path="/history">
         {() => <ProtectedRoute component={HistoryPage} />}

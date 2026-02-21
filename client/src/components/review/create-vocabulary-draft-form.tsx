@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useQuery } from "@tanstack/react-query";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -8,6 +9,7 @@ import { useCreateReviewDraft } from "@/hooks/use-review";
 import { LanguageEnum, PartOfSpeechEnum, VocabularyTagEnum } from "@shared/domain/enums";
 import { PART_OF_SPEECH_OPTIONS } from "@shared/domain/part-of-speech";
 import { VOCABULARY_TAG_OPTIONS } from "@shared/domain/vocabulary-tags";
+import { api } from "@shared/routes";
 
 type DraftExample = {
   originalScript: string;
@@ -39,7 +41,23 @@ export function CreateVocabularyDraftForm() {
   const [draftImageUrl, setDraftImageUrl] = useState("");
   const [draftSourceUrl, setDraftSourceUrl] = useState("");
   const [draftTags, setDraftTags] = useState<VocabularyTagEnum[]>([VocabularyTagEnum.MANUAL_DRAFT]);
+  const [draftClusterIds, setDraftClusterIds] = useState<string[]>([]);
   const [draftExamples, setDraftExamples] = useState<DraftExample[]>([{ ...DEFAULT_EXAMPLE }]);
+  const { data: availableClusters = [] } = useQuery({
+    queryKey: [api.clusters.list.path, draftLanguage, "draft-form"],
+    queryFn: async () => {
+      const params = new URLSearchParams({ language: draftLanguage });
+      const res = await fetch(`${api.clusters.list.path}?${params.toString()}`, { credentials: "include" });
+      if (!res.ok) {
+        throw new Error("Failed to load clusters");
+      }
+      return api.clusters.list.responses[200].parse(await res.json());
+    },
+  });
+  const clusterOptions = availableClusters.map((cluster) => ({
+    value: String(cluster.id),
+    label: `${cluster.name} (${cluster.wordCount})`,
+  }));
 
   const updateExample = (
     index: number,
@@ -80,6 +98,7 @@ export function CreateVocabularyDraftForm() {
         imageUrl: draftImageUrl.trim() || undefined,
         sourceUrl: draftSourceUrl.trim() || undefined,
         tags: draftTags,
+        clusterIds: draftClusterIds.map((id) => Number.parseInt(id, 10)).filter(Number.isFinite),
         examples: draftExamples.map((example) => ({
           originalScript: example.originalScript.trim(),
           pronunciation: example.pronunciation.trim(),
@@ -99,6 +118,7 @@ export function CreateVocabularyDraftForm() {
       setDraftImageUrl("");
       setDraftSourceUrl("");
       setDraftTags([VocabularyTagEnum.MANUAL_DRAFT]);
+      setDraftClusterIds([]);
       setDraftExamples([{ ...DEFAULT_EXAMPLE }]);
     } catch (error) {
       setCreateError(error instanceof Error ? error.message : "Failed to create draft");
@@ -206,6 +226,18 @@ export function CreateVocabularyDraftForm() {
             placeholder="Select one or more tags"
             searchPlaceholder="Search tags..."
             ariaLabel="Tags"
+          />
+        </div>
+        <div className="space-y-1 md:col-span-2">
+          <Label htmlFor="draft-clusters">Clusters (Optional)</Label>
+          <SearchableMultiSelect
+            id="draft-clusters"
+            values={draftClusterIds}
+            options={clusterOptions}
+            onChange={setDraftClusterIds}
+            placeholder="Link this word to one or more clusters"
+            searchPlaceholder="Search clusters..."
+            ariaLabel="Clusters"
           />
         </div>
       </div>
