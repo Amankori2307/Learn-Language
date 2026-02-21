@@ -14,6 +14,7 @@ import TutorPage from "@/pages/tutor";
 import LeaderboardPage from "@/pages/leaderboard";
 import ProfilePage from "@/pages/profile";
 import ReviewPage from "@/pages/review";
+import AddVocabularyPage from "@/pages/add-vocabulary";
 import HistoryPage from "@/pages/history";
 import AuthPage from "@/pages/auth";
 import NotFound from "@/pages/not-found";
@@ -59,6 +60,9 @@ function Router() {
       </Route>
       <Route path="/review">
         {() => <ProtectedRoute component={ReviewPage} />}
+      </Route>
+      <Route path="/review/add">
+        {() => <ProtectedRoute component={AddVocabularyPage} />}
       </Route>
       <Route path="/contextual">
         {() => <ProtectedRoute component={ContextualPage} />}

@@ -53,7 +53,10 @@ export function Layout({ children }: { children: React.ReactNode }) {
     { name: 'Profile', href: '/profile', icon: UserCircle },
     { name: 'History', href: '/history', icon: History },
     ...((user?.role === UserTypeEnum.REVIEWER || user?.role === UserTypeEnum.ADMIN)
-      ? [{ name: "Review", href: "/review", icon: ShieldCheck }]
+      ? [
+          { name: "Review Vocabulary", href: "/review", icon: ShieldCheck },
+          { name: "Add Vocabulary", href: "/review/add", icon: ShieldCheck },
+        ]
       : []),
   ];
   const avatarUrl = buildAvatarUrl({
