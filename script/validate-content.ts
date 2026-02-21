@@ -1,7 +1,8 @@
 import fs from "fs/promises";
 import path from "path";
-import { LanguageEnum, PartOfSpeechEnum } from "../shared/domain/enums";
+import { LanguageEnum, PartOfSpeechEnum, VocabularyTagEnum } from "../shared/domain/enums";
 import { isPartOfSpeech } from "../shared/domain/part-of-speech";
+import { isVocabularyTag } from "../shared/domain/vocabulary-tags";
 
 type ContentWord = {
   key: string;
@@ -14,7 +15,7 @@ type ContentWord = {
   difficultyLevel: "beginner" | "easy" | "medium" | "hard";
   frequencyScore: number;
   cefrLevel?: string;
-  tags?: string[];
+  tags?: VocabularyTagEnum[];
   clusters?: string[];
   source?: {
     type?: string;
@@ -91,6 +92,33 @@ function validateTagLikeCollection(
   });
 }
 
+function validateVocabularyTags(values: string[] | undefined, row: number, errors: string[]) {
+  if (!values || values.length === 0) {
+    errors.push(`[word ${row}] tags must include at least one value`);
+    return;
+  }
+
+  const seen = new Set<string>();
+  values.forEach((rawValue) => {
+    const value = rawValue.trim();
+    const normalized = normalize(value);
+
+    if (!value) {
+      errors.push(`[word ${row}] tags cannot contain empty values`);
+      return;
+    }
+
+    if (!isVocabularyTag(value)) {
+      errors.push(`[word ${row}] unsupported tag value "${value}"`);
+    }
+
+    if (seen.has(normalized)) {
+      errors.push(`[word ${row}] tags contains duplicate value "${value}"`);
+    }
+    seen.add(normalized);
+  });
+}
+
 function validateWord(word: ContentWord, row: number, errors: string[]) {
   if (!word.key || !word.originalScript || !word.english || !word.transliteration || !word.partOfSpeech) {
     errors.push(`[word ${row}] Missing required lexical fields`);
@@ -133,7 +161,7 @@ function validateWord(word: ContentWord, row: number, errors: string[]) {
     errors.push(`[word ${row}] partOfSpeech "${word.partOfSpeech}" is not supported`);
   }
 
-  validateTagLikeCollection(word.tags, "tags", row, errors);
+  validateVocabularyTags(word.tags, row, errors);
   validateTagLikeCollection(word.clusters, "clusters", row, errors);
 }
 

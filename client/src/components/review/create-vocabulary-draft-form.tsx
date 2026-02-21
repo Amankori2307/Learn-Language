@@ -2,10 +2,12 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { SearchableMultiSelect } from "@/components/ui/searchable-multi-select";
 import { SearchableSelect } from "@/components/ui/searchable-select";
 import { useCreateReviewDraft } from "@/hooks/use-review";
-import { LanguageEnum, PartOfSpeechEnum } from "@shared/domain/enums";
+import { LanguageEnum, PartOfSpeechEnum, VocabularyTagEnum } from "@shared/domain/enums";
 import { PART_OF_SPEECH_OPTIONS } from "@shared/domain/part-of-speech";
+import { VOCABULARY_TAG_OPTIONS } from "@shared/domain/vocabulary-tags";
 
 type DraftExample = {
   originalScript: string;
@@ -36,7 +38,7 @@ export function CreateVocabularyDraftForm() {
   const [draftAudioUrl, setDraftAudioUrl] = useState("");
   const [draftImageUrl, setDraftImageUrl] = useState("");
   const [draftSourceUrl, setDraftSourceUrl] = useState("");
-  const [draftTags, setDraftTags] = useState("");
+  const [draftTags, setDraftTags] = useState<VocabularyTagEnum[]>([VocabularyTagEnum.MANUAL_DRAFT]);
   const [draftExamples, setDraftExamples] = useState<DraftExample[]>([{ ...DEFAULT_EXAMPLE }]);
 
   const updateExample = (
@@ -77,10 +79,7 @@ export function CreateVocabularyDraftForm() {
         audioUrl: draftAudioUrl.trim() || undefined,
         imageUrl: draftImageUrl.trim() || undefined,
         sourceUrl: draftSourceUrl.trim() || undefined,
-        tags: draftTags
-          .split(",")
-          .map((tag) => tag.trim())
-          .filter(Boolean),
+        tags: draftTags,
         examples: draftExamples.map((example) => ({
           originalScript: example.originalScript.trim(),
           pronunciation: example.pronunciation.trim(),
@@ -99,7 +98,7 @@ export function CreateVocabularyDraftForm() {
       setDraftAudioUrl("");
       setDraftImageUrl("");
       setDraftSourceUrl("");
-      setDraftTags("");
+      setDraftTags([VocabularyTagEnum.MANUAL_DRAFT]);
       setDraftExamples([{ ...DEFAULT_EXAMPLE }]);
     } catch (error) {
       setCreateError(error instanceof Error ? error.message : "Failed to create draft");
@@ -198,12 +197,15 @@ export function CreateVocabularyDraftForm() {
           />
         </div>
         <div className="space-y-1 md:col-span-2">
-          <Label htmlFor="draft-tags">Tags (comma separated)</Label>
-          <Input
+          <Label htmlFor="draft-tags">Tags</Label>
+          <SearchableMultiSelect
             id="draft-tags"
-            value={draftTags}
-            onChange={(event) => setDraftTags(event.target.value)}
-            placeholder="manual, beginner, reviewer-added"
+            values={draftTags}
+            options={VOCABULARY_TAG_OPTIONS}
+            onChange={setDraftTags}
+            placeholder="Select one or more tags"
+            searchPlaceholder="Search tags..."
+            ariaLabel="Tags"
           />
         </div>
       </div>

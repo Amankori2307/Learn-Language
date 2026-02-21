@@ -2,9 +2,10 @@ import fs from "fs/promises";
 import path from "path";
 import { and, eq, inArray, sql } from "drizzle-orm";
 import { db } from "../server/db";
-import { LanguageEnum, PartOfSpeechEnum } from "../shared/domain/enums";
+import { LanguageEnum, PartOfSpeechEnum, VocabularyTagEnum } from "../shared/domain/enums";
 import { getClusterDescription } from "../shared/domain/cluster-metadata";
 import { isPartOfSpeech } from "../shared/domain/part-of-speech";
+import { isVocabularyTag } from "../shared/domain/vocabulary-tags";
 import {
   clusters,
   quizAttempts,
@@ -26,7 +27,7 @@ type ContentWord = {
   difficultyLevel: "beginner" | "easy" | "medium" | "hard";
   frequencyScore: number;
   cefrLevel?: string;
-  tags?: string[];
+  tags?: VocabularyTagEnum[];
   clusters?: string[];
   source?: {
     type?: string;
@@ -58,6 +59,19 @@ function assertPartOfSpeech(value: string): PartOfSpeechEnum {
     throw new Error(`Invalid partOfSpeech value: ${value}`);
   }
   return value;
+}
+
+function assertVocabularyTags(values: string[] | undefined): VocabularyTagEnum[] {
+  if (!values || values.length === 0) {
+    return [];
+  }
+
+  return values.map((value) => {
+    if (!isVocabularyTag(value)) {
+      throw new Error(`Invalid tag value: ${value}`);
+    }
+    return value;
+  });
 }
 
 function assertWord(word: ContentWord, idx: number) {
@@ -110,10 +124,11 @@ async function ensureCluster(name: string) {
 async function upsertWord(input: ContentWord, exampleSentences: string[]) {
   const language = assertLanguage(input.language);
   const partOfSpeech = assertPartOfSpeech(input.partOfSpeech);
+  const tags = assertVocabularyTags(input.tags);
   const originalScript = input.originalScript.trim();
   const reviewStatus =
     input.source?.reviewStatus ??
-    ((input.tags ?? []).includes("needs-review") ? "pending_review" : "approved");
+    (tags.includes(VocabularyTagEnum.NEEDS_REVIEW) ? "pending_review" : "approved");
   const [existing] = await db
     .select()
     .from(words)
@@ -137,7 +152,7 @@ async function upsertWord(input: ContentWord, exampleSentences: string[]) {
         difficultyLevel: input.difficultyLevel,
         frequencyScore: input.frequencyScore,
         cefrLevel: input.cefrLevel ?? null,
-        tags: input.tags ?? [],
+        tags,
         reviewStatus,
         sourceUrl: input.source?.sourceUrl ?? null,
         sourceCapturedAt: input.source?.generatedAt ? new Date(input.source.generatedAt) : null,
@@ -160,7 +175,7 @@ async function upsertWord(input: ContentWord, exampleSentences: string[]) {
       difficultyLevel: input.difficultyLevel,
       frequencyScore: input.frequencyScore,
       cefrLevel: input.cefrLevel ?? null,
-      tags: input.tags ?? [],
+      tags,
       reviewStatus,
       sourceUrl: input.source?.sourceUrl ?? null,
       sourceCapturedAt: input.source?.generatedAt ? new Date(input.source.generatedAt) : null,

@@ -9,7 +9,6 @@ Build a text-first language learning app with high data correctness, strong memo
 - Phase 4 complete.
 - Phase 6 core hardening complete (`P6-001` to `P6-011`).
 - Active tasks:
-  - `P6-025` tag enum/registry + searchable multi-select
   - `P6-022` maintain zero-warning lint baseline and guard against regressions
 
 ## Core capabilities live
@@ -68,6 +67,7 @@ Build a text-first language learning app with high data correctness, strong memo
   - words and sentences store source script, pronunciation, and meaning directly
   - sentence records include `wordRefs` links so examples are deterministic and reusable
   - language is mandatory on all content rows
+  - part-of-speech and tags are enum-backed across contracts, import, validation, and vocab forms
 
 ## Runtime and quality gates
 
@@ -83,5 +83,5 @@ Build a text-first language learning app with high data correctness, strong memo
 
 ## Immediate next implementation
 
-- Execute in order: `P6-025` -> `P6-022`.
+- Execute in order: `P6-022`.
 - Latest planning artifact: `context/plan/61-pronunciation-strategy.md`.

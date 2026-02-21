@@ -9,6 +9,7 @@ import {
   ReviewDisagreementStatusEnum,
   ReviewStatusEnum,
   UserTypeEnum,
+  VocabularyTagEnum,
 } from './domain/enums';
 
 // ============================================
@@ -498,7 +499,7 @@ export const api = {
         audioUrl: z.string().url().optional(),
         imageUrl: z.string().url().optional(),
         sourceUrl: z.string().url().optional(),
-        tags: z.array(z.string()).optional(),
+        tags: z.array(z.nativeEnum(VocabularyTagEnum)).optional(),
         examples: z.array(z.object({
           originalScript: z.string().trim().min(1),
           pronunciation: z.string().trim().min(1),

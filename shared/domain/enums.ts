@@ -28,6 +28,14 @@ export enum PartOfSpeechEnum {
   INTERJECTION = "interjection",
 }
 
+export enum VocabularyTagEnum {
+  MODEL_SEED = "model-seed",
+  HIGH_CONFIDENCE_BASIC = "high-confidence-basic",
+  MANUAL_DRAFT = "manual-draft",
+  REVIEWER_ADDED = "reviewer-added",
+  NEEDS_REVIEW = "needs-review",
+}
+
 export enum ReviewStatusEnum {
   DRAFT = "draft",
   PENDING_REVIEW = "pending_review",

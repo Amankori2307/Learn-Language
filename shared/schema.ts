@@ -9,6 +9,7 @@ import {
   ReviewDisagreementStatusEnum,
   ReviewStatusEnum,
   UserTypeEnum,
+  VocabularyTagEnum,
 } from "./domain/enums";
 
 // === AUTH MODELS (Inlined for simplicity and consistency with PRD) ===
@@ -49,7 +50,7 @@ export const words = pgTable("words", {
   audioUrl: text("audio_url"),
   imageUrl: text("image_url"),
   exampleSentences: jsonb("example_sentences").$type<string[]>().default([]),
-  tags: jsonb("tags").$type<string[]>().default([]),
+  tags: jsonb("tags").$type<VocabularyTagEnum[]>().default([]),
   reviewStatus: text("review_status").$type<ReviewStatusEnum>().default(ReviewStatusEnum.APPROVED).notNull(),
   submittedBy: varchar("submitted_by"),
   submittedAt: timestamp("submitted_at").defaultNow(),

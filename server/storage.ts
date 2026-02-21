@@ -10,6 +10,7 @@ import {
   QuizQuestionTypeEnum,
   ReviewDisagreementStatusEnum,
   ReviewStatusEnum,
+  VocabularyTagEnum,
 } from "@shared/domain/enums";
 import { getClusterDescription, isGenericClusterDescription } from "@shared/domain/cluster-metadata";
 import { isPartOfSpeech } from "@shared/domain/part-of-speech";
@@ -195,7 +196,7 @@ export interface IStorage {
     audioUrl?: string;
     imageUrl?: string;
     sourceUrl?: string;
-    tags?: string[];
+    tags?: VocabularyTagEnum[];
     examples: Array<{
       originalScript: string;
       pronunciation: string;
@@ -793,7 +794,7 @@ export class DatabaseStorage implements IStorage {
     audioUrl?: string;
     imageUrl?: string;
     sourceUrl?: string;
-    tags?: string[];
+    tags?: VocabularyTagEnum[];
     examples: Array<{
       originalScript: string;
       pronunciation: string;
@@ -816,7 +817,7 @@ export class DatabaseStorage implements IStorage {
         difficultyLevel: "beginner",
         frequencyScore: 0.5,
         exampleSentences: [],
-        tags: input.tags ?? ["manual-draft"],
+        tags: input.tags ?? [VocabularyTagEnum.MANUAL_DRAFT],
         reviewStatus: ReviewStatusEnum.DRAFT,
         reviewerConfidenceScore: null,
         requiresSecondaryReview: false,
@@ -1179,7 +1180,7 @@ export class DatabaseStorage implements IStorage {
       difficultyLevel: "beginner" | "easy" | "medium" | "hard";
       frequencyScore: number;
       cefrLevel?: string;
-      tags?: string[];
+      tags?: VocabularyTagEnum[];
       clusters?: string[];
       source?: {
         type?: string;
