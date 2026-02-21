@@ -64,7 +64,7 @@ Acceptance:
 - Predictable operational costs and safe media handling.
 
 ### P5-006 - Audio + visual answer feedback effects
-Status: `todo`
+Status: `done`
 
 Scope:
 - Add short success/failure sound cues for answer submit feedback.

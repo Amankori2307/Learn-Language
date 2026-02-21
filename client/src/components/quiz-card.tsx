@@ -1,10 +1,11 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { CheckCircle2, XCircle, Volume2, ArrowRight } from "lucide-react";
+import { CheckCircle2, XCircle, Volume2, VolumeX, ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
-import confetti from "canvas-confetti";
 import { useEffect, useState } from "react";
 import { QuizQuestionTypeEnum } from "@shared/domain/enums";
+import { useFeedbackEffects } from "@/hooks/use-feedback-effects";
+import { runErrorEffects, runSuccessEffects } from "@/lib/feedback-effects";
 
 interface QuizOption {
   id: number;
@@ -51,17 +52,27 @@ export function QuizCard({
   onNext 
 }: QuizCardProps) {
   const [selectedOption, setSelectedOption] = useState<number | null>(null);
+  const [negativeVisualNonce, setNegativeVisualNonce] = useState(0);
+  const { enabled: effectsEnabled, toggle: toggleEffects } = useFeedbackEffects();
+
+  const cardAnimate =
+    result && !result.isCorrect
+      ? { opacity: 1, y: 0, x: [0, -9, 9, -7, 7, 0] }
+      : { opacity: 1, y: 0, x: 0 };
 
   useEffect(() => {
-    if (result?.isCorrect) {
-      confetti({
-        particleCount: 100,
-        spread: 70,
-        origin: { y: 0.6 },
-        colors: ['#10b981', '#34d399', '#059669']
-      });
+    if (!result) {
+      return;
     }
-  }, [result]);
+
+    if (result.isCorrect) {
+      runSuccessEffects(effectsEnabled);
+      return;
+    }
+
+    runErrorEffects(effectsEnabled);
+    setNegativeVisualNonce((prev) => prev + 1);
+  }, [effectsEnabled, result]);
 
   const handleOptionClick = (id: number) => {
     if (result) return;
@@ -80,10 +91,10 @@ export function QuizCard({
         <motion.div
           key={question}
           initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
+          animate={cardAnimate}
           exit={{ opacity: 0, y: -20 }}
           transition={{ duration: 0.3 }}
-          className="bg-card rounded-3xl shadow-xl border border-border/50 overflow-hidden"
+          className="relative bg-card rounded-3xl shadow-xl border border-border/50 overflow-hidden"
         >
           {/* Question Area */}
           <div className="p-8 md:p-12 text-center bg-gradient-to-b from-primary/5 to-transparent">
@@ -103,9 +114,16 @@ export function QuizCard({
               </p>
             )}
 
-            {/* Audio Button Placeholder if needed */}
-            <Button variant="ghost" size="icon" className="rounded-full hover:bg-primary/10 hover:text-primary">
-              <Volume2 className="w-6 h-6" />
+            <Button
+              type="button"
+              variant="outline"
+              size="sm"
+              className="rounded-full gap-2"
+              onClick={toggleEffects}
+              aria-label={effectsEnabled ? "Mute feedback effects" : "Unmute feedback effects"}
+            >
+              {effectsEnabled ? <Volume2 className="w-4 h-4" /> : <VolumeX className="w-4 h-4" />}
+              {effectsEnabled ? "Effects On" : "Effects Off"}
             </Button>
           </div>
 
@@ -206,6 +224,15 @@ export function QuizCard({
                     : "bg-rose-50/80 border-rose-200 dark:bg-rose-950/30 dark:border-rose-800/70"
                 )}
               >
+                {result && !result.isCorrect && (
+                  <motion.div
+                    key={negativeVisualNonce}
+                    initial={{ opacity: 0.18 }}
+                    animate={{ opacity: 0 }}
+                    transition={{ duration: 0.45, ease: "easeOut" }}
+                    className="pointer-events-none absolute inset-0 bg-rose-500/20"
+                  />
+                )}
                 <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
                   <div className="flex gap-4">
                     <div className={cn(
