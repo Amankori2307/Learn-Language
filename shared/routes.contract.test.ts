@@ -247,6 +247,18 @@ test("review history contract accepts payload", () => {
       requiresSecondaryReview: true,
       disagreementStatus: ReviewDisagreementStatusEnum.FLAGGED,
     },
+    clusters: [
+      { id: 1, name: "daily-use", type: "semantic" },
+    ],
+    relatedClusterWords: [
+      {
+        id: 2,
+        originalScript: "శుభోదయం",
+        transliteration: "shubhodhayam",
+        english: "good morning",
+        reviewStatus: ReviewStatusEnum.APPROVED,
+      },
+    ],
     events: [
       {
         id: 10,

@@ -440,6 +440,18 @@ export const api = {
             requiresSecondaryReview: z.boolean(),
             disagreementStatus: z.nativeEnum(ReviewDisagreementStatusEnum),
           }),
+          clusters: z.array(z.object({
+            id: z.number(),
+            name: z.string(),
+            type: z.string(),
+          })),
+          relatedClusterWords: z.array(z.object({
+            id: z.number(),
+            originalScript: z.string(),
+            transliteration: z.string(),
+            english: z.string(),
+            reviewStatus: z.nativeEnum(ReviewStatusEnum),
+          })),
           events: z.array(z.object({
             id: z.number(),
             fromStatus: z.string(),

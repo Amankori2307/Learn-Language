@@ -510,6 +510,8 @@ export async function registerRoutes(
         requiresSecondaryReview: result.word.requiresSecondaryReview ?? false,
         disagreementStatus: result.word.disagreementStatus ?? ReviewDisagreementStatusEnum.NONE,
       },
+      clusters: result.clusters,
+      relatedClusterWords: result.relatedClusterWords,
       events: result.events.map((e) => ({
         id: e.id,
         fromStatus: e.fromStatus,

@@ -1,5 +1,5 @@
 import { db } from "./db";
-import { eq, sql, and, inArray } from "drizzle-orm";
+import { eq, ne, sql, and, inArray } from "drizzle-orm";
 import fs from "fs/promises";
 import path from "path";
 import {
@@ -156,7 +156,17 @@ export interface IStorage {
     limit?: number,
   ): Promise<Word[]>;
   getConflictReviewQueue(limit?: number): Promise<Word[]>;
-  getWordWithReviewHistory(wordId: number): Promise<{ word: Word; events: Array<{
+  getWordWithReviewHistory(wordId: number): Promise<{ word: Word; clusters: Array<{
+    id: number;
+    name: string;
+    type: string;
+  }>; relatedClusterWords: Array<{
+    id: number;
+    originalScript: string;
+    transliteration: string;
+    english: string;
+    reviewStatus: ReviewStatusEnum;
+  }>; events: Array<{
     id: number;
     fromStatus: string;
     toStatus: string;
@@ -754,7 +764,17 @@ export class DatabaseStorage implements IStorage {
     });
   }
 
-  async getWordWithReviewHistory(wordId: number): Promise<{ word: Word; events: Array<{
+  async getWordWithReviewHistory(wordId: number): Promise<{ word: Word; clusters: Array<{
+    id: number;
+    name: string;
+    type: string;
+  }>; relatedClusterWords: Array<{
+    id: number;
+    originalScript: string;
+    transliteration: string;
+    english: string;
+    reviewStatus: ReviewStatusEnum;
+  }>; events: Array<{
     id: number;
     fromStatus: string;
     toStatus: string;
@@ -782,7 +802,52 @@ export class DatabaseStorage implements IStorage {
       .where(eq(wordReviewEvents.wordId, wordId))
       .orderBy(sql`${wordReviewEvents.createdAt} desc`);
 
-    return { word, events };
+    const linkedClusters = await db
+      .select({
+        id: clusters.id,
+        name: clusters.name,
+        type: clusters.type,
+      })
+      .from(wordClusters)
+      .innerJoin(clusters, eq(wordClusters.clusterId, clusters.id))
+      .where(eq(wordClusters.wordId, wordId))
+      .orderBy(sql`${clusters.name} asc`);
+
+    const clusterIds = linkedClusters.map((cluster) => cluster.id);
+    let relatedClusterWords: Array<{
+      id: number;
+      originalScript: string;
+      transliteration: string;
+      english: string;
+      reviewStatus: ReviewStatusEnum;
+    }> = [];
+
+    if (clusterIds.length > 0) {
+      const relatedRows = await db
+        .select({
+          id: words.id,
+          originalScript: words.originalScript,
+          transliteration: words.transliteration,
+          english: words.english,
+          reviewStatus: words.reviewStatus,
+        })
+        .from(wordClusters)
+        .innerJoin(words, eq(wordClusters.wordId, words.id))
+        .where(and(inArray(wordClusters.clusterId, clusterIds), ne(words.id, wordId)))
+        .orderBy(sql`${words.english} asc`)
+        .limit(100);
+
+      const dedup = new Map<number, (typeof relatedRows)[number]>();
+      relatedRows.forEach((row) => {
+        if (!dedup.has(row.id)) {
+          dedup.set(row.id, row);
+        }
+      });
+
+      relatedClusterWords = Array.from(dedup.values()).slice(0, 20);
+    }
+
+    return { word, clusters: linkedClusters, relatedClusterWords, events };
   }
 
   async createWordDraft(input: {

@@ -187,6 +187,18 @@ export default function ReviewPage() {
                 <div className="rounded-xl border border-border/50 p-3">
                   <p className="font-medium">{history.data.word.transliteration} ({history.data.word.originalScript})</p>
                   <p className="text-sm text-muted-foreground">{history.data.word.english}</p>
+                  <div className="mt-2 flex flex-wrap gap-2">
+                    {history.data.clusters.length > 0 ? history.data.clusters.map((cluster) => (
+                      <span
+                        key={cluster.id}
+                        className="inline-flex items-center rounded-full border border-border/60 bg-secondary px-2 py-1 text-xs"
+                      >
+                        {cluster.name}
+                      </span>
+                    )) : (
+                      <span className="text-xs text-muted-foreground">No clusters linked</span>
+                    )}
+                  </div>
                   <p className="text-xs text-muted-foreground mt-2">
                     Source: {history.data.word.sourceUrl ? (
                       <a className="underline" href={history.data.word.sourceUrl} target="_blank" rel="noreferrer">
@@ -197,6 +209,20 @@ export default function ReviewPage() {
                   <p className="text-xs text-muted-foreground">
                     Source captured: {formatDate(history.data.word.sourceCapturedAt)}
                   </p>
+                </div>
+                <div className="rounded-xl border border-border/50 p-3">
+                  <p className="text-sm font-medium">Related Cluster Words</p>
+                  {history.data.relatedClusterWords.length === 0 ? (
+                    <p className="text-xs text-muted-foreground mt-1">No related words found for linked clusters.</p>
+                  ) : (
+                    <div className="mt-2 space-y-1">
+                      {history.data.relatedClusterWords.map((item) => (
+                        <p key={item.id} className="text-xs text-muted-foreground">
+                          {item.transliteration} ({item.originalScript}) • {item.english} • {item.reviewStatus}
+                        </p>
+                      ))}
+                    </div>
+                  )}
                 </div>
                 {history.data.events.length === 0 ? (
                   <p className="text-sm text-muted-foreground">No review events yet.</p>
