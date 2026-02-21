@@ -2,9 +2,9 @@
 
 Date: 2026-02-21  
 Session owner: Codex  
-Last completed task ID: P5-002  
+Last completed task ID: P5-003  
 Current in-progress task ID: -  
-Next task ID: P5-003
+Next task ID: -
 
 ## Current state
 
@@ -28,6 +28,7 @@ Next task ID: P5-003
 - Reviewer/admin create-vocabulary flow is now live in UI + API, with required pronunciation/meaning/examples and automatic insertion into draft review lifecycle.
 - Optional audio URL support is now available in reviewer/admin vocabulary creation flow and persisted on words without affecting text-first flows.
 - Optional `listen_identify` mode is now supported end-to-end for audio-enabled words.
+- Optional image hints are now supported end-to-end (`imageUrl` on words + quiz payload + UI rendering fallback-safe).
 
 ## Current blockers
 
@@ -35,5 +36,4 @@ Next task ID: P5-003
 
 ## Immediate next actions
 
-1. Execute `P5-003`: image hints for selected vocabulary groups.
-2. Continue deferred Phase 5 media tasks in order.
+- No active pending tasks in the current registry.

@@ -104,6 +104,7 @@ export const api = {
           questionText: z.string(),
           pronunciation: z.string().optional().nullable(),
           audioUrl: z.string().optional().nullable(),
+          imageUrl: z.string().optional().nullable(),
           options: z.array(z.object({
             id: z.number(),
             text: z.string(),
@@ -446,6 +447,7 @@ export const api = {
         english: z.string().trim().min(1),
         partOfSpeech: z.string().trim().min(1),
         audioUrl: z.string().url().optional(),
+        imageUrl: z.string().url().optional(),
         sourceUrl: z.string().url().optional(),
         tags: z.array(z.string()).optional(),
         examples: z.array(z.object({

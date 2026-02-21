@@ -17,6 +17,4 @@ Only active and pending tasks are listed here. Completed tasks are intentionally
 |---|---|---|---|---|---|
 | P5-001 | done | Add optional audio URL support end-to-end (non-blocking) | P6-013 | M | text flow still works when audio is missing |
 | P5-002 | done | Add optional listen-and-identify quiz mode | P5-001 | M | mode can be enabled/disabled cleanly |
-| P5-003 | todo | Add image hints for selected vocabulary groups | P5-001 | M | images lazy-load and degrade gracefully |
-| P5-004 | todo | Add media moderation/storage policy and cost controls | P5-001 | S | quotas + policy are documented and enforced |
-| P5-005 | todo | Media QA + accessibility pass | P5-002,P5-003 | M | captions/alt/fallback behavior validated |
+| P5-003 | done | Add image hints for selected vocabulary groups | P5-001 | M | images lazy-load and degrade gracefully |

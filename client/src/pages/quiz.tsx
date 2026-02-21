@@ -191,6 +191,7 @@ export default function QuizPage() {
         <QuizCard
           question={currentQuestion.questionText}
           pronunciation={currentQuestion.pronunciation}
+          imageUrl={currentQuestion.imageUrl}
           type={currentQuestion.type}
           options={currentQuestion.options}
           confidenceLevel={confidenceLevel}

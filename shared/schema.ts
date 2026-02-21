@@ -46,6 +46,7 @@ export const words = pgTable("words", {
   frequencyScore: real("frequency_score").notNull(),
   cefrLevel: text("cefr_level"),
   audioUrl: text("audio_url"),
+  imageUrl: text("image_url"),
   exampleSentences: jsonb("example_sentences").$type<string[]>().default([]),
   tags: jsonb("tags").$type<string[]>().default([]),
   reviewStatus: text("review_status").$type<ReviewStatusEnum>().default(ReviewStatusEnum.APPROVED).notNull(),

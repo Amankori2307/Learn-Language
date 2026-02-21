@@ -153,6 +153,7 @@ export interface IStorage {
     english: string;
     partOfSpeech: string;
     audioUrl?: string;
+    imageUrl?: string;
     sourceUrl?: string;
     tags?: string[];
     examples: Array<{
@@ -722,6 +723,7 @@ export class DatabaseStorage implements IStorage {
     english: string;
     partOfSpeech: string;
     audioUrl?: string;
+    imageUrl?: string;
     sourceUrl?: string;
     tags?: string[];
     examples: Array<{
@@ -741,6 +743,7 @@ export class DatabaseStorage implements IStorage {
         english: input.english,
         partOfSpeech: input.partOfSpeech,
         audioUrl: input.audioUrl ?? null,
+        imageUrl: input.imageUrl ?? null,
         difficulty: 1,
         difficultyLevel: "beginner",
         frequencyScore: 0.5,

@@ -15,6 +15,7 @@ interface QuizOption {
 interface QuizCardProps {
   question: string;
   pronunciation?: string | null;
+  imageUrl?: string | null;
   type: QuizQuestionTypeEnum;
   options: QuizOption[];
   confidenceLevel: 1 | 2 | 3;
@@ -42,6 +43,7 @@ interface QuizCardProps {
 export function QuizCard({ 
   question, 
   pronunciation,
+  imageUrl,
   type, 
   options, 
   confidenceLevel,
@@ -112,6 +114,16 @@ export function QuizCard({
               <p className="text-sm md:text-base text-muted-foreground mb-5">
                 Pronunciation: <span className="font-semibold text-foreground">{pronunciation}</span>
               </p>
+            )}
+            {imageUrl && (
+              <div className="mb-5 flex justify-center">
+                <img
+                  src={imageUrl}
+                  alt="Vocabulary hint"
+                  className="max-h-44 w-auto rounded-xl border border-border/60 object-contain"
+                  loading="lazy"
+                />
+              </div>
             )}
 
             <Button

@@ -81,6 +81,7 @@ export function useCreateReviewDraft() {
       english: string;
       partOfSpeech: string;
       audioUrl?: string;
+      imageUrl?: string;
       sourceUrl?: string;
       tags?: string[];
       examples: Array<{

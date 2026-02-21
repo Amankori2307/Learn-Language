@@ -8,9 +8,7 @@ Build a text-first language learning app with high data correctness, strong memo
 
 - Phase 4 complete.
 - Phase 6 core hardening complete (`P6-001` to `P6-011`).
-- Active tasks:
-  - `P6-012` context hygiene
-  - `P6-013` reviewer/admin create-vocabulary flow
+- Active tasks: none.
 
 ## Core capabilities live
 
@@ -20,6 +18,7 @@ Build a text-first language learning app with high data correctness, strong memo
 - Learning:
   - Quiz modes: `daily_review`, `new_words`, `cluster`, `weak_words`, `complex_workout`
   - Optional audio mode: `listen_identify` (serves only audio-enabled words)
+  - Optional image hints via `imageUrl` in quiz payload/UI (rendered only when present)
   - Language-scoped learner data isolation for quiz/stats/attempts/clusters/leaderboard/words
   - SRS scheduling with:
     - versioned config (`srs_configs`)
@@ -45,6 +44,7 @@ Build a text-first language learning app with high data correctness, strong memo
     - queue endpoint: `GET /api/review/conflicts`
     - resolution endpoint: `PATCH /api/review/words/:id/resolve-conflict`
   - reviewer/admin draft creation now supports optional `audioUrl` for future media-enabled modes
+  - reviewer/admin draft creation now supports optional `imageUrl`
   - complete audit trail in `word_review_events`
 
 ## Data/source of truth
@@ -68,5 +68,4 @@ Build a text-first language learning app with high data correctness, strong memo
 
 ## Immediate next implementation
 
-1. Execute `P5-003` (image hints for selected vocabulary groups).
-2. Continue `P5-004`..`P5-005` in strict order.
+- No active pending tasks in current plan.

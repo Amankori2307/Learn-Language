@@ -144,6 +144,7 @@ export async function registerRoutes(
               ? (word.transliteration ?? null)
               : null,
         audioUrl: word.audioUrl,
+        imageUrl: word.imageUrl ?? null,
         options,
       };
     }));
@@ -486,6 +487,7 @@ export async function registerRoutes(
         english: parsed.english,
         partOfSpeech: parsed.partOfSpeech,
         audioUrl: parsed.audioUrl,
+        imageUrl: parsed.imageUrl,
         sourceUrl: parsed.sourceUrl,
         tags: parsed.tags,
         examples: parsed.examples,
