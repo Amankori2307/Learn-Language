@@ -1,10 +1,12 @@
 import type { UserWordProgress } from "@shared/schema";
+import { QuizDirectionEnum } from "@shared/domain/enums";
 
 export type SrsInput = {
   progress: UserWordProgress;
   isCorrect: boolean;
   confidenceLevel: number;
   responseTimeMs?: number;
+  direction?: QuizDirectionEnum;
   now?: Date;
   config?: {
     version: string;
@@ -39,6 +41,12 @@ function toMasteryLevel(streak: number) {
   if (streak >= 3) return 2;
   if (streak >= 1) return 1;
   return 0;
+}
+
+function updateStrength(current: number | null | undefined, isCorrect: boolean, confidenceLevel: number) {
+  const base = isCorrect ? 0.12 : -0.18;
+  const confidenceAdjustment = isCorrect ? (confidenceLevel - 2) * 0.04 : (confidenceLevel - 2) * 0.02;
+  return clamp((current ?? 0.5) + base + confidenceAdjustment, 0, 1);
 }
 
 export function applySrsUpdate(input: SrsInput): UserWordProgress {
@@ -80,6 +88,17 @@ export function applySrsUpdate(input: SrsInput): UserWordProgress {
 
   next.masteryLevel = toMasteryLevel(next.correctStreak ?? 0);
   next.srsConfigVersion = config.version;
+
+  if (input.direction === QuizDirectionEnum.SOURCE_TO_TARGET) {
+    next.sourceToTargetStrength = updateStrength(next.sourceToTargetStrength, input.isCorrect, input.confidenceLevel);
+  } else if (input.direction === QuizDirectionEnum.TARGET_TO_SOURCE) {
+    next.targetToSourceStrength = updateStrength(next.targetToSourceStrength, input.isCorrect, input.confidenceLevel);
+  } else {
+    // Fallback for legacy submissions without direction metadata.
+    next.sourceToTargetStrength = updateStrength(next.sourceToTargetStrength, input.isCorrect, input.confidenceLevel);
+    next.targetToSourceStrength = updateStrength(next.targetToSourceStrength, input.isCorrect, input.confidenceLevel);
+  }
+
   next.lastSeen = now;
 
   const nextReview = new Date(now);

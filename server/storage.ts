@@ -86,6 +86,8 @@ export interface IStorage {
     xp: number;
     recognitionAccuracy: number;
     recallAccuracy: number;
+    sourceToTargetStrength: number;
+    targetToSourceStrength: number;
     recommendedDirection: QuizDirectionEnum;
   }>;
   getRecentAccuracy(userId: string, limit?: number, language?: LanguageEnum): Promise<number>;
@@ -693,6 +695,8 @@ export class DatabaseStorage implements IStorage {
     xp: number;
     recognitionAccuracy: number;
     recallAccuracy: number;
+    sourceToTargetStrength: number;
+    targetToSourceStrength: number;
     recommendedDirection: QuizDirectionEnum;
   }> {
     const progressList = await this.getUserProgress(userId, language);
@@ -770,6 +774,12 @@ export class DatabaseStorage implements IStorage {
 
     const recallAccuracy = recallAttempts.length > 0 ? recallCorrect / recallAttempts.length : 1;
     const recognitionAccuracy = recognitionAttempts.length > 0 ? recognitionCorrect / recognitionAttempts.length : 1;
+    const sourceToTargetStrength = progressList.length > 0
+      ? progressList.reduce((sum, row) => sum + (row.sourceToTargetStrength ?? 0.5), 0) / progressList.length
+      : 0.5;
+    const targetToSourceStrength = progressList.length > 0
+      ? progressList.reduce((sum, row) => sum + (row.targetToSourceStrength ?? 0.5), 0) / progressList.length
+      : 0.5;
     const recommendedDirection = recallAccuracy < recognitionAccuracy
       ? QuizDirectionEnum.SOURCE_TO_TARGET
       : QuizDirectionEnum.TARGET_TO_SOURCE;
@@ -783,6 +793,8 @@ export class DatabaseStorage implements IStorage {
       xp,
       recognitionAccuracy: Number((recognitionAccuracy * 100).toFixed(1)),
       recallAccuracy: Number((recallAccuracy * 100).toFixed(1)),
+      sourceToTargetStrength: Number(sourceToTargetStrength.toFixed(3)),
+      targetToSourceStrength: Number(targetToSourceStrength.toFixed(3)),
       recommendedDirection,
     };
   }

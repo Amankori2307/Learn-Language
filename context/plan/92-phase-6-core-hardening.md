@@ -216,7 +216,7 @@ Deliverable:
 ---
 
 ## P6-010 - Per-direction memory strength model
-Status: `todo`
+Status: `done`
 Depends on: `P6-009`
 
 Scope:
@@ -228,6 +228,15 @@ Scope:
 Acceptance criteria:
 - Repetition prioritization changes based on weaker direction.
 - Stats expose direction-specific progression.
+
+Deliverable:
+- `shared/schema.ts` (`source_to_target_strength`, `target_to_source_strength`)
+- `migrations/0004_direction_strengths.sql`
+- `server/services/srs.ts` (direction-aware strength updates)
+- `server/services/quiz-candidate-scoring.ts` (weaker-direction priority bonus)
+- `server/storage.ts` + `shared/routes.ts` (`sourceToTargetStrength`, `targetToSourceStrength` in stats)
+- `server/services/srs.test.ts`
+- `server/services/quiz-candidate-scoring.test.ts`
 
 ---
 

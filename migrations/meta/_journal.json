@@ -29,6 +29,13 @@
       "when": 1771708600000,
       "tag": "0003_srs_config_versioning",
       "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1771709200000,
+      "tag": "0004_direction_strengths",
+      "breakpoints": true
     }
   ]
 }

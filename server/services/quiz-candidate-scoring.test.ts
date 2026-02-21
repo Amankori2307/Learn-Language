@@ -75,3 +75,44 @@ test("rankQuizCandidates deprioritizes mastered words that are not due", () => {
   const ranked = rankQuizCandidates(words, progressMap, now);
   assert.deepEqual(ranked.map((w: any) => w.id), [2, 1]);
 });
+
+test("computeCandidateScore boosts words with weaker direction strength", () => {
+  const now = new Date("2026-02-20T00:00:00.000Z");
+  const strongScore = computeCandidateScore({
+    word: makeWord(1, 1) as any,
+    now,
+    progress: {
+      userId: "u1",
+      wordId: 1,
+      correctStreak: 1,
+      wrongCount: 0,
+      easeFactor: 2.5,
+      interval: 3,
+      lastSeen: new Date("2026-02-19T00:00:00.000Z"),
+      nextReview: new Date("2026-02-25T00:00:00.000Z"),
+      masteryLevel: 1,
+      sourceToTargetStrength: 0.9,
+      targetToSourceStrength: 0.9,
+    } as any,
+  });
+  const weakScore = computeCandidateScore({
+    word: makeWord(2, 1) as any,
+    now,
+    progress: {
+      userId: "u1",
+      wordId: 2,
+      correctStreak: 1,
+      wrongCount: 0,
+      easeFactor: 2.5,
+      interval: 3,
+      lastSeen: new Date("2026-02-19T00:00:00.000Z"),
+      nextReview: new Date("2026-02-25T00:00:00.000Z"),
+      masteryLevel: 1,
+      sourceToTargetStrength: 0.3,
+      targetToSourceStrength: 0.9,
+    } as any,
+  });
+
+  assert.ok(weakScore.directionWeaknessBonus > strongScore.directionWeaknessBonus);
+  assert.ok(weakScore.total > strongScore.total);
+});

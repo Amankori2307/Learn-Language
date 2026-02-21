@@ -110,6 +110,8 @@ export const userWordProgress = pgTable("user_word_progress", {
   easeFactor: real("ease_factor").default(2.5),
   interval: integer("interval").default(1),
   srsConfigVersion: text("srs_config_version").default("v1").notNull(),
+  sourceToTargetStrength: real("source_to_target_strength").default(0.5).notNull(),
+  targetToSourceStrength: real("target_to_source_strength").default(0.5).notNull(),
   lastSeen: timestamp("last_seen").defaultNow(),
   nextReview: timestamp("next_review").defaultNow(),
   masteryLevel: integer("mastery_level").default(0),

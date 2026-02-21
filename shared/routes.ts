@@ -162,6 +162,8 @@ export const api = {
           xp: z.number(),
           recognitionAccuracy: z.number(),
           recallAccuracy: z.number(),
+          sourceToTargetStrength: z.number(),
+          targetToSourceStrength: z.number(),
           recommendedDirection: z.nativeEnum(QuizDirectionEnum),
         }),
         401: errorSchemas.unauthorized,

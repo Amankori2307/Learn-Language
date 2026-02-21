@@ -2,9 +2,9 @@
 
 Date: 2026-02-21  
 Session owner: Codex  
-Last completed task ID: P6-009  
+Last completed task ID: P6-010  
 Current in-progress task ID: -  
-Next task ID: P6-010
+Next task ID: P6-011
 
 ## Current state
 
@@ -21,6 +21,7 @@ Next task ID: P6-010
 - Review governance v2 schema is now active across DB + API with reviewer confidence score, secondary-review flag, and disagreement status fields.
 - Conflict queue + resolution workflow is active with reviewer-only endpoints and integration coverage validating disagreement -> resolved audit trace.
 - SRS config versioning is live with `srs_configs`, version-stamped progress updates, and fallback-safe default config resolution.
+- Per-direction memory strengths are now persisted and used for scheduling priority + stats (`source->target` vs `target->source`).
 - Active pending work is now managed through:
   - `context/plan/01-master-task-registry.md`
   - `context/plan/92-phase-6-core-hardening.md`
@@ -32,6 +33,5 @@ Next task ID: P6-010
 
 ## Immediate next actions
 
-1. Execute `P6-010`: per-direction memory strength model.
-2. Execute `P6-011`: SRS drift/overdue monitor.
-3. Continue in strict order defined in `context/plan/92-phase-6-core-hardening.md`.
+1. Execute `P6-011`: SRS drift/overdue monitor.
+2. Continue in strict order defined in `context/plan/92-phase-6-core-hardening.md`.

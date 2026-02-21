@@ -180,6 +180,8 @@ export async function registerRoutes(
           easeFactor: 2.5,
           interval: 0,
           srsConfigVersion: srsConfig.version,
+          sourceToTargetStrength: 0.5,
+          targetToSourceStrength: 0.5,
           masteryLevel: 0,
           lastSeen: null,
           nextReview: null,
@@ -192,6 +194,7 @@ export async function registerRoutes(
         isCorrect,
         confidenceLevel: input.confidenceLevel,
         responseTimeMs: input.responseTimeMs,
+        direction: input.direction,
         now,
         config: srsConfig,
       });

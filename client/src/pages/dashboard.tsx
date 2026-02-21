@@ -42,6 +42,8 @@ export default function Dashboard() {
     xp: 0,
     recognitionAccuracy: 0,
     recallAccuracy: 0,
+    sourceToTargetStrength: 0.5,
+    targetToSourceStrength: 0.5,
     recommendedDirection: QuizDirectionEnum.SOURCE_TO_TARGET as const,
   };
 

@@ -5,6 +5,7 @@ export type CandidateScoreBreakdown = {
   daysSinceLastSeen: number;
   wrongPenaltyBonus: number;
   streakPenalty: number;
+  directionWeaknessBonus: number;
   newWordBoost: number;
   masteredPenalty: number;
   total: number;
@@ -27,6 +28,7 @@ export function computeCandidateScore(input: ScoreCandidateInput): CandidateScor
       daysSinceLastSeen: 0,
       wrongPenaltyBonus: 0,
       streakPenalty: 0,
+      directionWeaknessBonus: 0,
       newWordBoost: 50,
       masteredPenalty: 0,
       total,
@@ -40,6 +42,11 @@ export function computeCandidateScore(input: ScoreCandidateInput): CandidateScor
   );
   const wrongPenaltyBonus = (input.progress.wrongCount ?? 0) * 2;
   const streakPenalty = input.progress.correctStreak ?? 0;
+  const weakestDirection = Math.min(
+    input.progress.sourceToTargetStrength ?? 0.5,
+    input.progress.targetToSourceStrength ?? 0.5,
+  );
+  const directionWeaknessBonus = Math.round((1 - weakestDirection) * 8);
 
   let masteredPenalty = 0;
   if ((input.progress.masteryLevel ?? 0) >= 4) {
@@ -52,6 +59,7 @@ export function computeCandidateScore(input: ScoreCandidateInput): CandidateScor
     daysSinceLastSeen +
     wrongPenaltyBonus -
     streakPenalty +
+    directionWeaknessBonus +
     masteredPenalty;
 
   return {
@@ -59,6 +67,7 @@ export function computeCandidateScore(input: ScoreCandidateInput): CandidateScor
     daysSinceLastSeen,
     wrongPenaltyBonus,
     streakPenalty,
+    directionWeaknessBonus,
     newWordBoost: 0,
     masteredPenalty,
     total,

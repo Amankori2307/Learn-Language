@@ -100,6 +100,8 @@ test("stats contract accepts direction metrics", () => {
     xp: 120,
     recognitionAccuracy: 72.5,
     recallAccuracy: 61.2,
+    sourceToTargetStrength: 0.42,
+    targetToSourceStrength: 0.68,
     recommendedDirection: QuizDirectionEnum.SOURCE_TO_TARGET,
   };
 

@@ -1,6 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { applySrsUpdate } from "./srs";
+import { QuizDirectionEnum } from "@shared/domain/enums";
 
 const baseProgress = {
   userId: "u1",
@@ -10,6 +11,8 @@ const baseProgress = {
   easeFactor: 2.5,
   interval: 1,
   srsConfigVersion: "v1",
+  sourceToTargetStrength: 0.5,
+  targetToSourceStrength: 0.5,
   lastSeen: null,
   nextReview: null,
   masteryLevel: 0,
@@ -37,6 +40,7 @@ test("applySrsUpdate increases streak and interval on correct answers", () => {
     isCorrect: true,
     confidenceLevel: 3,
     responseTimeMs: 2000,
+    direction: QuizDirectionEnum.SOURCE_TO_TARGET,
     now,
   });
 
@@ -44,4 +48,6 @@ test("applySrsUpdate increases streak and interval on correct answers", () => {
   assert.ok((updated.interval ?? 0) > 6);
   assert.equal(updated.masteryLevel, 2);
   assert.equal(updated.srsConfigVersion, "v1");
+  assert.ok((updated.sourceToTargetStrength ?? 0) > 0.5);
+  assert.equal(updated.targetToSourceStrength, 0.5);
 });
