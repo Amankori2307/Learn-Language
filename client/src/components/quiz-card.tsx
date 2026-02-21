@@ -31,11 +31,11 @@ interface QuizCardProps {
       transliteration: string;
       exampleSentences: string[];
     };
-    example: {
+    examples: Array<{
       originalScript: string;
       pronunciation: string;
       meaning: string;
-    };
+    }>;
   } | null;
   onNext: () => void;
 }
@@ -274,26 +274,33 @@ export function QuizCard({
                         <span className="mx-2">•</span>
                         <span>{result.correctAnswer.english}</span>
                       </p>
-                      {result.example && (
-                        <div className="text-sm mt-3 p-3 rounded-lg border border-border/70 bg-background/90 dark:bg-background/60 space-y-1 text-foreground">
-                          <p>
-                            <span className="font-semibold">Sentence:</span>{" "}
-                            <span className="font-originalScript text-foreground/95">
-                              {result.example.originalScript}
-                            </span>
-                          </p>
-                          <p>
-                            <span className="font-semibold">Pronunciation:</span>{" "}
-                            <span className="font-medium text-foreground/95">
-                              {result.example.pronunciation}
-                            </span>
-                          </p>
-                          <p>
-                            <span className="font-semibold">Meaning:</span>{" "}
-                            <span className="font-medium text-foreground/95">
-                              {result.example.meaning}
-                            </span>
-                          </p>
+                      {result.examples.length > 0 && (
+                        <div className="text-sm mt-3 space-y-2">
+                          {result.examples.map((example, index) => (
+                            <div
+                              key={`${example.originalScript}-${index}`}
+                              className="p-3 rounded-lg border border-border/70 bg-background/90 dark:bg-background/60 text-foreground"
+                            >
+                              <p>
+                                <span className="font-semibold">Sentence:</span>{" "}
+                                <span className="font-originalScript text-foreground/95">
+                                  {example.originalScript}
+                                </span>
+                              </p>
+                              <p>
+                                <span className="font-semibold">Pronunciation:</span>{" "}
+                                <span className="font-medium text-foreground/95">
+                                  {example.pronunciation}
+                                </span>
+                              </p>
+                              <p>
+                                <span className="font-semibold">Meaning:</span>{" "}
+                                <span className="font-medium text-foreground/95">
+                                  {example.meaning}
+                                </span>
+                              </p>
+                            </div>
+                          ))}
                         </div>
                       )}
                     </div>

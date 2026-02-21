@@ -173,7 +173,6 @@ export async function registerRoutes(
       }
 
       const examples = await storage.getWordExamples(word.id, input.language ?? undefined);
-      const firstExample = examples[0];
 
       const isCorrect = input.selectedOptionId === word.id; // Option ID is word ID of the choice
       const srsConfig = await storage.getActiveSrsConfig();
@@ -230,21 +229,22 @@ export async function registerRoutes(
 
       const fallbackSentence = word.exampleSentences?.[0] ?? word.originalScript;
       const fallbackPronunciation = word.transliteration;
-      const bestExamplePronunciation = firstExample?.pronunciation ?? fallbackPronunciation;
-      const feedbackExample = firstExample ? {
-        originalScript: firstExample.originalScript,
-        pronunciation: bestExamplePronunciation,
-        meaning: firstExample.englishSentence,
-      } : {
-        originalScript: fallbackSentence,
-        pronunciation: fallbackPronunciation,
-        meaning: word.english,
-      };
+      const feedbackExamples = examples.length > 0
+        ? examples.slice(0, 3).map((example) => ({
+            originalScript: example.originalScript,
+            pronunciation: example.pronunciation,
+            meaning: example.englishSentence,
+          }))
+        : [{
+            originalScript: fallbackSentence,
+            pronunciation: fallbackPronunciation,
+            meaning: word.english,
+          }];
 
       res.json({
         isCorrect,
         correctAnswer: word,
-        example: feedbackExample,
+        examples: feedbackExamples,
         progressUpdate: {
           streak: progress.correctStreak || 0,
           masteryLevel: progress.masteryLevel || 0,

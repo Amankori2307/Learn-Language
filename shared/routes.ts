@@ -136,11 +136,11 @@ export const api = {
         200: z.object({
           isCorrect: z.boolean(),
           correctAnswer: z.custom<typeof words.$inferSelect>(),
-          example: z.object({
+          examples: z.array(z.object({
             originalScript: z.string(),
             pronunciation: z.string(),
             meaning: z.string(),
-          }),
+          })),
           progressUpdate: z.object({
             streak: z.number(),
             masteryLevel: z.number(),

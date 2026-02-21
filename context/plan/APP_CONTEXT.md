@@ -9,7 +9,6 @@ Build a text-first language learning app with high data correctness, strong memo
 - Phase 4 complete.
 - Phase 6 core hardening complete (`P6-001` to `P6-011`).
 - Active tasks:
-  - `P6-017` quiz feedback with multiple example sentences
   - `P6-018` learner analytics for strengths/gaps
   - `P6-019` pronunciation strategy note (non-implementation)
 
@@ -33,6 +32,7 @@ Build a text-first language learning app with high data correctness, strong memo
   - Cluster UX/data improvements:
     - cluster list API returns language-scoped `wordCount`
     - cluster UI shows cluster size and richer cluster catalog via POS-derived clusters
+  - Quiz feedback now returns and renders up to 3 example sentences per answer (sentence + pronunciation + meaning)
 - Stats/analytics:
   - recall vs recognition accuracy
   - direction strength averages
@@ -77,4 +77,4 @@ Build a text-first language learning app with high data correctness, strong memo
 
 ## Immediate next implementation
 
-- Execute in order: `P6-017` -> `P6-018` -> `P6-019`.
+- Execute in order: `P6-018` -> `P6-019`.

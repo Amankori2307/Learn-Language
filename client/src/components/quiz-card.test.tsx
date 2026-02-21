@@ -63,4 +63,49 @@ describe("QuizCard", () => {
     const firstNewOption = screen.getByRole("button", { name: "Option shubharaatri" });
     expect(firstNewOption.className.includes("ring-primary")).toBe(false);
   });
+
+  it("renders multiple feedback examples after answer evaluation", () => {
+    render(
+      <QuizCard
+        question="hello"
+        pronunciation={null}
+        imageUrl={null}
+        type={QuizQuestionTypeEnum.SOURCE_TO_TARGET}
+        options={[
+          { id: 1, text: "hello" },
+          { id: 2, text: "thanks" },
+        ]}
+        confidenceLevel={2}
+        onConfidenceChange={vi.fn()}
+        onAnswer={vi.fn()}
+        isSubmitting={false}
+        result={{
+          isCorrect: true,
+          correctAnswer: {
+            id: 1,
+            originalScript: "నమస్తే",
+            english: "hello",
+            transliteration: "namaste",
+            exampleSentences: [],
+          },
+          examples: [
+            {
+              originalScript: "నమస్తే, మీరు ఎలా ఉన్నారు?",
+              pronunciation: "namaste, meeru ela unnaru?",
+              meaning: "Hello, how are you?",
+            },
+            {
+              originalScript: "అందరికీ నమస్తే.",
+              pronunciation: "andariki namaste.",
+              meaning: "Hello everyone.",
+            },
+          ],
+        }}
+        onNext={vi.fn()}
+      />,
+    );
+
+    expect(screen.getByText("Hello, how are you?")).toBeTruthy();
+    expect(screen.getByText("Hello everyone.")).toBeTruthy();
+  });
 });
