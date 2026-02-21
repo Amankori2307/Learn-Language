@@ -9,7 +9,6 @@ Build a text-first language learning app with high data correctness, strong memo
 - Phase 4 complete.
 - Phase 6 core hardening complete (`P6-001` to `P6-011`).
 - Active tasks:
-  - `P6-014` completion/revision UX when new queue is empty
   - `P6-015` split seed source into `words.json` + `sentences.json` with linkage
   - `P6-016` cluster UX upgrade with per-cluster counts
   - `P6-017` quiz feedback with multiple example sentences
@@ -80,4 +79,4 @@ Planned migration (active):
 
 ## Immediate next implementation
 
-- Execute in order: `P6-014` -> `P6-015` -> `P6-016` -> `P6-017` -> `P6-018` -> `P6-019`.
+- Execute in order: `P6-015` -> `P6-016` -> `P6-017` -> `P6-018` -> `P6-019`.

@@ -15,7 +15,6 @@ Only active and pending tasks are listed here. Completed tasks are intentionally
 
 | ID | Status | Task | Depends On | Effort | Done When |
 |---|---|---|---|---|---|
-| P6-014 | todo | Improve "all words completed" learner UX: show clear completion state with quick actions for revision, weak-word drill, and cluster replay | P6-013 | M | when new-word queue is empty, learner sees a non-dead-end state with actionable buttons; revision modes open with valid session payload; no blank/no-data dead screen |
 | P6-015 | todo | Split content source into `assets/processed/words.json` and `assets/processed/sentences.json`, with sentence-to-word linking for examples | P6-014 | L | importer/validator use two files, sentence schema includes `wordRefs` (or equivalent) and language/meaning/pronunciation, and word example rendering resolves only linked sentences |
 | P6-016 | todo | Improve cluster experience: richer cluster catalog and per-cluster word counts in UI/API | P6-015 | M | clusters list includes count badges sourced from backend data, adds missing practical clusters, and learner can see cluster size before starting practice |
 | P6-017 | todo | Upgrade quiz feedback panel to show multiple example sentences (word + pronunciation + meaning for each) | P6-015 | M | post-answer feedback renders multiple linked examples (not single-line only), layout remains readable in light/dark modes, and no Telugu-only sentence is shown without pronunciation/meaning |

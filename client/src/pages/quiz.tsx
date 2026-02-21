@@ -82,12 +82,35 @@ export default function QuizPage() {
   }
 
   if (isError || !questions || questions.length === 0) {
+    const completionMessage =
+      mode === QuizModeEnum.NEW_WORDS
+        ? "You finished the current new-word queue."
+        : "Great job! You've completed all due items for this session.";
     return (
       <Layout>
-        <div className="text-center py-20">
-          <h2 className="text-2xl font-bold text-foreground">No questions available</h2>
-          <p className="text-muted-foreground mt-2 mb-6">Great job! You've completed all your reviews for now.</p>
-          <Button onClick={() => setLocation('/')}>Return Home</Button>
+        <div className="max-w-2xl mx-auto rounded-2xl border border-border/50 bg-card p-8 md:p-10 text-center">
+          <h2 className="text-2xl font-bold text-foreground">Session Complete</h2>
+          <p className="text-muted-foreground mt-2">{completionMessage}</p>
+          <p className="text-sm text-muted-foreground mt-1 mb-6">
+            Keep momentum by starting a revision mode instead of stopping here.
+          </p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <Button onClick={() => setLocation(`/quiz?mode=${QuizModeEnum.DAILY_REVIEW}`)}>
+              Daily Revision
+            </Button>
+            <Button variant="outline" onClick={() => setLocation(`/quiz?mode=${QuizModeEnum.WEAK_WORDS}`)}>
+              Weak Words Drill
+            </Button>
+            <Button variant="outline" onClick={() => setLocation("/clusters")}>
+              Practice by Cluster
+            </Button>
+            <Button variant="outline" onClick={() => setLocation("/history")}>
+              Review Attempt History
+            </Button>
+          </div>
+          <Button variant="ghost" className="mt-4" onClick={() => setLocation("/")}>
+            Return Home
+          </Button>
         </div>
       </Layout>
     );
