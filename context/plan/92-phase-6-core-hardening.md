@@ -21,7 +21,7 @@ Objective: enforce data correctness, review-quality governance, and scheduling r
 ---
 
 ## P6-001 - Language-isolation endpoint matrix
-Status: `todo`
+Status: `done`
 Depends on: `-`
 
 Scope:
@@ -42,6 +42,9 @@ Scope:
 Acceptance criteria:
 - Matrix document exists and is referenced in implementation/test files.
 - Every endpoint has an explicit expected behavior for `(userId, language)`.
+
+Deliverable:
+- `context/plan/93-language-isolation-endpoint-matrix.md`
 
 ---
 

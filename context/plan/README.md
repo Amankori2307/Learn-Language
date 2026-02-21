@@ -14,7 +14,8 @@ This folder is intentionally compact and keeps only active context.
 8. `context/plan/82-docker-setup.md`: Docker usage and hot-reload notes.
 9. `context/plan/90-future-roadmap.md`: approved future product roadmap (must/should/good).
 10. `context/plan/92-phase-6-core-hardening.md`: active detailed execution plan for next core phase.
-11. `context/plan/99-daily-run-log.md`: latest progress snapshot and resume pointer.
+11. `context/plan/93-language-isolation-endpoint-matrix.md`: endpoint-by-endpoint language isolation rules and test ownership.
+12. `context/plan/99-daily-run-log.md`: latest progress snapshot and resume pointer.
 
 ## Operating rule
 
