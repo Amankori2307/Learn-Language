@@ -2,9 +2,9 @@
 
 Date: 2026-02-21  
 Session owner: Codex  
-Last completed task ID: P6-011  
+Last completed task ID: P6-012  
 Current in-progress task ID: -  
-Next task ID: P6-012
+Next task ID: P6-013
 
 ## Current state
 
@@ -24,10 +24,7 @@ Next task ID: P6-012
 - Per-direction memory strengths are now persisted and used for scheduling priority + stats (`source->target` vs `target->source`).
 - SRS drift monitoring is active with alert-friendly summary endpoint (`/api/admin/srs/drift`).
 - Phase 6 core hardening (`P6-001` to `P6-011`) is complete.
-- Active pending work is now managed through:
-  - `context/plan/01-master-task-registry.md`
-  - `context/plan/92-phase-6-core-hardening.md`
-  - `context/plan/93-language-isolation-endpoint-matrix.md`
+- Context hygiene pass is complete: active context is now minimized in `context/plan`, and completed phase docs are archived under `context/archive`.
 
 ## Current blockers
 
@@ -35,6 +32,5 @@ Next task ID: P6-012
 
 ## Immediate next actions
 
-1. Execute `P6-012`: context hygiene pass (`APP_CONTEXT.md` as primary active source).
-2. Execute `P6-013`: reviewer/admin create-vocabulary flow.
-3. Continue with deferred Phase 5 items after active Phase 6 extension tasks.
+1. Execute `P6-013`: reviewer/admin create-vocabulary flow.
+2. Continue with deferred Phase 5 items after active Phase 6 extension tasks.

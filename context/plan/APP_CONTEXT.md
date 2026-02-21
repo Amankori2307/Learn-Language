@@ -2,60 +2,69 @@
 
 ## Purpose
 
-Build a source language learning app focused on text-first retention and beginner-friendly learning.
+Build a text-first language learning app with high data correctness, strong memory retention loops, and reviewer-governed content quality.
 
-## Current supported features
+## Product state
+
+- Phase 4 complete.
+- Phase 6 core hardening complete (`P6-001` to `P6-011`).
+- Active tasks:
+  - `P6-012` context hygiene
+  - `P6-013` reviewer/admin create-vocabulary flow
+
+## Core capabilities live
 
 - Auth:
-  - Google OAuth (primary)
-  - Dev auth mode (local development)
-- Learning engine:
-  - Quiz generation (`daily_review`, `new_words`, `cluster`, `weak_words`, `complex_workout`)
-  - Adaptive candidate scoring
-  - SM-2 style review updates
-  - Weak-word reinforcement loop
-  - Text-first contextual mode and optional text tutor mode (feature flag)
-- UX:
-  - Dashboard with stats and launch actions
-  - Clusters page
-  - Quiz flow with confidence capture
-  - Leaderboard page (daily/weekly/all-time windows)
-  - Profile page (name + avatar URL updates)
-  - Pronunciation-first display style for source language prompts (transliteration first, source language in brackets)
-  - Words-first quiz prompts (word/phrase only in current phase)
-  - Post-answer sentence example triplet in feedback (sentence + pronunciation + meaning)
-- Content/data:
-  - Seed files now sourced from `assets/processed/`
-  - Single processed seed source: `assets/processed/seed.json` (realistic source language beginner set, 91 rows)
+  - Google OAuth
+  - Local/dev auth fallback
+- Learning:
+  - Quiz modes: `daily_review`, `new_words`, `cluster`, `weak_words`, `complex_workout`
+  - Language-scoped learner data isolation for quiz/stats/attempts/clusters/leaderboard/words
+  - SRS scheduling with:
+    - versioned config (`srs_configs`)
+    - per-update config version stamp (`user_word_progress.srs_config_version`)
+    - per-direction strengths:
+      - `source_to_target_strength`
+      - `target_to_source_strength`
+  - Direction-aware candidate prioritization (weaker direction gets higher practice priority)
+- Stats/analytics:
+  - recall vs recognition accuracy
+  - direction strength averages
+  - language-window leaderboard correctness (`daily`, `weekly`, `all_time`)
+  - SRS drift monitoring endpoint:
+    - `GET /api/admin/srs/drift`
+    - alerts for overdue growth, interval spikes, and empty-review-day anomalies
 - Review governance:
-  - Word review lifecycle fields (`draft`, `pending_review`, `approved`, `rejected`)
-  - Review queue, transition, bulk transition, history, and draft submission APIs
-  - Review audit events table with source metadata
-  - Reviewer/admin permission middleware + role bootstrap script (`pnpm run user:set-role`)
-  - Migration/backfill scripts for governance schema (`pnpm run db:migrate:review-governance`, `pnpm run db:backfill:review-governance`)
+  - review lifecycle: `draft`, `pending_review`, `approved`, `rejected`
+  - reviewer metadata:
+    - `reviewer_confidence_score`
+    - `requires_secondary_review`
+    - `disagreement_status` (`none`, `flagged`, `resolved`)
+  - conflict workflow:
+    - queue endpoint: `GET /api/review/conflicts`
+    - resolution endpoint: `PATCH /api/review/words/:id/resolve-conflict`
+  - complete audit trail in `word_review_events`
 
-## Stack
+## Data/source of truth
 
-- Frontend: React + Vite + TanStack Query + Tailwind
-- Backend: Express + TypeScript
-- DB: PostgreSQL + Drizzle ORM
-- Package manager: pnpm
-- Container: Docker Compose
-- UI test runtime: Vitest + Testing Library
+- Single seed source: `assets/processed/seed.json`
+- Text-first structure:
+  - words and example sentences store source script, pronunciation, and meaning directly
+  - language is mandatory on content rows
 
-## Important runtime notes
+## Runtime and quality gates
 
-- App default port: `3000`
-- Compose is configured for dev hot reload (bind mount + `pnpm run dev` watch mode).
-- Database connection in compose: `postgresql://postgres:postgres@db:5432/mydb`.
-- Production-like startup still available via existing production entrypoint if needed.
+- Package manager: `pnpm`
+- App port: `3000`
+- Primary quality gate command: `pnpm run lint`
+  - eslint + typecheck + content validation + single-source seed verification + backend tests + UI tests
+- Docker compose:
+  - hot reload enabled
+  - app uses in-network DB connection: `postgresql://postgres:postgres@db:5432/mydb`
+- CI:
+  - pnpm-based workflow parity with local/docker checks
 
-## Current execution focus
+## Immediate next implementation
 
-- Phase 4 is complete.
-- Active next phase: Phase 6 core hardening (`context/plan/92-phase-6-core-hardening.md`).
-- Current priority order:
-  1. language isolation correctness and tests
-  2. strict content validation gates
-  3. env parity (local/docker/CI)
-  4. review governance v2 and SRS hardening
+1. `P6-013`: Add reviewer/admin create-vocabulary UI + API flow into normal review lifecycle.
+2. Then execute deferred Phase 5 media backlog in order.
