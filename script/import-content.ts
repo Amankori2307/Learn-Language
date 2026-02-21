@@ -3,6 +3,7 @@ import path from "path";
 import { and, eq, inArray, sql } from "drizzle-orm";
 import { db } from "../server/db";
 import { LanguageEnum } from "../shared/domain/enums";
+import { getClusterDescription } from "../shared/domain/cluster-metadata";
 import {
   clusters,
   quizAttempts,
@@ -91,7 +92,7 @@ async function ensureCluster(name: string) {
     .values({
       name,
       type: "semantic",
-      description: `${name} imported cluster`,
+      description: getClusterDescription(name),
     })
     .returning();
 

@@ -10,6 +10,7 @@ import {
   ReviewDisagreementStatusEnum,
   ReviewStatusEnum,
 } from "@shared/domain/enums";
+import { getClusterDescription, isGenericClusterDescription } from "@shared/domain/cluster-metadata";
 import {
   words, clusters, wordClusters, userWordProgress, quizAttempts, wordExamples, users,
   wordReviewEvents, srsConfigs,
@@ -283,6 +284,9 @@ export class DatabaseStorage implements IStorage {
     const countByClusterId = new Map(counts.map((row) => [row.clusterId, Number(row.count)]));
     const enriched = allClusters.map((cluster) => ({
       ...cluster,
+      description: isGenericClusterDescription(cluster.description)
+        ? getClusterDescription(cluster.name)
+        : cluster.description,
       wordCount: countByClusterId.get(cluster.id) ?? 0,
     }));
 
@@ -298,11 +302,26 @@ export class DatabaseStorage implements IStorage {
     if (!cluster) return undefined;
 
     const clusterWords = await this.getWordsByCluster(id, language);
-    return { ...cluster, words: clusterWords };
+    return {
+      ...cluster,
+      description: isGenericClusterDescription(cluster.description)
+        ? getClusterDescription(cluster.name)
+        : cluster.description,
+      words: clusterWords,
+    };
   }
 
   async createCluster(cluster: CreateClusterRequest): Promise<Cluster> {
-    const [newCluster] = await db.insert(clusters).values(cluster).returning();
+    const [newCluster] = await db
+      .insert(clusters)
+      .values({
+        ...cluster,
+        description:
+          cluster.description && cluster.description.trim().length > 0
+            ? cluster.description
+            : getClusterDescription(cluster.name),
+      })
+      .returning();
     return newCluster;
   }
 
@@ -1286,7 +1305,7 @@ export class DatabaseStorage implements IStorage {
           cluster = await ensureCluster({
             name: clusterName,
             type: "semantic",
-            description: `${clusterName} imported cluster`,
+            description: getClusterDescription(clusterName),
           });
           clusterByName.set(clusterName, cluster);
         }
