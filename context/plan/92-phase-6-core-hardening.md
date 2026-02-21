@@ -86,7 +86,7 @@ Deliverable:
 ---
 
 ## P6-004 - Leaderboard/stats language-window validation
-Status: `todo`
+Status: `done`
 Depends on: `P6-002,P6-003`
 
 Scope:
@@ -96,6 +96,9 @@ Scope:
 Acceptance criteria:
 - Unit/integration tests verify window correctness by language.
 - Manual QA script demonstrates expected ranking changes per language switch.
+
+Deliverable:
+- `server/storage.language-isolation.integration.test.ts` (windowed leaderboard assertions)
 
 ---
 

@@ -16,6 +16,9 @@ test("language isolation: user data reads are scoped by selected language", asyn
 
   const createdWordIds: number[] = [];
   const createdClusterIds: number[] = [];
+  const now = new Date();
+  const twoDaysAgo = new Date(now.getTime() - 2 * 24 * 60 * 60 * 1000);
+  const tenDaysAgo = new Date(now.getTime() - 10 * 24 * 60 * 60 * 1000);
   try {
     await db.insert(users).values([
       {
@@ -105,6 +108,7 @@ test("language isolation: user data reads are scoped by selected language", asyn
         direction: QuizDirectionEnum.SOURCE_TO_TARGET,
         isCorrect: true,
         confidenceLevel: 3,
+        createdAt: tenDaysAgo,
       },
       {
         userId: learnerUserId,
@@ -112,6 +116,7 @@ test("language isolation: user data reads are scoped by selected language", asyn
         direction: QuizDirectionEnum.TARGET_TO_SOURCE,
         isCorrect: false,
         confidenceLevel: 1,
+        createdAt: twoDaysAgo,
       },
       {
         userId: leaderboardUserId,
@@ -119,6 +124,7 @@ test("language isolation: user data reads are scoped by selected language", asyn
         direction: QuizDirectionEnum.TARGET_TO_SOURCE,
         isCorrect: true,
         confidenceLevel: 3,
+        createdAt: now,
       },
       {
         userId: leaderboardUserId,
@@ -126,6 +132,7 @@ test("language isolation: user data reads are scoped by selected language", asyn
         direction: QuizDirectionEnum.TARGET_TO_SOURCE,
         isCorrect: true,
         confidenceLevel: 3,
+        createdAt: now,
       },
     ]);
 
@@ -182,13 +189,26 @@ test("language isolation: user data reads are scoped by selected language", asyn
 
     const teluguLeaderboard = await storage.getLeaderboard("all_time", 10, LanguageEnum.TELUGU);
     const hindiLeaderboard = await storage.getLeaderboard("all_time", 10, LanguageEnum.HINDI);
+    const hindiWeeklyLeaderboard = await storage.getLeaderboard("weekly", 10, LanguageEnum.HINDI);
+    const hindiDailyLeaderboard = await storage.getLeaderboard("daily", 10, LanguageEnum.HINDI);
     const teluguLearner = teluguLeaderboard.find((row) => row.userId === learnerUserId);
     const hindiLeader = hindiLeaderboard.find((row) => row.userId === leaderboardUserId);
+    const hindiWeeklyLeader = hindiWeeklyLeaderboard.find((row) => row.userId === leaderboardUserId);
+    const hindiDailyLeader = hindiDailyLeaderboard.find((row) => row.userId === leaderboardUserId);
+    const hindiWeeklyLearner = hindiWeeklyLeaderboard.find((row) => row.userId === learnerUserId);
+    const hindiDailyLearner = hindiDailyLeaderboard.find((row) => row.userId === learnerUserId);
     assert.ok(teluguLearner);
     assert.ok(hindiLeader);
+    assert.ok(hindiWeeklyLeader);
+    assert.ok(hindiDailyLeader);
     assert.equal(teluguLearner?.accuracy, 100);
     assert.equal(hindiLeader?.accuracy, 100);
     assert.ok((hindiLeader?.xp ?? 0) > (teluguLearner?.xp ?? 0));
+    assert.equal(hindiLeader?.attempts, 2);
+    assert.equal(hindiWeeklyLeader?.attempts, 2);
+    assert.equal(hindiDailyLeader?.attempts, 2);
+    assert.equal(hindiWeeklyLearner?.attempts, 1);
+    assert.equal(hindiDailyLearner?.attempts, 0);
   } finally {
     await db.delete(quizAttempts).where(inArray(quizAttempts.userId, [learnerUserId, leaderboardUserId]));
     await db.delete(userWordProgress).where(inArray(userWordProgress.userId, [learnerUserId, leaderboardUserId]));
