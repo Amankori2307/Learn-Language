@@ -66,8 +66,11 @@ export function SearchableMultiSelect<TValue extends string>({
             <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
           </Button>
         </PopoverTrigger>
-        <PopoverContent className="w-[var(--radix-popover-trigger-width)] p-0" align="start">
-          <Command>
+        <PopoverContent
+          className="w-[var(--radix-popover-trigger-width)] border-border bg-card p-0 shadow-xl"
+          align="start"
+        >
+          <Command className="bg-card text-card-foreground">
             <CommandInput placeholder={searchPlaceholder} />
             <CommandList>
               <CommandEmpty>{emptyText}</CommandEmpty>
