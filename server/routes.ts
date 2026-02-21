@@ -112,10 +112,14 @@ export async function registerRoutes(
       });
 
       const typePool = [QuizQuestionTypeEnum.SOURCE_TO_TARGET, QuizQuestionTypeEnum.TARGET_TO_SOURCE] as const;
-      const type = typePool[Math.floor(Math.random() * typePool.length)];
+      const type = mode === QuizModeEnum.LISTEN_IDENTIFY
+        ? QuizQuestionTypeEnum.SOURCE_TO_TARGET
+        : typePool[Math.floor(Math.random() * typePool.length)];
 
       const questionText =
-        type === QuizQuestionTypeEnum.SOURCE_TO_TARGET
+        mode === QuizModeEnum.LISTEN_IDENTIFY
+          ? "Listen and pick the correct meaning"
+          : type === QuizQuestionTypeEnum.SOURCE_TO_TARGET
           ? word.originalScript
           : word.english;
       
@@ -133,7 +137,12 @@ export async function registerRoutes(
         wordId: word.id,
         type,
         questionText,
-        pronunciation: type === QuizQuestionTypeEnum.SOURCE_TO_TARGET ? (word.transliteration ?? null) : null,
+        pronunciation:
+          mode === QuizModeEnum.LISTEN_IDENTIFY
+            ? null
+            : type === QuizQuestionTypeEnum.SOURCE_TO_TARGET
+              ? (word.transliteration ?? null)
+              : null,
         audioUrl: word.audioUrl,
         options,
       };

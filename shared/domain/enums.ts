@@ -33,6 +33,7 @@ export enum QuizModeEnum {
   NEW_WORDS = "new_words",
   CLUSTER = "cluster",
   WEAK_WORDS = "weak_words",
+  LISTEN_IDENTIFY = "listen_identify",
   COMPLEX_WORKOUT = "complex_workout",
 }
 

@@ -19,6 +19,7 @@ Build a text-first language learning app with high data correctness, strong memo
   - Local/dev auth fallback
 - Learning:
   - Quiz modes: `daily_review`, `new_words`, `cluster`, `weak_words`, `complex_workout`
+  - Optional audio mode: `listen_identify` (serves only audio-enabled words)
   - Language-scoped learner data isolation for quiz/stats/attempts/clusters/leaderboard/words
   - SRS scheduling with:
     - versioned config (`srs_configs`)
@@ -67,5 +68,5 @@ Build a text-first language learning app with high data correctness, strong memo
 
 ## Immediate next implementation
 
-1. Execute `P5-002` (optional listen-and-identify quiz mode).
-2. Continue `P5-003`..`P5-005` in strict order.
+1. Execute `P5-003` (image hints for selected vocabulary groups).
+2. Continue `P5-004`..`P5-005` in strict order.

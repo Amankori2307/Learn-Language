@@ -426,6 +426,10 @@ export class DatabaseStorage implements IStorage {
       candidateWords = await this.getWords(500, language);
     }
 
+    if (mode === QuizModeEnum.LISTEN_IDENTIFY) {
+      candidateWords = candidateWords.filter((word) => Boolean(word.audioUrl));
+    }
+
     const progressList = await this.getUserProgress(userId, language);
     const progressMap = new Map(progressList.map(p => [p.wordId, p]));
 

@@ -59,6 +59,10 @@ export function generateSessionWords(params: {
     return ranked.slice(0, params.count);
   }
 
+  if (params.mode === QuizModeEnum.LISTEN_IDENTIFY) {
+    return ranked.filter((word) => Boolean(word.audioUrl)).slice(0, params.count);
+  }
+
   if (params.mode === QuizModeEnum.COMPLEX_WORKOUT) {
     const hardFirst = ranked
       .filter((word) => (word.difficulty ?? 1) >= 2)

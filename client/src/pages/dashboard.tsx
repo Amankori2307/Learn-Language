@@ -14,7 +14,8 @@ import {
   Dumbbell,
   Layers3,
   PlayCircle,
-  MessageSquareQuote
+  MessageSquareQuote,
+  Headphones
 } from "lucide-react";
 import { motion } from "framer-motion";
 import { QuizDirectionEnum, QuizModeEnum } from "@shared/domain/enums";
@@ -82,6 +83,13 @@ export default function Dashboard() {
       icon: Dumbbell,
       href: `/quiz?mode=${QuizModeEnum.WEAK_WORDS}`,
       count: s.weak
+    },
+    {
+      title: "Listen & Identify",
+      description: "Audio-first quick checks for recognition",
+      icon: Headphones,
+      href: `/quiz?mode=${QuizModeEnum.LISTEN_IDENTIFY}`,
+      count: Math.max(0, s.learning),
     },
     {
       title: "Practice by Cluster",

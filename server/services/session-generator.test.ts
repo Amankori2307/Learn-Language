@@ -163,3 +163,21 @@ test("complex_workout prioritizes weak/harder candidates", () => {
   assert.equal(result.length, 3);
   assert.equal(result[0].id, 2);
 });
+
+test("listen_identify returns only words with audio", () => {
+  const words = [
+    { ...makeWord(1), audioUrl: "https://cdn.example.com/1.mp3" },
+    { ...makeWord(2), audioUrl: null },
+    { ...makeWord(3), audioUrl: "https://cdn.example.com/3.mp3" },
+  ] as any;
+
+  const result = generateSessionWords({
+    mode: QuizModeEnum.LISTEN_IDENTIFY,
+    count: 5,
+    words,
+    progressMap: new Map(),
+    now,
+  });
+
+  assert.deepEqual(result.map((word: any) => word.id), [1, 3]);
+});
