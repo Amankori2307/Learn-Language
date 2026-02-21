@@ -14,7 +14,7 @@ Only active and pending tasks are listed here. Completed tasks are intentionally
 | P6-004 | done | Add language-aware leaderboard/stat analytics validation (windowed + all-time) | P6-002,P6-003 | M | leaderboard/stat windows reflect only selected language attempts/progress |
 | P6-005 | done | Extend content validators with strict quality gates (duplicate transliteration collision, empty/low-quality pronunciation, inconsistent cluster/tag mappings) | P6-001 | M | invalid content fails `pnpm run lint` with actionable errors |
 | P6-006 | done | CI/compose parity check for lint/test/content pipeline and deterministic DB bootstrap | P6-004,P6-005 | S | same command set passes in local + docker + GitHub Actions without manual overrides |
-| P6-007 | todo | Review governance v2 schema: reviewer confidence, secondary review requirement, disagreement marker | P6-006 | M | DB + API contracts support confidence/disagreement workflow fields |
+| P6-007 | done | Review governance v2 schema: reviewer confidence, secondary review requirement, disagreement marker | P6-006 | M | DB + API contracts support confidence/disagreement workflow fields |
 | P6-008 | todo | Review governance v2 queue/actions: conflict queue + dual-review resolution flow | P6-007 | M | reviewers can resolve disagreement cases with complete audit trail |
 | P6-009 | todo | SRS config versioning (stored + auditable), including safe defaults and rollback path | P6-006 | M | scheduling logic is config-versioned and reversible without data loss |
 | P6-010 | todo | Add per-direction memory strength model (`source->target` vs `target->source`) into scheduling + stats | P6-009 | L | repetition frequency adapts per direction and direction metrics are exposed |

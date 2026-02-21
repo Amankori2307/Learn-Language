@@ -2,7 +2,14 @@ import { db } from "./db";
 import { eq, sql, and } from "drizzle-orm";
 import fs from "fs/promises";
 import path from "path";
-import { LanguageEnum, QuizDirectionEnum, QuizModeEnum, QuizQuestionTypeEnum, ReviewStatusEnum } from "@shared/domain/enums";
+import {
+  LanguageEnum,
+  QuizDirectionEnum,
+  QuizModeEnum,
+  QuizQuestionTypeEnum,
+  ReviewDisagreementStatusEnum,
+  ReviewStatusEnum,
+} from "@shared/domain/enums";
 import {
   words, clusters, wordClusters, userWordProgress, quizAttempts, wordExamples, users,
   wordReviewEvents,
@@ -115,7 +122,12 @@ export interface IStorage {
     wordId: number,
     reviewerId: string,
     toStatus: ReviewStatusEnum,
-    notes?: string,
+    input?: {
+      notes?: string;
+      reviewerConfidenceScore?: number;
+      requiresSecondaryReview?: boolean;
+      disagreementStatus?: ReviewDisagreementStatusEnum;
+    },
   ): Promise<Word | undefined>;
   createWordDraft(input: {
     submittedBy: string;
@@ -175,6 +187,13 @@ export class DatabaseStorage implements IStorage {
     )
       ? word.reviewStatus
       : ReviewStatusEnum.APPROVED;
+    const normalizedDisagreementStatus = (
+      word.disagreementStatus === ReviewDisagreementStatusEnum.NONE ||
+      word.disagreementStatus === ReviewDisagreementStatusEnum.FLAGGED ||
+      word.disagreementStatus === ReviewDisagreementStatusEnum.RESOLVED
+    )
+      ? word.disagreementStatus
+      : ReviewDisagreementStatusEnum.NONE;
     const [newWord] = await db
       .insert(words)
       .values({
@@ -182,6 +201,9 @@ export class DatabaseStorage implements IStorage {
         language: assertLanguage(String(word.language)),
         originalScript: word.originalScript,
         reviewStatus: normalizedReviewStatus,
+        reviewerConfidenceScore: word.reviewerConfidenceScore ?? null,
+        requiresSecondaryReview: word.requiresSecondaryReview ?? false,
+        disagreementStatus: normalizedDisagreementStatus,
       })
       .returning();
     return newWord;
@@ -497,7 +519,12 @@ export class DatabaseStorage implements IStorage {
     wordId: number,
     reviewerId: string,
     toStatus: ReviewStatusEnum,
-    notes?: string,
+    input?: {
+      notes?: string;
+      reviewerConfidenceScore?: number;
+      requiresSecondaryReview?: boolean;
+      disagreementStatus?: ReviewDisagreementStatusEnum;
+    },
   ): Promise<Word | undefined> {
     const [existing] = await db.select().from(words).where(eq(words.id, wordId));
     if (!existing) return undefined;
@@ -508,7 +535,10 @@ export class DatabaseStorage implements IStorage {
         reviewStatus: toStatus,
         reviewedBy: reviewerId,
         reviewedAt: now,
-        reviewNotes: notes ?? null,
+        reviewNotes: input?.notes ?? null,
+        reviewerConfidenceScore: input?.reviewerConfidenceScore ?? existing.reviewerConfidenceScore ?? null,
+        requiresSecondaryReview: input?.requiresSecondaryReview ?? existing.requiresSecondaryReview ?? false,
+        disagreementStatus: input?.disagreementStatus ?? existing.disagreementStatus ?? ReviewDisagreementStatusEnum.NONE,
       })
       .where(eq(words.id, wordId))
       .returning();
@@ -518,7 +548,7 @@ export class DatabaseStorage implements IStorage {
       fromStatus: existing.reviewStatus ?? ReviewStatusEnum.APPROVED,
       toStatus,
       changedBy: reviewerId,
-      notes: notes ?? null,
+      notes: input?.notes ?? null,
       sourceUrl: updated.sourceUrl ?? null,
       sourceCapturedAt: updated.sourceCapturedAt ?? null,
     });
@@ -580,6 +610,9 @@ export class DatabaseStorage implements IStorage {
       exampleSentences: [],
       tags: input.tags ?? ["manual-draft"],
       reviewStatus: ReviewStatusEnum.DRAFT,
+      reviewerConfidenceScore: null,
+      requiresSecondaryReview: false,
+      disagreementStatus: ReviewDisagreementStatusEnum.NONE,
       submittedBy: input.submittedBy,
       submittedAt: now,
       sourceUrl: input.sourceUrl ?? null,

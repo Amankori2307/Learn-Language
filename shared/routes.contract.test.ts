@@ -1,7 +1,13 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { api } from "./routes";
-import { LanguageEnum, QuizDirectionEnum, QuizQuestionTypeEnum, ReviewStatusEnum } from "./domain/enums";
+import {
+  LanguageEnum,
+  QuizDirectionEnum,
+  QuizQuestionTypeEnum,
+  ReviewDisagreementStatusEnum,
+  ReviewStatusEnum,
+} from "./domain/enums";
 
 test("quiz generate contract accepts expected payload", () => {
   const payload = [
@@ -171,6 +177,9 @@ test("review queue contract accepts pending review payload", () => {
       reviewedBy: null,
       reviewedAt: null,
       reviewNotes: null,
+      reviewerConfidenceScore: 4,
+      requiresSecondaryReview: false,
+      disagreementStatus: ReviewDisagreementStatusEnum.NONE,
     },
   ];
 
@@ -186,11 +195,26 @@ test("review transition contract rejects invalid status", () => {
   });
 });
 
+test("review transition contract accepts governance v2 metadata", () => {
+  const parsed = api.review.transition.input.parse({
+    toStatus: ReviewStatusEnum.PENDING_REVIEW,
+    reviewerConfidenceScore: 2,
+    requiresSecondaryReview: true,
+    disagreementStatus: ReviewDisagreementStatusEnum.FLAGGED,
+  });
+  assert.equal(parsed.toStatus, ReviewStatusEnum.PENDING_REVIEW);
+  assert.equal(parsed.reviewerConfidenceScore, 2);
+  assert.equal(parsed.requiresSecondaryReview, true);
+});
+
 test("review bulk transition contract accepts payload", () => {
   const parsed = api.review.bulkTransition.input.parse({
     ids: [1, 2, 3],
     toStatus: ReviewStatusEnum.APPROVED,
     notes: "Looks good",
+    reviewerConfidenceScore: 5,
+    requiresSecondaryReview: true,
+    disagreementStatus: ReviewDisagreementStatusEnum.FLAGGED,
   });
   assert.equal(parsed.ids.length, 3);
 });
@@ -207,6 +231,9 @@ test("review history contract accepts payload", () => {
       sourceUrl: null,
       sourceCapturedAt: null,
       reviewNotes: null,
+      reviewerConfidenceScore: 3,
+      requiresSecondaryReview: true,
+      disagreementStatus: ReviewDisagreementStatusEnum.FLAGGED,
     },
     events: [
       {

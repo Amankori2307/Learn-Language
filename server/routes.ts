@@ -8,7 +8,13 @@ import { logApiEvent, sendError } from "./http";
 import { chooseDistractors } from "./services/distractors";
 import { applySrsUpdate } from "./services/srs";
 import { requireReviewer } from "./auth/permissions";
-import { LanguageEnum, QuizModeEnum, QuizQuestionTypeEnum, ReviewStatusEnum } from "@shared/domain/enums";
+import {
+  LanguageEnum,
+  QuizModeEnum,
+  QuizQuestionTypeEnum,
+  ReviewDisagreementStatusEnum,
+  ReviewStatusEnum,
+} from "@shared/domain/enums";
 
 function formatPronunciationFirst(word: { transliteration?: string | null; originalScript: string }) {
   const transliteration = word.transliteration?.trim();
@@ -280,6 +286,9 @@ export async function registerRoutes(
       submittedAt: word.submittedAt?.toISOString() ?? null,
       reviewedAt: word.reviewedAt?.toISOString() ?? null,
       createdAt: word.createdAt?.toISOString() ?? null,
+      reviewerConfidenceScore: word.reviewerConfidenceScore ?? null,
+      requiresSecondaryReview: word.requiresSecondaryReview ?? false,
+      disagreementStatus: word.disagreementStatus ?? ReviewDisagreementStatusEnum.NONE,
     })));
   });
 
@@ -293,7 +302,12 @@ export async function registerRoutes(
 
     try {
       const parsed = api.review.transition.input.parse(req.body);
-      const updated = await storage.transitionWordReview(wordId, reviewerId, parsed.toStatus, parsed.notes);
+      const updated = await storage.transitionWordReview(wordId, reviewerId, parsed.toStatus, {
+        notes: parsed.notes,
+        reviewerConfidenceScore: parsed.reviewerConfidenceScore,
+        requiresSecondaryReview: parsed.requiresSecondaryReview,
+        disagreementStatus: parsed.disagreementStatus,
+      });
       if (!updated) {
         return sendError(req, res, 404, "NOT_FOUND", "Word not found");
       }
@@ -303,6 +317,9 @@ export async function registerRoutes(
         reviewedBy: updated.reviewedBy,
         reviewedAt: updated.reviewedAt?.toISOString() ?? null,
         reviewNotes: updated.reviewNotes ?? null,
+        reviewerConfidenceScore: updated.reviewerConfidenceScore ?? null,
+        requiresSecondaryReview: updated.requiresSecondaryReview ?? false,
+        disagreementStatus: updated.disagreementStatus ?? ReviewDisagreementStatusEnum.NONE,
       });
     } catch (error) {
       if (error instanceof z.ZodError) {
@@ -321,7 +338,12 @@ export async function registerRoutes(
       let skipped = 0;
 
       for (const id of parsed.ids) {
-        const row = await storage.transitionWordReview(id, reviewerId, parsed.toStatus, parsed.notes);
+        const row = await storage.transitionWordReview(id, reviewerId, parsed.toStatus, {
+          notes: parsed.notes,
+          reviewerConfidenceScore: parsed.reviewerConfidenceScore,
+          requiresSecondaryReview: parsed.requiresSecondaryReview,
+          disagreementStatus: parsed.disagreementStatus,
+        });
         if (row) {
           updated += 1;
         } else {
@@ -361,6 +383,9 @@ export async function registerRoutes(
         sourceUrl: result.word.sourceUrl ?? null,
         sourceCapturedAt: result.word.sourceCapturedAt?.toISOString() ?? null,
         reviewNotes: result.word.reviewNotes ?? null,
+        reviewerConfidenceScore: result.word.reviewerConfidenceScore ?? null,
+        requiresSecondaryReview: result.word.requiresSecondaryReview ?? false,
+        disagreementStatus: result.word.disagreementStatus ?? ReviewDisagreementStatusEnum.NONE,
       },
       events: result.events.map((e) => ({
         id: e.id,

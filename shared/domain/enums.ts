@@ -22,6 +22,12 @@ export enum ReviewStatusEnum {
   REJECTED = "rejected",
 }
 
+export enum ReviewDisagreementStatusEnum {
+  NONE = "none",
+  FLAGGED = "flagged",
+  RESOLVED = "resolved",
+}
+
 export enum QuizModeEnum {
   DAILY_REVIEW = "daily_review",
   NEW_WORDS = "new_words",

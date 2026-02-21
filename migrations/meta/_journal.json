@@ -15,6 +15,13 @@
       "when": 1771607352237,
       "tag": "0001_tricky_spencer_smythe",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1771708000000,
+      "tag": "0002_review_governance_v2",
+      "breakpoints": true
     }
   ]
 }

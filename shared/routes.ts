@@ -5,6 +5,7 @@ import {
   QuizDirectionEnum,
   QuizModeEnum,
   QuizQuestionTypeEnum,
+  ReviewDisagreementStatusEnum,
   ReviewStatusEnum,
   UserTypeEnum,
 } from './domain/enums';
@@ -290,6 +291,9 @@ export const api = {
           reviewedBy: z.string().nullable(),
           reviewedAt: z.string().nullable(),
           reviewNotes: z.string().nullable(),
+          reviewerConfidenceScore: z.number().int().min(1).max(5).nullable(),
+          requiresSecondaryReview: z.boolean(),
+          disagreementStatus: z.nativeEnum(ReviewDisagreementStatusEnum),
         })),
         401: errorSchemas.unauthorized,
         403: errorSchemas.unauthorized,
@@ -301,6 +305,9 @@ export const api = {
       input: z.object({
         toStatus: z.nativeEnum(ReviewStatusEnum),
         notes: z.string().max(1000).optional(),
+        reviewerConfidenceScore: z.number().int().min(1).max(5).optional(),
+        requiresSecondaryReview: z.boolean().optional(),
+        disagreementStatus: z.nativeEnum(ReviewDisagreementStatusEnum).optional(),
       }),
       responses: {
         200: z.object({
@@ -309,6 +316,9 @@ export const api = {
           reviewedBy: z.string().nullable(),
           reviewedAt: z.string().nullable(),
           reviewNotes: z.string().nullable(),
+          reviewerConfidenceScore: z.number().int().min(1).max(5).nullable(),
+          requiresSecondaryReview: z.boolean(),
+          disagreementStatus: z.nativeEnum(ReviewDisagreementStatusEnum),
         }),
         400: errorSchemas.validation,
         401: errorSchemas.unauthorized,
@@ -323,6 +333,9 @@ export const api = {
         ids: z.array(z.number().int().positive()).min(1).max(200),
         toStatus: z.nativeEnum(ReviewStatusEnum),
         notes: z.string().max(1000).optional(),
+        reviewerConfidenceScore: z.number().int().min(1).max(5).optional(),
+        requiresSecondaryReview: z.boolean().optional(),
+        disagreementStatus: z.nativeEnum(ReviewDisagreementStatusEnum).optional(),
       }),
       responses: {
         200: z.object({
@@ -349,6 +362,9 @@ export const api = {
             sourceUrl: z.string().nullable(),
             sourceCapturedAt: z.string().nullable(),
             reviewNotes: z.string().nullable(),
+            reviewerConfidenceScore: z.number().int().min(1).max(5).nullable(),
+            requiresSecondaryReview: z.boolean(),
+            disagreementStatus: z.nativeEnum(ReviewDisagreementStatusEnum),
           }),
           events: z.array(z.object({
             id: z.number(),

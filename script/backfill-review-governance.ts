@@ -29,6 +29,20 @@ async function run() {
       AND source_captured_at IS NULL;
   `));
 
+  await db.execute(sql.raw(`
+    UPDATE words
+    SET requires_secondary_review = false
+    WHERE requires_secondary_review IS NULL;
+  `));
+
+  await db.execute(sql.raw(`
+    UPDATE words
+    SET disagreement_status = 'none'
+    WHERE disagreement_status IS NULL
+       OR btrim(disagreement_status) = ''
+       OR disagreement_status NOT IN ('none', 'flagged', 'resolved');
+  `));
+
   console.log("Review governance backfill completed.");
 }
 

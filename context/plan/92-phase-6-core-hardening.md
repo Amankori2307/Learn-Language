@@ -144,7 +144,7 @@ Deliverable:
 ---
 
 ## P6-007 - Review governance v2 schema
-Status: `todo`
+Status: `done`
 Depends on: `P6-006`
 
 Scope:
@@ -157,6 +157,15 @@ Scope:
 Acceptance criteria:
 - DB migration is idempotent and safe for existing rows.
 - API contracts expose new fields where needed.
+
+Deliverable:
+- `shared/schema.ts`
+- `migrations/0002_review_governance_v2.sql`
+- `script/migrate-review-governance.ts`
+- `script/backfill-review-governance.ts`
+- `shared/routes.ts`
+- `server/routes.ts`
+- `server/storage.ts`
 
 ---
 

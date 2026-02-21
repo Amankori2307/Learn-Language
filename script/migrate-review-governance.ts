@@ -15,6 +15,9 @@ async function run() {
       ADD COLUMN IF NOT EXISTS reviewed_by varchar,
       ADD COLUMN IF NOT EXISTS reviewed_at timestamp,
       ADD COLUMN IF NOT EXISTS review_notes text,
+      ADD COLUMN IF NOT EXISTS reviewer_confidence_score integer,
+      ADD COLUMN IF NOT EXISTS requires_secondary_review boolean DEFAULT false NOT NULL,
+      ADD COLUMN IF NOT EXISTS disagreement_status text DEFAULT 'none' NOT NULL,
       ADD COLUMN IF NOT EXISTS source_url text,
       ADD COLUMN IF NOT EXISTS source_captured_at timestamp;
   `));

@@ -2,7 +2,13 @@ import { pgTable, text, varchar, timestamp, serial, integer, boolean, jsonb, rea
 import { relations, sql } from "drizzle-orm";
 import { createInsertSchema } from "drizzle-zod";
 import { z } from "zod";
-import { LanguageEnum, QuizQuestionTypeEnum, ReviewStatusEnum, UserTypeEnum } from "./domain/enums";
+import {
+  LanguageEnum,
+  QuizQuestionTypeEnum,
+  ReviewDisagreementStatusEnum,
+  ReviewStatusEnum,
+  UserTypeEnum,
+} from "./domain/enums";
 
 // === AUTH MODELS (Inlined for simplicity and consistency with PRD) ===
 
@@ -48,6 +54,12 @@ export const words = pgTable("words", {
   reviewedBy: varchar("reviewed_by"),
   reviewedAt: timestamp("reviewed_at"),
   reviewNotes: text("review_notes"),
+  reviewerConfidenceScore: integer("reviewer_confidence_score"),
+  requiresSecondaryReview: boolean("requires_secondary_review").default(false).notNull(),
+  disagreementStatus: text("disagreement_status")
+    .$type<ReviewDisagreementStatusEnum>()
+    .default(ReviewDisagreementStatusEnum.NONE)
+    .notNull(),
   sourceUrl: text("source_url"),
   sourceCapturedAt: timestamp("source_captured_at"),
   createdAt: timestamp("created_at").defaultNow(),
