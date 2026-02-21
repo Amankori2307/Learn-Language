@@ -8,7 +8,8 @@ Build a text-first language learning app with high data correctness, strong memo
 
 - Phase 4 complete.
 - Phase 6 core hardening complete (`P6-001` to `P6-011`).
-- Active tasks: none.
+- Active tasks:
+  - `P6-022` maintain zero-warning lint baseline and guard against regressions
 
 ## Core capabilities live
 
@@ -70,7 +71,7 @@ Build a text-first language learning app with high data correctness, strong memo
 - Package manager: `pnpm`
 - App port: `3000`
 - Primary quality gate command: `pnpm run lint`
-  - eslint + typecheck + content validation + single-source seed verification + backend tests + UI tests
+  - eslint (`--max-warnings=0`) + typecheck + content validation + single-source seed verification + backend tests + UI tests
 - Docker compose:
   - hot reload enabled
   - app uses in-network DB connection: `postgresql://postgres:postgres@db:5432/mydb`
@@ -79,5 +80,5 @@ Build a text-first language learning app with high data correctness, strong memo
 
 ## Immediate next implementation
 
-- No active pending tasks.
+- Execute in order: `P6-022`.
 - Latest planning artifact: `context/plan/61-pronunciation-strategy.md`.

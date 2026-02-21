@@ -4,12 +4,11 @@ import { useGenerateQuiz, useSubmitAnswer, type QuizMode } from "@/hooks/use-qui
 import { QuizCard } from "@/components/quiz-card";
 import { Button } from "@/components/ui/button";
 import { X } from "lucide-react";
-import { Progress } from "@/components/ui/progress";
 import { Layout } from "@/components/layout";
 import { QuizDirectionEnum, QuizModeEnum, QuizQuestionTypeEnum } from "@shared/domain/enums";
 
 export default function QuizPage() {
-  const [location, setLocation] = useLocation();
+  const [, setLocation] = useLocation();
   const searchStr = useSearch();
   const params = new URLSearchParams(searchStr);
   const mode = (params.get("mode") as QuizMode) || QuizModeEnum.DAILY_REVIEW;

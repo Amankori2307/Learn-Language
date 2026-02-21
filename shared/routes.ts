@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { insertWordSchema, insertClusterSchema, words, clusters, userWordProgress, quizAttempts } from './schema';
+import { words, clusters } from './schema';
 import {
   LanguageEnum,
   QuizDirectionEnum,

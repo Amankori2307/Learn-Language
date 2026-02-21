@@ -14,7 +14,7 @@
     "start": "NODE_ENV=production node dist/index.cjs",
     "check": "tsc --noEmit",
     "typecheck": "pnpm run check",
-    "lint": "pnpm exec eslint . && pnpm run check && pnpm run content:validate && pnpm run seed:verify-single-source && pnpm run test && pnpm run test:ui",
+    "lint": "pnpm exec eslint . --max-warnings=0 && pnpm run check && pnpm run content:validate && pnpm run seed:verify-single-source && pnpm run test && pnpm run test:ui",
     "format": "pnpm exec prettier . --write",
     "format:check": "pnpm exec prettier . --check",
     "test": "DATABASE_URL=${DATABASE_URL:-postgresql://postgres:postgres@localhost:5432/mydb} node --import tsx --test server/*.test.ts server/**/*.test.ts",

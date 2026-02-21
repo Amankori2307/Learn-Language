@@ -33,6 +33,11 @@
 - Replace scattered string literals incrementally by phase.
 - Keep CI green after each module migration.
 
+6. Lint policy (zero warnings):
+- `pnpm run lint` must pass with `--max-warnings=0`.
+- Do not merge code with ESLint warnings.
+- Treat `react-refresh/only-export-components` and `@typescript-eslint/no-unused-vars` as errors.
+
 ## Adoption plan
 
 - Phase 4D:

@@ -15,7 +15,7 @@ Only active and pending tasks are listed here. Completed tasks are intentionally
 
 | ID | Status | Task | Depends On | Effort | Done When |
 |---|---|---|---|---|---|
-| _none_ | - | No active Phase 6 extension tasks pending | - | - | - |
+| P6-022 | todo | Maintain zero-warning lint baseline and prevent regressions across new PRs | - | S | `pnpm run lint` remains warning-free with `--max-warnings=0`; guideline rule is enforced and no warning-level lint rules are reintroduced |
 
 ## Phase 5 - Media expansion (deferred)
 
