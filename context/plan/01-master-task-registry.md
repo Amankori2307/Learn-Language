@@ -15,6 +15,7 @@ Only active and pending tasks are listed here. Completed tasks are intentionally
 
 | ID | Status | Task | Depends On | Effort | Done When |
 |---|---|---|---|---|---|
+| P6-023 | todo | Fix post-session CTA on quiz completion screen: replace stale "Start Daily Review" label with next-step recommendation and ensure CTA route works | P6-022 | S | after finishing daily review, primary CTA text reflects next logical flow (not stale "Start Daily Review"), CTA navigates to a working route/session, and user is never stuck with only "Back to Dashboard" |
 | P6-022 | todo | Maintain zero-warning lint baseline and prevent regressions across new PRs | - | S | `pnpm run lint` remains warning-free with `--max-warnings=0`; guideline rule is enforced and no warning-level lint rules are reintroduced |
 
 ## Phase 5 - Media expansion (deferred)
