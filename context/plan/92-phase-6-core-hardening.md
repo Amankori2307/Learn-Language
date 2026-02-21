@@ -123,7 +123,7 @@ Deliverable:
 ---
 
 ## P6-006 - Environment parity gate (local/docker/CI)
-Status: `todo`
+Status: `done`
 Depends on: `P6-004,P6-005`
 
 Scope:
@@ -136,6 +136,10 @@ Scope:
 Acceptance criteria:
 - No environment-specific script forks are required for core validation.
 - CI workflow documents and executes same checks as local baseline.
+
+Deliverable:
+- `.github/workflows/ci.yml`
+- `server/storage.language-isolation.integration.test.ts` (DB-unavailable local guard)
 
 ---
 

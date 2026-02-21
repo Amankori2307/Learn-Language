@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { eq, inArray } from "drizzle-orm";
+import { eq, inArray, sql } from "drizzle-orm";
 import { storage } from "./storage";
 import { db } from "./db";
 import { LanguageEnum, QuizDirectionEnum, QuizModeEnum, UserTypeEnum } from "@shared/domain/enums";
@@ -10,7 +10,18 @@ function buildId(prefix: string) {
   return `${prefix}-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
 }
 
-test("language isolation: user data reads are scoped by selected language", async () => {
+test("language isolation: user data reads are scoped by selected language", async (t) => {
+  try {
+    await db.execute(sql`select 1`);
+  } catch (error) {
+    const code = typeof error === "object" && error !== null && "code" in error ? String(error.code) : "";
+    if (code === "ECONNREFUSED" || code === "EPERM") {
+      t.skip("Postgres is unavailable in current environment; skipping DB integration test");
+      return;
+    }
+    throw error;
+  }
+
   const learnerUserId = buildId("p6-learner");
   const leaderboardUserId = buildId("p6-leaderboard");
 

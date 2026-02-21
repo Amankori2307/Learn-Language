@@ -4,7 +4,7 @@ Date: 2026-02-21
 Session owner: Codex  
 Last completed task ID: P6-005  
 Current in-progress task ID: -  
-Next task ID: P6-006
+Next task ID: P6-007
 
 ## Current state
 
@@ -17,6 +17,7 @@ Next task ID: P6-006
 - Storage query audit completed and submit-answer path now enforces selected language boundary.
 - Leaderboard language-window behavior validated with integration assertions (`daily`, `weekly`, `all_time`).
 - Content validator now enforces transliteration-collision, pronunciation-quality, and tag/cluster consistency gates.
+- Environment parity gate is complete: CI now uses pnpm workflow with legacy schema prep + migration parity, and DB integration tests skip only when DB is unavailable locally.
 - Active pending work is now managed through:
   - `context/plan/01-master-task-registry.md`
   - `context/plan/92-phase-6-core-hardening.md`
@@ -28,7 +29,6 @@ Next task ID: P6-006
 
 ## Immediate next actions
 
-1. Execute `P6-006`: environment parity gate for local/docker/CI.
-2. Execute `P6-007`: review governance v2 schema.
-3. Execute `P6-008`: review governance v2 conflict queue/actions.
-4. Continue in strict order defined in `context/plan/92-phase-6-core-hardening.md`.
+1. Execute `P6-007`: review governance v2 schema.
+2. Execute `P6-008`: review governance v2 conflict queue/actions.
+3. Continue in strict order defined in `context/plan/92-phase-6-core-hardening.md`.
