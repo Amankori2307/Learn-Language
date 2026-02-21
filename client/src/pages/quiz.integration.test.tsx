@@ -66,7 +66,7 @@ describe("QuizPage integration", () => {
     expect(screen.getByRole("button", { name: "Daily Revision" })).toBeTruthy();
     expect(screen.getByRole("button", { name: "Weak Words Drill" })).toBeTruthy();
     expect(screen.getByRole("button", { name: "Practice by Cluster" })).toBeTruthy();
-    expect(screen.getByRole("button", { name: "Review Attempt History" })).toBeTruthy();
+    expect(screen.getByRole("button", { name: "View Analytics" })).toBeTruthy();
 
     await user.click(screen.getByRole("button", { name: "Weak Words Drill" }));
     expect(setLocation).toHaveBeenCalledWith(`/quiz?mode=${QuizModeEnum.WEAK_WORDS}`);

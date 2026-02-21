@@ -6,7 +6,7 @@ import {
   Trophy, 
   UserCircle, 
   ShieldCheck,
-  History,
+  BarChart3,
   LogOut, 
   Menu,
   MessageSquare,
@@ -53,7 +53,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
     { name: 'Leaderboard', href: '/leaderboard', icon: Trophy },
     { name: 'Profile', href: '/profile', icon: UserCircle },
     { name: "Feedback", href: "/feedback", icon: MessageSquare },
-    { name: 'History', href: '/history', icon: History },
+    { name: "Analytics", href: "/analytics", icon: BarChart3 },
     ...((user?.role === UserTypeEnum.REVIEWER || user?.role === UserTypeEnum.ADMIN)
       ? [
           { name: "Review Vocabulary", href: "/review", icon: ShieldCheck },

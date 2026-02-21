@@ -119,8 +119,8 @@ export default function QuizPage() {
             <Button variant="outline" onClick={() => setLocation("/clusters")}>
               Practice by Cluster
             </Button>
-            <Button variant="outline" onClick={() => setLocation("/history")}>
-              Review Attempt History
+            <Button variant="outline" onClick={() => setLocation("/analytics")}>
+              View Analytics
             </Button>
           </div>
           <Button variant="ghost" className="mt-4" onClick={() => setLocation("/")}>

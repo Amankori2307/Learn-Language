@@ -62,6 +62,9 @@ function Router() {
       <Route path="/history">
         {() => <ProtectedRoute component={HistoryPage} />}
       </Route>
+      <Route path="/analytics">
+        {() => <ProtectedRoute component={HistoryPage} />}
+      </Route>
       <Route path="/review">
         {() => <ProtectedRoute component={ReviewPage} />}
       </Route>
