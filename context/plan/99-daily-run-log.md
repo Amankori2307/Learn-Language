@@ -2,9 +2,9 @@
 
 Date: 2026-02-21  
 Session owner: Codex  
-Last completed task ID: P6-007  
+Last completed task ID: P6-008  
 Current in-progress task ID: -  
-Next task ID: P6-008
+Next task ID: P6-009
 
 ## Current state
 
@@ -19,6 +19,7 @@ Next task ID: P6-008
 - Content validator now enforces transliteration-collision, pronunciation-quality, and tag/cluster consistency gates.
 - Environment parity gate is complete: CI now uses pnpm workflow with legacy schema prep + migration parity, and DB integration tests skip only when DB is unavailable locally.
 - Review governance v2 schema is now active across DB + API with reviewer confidence score, secondary-review flag, and disagreement status fields.
+- Conflict queue + resolution workflow is active with reviewer-only endpoints and integration coverage validating disagreement -> resolved audit trace.
 - Active pending work is now managed through:
   - `context/plan/01-master-task-registry.md`
   - `context/plan/92-phase-6-core-hardening.md`
@@ -30,5 +31,7 @@ Next task ID: P6-008
 
 ## Immediate next actions
 
-1. Execute `P6-008`: review governance v2 conflict queue/actions.
-2. Continue in strict order defined in `context/plan/92-phase-6-core-hardening.md`.
+1. Execute `P6-009`: SRS config versioning.
+2. Execute `P6-010`: per-direction memory strength model.
+3. Execute `P6-011`: SRS drift/overdue monitor.
+4. Continue in strict order defined in `context/plan/92-phase-6-core-hardening.md`.

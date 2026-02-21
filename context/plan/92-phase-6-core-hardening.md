@@ -170,7 +170,7 @@ Deliverable:
 ---
 
 ## P6-008 - Conflict queue and dual-review workflow
-Status: `todo`
+Status: `done`
 Depends on: `P6-007`
 
 Scope:
@@ -181,6 +181,13 @@ Scope:
 Acceptance criteria:
 - Reviewer can move item from disagreement -> resolved with history trace.
 - Unauthorized users cannot access conflict actions.
+
+Deliverable:
+- `shared/routes.ts` (`/api/review/conflicts`, `/api/review/words/:id/resolve-conflict`)
+- `server/routes.ts`
+- `server/storage.ts`
+- `server/review-conflict.integration.test.ts`
+- `shared/routes.contract.test.ts`
 
 ---
 

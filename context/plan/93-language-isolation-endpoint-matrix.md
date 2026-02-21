@@ -22,11 +22,11 @@ Objective: define exact `(userId, language)` behavior for learner-facing endpoin
 
 ## Implementation checklist
 
-- [ ] Ensure every client hook sends `language` query param for learner-facing endpoints.
-- [ ] Ensure every route parser reads `language` from contract input.
-- [ ] Ensure every storage method receives `language` for learner-facing reads.
-- [ ] Remove legacy unscoped fallback behavior in learner-facing code paths.
-- [ ] Add integration tests from test ownership column.
+- [x] Ensure every client hook sends `language` query param for learner-facing endpoints.
+- [x] Ensure every route parser reads `language` from contract input.
+- [x] Ensure every storage method receives `language` for learner-facing reads.
+- [x] Remove legacy unscoped fallback behavior in learner-facing code paths.
+- [x] Add integration tests from test ownership column.
 
 ## Notes for P6-002 and P6-003
 

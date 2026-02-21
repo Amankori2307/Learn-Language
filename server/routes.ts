@@ -292,6 +292,28 @@ export async function registerRoutes(
     })));
   });
 
+  // Review conflict queue (secondary-review required / disagreement flagged)
+  app.get(api.review.conflicts.path, isAuthenticated, requireReviewer, async (req, res) => {
+    const parsed = api.review.conflicts.input?.parse(req.query) ?? { limit: 50 };
+    const limit = parsed.limit ?? 50;
+    const queue = await storage.getConflictReviewQueue(limit);
+    res.json(queue.map((word) => ({
+      id: word.id,
+      language: word.language,
+      originalScript: word.originalScript,
+      transliteration: word.transliteration,
+      english: word.english,
+      partOfSpeech: word.partOfSpeech,
+      reviewStatus: word.reviewStatus,
+      reviewerConfidenceScore: word.reviewerConfidenceScore ?? null,
+      requiresSecondaryReview: word.requiresSecondaryReview ?? false,
+      disagreementStatus: word.disagreementStatus ?? ReviewDisagreementStatusEnum.NONE,
+      reviewNotes: word.reviewNotes ?? null,
+      submittedAt: word.submittedAt?.toISOString() ?? null,
+      reviewedAt: word.reviewedAt?.toISOString() ?? null,
+    })));
+  });
+
   // Review transition
   app.patch(api.review.transition.path, isAuthenticated, requireReviewer, async (req, res) => {
     const reviewerId = (req.user as any).claims.sub;
@@ -357,6 +379,42 @@ export async function registerRoutes(
         return sendError(req, res, 400, "VALIDATION_ERROR", error.errors[0]?.message ?? "Invalid request");
       }
       return sendError(req, res, 500, "INTERNAL_ERROR", "Failed to bulk update review status");
+    }
+  });
+
+  // Resolve flagged conflict by secondary reviewer/admin decision
+  app.patch(api.review.resolveConflict.path, isAuthenticated, requireReviewer, async (req, res) => {
+    const reviewerId = (req.user as any).claims.sub;
+    const wordId = Number(req.params.id);
+    if (!Number.isFinite(wordId) || wordId <= 0) {
+      return sendError(req, res, 400, "VALIDATION_ERROR", "Invalid word id");
+    }
+
+    try {
+      const parsed = api.review.resolveConflict.input.parse(req.body);
+      const updated = await storage.resolveWordReviewConflict(wordId, reviewerId, {
+        toStatus: parsed.toStatus,
+        notes: parsed.notes,
+        reviewerConfidenceScore: parsed.reviewerConfidenceScore,
+      });
+      if (!updated) {
+        return sendError(req, res, 400, "VALIDATION_ERROR", "Word is not in conflict state");
+      }
+      res.json({
+        id: updated.id,
+        reviewStatus: updated.reviewStatus,
+        reviewerConfidenceScore: updated.reviewerConfidenceScore ?? null,
+        requiresSecondaryReview: updated.requiresSecondaryReview ?? false,
+        disagreementStatus: updated.disagreementStatus ?? ReviewDisagreementStatusEnum.NONE,
+        reviewNotes: updated.reviewNotes ?? null,
+        reviewedBy: updated.reviewedBy,
+        reviewedAt: updated.reviewedAt?.toISOString() ?? null,
+      });
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        return sendError(req, res, 400, "VALIDATION_ERROR", error.errors[0]?.message ?? "Invalid request");
+      }
+      return sendError(req, res, 500, "INTERNAL_ERROR", "Failed to resolve conflict");
     }
   });
 

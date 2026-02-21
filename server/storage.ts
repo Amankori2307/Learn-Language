@@ -108,6 +108,7 @@ export interface IStorage {
     status: ReviewStatusEnum,
     limit?: number,
   ): Promise<Word[]>;
+  getConflictReviewQueue(limit?: number): Promise<Word[]>;
   getWordWithReviewHistory(wordId: number): Promise<{ word: Word; events: Array<{
     id: number;
     fromStatus: string;
@@ -127,6 +128,15 @@ export interface IStorage {
       reviewerConfidenceScore?: number;
       requiresSecondaryReview?: boolean;
       disagreementStatus?: ReviewDisagreementStatusEnum;
+    },
+  ): Promise<Word | undefined>;
+  resolveWordReviewConflict(
+    wordId: number,
+    reviewerId: string,
+    input: {
+      toStatus: ReviewStatusEnum;
+      notes?: string;
+      reviewerConfidenceScore?: number;
     },
   ): Promise<Word | undefined>;
   createWordDraft(input: {
@@ -515,6 +525,15 @@ export class DatabaseStorage implements IStorage {
       .limit(limit);
   }
 
+  async getConflictReviewQueue(limit: number = 50): Promise<Word[]> {
+    return db
+      .select()
+      .from(words)
+      .where(eq(words.disagreementStatus, ReviewDisagreementStatusEnum.FLAGGED))
+      .orderBy(sql`${words.reviewedAt} desc nulls last`, sql`${words.submittedAt} desc nulls last`, sql`${words.createdAt} desc`)
+      .limit(limit);
+  }
+
   async transitionWordReview(
     wordId: number,
     reviewerId: string,
@@ -554,6 +573,28 @@ export class DatabaseStorage implements IStorage {
     });
 
     return updated;
+  }
+
+  async resolveWordReviewConflict(
+    wordId: number,
+    reviewerId: string,
+    input: {
+      toStatus: ReviewStatusEnum;
+      notes?: string;
+      reviewerConfidenceScore?: number;
+    },
+  ): Promise<Word | undefined> {
+    const [existing] = await db.select().from(words).where(eq(words.id, wordId));
+    if (!existing || existing.disagreementStatus !== ReviewDisagreementStatusEnum.FLAGGED) {
+      return undefined;
+    }
+
+    return this.transitionWordReview(wordId, reviewerId, input.toStatus, {
+      notes: input.notes ? `[conflict-resolved] ${input.notes}` : "[conflict-resolved]",
+      reviewerConfidenceScore: input.reviewerConfidenceScore,
+      requiresSecondaryReview: false,
+      disagreementStatus: ReviewDisagreementStatusEnum.RESOLVED,
+    });
   }
 
   async getWordWithReviewHistory(wordId: number): Promise<{ word: Word; events: Array<{

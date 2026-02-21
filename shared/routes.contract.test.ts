@@ -253,3 +253,35 @@ test("review history contract accepts payload", () => {
   assert.equal(parsed.word.id, 1);
   assert.equal(parsed.events.length, 1);
 });
+
+test("review conflicts contract accepts flagged queue payload", () => {
+  const payload = [
+    {
+      id: 22,
+      language: LanguageEnum.TELUGU,
+      originalScript: "vandana",
+      transliteration: "vandana",
+      english: "greetings",
+      partOfSpeech: "noun",
+      reviewStatus: ReviewStatusEnum.PENDING_REVIEW,
+      reviewerConfidenceScore: 2,
+      requiresSecondaryReview: true,
+      disagreementStatus: ReviewDisagreementStatusEnum.FLAGGED,
+      reviewNotes: "Needs second opinion",
+      submittedAt: "2026-02-21T10:00:00.000Z",
+      reviewedAt: "2026-02-21T12:00:00.000Z",
+    },
+  ];
+  const parsed = api.review.conflicts.responses[200].parse(payload);
+  assert.equal(parsed[0].disagreementStatus, ReviewDisagreementStatusEnum.FLAGGED);
+});
+
+test("review resolve conflict contract accepts payload", () => {
+  const input = api.review.resolveConflict.input.parse({
+    toStatus: ReviewStatusEnum.APPROVED,
+    notes: "Second reviewer approved this entry",
+    reviewerConfidenceScore: 4,
+  });
+  assert.equal(input.toStatus, ReviewStatusEnum.APPROVED);
+  assert.equal(input.reviewerConfidenceScore, 4);
+});
