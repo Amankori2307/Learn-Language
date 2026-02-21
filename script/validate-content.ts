@@ -1,6 +1,7 @@
 import fs from "fs/promises";
 import path from "path";
-import { LanguageEnum } from "../shared/domain/enums";
+import { LanguageEnum, PartOfSpeechEnum } from "../shared/domain/enums";
+import { isPartOfSpeech } from "../shared/domain/part-of-speech";
 
 type ContentWord = {
   key: string;
@@ -8,7 +9,7 @@ type ContentWord = {
   originalScript: string;
   transliteration: string;
   english: string;
-  partOfSpeech: string;
+  partOfSpeech: PartOfSpeechEnum;
   difficulty: number;
   difficultyLevel: "beginner" | "easy" | "medium" | "hard";
   frequencyScore: number;
@@ -126,6 +127,10 @@ function validateWord(word: ContentWord, row: number, errors: string[]) {
 
   if (word.frequencyScore < 0 || word.frequencyScore > 1) {
     errors.push(`[word ${row}] frequencyScore must be between 0 and 1`);
+  }
+
+  if (!isPartOfSpeech(word.partOfSpeech)) {
+    errors.push(`[word ${row}] partOfSpeech "${word.partOfSpeech}" is not supported`);
   }
 
   validateTagLikeCollection(word.tags, "tags", row, errors);

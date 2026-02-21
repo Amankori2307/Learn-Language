@@ -2,8 +2,10 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { SearchableSelect } from "@/components/ui/searchable-select";
 import { useCreateReviewDraft } from "@/hooks/use-review";
-import { LanguageEnum } from "@shared/domain/enums";
+import { LanguageEnum, PartOfSpeechEnum } from "@shared/domain/enums";
+import { PART_OF_SPEECH_OPTIONS } from "@shared/domain/part-of-speech";
 
 type DraftExample = {
   originalScript: string;
@@ -30,7 +32,7 @@ export function CreateVocabularyDraftForm() {
   const [draftOriginalScript, setDraftOriginalScript] = useState("");
   const [draftPronunciation, setDraftPronunciation] = useState("");
   const [draftEnglish, setDraftEnglish] = useState("");
-  const [draftPartOfSpeech, setDraftPartOfSpeech] = useState("noun");
+  const [draftPartOfSpeech, setDraftPartOfSpeech] = useState<PartOfSpeechEnum>(PartOfSpeechEnum.NOUN);
   const [draftAudioUrl, setDraftAudioUrl] = useState("");
   const [draftImageUrl, setDraftImageUrl] = useState("");
   const [draftSourceUrl, setDraftSourceUrl] = useState("");
@@ -71,7 +73,7 @@ export function CreateVocabularyDraftForm() {
         originalScript: draftOriginalScript.trim(),
         pronunciation: draftPronunciation.trim(),
         english: draftEnglish.trim(),
-        partOfSpeech: draftPartOfSpeech.trim(),
+        partOfSpeech: draftPartOfSpeech,
         audioUrl: draftAudioUrl.trim() || undefined,
         imageUrl: draftImageUrl.trim() || undefined,
         sourceUrl: draftSourceUrl.trim() || undefined,
@@ -93,7 +95,7 @@ export function CreateVocabularyDraftForm() {
       setDraftOriginalScript("");
       setDraftPronunciation("");
       setDraftEnglish("");
-      setDraftPartOfSpeech("noun");
+      setDraftPartOfSpeech(PartOfSpeechEnum.NOUN);
       setDraftAudioUrl("");
       setDraftImageUrl("");
       setDraftSourceUrl("");
@@ -131,10 +133,14 @@ export function CreateVocabularyDraftForm() {
         </div>
         <div className="space-y-1">
           <Label htmlFor="draft-part-of-speech">Part of Speech</Label>
-          <Input
+          <SearchableSelect
             id="draft-part-of-speech"
             value={draftPartOfSpeech}
-            onChange={(event) => setDraftPartOfSpeech(event.target.value)}
+            options={PART_OF_SPEECH_OPTIONS}
+            onChange={setDraftPartOfSpeech}
+            placeholder="Choose part of speech"
+            searchPlaceholder="Search part of speech..."
+            ariaLabel="Part of Speech"
           />
         </div>
         <div className="space-y-1">

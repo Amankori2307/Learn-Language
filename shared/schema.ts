@@ -4,6 +4,7 @@ import { createInsertSchema } from "drizzle-zod";
 import { z } from "zod";
 import {
   LanguageEnum,
+  PartOfSpeechEnum,
   QuizQuestionTypeEnum,
   ReviewDisagreementStatusEnum,
   ReviewStatusEnum,
@@ -40,7 +41,7 @@ export const words = pgTable("words", {
   originalScript: text("original_script").notNull(),
   transliteration: text("transliteration").notNull(),
   english: text("english").notNull(),
-  partOfSpeech: text("part_of_speech").notNull(),
+  partOfSpeech: text("part_of_speech").$type<PartOfSpeechEnum>().notNull(),
   difficulty: integer("difficulty").notNull(),
   difficultyLevel: text("difficulty_level").notNull(),
   frequencyScore: real("frequency_score").notNull(),

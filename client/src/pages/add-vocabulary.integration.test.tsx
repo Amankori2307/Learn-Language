@@ -2,7 +2,7 @@ import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import type { ReactNode } from "react";
 import { describe, expect, it, vi } from "vitest";
-import { LanguageEnum, UserTypeEnum } from "@shared/domain/enums";
+import { LanguageEnum, PartOfSpeechEnum, UserTypeEnum } from "@shared/domain/enums";
 import AddVocabularyPage from "./add-vocabulary";
 
 const createDraftMutateAsync = vi
@@ -38,8 +38,8 @@ describe("AddVocabularyPage integration", () => {
     await user.type(screen.getByPlaceholderText("Original script word/phrase"), "నమస్కారం");
     await user.type(screen.getByPlaceholderText("Romanized pronunciation"), "namaskaaram");
     await user.type(screen.getByPlaceholderText("Meaning in English"), "hello");
-    await user.clear(screen.getByLabelText("Part of Speech"));
-    await user.type(screen.getByLabelText("Part of Speech"), "phrase");
+    await user.click(screen.getByRole("combobox", { name: "Part of Speech" }));
+    await user.click(await screen.findByText("Phrase"));
     await user.type(screen.getByPlaceholderText("Example sentence in source script"), "ఆమె నమస్కారం చెప్పింది.");
     await user.type(screen.getByPlaceholderText("Example pronunciation"), "aame namaskaaram cheppindi");
     await user.type(screen.getByPlaceholderText("Example meaning in English"), "She said hello.");
@@ -52,7 +52,7 @@ describe("AddVocabularyPage integration", () => {
         language: LanguageEnum.TELUGU,
         pronunciation: "namaskaaram",
         english: "hello",
-        partOfSpeech: "phrase",
+        partOfSpeech: PartOfSpeechEnum.PHRASE,
       }),
     );
   });

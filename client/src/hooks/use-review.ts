@@ -1,6 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { api } from "@shared/routes";
-import { LanguageEnum, ReviewStatusEnum } from "@shared/domain/enums";
+import { LanguageEnum, PartOfSpeechEnum, ReviewStatusEnum } from "@shared/domain/enums";
 
 export type ReviewStatus = ReviewStatusEnum;
 
@@ -79,7 +79,7 @@ export function useCreateReviewDraft() {
       originalScript: string;
       pronunciation: string;
       english: string;
-      partOfSpeech: string;
+      partOfSpeech: PartOfSpeechEnum;
       audioUrl?: string;
       imageUrl?: string;
       sourceUrl?: string;

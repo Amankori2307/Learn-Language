@@ -4,6 +4,7 @@ import fs from "fs/promises";
 import path from "path";
 import {
   LanguageEnum,
+  PartOfSpeechEnum,
   QuizDirectionEnum,
   QuizModeEnum,
   QuizQuestionTypeEnum,
@@ -11,6 +12,7 @@ import {
   ReviewStatusEnum,
 } from "@shared/domain/enums";
 import { getClusterDescription, isGenericClusterDescription } from "@shared/domain/cluster-metadata";
+import { isPartOfSpeech } from "@shared/domain/part-of-speech";
 import {
   words, clusters, wordClusters, userWordProgress, quizAttempts, wordExamples, users,
   wordReviewEvents, srsConfigs,
@@ -29,6 +31,13 @@ function assertLanguage(value: string): LanguageEnum {
     return value as LanguageEnum;
   }
   throw new Error(`Invalid language value: ${value}`);
+}
+
+function assertPartOfSpeech(value: string): PartOfSpeechEnum {
+  if (isPartOfSpeech(value)) {
+    return value;
+  }
+  throw new Error(`Invalid partOfSpeech value: ${value}`);
 }
 
 export interface IStorage {
@@ -182,7 +191,7 @@ export interface IStorage {
     originalScript: string;
     pronunciation: string;
     english: string;
-    partOfSpeech: string;
+    partOfSpeech: PartOfSpeechEnum;
     audioUrl?: string;
     imageUrl?: string;
     sourceUrl?: string;
@@ -255,6 +264,7 @@ export class DatabaseStorage implements IStorage {
       .values({
         ...word,
         language: assertLanguage(String(word.language)),
+        partOfSpeech: assertPartOfSpeech(String(word.partOfSpeech)),
         originalScript: word.originalScript,
         reviewStatus: normalizedReviewStatus,
         reviewerConfidenceScore: word.reviewerConfidenceScore ?? null,
@@ -779,7 +789,7 @@ export class DatabaseStorage implements IStorage {
     originalScript: string;
     pronunciation: string;
     english: string;
-    partOfSpeech: string;
+    partOfSpeech: PartOfSpeechEnum;
     audioUrl?: string;
     imageUrl?: string;
     sourceUrl?: string;
@@ -1163,7 +1173,7 @@ export class DatabaseStorage implements IStorage {
       originalScript: string;
       transliteration: string;
       english: string;
-      partOfSpeech: string;
+      partOfSpeech: PartOfSpeechEnum;
       language: LanguageEnum;
       difficulty: number;
       difficultyLevel: "beginner" | "easy" | "medium" | "hard";

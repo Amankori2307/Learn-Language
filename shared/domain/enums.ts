@@ -15,6 +15,19 @@ export enum LanguageEnum {
   GERMAN = "german",
 }
 
+export enum PartOfSpeechEnum {
+  NOUN = "noun",
+  VERB = "verb",
+  ADJECTIVE = "adjective",
+  ADVERB = "adverb",
+  PRONOUN = "pronoun",
+  PHRASE = "phrase",
+  NUMERAL = "numeral",
+  PREPOSITION = "preposition",
+  CONJUNCTION = "conjunction",
+  INTERJECTION = "interjection",
+}
+
 export enum ReviewStatusEnum {
   DRAFT = "draft",
   PENDING_REVIEW = "pending_review",

@@ -2,8 +2,9 @@ import fs from "fs/promises";
 import path from "path";
 import { and, eq, inArray, sql } from "drizzle-orm";
 import { db } from "../server/db";
-import { LanguageEnum } from "../shared/domain/enums";
+import { LanguageEnum, PartOfSpeechEnum } from "../shared/domain/enums";
 import { getClusterDescription } from "../shared/domain/cluster-metadata";
+import { isPartOfSpeech } from "../shared/domain/part-of-speech";
 import {
   clusters,
   quizAttempts,
@@ -20,7 +21,7 @@ type ContentWord = {
   originalScript: string;
   transliteration: string;
   english: string;
-  partOfSpeech: string;
+  partOfSpeech: PartOfSpeechEnum;
   difficulty: number;
   difficultyLevel: "beginner" | "easy" | "medium" | "hard";
   frequencyScore: number;
@@ -50,6 +51,13 @@ function assertLanguage(value: string): LanguageEnum {
     throw new Error(`Invalid language value: ${value}`);
   }
   return value as LanguageEnum;
+}
+
+function assertPartOfSpeech(value: string): PartOfSpeechEnum {
+  if (!isPartOfSpeech(value)) {
+    throw new Error(`Invalid partOfSpeech value: ${value}`);
+  }
+  return value;
 }
 
 function assertWord(word: ContentWord, idx: number) {
@@ -101,6 +109,7 @@ async function ensureCluster(name: string) {
 
 async function upsertWord(input: ContentWord, exampleSentences: string[]) {
   const language = assertLanguage(input.language);
+  const partOfSpeech = assertPartOfSpeech(input.partOfSpeech);
   const originalScript = input.originalScript.trim();
   const reviewStatus =
     input.source?.reviewStatus ??
@@ -123,7 +132,7 @@ async function upsertWord(input: ContentWord, exampleSentences: string[]) {
         language,
         originalScript,
         transliteration: input.transliteration,
-        partOfSpeech: input.partOfSpeech,
+        partOfSpeech,
         difficulty: input.difficulty,
         difficultyLevel: input.difficultyLevel,
         frequencyScore: input.frequencyScore,
@@ -146,7 +155,7 @@ async function upsertWord(input: ContentWord, exampleSentences: string[]) {
       originalScript,
       english: input.english,
       transliteration: input.transliteration,
-      partOfSpeech: input.partOfSpeech,
+      partOfSpeech,
       difficulty: input.difficulty,
       difficultyLevel: input.difficultyLevel,
       frequencyScore: input.frequencyScore,
