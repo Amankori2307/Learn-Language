@@ -24,18 +24,28 @@ function playTone(
   durationMs: number,
   startTime: number,
   gainLevel: number,
+  type: OscillatorType = "sine",
+  endFrequency?: number,
 ) {
   const oscillator = context.createOscillator();
   const gainNode = context.createGain();
+  const filterNode = context.createBiquadFilter();
 
-  oscillator.type = "sine";
+  oscillator.type = type;
   oscillator.frequency.setValueAtTime(frequency, startTime);
+  if (typeof endFrequency === "number") {
+    oscillator.frequency.exponentialRampToValueAtTime(endFrequency, startTime + durationMs / 1000);
+  }
+
+  filterNode.type = "lowpass";
+  filterNode.frequency.setValueAtTime(4000, startTime);
 
   gainNode.gain.setValueAtTime(0.0001, startTime);
-  gainNode.gain.exponentialRampToValueAtTime(gainLevel, startTime + 0.01);
+  gainNode.gain.exponentialRampToValueAtTime(gainLevel, startTime + 0.006);
   gainNode.gain.exponentialRampToValueAtTime(0.0001, startTime + durationMs / 1000);
 
-  oscillator.connect(gainNode);
+  oscillator.connect(filterNode);
+  filterNode.connect(gainNode);
   gainNode.connect(context.destination);
   oscillator.start(startTime);
   oscillator.stop(startTime + durationMs / 1000);
@@ -62,9 +72,11 @@ export function runSuccessEffects(enabled: boolean) {
   }
 
   const now = audio.currentTime;
-  playTone(audio, 660, 120, now, 0.05);
-  playTone(audio, 880, 140, now + 0.11, 0.04);
-  window.setTimeout(() => void audio.close(), 450);
+  playTone(audio, 784, 170, now, 0.055, "triangle");
+  playTone(audio, 988, 190, now + 0.09, 0.05, "square");
+  playTone(audio, 1318, 170, now + 0.16, 0.038, "triangle");
+  playTone(audio, 659, 220, now + 0.12, 0.028, "sine");
+  window.setTimeout(() => void audio.close(), 700);
 }
 
 export function runErrorEffects(enabled: boolean) {
@@ -78,7 +90,8 @@ export function runErrorEffects(enabled: boolean) {
   }
 
   const now = audio.currentTime;
-  playTone(audio, 220, 140, now, 0.045);
-  playTone(audio, 170, 170, now + 0.12, 0.04);
-  window.setTimeout(() => void audio.close(), 450);
+  playTone(audio, 280, 180, now, 0.05, "sawtooth", 210);
+  playTone(audio, 220, 220, now + 0.1, 0.048, "triangle", 140);
+  playTone(audio, 160, 230, now + 0.2, 0.038, "sine", 115);
+  window.setTimeout(() => void audio.close(), 800);
 }
