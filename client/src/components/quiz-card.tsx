@@ -250,8 +250,8 @@ export function QuizCard({
                     className="pointer-events-none absolute inset-0 bg-rose-500/20"
                   />
                 )}
-                <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
-                  <div className="flex gap-4">
+                <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 min-w-0">
+                  <div className="flex gap-4 min-w-0">
                     <div className={cn(
                       "p-3 rounded-full shrink-0",
                       result.isCorrect
@@ -260,14 +260,14 @@ export function QuizCard({
                     )}>
                       {result.isCorrect ? <CheckCircle2 className="w-6 h-6" /> : <XCircle className="w-6 h-6" />}
                     </div>
-                    <div>
+                    <div className="min-w-0">
                       <h4 className={cn(
                         "text-lg font-bold",
                         result.isCorrect ? "text-emerald-800 dark:text-emerald-300" : "text-rose-800 dark:text-rose-300"
                       )}>
                         {result.isCorrect ? "Excellent!" : "Not quite right"}
                       </h4>
-                      <p className="text-sm md:text-base text-foreground/90 dark:text-foreground mt-1">
+                      <p className="text-sm md:text-base text-foreground/90 dark:text-foreground mt-1 break-words">
                         <span className="italic break-words">{result.correctAnswer.transliteration}</span>
                         <span className="mx-2">•</span>
                         <span className="font-semibold text-foreground">({result.correctAnswer.originalScript})</span>
@@ -275,25 +275,25 @@ export function QuizCard({
                         <span>{result.correctAnswer.english}</span>
                       </p>
                       {result.examples.length > 0 && (
-                        <div className="text-sm mt-3 space-y-2">
+                        <div className="text-sm mt-3 space-y-2 max-h-64 overflow-y-auto pr-1">
                           {result.examples.map((example, index) => (
                             <div
                               key={`${example.originalScript}-${index}`}
                               className="p-3 rounded-lg border border-border/70 bg-background/90 dark:bg-background/60 text-foreground"
                             >
-                              <p>
+                              <p className="break-words">
                                 <span className="font-semibold">Sentence:</span>{" "}
                                 <span className="font-originalScript text-foreground/95">
                                   {example.originalScript}
                                 </span>
                               </p>
-                              <p>
+                              <p className="break-words">
                                 <span className="font-semibold">Pronunciation:</span>{" "}
                                 <span className="font-medium text-foreground/95">
                                   {example.pronunciation}
                                 </span>
                               </p>
-                              <p>
+                              <p className="break-words">
                                 <span className="font-semibold">Meaning:</span>{" "}
                                 <span className="font-medium text-foreground/95">
                                   {example.meaning}
