@@ -45,6 +45,7 @@ export const api = {
       method: 'GET' as const,
       path: '/api/words' as const,
       input: z.object({
+        language: z.nativeEnum(LanguageEnum).optional(),
         search: z.string().optional(),
         clusterId: z.coerce.number().optional(),
         limit: z.coerce.number().optional(),
@@ -66,6 +67,9 @@ export const api = {
     list: {
       method: 'GET' as const,
       path: '/api/clusters' as const,
+      input: z.object({
+        language: z.nativeEnum(LanguageEnum).optional(),
+      }).optional(),
       responses: {
         200: z.array(z.custom<typeof clusters.$inferSelect>()),
       },
@@ -73,6 +77,9 @@ export const api = {
     get: {
       method: 'GET' as const,
       path: '/api/clusters/:id' as const,
+      input: z.object({
+        language: z.nativeEnum(LanguageEnum).optional(),
+      }).optional(),
       responses: {
         200: z.custom<typeof clusters.$inferSelect & { words: typeof words.$inferSelect[] }>(),
         404: errorSchemas.notFound,
@@ -87,6 +94,7 @@ export const api = {
         mode: z.nativeEnum(QuizModeEnum).default(QuizModeEnum.DAILY_REVIEW),
         clusterId: z.coerce.number().optional(),
         count: z.coerce.number().default(10),
+        language: z.nativeEnum(LanguageEnum).optional(),
       }).optional(),
       responses: {
         200: z.array(z.object({
@@ -139,6 +147,9 @@ export const api = {
     get: {
       method: 'GET' as const,
       path: '/api/stats' as const,
+      input: z.object({
+        language: z.nativeEnum(LanguageEnum).optional(),
+      }).optional(),
       responses: {
         200: z.object({
           totalWords: z.number(),
@@ -161,6 +172,7 @@ export const api = {
       path: "/api/attempts/history" as const,
       input: z.object({
         limit: z.coerce.number().int().positive().max(200).default(100),
+        language: z.nativeEnum(LanguageEnum).optional(),
       }).optional(),
       responses: {
         200: z.array(z.object({
@@ -190,6 +202,7 @@ export const api = {
       input: z.object({
         window: z.enum(["daily", "weekly", "all_time"]).default("weekly"),
         limit: z.coerce.number().int().positive().max(100).default(25),
+        language: z.nativeEnum(LanguageEnum).optional(),
       }).optional(),
       responses: {
         200: z.array(z.object({

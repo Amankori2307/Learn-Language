@@ -46,6 +46,7 @@ Only active and pending tasks are listed here. Completed tasks are intentionally
 | P5-003 | todo | Add image hints for selected vocabulary groups | P5-001 | M | images lazy-load and degrade gracefully |
 | P5-004 | todo | Add media moderation/storage policy and cost controls | P5-001 | S | quotas + policy are documented and enforced |
 | P5-005 | todo | Media QA + accessibility pass | P5-002,P5-003 | M | captions/alt/fallback behavior validated |
+| P5-006 | todo | Add answer feedback effects: success/failure sound cues + visual effects (confetti on correct, subtle shake/flash on incorrect) | P5-001 | S | correct and incorrect submissions trigger clear audio+visual feedback, can be toggled, and never block quiz flow |
 
 ## Phase 4D - Code standards rollout
 
@@ -63,9 +64,10 @@ Only active and pending tasks are listed here. Completed tasks are intentionally
 | P4E-001 | done | Remove `source_language` naming from codebase and use generic source-language naming (keep `LanguageEnum.source_language` as single language-specific token) | P4D-003 | L | code identifiers, API contracts, storage interfaces, and UI copy no longer use `source_language`-specific naming |
 | P4E-002 | done | Enforce naming consistency repo-wide after generic pivot (single canonical naming for source script/text across schema, API, UI, scripts, tests) | P4E-001 | M | no mixed legacy naming remains and lint/type/tests pass with a uniform vocabulary |
 | P4E-003 | done | Setup Drizzle migration workflow (generate/migrate scripts + migration folder conventions) and stop relying on schema push for lifecycle changes | P4E-002 | M | versioned migrations are generated/applied via scripts and validated in docs/compose flow |
-| P4E-004 | todo | Add language selector in UI and scope progress/statistics/session state by `(userId, language)` combination | P4E-003 | L | learners can switch language context and all progress/review/stats/attempts are isolated per language |
-| P4E-005 | todo | Enforce single source of truth for seed data (`assets/processed/seed.json`) and remove in-code hardcoded vocab arrays (e.g., `wordsData`) | P4E-003 | M | runtime/admin seed flow imports only from `seed.json`, and no fallback content arrays remain in code |
-| P4E-006 | todo | Add root-level lint/validation command and keep it green (typecheck + content schema + tests) | P4E-005 | S | `pnpm run lint:root` passes and is the single health-check command for repo quality |
+| P4E-004 | done | Add language selector in UI and scope progress/statistics/session state by `(userId, language)` combination | P4E-003 | L | learners can switch language context and all progress/review/stats/attempts are isolated per language |
+| P4E-005 | done | Enforce single source of truth for seed data (`assets/processed/seed.json`) and remove in-code hardcoded vocab arrays (e.g., `wordsData`) | P4E-003 | M | runtime/admin seed flow imports only from `seed.json`, and no fallback content arrays remain in code |
+| P4E-006 | done | Add root-level lint/validation command and keep it green (typecheck + content schema + tests) | P4E-005 | S | `pnpm run lint:root` passes and is the single health-check command for repo quality |
+| P4E-007 | done | Fix `pnpm run lint` command wiring and execution parity across local, Docker, and CI | P4E-006 | S | `pnpm run lint` executes successfully and produces consistent output in all supported environments |
 
 ## Exit criteria
 

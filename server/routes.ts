@@ -8,7 +8,7 @@ import { logApiEvent, sendError } from "./http";
 import { chooseDistractors } from "./services/distractors";
 import { applySrsUpdate } from "./services/srs";
 import { requireReviewer } from "./auth/permissions";
-import { QuizModeEnum, QuizQuestionTypeEnum, ReviewStatusEnum } from "@shared/domain/enums";
+import { LanguageEnum, QuizModeEnum, QuizQuestionTypeEnum, ReviewStatusEnum } from "@shared/domain/enums";
 
 function formatPronunciationFirst(word: { transliteration?: string | null; originalScript: string }) {
   const transliteration = word.transliteration?.trim();
@@ -16,6 +16,13 @@ function formatPronunciationFirst(word: { transliteration?: string | null; origi
     return word.originalScript;
   }
   return `${transliteration} (${word.originalScript})`;
+}
+
+function parseLanguage(value: unknown): LanguageEnum | undefined {
+  if (!value || typeof value !== "string") {
+    return undefined;
+  }
+  return Object.values(LanguageEnum).includes(value as LanguageEnum) ? (value as LanguageEnum) : undefined;
 }
 
 export async function registerRoutes(
@@ -30,8 +37,8 @@ export async function registerRoutes(
 
   // Words List
   app.get(api.words.list.path, isAuthenticated, async (req, res) => {
-    // Basic implementation - filters can be added later
-    const words = await storage.getWords(100);
+    const parsed = api.words.list.input?.parse(req.query) ?? {};
+    const words = await storage.getWords(parsed.limit ?? 100, parsed.language);
     res.json(words);
   });
 
@@ -46,13 +53,15 @@ export async function registerRoutes(
 
   // Clusters List
   app.get(api.clusters.list.path, isAuthenticated, async (req, res) => {
-    const clusters = await storage.getClusters();
+    const parsed = api.clusters.list.input?.parse(req.query) ?? {};
+    const clusters = await storage.getClusters(parsed.language);
     res.json(clusters);
   });
 
   // Get Cluster
   app.get(api.clusters.get.path, isAuthenticated, async (req, res) => {
-    const cluster = await storage.getCluster(Number(req.params.id));
+    const parsed = api.clusters.get.input?.parse(req.query) ?? {};
+    const cluster = await storage.getCluster(Number(req.params.id), parsed.language);
     if (!cluster) {
       return sendError(req, res, 404, "NOT_FOUND", "Cluster not found");
     }
@@ -66,19 +75,20 @@ export async function registerRoutes(
     const limit = parsed.count ?? 10;
     const clusterId = parsed.clusterId;
     const mode = parsed.mode ?? QuizModeEnum.DAILY_REVIEW;
+    const language = parsed.language ?? parseLanguage(req.query.language);
 
-    const candidates = await storage.getQuizCandidates(userId, limit, clusterId, mode);
+    const candidates = await storage.getQuizCandidates(userId, limit, clusterId, mode, language);
     
     if (candidates.length === 0) {
       // If no words found, maybe seed data or return empty
       // Ideally we should always have words after seeding
       await storage.seedInitialData();
       // Retry once
-      const retry = await storage.getQuizCandidates(userId, limit, clusterId);
+      const retry = await storage.getQuizCandidates(userId, limit, clusterId, mode, language);
       if (retry.length === 0) return res.json([]); 
     }
 
-    const allWords = await storage.getWords(500);
+    const allWords = await storage.getWords(500, language);
     const links = await storage.getWordClusterLinks();
     const clusterByWord = new Map<number, Set<number>>();
     for (const link of links) {
@@ -228,7 +238,8 @@ export async function registerRoutes(
   // Stats
   app.get(api.stats.get.path, isAuthenticated, async (req, res) => {
     const userId = (req.user as any).claims.sub;
-    const stats = await storage.getUserStats(userId);
+    const parsed = api.stats.get.input?.parse(req.query) ?? {};
+    const stats = await storage.getUserStats(userId, parsed.language);
     res.json(stats);
   });
 
@@ -237,7 +248,7 @@ export async function registerRoutes(
     const userId = (req.user as any).claims.sub;
     const parsed = api.attempts.history.input?.parse(req.query) ?? { limit: 100 };
     const limit = parsed.limit ?? 100;
-    const history = await storage.getUserAttemptHistory(userId, limit);
+    const history = await storage.getUserAttemptHistory(userId, limit, parsed.language);
     res.json(history.map((item) => ({
       ...item,
       createdAt: item.createdAt?.toISOString() ?? null,
@@ -249,7 +260,7 @@ export async function registerRoutes(
     const parsed = api.leaderboard.list.input?.parse(req.query) ?? { window: "weekly", limit: 25 };
     const window = parsed.window ?? "weekly";
     const limit = parsed.limit ?? 25;
-    const leaderboard = await storage.getLeaderboard(window, limit);
+    const leaderboard = await storage.getLeaderboard(window, limit, parsed.language);
     res.json(leaderboard);
   });
 

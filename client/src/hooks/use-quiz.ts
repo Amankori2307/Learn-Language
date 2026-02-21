@@ -1,18 +1,21 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { api, buildUrl } from "@shared/routes";
 import { z } from "zod";
-import { QuizModeEnum } from "@shared/domain/enums";
+import { LanguageEnum, QuizModeEnum } from "@shared/domain/enums";
+import { useLearningLanguage } from "@/hooks/use-language";
 
 // Types derived from API definition
 export type QuizMode = QuizModeEnum;
 type QuizSubmitInput = z.infer<typeof api.quiz.submit.input>;
 
 export function useGenerateQuiz(mode: QuizMode = QuizModeEnum.DAILY_REVIEW, clusterId?: number) {
+  const { language } = useLearningLanguage();
   return useQuery({
-    queryKey: [api.quiz.generate.path, { mode, clusterId }],
+    queryKey: [api.quiz.generate.path, { mode, clusterId, language }],
     queryFn: async () => {
       const params = new URLSearchParams();
       params.append('mode', mode);
+      params.append("language", language);
       if (clusterId) params.append('clusterId', clusterId.toString());
       
       const res = await fetch(`${api.quiz.generate.path}?${params.toString()}`, { credentials: "include" });
@@ -26,6 +29,7 @@ export function useGenerateQuiz(mode: QuizMode = QuizModeEnum.DAILY_REVIEW, clus
 
 export function useSubmitAnswer() {
   const queryClient = useQueryClient();
+  const { language } = useLearningLanguage();
   return useMutation({
     mutationFn: async (data: QuizSubmitInput) => {
       const res = await fetch(api.quiz.submit.path, {
@@ -40,16 +44,18 @@ export function useSubmitAnswer() {
     },
     onSuccess: () => {
       // Invalidate stats to refresh dashboard progress immediately
-      queryClient.invalidateQueries({ queryKey: [api.stats.get.path] });
+      queryClient.invalidateQueries({ queryKey: [api.stats.get.path, language] });
     }
   });
 }
 
 export function useStats() {
+  const { language } = useLearningLanguage();
   return useQuery({
-    queryKey: [api.stats.get.path],
+    queryKey: [api.stats.get.path, language],
     queryFn: async () => {
-      const res = await fetch(api.stats.get.path, { credentials: "include" });
+      const params = new URLSearchParams({ language });
+      const res = await fetch(`${api.stats.get.path}?${params.toString()}`, { credentials: "include" });
       if (res.status === 401) return null;
       if (!res.ok) throw new Error("Failed to fetch stats");
       return api.stats.get.responses[200].parse(await res.json());

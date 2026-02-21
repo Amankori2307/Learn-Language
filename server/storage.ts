@@ -23,17 +23,17 @@ function assertLanguage(value: string): LanguageEnum {
 
 export interface IStorage {
   // Words & Clusters
-  getWords(limit?: number): Promise<Word[]>;
+  getWords(limit?: number, language?: LanguageEnum): Promise<Word[]>;
   getWord(id: number): Promise<Word | undefined>;
-  getWordsByCluster(clusterId: number): Promise<Word[]>;
+  getWordsByCluster(clusterId: number, language?: LanguageEnum): Promise<Word[]>;
   createWord(word: CreateWordRequest): Promise<Word>;
   
-  getClusters(): Promise<Cluster[]>;
-  getCluster(id: number): Promise<(Cluster & { words: Word[] }) | undefined>;
+  getClusters(language?: LanguageEnum): Promise<Cluster[]>;
+  getCluster(id: number, language?: LanguageEnum): Promise<(Cluster & { words: Word[] }) | undefined>;
   createCluster(cluster: CreateClusterRequest): Promise<Cluster>;
   addWordToCluster(wordId: number, clusterId: number): Promise<void>;
   getWordClusterLinks(): Promise<Array<{ wordId: number; clusterId: number }>>;
-  getWordExamples(wordId: number): Promise<Array<{
+  getWordExamples(wordId: number, language?: LanguageEnum): Promise<Array<{
     language: LanguageEnum;
     originalScript: string;
     pronunciation: string;
@@ -43,14 +43,14 @@ export interface IStorage {
   }>>;
 
   // User Progress
-  getUserProgress(userId: string): Promise<UserWordProgress[]>;
+  getUserProgress(userId: string, language?: LanguageEnum): Promise<UserWordProgress[]>;
   getUserWordProgress(userId: string, wordId: number): Promise<UserWordProgress | undefined>;
   updateUserProgress(progress: UserWordProgress): Promise<UserWordProgress>;
   createUserProgress(progress: Omit<UserWordProgress, "id">): Promise<UserWordProgress>;
   
   // Quiz
   logQuizAttempt(attempt: Omit<QuizAttempt, "id" | "createdAt">): Promise<QuizAttempt>;
-  getUserAttemptHistory(userId: string, limit?: number): Promise<Array<{
+  getUserAttemptHistory(userId: string, limit?: number, language?: LanguageEnum): Promise<Array<{
     id: number;
     wordId: number;
     isCorrect: boolean;
@@ -66,10 +66,10 @@ export interface IStorage {
       english: string;
     };
   }>>;
-  getQuizCandidates(userId: string, limit?: number, clusterId?: number, mode?: QuizMode): Promise<Word[]>;
+  getQuizCandidates(userId: string, limit?: number, clusterId?: number, mode?: QuizMode, language?: LanguageEnum): Promise<Word[]>;
   
   // Stats
-  getUserStats(userId: string): Promise<{
+  getUserStats(userId: string, language?: LanguageEnum): Promise<{
     totalWords: number;
     mastered: number;
     learning: number;
@@ -80,10 +80,11 @@ export interface IStorage {
     recallAccuracy: number;
     recommendedDirection: QuizDirectionEnum;
   }>;
-  getRecentAccuracy(userId: string, limit?: number): Promise<number>;
+  getRecentAccuracy(userId: string, limit?: number, language?: LanguageEnum): Promise<number>;
   getLeaderboard(
     window: "daily" | "weekly" | "all_time",
     limit?: number,
+    language?: LanguageEnum,
   ): Promise<Array<{
     rank: number;
     userId: string;
@@ -132,11 +133,14 @@ export interface IStorage {
 }
 
 export class DatabaseStorage implements IStorage {
-  async getWords(limit: number = 100): Promise<Word[]> {
+  async getWords(limit: number = 100, language?: LanguageEnum): Promise<Word[]> {
+    const whereClause = language
+      ? and(eq(words.reviewStatus, ReviewStatusEnum.APPROVED), eq(words.language, language))
+      : eq(words.reviewStatus, ReviewStatusEnum.APPROVED);
     return await db
       .select()
       .from(words)
-      .where(eq(words.reviewStatus, ReviewStatusEnum.APPROVED))
+      .where(whereClause)
       .limit(limit);
   }
 
@@ -148,13 +152,16 @@ export class DatabaseStorage implements IStorage {
     return word;
   }
 
-  async getWordsByCluster(clusterId: number): Promise<Word[]> {
+  async getWordsByCluster(clusterId: number, language?: LanguageEnum): Promise<Word[]> {
+    const whereClause = language
+      ? and(eq(wordClusters.clusterId, clusterId), eq(words.reviewStatus, ReviewStatusEnum.APPROVED), eq(words.language, language))
+      : and(eq(wordClusters.clusterId, clusterId), eq(words.reviewStatus, ReviewStatusEnum.APPROVED));
     const results = await db.select({
       word: words
     })
     .from(wordClusters)
     .innerJoin(words, eq(wordClusters.wordId, words.id))
-    .where(and(eq(wordClusters.clusterId, clusterId), eq(words.reviewStatus, ReviewStatusEnum.APPROVED)));
+    .where(whereClause);
     
     return results.map(r => r.word);
   }
@@ -180,15 +187,31 @@ export class DatabaseStorage implements IStorage {
     return newWord;
   }
 
-  async getClusters(): Promise<Cluster[]> {
-    return await db.select().from(clusters);
+  async getClusters(language?: LanguageEnum): Promise<Cluster[]> {
+    if (!language) {
+      return await db.select().from(clusters);
+    }
+
+    const linked = await db
+      .select({ clusterId: wordClusters.clusterId })
+      .from(wordClusters)
+      .innerJoin(words, eq(wordClusters.wordId, words.id))
+      .where(and(eq(words.language, language), eq(words.reviewStatus, ReviewStatusEnum.APPROVED)));
+
+    const clusterIds = new Set(linked.map((row) => row.clusterId));
+    if (clusterIds.size === 0) {
+      return [];
+    }
+
+    const allClusters = await db.select().from(clusters);
+    return allClusters.filter((cluster) => clusterIds.has(cluster.id));
   }
 
-  async getCluster(id: number): Promise<(Cluster & { words: Word[] }) | undefined> {
+  async getCluster(id: number, language?: LanguageEnum): Promise<(Cluster & { words: Word[] }) | undefined> {
     const [cluster] = await db.select().from(clusters).where(eq(clusters.id, id));
     if (!cluster) return undefined;
 
-    const clusterWords = await this.getWordsByCluster(id);
+    const clusterWords = await this.getWordsByCluster(id, language);
     return { ...cluster, words: clusterWords };
   }
 
@@ -205,7 +228,7 @@ export class DatabaseStorage implements IStorage {
     return db.select({ wordId: wordClusters.wordId, clusterId: wordClusters.clusterId }).from(wordClusters);
   }
 
-  async getWordExamples(wordId: number): Promise<Array<{
+  async getWordExamples(wordId: number, language?: LanguageEnum): Promise<Array<{
     language: LanguageEnum;
     originalScript: string;
     pronunciation: string;
@@ -213,6 +236,10 @@ export class DatabaseStorage implements IStorage {
     contextTag: string;
     difficulty: number;
   }>> {
+    const whereClause = language
+      ? and(eq(wordExamples.wordId, wordId), eq(wordExamples.language, language))
+      : eq(wordExamples.wordId, wordId);
+
     return db
       .select({
         language: wordExamples.language,
@@ -223,12 +250,22 @@ export class DatabaseStorage implements IStorage {
         difficulty: wordExamples.difficulty,
       })
       .from(wordExamples)
-      .where(eq(wordExamples.wordId, wordId))
+      .where(whereClause)
       .orderBy(sql`${wordExamples.id} asc`);
   }
 
-  async getUserProgress(userId: string): Promise<UserWordProgress[]> {
-    return await db.select().from(userWordProgress).where(eq(userWordProgress.userId, userId));
+  async getUserProgress(userId: string, language?: LanguageEnum): Promise<UserWordProgress[]> {
+    if (!language) {
+      return await db.select().from(userWordProgress).where(eq(userWordProgress.userId, userId));
+    }
+
+    const rows = await db
+      .select({ progress: userWordProgress })
+      .from(userWordProgress)
+      .innerJoin(words, eq(userWordProgress.wordId, words.id))
+      .where(and(eq(userWordProgress.userId, userId), eq(words.language, language)));
+
+    return rows.map((row) => row.progress);
   }
 
   async getUserWordProgress(userId: string, wordId: number): Promise<UserWordProgress | undefined> {
@@ -261,7 +298,7 @@ export class DatabaseStorage implements IStorage {
     return log;
   }
 
-  async getUserAttemptHistory(userId: string, limit: number = 100): Promise<Array<{
+  async getUserAttemptHistory(userId: string, limit: number = 100, language?: LanguageEnum): Promise<Array<{
     id: number;
     wordId: number;
     isCorrect: boolean;
@@ -277,6 +314,10 @@ export class DatabaseStorage implements IStorage {
       english: string;
     };
   }>> {
+    const whereClause = language
+      ? and(eq(quizAttempts.userId, userId), eq(words.language, language))
+      : eq(quizAttempts.userId, userId);
+
     const rows = await db
       .select({
         id: quizAttempts.id,
@@ -294,7 +335,7 @@ export class DatabaseStorage implements IStorage {
       })
       .from(quizAttempts)
       .innerJoin(words, eq(quizAttempts.wordId, words.id))
-      .where(eq(quizAttempts.userId, userId))
+      .where(whereClause)
       .orderBy(sql`${quizAttempts.createdAt} desc`)
       .limit(limit);
 
@@ -330,15 +371,16 @@ export class DatabaseStorage implements IStorage {
     limit: number = 10,
     clusterId?: number,
     mode: QuizMode = QuizModeEnum.DAILY_REVIEW,
+    language?: LanguageEnum,
   ): Promise<Word[]> {
     let candidateWords: Word[] = [];
     if (clusterId) {
-      candidateWords = await this.getWordsByCluster(clusterId);
+      candidateWords = await this.getWordsByCluster(clusterId, language);
     } else {
-      candidateWords = await this.getWords(500);
+      candidateWords = await this.getWords(500, language);
     }
 
-    const progressList = await this.getUserProgress(userId);
+    const progressList = await this.getUserProgress(userId, language);
     const progressMap = new Map(progressList.map(p => [p.wordId, p]));
 
     if (mode === "cluster") {
@@ -346,7 +388,7 @@ export class DatabaseStorage implements IStorage {
       return ranked.slice(0, limit);
     }
 
-    const recentAccuracy = await this.getRecentAccuracy(userId);
+    const recentAccuracy = await this.getRecentAccuracy(userId, 50, language);
     return generateSessionWords({
       mode,
       count: limit,
@@ -356,13 +398,21 @@ export class DatabaseStorage implements IStorage {
     });
   }
 
-  async getRecentAccuracy(userId: string, limit: number = 50): Promise<number> {
-    const attempts = await db
-      .select({ isCorrect: quizAttempts.isCorrect })
-      .from(quizAttempts)
-      .where(eq(quizAttempts.userId, userId))
-      .orderBy(sql`${quizAttempts.createdAt} desc`)
-      .limit(limit);
+  async getRecentAccuracy(userId: string, limit: number = 50, language?: LanguageEnum): Promise<number> {
+    const attempts = language
+      ? await db
+          .select({ isCorrect: quizAttempts.isCorrect })
+          .from(quizAttempts)
+          .innerJoin(words, eq(quizAttempts.wordId, words.id))
+          .where(and(eq(quizAttempts.userId, userId), eq(words.language, language)))
+          .orderBy(sql`${quizAttempts.createdAt} desc`)
+          .limit(limit)
+      : await db
+          .select({ isCorrect: quizAttempts.isCorrect })
+          .from(quizAttempts)
+          .where(eq(quizAttempts.userId, userId))
+          .orderBy(sql`${quizAttempts.createdAt} desc`)
+          .limit(limit);
 
     if (attempts.length === 0) {
       return 1;
@@ -375,6 +425,7 @@ export class DatabaseStorage implements IStorage {
   async getLeaderboard(
     window: "daily" | "weekly" | "all_time",
     limit: number = 25,
+    language?: LanguageEnum,
   ): Promise<Array<{
     rank: number;
     userId: string;
@@ -407,8 +458,10 @@ export class DatabaseStorage implements IStorage {
       .leftJoin(words, eq(quizAttempts.wordId, words.id));
 
     const attempts = window === "all_time"
-      ? await attemptsQuery
-      : await attemptsQuery.where(sql`${quizAttempts.createdAt} >= ${from}`);
+      ? await (language ? attemptsQuery.where(eq(words.language, language)) : attemptsQuery)
+      : await (language
+          ? attemptsQuery.where(and(sql`${quizAttempts.createdAt} >= ${from}`, eq(words.language, language)))
+          : attemptsQuery.where(sql`${quizAttempts.createdAt} >= ${from}`));
 
     return computeLeaderboard(
       allUsers.map((u) => ({
@@ -546,7 +599,7 @@ export class DatabaseStorage implements IStorage {
     return created;
   }
 
-  async getUserStats(userId: string): Promise<{
+  async getUserStats(userId: string, language?: LanguageEnum): Promise<{
     totalWords: number;
     mastered: number;
     learning: number;
@@ -557,10 +610,12 @@ export class DatabaseStorage implements IStorage {
     recallAccuracy: number;
     recommendedDirection: QuizDirectionEnum;
   }> {
-    const progressList = await this.getUserProgress(userId);
+    const progressList = await this.getUserProgress(userId, language);
     
     // Total words in DB (approximate)
-    const totalWordsResult = await db.select({ count: sql<number>`count(*)` }).from(words);
+    const totalWordsResult = language
+      ? await db.select({ count: sql<number>`count(*)` }).from(words).where(and(eq(words.language, language), eq(words.reviewStatus, ReviewStatusEnum.APPROVED)))
+      : await db.select({ count: sql<number>`count(*)` }).from(words).where(eq(words.reviewStatus, ReviewStatusEnum.APPROVED));
     const totalWords = Number(totalWordsResult[0].count);
 
     const mastered = progressList.filter(p => (p.masteryLevel || 0) >= 4).length;
@@ -573,15 +628,25 @@ export class DatabaseStorage implements IStorage {
       (p.nextReview && new Date(p.nextReview) < now)
     ).length;
 
-    const attemptRows = await db
-      .select({
-        createdAt: quizAttempts.createdAt,
-        isCorrect: quizAttempts.isCorrect,
-        difficulty: words.difficulty,
-      })
-      .from(quizAttempts)
-      .leftJoin(words, eq(quizAttempts.wordId, words.id))
-      .where(eq(quizAttempts.userId, userId));
+    const attemptRows = language
+      ? await db
+          .select({
+            createdAt: quizAttempts.createdAt,
+            isCorrect: quizAttempts.isCorrect,
+            difficulty: words.difficulty,
+          })
+          .from(quizAttempts)
+          .innerJoin(words, eq(quizAttempts.wordId, words.id))
+          .where(and(eq(quizAttempts.userId, userId), eq(words.language, language)))
+      : await db
+          .select({
+            createdAt: quizAttempts.createdAt,
+            isCorrect: quizAttempts.isCorrect,
+            difficulty: words.difficulty,
+          })
+          .from(quizAttempts)
+          .leftJoin(words, eq(quizAttempts.wordId, words.id))
+          .where(eq(quizAttempts.userId, userId));
 
     const streak = computeStreak(
       attemptRows
@@ -595,13 +660,22 @@ export class DatabaseStorage implements IStorage {
     ).length;
     const xp = computeXp({ correctAttempts, hardCorrectAttempts });
 
-    const directionAttempts = await db
-      .select({
-        direction: quizAttempts.direction,
-        isCorrect: quizAttempts.isCorrect,
-      })
-      .from(quizAttempts)
-      .where(eq(quizAttempts.userId, userId));
+    const directionAttempts = language
+      ? await db
+          .select({
+            direction: quizAttempts.direction,
+            isCorrect: quizAttempts.isCorrect,
+          })
+          .from(quizAttempts)
+          .innerJoin(words, eq(quizAttempts.wordId, words.id))
+          .where(and(eq(quizAttempts.userId, userId), eq(words.language, language)))
+      : await db
+          .select({
+            direction: quizAttempts.direction,
+            isCorrect: quizAttempts.isCorrect,
+          })
+          .from(quizAttempts)
+          .where(eq(quizAttempts.userId, userId));
 
     const recallAttempts = directionAttempts.filter((a) => a.direction === QuizDirectionEnum.SOURCE_TO_TARGET);
     const recognitionAttempts = directionAttempts.filter((a) => a.direction === QuizDirectionEnum.TARGET_TO_SOURCE);

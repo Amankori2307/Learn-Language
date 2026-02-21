@@ -19,7 +19,8 @@ import { cn } from "@/lib/utils";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useTheme } from "next-themes";
 import { buildAvatarUrl } from "@/lib/avatar";
-import { UserTypeEnum } from "@shared/domain/enums";
+import { LanguageEnum, UserTypeEnum } from "@shared/domain/enums";
+import { useLearningLanguage } from "@/hooks/use-language";
 
 function getInitials(firstName?: string | null, lastName?: string | null, email?: string | null) {
   const fromNames = `${firstName ?? ""} ${lastName ?? ""}`.trim();
@@ -39,6 +40,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
   const [isOpen, setIsOpen] = useState(false);
   const { resolvedTheme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
+  const { language, setLanguage, options } = useLearningLanguage();
 
   useEffect(() => {
     setMounted(true);
@@ -78,6 +80,23 @@ export function Layout({ children }: { children: React.ReactNode }) {
           >
             {mounted && resolvedTheme === "dark" ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
           </Button>
+        </div>
+        <div className="mt-4">
+          <label htmlFor="language-select" className="block text-xs font-medium text-muted-foreground mb-1">
+            Learning Language
+          </label>
+          <select
+            id="language-select"
+            value={language}
+            onChange={(event) => setLanguage(event.target.value as LanguageEnum)}
+            className="w-full rounded-md border border-border bg-background px-3 py-2 text-sm text-foreground outline-none focus:ring-2 focus:ring-ring"
+          >
+            {options.map((option) => (
+              <option key={option.value} value={option.value}>
+                {option.label}
+              </option>
+            ))}
+          </select>
         </div>
       </div>
 
