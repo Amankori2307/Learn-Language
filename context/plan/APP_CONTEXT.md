@@ -9,6 +9,7 @@ Build a text-first language learning app with high data correctness, strong memo
 - Phase 4 complete.
 - Phase 6 core hardening complete (`P6-001` to `P6-011`).
 - Active tasks:
+  - `P6-027` improve clusters UI and replace generic imported cluster descriptions
   - `P6-026` fix reinforcement-loop CTA flow from quiz completion
   - `P6-024` part-of-speech enum + searchable dropdown in vocab flows
   - `P6-025` tag enum/registry + searchable multi-select
@@ -84,5 +85,5 @@ Build a text-first language learning app with high data correctness, strong memo
 
 ## Immediate next implementation
 
-- Execute in order: `P6-026` -> `P6-024` -> `P6-025` -> `P6-023` -> `P6-022`.
+- Execute in order: `P6-027` -> `P6-026` -> `P6-024` -> `P6-025` -> `P6-023` -> `P6-022`.
 - Latest planning artifact: `context/plan/61-pronunciation-strategy.md`.
