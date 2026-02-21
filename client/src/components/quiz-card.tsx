@@ -76,6 +76,11 @@ export function QuizCard({
     setNegativeVisualNonce((prev) => prev + 1);
   }, [effectsEnabled, result]);
 
+  useEffect(() => {
+    // Prevent stale selection/highlight state from leaking into the next question.
+    setSelectedOption(null);
+  }, [question, options, type]);
+
   const handleOptionClick = (id: number) => {
     if (result) return;
     setSelectedOption(id);
