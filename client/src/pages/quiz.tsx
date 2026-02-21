@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useLocation, useSearch } from "wouter";
 import { useGenerateQuiz, useSubmitAnswer, type QuizMode } from "@/hooks/use-quiz";
 import { QuizCard } from "@/components/quiz-card";
@@ -26,6 +26,18 @@ export default function QuizPage() {
 
   const currentQuestion = questions?.[currentIndex];
   const progress = questions ? ((currentIndex) / questions.length) * 100 : 0;
+  const resetSession = useCallback(() => {
+    setCurrentIndex(0);
+    setResult(null);
+    setSessionStats({ correct: 0, total: 0 });
+    setIsFinished(false);
+    setConfidenceLevel(2);
+    setQuestionStartedAt(Date.now());
+  }, []);
+  const startSession = (target: string) => {
+    resetSession();
+    setLocation(target);
+  };
 
   const handleAnswer = async (optionId: number, answerConfidence: 1 | 2 | 3) => {
     if (!currentQuestion) return;
@@ -69,6 +81,10 @@ export default function QuizPage() {
     setQuestionStartedAt(Date.now());
   }, [currentIndex]);
 
+  useEffect(() => {
+    resetSession();
+  }, [mode, clusterId, resetSession]);
+
   if (isLoading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-background">
@@ -94,10 +110,10 @@ export default function QuizPage() {
             Keep momentum by starting a revision mode instead of stopping here.
           </p>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-            <Button onClick={() => setLocation(`/quiz?mode=${QuizModeEnum.DAILY_REVIEW}`)}>
+            <Button onClick={() => startSession(`/quiz?mode=${QuizModeEnum.DAILY_REVIEW}`)}>
               Daily Revision
             </Button>
-            <Button variant="outline" onClick={() => setLocation(`/quiz?mode=${QuizModeEnum.WEAK_WORDS}`)}>
+            <Button variant="outline" onClick={() => startSession(`/quiz?mode=${QuizModeEnum.WEAK_WORDS}`)}>
               Weak Words Drill
             </Button>
             <Button variant="outline" onClick={() => setLocation("/clusters")}>
@@ -130,7 +146,18 @@ export default function QuizPage() {
   if (isFinished) {
     const percentage = Math.round((sessionStats.correct / sessionStats.total) * 100);
     const incorrectCount = Math.max(0, sessionStats.total - sessionStats.correct);
-    const recommendedMode = percentage < 70 ? QuizModeEnum.WEAK_WORDS : QuizModeEnum.DAILY_REVIEW;
+    const recommendedMode =
+      percentage < 70
+        ? QuizModeEnum.WEAK_WORDS
+        : mode === QuizModeEnum.DAILY_REVIEW
+          ? QuizModeEnum.NEW_WORDS
+          : QuizModeEnum.DAILY_REVIEW;
+    const recommendedLabel =
+      recommendedMode === QuizModeEnum.WEAK_WORDS
+        ? "Practice Weak Words"
+        : recommendedMode === QuizModeEnum.NEW_WORDS
+          ? "Start Next New-Word Set"
+          : "Start Next Daily Review";
     return (
       <div className="min-h-screen bg-background flex flex-col items-center justify-center p-4">
         <div className="max-w-md w-full bg-card rounded-3xl p-8 border border-border/50 shadow-2xl text-center">
@@ -156,7 +183,7 @@ export default function QuizPage() {
               <Button
                 variant="secondary"
                 className="w-full h-12 text-lg rounded-xl"
-                onClick={() => setLocation(`/quiz?mode=${QuizModeEnum.WEAK_WORDS}`)}
+                onClick={() => startSession(`/quiz?mode=${QuizModeEnum.WEAK_WORDS}`)}
               >
                 Start Reinforcement Loop ({incorrectCount} missed)
               </Button>
@@ -172,16 +199,16 @@ export default function QuizPage() {
             )}
             <Button
               className="w-full h-12 text-lg rounded-xl shadow-lg shadow-primary/20"
-              onClick={() => setLocation(`/quiz?mode=${recommendedMode}`)}
+              onClick={() => startSession(`/quiz?mode=${recommendedMode}`)}
             >
-              {recommendedMode === QuizModeEnum.WEAK_WORDS ? "Practice Weak Words" : "Start Daily Review"}
+              {recommendedLabel}
             </Button>
             <Button variant="outline" className="w-full h-12 text-lg rounded-xl" onClick={() => setLocation('/')}>
               Back to Dashboard
             </Button>
           </div>
           <p className="text-xs text-muted-foreground mt-3">
-            Next recommendation: {recommendedMode === QuizModeEnum.WEAK_WORDS ? "focus on weak words" : "continue daily review"}.
+            Next recommendation: {recommendedMode === QuizModeEnum.WEAK_WORDS ? "focus on weak words" : recommendedMode === QuizModeEnum.NEW_WORDS ? "continue with new words" : "continue daily review"}.
           </p>
         </div>
       </div>
