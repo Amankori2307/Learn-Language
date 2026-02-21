@@ -8,7 +8,8 @@ Build a text-first language learning app with high data correctness, strong memo
 
 - Phase 4 complete.
 - Phase 6 core hardening complete (`P6-001` to `P6-011`).
-- Active tasks: none.
+- Active tasks:
+  - `P6-028` clusters page list/table redesign with search, filter, sort, pagination
 
 ## Core capabilities live
 
@@ -82,5 +83,5 @@ Build a text-first language learning app with high data correctness, strong memo
 
 ## Immediate next implementation
 
-- Execute in order: select next tasks from `context/plan/61-pronunciation-strategy.md` backlog.
+- Execute in order: `P6-028`, then continue backlog from `context/plan/61-pronunciation-strategy.md`.
 - Latest planning artifact: `context/plan/61-pronunciation-strategy.md`.
