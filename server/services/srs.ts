@@ -6,6 +6,12 @@ export type SrsInput = {
   confidenceLevel: number;
   responseTimeMs?: number;
   now?: Date;
+  config?: {
+    version: string;
+    easeMin: number;
+    easeMax: number;
+    incorrectEasePenalty: number;
+  };
 };
 
 function clamp(value: number, min: number, max: number) {
@@ -38,6 +44,12 @@ function toMasteryLevel(streak: number) {
 export function applySrsUpdate(input: SrsInput): UserWordProgress {
   const now = input.now ?? new Date();
   const next = { ...input.progress };
+  const config = input.config ?? {
+    version: "v1",
+    easeMin: 1.3,
+    easeMax: 3.0,
+    incorrectEasePenalty: 0.2,
+  };
   const quality = computeQuality(input.isCorrect, input.confidenceLevel, input.responseTimeMs);
 
   const currentEase = next.easeFactor ?? 2.5;
@@ -47,7 +59,7 @@ export function applySrsUpdate(input: SrsInput): UserWordProgress {
     next.correctStreak = 0;
     next.wrongCount = (next.wrongCount ?? 0) + 1;
     next.interval = 1;
-    next.easeFactor = clamp(currentEase - 0.2, 1.3, 3.0);
+    next.easeFactor = clamp(currentEase - config.incorrectEasePenalty, config.easeMin, config.easeMax);
   } else {
     next.correctStreak = (next.correctStreak ?? 0) + 1;
 
@@ -55,7 +67,7 @@ export function applySrsUpdate(input: SrsInput): UserWordProgress {
     const updatedEase =
       currentEase +
       (0.1 - (5 - quality) * (0.08 + (5 - quality) * 0.02));
-    next.easeFactor = clamp(updatedEase, 1.3, 3.0);
+    next.easeFactor = clamp(updatedEase, config.easeMin, config.easeMax);
 
     if (next.correctStreak === 1) {
       next.interval = 1;
@@ -67,6 +79,7 @@ export function applySrsUpdate(input: SrsInput): UserWordProgress {
   }
 
   next.masteryLevel = toMasteryLevel(next.correctStreak ?? 0);
+  next.srsConfigVersion = config.version;
   next.lastSeen = now;
 
   const nextReview = new Date(now);

@@ -192,7 +192,7 @@ Deliverable:
 ---
 
 ## P6-009 - SRS config versioning
-Status: `todo`
+Status: `done`
 Depends on: `P6-006`
 
 Scope:
@@ -203,6 +203,15 @@ Scope:
 Acceptance criteria:
 - Scheduling behavior can be traced to a specific config version.
 - Config rollback does not corrupt user progress data.
+
+Deliverable:
+- `shared/schema.ts` (`srs_configs`, `user_word_progress.srs_config_version`)
+- `migrations/0003_srs_config_versioning.sql`
+- `server/services/srs-config.ts`
+- `server/services/srs-config.test.ts`
+- `server/services/srs.ts` (version-aware apply logic)
+- `server/routes.ts` (active-config scheduling path)
+- `server/storage.ts` (`getActiveSrsConfig` fallback)
 
 ---
 

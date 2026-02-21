@@ -22,6 +22,13 @@
       "when": 1771708000000,
       "tag": "0002_review_governance_v2",
       "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1771708600000,
+      "tag": "0003_srs_config_versioning",
+      "breakpoints": true
     }
   ]
 }

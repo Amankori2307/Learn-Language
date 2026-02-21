@@ -12,14 +12,15 @@ import {
 } from "@shared/domain/enums";
 import {
   words, clusters, wordClusters, userWordProgress, quizAttempts, wordExamples, users,
-  wordReviewEvents,
-  type Word, type Cluster, type UserWordProgress, type QuizAttempt,
+  wordReviewEvents, srsConfigs,
+  type Word, type Cluster, type UserWordProgress, type QuizAttempt, type SrsConfig,
   type CreateWordRequest, type CreateClusterRequest
 } from "@shared/schema";
 import { rankQuizCandidates } from "./services/quiz-candidate-scoring";
 import { generateSessionWords, type QuizMode } from "./services/session-generator";
 import { computeStreak, computeXp } from "./services/stats";
 import { computeLeaderboard } from "./services/leaderboard";
+import { type SrsConfigSnapshot, resolveSrsConfig } from "./services/srs-config";
 
 function assertLanguage(value: string): LanguageEnum {
   if (Object.values(LanguageEnum).includes(value as LanguageEnum)) {
@@ -104,6 +105,7 @@ export interface IStorage {
     attempts: number;
     accuracy: number;
   }>>;
+  getActiveSrsConfig(): Promise<SrsConfigSnapshot>;
   getReviewQueue(
     status: ReviewStatusEnum,
     limit?: number,
@@ -511,6 +513,15 @@ export class DatabaseStorage implements IStorage {
       })),
       limit,
     );
+  }
+
+  async getActiveSrsConfig(): Promise<SrsConfigSnapshot> {
+    const [active] = await db
+      .select()
+      .from(srsConfigs)
+      .where(eq(srsConfigs.isActive, true))
+      .limit(1);
+    return resolveSrsConfig((active as SrsConfig | undefined) ?? null);
   }
 
   async getReviewQueue(

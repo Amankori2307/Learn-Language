@@ -9,6 +9,7 @@ const baseProgress = {
   wrongCount: 0,
   easeFactor: 2.5,
   interval: 1,
+  srsConfigVersion: "v1",
   lastSeen: null,
   nextReview: null,
   masteryLevel: 0,
@@ -42,4 +43,5 @@ test("applySrsUpdate increases streak and interval on correct answers", () => {
   assert.equal(updated.correctStreak, 3);
   assert.ok((updated.interval ?? 0) > 6);
   assert.equal(updated.masteryLevel, 2);
+  assert.equal(updated.srsConfigVersion, "v1");
 });

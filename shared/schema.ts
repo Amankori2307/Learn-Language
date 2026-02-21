@@ -109,6 +109,7 @@ export const userWordProgress = pgTable("user_word_progress", {
   wrongCount: integer("wrong_count").default(0),
   easeFactor: real("ease_factor").default(2.5),
   interval: integer("interval").default(1),
+  srsConfigVersion: text("srs_config_version").default("v1").notNull(),
   lastSeen: timestamp("last_seen").defaultNow(),
   nextReview: timestamp("next_review").defaultNow(),
   masteryLevel: integer("mastery_level").default(0),
@@ -116,6 +117,18 @@ export const userWordProgress = pgTable("user_word_progress", {
   pk: primaryKey({ columns: [t.userId, t.wordId] }),
   userReviewIdx: index("user_word_progress_user_review_idx").on(t.userId, t.nextReview),
 }));
+
+export const srsConfigs = pgTable("srs_configs", {
+  version: text("version").primaryKey(),
+  config: jsonb("config").$type<{
+    easeMin: number;
+    easeMax: number;
+    incorrectEasePenalty: number;
+  }>().notNull(),
+  isActive: boolean("is_active").default(false).notNull(),
+  createdBy: varchar("created_by").references(() => users.id),
+  createdAt: timestamp("created_at").defaultNow(),
+});
 
 export const quizAttempts = pgTable("quiz_attempts", {
   id: serial("id").primaryKey(),
@@ -150,6 +163,7 @@ export const wordReviewEvents = pgTable("word_review_events", {
 export const usersRelations = relations(users, ({ many }) => ({
   progress: many(userWordProgress),
   attempts: many(quizAttempts),
+  srsConfigs: many(srsConfigs),
 }));
 
 export const wordsRelations = relations(words, ({ many }) => ({
@@ -172,6 +186,10 @@ export const wordClustersRelations = relations(wordClusters, ({ one }) => ({
 export const userWordProgressRelations = relations(userWordProgress, ({ one }) => ({
   user: one(users, { fields: [userWordProgress.userId], references: [users.id] }),
   word: one(words, { fields: [userWordProgress.wordId], references: [words.id] }),
+}));
+
+export const srsConfigsRelations = relations(srsConfigs, ({ one }) => ({
+  creator: one(users, { fields: [srsConfigs.createdBy], references: [users.id] }),
 }));
 
 export const wordExamplesRelations = relations(wordExamples, ({ one }) => ({
@@ -204,6 +222,7 @@ export type Cluster = typeof clusters.$inferSelect;
 export type UserWordProgress = typeof userWordProgress.$inferSelect;
 export type QuizAttempt = typeof quizAttempts.$inferSelect;
 export type WordReviewEvent = typeof wordReviewEvents.$inferSelect;
+export type SrsConfig = typeof srsConfigs.$inferSelect;
 
 export type CreateWordRequest = z.infer<typeof insertWordSchema>;
 export type CreateClusterRequest = z.infer<typeof insertClusterSchema>;

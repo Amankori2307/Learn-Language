@@ -166,6 +166,7 @@ export async function registerRoutes(
       const firstExample = examples[0];
 
       const isCorrect = input.selectedOptionId === word.id; // Option ID is word ID of the choice
+      const srsConfig = await storage.getActiveSrsConfig();
       
       // SRS Logic
       let progress = await storage.getUserWordProgress(userId, word.id);
@@ -178,6 +179,7 @@ export async function registerRoutes(
           wrongCount: 0,
           easeFactor: 2.5,
           interval: 0,
+          srsConfigVersion: srsConfig.version,
           masteryLevel: 0,
           lastSeen: null,
           nextReview: null,
@@ -191,6 +193,7 @@ export async function registerRoutes(
         confidenceLevel: input.confidenceLevel,
         responseTimeMs: input.responseTimeMs,
         now,
+        config: srsConfig,
       });
 
       await storage.updateUserProgress(progress);
