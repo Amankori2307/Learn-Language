@@ -14,6 +14,9 @@ done
 echo "Installing dependencies..."
 pnpm install --frozen-lockfile
 
+echo "Preparing legacy schema compatibility..."
+pnpm run db:prepare:legacy
+
 echo "Applying database migrations..."
 pnpm run db:migrate
 

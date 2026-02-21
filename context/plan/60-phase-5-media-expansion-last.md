@@ -63,8 +63,23 @@ Scope:
 Acceptance:
 - Predictable operational costs and safe media handling.
 
+### P5-006 - Audio + visual answer feedback effects
+Status: `todo`
+
+Scope:
+- Add short success/failure sound cues for answer submit feedback.
+- Add visual cues:
+  - correct: confetti burst (lightweight, non-intrusive)
+  - incorrect: subtle shake/flash feedback
+- Add a user setting to mute/disable effects.
+- Ensure effects do not block input, navigation, or result rendering.
+
+Acceptance:
+- Correct and incorrect submissions consistently trigger distinct audio+visual feedback.
+- Effects are optional/toggleable and respect reduced-motion or muted preferences.
+- Quiz flow remains smooth even if audio/effects fail to load.
+
 ## Exit criteria
 
 - Core text experience remains fastest path.
 - Media enhances learning but cannot degrade core retention flow.
-
