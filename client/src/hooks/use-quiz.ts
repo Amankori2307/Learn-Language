@@ -1,7 +1,7 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { api, buildUrl } from "@shared/routes";
+import { api } from "@shared/routes";
 import { z } from "zod";
-import { LanguageEnum, QuizModeEnum } from "@shared/domain/enums";
+import { QuizModeEnum } from "@shared/domain/enums";
 import { useLearningLanguage } from "@/hooks/use-language";
 
 // Types derived from API definition
@@ -32,10 +32,14 @@ export function useSubmitAnswer() {
   const { language } = useLearningLanguage();
   return useMutation({
     mutationFn: async (data: QuizSubmitInput) => {
+      const payload = {
+        ...data,
+        language,
+      };
       const res = await fetch(api.quiz.submit.path, {
         method: api.quiz.submit.method,
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
+        body: JSON.stringify(payload),
         credentials: "include",
       });
       

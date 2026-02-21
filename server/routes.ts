@@ -152,7 +152,11 @@ export async function registerRoutes(
       
       const word = await storage.getWord(input.wordId);
       if (!word) return sendError(req, res, 404, "NOT_FOUND", "Word not found");
-      const examples = await storage.getWordExamples(word.id);
+      if (input.language && word.language !== input.language) {
+        return sendError(req, res, 404, "NOT_FOUND", "Word not found in selected language");
+      }
+
+      const examples = await storage.getWordExamples(word.id, input.language ?? undefined);
       const firstExample = examples[0];
 
       const isCorrect = input.selectedOptionId === word.id; // Option ID is word ID of the choice

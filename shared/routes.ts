@@ -118,6 +118,7 @@ export const api = {
       input: z.object({
         wordId: z.number(),
         selectedOptionId: z.number(), // The ID of the word selected as the answer
+        language: z.nativeEnum(LanguageEnum).optional(),
         questionType: z.nativeEnum(QuizQuestionTypeEnum).optional(),
         direction: z.nativeEnum(QuizDirectionEnum).optional(),
         confidenceLevel: z.number().min(1).max(3),

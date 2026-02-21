@@ -68,7 +68,7 @@ Deliverable:
 ---
 
 ## P6-003 - Storage query hardening
-Status: `todo`
+Status: `done`
 Depends on: `P6-001`
 
 Scope:
@@ -79,6 +79,9 @@ Scope:
 Acceptance criteria:
 - Query audit checklist is completed with no unresolved entries.
 - All endpoint handlers pass language through to storage.
+
+Deliverable:
+- `context/plan/94-p6-003-storage-query-audit.md`
 
 ---
 
