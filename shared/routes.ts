@@ -72,7 +72,13 @@ export const api = {
         language: z.nativeEnum(LanguageEnum).optional(),
       }).optional(),
       responses: {
-        200: z.array(z.custom<typeof clusters.$inferSelect>()),
+        200: z.array(z.object({
+          id: z.number(),
+          name: z.string(),
+          type: z.string(),
+          description: z.string().nullable(),
+          wordCount: z.number(),
+        })),
       },
     },
     get: {

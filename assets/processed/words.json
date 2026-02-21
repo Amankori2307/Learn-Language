@@ -16,7 +16,8 @@
     ],
     "clusters": [
       "greetings",
-      "daily-use"
+      "daily-use",
+      "phrases"
     ],
     "source": {
       "type": "model-knowledge",
@@ -41,7 +42,8 @@
     ],
     "clusters": [
       "greetings",
-      "daily-use"
+      "daily-use",
+      "phrases"
     ],
     "source": {
       "type": "model-knowledge",
@@ -66,7 +68,8 @@
     ],
     "clusters": [
       "greetings",
-      "daily-use"
+      "daily-use",
+      "adverbs"
     ],
     "source": {
       "type": "model-knowledge",
@@ -91,7 +94,8 @@
     ],
     "clusters": [
       "greetings",
-      "daily-use"
+      "daily-use",
+      "phrases"
     ],
     "source": {
       "type": "model-knowledge",
@@ -115,7 +119,8 @@
       "high-confidence-basic"
     ],
     "clusters": [
-      "daily-use"
+      "daily-use",
+      "adverbs"
     ],
     "source": {
       "type": "model-knowledge",
@@ -139,7 +144,8 @@
       "high-confidence-basic"
     ],
     "clusters": [
-      "daily-use"
+      "daily-use",
+      "adverbs"
     ],
     "source": {
       "type": "model-knowledge",
@@ -163,7 +169,8 @@
       "high-confidence-basic"
     ],
     "clusters": [
-      "daily-use"
+      "daily-use",
+      "phrases"
     ],
     "source": {
       "type": "model-knowledge",
@@ -187,7 +194,8 @@
       "high-confidence-basic"
     ],
     "clusters": [
-      "daily-use"
+      "daily-use",
+      "phrases"
     ],
     "source": {
       "type": "model-knowledge",
@@ -212,7 +220,8 @@
     ],
     "clusters": [
       "core-grammar",
-      "daily-use"
+      "daily-use",
+      "pronouns"
     ],
     "source": {
       "type": "model-knowledge",
@@ -237,7 +246,8 @@
     ],
     "clusters": [
       "core-grammar",
-      "daily-use"
+      "daily-use",
+      "pronouns"
     ],
     "source": {
       "type": "model-knowledge",
@@ -262,7 +272,8 @@
     ],
     "clusters": [
       "core-grammar",
-      "daily-use"
+      "daily-use",
+      "pronouns"
     ],
     "source": {
       "type": "model-knowledge",
@@ -286,7 +297,8 @@
       "high-confidence-basic"
     ],
     "clusters": [
-      "core-grammar"
+      "core-grammar",
+      "pronouns"
     ],
     "source": {
       "type": "model-knowledge",
@@ -310,7 +322,8 @@
       "high-confidence-basic"
     ],
     "clusters": [
-      "core-grammar"
+      "core-grammar",
+      "pronouns"
     ],
     "source": {
       "type": "model-knowledge",
@@ -334,7 +347,8 @@
       "high-confidence-basic"
     ],
     "clusters": [
-      "core-grammar"
+      "core-grammar",
+      "pronouns"
     ],
     "source": {
       "type": "model-knowledge",
@@ -358,7 +372,8 @@
       "high-confidence-basic"
     ],
     "clusters": [
-      "core-grammar"
+      "core-grammar",
+      "pronouns"
     ],
     "source": {
       "type": "model-knowledge",
@@ -382,7 +397,8 @@
       "high-confidence-basic"
     ],
     "clusters": [
-      "core-grammar"
+      "core-grammar",
+      "pronouns"
     ],
     "source": {
       "type": "model-knowledge",
@@ -406,7 +422,8 @@
       "high-confidence-basic"
     ],
     "clusters": [
-      "core-grammar"
+      "core-grammar",
+      "pronouns"
     ],
     "source": {
       "type": "model-knowledge",
@@ -430,7 +447,8 @@
       "high-confidence-basic"
     ],
     "clusters": [
-      "core-grammar"
+      "core-grammar",
+      "pronouns"
     ],
     "source": {
       "type": "model-knowledge",
@@ -455,7 +473,8 @@
     ],
     "clusters": [
       "question-words",
-      "core-grammar"
+      "core-grammar",
+      "pronouns"
     ],
     "source": {
       "type": "model-knowledge",
@@ -480,7 +499,8 @@
     ],
     "clusters": [
       "question-words",
-      "core-grammar"
+      "core-grammar",
+      "pronouns"
     ],
     "source": {
       "type": "model-knowledge",
@@ -505,7 +525,8 @@
     ],
     "clusters": [
       "question-words",
-      "core-grammar"
+      "core-grammar",
+      "adverbs"
     ],
     "source": {
       "type": "model-knowledge",
@@ -530,7 +551,8 @@
     ],
     "clusters": [
       "question-words",
-      "core-grammar"
+      "core-grammar",
+      "adverbs"
     ],
     "source": {
       "type": "model-knowledge",
@@ -555,7 +577,8 @@
     ],
     "clusters": [
       "question-words",
-      "core-grammar"
+      "core-grammar",
+      "adverbs"
     ],
     "source": {
       "type": "model-knowledge",
@@ -580,7 +603,8 @@
     ],
     "clusters": [
       "question-words",
-      "core-grammar"
+      "core-grammar",
+      "adverbs"
     ],
     "source": {
       "type": "model-knowledge",
@@ -604,7 +628,8 @@
       "high-confidence-basic"
     ],
     "clusters": [
-      "numbers"
+      "numbers",
+      "numerals"
     ],
     "source": {
       "type": "model-knowledge",
@@ -628,7 +653,8 @@
       "high-confidence-basic"
     ],
     "clusters": [
-      "numbers"
+      "numbers",
+      "numerals"
     ],
     "source": {
       "type": "model-knowledge",
@@ -652,7 +678,8 @@
       "high-confidence-basic"
     ],
     "clusters": [
-      "numbers"
+      "numbers",
+      "numerals"
     ],
     "source": {
       "type": "model-knowledge",
@@ -676,7 +703,8 @@
       "high-confidence-basic"
     ],
     "clusters": [
-      "numbers"
+      "numbers",
+      "numerals"
     ],
     "source": {
       "type": "model-knowledge",
@@ -700,7 +728,8 @@
       "high-confidence-basic"
     ],
     "clusters": [
-      "numbers"
+      "numbers",
+      "numerals"
     ],
     "source": {
       "type": "model-knowledge",
@@ -724,7 +753,8 @@
       "high-confidence-basic"
     ],
     "clusters": [
-      "numbers"
+      "numbers",
+      "numerals"
     ],
     "source": {
       "type": "model-knowledge",
@@ -748,7 +778,8 @@
       "high-confidence-basic"
     ],
     "clusters": [
-      "numbers"
+      "numbers",
+      "numerals"
     ],
     "source": {
       "type": "model-knowledge",
@@ -773,7 +804,8 @@
     ],
     "clusters": [
       "time",
-      "daily-use"
+      "daily-use",
+      "nouns"
     ],
     "source": {
       "type": "model-knowledge",
@@ -798,7 +830,8 @@
     ],
     "clusters": [
       "time",
-      "daily-use"
+      "daily-use",
+      "nouns"
     ],
     "source": {
       "type": "model-knowledge",
@@ -823,7 +856,8 @@
     ],
     "clusters": [
       "time",
-      "daily-use"
+      "daily-use",
+      "nouns"
     ],
     "source": {
       "type": "model-knowledge",
@@ -848,7 +882,8 @@
     ],
     "clusters": [
       "time",
-      "daily-use"
+      "daily-use",
+      "adverbs"
     ],
     "source": {
       "type": "model-knowledge",
@@ -873,7 +908,8 @@
     ],
     "clusters": [
       "time",
-      "daily-use"
+      "daily-use",
+      "adverbs"
     ],
     "source": {
       "type": "model-knowledge",
@@ -897,7 +933,8 @@
       "high-confidence-basic"
     ],
     "clusters": [
-      "time"
+      "time",
+      "nouns"
     ],
     "source": {
       "type": "model-knowledge",
@@ -921,7 +958,8 @@
       "high-confidence-basic"
     ],
     "clusters": [
-      "time"
+      "time",
+      "nouns"
     ],
     "source": {
       "type": "model-knowledge",
@@ -945,7 +983,8 @@
       "high-confidence-basic"
     ],
     "clusters": [
-      "time"
+      "time",
+      "nouns"
     ],
     "source": {
       "type": "model-knowledge",
@@ -969,7 +1008,8 @@
       "high-confidence-basic"
     ],
     "clusters": [
-      "time"
+      "time",
+      "nouns"
     ],
     "source": {
       "type": "model-knowledge",
@@ -994,7 +1034,8 @@
     ],
     "clusters": [
       "family",
-      "people"
+      "people",
+      "nouns"
     ],
     "source": {
       "type": "model-knowledge",
@@ -1019,7 +1060,8 @@
     ],
     "clusters": [
       "family",
-      "people"
+      "people",
+      "nouns"
     ],
     "source": {
       "type": "model-knowledge",
@@ -1044,7 +1086,8 @@
     ],
     "clusters": [
       "family",
-      "people"
+      "people",
+      "nouns"
     ],
     "source": {
       "type": "model-knowledge",
@@ -1069,7 +1112,8 @@
     ],
     "clusters": [
       "family",
-      "people"
+      "people",
+      "nouns"
     ],
     "source": {
       "type": "model-knowledge",
@@ -1094,7 +1138,8 @@
     ],
     "clusters": [
       "family",
-      "people"
+      "people",
+      "nouns"
     ],
     "source": {
       "type": "model-knowledge",
@@ -1119,7 +1164,8 @@
     ],
     "clusters": [
       "family",
-      "people"
+      "people",
+      "nouns"
     ],
     "source": {
       "type": "model-knowledge",
@@ -1144,7 +1190,8 @@
     ],
     "clusters": [
       "family",
-      "people"
+      "people",
+      "nouns"
     ],
     "source": {
       "type": "model-knowledge",
@@ -1169,7 +1216,8 @@
     ],
     "clusters": [
       "people",
-      "daily-use"
+      "daily-use",
+      "nouns"
     ],
     "source": {
       "type": "model-knowledge",
@@ -1194,7 +1242,8 @@
     ],
     "clusters": [
       "people",
-      "daily-use"
+      "daily-use",
+      "nouns"
     ],
     "source": {
       "type": "model-knowledge",
@@ -1219,7 +1268,8 @@
     ],
     "clusters": [
       "home",
-      "daily-use"
+      "daily-use",
+      "nouns"
     ],
     "source": {
       "type": "model-knowledge",
@@ -1244,7 +1294,8 @@
     ],
     "clusters": [
       "education",
-      "daily-use"
+      "daily-use",
+      "nouns"
     ],
     "source": {
       "type": "model-knowledge",
@@ -1268,7 +1319,8 @@
       "high-confidence-basic"
     ],
     "clusters": [
-      "education"
+      "education",
+      "nouns"
     ],
     "source": {
       "type": "model-knowledge",
@@ -1293,7 +1345,8 @@
     ],
     "clusters": [
       "food-and-drink",
-      "daily-use"
+      "daily-use",
+      "nouns"
     ],
     "source": {
       "type": "model-knowledge",
@@ -1318,7 +1371,8 @@
     ],
     "clusters": [
       "food-and-drink",
-      "daily-use"
+      "daily-use",
+      "nouns"
     ],
     "source": {
       "type": "model-knowledge",
@@ -1342,7 +1396,8 @@
       "high-confidence-basic"
     ],
     "clusters": [
-      "food-and-drink"
+      "food-and-drink",
+      "nouns"
     ],
     "source": {
       "type": "model-knowledge",
@@ -1367,7 +1422,8 @@
     ],
     "clusters": [
       "travel",
-      "daily-use"
+      "daily-use",
+      "nouns"
     ],
     "source": {
       "type": "model-knowledge",
@@ -1392,7 +1448,8 @@
     ],
     "clusters": [
       "travel",
-      "places"
+      "places",
+      "nouns"
     ],
     "source": {
       "type": "model-knowledge",
@@ -1416,7 +1473,8 @@
       "high-confidence-basic"
     ],
     "clusters": [
-      "places"
+      "places",
+      "nouns"
     ],
     "source": {
       "type": "model-knowledge",
@@ -1440,7 +1498,8 @@
       "high-confidence-basic"
     ],
     "clusters": [
-      "places"
+      "places",
+      "nouns"
     ],
     "source": {
       "type": "model-knowledge",
@@ -1464,7 +1523,8 @@
       "high-confidence-basic"
     ],
     "clusters": [
-      "daily-use"
+      "daily-use",
+      "nouns"
     ],
     "source": {
       "type": "model-knowledge",
@@ -1488,7 +1548,8 @@
       "high-confidence-basic"
     ],
     "clusters": [
-      "daily-use"
+      "daily-use",
+      "nouns"
     ],
     "source": {
       "type": "model-knowledge",
@@ -1513,7 +1574,8 @@
     ],
     "clusters": [
       "education",
-      "daily-use"
+      "daily-use",
+      "nouns"
     ],
     "source": {
       "type": "model-knowledge",
@@ -1537,7 +1599,8 @@
       "high-confidence-basic"
     ],
     "clusters": [
-      "daily-use"
+      "daily-use",
+      "nouns"
     ],
     "source": {
       "type": "model-knowledge",
@@ -1562,7 +1625,8 @@
     ],
     "clusters": [
       "daily-actions",
-      "travel"
+      "travel",
+      "verbs"
     ],
     "source": {
       "type": "model-knowledge",
@@ -1586,7 +1650,8 @@
       "high-confidence-basic"
     ],
     "clusters": [
-      "daily-actions"
+      "daily-actions",
+      "verbs"
     ],
     "source": {
       "type": "model-knowledge",
@@ -1611,7 +1676,8 @@
     ],
     "clusters": [
       "daily-actions",
-      "food-and-drink"
+      "food-and-drink",
+      "verbs"
     ],
     "source": {
       "type": "model-knowledge",
@@ -1636,7 +1702,8 @@
     ],
     "clusters": [
       "daily-actions",
-      "food-and-drink"
+      "food-and-drink",
+      "verbs"
     ],
     "source": {
       "type": "model-knowledge",
@@ -1661,7 +1728,8 @@
     ],
     "clusters": [
       "daily-actions",
-      "education"
+      "education",
+      "verbs"
     ],
     "source": {
       "type": "model-knowledge",
@@ -1686,7 +1754,8 @@
     ],
     "clusters": [
       "daily-actions",
-      "education"
+      "education",
+      "verbs"
     ],
     "source": {
       "type": "model-knowledge",
@@ -1710,7 +1779,8 @@
       "high-confidence-basic"
     ],
     "clusters": [
-      "daily-actions"
+      "daily-actions",
+      "verbs"
     ],
     "source": {
       "type": "model-knowledge",
@@ -1734,7 +1804,8 @@
       "high-confidence-basic"
     ],
     "clusters": [
-      "daily-actions"
+      "daily-actions",
+      "verbs"
     ],
     "source": {
       "type": "model-knowledge",
@@ -1758,7 +1829,8 @@
       "high-confidence-basic"
     ],
     "clusters": [
-      "daily-actions"
+      "daily-actions",
+      "verbs"
     ],
     "source": {
       "type": "model-knowledge",
@@ -1783,7 +1855,8 @@
     ],
     "clusters": [
       "daily-actions",
-      "time"
+      "time",
+      "verbs"
     ],
     "source": {
       "type": "model-knowledge",
@@ -1807,7 +1880,8 @@
       "high-confidence-basic"
     ],
     "clusters": [
-      "daily-actions"
+      "daily-actions",
+      "verbs"
     ],
     "source": {
       "type": "model-knowledge",
@@ -1831,7 +1905,8 @@
       "high-confidence-basic"
     ],
     "clusters": [
-      "daily-actions"
+      "daily-actions",
+      "verbs"
     ],
     "source": {
       "type": "model-knowledge",
@@ -1855,7 +1930,8 @@
       "high-confidence-basic"
     ],
     "clusters": [
-      "daily-actions"
+      "daily-actions",
+      "verbs"
     ],
     "source": {
       "type": "model-knowledge",
@@ -1879,7 +1955,8 @@
       "high-confidence-basic"
     ],
     "clusters": [
-      "daily-actions"
+      "daily-actions",
+      "verbs"
     ],
     "source": {
       "type": "model-knowledge",
@@ -1903,7 +1980,8 @@
       "high-confidence-basic"
     ],
     "clusters": [
-      "daily-actions"
+      "daily-actions",
+      "verbs"
     ],
     "source": {
       "type": "model-knowledge",
@@ -1928,7 +2006,8 @@
     ],
     "clusters": [
       "daily-actions",
-      "core-grammar"
+      "core-grammar",
+      "verbs"
     ],
     "source": {
       "type": "model-knowledge",
@@ -1953,7 +2032,8 @@
     ],
     "clusters": [
       "daily-actions",
-      "education"
+      "education",
+      "verbs"
     ],
     "source": {
       "type": "model-knowledge",
@@ -1978,7 +2058,8 @@
     ],
     "clusters": [
       "descriptions",
-      "daily-use"
+      "daily-use",
+      "adjectives"
     ],
     "source": {
       "type": "model-knowledge",
@@ -2002,7 +2083,8 @@
       "high-confidence-basic"
     ],
     "clusters": [
-      "descriptions"
+      "descriptions",
+      "adjectives"
     ],
     "source": {
       "type": "model-knowledge",
@@ -2026,7 +2108,8 @@
       "high-confidence-basic"
     ],
     "clusters": [
-      "descriptions"
+      "descriptions",
+      "adjectives"
     ],
     "source": {
       "type": "model-knowledge",
@@ -2050,7 +2133,8 @@
       "high-confidence-basic"
     ],
     "clusters": [
-      "descriptions"
+      "descriptions",
+      "adjectives"
     ],
     "source": {
       "type": "model-knowledge",
@@ -2074,7 +2158,8 @@
       "high-confidence-basic"
     ],
     "clusters": [
-      "descriptions"
+      "descriptions",
+      "adjectives"
     ],
     "source": {
       "type": "model-knowledge",
@@ -2098,7 +2183,8 @@
       "high-confidence-basic"
     ],
     "clusters": [
-      "descriptions"
+      "descriptions",
+      "adjectives"
     ],
     "source": {
       "type": "model-knowledge",
@@ -2122,7 +2208,8 @@
       "high-confidence-basic"
     ],
     "clusters": [
-      "daily-use"
+      "daily-use",
+      "adverbs"
     ],
     "source": {
       "type": "model-knowledge",
@@ -2146,7 +2233,8 @@
       "high-confidence-basic"
     ],
     "clusters": [
-      "daily-use"
+      "daily-use",
+      "adverbs"
     ],
     "source": {
       "type": "model-knowledge",
@@ -2170,7 +2258,8 @@
       "high-confidence-basic"
     ],
     "clusters": [
-      "daily-use"
+      "daily-use",
+      "adverbs"
     ],
     "source": {
       "type": "model-knowledge",
@@ -2195,7 +2284,8 @@
     ],
     "clusters": [
       "places",
-      "daily-use"
+      "daily-use",
+      "adverbs"
     ],
     "source": {
       "type": "model-knowledge",
@@ -2220,7 +2310,8 @@
     ],
     "clusters": [
       "places",
-      "daily-use"
+      "daily-use",
+      "adverbs"
     ],
     "source": {
       "type": "model-knowledge",
@@ -2245,7 +2336,8 @@
     ],
     "clusters": [
       "family",
-      "daily-use"
+      "daily-use",
+      "nouns"
     ],
     "source": {
       "type": "model-knowledge",
@@ -2270,7 +2362,8 @@
     ],
     "clusters": [
       "family",
-      "daily-use"
+      "daily-use",
+      "nouns"
     ],
     "source": {
       "type": "model-knowledge",
@@ -2295,7 +2388,8 @@
     ],
     "clusters": [
       "family",
-      "daily-use"
+      "daily-use",
+      "nouns"
     ],
     "source": {
       "type": "model-knowledge",
@@ -2320,7 +2414,8 @@
     ],
     "clusters": [
       "travel",
-      "daily-use"
+      "daily-use",
+      "nouns"
     ],
     "source": {
       "type": "model-knowledge",
@@ -2345,7 +2440,8 @@
     ],
     "clusters": [
       "shopping",
-      "daily-use"
+      "daily-use",
+      "nouns"
     ],
     "source": {
       "type": "model-knowledge",
@@ -2370,7 +2466,8 @@
     ],
     "clusters": [
       "education",
-      "people"
+      "people",
+      "nouns"
     ],
     "source": {
       "type": "model-knowledge",
@@ -2395,7 +2492,8 @@
     ],
     "clusters": [
       "education",
-      "people"
+      "people",
+      "nouns"
     ],
     "source": {
       "type": "model-knowledge",
@@ -2420,7 +2518,8 @@
     ],
     "clusters": [
       "food",
-      "shopping"
+      "shopping",
+      "nouns"
     ],
     "source": {
       "type": "model-knowledge",
@@ -2445,7 +2544,8 @@
     ],
     "clusters": [
       "food",
-      "daily-use"
+      "daily-use",
+      "nouns"
     ],
     "source": {
       "type": "model-knowledge",
@@ -2470,7 +2570,8 @@
     ],
     "clusters": [
       "education",
-      "daily-use"
+      "daily-use",
+      "nouns"
     ],
     "source": {
       "type": "model-knowledge",
@@ -2495,7 +2596,8 @@
     ],
     "clusters": [
       "education",
-      "daily-use"
+      "daily-use",
+      "nouns"
     ],
     "source": {
       "type": "model-knowledge",
@@ -2520,7 +2622,8 @@
     ],
     "clusters": [
       "greetings",
-      "daily-use"
+      "daily-use",
+      "phrases"
     ],
     "source": {
       "type": "model-knowledge",
@@ -2545,7 +2648,8 @@
     ],
     "clusters": [
       "greetings",
-      "daily-use"
+      "daily-use",
+      "phrases"
     ],
     "source": {
       "type": "model-knowledge",
@@ -2570,7 +2674,8 @@
     ],
     "clusters": [
       "greetings",
-      "daily-use"
+      "daily-use",
+      "phrases"
     ],
     "source": {
       "type": "model-knowledge",
@@ -2595,7 +2700,8 @@
     ],
     "clusters": [
       "question-words",
-      "shopping"
+      "shopping",
+      "pronouns"
     ],
     "source": {
       "type": "model-knowledge",
@@ -2620,7 +2726,8 @@
     ],
     "clusters": [
       "travel",
-      "places"
+      "places",
+      "nouns"
     ],
     "source": {
       "type": "model-knowledge",
@@ -2645,7 +2752,8 @@
     ],
     "clusters": [
       "travel",
-      "places"
+      "places",
+      "nouns"
     ],
     "source": {
       "type": "model-knowledge",
@@ -2670,7 +2778,8 @@
     ],
     "clusters": [
       "travel",
-      "places"
+      "places",
+      "adverbs"
     ],
     "source": {
       "type": "model-knowledge",
@@ -2695,7 +2804,8 @@
     ],
     "clusters": [
       "daily-use",
-      "descriptions"
+      "descriptions",
+      "adverbs"
     ],
     "source": {
       "type": "model-knowledge",
@@ -2720,7 +2830,8 @@
     ],
     "clusters": [
       "time",
-      "daily-use"
+      "daily-use",
+      "phrases"
     ],
     "source": {
       "type": "model-knowledge",
@@ -2745,7 +2856,8 @@
     ],
     "clusters": [
       "education",
-      "daily-use"
+      "daily-use",
+      "nouns"
     ],
     "source": {
       "type": "model-knowledge",
@@ -2770,7 +2882,8 @@
     ],
     "clusters": [
       "time",
-      "daily-use"
+      "daily-use",
+      "nouns"
     ],
     "source": {
       "type": "model-knowledge",
@@ -2795,7 +2908,8 @@
     ],
     "clusters": [
       "time",
-      "daily-use"
+      "daily-use",
+      "nouns"
     ],
     "source": {
       "type": "model-knowledge",
@@ -2820,7 +2934,8 @@
     ],
     "clusters": [
       "time",
-      "daily-use"
+      "daily-use",
+      "nouns"
     ],
     "source": {
       "type": "model-knowledge",
@@ -2845,7 +2960,8 @@
     ],
     "clusters": [
       "time",
-      "daily-use"
+      "daily-use",
+      "nouns"
     ],
     "source": {
       "type": "model-knowledge",
@@ -2870,7 +2986,8 @@
     ],
     "clusters": [
       "people",
-      "daily-use"
+      "daily-use",
+      "nouns"
     ],
     "source": {
       "type": "model-knowledge",
@@ -2895,7 +3012,8 @@
     ],
     "clusters": [
       "shopping",
-      "daily-use"
+      "daily-use",
+      "nouns"
     ],
     "source": {
       "type": "model-knowledge",
@@ -2920,7 +3038,8 @@
     ],
     "clusters": [
       "places",
-      "travel"
+      "travel",
+      "adverbs"
     ],
     "source": {
       "type": "model-knowledge",
@@ -2945,7 +3064,8 @@
     ],
     "clusters": [
       "places",
-      "travel"
+      "travel",
+      "adverbs"
     ],
     "source": {
       "type": "model-knowledge",
@@ -2970,7 +3090,8 @@
     ],
     "clusters": [
       "home",
-      "places"
+      "places",
+      "adverbs"
     ],
     "source": {
       "type": "model-knowledge",
@@ -2995,7 +3116,8 @@
     ],
     "clusters": [
       "home",
-      "places"
+      "places",
+      "adverbs"
     ],
     "source": {
       "type": "model-knowledge",
@@ -3020,7 +3142,8 @@
     ],
     "clusters": [
       "time",
-      "daily-use"
+      "daily-use",
+      "adverbs"
     ],
     "source": {
       "type": "model-knowledge",
@@ -3045,7 +3168,8 @@
     ],
     "clusters": [
       "daily-actions",
-      "home"
+      "home",
+      "verbs"
     ],
     "source": {
       "type": "model-knowledge",
@@ -3070,7 +3194,8 @@
     ],
     "clusters": [
       "daily-actions",
-      "home"
+      "home",
+      "verbs"
     ],
     "source": {
       "type": "model-knowledge",
@@ -3095,7 +3220,8 @@
     ],
     "clusters": [
       "daily-actions",
-      "daily-use"
+      "daily-use",
+      "verbs"
     ],
     "source": {
       "type": "model-knowledge",
@@ -3120,7 +3246,8 @@
     ],
     "clusters": [
       "travel",
-      "daily-actions"
+      "daily-actions",
+      "verbs"
     ],
     "source": {
       "type": "model-knowledge",
@@ -3145,7 +3272,8 @@
     ],
     "clusters": [
       "daily-actions",
-      "daily-use"
+      "daily-use",
+      "verbs"
     ],
     "source": {
       "type": "model-knowledge",

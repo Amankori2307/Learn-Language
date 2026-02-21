@@ -15,7 +15,6 @@ Only active and pending tasks are listed here. Completed tasks are intentionally
 
 | ID | Status | Task | Depends On | Effort | Done When |
 |---|---|---|---|---|---|
-| P6-016 | todo | Improve cluster experience: richer cluster catalog and per-cluster word counts in UI/API | P6-015 | M | clusters list includes count badges sourced from backend data, adds missing practical clusters, and learner can see cluster size before starting practice |
 | P6-017 | todo | Upgrade quiz feedback panel to show multiple example sentences (word + pronunciation + meaning for each) | P6-015 | M | post-answer feedback renders multiple linked examples (not single-line only), layout remains readable in light/dark modes, and no Telugu-only sentence is shown without pronunciation/meaning |
 | P6-018 | todo | Add learner analytics module for strengths/gaps by cluster, word, and category | P6-017 | L | dashboard shows top strengths, weak clusters/words, and trend indicators from attempts/progress; insights are language-scoped and backed by API endpoints/tests |
 | P6-019 | todo | Pronunciation strategy decision note (non-implementation): evaluate sources for word/sentence pronunciation quality, cost, and licensing | P6-018 | S | plan doc added with options (manual reviewer text, transliteration rules, TTS fallback), tradeoffs, and recommended phased rollout; no runtime code changes |

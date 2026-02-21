@@ -37,7 +37,7 @@ export interface IStorage {
   getWordsByCluster(clusterId: number, language?: LanguageEnum): Promise<Word[]>;
   createWord(word: CreateWordRequest): Promise<Word>;
   
-  getClusters(language?: LanguageEnum): Promise<Cluster[]>;
+  getClusters(language?: LanguageEnum): Promise<Array<Cluster & { wordCount: number }>>;
   getCluster(id: number, language?: LanguageEnum): Promise<(Cluster & { words: Word[] }) | undefined>;
   createCluster(cluster: CreateClusterRequest): Promise<Cluster>;
   addWordToCluster(wordId: number, clusterId: number): Promise<void>;
@@ -234,24 +234,33 @@ export class DatabaseStorage implements IStorage {
     return newWord;
   }
 
-  async getClusters(language?: LanguageEnum): Promise<Cluster[]> {
-    if (!language) {
-      return await db.select().from(clusters);
-    }
+  async getClusters(language?: LanguageEnum): Promise<Array<Cluster & { wordCount: number }>> {
+    const allClusters = await db.select().from(clusters);
+    const countWhere = language
+      ? and(eq(words.language, language), eq(words.reviewStatus, ReviewStatusEnum.APPROVED))
+      : eq(words.reviewStatus, ReviewStatusEnum.APPROVED);
 
-    const linked = await db
-      .select({ clusterId: wordClusters.clusterId })
+    const counts = await db
+      .select({
+        clusterId: wordClusters.clusterId,
+        count: sql<number>`count(*)`,
+      })
       .from(wordClusters)
       .innerJoin(words, eq(wordClusters.wordId, words.id))
-      .where(and(eq(words.language, language), eq(words.reviewStatus, ReviewStatusEnum.APPROVED)));
+      .where(countWhere)
+      .groupBy(wordClusters.clusterId);
 
-    const clusterIds = new Set(linked.map((row) => row.clusterId));
-    if (clusterIds.size === 0) {
-      return [];
+    const countByClusterId = new Map(counts.map((row) => [row.clusterId, Number(row.count)]));
+    const enriched = allClusters.map((cluster) => ({
+      ...cluster,
+      wordCount: countByClusterId.get(cluster.id) ?? 0,
+    }));
+
+    if (!language) {
+      return enriched;
     }
 
-    const allClusters = await db.select().from(clusters);
-    return allClusters.filter((cluster) => clusterIds.has(cluster.id));
+    return enriched.filter((cluster) => cluster.wordCount > 0);
   }
 
   async getCluster(id: number, language?: LanguageEnum): Promise<(Cluster & { words: Word[] }) | undefined> {

@@ -2,16 +2,33 @@ import { Layout } from "@/components/layout";
 import { useClusters } from "@/hooks/use-clusters";
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
-import { Layers, ArrowRight } from "lucide-react";
+import { Layers, ArrowRight, Hash, BookOpen } from "lucide-react";
 
 export default function ClustersPage() {
   const { data: clusters, isLoading } = useClusters();
+  const sortedClusters = [...(clusters ?? [])].sort((left, right) => right.wordCount - left.wordCount);
+  const totalWords = sortedClusters.reduce((sum, cluster) => sum + cluster.wordCount, 0);
+  const nonEmptyClusters = sortedClusters.filter((cluster) => cluster.wordCount > 0).length;
 
   return (
     <Layout>
       <div className="mb-8">
         <h2 className="text-3xl font-bold">Word Clusters</h2>
-        <p className="text-muted-foreground mt-2">Master related words grouped by topic or grammar.</p>
+        <p className="text-muted-foreground mt-2">
+          Master related words grouped by topic or grammar.
+        </p>
+        {!isLoading && (
+          <div className="mt-4 flex flex-wrap gap-3">
+            <div className="inline-flex items-center gap-2 rounded-lg border border-border/60 bg-card px-3 py-2 text-sm">
+              <Hash className="w-4 h-4" />
+              <span>{nonEmptyClusters} active clusters</span>
+            </div>
+            <div className="inline-flex items-center gap-2 rounded-lg border border-border/60 bg-card px-3 py-2 text-sm">
+              <BookOpen className="w-4 h-4" />
+              <span>{totalWords} linked words</span>
+            </div>
+          </div>
+        )}
       </div>
 
       {isLoading ? (
@@ -22,7 +39,7 @@ export default function ClustersPage() {
         </div>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {clusters?.map((cluster) => (
+          {sortedClusters.map((cluster) => (
             <div 
               key={cluster.id}
               className="bg-card rounded-3xl p-6 border border-border/50 shadow-sm hover:shadow-xl hover:border-primary/20 transition-all duration-300 group"
@@ -37,9 +54,14 @@ export default function ClustersPage() {
               </p>
 
               <div className="flex items-center justify-between mt-auto">
-                <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground bg-secondary px-2 py-1 rounded">
-                  {cluster.type}
-                </span>
+                <div className="flex items-center gap-2">
+                  <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground bg-secondary px-2 py-1 rounded">
+                    {cluster.type}
+                  </span>
+                  <span className="text-xs font-semibold uppercase tracking-wider text-foreground bg-primary/10 px-2 py-1 rounded">
+                    {cluster.wordCount} words
+                  </span>
+                </div>
                 <Link href={`/quiz?mode=cluster&clusterId=${cluster.id}`}>
                   <Button variant="ghost" className="hover:bg-blue-50 hover:text-blue-600 gap-2 group-hover:translate-x-1 transition-transform">
                     Start <ArrowRight className="w-4 h-4" />
