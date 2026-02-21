@@ -15,6 +15,7 @@ Only active and pending tasks are listed here. Completed tasks are intentionally
 
 | ID | Status | Task | Depends On | Effort | Done When |
 |---|---|---|---|---|---|
+| P6-026 | todo | Fix "Start Reinforcement Loop" CTA from quiz completion so it always starts a valid weak-words session | P6-023 | S | clicking reinforcement CTA navigates correctly, loads weak-words quiz items (or explicit non-broken fallback UI), and works after both correct-heavy and incorrect-heavy sessions |
 | P6-024 | todo | Standardize Part of Speech with backend enum and searchable dropdown in vocabulary forms | P6-023 | M | backend uses `PartOfSpeechEnum` for validation/storage contracts, UI uses searchable select (not free-text) in add/review vocab flows, and existing seed/import paths map cleanly to enum values |
 | P6-025 | todo | Standardize Tags with enum-backed selectable options and searchable multi-select (aligned with cluster UX where appropriate) | P6-024 | M | backend validates tags via enum (or controlled registry), UI supports searchable multi-select for tags, tags-vs-clusters distinction is documented/enforced, and invalid free-text tags are blocked |
 | P6-023 | todo | Fix post-session CTA on quiz completion screen: replace stale "Start Daily Review" label with next-step recommendation and ensure CTA route works | P6-022 | S | after finishing daily review, primary CTA text reflects next logical flow (not stale "Start Daily Review"), CTA navigates to a working route/session, and user is never stuck with only "Back to Dashboard" |
