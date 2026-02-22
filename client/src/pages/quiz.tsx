@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { X } from "lucide-react";
 import { Layout } from "@/components/layout";
 import { QuizDirectionEnum, QuizModeEnum, QuizQuestionTypeEnum } from "@shared/domain/enums";
+import { useLearningLanguage } from "@/hooks/use-language";
 
 export default function QuizPage() {
   const [, setLocation] = useLocation();
@@ -16,6 +17,7 @@ export default function QuizPage() {
 
   const { data: questions, isLoading, isError } = useGenerateQuiz(mode, clusterId);
   const submitAnswer = useSubmitAnswer();
+  const { language } = useLearningLanguage();
 
   const [currentIndex, setCurrentIndex] = useState(0);
   const [result, setResult] = useState<any>(null);
@@ -238,6 +240,8 @@ export default function QuizPage() {
         <QuizCard
           question={currentQuestion.questionText}
           pronunciation={currentQuestion.pronunciation}
+          audioUrl={currentQuestion.audioUrl}
+          language={language}
           imageUrl={currentQuestion.imageUrl}
           type={currentQuestion.type}
           options={currentQuestion.options}

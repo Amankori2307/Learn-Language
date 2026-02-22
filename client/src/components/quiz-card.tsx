@@ -3,9 +3,10 @@ import { Button } from "@/components/ui/button";
 import { CheckCircle2, XCircle, Volume2, VolumeX, ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useEffect, useState } from "react";
-import { QuizQuestionTypeEnum } from "@shared/domain/enums";
+import { LanguageEnum, QuizQuestionTypeEnum } from "@shared/domain/enums";
 import { useFeedbackEffects } from "@/hooks/use-feedback-effects";
 import { runErrorEffects, runSuccessEffects } from "@/lib/feedback-effects";
+import { useHybridAudio } from "@/hooks/use-hybrid-audio";
 
 interface QuizOption {
   id: number;
@@ -15,6 +16,8 @@ interface QuizOption {
 interface QuizCardProps {
   question: string;
   pronunciation?: string | null;
+  audioUrl?: string | null;
+  language?: LanguageEnum;
   imageUrl?: string | null;
   type: QuizQuestionTypeEnum;
   options: QuizOption[];
@@ -24,13 +27,14 @@ interface QuizCardProps {
   isSubmitting: boolean;
   result: {
     isCorrect: boolean;
-    correctAnswer: {
-      id?: number;
-      originalScript: string;
-      english: string;
-      transliteration: string;
-      exampleSentences: string[];
-    };
+      correctAnswer: {
+        id?: number;
+        originalScript: string;
+        english: string;
+        transliteration: string;
+        audioUrl?: string | null;
+        exampleSentences: string[];
+      };
     examples: Array<{
       originalScript: string;
       pronunciation: string;
@@ -43,6 +47,8 @@ interface QuizCardProps {
 export function QuizCard({ 
   question, 
   pronunciation,
+  audioUrl,
+  language,
   imageUrl,
   type, 
   options, 
@@ -56,6 +62,7 @@ export function QuizCard({
   const [selectedOption, setSelectedOption] = useState<number | null>(null);
   const [negativeVisualNonce, setNegativeVisualNonce] = useState(0);
   const { enabled: effectsEnabled, toggle: toggleEffects } = useFeedbackEffects();
+  const { activeKey, play } = useHybridAudio();
 
   const cardAnimate =
     result && !result.isCorrect
@@ -136,6 +143,25 @@ export function QuizCard({
                     Pronunciation: <span className="font-semibold text-foreground">{pronunciation}</span>
                   </p>
                 )}
+                <div className="mt-4">
+                  <Button
+                    type="button"
+                    variant="outline"
+                    size="sm"
+                    className="rounded-full gap-2"
+                    onClick={() =>
+                      play({
+                        key: "question-audio",
+                        audioUrl,
+                        text: question,
+                        language,
+                      })
+                    }
+                  >
+                    <Volume2 className="h-4 w-4" />
+                    {activeKey === "question-audio" ? "Stop Audio" : "Listen"}
+                  </Button>
+                </div>
                 {imageUrl && (
                   <div className="mt-5">
                     <img
@@ -265,6 +291,23 @@ export function QuizCard({
                           <span className="mx-2">•</span>
                           <span>{result.correctAnswer.english}</span>
                         </p>
+                        <Button
+                          type="button"
+                          variant="outline"
+                          size="sm"
+                          className="mt-2 rounded-full gap-2"
+                          onClick={() =>
+                            play({
+                              key: "answer-audio",
+                              audioUrl: result.correctAnswer.audioUrl ?? null,
+                              text: result.correctAnswer.originalScript,
+                              language,
+                            })
+                          }
+                        >
+                          <Volume2 className="h-4 w-4" />
+                          {activeKey === "answer-audio" ? "Stop Audio" : "Listen Answer"}
+                        </Button>
                       </div>
                     </div>
 
@@ -275,6 +318,24 @@ export function QuizCard({
                             key={`${example.originalScript}-${index}`}
                             className="p-3 rounded-lg border border-border/70 bg-background/90 dark:bg-background/60 text-sm text-foreground"
                           >
+                            <div className="flex items-center justify-end pb-2">
+                              <Button
+                                type="button"
+                                variant="ghost"
+                                size="sm"
+                                className="h-7 rounded-full gap-1 text-xs"
+                                onClick={() =>
+                                  play({
+                                    key: `example-audio-${index}`,
+                                    text: example.originalScript,
+                                    language,
+                                  })
+                                }
+                              >
+                                <Volume2 className="h-3.5 w-3.5" />
+                                {activeKey === `example-audio-${index}` ? "Stop" : "Listen"}
+                              </Button>
+                            </div>
                             <p className="break-words">
                               <span className="font-semibold">Sentence:</span> {example.originalScript}
                             </p>
