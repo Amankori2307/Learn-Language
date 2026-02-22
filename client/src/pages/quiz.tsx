@@ -31,7 +31,6 @@ export default function QuizPage() {
     setResult(null);
     setSessionStats({ correct: 0, total: 0 });
     setIsFinished(false);
-    setConfidenceLevel(2);
     setQuestionStartedAt(Date.now());
   }, []);
   const startSession = (target: string) => {
@@ -68,7 +67,6 @@ export default function QuizPage() {
 
   const handleNext = () => {
     setResult(null);
-    setConfidenceLevel(2);
     setQuestionStartedAt(Date.now());
     if (questions && currentIndex < questions.length - 1) {
       setCurrentIndex(prev => prev + 1);
