@@ -37,6 +37,20 @@ function isMostlyAscii(value: string): boolean {
   return Array.from(value).every((character) => character.charCodeAt(0) <= 0x7f);
 }
 
+function isQuizAudioEnabled(): boolean {
+  return import.meta.env.VITE_ENABLE_QUIZ_AUDIO !== "false";
+}
+
+type AudioPlaybackMode = "hybrid" | "url_only" | "tts_only";
+
+function getAudioPlaybackMode(): AudioPlaybackMode {
+  const mode = String(import.meta.env.VITE_AUDIO_PLAYBACK_MODE ?? "hybrid").toLowerCase();
+  if (mode === "url_only" || mode === "tts_only") {
+    return mode;
+  }
+  return "hybrid";
+}
+
 export function useHybridAudio() {
   const [activeKey, setActiveKey] = useState<string | null>(null);
   const htmlAudioRef = useRef<HTMLAudioElement | null>(null);
@@ -57,6 +71,11 @@ export function useHybridAudio() {
 
   const play = useCallback(
     async ({ key, audioUrl, text, speechText, language }: IPlayHybridAudioInput): Promise<void> => {
+      if (!isQuizAudioEnabled()) {
+        setActiveKey(null);
+        return;
+      }
+
       if (activeKey === key) {
         stop();
         return;
@@ -64,8 +83,13 @@ export function useHybridAudio() {
 
       stop();
       setActiveKey(key);
+      const playbackMode = getAudioPlaybackMode();
 
       const fallbackToSpeech = () => {
+        if (playbackMode === "url_only") {
+          setActiveKey(null);
+          return;
+        }
         const resolvedSpeechText = (speechText ?? text)?.trim();
         if (!resolvedSpeechText) {
           setActiveKey(null);
@@ -87,7 +111,7 @@ export function useHybridAudio() {
         window.speechSynthesis.speak(utterance);
       };
 
-      if (!audioUrl) {
+      if (playbackMode === "tts_only" || !audioUrl) {
         fallbackToSpeech();
         return;
       }

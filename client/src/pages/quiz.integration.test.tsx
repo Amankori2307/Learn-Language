@@ -7,12 +7,14 @@ import QuizPage from "./quiz";
 
 const setLocation = vi.fn();
 const submitAnswerMock = vi.fn();
+let searchMode: QuizModeEnum = QuizModeEnum.NEW_WORDS;
 const quizDataState = {
   data: [] as Array<{
     wordId: number;
     type: QuizQuestionTypeEnum;
     questionText: string;
     pronunciation: string | null;
+    audioUrl?: string | null;
     imageUrl: string | null;
     options: Array<{ id: number; text: string }>;
   }>,
@@ -20,7 +22,7 @@ const quizDataState = {
 
 vi.mock("wouter", () => ({
   useLocation: () => ["/quiz", setLocation],
-  useSearch: () => `?mode=${QuizModeEnum.NEW_WORDS}`,
+  useSearch: () => `?mode=${searchMode}`,
 }));
 
 vi.mock("@/components/layout", () => ({
@@ -56,13 +58,15 @@ describe("QuizPage integration", () => {
     setLocation.mockReset();
     submitAnswerMock.mockReset();
     quizDataState.data = [];
+    searchMode = QuizModeEnum.NEW_WORDS;
   });
 
-  it("shows revision actions when no questions are available", async () => {
+  it("shows new-word completion copy when new_words queue is empty", async () => {
     const user = userEvent.setup();
     render(<QuizPage />);
 
     expect(screen.getByText("Session Complete")).toBeTruthy();
+    expect(screen.getByText("You finished the current new-word queue.")).toBeTruthy();
     expect(screen.getByRole("button", { name: "Daily Revision" })).toBeTruthy();
     expect(screen.getByRole("button", { name: "Weak Words Drill" })).toBeTruthy();
     expect(screen.getByRole("button", { name: "Practice by Cluster" })).toBeTruthy();
@@ -72,6 +76,28 @@ describe("QuizPage integration", () => {
     expect(setLocation).toHaveBeenCalledWith(`/quiz?mode=${QuizModeEnum.WEAK_WORDS}`);
   });
 
+  it("shows default completion copy when daily review queue is empty", () => {
+    searchMode = QuizModeEnum.DAILY_REVIEW;
+    render(<QuizPage />);
+
+    expect(screen.getByText("Session Complete")).toBeTruthy();
+    expect(screen.getByText("Great job! You've completed all due items for this session.")).toBeTruthy();
+  });
+
+  it.each([
+    QuizModeEnum.DAILY_REVIEW,
+    QuizModeEnum.NEW_WORDS,
+    QuizModeEnum.CLUSTER,
+    QuizModeEnum.WEAK_WORDS,
+    QuizModeEnum.LISTEN_IDENTIFY,
+    QuizModeEnum.COMPLEX_WORKOUT,
+  ])("renders mode shell without crashing for mode=%s when queue is empty", (mode) => {
+    searchMode = mode;
+    render(<QuizPage />);
+    expect(screen.getByText("Session Complete")).toBeTruthy();
+    expect(screen.getByRole("button", { name: "Daily Revision" })).toBeTruthy();
+  });
+
   it("starts reinforcement loop from completion CTA after an incorrect answer", async () => {
     quizDataState.data = [
       {
@@ -79,6 +105,7 @@ describe("QuizPage integration", () => {
         type: QuizQuestionTypeEnum.SOURCE_TO_TARGET,
         questionText: "నమస్తే",
         pronunciation: "namaste",
+        audioUrl: null,
         imageUrl: null,
         options: [
           { id: 11, text: "hello" },

@@ -27,3 +27,11 @@ Only active and pending tasks are listed here. Completed tasks are intentionally
 | P5-001 | done | Add optional audio URL support end-to-end (non-blocking) | P6-013 | M | text flow still works when audio is missing |
 | P5-002 | done | Add optional listen-and-identify quiz mode | P5-001 | M | mode can be enabled/disabled cleanly |
 | P5-003 | done | Add image hints for selected vocabulary groups | P5-001 | M | images lazy-load and degrade gracefully |
+
+## Phase 7 - Runtime reliability and test expansion (active)
+
+| ID | Status | Task | Depends On | Effort | Done When |
+|---|---|---|---|---|---|
+| P7-001 | done | Add explicit `.env` runtime controls for feedback email transport and hybrid quiz audio behavior (local + docker parity) | - | S | `.env` and `docker-compose.yml` include required email/audio runtime keys, server/client read them safely, and app has deterministic behavior when values are missing |
+| P7-002 | doing | Validate all quiz modes end-to-end and close behavior gaps (`daily_review`, `new_words`, `cluster`, `weak_words`, `listen_identify`, `complex_workout`) | P7-001 | M | every mode can start from UI, generate valid question set, submit answers, and complete flow without dead CTAs or broken navigation |
+| P7-003 | todo | Build comprehensive automated testing pyramid (unit + integration + UI + smoke E2E) and wire into single CI gate | P7-002 | L | baseline suites exist per layer, core learning/review/auth/audio/feedback flows are covered, and CI blocks on failures with stable test commands |

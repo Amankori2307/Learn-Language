@@ -1,6 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { generateSessionWords } from "./session-generator";
+import { rankQuizCandidates } from "./quiz-candidate-scoring";
 import { QuizModeEnum } from "@shared/domain/enums";
 
 const now = new Date("2026-02-20T00:00:00.000Z");
@@ -73,6 +74,51 @@ test("weak_words mode prioritizes weak items first", () => {
   assert.deepEqual(
     result.slice(0, 2).map((w: any) => w.id),
     [1, 2],
+  );
+});
+
+test("new_words mode prioritizes unseen words first", () => {
+  const words = [makeWord(1), makeWord(2), makeWord(3), makeWord(4)] as any;
+  const progressMap = new Map<number, any>([
+    [1, makeProgress(1, new Date("2026-03-01T00:00:00.000Z"), 0)],
+    [2, makeProgress(2, new Date("2026-03-01T00:00:00.000Z"), 0)],
+  ]);
+
+  const result = generateSessionWords({
+    mode: QuizModeEnum.NEW_WORDS,
+    count: 2,
+    words,
+    progressMap,
+    now,
+  });
+
+  assert.equal(result.length, 2);
+  assert.deepEqual(
+    result.map((word: any) => word.id).sort((a: number, b: number) => a - b),
+    [3, 4],
+  );
+});
+
+test("cluster mode returns ranked candidates for the provided cluster pool", () => {
+  const words = [makeWord(1), makeWord(2), makeWord(3)] as any;
+  const progressMap = new Map<number, any>([
+    [1, makeProgress(1, new Date("2026-02-18T00:00:00.000Z"), 0)],
+    [2, makeProgress(2, new Date("2026-03-20T00:00:00.000Z"), 3)],
+  ]);
+
+  const result = generateSessionWords({
+    mode: QuizModeEnum.CLUSTER,
+    count: 3,
+    words,
+    progressMap,
+    now,
+  });
+
+  assert.equal(result.length, 3);
+  const expected = rankQuizCandidates(words, progressMap, now).slice(0, 3);
+  assert.deepEqual(
+    result.map((word: any) => word.id),
+    expected.map((word: any) => word.id),
   );
 });
 

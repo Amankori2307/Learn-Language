@@ -8,7 +8,7 @@ Build a text-first language learning app with high data correctness, strong memo
 
 - Phase 4 complete.
 - Phase 6 core hardening complete (`P6-001` to `P6-011`).
-- Active tasks: none.
+- Active tasks: Phase 7 runtime reliability + testing expansion (`P7-001` to `P7-003`).
 
 ## Core capabilities live
 

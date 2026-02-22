@@ -2,9 +2,9 @@
 
 Date: 2026-02-21  
 Session owner: Codex  
-Last completed task ID: P5-003  
-Current in-progress task ID: -  
-Next task ID: -
+Last completed task ID: P7-001  
+Current in-progress task ID: P7-002  
+Next task ID: P7-003
 
 ## Current state
 
@@ -36,4 +36,6 @@ Next task ID: -
 
 ## Immediate next actions
 
-- No active pending tasks in the current registry.
+- Execute `P7-001`: add and enforce runtime `.env` controls for feedback email + hybrid quiz audio.
+- Execute `P7-002`: run full quiz-mode validation and fix discovered flow issues.
+- Execute `P7-003`: expand automated test coverage matrix and wire into single quality gate.
