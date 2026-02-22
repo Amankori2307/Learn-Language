@@ -5,6 +5,7 @@ interface IPlayHybridAudioInput {
   key: string;
   audioUrl?: string | null;
   text?: string | null;
+  speechText?: string | null;
   language?: LanguageEnum | null;
 }
 
@@ -19,9 +20,21 @@ function resolveSpeechLang(inputLanguage?: LanguageEnum | null): string {
       return "ta-IN";
     case LanguageEnum.KANNADA:
       return "kn-IN";
+    case LanguageEnum.MALAYALAM:
+      return "ml-IN";
+    case LanguageEnum.SPANISH:
+      return "es-ES";
+    case LanguageEnum.FRENCH:
+      return "fr-FR";
+    case LanguageEnum.GERMAN:
+      return "de-DE";
     default:
       return "en-US";
   }
+}
+
+function isMostlyAscii(value: string): boolean {
+  return Array.from(value).every((character) => character.charCodeAt(0) <= 0x7f);
 }
 
 export function useHybridAudio() {
@@ -43,7 +56,7 @@ export function useHybridAudio() {
   }, []);
 
   const play = useCallback(
-    async ({ key, audioUrl, text, language }: IPlayHybridAudioInput): Promise<void> => {
+    async ({ key, audioUrl, text, speechText, language }: IPlayHybridAudioInput): Promise<void> => {
       if (activeKey === key) {
         stop();
         return;
@@ -53,8 +66,8 @@ export function useHybridAudio() {
       setActiveKey(key);
 
       const fallbackToSpeech = () => {
-        const speechText = text?.trim();
-        if (!speechText) {
+        const resolvedSpeechText = (speechText ?? text)?.trim();
+        if (!resolvedSpeechText) {
           setActiveKey(null);
           return;
         }
@@ -63,12 +76,14 @@ export function useHybridAudio() {
           return;
         }
 
-        const utterance = new SpeechSynthesisUtterance(speechText);
-        utterance.lang = resolveSpeechLang(language);
+        const utterance = new SpeechSynthesisUtterance(resolvedSpeechText);
+        utterance.lang = isMostlyAscii(resolvedSpeechText) ? "en-US" : resolveSpeechLang(language);
         utterance.rate = 0.95;
         utterance.onend = () => setActiveKey(null);
         utterance.onerror = () => setActiveKey(null);
         utteranceRef.current = utterance;
+        window.speechSynthesis.cancel();
+        window.speechSynthesis.resume();
         window.speechSynthesis.speak(utterance);
       };
 
@@ -79,9 +94,12 @@ export function useHybridAudio() {
 
       try {
         const audio = new Audio(audioUrl);
+        audio.preload = "auto";
+        audio.crossOrigin = "anonymous";
         htmlAudioRef.current = audio;
         audio.onended = () => setActiveKey(null);
         audio.onerror = () => fallbackToSpeech();
+        audio.onabort = () => fallbackToSpeech();
         await audio.play();
       } catch {
         fallbackToSpeech();
@@ -98,4 +116,3 @@ export function useHybridAudio() {
     stop,
   };
 }
-

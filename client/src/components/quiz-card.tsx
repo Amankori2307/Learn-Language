@@ -154,6 +154,7 @@ export function QuizCard({
                         key: "question-audio",
                         audioUrl,
                         text: question,
+                        speechText: pronunciation ?? question,
                         language,
                       })
                     }
@@ -301,6 +302,7 @@ export function QuizCard({
                               key: "answer-audio",
                               audioUrl: result.correctAnswer.audioUrl ?? null,
                               text: result.correctAnswer.originalScript,
+                              speechText: result.correctAnswer.transliteration ?? result.correctAnswer.originalScript,
                               language,
                             })
                           }
@@ -328,6 +330,7 @@ export function QuizCard({
                                   play({
                                     key: `example-audio-${index}`,
                                     text: example.originalScript,
+                                    speechText: example.pronunciation ?? example.originalScript,
                                     language,
                                   })
                                 }
