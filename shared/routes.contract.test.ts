@@ -4,6 +4,7 @@ import { api } from "./routes";
 import {
   LanguageEnum,
   QuizDirectionEnum,
+  QuizModeEnum,
   QuizQuestionTypeEnum,
   ReviewDisagreementStatusEnum,
   ReviewStatusEnum,
@@ -27,6 +28,22 @@ test("quiz generate contract accepts expected payload", () => {
   assert.equal(parsed[0].wordId, 1);
 });
 
+test("quiz generate input accepts all supported quiz modes", () => {
+  const modes = [
+    QuizModeEnum.DAILY_REVIEW,
+    QuizModeEnum.NEW_WORDS,
+    QuizModeEnum.CLUSTER,
+    QuizModeEnum.WEAK_WORDS,
+    QuizModeEnum.LISTEN_IDENTIFY,
+    QuizModeEnum.COMPLEX_WORKOUT,
+  ];
+
+  for (const mode of modes) {
+    const parsed = api.quiz.generate.input.parse({ mode, count: 10, language: LanguageEnum.TELUGU });
+    assert.equal(parsed.mode, mode);
+  }
+});
+
 test("quiz submit contract rejects out-of-range confidence", () => {
   assert.throws(() => {
     api.quiz.submit.input.parse({
@@ -48,7 +65,7 @@ test("quiz submit contract rejects sentence-style question types in words-first 
   });
 });
 
-test("quiz submit response contract requires example triplet", () => {
+test("quiz submit response contract requires examples array with triplet fields", () => {
   const payload = {
     isCorrect: true,
     correctAnswer: {
@@ -74,11 +91,13 @@ test("quiz submit response contract requires example triplet", () => {
       sourceCapturedAt: null,
       createdAt: null,
     },
-    example: {
-      originalScript: "nenu neeru taaganu.",
-      pronunciation: "nenu neeru taagaanu",
-      meaning: "I drank water.",
-    },
+    examples: [
+      {
+        originalScript: "nenu neeru taaganu.",
+        pronunciation: "nenu neeru taagaanu",
+        meaning: "I drank water.",
+      },
+    ],
     progressUpdate: {
       streak: 1,
       masteryLevel: 1,
@@ -87,7 +106,7 @@ test("quiz submit response contract requires example triplet", () => {
   };
 
   const parsed = api.quiz.submit.responses[200].parse(payload);
-  assert.equal(parsed.example.meaning, "I drank water.");
+  assert.equal(parsed.examples[0].meaning, "I drank water.");
 });
 
 test("stats contract accepts direction metrics", () => {
