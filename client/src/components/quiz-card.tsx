@@ -93,7 +93,7 @@ export function QuizCard({
       : "Translate to Source Language";
 
   return (
-    <div className="w-full max-w-2xl mx-auto">
+    <div className="w-full max-w-6xl mx-auto px-2 md:px-4">
       <AnimatePresence mode="wait">
         <motion.div
           key={question}
@@ -101,227 +101,224 @@ export function QuizCard({
           animate={cardAnimate}
           exit={{ opacity: 0, y: -20 }}
           transition={{ duration: 0.3 }}
-          className="relative bg-card rounded-3xl shadow-xl border border-border/50 overflow-hidden"
+          className="relative bg-card/95 backdrop-blur rounded-3xl shadow-2xl border border-border/50 overflow-hidden h-[min(88vh,820px)] flex flex-col"
         >
-          {/* Question Area */}
-          <div className="p-8 md:p-12 text-center bg-gradient-to-b from-primary/5 to-transparent">
-            <span className="inline-block px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-semibold mb-4 uppercase tracking-wider">
-              {promptLabel}
-            </span>
-            
-            <h2 className={cn(
-              "text-3xl md:text-5xl font-bold mb-6 text-foreground leading-relaxed",
-              "font-sans break-words"
-            )}>
-              {question}
-            </h2>
-            {pronunciation && (
-              <p className="text-sm md:text-base text-muted-foreground mb-5">
-                Pronunciation: <span className="font-semibold text-foreground">{pronunciation}</span>
-              </p>
-            )}
-            {imageUrl && (
-              <div className="mb-5 flex justify-center">
-                <img
-                  src={imageUrl}
-                  alt="Vocabulary hint"
-                  className="max-h-44 w-auto rounded-xl border border-border/60 object-contain"
-                  loading="lazy"
-                />
-              </div>
-            )}
-
-            <Button
-              type="button"
-              variant="outline"
-              size="sm"
-              className="rounded-full gap-2"
-              onClick={toggleEffects}
-              aria-label={effectsEnabled ? "Mute feedback effects" : "Unmute feedback effects"}
-            >
-              {effectsEnabled ? <Volume2 className="w-4 h-4" /> : <VolumeX className="w-4 h-4" />}
-              {effectsEnabled ? "Effects On" : "Effects Off"}
-            </Button>
-          </div>
-
-          {/* Options Grid */}
-          <div className="p-6 md:p-8 bg-card">
-            <div className="mb-4">
-              <p className="text-sm font-medium text-muted-foreground mb-2">How confident are you?</p>
-              <div className="flex gap-2" role="radiogroup" aria-label="Answer confidence">
+          <div className="grid grid-cols-1 lg:grid-cols-[1.05fr_1fr] flex-1 min-h-0">
+            <section className="min-h-0 border-b lg:border-b-0 lg:border-r border-border/60 bg-gradient-to-br from-primary/10 via-primary/5 to-transparent p-5 md:p-8 flex flex-col">
+              <div className="flex items-center justify-between gap-3">
+                <span className="inline-flex px-3 py-1 rounded-full bg-primary/15 text-primary text-xs font-semibold uppercase tracking-wider">
+                  {promptLabel}
+                </span>
                 <Button
                   type="button"
-                  variant={confidenceLevel === 1 ? "default" : "outline"}
+                  variant="outline"
                   size="sm"
-                  onClick={() => onConfidenceChange(1)}
-                  aria-pressed={confidenceLevel === 1}
-                  disabled={isSubmitting || !!result}
+                  className="rounded-full gap-2"
+                  onClick={toggleEffects}
+                  aria-label={effectsEnabled ? "Mute feedback effects" : "Unmute feedback effects"}
                 >
-                  Guess
-                </Button>
-                <Button
-                  type="button"
-                  variant={confidenceLevel === 2 ? "default" : "outline"}
-                  size="sm"
-                  onClick={() => onConfidenceChange(2)}
-                  aria-pressed={confidenceLevel === 2}
-                  disabled={isSubmitting || !!result}
-                >
-                  Somewhat Sure
-                </Button>
-                <Button
-                  type="button"
-                  variant={confidenceLevel === 3 ? "default" : "outline"}
-                  size="sm"
-                  onClick={() => onConfidenceChange(3)}
-                  aria-pressed={confidenceLevel === 3}
-                  disabled={isSubmitting || !!result}
-                >
-                  Very Sure
+                  {effectsEnabled ? <Volume2 className="w-4 h-4" /> : <VolumeX className="w-4 h-4" />}
+                  {effectsEnabled ? "Effects On" : "Effects Off"}
                 </Button>
               </div>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {options.map((option) => {
-                const isSelected = selectedOption === option.id;
-                const correctOptionId = result?.correctAnswer?.id;
-                const isCorrectOption = result
-                  ? (typeof correctOptionId === "number"
-                      ? option.id === correctOptionId
-                      : option.text === result.correctAnswer.english)
-                  : false;
-                let className = "hover:border-primary hover:bg-primary/5";
 
-                if (result) {
-                  if (isCorrectOption) {
-                    className = "border-emerald-500 bg-emerald-500/12 text-emerald-900 dark:text-emerald-200 ring-2 ring-emerald-500/60 ring-offset-2 ring-offset-background";
-                  } else if (!result.isCorrect && isSelected) {
-                    className = "border-rose-500 bg-rose-500/12 text-rose-900 dark:text-rose-200 ring-2 ring-rose-500/60 ring-offset-2 ring-offset-background";
-                  } else {
-                    className = "opacity-70";
-                  }
-                } else if (isSelected) {
-                  className = "border-primary bg-primary/10 text-primary ring-2 ring-primary ring-offset-2";
-                }
-
-                return (
-                  <button
-                    key={option.id}
-                    disabled={!!result || isSubmitting}
-                    onClick={() => handleOptionClick(option.id)}
-                    aria-label={`Option ${option.text}`}
-                      className={cn(
-                        "p-4 rounded-xl text-base md:text-lg font-medium border-2 transition-all duration-200 text-left relative overflow-hidden group break-words",
-                        type !== QuizQuestionTypeEnum.SOURCE_TO_TARGET && "text-xl",
-                        className
-                      )}
-                  >
-                    <span className="relative z-10">{option.text}</span>
-                    {isSelected && isSubmitting && (
-                      <div className="absolute inset-0 bg-white/20 animate-pulse" />
-                    )}
-                  </button>
-                );
-              })}
-            </div>
-          </div>
-
-          {/* Result Feedback & Next Button */}
-          <AnimatePresence>
-            {result && (
-              <motion.div
-                initial={{ height: 0, opacity: 0 }}
-                animate={{ height: "auto", opacity: 1 }}
-                exit={{ height: 0, opacity: 0 }}
-                aria-live="polite"
-                className={cn(
-                  "border-t p-6 md:p-8",
-                  result.isCorrect
-                    ? "bg-emerald-50/80 border-emerald-200 dark:bg-emerald-950/30 dark:border-emerald-800/70"
-                    : "bg-rose-50/80 border-rose-200 dark:bg-rose-950/30 dark:border-rose-800/70"
+              <div className="mt-5 min-h-0 overflow-y-auto pr-1">
+                <h2
+                  className={cn(
+                    "font-bold text-foreground break-words leading-tight",
+                    type === QuizQuestionTypeEnum.SOURCE_TO_TARGET ? "text-4xl md:text-5xl" : "text-3xl md:text-4xl",
+                  )}
+                >
+                  {question}
+                </h2>
+                {pronunciation && (
+                  <p className="text-sm md:text-base text-muted-foreground mt-4 break-words">
+                    Pronunciation: <span className="font-semibold text-foreground">{pronunciation}</span>
+                  </p>
                 )}
-              >
-                {result && !result.isCorrect && (
-                  <motion.div
-                    key={negativeVisualNonce}
-                    initial={{ opacity: 0.18 }}
-                    animate={{ opacity: 0 }}
-                    transition={{ duration: 0.45, ease: "easeOut" }}
-                    className="pointer-events-none absolute inset-0 bg-rose-500/20"
-                  />
-                )}
-                <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 min-w-0">
-                  <div className="flex gap-4 min-w-0">
-                    <div className={cn(
-                      "p-3 rounded-full shrink-0",
-                      result.isCorrect
-                        ? "bg-emerald-100 text-emerald-700 dark:bg-emerald-900/60 dark:text-emerald-300"
-                        : "bg-rose-100 text-rose-700 dark:bg-rose-900/60 dark:text-rose-300"
-                    )}>
-                      {result.isCorrect ? <CheckCircle2 className="w-6 h-6" /> : <XCircle className="w-6 h-6" />}
-                    </div>
-                    <div className="min-w-0">
-                      <h4 className={cn(
-                        "text-lg font-bold",
-                        result.isCorrect ? "text-emerald-800 dark:text-emerald-300" : "text-rose-800 dark:text-rose-300"
-                      )}>
-                        {result.isCorrect ? "Excellent!" : "Not quite right"}
-                      </h4>
-                      <p className="text-sm md:text-base text-foreground/90 dark:text-foreground mt-1 break-words">
-                        <span className="italic break-words">{result.correctAnswer.transliteration}</span>
-                        <span className="mx-2">•</span>
-                        <span className="font-semibold text-foreground">({result.correctAnswer.originalScript})</span>
-                        <span className="mx-2">•</span>
-                        <span>{result.correctAnswer.english}</span>
-                      </p>
-                      {result.examples.length > 0 && (
-                        <div className="text-sm mt-3 space-y-2 max-h-64 overflow-y-auto pr-1">
-                          {result.examples.map((example, index) => (
-                            <div
-                              key={`${example.originalScript}-${index}`}
-                              className="p-3 rounded-lg border border-border/70 bg-background/90 dark:bg-background/60 text-foreground"
-                            >
-                              <p className="break-words">
-                                <span className="font-semibold">Sentence:</span>{" "}
-                                <span className="font-originalScript text-foreground/95">
-                                  {example.originalScript}
-                                </span>
-                              </p>
-                              <p className="break-words">
-                                <span className="font-semibold">Pronunciation:</span>{" "}
-                                <span className="font-medium text-foreground/95">
-                                  {example.pronunciation}
-                                </span>
-                              </p>
-                              <p className="break-words">
-                                <span className="font-semibold">Meaning:</span>{" "}
-                                <span className="font-medium text-foreground/95">
-                                  {example.meaning}
-                                </span>
-                              </p>
-                            </div>
-                          ))}
-                        </div>
-                      )}
-                    </div>
+                {imageUrl && (
+                  <div className="mt-5">
+                    <img
+                      src={imageUrl}
+                      alt="Vocabulary hint"
+                      className="max-h-64 w-full rounded-xl border border-border/60 object-contain bg-background/70"
+                      loading="lazy"
+                    />
                   </div>
-                  
-                  <Button 
-                    size="lg" 
+                )}
+              </div>
+            </section>
+
+            <section className="min-h-0 p-5 md:p-8 grid grid-rows-[auto_minmax(0,1fr)_auto] gap-4">
+              <div>
+                <p className="text-sm font-medium text-muted-foreground mb-2">How confident are you?</p>
+                <div className="flex flex-wrap gap-2" role="radiogroup" aria-label="Answer confidence">
+                  <Button
+                    type="button"
+                    variant={confidenceLevel === 1 ? "default" : "outline"}
+                    size="sm"
+                    onClick={() => onConfidenceChange(1)}
+                    aria-pressed={confidenceLevel === 1}
+                    disabled={isSubmitting || Boolean(result)}
+                  >
+                    Guess
+                  </Button>
+                  <Button
+                    type="button"
+                    variant={confidenceLevel === 2 ? "default" : "outline"}
+                    size="sm"
+                    onClick={() => onConfidenceChange(2)}
+                    aria-pressed={confidenceLevel === 2}
+                    disabled={isSubmitting || Boolean(result)}
+                  >
+                    Somewhat Sure
+                  </Button>
+                  <Button
+                    type="button"
+                    variant={confidenceLevel === 3 ? "default" : "outline"}
+                    size="sm"
+                    onClick={() => onConfidenceChange(3)}
+                    aria-pressed={confidenceLevel === 3}
+                    disabled={isSubmitting || Boolean(result)}
+                  >
+                    Very Sure
+                  </Button>
+                </div>
+              </div>
+
+              {!result ? (
+                <div className="min-h-0 overflow-y-auto pr-1">
+                  <div className="grid grid-cols-1 gap-3">
+                    {options.map((option) => {
+                      const isSelected = selectedOption === option.id;
+                      const className = isSelected
+                        ? "border-primary bg-primary/10 text-primary ring-2 ring-primary ring-offset-2"
+                        : "hover:border-primary hover:bg-primary/5";
+
+                      return (
+                        <button
+                          key={option.id}
+                          disabled={isSubmitting}
+                          onClick={() => handleOptionClick(option.id)}
+                          aria-label={`Option ${option.text}`}
+                          className={cn(
+                            "p-4 rounded-xl text-base md:text-lg font-medium border-2 transition-all duration-200 text-left relative overflow-hidden break-words",
+                            type !== QuizQuestionTypeEnum.SOURCE_TO_TARGET && "text-xl",
+                            className,
+                          )}
+                        >
+                          <span className="relative z-10">{option.text}</span>
+                          {isSelected && isSubmitting && <div className="absolute inset-0 bg-white/20 animate-pulse" />}
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+              ) : (
+                <AnimatePresence>
+                  <motion.div
+                    initial={{ opacity: 0, y: 8 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -8 }}
+                    aria-live="polite"
+                    className={cn(
+                      "relative rounded-2xl border p-4 md:p-5 min-h-0 overflow-hidden grid grid-rows-[auto_minmax(0,1fr)]",
+                      result.isCorrect
+                        ? "bg-emerald-50/80 border-emerald-200 dark:bg-emerald-950/30 dark:border-emerald-800/70"
+                        : "bg-rose-50/80 border-rose-200 dark:bg-rose-950/30 dark:border-rose-800/70",
+                    )}
+                  >
+                    {!result.isCorrect && (
+                      <motion.div
+                        key={negativeVisualNonce}
+                        initial={{ opacity: 0.18 }}
+                        animate={{ opacity: 0 }}
+                        transition={{ duration: 0.45, ease: "easeOut" }}
+                        className="pointer-events-none absolute inset-0 bg-rose-500/20"
+                      />
+                    )}
+
+                    <div className="flex items-start gap-3 mb-3">
+                      <div
+                        className={cn(
+                          "p-2 rounded-full shrink-0",
+                          result.isCorrect
+                            ? "bg-emerald-100 text-emerald-700 dark:bg-emerald-900/60 dark:text-emerald-300"
+                            : "bg-rose-100 text-rose-700 dark:bg-rose-900/60 dark:text-rose-300",
+                        )}
+                      >
+                        {result.isCorrect ? <CheckCircle2 className="w-5 h-5" /> : <XCircle className="w-5 h-5" />}
+                      </div>
+                      <div className="min-w-0">
+                        <h4
+                          className={cn(
+                            "text-lg font-bold",
+                            result.isCorrect ? "text-emerald-800 dark:text-emerald-300" : "text-rose-800 dark:text-rose-300",
+                          )}
+                        >
+                          {result.isCorrect ? "Excellent!" : "Not quite right"}
+                        </h4>
+                        <p className="text-sm text-foreground/90 dark:text-foreground mt-1 break-words">
+                          <span className="italic">{result.correctAnswer.transliteration}</span>
+                          <span className="mx-2">•</span>
+                          <span className="font-semibold">({result.correctAnswer.originalScript})</span>
+                          <span className="mx-2">•</span>
+                          <span>{result.correctAnswer.english}</span>
+                        </p>
+                      </div>
+                    </div>
+
+                    {result.examples.length > 0 ? (
+                      <div className="space-y-2 overflow-y-auto pr-1 min-h-0">
+                        {result.examples.map((example, index) => (
+                          <div
+                            key={`${example.originalScript}-${index}`}
+                            className="p-3 rounded-lg border border-border/70 bg-background/90 dark:bg-background/60 text-sm text-foreground"
+                          >
+                            <p className="break-words">
+                              <span className="font-semibold">Sentence:</span> {example.originalScript}
+                            </p>
+                            <p className="break-words">
+                              <span className="font-semibold">Pronunciation:</span> {example.pronunciation}
+                            </p>
+                            <p className="break-words">
+                              <span className="font-semibold">Meaning:</span> {example.meaning}
+                            </p>
+                          </div>
+                        ))}
+                      </div>
+                    ) : (
+                      <div className="text-sm text-muted-foreground">No examples available for this item yet.</div>
+                    )}
+                  </motion.div>
+                </AnimatePresence>
+              )}
+
+              <div className="pt-2 border-t border-border/60">
+                {result ? (
+                  <Button
+                    size="lg"
                     onClick={onNext}
                     className={cn(
-                      "w-full md:w-auto shrink-0 gap-2 shadow-lg hover:shadow-xl transition-all",
-                      result.isCorrect 
-                        ? "bg-green-600 hover:bg-green-700 text-white shadow-green-200" 
-                        : "bg-primary hover:bg-primary/90 shadow-primary/20"
+                      "w-full gap-2 shadow-lg hover:shadow-xl transition-all",
+                      result.isCorrect
+                        ? "bg-green-600 hover:bg-green-700 text-white shadow-green-200"
+                        : "bg-primary hover:bg-primary/90 shadow-primary/20",
                     )}
                   >
                     Continue <ArrowRight className="w-4 h-4" />
                   </Button>
-                </div>
-              </motion.div>
-            )}
-          </AnimatePresence>
+                ) : (
+                  <p className="text-xs text-muted-foreground text-center">Choose an option to view feedback and examples.</p>
+                )}
+              </div>
+            </section>
+          </div>
+
+          {/* Hidden visual state container for accessibility continuity */}
+          <div className="sr-only" aria-hidden={!result}>
+            {result ? "Answer evaluated" : "Awaiting answer"}
+          </div>
         </motion.div>
       </AnimatePresence>
     </div>

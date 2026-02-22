@@ -1406,5 +1406,3589 @@
     "wordRefs": [
       "telugu::aapu::stop"
     ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "నమస్తే అనే పదాన్ని నేర్చుకుంటున్నాను.",
+    "pronunciation": "namaste ane padaanni nerchukuntunnanu.",
+    "english": "I am learning the word \"hello\".",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::namaste::hello"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "రోజూ నేను నమస్తే అనే పదాన్ని వాడుతాను.",
+    "pronunciation": "roju nenu namaste ane padaanni vaadutanu.",
+    "english": "I use the word \"hello\" every day.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::namaste::hello"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "ధన్యవాదాలు అనే పదాన్ని నేర్చుకుంటున్నాను.",
+    "pronunciation": "dhanyavaadalu ane padaanni nerchukuntunnanu.",
+    "english": "I am learning the word \"thank you\".",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::dhanyavaadalu::thank you"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "రోజూ నేను ధన్యవాదాలు అనే పదాన్ని వాడుతాను.",
+    "pronunciation": "roju nenu dhanyavaadalu ane padaanni vaadutanu.",
+    "english": "I use the word \"thank you\" every day.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::dhanyavaadalu::thank you"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "దయచేసి అనే పదాన్ని నేర్చుకుంటున్నాను.",
+    "pronunciation": "dayachesi ane padaanni nerchukuntunnanu.",
+    "english": "I am learning the word \"please\".",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::dayachesi::please"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "రోజూ నేను దయచేసి అనే పదాన్ని వాడుతాను.",
+    "pronunciation": "roju nenu dayachesi ane padaanni vaadutanu.",
+    "english": "I use the word \"please\" every day.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::dayachesi::please"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "క్షమించండి అనే పదాన్ని నేర్చుకుంటున్నాను.",
+    "pronunciation": "kshaminchandi ane padaanni nerchukuntunnanu.",
+    "english": "I am learning the word \"sorry / excuse me\".",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::kshaminchandi::sorry / excuse me"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "రోజూ నేను క్షమించండి అనే పదాన్ని వాడుతాను.",
+    "pronunciation": "roju nenu kshaminchandi ane padaanni vaadutanu.",
+    "english": "I use the word \"sorry / excuse me\" every day.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::kshaminchandi::sorry / excuse me"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "అవును అనే పదాన్ని నేర్చుకుంటున్నాను.",
+    "pronunciation": "avunu ane padaanni nerchukuntunnanu.",
+    "english": "I am learning the word \"yes\".",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::avunu::yes"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "రోజూ నేను అవును అనే పదాన్ని వాడుతాను.",
+    "pronunciation": "roju nenu avunu ane padaanni vaadutanu.",
+    "english": "I use the word \"yes\" every day.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::avunu::yes"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "కాదు అనే పదాన్ని నేర్చుకుంటున్నాను.",
+    "pronunciation": "kaadu ane padaanni nerchukuntunnanu.",
+    "english": "I am learning the word \"no / not\".",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::kaadu::no / not"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "రోజూ నేను కాదు అనే పదాన్ని వాడుతాను.",
+    "pronunciation": "roju nenu kaadu ane padaanni vaadutanu.",
+    "english": "I use the word \"no / not\" every day.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::kaadu::no / not"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "సరే అనే పదాన్ని నేర్చుకుంటున్నాను.",
+    "pronunciation": "sare ane padaanni nerchukuntunnanu.",
+    "english": "I am learning the word \"okay\".",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::sare::okay"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "రోజూ నేను సరే అనే పదాన్ని వాడుతాను.",
+    "pronunciation": "roju nenu sare ane padaanni vaadutanu.",
+    "english": "I use the word \"okay\" every day.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::sare::okay"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "బాగుంది అనే పదాన్ని నేర్చుకుంటున్నాను.",
+    "pronunciation": "bagundi ane padaanni nerchukuntunnanu.",
+    "english": "I am learning the word \"it is good\".",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::bagundi::it is good"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "రోజూ నేను బాగుంది అనే పదాన్ని వాడుతాను.",
+    "pronunciation": "roju nenu bagundi ane padaanni vaadutanu.",
+    "english": "I use the word \"it is good\" every day.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::bagundi::it is good"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "నేను అనే పదాన్ని నేర్చుకుంటున్నాను.",
+    "pronunciation": "nenu ane padaanni nerchukuntunnanu.",
+    "english": "I am learning the word \"I\".",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::nenu::i"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "రోజూ నేను నేను అనే పదాన్ని వాడుతాను.",
+    "pronunciation": "roju nenu nenu ane padaanni vaadutanu.",
+    "english": "I use the word \"I\" every day.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::nenu::i"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "నువ్వు అనే పదాన్ని నేర్చుకుంటున్నాను.",
+    "pronunciation": "nuvvu ane padaanni nerchukuntunnanu.",
+    "english": "I am learning the word \"you (informal)\".",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::nuvvu::you (informal)"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "రోజూ నేను నువ్వు అనే పదాన్ని వాడుతాను.",
+    "pronunciation": "roju nenu nuvvu ane padaanni vaadutanu.",
+    "english": "I use the word \"you (informal)\" every day.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::nuvvu::you (informal)"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "మీరు అనే పదాన్ని నేర్చుకుంటున్నాను.",
+    "pronunciation": "meeru ane padaanni nerchukuntunnanu.",
+    "english": "I am learning the word \"you (formal/plural)\".",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::meeru::you (formal/plural)"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "రోజూ నేను మీరు అనే పదాన్ని వాడుతాను.",
+    "pronunciation": "roju nenu meeru ane padaanni vaadutanu.",
+    "english": "I use the word \"you (formal/plural)\" every day.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::meeru::you (formal/plural)"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "అతను అనే పదాన్ని నేర్చుకుంటున్నాను.",
+    "pronunciation": "atanu ane padaanni nerchukuntunnanu.",
+    "english": "I am learning the word \"he\".",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::atanu::he"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "రోజూ నేను అతను అనే పదాన్ని వాడుతాను.",
+    "pronunciation": "roju nenu atanu ane padaanni vaadutanu.",
+    "english": "I use the word \"he\" every day.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::atanu::he"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "ఆమె అనే పదాన్ని నేర్చుకుంటున్నాను.",
+    "pronunciation": "aame ane padaanni nerchukuntunnanu.",
+    "english": "I am learning the word \"she\".",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::aame::she"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "రోజూ నేను ఆమె అనే పదాన్ని వాడుతాను.",
+    "pronunciation": "roju nenu aame ane padaanni vaadutanu.",
+    "english": "I use the word \"she\" every day.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::aame::she"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "ఇది అనే పదాన్ని నేర్చుకుంటున్నాను.",
+    "pronunciation": "idi ane padaanni nerchukuntunnanu.",
+    "english": "I am learning the word \"this\".",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::idi::this"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "రోజూ నేను ఇది అనే పదాన్ని వాడుతాను.",
+    "pronunciation": "roju nenu idi ane padaanni vaadutanu.",
+    "english": "I use the word \"this\" every day.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::idi::this"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "అది అనే పదాన్ని నేర్చుకుంటున్నాను.",
+    "pronunciation": "adi ane padaanni nerchukuntunnanu.",
+    "english": "I am learning the word \"that\".",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::adi::that"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "రోజూ నేను అది అనే పదాన్ని వాడుతాను.",
+    "pronunciation": "roju nenu adi ane padaanni vaadutanu.",
+    "english": "I use the word \"that\" every day.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::adi::that"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "మనం అనే పదాన్ని నేర్చుకుంటున్నాను.",
+    "pronunciation": "manam ane padaanni nerchukuntunnanu.",
+    "english": "I am learning the word \"we (inclusive)\".",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::manam::we (inclusive)"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "రోజూ నేను మనం అనే పదాన్ని వాడుతాను.",
+    "pronunciation": "roju nenu manam ane padaanni vaadutanu.",
+    "english": "I use the word \"we (inclusive)\" every day.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::manam::we (inclusive)"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "మేము అనే పదాన్ని నేర్చుకుంటున్నాను.",
+    "pronunciation": "memu ane padaanni nerchukuntunnanu.",
+    "english": "I am learning the word \"we (exclusive)\".",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::memu::we (exclusive)"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "రోజూ నేను మేము అనే పదాన్ని వాడుతాను.",
+    "pronunciation": "roju nenu memu ane padaanni vaadutanu.",
+    "english": "I use the word \"we (exclusive)\" every day.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::memu::we (exclusive)"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "వాళ్లు అనే పదాన్ని నేర్చుకుంటున్నాను.",
+    "pronunciation": "vaallu ane padaanni nerchukuntunnanu.",
+    "english": "I am learning the word \"they\".",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::vaallu::they"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "రోజూ నేను వాళ్లు అనే పదాన్ని వాడుతాను.",
+    "pronunciation": "roju nenu vaallu ane padaanni vaadutanu.",
+    "english": "I use the word \"they\" every day.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::vaallu::they"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "ఏమి అనే పదాన్ని నేర్చుకుంటున్నాను.",
+    "pronunciation": "emi ane padaanni nerchukuntunnanu.",
+    "english": "I am learning the word \"what\".",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::emi::what"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "రోజూ నేను ఏమి అనే పదాన్ని వాడుతాను.",
+    "pronunciation": "roju nenu emi ane padaanni vaadutanu.",
+    "english": "I use the word \"what\" every day.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::emi::what"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "ఎవరు అనే పదాన్ని నేర్చుకుంటున్నాను.",
+    "pronunciation": "evaru ane padaanni nerchukuntunnanu.",
+    "english": "I am learning the word \"who\".",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::evaru::who"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "రోజూ నేను ఎవరు అనే పదాన్ని వాడుతాను.",
+    "pronunciation": "roju nenu evaru ane padaanni vaadutanu.",
+    "english": "I use the word \"who\" every day.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::evaru::who"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "ఎక్కడ అనే పదాన్ని నేర్చుకుంటున్నాను.",
+    "pronunciation": "ekkada ane padaanni nerchukuntunnanu.",
+    "english": "I am learning the word \"where\".",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::ekkada::where"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "రోజూ నేను ఎక్కడ అనే పదాన్ని వాడుతాను.",
+    "pronunciation": "roju nenu ekkada ane padaanni vaadutanu.",
+    "english": "I use the word \"where\" every day.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::ekkada::where"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "ఎప్పుడు అనే పదాన్ని నేర్చుకుంటున్నాను.",
+    "pronunciation": "eppudu ane padaanni nerchukuntunnanu.",
+    "english": "I am learning the word \"when\".",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::eppudu::when"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "రోజూ నేను ఎప్పుడు అనే పదాన్ని వాడుతాను.",
+    "pronunciation": "roju nenu eppudu ane padaanni vaadutanu.",
+    "english": "I use the word \"when\" every day.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::eppudu::when"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "ఎలా అనే పదాన్ని నేర్చుకుంటున్నాను.",
+    "pronunciation": "ela ane padaanni nerchukuntunnanu.",
+    "english": "I am learning the word \"how\".",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::ela::how"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "రోజూ నేను ఎలా అనే పదాన్ని వాడుతాను.",
+    "pronunciation": "roju nenu ela ane padaanni vaadutanu.",
+    "english": "I use the word \"how\" every day.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::ela::how"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "ఎందుకు అనే పదాన్ని నేర్చుకుంటున్నాను.",
+    "pronunciation": "enduku ane padaanni nerchukuntunnanu.",
+    "english": "I am learning the word \"why\".",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::enduku::why"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "రోజూ నేను ఎందుకు అనే పదాన్ని వాడుతాను.",
+    "pronunciation": "roju nenu enduku ane padaanni vaadutanu.",
+    "english": "I use the word \"why\" every day.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::enduku::why"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "ఒకటి అనే పదాన్ని నేర్చుకుంటున్నాను.",
+    "pronunciation": "okati ane padaanni nerchukuntunnanu.",
+    "english": "I am learning the word \"one\".",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::okati::one"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "రోజూ నేను ఒకటి అనే పదాన్ని వాడుతాను.",
+    "pronunciation": "roju nenu okati ane padaanni vaadutanu.",
+    "english": "I use the word \"one\" every day.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::okati::one"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "రెండు అనే పదాన్ని నేర్చుకుంటున్నాను.",
+    "pronunciation": "rendu ane padaanni nerchukuntunnanu.",
+    "english": "I am learning the word \"two\".",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::rendu::two"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "రోజూ నేను రెండు అనే పదాన్ని వాడుతాను.",
+    "pronunciation": "roju nenu rendu ane padaanni vaadutanu.",
+    "english": "I use the word \"two\" every day.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::rendu::two"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "మూడు అనే పదాన్ని నేర్చుకుంటున్నాను.",
+    "pronunciation": "moodu ane padaanni nerchukuntunnanu.",
+    "english": "I am learning the word \"three\".",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::moodu::three"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "రోజూ నేను మూడు అనే పదాన్ని వాడుతాను.",
+    "pronunciation": "roju nenu moodu ane padaanni vaadutanu.",
+    "english": "I use the word \"three\" every day.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::moodu::three"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "నాలుగు అనే పదాన్ని నేర్చుకుంటున్నాను.",
+    "pronunciation": "naalugu ane padaanni nerchukuntunnanu.",
+    "english": "I am learning the word \"four\".",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::naalugu::four"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "రోజూ నేను నాలుగు అనే పదాన్ని వాడుతాను.",
+    "pronunciation": "roju nenu naalugu ane padaanni vaadutanu.",
+    "english": "I use the word \"four\" every day.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::naalugu::four"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "ఐదు అనే పదాన్ని నేర్చుకుంటున్నాను.",
+    "pronunciation": "aidu ane padaanni nerchukuntunnanu.",
+    "english": "I am learning the word \"five\".",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::aidu::five"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "రోజూ నేను ఐదు అనే పదాన్ని వాడుతాను.",
+    "pronunciation": "roju nenu aidu ane padaanni vaadutanu.",
+    "english": "I use the word \"five\" every day.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::aidu::five"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "పది అనే పదాన్ని నేర్చుకుంటున్నాను.",
+    "pronunciation": "padi ane padaanni nerchukuntunnanu.",
+    "english": "I am learning the word \"ten\".",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::padi::ten"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "రోజూ నేను పది అనే పదాన్ని వాడుతాను.",
+    "pronunciation": "roju nenu padi ane padaanni vaadutanu.",
+    "english": "I use the word \"ten\" every day.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::padi::ten"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "ఇరవై అనే పదాన్ని నేర్చుకుంటున్నాను.",
+    "pronunciation": "iravai ane padaanni nerchukuntunnanu.",
+    "english": "I am learning the word \"twenty\".",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::iravai::twenty"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "రోజూ నేను ఇరవై అనే పదాన్ని వాడుతాను.",
+    "pronunciation": "roju nenu iravai ane padaanni vaadutanu.",
+    "english": "I use the word \"twenty\" every day.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::iravai::twenty"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "ఈరోజు అనే పదాన్ని నేర్చుకుంటున్నాను.",
+    "pronunciation": "eeroju ane padaanni nerchukuntunnanu.",
+    "english": "I am learning the word \"today\".",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::eeroju::today"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "రోజూ నేను ఈరోజు అనే పదాన్ని వాడుతాను.",
+    "pronunciation": "roju nenu eeroju ane padaanni vaadutanu.",
+    "english": "I use the word \"today\" every day.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::eeroju::today"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "రేపు అనే పదాన్ని నేర్చుకుంటున్నాను.",
+    "pronunciation": "repu ane padaanni nerchukuntunnanu.",
+    "english": "I am learning the word \"tomorrow\".",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::repu::tomorrow"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "రోజూ నేను రేపు అనే పదాన్ని వాడుతాను.",
+    "pronunciation": "roju nenu repu ane padaanni vaadutanu.",
+    "english": "I use the word \"tomorrow\" every day.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::repu::tomorrow"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "నిన్న అనే పదాన్ని నేర్చుకుంటున్నాను.",
+    "pronunciation": "ninna ane padaanni nerchukuntunnanu.",
+    "english": "I am learning the word \"yesterday\".",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::ninna::yesterday"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "రోజూ నేను నిన్న అనే పదాన్ని వాడుతాను.",
+    "pronunciation": "roju nenu ninna ane padaanni vaadutanu.",
+    "english": "I use the word \"yesterday\" every day.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::ninna::yesterday"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "ఇప్పుడు అనే పదాన్ని నేర్చుకుంటున్నాను.",
+    "pronunciation": "ippudu ane padaanni nerchukuntunnanu.",
+    "english": "I am learning the word \"now\".",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::ippudu::now"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "రోజూ నేను ఇప్పుడు అనే పదాన్ని వాడుతాను.",
+    "pronunciation": "roju nenu ippudu ane padaanni vaadutanu.",
+    "english": "I use the word \"now\" every day.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::ippudu::now"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "తర్వాత అనే పదాన్ని నేర్చుకుంటున్నాను.",
+    "pronunciation": "taruvata ane padaanni nerchukuntunnanu.",
+    "english": "I am learning the word \"later / after\".",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::taruvata::later / after"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "రోజూ నేను తర్వాత అనే పదాన్ని వాడుతాను.",
+    "pronunciation": "roju nenu taruvata ane padaanni vaadutanu.",
+    "english": "I use the word \"later / after\" every day.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::taruvata::later / after"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "ఉదయం అనే పదాన్ని నేర్చుకుంటున్నాను.",
+    "pronunciation": "udayam ane padaanni nerchukuntunnanu.",
+    "english": "I am learning the word \"morning\".",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::udayam::morning"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "రోజూ నేను ఉదయం అనే పదాన్ని వాడుతాను.",
+    "pronunciation": "roju nenu udayam ane padaanni vaadutanu.",
+    "english": "I use the word \"morning\" every day.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::udayam::morning"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "సాయంత్రం అనే పదాన్ని నేర్చుకుంటున్నాను.",
+    "pronunciation": "saayantram ane padaanni nerchukuntunnanu.",
+    "english": "I am learning the word \"evening\".",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::saayantram::evening"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "రోజూ నేను సాయంత్రం అనే పదాన్ని వాడుతాను.",
+    "pronunciation": "roju nenu saayantram ane padaanni vaadutanu.",
+    "english": "I use the word \"evening\" every day.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::saayantram::evening"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "రాత్రి అనే పదాన్ని నేర్చుకుంటున్నాను.",
+    "pronunciation": "raatri ane padaanni nerchukuntunnanu.",
+    "english": "I am learning the word \"night\".",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::raatri::night"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "రోజూ నేను రాత్రి అనే పదాన్ని వాడుతాను.",
+    "pronunciation": "roju nenu raatri ane padaanni vaadutanu.",
+    "english": "I use the word \"night\" every day.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::raatri::night"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "సమయం అనే పదాన్ని నేర్చుకుంటున్నాను.",
+    "pronunciation": "samayam ane padaanni nerchukuntunnanu.",
+    "english": "I am learning the word \"time\".",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::samayam::time"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "రోజూ నేను సమయం అనే పదాన్ని వాడుతాను.",
+    "pronunciation": "roju nenu samayam ane padaanni vaadutanu.",
+    "english": "I use the word \"time\" every day.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::samayam::time"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "అమ్మ అనే పదాన్ని నేర్చుకుంటున్నాను.",
+    "pronunciation": "amma ane padaanni nerchukuntunnanu.",
+    "english": "I am learning the word \"mother\".",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::amma::mother"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "రోజూ నేను అమ్మ అనే పదాన్ని వాడుతాను.",
+    "pronunciation": "roju nenu amma ane padaanni vaadutanu.",
+    "english": "I use the word \"mother\" every day.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::amma::mother"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "నాన్న అనే పదాన్ని నేర్చుకుంటున్నాను.",
+    "pronunciation": "nanna ane padaanni nerchukuntunnanu.",
+    "english": "I am learning the word \"father\".",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::nanna::father"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "రోజూ నేను నాన్న అనే పదాన్ని వాడుతాను.",
+    "pronunciation": "roju nenu nanna ane padaanni vaadutanu.",
+    "english": "I use the word \"father\" every day.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::nanna::father"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "అన్న అనే పదాన్ని నేర్చుకుంటున్నాను.",
+    "pronunciation": "anna ane padaanni nerchukuntunnanu.",
+    "english": "I am learning the word \"elder brother\".",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::anna::elder brother"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "రోజూ నేను అన్న అనే పదాన్ని వాడుతాను.",
+    "pronunciation": "roju nenu anna ane padaanni vaadutanu.",
+    "english": "I use the word \"elder brother\" every day.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::anna::elder brother"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "అక్క అనే పదాన్ని నేర్చుకుంటున్నాను.",
+    "pronunciation": "akka ane padaanni nerchukuntunnanu.",
+    "english": "I am learning the word \"elder sister\".",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::akka::elder sister"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "రోజూ నేను అక్క అనే పదాన్ని వాడుతాను.",
+    "pronunciation": "roju nenu akka ane padaanni vaadutanu.",
+    "english": "I use the word \"elder sister\" every day.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::akka::elder sister"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "తమ్ముడు అనే పదాన్ని నేర్చుకుంటున్నాను.",
+    "pronunciation": "tammudu ane padaanni nerchukuntunnanu.",
+    "english": "I am learning the word \"younger brother\".",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::tammudu::younger brother"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "రోజూ నేను తమ్ముడు అనే పదాన్ని వాడుతాను.",
+    "pronunciation": "roju nenu tammudu ane padaanni vaadutanu.",
+    "english": "I use the word \"younger brother\" every day.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::tammudu::younger brother"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "చెల్లి అనే పదాన్ని నేర్చుకుంటున్నాను.",
+    "pronunciation": "chelli ane padaanni nerchukuntunnanu.",
+    "english": "I am learning the word \"younger sister\".",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::chelli::younger sister"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "రోజూ నేను చెల్లి అనే పదాన్ని వాడుతాను.",
+    "pronunciation": "roju nenu chelli ane padaanni vaadutanu.",
+    "english": "I use the word \"younger sister\" every day.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::chelli::younger sister"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "కుటుంబం అనే పదాన్ని నేర్చుకుంటున్నాను.",
+    "pronunciation": "kutumbam ane padaanni nerchukuntunnanu.",
+    "english": "I am learning the word \"family\".",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::kutumbam::family"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "రోజూ నేను కుటుంబం అనే పదాన్ని వాడుతాను.",
+    "pronunciation": "roju nenu kutumbam ane padaanni vaadutanu.",
+    "english": "I use the word \"family\" every day.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::kutumbam::family"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "స్నేహితుడు అనే పదాన్ని నేర్చుకుంటున్నాను.",
+    "pronunciation": "snehitudu ane padaanni nerchukuntunnanu.",
+    "english": "I am learning the word \"friend (male)\".",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::snehitudu::friend (male)"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "రోజూ నేను స్నేహితుడు అనే పదాన్ని వాడుతాను.",
+    "pronunciation": "roju nenu snehitudu ane padaanni vaadutanu.",
+    "english": "I use the word \"friend (male)\" every day.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::snehitudu::friend (male)"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "స్నేహితురాలు అనే పదాన్ని నేర్చుకుంటున్నాను.",
+    "pronunciation": "snehituralu ane padaanni nerchukuntunnanu.",
+    "english": "I am learning the word \"friend (female)\".",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::snehituralu::friend (female)"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "రోజూ నేను స్నేహితురాలు అనే పదాన్ని వాడుతాను.",
+    "pronunciation": "roju nenu snehituralu ane padaanni vaadutanu.",
+    "english": "I use the word \"friend (female)\" every day.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::snehituralu::friend (female)"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "ఇల్లు అనే పదాన్ని నేర్చుకుంటున్నాను.",
+    "pronunciation": "illu ane padaanni nerchukuntunnanu.",
+    "english": "I am learning the word \"house\".",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::illu::house"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "రోజూ నేను ఇల్లు అనే పదాన్ని వాడుతాను.",
+    "pronunciation": "roju nenu illu ane padaanni vaadutanu.",
+    "english": "I use the word \"house\" every day.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::illu::house"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "పుస్తకం అనే పదాన్ని నేర్చుకుంటున్నాను.",
+    "pronunciation": "pustakam ane padaanni nerchukuntunnanu.",
+    "english": "I am learning the word \"book\".",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::pustakam::book"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "రోజూ నేను పుస్తకం అనే పదాన్ని వాడుతాను.",
+    "pronunciation": "roju nenu pustakam ane padaanni vaadutanu.",
+    "english": "I use the word \"book\" every day.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::pustakam::book"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "పాఠశాల అనే పదాన్ని నేర్చుకుంటున్నాను.",
+    "pronunciation": "paatashaala ane padaanni nerchukuntunnanu.",
+    "english": "I am learning the word \"school\".",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::paatashaala::school"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "రోజూ నేను పాఠశాల అనే పదాన్ని వాడుతాను.",
+    "pronunciation": "roju nenu paatashaala ane padaanni vaadutanu.",
+    "english": "I use the word \"school\" every day.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::paatashaala::school"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "నీరు అనే పదాన్ని నేర్చుకుంటున్నాను.",
+    "pronunciation": "neeru ane padaanni nerchukuntunnanu.",
+    "english": "I am learning the word \"water\".",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::neeru::water"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "రోజూ నేను నీరు అనే పదాన్ని వాడుతాను.",
+    "pronunciation": "roju nenu neeru ane padaanni vaadutanu.",
+    "english": "I use the word \"water\" every day.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::neeru::water"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "అన్నం అనే పదాన్ని నేర్చుకుంటున్నాను.",
+    "pronunciation": "annam ane padaanni nerchukuntunnanu.",
+    "english": "I am learning the word \"cooked rice / meal\".",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::annam::cooked rice / meal"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "రోజూ నేను అన్నం అనే పదాన్ని వాడుతాను.",
+    "pronunciation": "roju nenu annam ane padaanni vaadutanu.",
+    "english": "I use the word \"cooked rice / meal\" every day.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::annam::cooked rice / meal"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "పండు అనే పదాన్ని నేర్చుకుంటున్నాను.",
+    "pronunciation": "pandu ane padaanni nerchukuntunnanu.",
+    "english": "I am learning the word \"fruit\".",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::pandu::fruit"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "రోజూ నేను పండు అనే పదాన్ని వాడుతాను.",
+    "pronunciation": "roju nenu pandu ane padaanni vaadutanu.",
+    "english": "I use the word \"fruit\" every day.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::pandu::fruit"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "బస్సు అనే పదాన్ని నేర్చుకుంటున్నాను.",
+    "pronunciation": "bassu ane padaanni nerchukuntunnanu.",
+    "english": "I am learning the word \"bus\".",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::bassu::bus"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "రోజూ నేను బస్సు అనే పదాన్ని వాడుతాను.",
+    "pronunciation": "roju nenu bassu ane padaanni vaadutanu.",
+    "english": "I use the word \"bus\" every day.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::bassu::bus"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "రోడు అనే పదాన్ని నేర్చుకుంటున్నాను.",
+    "pronunciation": "rodu ane padaanni nerchukuntunnanu.",
+    "english": "I am learning the word \"road\".",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::rodu::road"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "రోజూ నేను రోడు అనే పదాన్ని వాడుతాను.",
+    "pronunciation": "roju nenu rodu ane padaanni vaadutanu.",
+    "english": "I use the word \"road\" every day.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::rodu::road"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "గ్రామం అనే పదాన్ని నేర్చుకుంటున్నాను.",
+    "pronunciation": "graamam ane padaanni nerchukuntunnanu.",
+    "english": "I am learning the word \"village\".",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::graamam::village"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "రోజూ నేను గ్రామం అనే పదాన్ని వాడుతాను.",
+    "pronunciation": "roju nenu graamam ane padaanni vaadutanu.",
+    "english": "I use the word \"village\" every day.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::graamam::village"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "నగరం అనే పదాన్ని నేర్చుకుంటున్నాను.",
+    "pronunciation": "nagaram ane padaanni nerchukuntunnanu.",
+    "english": "I am learning the word \"city\".",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::nagaram::city"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "రోజూ నేను నగరం అనే పదాన్ని వాడుతాను.",
+    "pronunciation": "roju nenu nagaram ane padaanni vaadutanu.",
+    "english": "I use the word \"city\" every day.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::nagaram::city"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "పని అనే పదాన్ని నేర్చుకుంటున్నాను.",
+    "pronunciation": "pani ane padaanni nerchukuntunnanu.",
+    "english": "I am learning the word \"work\".",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::pani::work"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "రోజూ నేను పని అనే పదాన్ని వాడుతాను.",
+    "pronunciation": "roju nenu pani ane padaanni vaadutanu.",
+    "english": "I use the word \"work\" every day.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::pani::work"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "డబ్బు అనే పదాన్ని నేర్చుకుంటున్నాను.",
+    "pronunciation": "dabbu ane padaanni nerchukuntunnanu.",
+    "english": "I am learning the word \"money\".",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::dabbu::money"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "రోజూ నేను డబ్బు అనే పదాన్ని వాడుతాను.",
+    "pronunciation": "roju nenu dabbu ane padaanni vaadutanu.",
+    "english": "I use the word \"money\" every day.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::dabbu::money"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "భాష అనే పదాన్ని నేర్చుకుంటున్నాను.",
+    "pronunciation": "bhaasha ane padaanni nerchukuntunnanu.",
+    "english": "I am learning the word \"language\".",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::bhaasha::language"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "రోజూ నేను భాష అనే పదాన్ని వాడుతాను.",
+    "pronunciation": "roju nenu bhaasha ane padaanni vaadutanu.",
+    "english": "I use the word \"language\" every day.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::bhaasha::language"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "సహాయం అనే పదాన్ని నేర్చుకుంటున్నాను.",
+    "pronunciation": "sahaayam ane padaanni nerchukuntunnanu.",
+    "english": "I am learning the word \"help\".",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::sahaayam::help"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "రోజూ నేను సహాయం అనే పదాన్ని వాడుతాను.",
+    "pronunciation": "roju nenu sahaayam ane padaanni vaadutanu.",
+    "english": "I use the word \"help\" every day.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::sahaayam::help"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "వెళ్ళు అనే పదాన్ని నేర్చుకుంటున్నాను.",
+    "pronunciation": "vellu ane padaanni nerchukuntunnanu.",
+    "english": "I am learning the word \"go\".",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::vellu::go"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "రోజూ నేను వెళ్ళు అనే పదాన్ని వాడుతాను.",
+    "pronunciation": "roju nenu vellu ane padaanni vaadutanu.",
+    "english": "I use the word \"go\" every day.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::vellu::go"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "రా అనే పదాన్ని నేర్చుకుంటున్నాను.",
+    "pronunciation": "raa ane padaanni nerchukuntunnanu.",
+    "english": "I am learning the word \"come\".",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::raa::come"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "రోజూ నేను రా అనే పదాన్ని వాడుతాను.",
+    "pronunciation": "roju nenu raa ane padaanni vaadutanu.",
+    "english": "I use the word \"come\" every day.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::raa::come"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "తిను అనే పదాన్ని నేర్చుకుంటున్నాను.",
+    "pronunciation": "tinu ane padaanni nerchukuntunnanu.",
+    "english": "I am learning the word \"eat\".",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::tinu::eat"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "రోజూ నేను తిను అనే పదాన్ని వాడుతాను.",
+    "pronunciation": "roju nenu tinu ane padaanni vaadutanu.",
+    "english": "I use the word \"eat\" every day.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::tinu::eat"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "తాగు అనే పదాన్ని నేర్చుకుంటున్నాను.",
+    "pronunciation": "taagu ane padaanni nerchukuntunnanu.",
+    "english": "I am learning the word \"drink\".",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::taagu::drink"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "రోజూ నేను తాగు అనే పదాన్ని వాడుతాను.",
+    "pronunciation": "roju nenu taagu ane padaanni vaadutanu.",
+    "english": "I use the word \"drink\" every day.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::taagu::drink"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "చదువు అనే పదాన్ని నేర్చుకుంటున్నాను.",
+    "pronunciation": "chaduvu ane padaanni nerchukuntunnanu.",
+    "english": "I am learning the word \"study / read\".",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::chaduvu::study / read"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "రోజూ నేను చదువు అనే పదాన్ని వాడుతాను.",
+    "pronunciation": "roju nenu chaduvu ane padaanni vaadutanu.",
+    "english": "I use the word \"study / read\" every day.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::chaduvu::study / read"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "రాయి అనే పదాన్ని నేర్చుకుంటున్నాను.",
+    "pronunciation": "raayi ane padaanni nerchukuntunnanu.",
+    "english": "I am learning the word \"write\".",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::raayi::write"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "రోజూ నేను రాయి అనే పదాన్ని వాడుతాను.",
+    "pronunciation": "roju nenu raayi ane padaanni vaadutanu.",
+    "english": "I use the word \"write\" every day.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::raayi::write"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "చూడు అనే పదాన్ని నేర్చుకుంటున్నాను.",
+    "pronunciation": "choodu ane padaanni nerchukuntunnanu.",
+    "english": "I am learning the word \"see / look\".",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::choodu::see / look"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "రోజూ నేను చూడు అనే పదాన్ని వాడుతాను.",
+    "pronunciation": "roju nenu choodu ane padaanni vaadutanu.",
+    "english": "I use the word \"see / look\" every day.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::choodu::see / look"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "మాట్లాడు అనే పదాన్ని నేర్చుకుంటున్నాను.",
+    "pronunciation": "maatlaadu ane padaanni nerchukuntunnanu.",
+    "english": "I am learning the word \"speak / talk\".",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::maatlaadu::speak / talk"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "రోజూ నేను మాట్లాడు అనే పదాన్ని వాడుతాను.",
+    "pronunciation": "roju nenu maatlaadu ane padaanni vaadutanu.",
+    "english": "I use the word \"speak / talk\" every day.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::maatlaadu::speak / talk"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "విను అనే పదాన్ని నేర్చుకుంటున్నాను.",
+    "pronunciation": "vinu ane padaanni nerchukuntunnanu.",
+    "english": "I am learning the word \"listen / hear\".",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::vinu::listen / hear"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "రోజూ నేను విను అనే పదాన్ని వాడుతాను.",
+    "pronunciation": "roju nenu vinu ane padaanni vaadutanu.",
+    "english": "I use the word \"listen / hear\" every day.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::vinu::listen / hear"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "నిద్రపో అనే పదాన్ని నేర్చుకుంటున్నాను.",
+    "pronunciation": "nidrapo ane padaanni nerchukuntunnanu.",
+    "english": "I am learning the word \"sleep\".",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::nidrapo::sleep"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "రోజూ నేను నిద్రపో అనే పదాన్ని వాడుతాను.",
+    "pronunciation": "roju nenu nidrapo ane padaanni vaadutanu.",
+    "english": "I use the word \"sleep\" every day.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::nidrapo::sleep"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "కూర్చో అనే పదాన్ని నేర్చుకుంటున్నాను.",
+    "pronunciation": "koorcho ane padaanni nerchukuntunnanu.",
+    "english": "I am learning the word \"sit\".",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::koorcho::sit"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "రోజూ నేను కూర్చో అనే పదాన్ని వాడుతాను.",
+    "pronunciation": "roju nenu koorcho ane padaanni vaadutanu.",
+    "english": "I use the word \"sit\" every day.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::koorcho::sit"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "నిలబడు అనే పదాన్ని నేర్చుకుంటున్నాను.",
+    "pronunciation": "nilabadu ane padaanni nerchukuntunnanu.",
+    "english": "I am learning the word \"stand\".",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::nilabadu::stand"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "రోజూ నేను నిలబడు అనే పదాన్ని వాడుతాను.",
+    "pronunciation": "roju nenu nilabadu ane padaanni vaadutanu.",
+    "english": "I use the word \"stand\" every day.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::nilabadu::stand"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "ఇవ్వు అనే పదాన్ని నేర్చుకుంటున్నాను.",
+    "pronunciation": "ivvu ane padaanni nerchukuntunnanu.",
+    "english": "I am learning the word \"give\".",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::ivvu::give"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "రోజూ నేను ఇవ్వు అనే పదాన్ని వాడుతాను.",
+    "pronunciation": "roju nenu ivvu ane padaanni vaadutanu.",
+    "english": "I use the word \"give\" every day.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::ivvu::give"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "తీసుకో అనే పదాన్ని నేర్చుకుంటున్నాను.",
+    "pronunciation": "teesuko ane padaanni nerchukuntunnanu.",
+    "english": "I am learning the word \"take\".",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::teesuko::take"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "రోజూ నేను తీసుకో అనే పదాన్ని వాడుతాను.",
+    "pronunciation": "roju nenu teesuko ane padaanni vaadutanu.",
+    "english": "I use the word \"take\" every day.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::teesuko::take"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "చేయి అనే పదాన్ని నేర్చుకుంటున్నాను.",
+    "pronunciation": "cheyi ane padaanni nerchukuntunnanu.",
+    "english": "I am learning the word \"do\".",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::cheyi::do"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "రోజూ నేను చేయి అనే పదాన్ని వాడుతాను.",
+    "pronunciation": "roju nenu cheyi ane padaanni vaadutanu.",
+    "english": "I use the word \"do\" every day.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::cheyi::do"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "తెలుసు అనే పదాన్ని నేర్చుకుంటున్నాను.",
+    "pronunciation": "telusu ane padaanni nerchukuntunnanu.",
+    "english": "I am learning the word \"know\".",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::telusu::know"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "రోజూ నేను తెలుసు అనే పదాన్ని వాడుతాను.",
+    "pronunciation": "roju nenu telusu ane padaanni vaadutanu.",
+    "english": "I use the word \"know\" every day.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::telusu::know"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "అర్థం అవు అనే పదాన్ని నేర్చుకుంటున్నాను.",
+    "pronunciation": "artham avu ane padaanni nerchukuntunnanu.",
+    "english": "I am learning the word \"understand\".",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::artham avu::understand"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "రోజూ నేను అర్థం అవు అనే పదాన్ని వాడుతాను.",
+    "pronunciation": "roju nenu artham avu ane padaanni vaadutanu.",
+    "english": "I use the word \"understand\" every day.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::artham avu::understand"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "మంచి అనే పదాన్ని నేర్చుకుంటున్నాను.",
+    "pronunciation": "manchi ane padaanni nerchukuntunnanu.",
+    "english": "I am learning the word \"good\".",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::manchi::good"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "రోజూ నేను మంచి అనే పదాన్ని వాడుతాను.",
+    "pronunciation": "roju nenu manchi ane padaanni vaadutanu.",
+    "english": "I use the word \"good\" every day.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::manchi::good"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "చెడు అనే పదాన్ని నేర్చుకుంటున్నాను.",
+    "pronunciation": "chedu ane padaanni nerchukuntunnanu.",
+    "english": "I am learning the word \"bad\".",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::chedu::bad"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "రోజూ నేను చెడు అనే పదాన్ని వాడుతాను.",
+    "pronunciation": "roju nenu chedu ane padaanni vaadutanu.",
+    "english": "I use the word \"bad\" every day.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::chedu::bad"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "పెద్ద అనే పదాన్ని నేర్చుకుంటున్నాను.",
+    "pronunciation": "pedda ane padaanni nerchukuntunnanu.",
+    "english": "I am learning the word \"big\".",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::pedda::big"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "రోజూ నేను పెద్ద అనే పదాన్ని వాడుతాను.",
+    "pronunciation": "roju nenu pedda ane padaanni vaadutanu.",
+    "english": "I use the word \"big\" every day.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::pedda::big"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "చిన్న అనే పదాన్ని నేర్చుకుంటున్నాను.",
+    "pronunciation": "chinna ane padaanni nerchukuntunnanu.",
+    "english": "I am learning the word \"small\".",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::chinna::small"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "రోజూ నేను చిన్న అనే పదాన్ని వాడుతాను.",
+    "pronunciation": "roju nenu chinna ane padaanni vaadutanu.",
+    "english": "I use the word \"small\" every day.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::chinna::small"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "కొత్త అనే పదాన్ని నేర్చుకుంటున్నాను.",
+    "pronunciation": "kotta ane padaanni nerchukuntunnanu.",
+    "english": "I am learning the word \"new\".",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::kotta::new"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "రోజూ నేను కొత్త అనే పదాన్ని వాడుతాను.",
+    "pronunciation": "roju nenu kotta ane padaanni vaadutanu.",
+    "english": "I use the word \"new\" every day.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::kotta::new"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "పాత అనే పదాన్ని నేర్చుకుంటున్నాను.",
+    "pronunciation": "paata ane padaanni nerchukuntunnanu.",
+    "english": "I am learning the word \"old\".",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::paata::old"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "రోజూ నేను పాత అనే పదాన్ని వాడుతాను.",
+    "pronunciation": "roju nenu paata ane padaanni vaadutanu.",
+    "english": "I use the word \"old\" every day.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::paata::old"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "చాలా అనే పదాన్ని నేర్చుకుంటున్నాను.",
+    "pronunciation": "chaala ane padaanni nerchukuntunnanu.",
+    "english": "I am learning the word \"very / much\".",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::chaala::very / much"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "రోజూ నేను చాలా అనే పదాన్ని వాడుతాను.",
+    "pronunciation": "roju nenu chaala ane padaanni vaadutanu.",
+    "english": "I use the word \"very / much\" every day.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::chaala::very / much"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "నెమ్మదిగా అనే పదాన్ని నేర్చుకుంటున్నాను.",
+    "pronunciation": "nemmadiga ane padaanni nerchukuntunnanu.",
+    "english": "I am learning the word \"slowly\".",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::nemmadiga::slowly"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "రోజూ నేను నెమ్మదిగా అనే పదాన్ని వాడుతాను.",
+    "pronunciation": "roju nenu nemmadiga ane padaanni vaadutanu.",
+    "english": "I use the word \"slowly\" every day.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::nemmadiga::slowly"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "వేగంగా అనే పదాన్ని నేర్చుకుంటున్నాను.",
+    "pronunciation": "veganga ane padaanni nerchukuntunnanu.",
+    "english": "I am learning the word \"quickly\".",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::veganga::quickly"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "రోజూ నేను వేగంగా అనే పదాన్ని వాడుతాను.",
+    "pronunciation": "roju nenu veganga ane padaanni vaadutanu.",
+    "english": "I use the word \"quickly\" every day.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::veganga::quickly"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "ఇక్కడ అనే పదాన్ని నేర్చుకుంటున్నాను.",
+    "pronunciation": "ikkada ane padaanni nerchukuntunnanu.",
+    "english": "I am learning the word \"here\".",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::ikkada::here"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "రోజూ నేను ఇక్కడ అనే పదాన్ని వాడుతాను.",
+    "pronunciation": "roju nenu ikkada ane padaanni vaadutanu.",
+    "english": "I use the word \"here\" every day.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::ikkada::here"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "అక్కడ అనే పదాన్ని నేర్చుకుంటున్నాను.",
+    "pronunciation": "akkada ane padaanni nerchukuntunnanu.",
+    "english": "I am learning the word \"there\".",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::akkada::there"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "రోజూ నేను అక్కడ అనే పదాన్ని వాడుతాను.",
+    "pronunciation": "roju nenu akkada ane padaanni vaadutanu.",
+    "english": "I use the word \"there\" every day.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::akkada::there"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "తల్లి అనే పదాన్ని నేర్చుకుంటున్నాను.",
+    "pronunciation": "talli ane padaanni nerchukuntunnanu.",
+    "english": "I am learning the word \"mother\".",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::talli::mother"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "రోజూ నేను తల్లి అనే పదాన్ని వాడుతాను.",
+    "pronunciation": "roju nenu talli ane padaanni vaadutanu.",
+    "english": "I use the word \"mother\" every day.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::talli::mother"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "తండ్రి అనే పదాన్ని నేర్చుకుంటున్నాను.",
+    "pronunciation": "tandri ane padaanni nerchukuntunnanu.",
+    "english": "I am learning the word \"father\".",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::tandri::father"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "రోజూ నేను తండ్రి అనే పదాన్ని వాడుతాను.",
+    "pronunciation": "roju nenu tandri ane padaanni vaadutanu.",
+    "english": "I use the word \"father\" every day.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::tandri::father"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "బిడ్డ అనే పదాన్ని నేర్చుకుంటున్నాను.",
+    "pronunciation": "bidda ane padaanni nerchukuntunnanu.",
+    "english": "I am learning the word \"child\".",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::bidda::child"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "రోజూ నేను బిడ్డ అనే పదాన్ని వాడుతాను.",
+    "pronunciation": "roju nenu bidda ane padaanni vaadutanu.",
+    "english": "I use the word \"child\" every day.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::bidda::child"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "రహదారి అనే పదాన్ని నేర్చుకుంటున్నాను.",
+    "pronunciation": "rahadaari ane padaanni nerchukuntunnanu.",
+    "english": "I am learning the word \"road\".",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::rahadaari::road"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "రోజూ నేను రహదారి అనే పదాన్ని వాడుతాను.",
+    "pronunciation": "roju nenu rahadaari ane padaanni vaadutanu.",
+    "english": "I use the word \"road\" every day.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::rahadaari::road"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "బజారు అనే పదాన్ని నేర్చుకుంటున్నాను.",
+    "pronunciation": "bazaaru ane padaanni nerchukuntunnanu.",
+    "english": "I am learning the word \"market\".",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::bazaaru::market"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "రోజూ నేను బజారు అనే పదాన్ని వాడుతాను.",
+    "pronunciation": "roju nenu bazaaru ane padaanni vaadutanu.",
+    "english": "I use the word \"market\" every day.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::bazaaru::market"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "గురువు అనే పదాన్ని నేర్చుకుంటున్నాను.",
+    "pronunciation": "guruvu ane padaanni nerchukuntunnanu.",
+    "english": "I am learning the word \"teacher\".",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::guruvu::teacher"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "రోజూ నేను గురువు అనే పదాన్ని వాడుతాను.",
+    "pronunciation": "roju nenu guruvu ane padaanni vaadutanu.",
+    "english": "I use the word \"teacher\" every day.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::guruvu::teacher"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "విద్యార్థి అనే పదాన్ని నేర్చుకుంటున్నాను.",
+    "pronunciation": "vidyarthi ane padaanni nerchukuntunnanu.",
+    "english": "I am learning the word \"student\".",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::vidyarthi::student"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "రోజూ నేను విద్యార్థి అనే పదాన్ని వాడుతాను.",
+    "pronunciation": "roju nenu vidyarthi ane padaanni vaadutanu.",
+    "english": "I use the word \"student\" every day.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::vidyarthi::student"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "కూరగాయలు అనే పదాన్ని నేర్చుకుంటున్నాను.",
+    "pronunciation": "kooragayalu ane padaanni nerchukuntunnanu.",
+    "english": "I am learning the word \"vegetables\".",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::kooragayalu::vegetables"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "రోజూ నేను కూరగాయలు అనే పదాన్ని వాడుతాను.",
+    "pronunciation": "roju nenu kooragayalu ane padaanni vaadutanu.",
+    "english": "I use the word \"vegetables\" every day.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::kooragayalu::vegetables"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "పాలు అనే పదాన్ని నేర్చుకుంటున్నాను.",
+    "pronunciation": "paalu ane padaanni nerchukuntunnanu.",
+    "english": "I am learning the word \"milk\".",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::paalu::milk"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "రోజూ నేను పాలు అనే పదాన్ని వాడుతాను.",
+    "pronunciation": "roju nenu paalu ane padaanni vaadutanu.",
+    "english": "I use the word \"milk\" every day.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::paalu::milk"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "ప్రశ్న అనే పదాన్ని నేర్చుకుంటున్నాను.",
+    "pronunciation": "prashna ane padaanni nerchukuntunnanu.",
+    "english": "I am learning the word \"question\".",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::prashna::question"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "రోజూ నేను ప్రశ్న అనే పదాన్ని వాడుతాను.",
+    "pronunciation": "roju nenu prashna ane padaanni vaadutanu.",
+    "english": "I use the word \"question\" every day.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::prashna::question"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "సమాధానం అనే పదాన్ని నేర్చుకుంటున్నాను.",
+    "pronunciation": "samaadhaanam ane padaanni nerchukuntunnanu.",
+    "english": "I am learning the word \"answer\".",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::samaadhaanam::answer"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "రోజూ నేను సమాధానం అనే పదాన్ని వాడుతాను.",
+    "pronunciation": "roju nenu samaadhaanam ane padaanni vaadutanu.",
+    "english": "I use the word \"answer\" every day.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::samaadhaanam::answer"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "శుభోదయం అనే పదాన్ని నేర్చుకుంటున్నాను.",
+    "pronunciation": "shubhodayam ane padaanni nerchukuntunnanu.",
+    "english": "I am learning the word \"good morning\".",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::shubhodayam::good morning"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "రోజూ నేను శుభోదయం అనే పదాన్ని వాడుతాను.",
+    "pronunciation": "roju nenu shubhodayam ane padaanni vaadutanu.",
+    "english": "I use the word \"good morning\" every day.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::shubhodayam::good morning"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "శుభరాత్రి అనే పదాన్ని నేర్చుకుంటున్నాను.",
+    "pronunciation": "shubharaatri ane padaanni nerchukuntunnanu.",
+    "english": "I am learning the word \"good night\".",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::shubharaatri::good night"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "రోజూ నేను శుభరాత్రి అనే పదాన్ని వాడుతాను.",
+    "pronunciation": "roju nenu shubharaatri ane padaanni vaadutanu.",
+    "english": "I use the word \"good night\" every day.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::shubharaatri::good night"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "స్వాగతం అనే పదాన్ని నేర్చుకుంటున్నాను.",
+    "pronunciation": "swaagatam ane padaanni nerchukuntunnanu.",
+    "english": "I am learning the word \"welcome\".",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::swaagatam::welcome"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "రోజూ నేను స్వాగతం అనే పదాన్ని వాడుతాను.",
+    "pronunciation": "roju nenu swaagatam ane padaanni vaadutanu.",
+    "english": "I use the word \"welcome\" every day.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::swaagatam::welcome"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "ఎంత అనే పదాన్ని నేర్చుకుంటున్నాను.",
+    "pronunciation": "enta ane padaanni nerchukuntunnanu.",
+    "english": "I am learning the word \"how much\".",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::enta::how much"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "రోజూ నేను ఎంత అనే పదాన్ని వాడుతాను.",
+    "pronunciation": "roju nenu enta ane padaanni vaadutanu.",
+    "english": "I use the word \"how much\" every day.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::enta::how much"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "ఎడమ అనే పదాన్ని నేర్చుకుంటున్నాను.",
+    "pronunciation": "edama ane padaanni nerchukuntunnanu.",
+    "english": "I am learning the word \"left\".",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::edama::left"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "రోజూ నేను ఎడమ అనే పదాన్ని వాడుతాను.",
+    "pronunciation": "roju nenu edama ane padaanni vaadutanu.",
+    "english": "I use the word \"left\" every day.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::edama::left"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "కుడి అనే పదాన్ని నేర్చుకుంటున్నాను.",
+    "pronunciation": "kudi ane padaanni nerchukuntunnanu.",
+    "english": "I am learning the word \"right\".",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::kudi::right"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "రోజూ నేను కుడి అనే పదాన్ని వాడుతాను.",
+    "pronunciation": "roju nenu kudi ane padaanni vaadutanu.",
+    "english": "I use the word \"right\" every day.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::kudi::right"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "నేరుగా అనే పదాన్ని నేర్చుకుంటున్నాను.",
+    "pronunciation": "neruga ane padaanni nerchukuntunnanu.",
+    "english": "I am learning the word \"straight\".",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::neruga::straight"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "రోజూ నేను నేరుగా అనే పదాన్ని వాడుతాను.",
+    "pronunciation": "roju nenu neruga ane padaanni vaadutanu.",
+    "english": "I use the word \"straight\" every day.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::neruga::straight"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "త్వరగా అనే పదాన్ని నేర్చుకుంటున్నాను.",
+    "pronunciation": "tvaraga ane padaanni nerchukuntunnanu.",
+    "english": "I am learning the word \"quickly\".",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::tvaraga::quickly"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "రోజూ నేను త్వరగా అనే పదాన్ని వాడుతాను.",
+    "pronunciation": "roju nenu tvaraga ane padaanni vaadutanu.",
+    "english": "I use the word \"quickly\" every day.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::tvaraga::quickly"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "ఒక నిమిషం అనే పదాన్ని నేర్చుకుంటున్నాను.",
+    "pronunciation": "oka nimisham ane padaanni nerchukuntunnanu.",
+    "english": "I am learning the word \"one minute\".",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::oka nimisham::one minute"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "రోజూ నేను ఒక నిమిషం అనే పదాన్ని వాడుతాను.",
+    "pronunciation": "roju nenu oka nimisham ane padaanni vaadutanu.",
+    "english": "I use the word \"one minute\" every day.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::oka nimisham::one minute"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "కలం అనే పదాన్ని నేర్చుకుంటున్నాను.",
+    "pronunciation": "kalam ane padaanni nerchukuntunnanu.",
+    "english": "I am learning the word \"pen\".",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::kalam::pen"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "రోజూ నేను కలం అనే పదాన్ని వాడుతాను.",
+    "pronunciation": "roju nenu kalam ane padaanni vaadutanu.",
+    "english": "I use the word \"pen\" every day.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::kalam::pen"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "రోజు అనే పదాన్ని నేర్చుకుంటున్నాను.",
+    "pronunciation": "roju ane padaanni nerchukuntunnanu.",
+    "english": "I am learning the word \"day\".",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::roju::day"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "రోజూ నేను రోజు అనే పదాన్ని వాడుతాను.",
+    "pronunciation": "roju nenu roju ane padaanni vaadutanu.",
+    "english": "I use the word \"day\" every day.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::roju::day"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "వారం అనే పదాన్ని నేర్చుకుంటున్నాను.",
+    "pronunciation": "vaaram ane padaanni nerchukuntunnanu.",
+    "english": "I am learning the word \"week\".",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::vaaram::week"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "రోజూ నేను వారం అనే పదాన్ని వాడుతాను.",
+    "pronunciation": "roju nenu vaaram ane padaanni vaadutanu.",
+    "english": "I use the word \"week\" every day.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::vaaram::week"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "నెల అనే పదాన్ని నేర్చుకుంటున్నాను.",
+    "pronunciation": "nela ane padaanni nerchukuntunnanu.",
+    "english": "I am learning the word \"month\".",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::nela::month"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "రోజూ నేను నెల అనే పదాన్ని వాడుతాను.",
+    "pronunciation": "roju nenu nela ane padaanni vaadutanu.",
+    "english": "I use the word \"month\" every day.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::nela::month"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "సంవత్సరం అనే పదాన్ని నేర్చుకుంటున్నాను.",
+    "pronunciation": "samvatsaram ane padaanni nerchukuntunnanu.",
+    "english": "I am learning the word \"year\".",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::samvatsaram::year"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "రోజూ నేను సంవత్సరం అనే పదాన్ని వాడుతాను.",
+    "pronunciation": "roju nenu samvatsaram ane padaanni vaadutanu.",
+    "english": "I use the word \"year\" every day.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::samvatsaram::year"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "పేరు అనే పదాన్ని నేర్చుకుంటున్నాను.",
+    "pronunciation": "peru ane padaanni nerchukuntunnanu.",
+    "english": "I am learning the word \"name\".",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::peru::name"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "రోజూ నేను పేరు అనే పదాన్ని వాడుతాను.",
+    "pronunciation": "roju nenu peru ane padaanni vaadutanu.",
+    "english": "I use the word \"name\" every day.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::peru::name"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "ధర అనే పదాన్ని నేర్చుకుంటున్నాను.",
+    "pronunciation": "dhara ane padaanni nerchukuntunnanu.",
+    "english": "I am learning the word \"price\".",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::dhara::price"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "రోజూ నేను ధర అనే పదాన్ని వాడుతాను.",
+    "pronunciation": "roju nenu dhara ane padaanni vaadutanu.",
+    "english": "I use the word \"price\" every day.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::dhara::price"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "దగ్గర అనే పదాన్ని నేర్చుకుంటున్నాను.",
+    "pronunciation": "daggara ane padaanni nerchukuntunnanu.",
+    "english": "I am learning the word \"near\".",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::daggara::near"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "రోజూ నేను దగ్గర అనే పదాన్ని వాడుతాను.",
+    "pronunciation": "roju nenu daggara ane padaanni vaadutanu.",
+    "english": "I use the word \"near\" every day.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::daggara::near"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "దూరం అనే పదాన్ని నేర్చుకుంటున్నాను.",
+    "pronunciation": "dooram ane padaanni nerchukuntunnanu.",
+    "english": "I am learning the word \"far\".",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::dooram::far"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "రోజూ నేను దూరం అనే పదాన్ని వాడుతాను.",
+    "pronunciation": "roju nenu dooram ane padaanni vaadutanu.",
+    "english": "I use the word \"far\" every day.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::dooram::far"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "లోపల అనే పదాన్ని నేర్చుకుంటున్నాను.",
+    "pronunciation": "lopala ane padaanni nerchukuntunnanu.",
+    "english": "I am learning the word \"inside\".",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::lopala::inside"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "రోజూ నేను లోపల అనే పదాన్ని వాడుతాను.",
+    "pronunciation": "roju nenu lopala ane padaanni vaadutanu.",
+    "english": "I use the word \"inside\" every day.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::lopala::inside"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "బయట అనే పదాన్ని నేర్చుకుంటున్నాను.",
+    "pronunciation": "bayata ane padaanni nerchukuntunnanu.",
+    "english": "I am learning the word \"outside\".",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::bayata::outside"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "రోజూ నేను బయట అనే పదాన్ని వాడుతాను.",
+    "pronunciation": "roju nenu bayata ane padaanni vaadutanu.",
+    "english": "I use the word \"outside\" every day.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::bayata::outside"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "ముందు అనే పదాన్ని నేర్చుకుంటున్నాను.",
+    "pronunciation": "mundu ane padaanni nerchukuntunnanu.",
+    "english": "I am learning the word \"before\".",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::mundu::before"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "రోజూ నేను ముందు అనే పదాన్ని వాడుతాను.",
+    "pronunciation": "roju nenu mundu ane padaanni vaadutanu.",
+    "english": "I use the word \"before\" every day.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::mundu::before"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "తెరవు అనే పదాన్ని నేర్చుకుంటున్నాను.",
+    "pronunciation": "teravu ane padaanni nerchukuntunnanu.",
+    "english": "I am learning the word \"open\".",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::teravu::open"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "రోజూ నేను తెరవు అనే పదాన్ని వాడుతాను.",
+    "pronunciation": "roju nenu teravu ane padaanni vaadutanu.",
+    "english": "I use the word \"open\" every day.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::teravu::open"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "మూయి అనే పదాన్ని నేర్చుకుంటున్నాను.",
+    "pronunciation": "muuyi ane padaanni nerchukuntunnanu.",
+    "english": "I am learning the word \"close\".",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::muuyi::close"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "రోజూ నేను మూయి అనే పదాన్ని వాడుతాను.",
+    "pronunciation": "roju nenu muuyi ane padaanni vaadutanu.",
+    "english": "I use the word \"close\" every day.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::muuyi::close"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "ఆగు అనే పదాన్ని నేర్చుకుంటున్నాను.",
+    "pronunciation": "aagu ane padaanni nerchukuntunnanu.",
+    "english": "I am learning the word \"wait\".",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::aagu::wait"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "రోజూ నేను ఆగు అనే పదాన్ని వాడుతాను.",
+    "pronunciation": "roju nenu aagu ane padaanni vaadutanu.",
+    "english": "I use the word \"wait\" every day.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::aagu::wait"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "తిరుగు అనే పదాన్ని నేర్చుకుంటున్నాను.",
+    "pronunciation": "tirugu ane padaanni nerchukuntunnanu.",
+    "english": "I am learning the word \"turn\".",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::tirugu::turn"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "రోజూ నేను తిరుగు అనే పదాన్ని వాడుతాను.",
+    "pronunciation": "roju nenu tirugu ane padaanni vaadutanu.",
+    "english": "I use the word \"turn\" every day.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::tirugu::turn"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "ఆపు అనే పదాన్ని నేర్చుకుంటున్నాను.",
+    "pronunciation": "aapu ane padaanni nerchukuntunnanu.",
+    "english": "I am learning the word \"stop\".",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::aapu::stop"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "రోజూ నేను ఆపు అనే పదాన్ని వాడుతాను.",
+    "pronunciation": "roju nenu aapu ane padaanni vaadutanu.",
+    "english": "I use the word \"stop\" every day.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::aapu::stop"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "నమస్తే మరియు ధన్యవాదాలు రెండూ ముఖ్యమైన పదాలు.",
+    "pronunciation": "namaste mariyu dhanyavaadalu rendu mukhyamaina padaalu.",
+    "english": "hello and thank you are both important words.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::namaste::hello",
+      "telugu::dhanyavaadalu::thank you"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "దయచేసి మరియు క్షమించండి రెండూ ముఖ్యమైన పదాలు.",
+    "pronunciation": "dayachesi mariyu kshaminchandi rendu mukhyamaina padaalu.",
+    "english": "please and sorry / excuse me are both important words.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::dayachesi::please",
+      "telugu::kshaminchandi::sorry / excuse me"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "అవును మరియు కాదు రెండూ ముఖ్యమైన పదాలు.",
+    "pronunciation": "avunu mariyu kaadu rendu mukhyamaina padaalu.",
+    "english": "yes and no / not are both important words.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::avunu::yes",
+      "telugu::kaadu::no / not"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "సరే మరియు బాగుంది రెండూ ముఖ్యమైన పదాలు.",
+    "pronunciation": "sare mariyu bagundi rendu mukhyamaina padaalu.",
+    "english": "okay and it is good are both important words.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::sare::okay",
+      "telugu::bagundi::it is good"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "నేను మరియు నువ్వు రెండూ ముఖ్యమైన పదాలు.",
+    "pronunciation": "nenu mariyu nuvvu rendu mukhyamaina padaalu.",
+    "english": "I and you (informal) are both important words.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::nenu::i",
+      "telugu::nuvvu::you (informal)"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "మీరు మరియు అతను రెండూ ముఖ్యమైన పదాలు.",
+    "pronunciation": "meeru mariyu atanu rendu mukhyamaina padaalu.",
+    "english": "you (formal/plural) and he are both important words.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::meeru::you (formal/plural)",
+      "telugu::atanu::he"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "ఆమె మరియు ఇది రెండూ ముఖ్యమైన పదాలు.",
+    "pronunciation": "aame mariyu idi rendu mukhyamaina padaalu.",
+    "english": "she and this are both important words.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::aame::she",
+      "telugu::idi::this"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "అది మరియు మనం రెండూ ముఖ్యమైన పదాలు.",
+    "pronunciation": "adi mariyu manam rendu mukhyamaina padaalu.",
+    "english": "that and we (inclusive) are both important words.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::adi::that",
+      "telugu::manam::we (inclusive)"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "మేము మరియు వాళ్లు రెండూ ముఖ్యమైన పదాలు.",
+    "pronunciation": "memu mariyu vaallu rendu mukhyamaina padaalu.",
+    "english": "we (exclusive) and they are both important words.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::memu::we (exclusive)",
+      "telugu::vaallu::they"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "ఏమి మరియు ఎవరు రెండూ ముఖ్యమైన పదాలు.",
+    "pronunciation": "emi mariyu evaru rendu mukhyamaina padaalu.",
+    "english": "what and who are both important words.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::emi::what",
+      "telugu::evaru::who"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "ఎక్కడ మరియు ఎప్పుడు రెండూ ముఖ్యమైన పదాలు.",
+    "pronunciation": "ekkada mariyu eppudu rendu mukhyamaina padaalu.",
+    "english": "where and when are both important words.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::ekkada::where",
+      "telugu::eppudu::when"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "ఎలా మరియు ఎందుకు రెండూ ముఖ్యమైన పదాలు.",
+    "pronunciation": "ela mariyu enduku rendu mukhyamaina padaalu.",
+    "english": "how and why are both important words.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::ela::how",
+      "telugu::enduku::why"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "ఒకటి మరియు రెండు రెండూ ముఖ్యమైన పదాలు.",
+    "pronunciation": "okati mariyu rendu rendu mukhyamaina padaalu.",
+    "english": "one and two are both important words.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::okati::one",
+      "telugu::rendu::two"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "మూడు మరియు నాలుగు రెండూ ముఖ్యమైన పదాలు.",
+    "pronunciation": "moodu mariyu naalugu rendu mukhyamaina padaalu.",
+    "english": "three and four are both important words.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::moodu::three",
+      "telugu::naalugu::four"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "ఐదు మరియు పది రెండూ ముఖ్యమైన పదాలు.",
+    "pronunciation": "aidu mariyu padi rendu mukhyamaina padaalu.",
+    "english": "five and ten are both important words.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::aidu::five",
+      "telugu::padi::ten"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "ఇరవై మరియు ఈరోజు రెండూ ముఖ్యమైన పదాలు.",
+    "pronunciation": "iravai mariyu eeroju rendu mukhyamaina padaalu.",
+    "english": "twenty and today are both important words.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::iravai::twenty",
+      "telugu::eeroju::today"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "రేపు మరియు నిన్న రెండూ ముఖ్యమైన పదాలు.",
+    "pronunciation": "repu mariyu ninna rendu mukhyamaina padaalu.",
+    "english": "tomorrow and yesterday are both important words.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::repu::tomorrow",
+      "telugu::ninna::yesterday"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "ఇప్పుడు మరియు తర్వాత రెండూ ముఖ్యమైన పదాలు.",
+    "pronunciation": "ippudu mariyu taruvata rendu mukhyamaina padaalu.",
+    "english": "now and later / after are both important words.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::ippudu::now",
+      "telugu::taruvata::later / after"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "ఉదయం మరియు సాయంత్రం రెండూ ముఖ్యమైన పదాలు.",
+    "pronunciation": "udayam mariyu saayantram rendu mukhyamaina padaalu.",
+    "english": "morning and evening are both important words.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::udayam::morning",
+      "telugu::saayantram::evening"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "రాత్రి మరియు సమయం రెండూ ముఖ్యమైన పదాలు.",
+    "pronunciation": "raatri mariyu samayam rendu mukhyamaina padaalu.",
+    "english": "night and time are both important words.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::raatri::night",
+      "telugu::samayam::time"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "అమ్మ మరియు నాన్న రెండూ ముఖ్యమైన పదాలు.",
+    "pronunciation": "amma mariyu nanna rendu mukhyamaina padaalu.",
+    "english": "mother and father are both important words.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::amma::mother",
+      "telugu::nanna::father"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "అన్న మరియు అక్క రెండూ ముఖ్యమైన పదాలు.",
+    "pronunciation": "anna mariyu akka rendu mukhyamaina padaalu.",
+    "english": "elder brother and elder sister are both important words.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::anna::elder brother",
+      "telugu::akka::elder sister"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "తమ్ముడు మరియు చెల్లి రెండూ ముఖ్యమైన పదాలు.",
+    "pronunciation": "tammudu mariyu chelli rendu mukhyamaina padaalu.",
+    "english": "younger brother and younger sister are both important words.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::tammudu::younger brother",
+      "telugu::chelli::younger sister"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "కుటుంబం మరియు స్నేహితుడు రెండూ ముఖ్యమైన పదాలు.",
+    "pronunciation": "kutumbam mariyu snehitudu rendu mukhyamaina padaalu.",
+    "english": "family and friend (male) are both important words.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::kutumbam::family",
+      "telugu::snehitudu::friend (male)"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "స్నేహితురాలు మరియు ఇల్లు రెండూ ముఖ్యమైన పదాలు.",
+    "pronunciation": "snehituralu mariyu illu rendu mukhyamaina padaalu.",
+    "english": "friend (female) and house are both important words.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::snehituralu::friend (female)",
+      "telugu::illu::house"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "పుస్తకం మరియు పాఠశాల రెండూ ముఖ్యమైన పదాలు.",
+    "pronunciation": "pustakam mariyu paatashaala rendu mukhyamaina padaalu.",
+    "english": "book and school are both important words.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::pustakam::book",
+      "telugu::paatashaala::school"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "నీరు మరియు అన్నం రెండూ ముఖ్యమైన పదాలు.",
+    "pronunciation": "neeru mariyu annam rendu mukhyamaina padaalu.",
+    "english": "water and cooked rice / meal are both important words.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::neeru::water",
+      "telugu::annam::cooked rice / meal"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "పండు మరియు బస్సు రెండూ ముఖ్యమైన పదాలు.",
+    "pronunciation": "pandu mariyu bassu rendu mukhyamaina padaalu.",
+    "english": "fruit and bus are both important words.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::pandu::fruit",
+      "telugu::bassu::bus"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "రోడు మరియు గ్రామం రెండూ ముఖ్యమైన పదాలు.",
+    "pronunciation": "rodu mariyu graamam rendu mukhyamaina padaalu.",
+    "english": "road and village are both important words.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::rodu::road",
+      "telugu::graamam::village"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "నగరం మరియు పని రెండూ ముఖ్యమైన పదాలు.",
+    "pronunciation": "nagaram mariyu pani rendu mukhyamaina padaalu.",
+    "english": "city and work are both important words.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::nagaram::city",
+      "telugu::pani::work"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "డబ్బు మరియు భాష రెండూ ముఖ్యమైన పదాలు.",
+    "pronunciation": "dabbu mariyu bhaasha rendu mukhyamaina padaalu.",
+    "english": "money and language are both important words.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::dabbu::money",
+      "telugu::bhaasha::language"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "సహాయం మరియు వెళ్ళు రెండూ ముఖ్యమైన పదాలు.",
+    "pronunciation": "sahaayam mariyu vellu rendu mukhyamaina padaalu.",
+    "english": "help and go are both important words.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::sahaayam::help",
+      "telugu::vellu::go"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "రా మరియు తిను రెండూ ముఖ్యమైన పదాలు.",
+    "pronunciation": "raa mariyu tinu rendu mukhyamaina padaalu.",
+    "english": "come and eat are both important words.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::raa::come",
+      "telugu::tinu::eat"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "తాగు మరియు చదువు రెండూ ముఖ్యమైన పదాలు.",
+    "pronunciation": "taagu mariyu chaduvu rendu mukhyamaina padaalu.",
+    "english": "drink and study / read are both important words.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::taagu::drink",
+      "telugu::chaduvu::study / read"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "రాయి మరియు చూడు రెండూ ముఖ్యమైన పదాలు.",
+    "pronunciation": "raayi mariyu choodu rendu mukhyamaina padaalu.",
+    "english": "write and see / look are both important words.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::raayi::write",
+      "telugu::choodu::see / look"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "మాట్లాడు మరియు విను రెండూ ముఖ్యమైన పదాలు.",
+    "pronunciation": "maatlaadu mariyu vinu rendu mukhyamaina padaalu.",
+    "english": "speak / talk and listen / hear are both important words.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::maatlaadu::speak / talk",
+      "telugu::vinu::listen / hear"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "నిద్రపో మరియు కూర్చో రెండూ ముఖ్యమైన పదాలు.",
+    "pronunciation": "nidrapo mariyu koorcho rendu mukhyamaina padaalu.",
+    "english": "sleep and sit are both important words.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::nidrapo::sleep",
+      "telugu::koorcho::sit"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "నిలబడు మరియు ఇవ్వు రెండూ ముఖ్యమైన పదాలు.",
+    "pronunciation": "nilabadu mariyu ivvu rendu mukhyamaina padaalu.",
+    "english": "stand and give are both important words.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::nilabadu::stand",
+      "telugu::ivvu::give"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "తీసుకో మరియు చేయి రెండూ ముఖ్యమైన పదాలు.",
+    "pronunciation": "teesuko mariyu cheyi rendu mukhyamaina padaalu.",
+    "english": "take and do are both important words.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::teesuko::take",
+      "telugu::cheyi::do"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "తెలుసు మరియు అర్థం అవు రెండూ ముఖ్యమైన పదాలు.",
+    "pronunciation": "telusu mariyu artham avu rendu mukhyamaina padaalu.",
+    "english": "know and understand are both important words.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::telusu::know",
+      "telugu::artham avu::understand"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "మంచి మరియు చెడు రెండూ ముఖ్యమైన పదాలు.",
+    "pronunciation": "manchi mariyu chedu rendu mukhyamaina padaalu.",
+    "english": "good and bad are both important words.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::manchi::good",
+      "telugu::chedu::bad"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "పెద్ద మరియు చిన్న రెండూ ముఖ్యమైన పదాలు.",
+    "pronunciation": "pedda mariyu chinna rendu mukhyamaina padaalu.",
+    "english": "big and small are both important words.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::pedda::big",
+      "telugu::chinna::small"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "కొత్త మరియు పాత రెండూ ముఖ్యమైన పదాలు.",
+    "pronunciation": "kotta mariyu paata rendu mukhyamaina padaalu.",
+    "english": "new and old are both important words.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::kotta::new",
+      "telugu::paata::old"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "చాలా మరియు నెమ్మదిగా రెండూ ముఖ్యమైన పదాలు.",
+    "pronunciation": "chaala mariyu nemmadiga rendu mukhyamaina padaalu.",
+    "english": "very / much and slowly are both important words.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::chaala::very / much",
+      "telugu::nemmadiga::slowly"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "వేగంగా మరియు ఇక్కడ రెండూ ముఖ్యమైన పదాలు.",
+    "pronunciation": "veganga mariyu ikkada rendu mukhyamaina padaalu.",
+    "english": "quickly and here are both important words.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::veganga::quickly",
+      "telugu::ikkada::here"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "అక్కడ మరియు తల్లి రెండూ ముఖ్యమైన పదాలు.",
+    "pronunciation": "akkada mariyu talli rendu mukhyamaina padaalu.",
+    "english": "there and mother are both important words.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::akkada::there",
+      "telugu::talli::mother"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "తండ్రి మరియు బిడ్డ రెండూ ముఖ్యమైన పదాలు.",
+    "pronunciation": "tandri mariyu bidda rendu mukhyamaina padaalu.",
+    "english": "father and child are both important words.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::tandri::father",
+      "telugu::bidda::child"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "రహదారి మరియు బజారు రెండూ ముఖ్యమైన పదాలు.",
+    "pronunciation": "rahadaari mariyu bazaaru rendu mukhyamaina padaalu.",
+    "english": "road and market are both important words.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::rahadaari::road",
+      "telugu::bazaaru::market"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "గురువు మరియు విద్యార్థి రెండూ ముఖ్యమైన పదాలు.",
+    "pronunciation": "guruvu mariyu vidyarthi rendu mukhyamaina padaalu.",
+    "english": "teacher and student are both important words.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::guruvu::teacher",
+      "telugu::vidyarthi::student"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "కూరగాయలు మరియు పాలు రెండూ ముఖ్యమైన పదాలు.",
+    "pronunciation": "kooragayalu mariyu paalu rendu mukhyamaina padaalu.",
+    "english": "vegetables and milk are both important words.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::kooragayalu::vegetables",
+      "telugu::paalu::milk"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "ప్రశ్న మరియు సమాధానం రెండూ ముఖ్యమైన పదాలు.",
+    "pronunciation": "prashna mariyu samaadhaanam rendu mukhyamaina padaalu.",
+    "english": "question and answer are both important words.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::prashna::question",
+      "telugu::samaadhaanam::answer"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "శుభోదయం మరియు శుభరాత్రి రెండూ ముఖ్యమైన పదాలు.",
+    "pronunciation": "shubhodayam mariyu shubharaatri rendu mukhyamaina padaalu.",
+    "english": "good morning and good night are both important words.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::shubhodayam::good morning",
+      "telugu::shubharaatri::good night"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "స్వాగతం మరియు ఎంత రెండూ ముఖ్యమైన పదాలు.",
+    "pronunciation": "swaagatam mariyu enta rendu mukhyamaina padaalu.",
+    "english": "welcome and how much are both important words.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::swaagatam::welcome",
+      "telugu::enta::how much"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "ఎడమ మరియు కుడి రెండూ ముఖ్యమైన పదాలు.",
+    "pronunciation": "edama mariyu kudi rendu mukhyamaina padaalu.",
+    "english": "left and right are both important words.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::edama::left",
+      "telugu::kudi::right"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "నేరుగా మరియు త్వరగా రెండూ ముఖ్యమైన పదాలు.",
+    "pronunciation": "neruga mariyu tvaraga rendu mukhyamaina padaalu.",
+    "english": "straight and quickly are both important words.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::neruga::straight",
+      "telugu::tvaraga::quickly"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "ఒక నిమిషం మరియు కలం రెండూ ముఖ్యమైన పదాలు.",
+    "pronunciation": "oka nimisham mariyu kalam rendu mukhyamaina padaalu.",
+    "english": "one minute and pen are both important words.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::oka nimisham::one minute",
+      "telugu::kalam::pen"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "రోజు మరియు వారం రెండూ ముఖ్యమైన పదాలు.",
+    "pronunciation": "roju mariyu vaaram rendu mukhyamaina padaalu.",
+    "english": "day and week are both important words.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::roju::day",
+      "telugu::vaaram::week"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "నెల మరియు సంవత్సరం రెండూ ముఖ్యమైన పదాలు.",
+    "pronunciation": "nela mariyu samvatsaram rendu mukhyamaina padaalu.",
+    "english": "month and year are both important words.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::nela::month",
+      "telugu::samvatsaram::year"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "పేరు మరియు ధర రెండూ ముఖ్యమైన పదాలు.",
+    "pronunciation": "peru mariyu dhara rendu mukhyamaina padaalu.",
+    "english": "name and price are both important words.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::peru::name",
+      "telugu::dhara::price"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "దగ్గర మరియు దూరం రెండూ ముఖ్యమైన పదాలు.",
+    "pronunciation": "daggara mariyu dooram rendu mukhyamaina padaalu.",
+    "english": "near and far are both important words.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::daggara::near",
+      "telugu::dooram::far"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "లోపల మరియు బయట రెండూ ముఖ్యమైన పదాలు.",
+    "pronunciation": "lopala mariyu bayata rendu mukhyamaina padaalu.",
+    "english": "inside and outside are both important words.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::lopala::inside",
+      "telugu::bayata::outside"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "ముందు మరియు తెరవు రెండూ ముఖ్యమైన పదాలు.",
+    "pronunciation": "mundu mariyu teravu rendu mukhyamaina padaalu.",
+    "english": "before and open are both important words.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::mundu::before",
+      "telugu::teravu::open"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "మూయి మరియు ఆగు రెండూ ముఖ్యమైన పదాలు.",
+    "pronunciation": "muuyi mariyu aagu rendu mukhyamaina padaalu.",
+    "english": "close and wait are both important words.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::muuyi::close",
+      "telugu::aagu::wait"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "తిరుగు మరియు ఆపు రెండూ ముఖ్యమైన పదాలు.",
+    "pronunciation": "tirugu mariyu aapu rendu mukhyamaina padaalu.",
+    "english": "turn and stop are both important words.",
+    "contextTag": "vocabulary-building",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::tirugu::turn",
+      "telugu::aapu::stop"
+    ]
   }
 ]
