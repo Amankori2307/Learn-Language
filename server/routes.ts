@@ -85,7 +85,7 @@ export async function registerRoutes(
     const mode = parsed.mode ?? QuizModeEnum.DAILY_REVIEW;
     const language = parsed.language ?? parseLanguage(req.query.language);
 
-    const candidates = await storage.getQuizCandidates(userId, limit, clusterId, mode, language);
+    let candidates = await storage.getQuizCandidates(userId, limit, clusterId, mode, language);
     
     if (candidates.length === 0) {
       // If no words found, maybe seed data or return empty
@@ -93,7 +93,8 @@ export async function registerRoutes(
       await storage.seedInitialData();
       // Retry once
       const retry = await storage.getQuizCandidates(userId, limit, clusterId, mode, language);
-      if (retry.length === 0) return res.json([]); 
+      if (retry.length === 0) return res.json([]);
+      candidates = retry;
     }
 
     const allWords = await storage.getWords(500, language);

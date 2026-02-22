@@ -57,7 +57,7 @@ test("language isolation: user data reads are scoped by selected language", asyn
       .returning();
     createdClusterIds.push(teluguCluster.id, hindiCluster.id);
 
-    const [teluguWord, hindiWord] = await db
+    const [teluguWord, teluguAudioWord, hindiWord] = await db
       .insert(words)
       .values([
         {
@@ -71,6 +71,17 @@ test("language isolation: user data reads are scoped by selected language", asyn
           frequencyScore: 0.8,
         },
         {
+          language: LanguageEnum.TELUGU,
+          originalScript: `p6_telugu_audio_${Date.now()}`,
+          transliteration: "telugu-audio-padam",
+          english: "example telugu audio word",
+          partOfSpeech: "noun",
+          difficulty: 2,
+          difficultyLevel: "easy",
+          frequencyScore: 0.8,
+          audioUrl: "https://cdn.example.com/audio/telugu-word.mp3",
+        },
+        {
           language: LanguageEnum.HINDI,
           originalScript: `p6_hindi_${Date.now()}`,
           transliteration: "hindi-shabd",
@@ -82,10 +93,11 @@ test("language isolation: user data reads are scoped by selected language", asyn
         },
       ])
       .returning();
-    createdWordIds.push(teluguWord.id, hindiWord.id);
+    createdWordIds.push(teluguWord.id, teluguAudioWord.id, hindiWord.id);
 
     await db.insert(wordClusters).values([
       { wordId: teluguWord.id, clusterId: teluguCluster.id },
+      { wordId: teluguAudioWord.id, clusterId: teluguCluster.id },
       { wordId: hindiWord.id, clusterId: hindiCluster.id },
     ]);
 
@@ -109,6 +121,16 @@ test("language isolation: user data reads are scoped by selected language", asyn
         easeFactor: 1.8,
         interval: 1,
         nextReview: new Date(Date.now() - 24 * 60 * 60 * 1000),
+      },
+      {
+        userId: learnerUserId,
+        wordId: teluguAudioWord.id,
+        correctStreak: 1,
+        wrongCount: 1,
+        masteryLevel: 2,
+        easeFactor: 2.2,
+        interval: 2,
+        nextReview: new Date(Date.now() - 2 * 60 * 60 * 1000),
       },
     ]);
 
@@ -184,6 +206,41 @@ test("language isolation: user data reads are scoped by selected language", asyn
     assert.deepEqual(
       hindiCandidates.map((row) => row.language),
       [LanguageEnum.HINDI],
+    );
+
+    const modeChecks: QuizModeEnum[] = [
+      QuizModeEnum.DAILY_REVIEW,
+      QuizModeEnum.NEW_WORDS,
+      QuizModeEnum.CLUSTER,
+      QuizModeEnum.WEAK_WORDS,
+      QuizModeEnum.LISTEN_IDENTIFY,
+      QuizModeEnum.COMPLEX_WORKOUT,
+    ];
+
+    for (const mode of modeChecks) {
+      const rows = await storage.getQuizCandidates(
+        learnerUserId,
+        10,
+        teluguCluster.id,
+        mode,
+        LanguageEnum.TELUGU,
+      );
+      assert.ok(rows.length > 0, `expected candidates for mode=${mode}`);
+      assert.ok(rows.every((row) => row.language === LanguageEnum.TELUGU), `expected telugu-only candidates for mode=${mode}`);
+    }
+
+    const listenRows = await storage.getQuizCandidates(
+      learnerUserId,
+      10,
+      teluguCluster.id,
+      QuizModeEnum.LISTEN_IDENTIFY,
+      LanguageEnum.TELUGU,
+    );
+    assert.ok(listenRows.length > 0);
+    assert.ok(listenRows.every((row) => Boolean(row.audioUrl)));
+    assert.deepEqual(
+      listenRows.map((row) => row.id),
+      [teluguAudioWord.id],
     );
 
     const teluguWords = await storage.getWords(20, LanguageEnum.TELUGU);

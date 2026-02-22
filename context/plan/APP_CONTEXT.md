@@ -8,7 +8,7 @@ Build a text-first language learning app with high data correctness, strong memo
 
 - Phase 4 complete.
 - Phase 6 core hardening complete (`P6-001` to `P6-011`).
-- Active tasks: Phase 7 runtime reliability + testing expansion (`P7-001` to `P7-003`).
+- Active tasks: `P7-004` backend runtime migration to Next.js (currently blocked in constrained environment).
 
 ## Core capabilities live
 

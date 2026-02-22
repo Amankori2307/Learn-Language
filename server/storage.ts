@@ -514,7 +514,7 @@ export class DatabaseStorage implements IStorage {
     const progressList = await this.getUserProgress(userId, language);
     const progressMap = new Map(progressList.map(p => [p.wordId, p]));
 
-    if (mode === "cluster") {
+    if (mode === QuizModeEnum.CLUSTER) {
       const ranked = rankQuizCandidates(candidateWords, progressMap);
       return ranked.slice(0, limit);
     }

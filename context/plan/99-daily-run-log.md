@@ -2,9 +2,9 @@
 
 Date: 2026-02-21  
 Session owner: Codex  
-Last completed task ID: P7-001  
-Current in-progress task ID: P7-002  
-Next task ID: P7-003
+Last completed task ID: P7-003  
+Current in-progress task ID: P7-004  
+Next task ID: -
 
 ## Current state
 
@@ -36,7 +36,4 @@ Next task ID: P7-003
 
 ## Immediate next actions
 
-- Execute `P7-001`: add and enforce runtime `.env` controls for feedback email + hybrid quiz audio.
-- Execute `P7-002`: run full quiz-mode validation and fix discovered flow issues.
-- Execute `P7-003`: expand automated test coverage matrix and wire into single quality gate.
-- Queue `P7-004`: backend migration to Next.js with domain-module architecture split after test hardening baseline is complete.
+- `P7-004` is now the active long-running item; blocked in this environment due package installation/network constraints required for Next.js runtime migration.

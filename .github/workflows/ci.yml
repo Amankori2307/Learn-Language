@@ -58,5 +58,5 @@ jobs:
           pnpm run db:migrate:review-governance
           pnpm run db:backfill:review-governance
 
-      - name: Validate (lint + checks + tests)
-        run: pnpm run lint
+      - name: Validate (lint + checks + tests + e2e smoke)
+        run: pnpm run ci
