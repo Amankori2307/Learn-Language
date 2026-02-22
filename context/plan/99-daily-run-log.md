@@ -39,3 +39,4 @@ Next task ID: P7-003
 - Execute `P7-001`: add and enforce runtime `.env` controls for feedback email + hybrid quiz audio.
 - Execute `P7-002`: run full quiz-mode validation and fix discovered flow issues.
 - Execute `P7-003`: expand automated test coverage matrix and wire into single quality gate.
+- Queue `P7-004`: backend migration to Next.js with domain-module architecture split after test hardening baseline is complete.
