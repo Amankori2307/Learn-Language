@@ -32,7 +32,9 @@ Next task ID: -
 
 ## Current blockers
 
-- None.
+- `P7-004` backend Next.js migration is blocked by package installation constraints in the current environment:
+  - `pnpm add next@15.2.0` fails with `ERR_PNPM_META_FETCH_FAIL` (`getaddrinfo ENOTFOUND registry.npmjs.org`)
+  - without Next.js packages, runtime migration cannot be completed safely
 
 ## Immediate next actions
 
