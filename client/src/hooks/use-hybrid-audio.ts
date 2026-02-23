@@ -37,14 +37,21 @@ function isMostlyAscii(value: string): boolean {
   return Array.from(value).every((character) => character.charCodeAt(0) <= 0x7f);
 }
 
+function getPublicClientEnv(name: string): string | undefined {
+  if (typeof process !== "undefined" && process.env?.[name]) {
+    return process.env[name];
+  }
+  return undefined;
+}
+
 function isQuizAudioEnabled(): boolean {
-  return import.meta.env.VITE_ENABLE_QUIZ_AUDIO !== "false";
+  return getPublicClientEnv("NEXT_PUBLIC_ENABLE_QUIZ_AUDIO") !== "false";
 }
 
 type AudioPlaybackMode = "hybrid" | "url_only" | "tts_only";
 
 function getAudioPlaybackMode(): AudioPlaybackMode {
-  const mode = String(import.meta.env.VITE_AUDIO_PLAYBACK_MODE ?? "hybrid").toLowerCase();
+  const mode = String(getPublicClientEnv("NEXT_PUBLIC_AUDIO_PLAYBACK_MODE") ?? "hybrid").toLowerCase();
   if (mode === "url_only" || mode === "tts_only") {
     return mode;
   }
