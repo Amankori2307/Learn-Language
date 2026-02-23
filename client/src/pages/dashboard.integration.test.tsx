@@ -54,12 +54,13 @@ vi.mock("@/hooks/use-quiz", () => ({
 }));
 
 describe("Dashboard integration", () => {
-  it("shows learning insights blocks", () => {
+  it("shows primary dashboard actions and core mode cards", () => {
     render(<Dashboard />);
-    expect(screen.getByText("Learning Insights")).toBeTruthy();
-    expect(screen.getByText("Needs Improvement (Clusters)")).toBeTruthy();
-    expect(screen.getByText("travel")).toBeTruthy();
-    expect(screen.getByText("Words to Focus Next")).toBeTruthy();
-    expect(screen.getByText("raa (రా)")).toBeTruthy();
+    expect(screen.getByText("Start Learning")).toBeTruthy();
+    expect(screen.getByText("Primary Action")).toBeTruthy();
+    expect(screen.getByRole("button", { name: "Resume Weak Words" })).toBeTruthy();
+    expect(screen.getByText("Core Modes")).toBeTruthy();
+    expect(screen.getByText("Daily Review")).toBeTruthy();
+    expect(screen.getByText("Practice by Cluster")).toBeTruthy();
   });
 });

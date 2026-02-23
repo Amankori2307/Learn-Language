@@ -500,12 +500,9 @@ export class DatabaseStorage implements IStorage {
     mode: QuizMode = QuizModeEnum.DAILY_REVIEW,
     language?: LanguageEnum,
   ): Promise<Word[]> {
-    let candidateWords: Word[] = [];
-    if (clusterId) {
-      candidateWords = await this.getWordsByCluster(clusterId, language);
-    } else {
-      candidateWords = await this.getWords(500, language);
-    }
+    let candidateWords: Word[] = clusterId
+      ? await this.getWordsByCluster(clusterId, language)
+      : await this.getWords(500, language);
 
     if (mode === QuizModeEnum.LISTEN_IDENTIFY) {
       candidateWords = candidateWords.filter((word) => Boolean(word.audioUrl));

@@ -1,7 +1,8 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import type { ReactNode } from "react";
-import { describe, expect, it, vi } from "vitest";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { afterEach, describe, expect, it, vi } from "vitest";
 import { LanguageEnum, PartOfSpeechEnum, UserTypeEnum } from "@shared/domain/enums";
 import AddVocabularyPage from "./add-vocabulary";
 
@@ -30,10 +31,24 @@ vi.mock("@/hooks/use-review", () => ({
   }),
 }));
 
+afterEach(() => {
+  vi.restoreAllMocks();
+});
+
 describe("AddVocabularyPage integration", () => {
   it("creates a draft with example payload", async () => {
     const user = userEvent.setup();
-    render(<AddVocabularyPage />);
+    const queryClient = new QueryClient();
+    vi.spyOn(globalThis, "fetch").mockResolvedValue({
+      ok: true,
+      json: async () => [],
+    } as Response);
+
+    render(
+      <QueryClientProvider client={queryClient}>
+        <AddVocabularyPage />
+      </QueryClientProvider>,
+    );
 
     await user.type(screen.getByPlaceholderText("Original script word/phrase"), "నమస్కారం");
     await user.type(screen.getByPlaceholderText("Romanized pronunciation"), "namaskaaram");

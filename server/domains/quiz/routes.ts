@@ -183,10 +183,9 @@ export function registerQuizRoutes(app: Express) {
       });
     } catch (error) {
       if (error instanceof z.ZodError) {
-        return sendError(req, res, 400, "VALIDATION_ERROR", error.errors[0].message, error.errors);
+        return sendError(req, res, 400, "VALIDATION_ERROR", error.issues[0]?.message ?? "Invalid request", error.issues);
       }
       return sendError(req, res, 500, "INTERNAL_ERROR", "Internal Server Error");
     }
   });
 }
-

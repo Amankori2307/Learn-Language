@@ -92,7 +92,7 @@ export function registerAuthRoutes(app: Express): void {
       });
     } catch (error) {
       if (error instanceof z.ZodError) {
-        return sendError(req, res, 400, "VALIDATION_ERROR", error.errors[0]?.message ?? "Invalid request");
+        return sendError(req, res, 400, "VALIDATION_ERROR", error.issues[0]?.message ?? "Invalid request");
       }
       return sendError(req, res, 500, "INTERNAL_ERROR", "Failed to update profile");
     }

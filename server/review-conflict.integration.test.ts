@@ -10,12 +10,32 @@ function buildId(prefix: string) {
   return `${prefix}-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
 }
 
+function isDbUnavailable(error: unknown): boolean {
+  if (!error || typeof error !== "object") {
+    return false;
+  }
+
+  const maybeCode = "code" in error ? String((error as { code?: string }).code) : "";
+  if (maybeCode === "ECONNREFUSED" || maybeCode === "EPERM") {
+    return true;
+  }
+
+  if ("cause" in error && isDbUnavailable((error as { cause?: unknown }).cause)) {
+    return true;
+  }
+
+  if ("errors" in error && Array.isArray((error as { errors?: unknown[] }).errors)) {
+    return (error as { errors: unknown[] }).errors.some((inner) => isDbUnavailable(inner));
+  }
+
+  return false;
+}
+
 test("review conflict workflow resolves disagreement with audit history", async (t) => {
   try {
     await db.execute(sql`select 1`);
   } catch (error) {
-    const code = typeof error === "object" && error !== null && "code" in error ? String(error.code) : "";
-    if (code === "ECONNREFUSED" || code === "EPERM") {
+    if (isDbUnavailable(error)) {
       t.skip("Postgres is unavailable in current environment; skipping DB integration test");
       return;
     }
