@@ -1,0 +1,4 @@
+export const AUTH_SESSION_RULES = {
+  OIDC_CONFIG_CACHE_MAX_AGE_MS: 3600 * 1000,
+  SESSION_TTL_MS: 7 * 24 * 60 * 60 * 1000,
+} as const;

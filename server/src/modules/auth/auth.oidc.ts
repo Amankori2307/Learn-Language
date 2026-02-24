@@ -10,6 +10,7 @@ import { authStorage } from "./auth.storage";
 import { getAuthConfig } from "../../config/runtime.config";
 import { sendError } from "../../common/http";
 import { resolveRoleFromEmail } from "./auth.roles";
+import { AUTH_SESSION_RULES } from "./auth.constants";
 
 const authConfig = getAuthConfig();
 
@@ -25,11 +26,11 @@ const getOidcConfig = memoize(
       authConfig.CLIENT_SECRET
     );
   },
-  { maxAge: 3600 * 1000 }
+  { maxAge: AUTH_SESSION_RULES.OIDC_CONFIG_CACHE_MAX_AGE_MS }
 );
 
 export function getSession() {
-  const sessionTtl = 7 * 24 * 60 * 60 * 1000; // 1 week
+  const sessionTtl = AUTH_SESSION_RULES.SESSION_TTL_MS;
   const pgStore = connectPg(session);
   const sessionStore = new pgStore({
     conString: authConfig.DATABASE_URL,

@@ -1,4 +1,5 @@
 import { computeStreak, computeXp } from "./stats";
+import { LEADERBOARD_RULES } from "./leaderboard.constants";
 
 interface IUserIdentity {
   id: string;
@@ -43,7 +44,12 @@ export function computeLeaderboard(
   const rows: ILeaderboardEntry[] = users.map((user) => {
     const userAttempts = byUser.get(user.id) ?? [];
     const correctAttempts = userAttempts.filter((a) => a.isCorrect).length;
-    const hardCorrectAttempts = userAttempts.filter((a) => a.isCorrect && (a.difficulty ?? 1) >= 3).length;
+    const hardCorrectAttempts = userAttempts.filter(
+      (a) =>
+        a.isCorrect &&
+        (a.difficulty ?? LEADERBOARD_RULES.DEFAULT_WORD_DIFFICULTY) >=
+          LEADERBOARD_RULES.HARD_WORD_DIFFICULTY_THRESHOLD,
+    ).length;
     const streak = computeStreak(
       userAttempts
         .map((row) => row.createdAt)
@@ -51,7 +57,11 @@ export function computeLeaderboard(
     );
     const xp = computeXp({ correctAttempts, hardCorrectAttempts });
     const accuracy = userAttempts.length > 0
-      ? Number(((correctAttempts / userAttempts.length) * 100).toFixed(1))
+      ? Number(
+          ((correctAttempts / userAttempts.length) * LEADERBOARD_RULES.PERCENT_MULTIPLIER).toFixed(
+            LEADERBOARD_RULES.ACCURACY_DECIMAL_PLACES,
+          ),
+        )
       : 0;
 
     return {
@@ -75,5 +85,5 @@ export function computeLeaderboard(
     return a.userId.localeCompare(b.userId);
   });
 
-  return rows.slice(0, limit).map((row, idx) => ({ ...row, rank: idx + 1 }));
+  return rows.slice(0, limit).map((row, idx) => ({ ...row, rank: idx + LEADERBOARD_RULES.RANK_START }));
 }

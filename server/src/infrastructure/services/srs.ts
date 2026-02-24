@@ -1,5 +1,6 @@
 import type { UserWordProgress } from "../schema";
 import { QuizDirectionEnum } from "@shared/domain/enums";
+import { SRS_DEFAULT_CONFIG, SRS_EASE_UPDATE, SRS_MASTERY_RULES, SRS_QUALITY_RULES, SRS_STRENGTH_RULES } from "./srs.constants";
 
 export type SrsInput = {
   progress: UserWordProgress;
@@ -21,52 +22,69 @@ function clamp(value: number, min: number, max: number) {
 }
 
 function computeQuality(isCorrect: boolean, confidenceLevel: number, responseTimeMs?: number) {
-  if (!isCorrect) return 1;
+  if (!isCorrect) return SRS_QUALITY_RULES.INCORRECT_QUALITY;
 
-  let quality = 3;
-  if (confidenceLevel >= 3) quality += 1;
-  if (confidenceLevel <= 1) quality -= 0.5;
-
-  if (typeof responseTimeMs === "number") {
-    if (responseTimeMs <= 3000) quality += 0.5;
-    if (responseTimeMs >= 10000) quality -= 0.5;
+  let quality = SRS_QUALITY_RULES.BASE_QUALITY;
+  if (confidenceLevel >= SRS_QUALITY_RULES.HIGH_CONFIDENCE_THRESHOLD) {
+    quality += SRS_QUALITY_RULES.HIGH_CONFIDENCE_BONUS;
+  }
+  if (confidenceLevel <= SRS_QUALITY_RULES.LOW_CONFIDENCE_THRESHOLD) {
+    quality -= SRS_QUALITY_RULES.LOW_CONFIDENCE_PENALTY;
   }
 
-  return clamp(Math.round(quality), 0, 5);
+  if (typeof responseTimeMs === "number") {
+    if (responseTimeMs <= SRS_QUALITY_RULES.FAST_RESPONSE_MS_THRESHOLD) {
+      quality += SRS_QUALITY_RULES.FAST_RESPONSE_BONUS;
+    }
+    if (responseTimeMs >= SRS_QUALITY_RULES.SLOW_RESPONSE_MS_THRESHOLD) {
+      quality -= SRS_QUALITY_RULES.SLOW_RESPONSE_PENALTY;
+    }
+  }
+
+  return clamp(Math.round(quality), SRS_QUALITY_RULES.QUALITY_MIN, SRS_QUALITY_RULES.QUALITY_MAX);
 }
 
 function toMasteryLevel(streak: number) {
-  if (streak >= 7) return 4;
-  if (streak >= 5) return 3;
-  if (streak >= 3) return 2;
-  if (streak >= 1) return 1;
+  if (streak >= SRS_MASTERY_RULES.LEVEL_4_STREAK_MIN) return 4;
+  if (streak >= SRS_MASTERY_RULES.LEVEL_3_STREAK_MIN) return 3;
+  if (streak >= SRS_MASTERY_RULES.LEVEL_2_STREAK_MIN) return 2;
+  if (streak >= SRS_MASTERY_RULES.LEVEL_1_STREAK_MIN) return 1;
   return 0;
 }
 
 function updateStrength(current: number | null | undefined, isCorrect: boolean, confidenceLevel: number) {
-  const base = isCorrect ? 0.12 : -0.18;
-  const confidenceAdjustment = isCorrect ? (confidenceLevel - 2) * 0.04 : (confidenceLevel - 2) * 0.02;
-  return clamp((current ?? 0.5) + base + confidenceAdjustment, 0, 1);
+  const base = isCorrect
+    ? SRS_STRENGTH_RULES.CORRECT_BASE_ADJUSTMENT
+    : SRS_STRENGTH_RULES.INCORRECT_BASE_ADJUSTMENT;
+  const confidenceDelta = confidenceLevel - SRS_STRENGTH_RULES.CONFIDENCE_BASELINE;
+  const confidenceAdjustment = isCorrect
+    ? confidenceDelta * SRS_STRENGTH_RULES.CORRECT_CONFIDENCE_SCALE
+    : confidenceDelta * SRS_STRENGTH_RULES.INCORRECT_CONFIDENCE_SCALE;
+  return clamp(
+    (current ?? SRS_STRENGTH_RULES.DEFAULT_STRENGTH) + base + confidenceAdjustment,
+    SRS_STRENGTH_RULES.MIN_STRENGTH,
+    SRS_STRENGTH_RULES.MAX_STRENGTH,
+  );
 }
 
 export function applySrsUpdate(input: SrsInput): UserWordProgress {
   const now = input.now ?? new Date();
   const next = { ...input.progress };
   const config = input.config ?? {
-    version: "v1",
-    easeMin: 1.3,
-    easeMax: 3.0,
-    incorrectEasePenalty: 0.2,
+    version: SRS_DEFAULT_CONFIG.VERSION,
+    easeMin: SRS_DEFAULT_CONFIG.EASE_MIN,
+    easeMax: SRS_DEFAULT_CONFIG.EASE_MAX,
+    incorrectEasePenalty: SRS_DEFAULT_CONFIG.INCORRECT_EASE_PENALTY,
   };
   const quality = computeQuality(input.isCorrect, input.confidenceLevel, input.responseTimeMs);
 
-  const currentEase = next.easeFactor ?? 2.5;
-  const currentInterval = next.interval ?? 1;
+  const currentEase = next.easeFactor ?? SRS_DEFAULT_CONFIG.DEFAULT_EASE;
+  const currentInterval = next.interval ?? SRS_DEFAULT_CONFIG.DEFAULT_INTERVAL_DAYS;
 
-  if (quality < 3) {
+  if (quality < SRS_DEFAULT_CONFIG.QUALITY_PASS_THRESHOLD) {
     next.correctStreak = 0;
     next.wrongCount = (next.wrongCount ?? 0) + 1;
-    next.interval = 1;
+    next.interval = SRS_DEFAULT_CONFIG.DEFAULT_INTERVAL_DAYS;
     next.easeFactor = clamp(currentEase - config.incorrectEasePenalty, config.easeMin, config.easeMax);
   } else {
     next.correctStreak = (next.correctStreak ?? 0) + 1;
@@ -74,15 +92,21 @@ export function applySrsUpdate(input: SrsInput): UserWordProgress {
     // SM-2 inspired ease factor update with quality score.
     const updatedEase =
       currentEase +
-      (0.1 - (5 - quality) * (0.08 + (5 - quality) * 0.02));
+      (SRS_EASE_UPDATE.BASE_INCREMENT -
+        (SRS_EASE_UPDATE.QUALITY_OFFSET - quality) *
+          (SRS_EASE_UPDATE.PRIMARY_FACTOR +
+            (SRS_EASE_UPDATE.QUALITY_OFFSET - quality) * SRS_EASE_UPDATE.SECONDARY_FACTOR));
     next.easeFactor = clamp(updatedEase, config.easeMin, config.easeMax);
 
-    if (next.correctStreak === 1) {
-      next.interval = 1;
-    } else if (next.correctStreak === 2) {
-      next.interval = 6;
+    if (next.correctStreak === SRS_MASTERY_RULES.LEVEL_1_STREAK_MIN) {
+      next.interval = SRS_DEFAULT_CONFIG.DEFAULT_INTERVAL_DAYS;
+    } else if (next.correctStreak === SRS_MASTERY_RULES.SECOND_STREAK_STEP) {
+      next.interval = SRS_DEFAULT_CONFIG.SECOND_INTERVAL_DAYS;
     } else {
-      next.interval = Math.max(1, Math.round(currentInterval * (next.easeFactor ?? 2.5)));
+      next.interval = Math.max(
+        SRS_DEFAULT_CONFIG.DEFAULT_INTERVAL_DAYS,
+        Math.round(currentInterval * (next.easeFactor ?? SRS_DEFAULT_CONFIG.DEFAULT_EASE)),
+      );
     }
   }
 
@@ -102,7 +126,7 @@ export function applySrsUpdate(input: SrsInput): UserWordProgress {
   next.lastSeen = now;
 
   const nextReview = new Date(now);
-  nextReview.setDate(nextReview.getDate() + (next.interval ?? 1));
+  nextReview.setDate(nextReview.getDate() + (next.interval ?? SRS_DEFAULT_CONFIG.DEFAULT_INTERVAL_DAYS));
   next.nextReview = nextReview;
 
   return next;

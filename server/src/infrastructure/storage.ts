@@ -20,6 +20,7 @@ import {
   type Word, type Cluster, type UserWordProgress, type QuizAttempt, type SrsConfig,
   type CreateWordRequest, type CreateClusterRequest
 } from "./schema";
+import { STORAGE_RULES } from "./storage.constants";
 import { rankQuizCandidates } from "./services/quiz-candidate-scoring";
 import { generateSessionWords, type QuizMode } from "./services/session-generator";
 import { computeStreak, computeXp } from "./services/stats";
@@ -666,11 +667,16 @@ export class DatabaseStorage implements IStorage {
           .select({ count: sql<number>`count(*)` })
           .from(userWordProgress)
           .innerJoin(words, eq(userWordProgress.wordId, words.id))
-          .where(and(whereLanguage, sql`${userWordProgress.interval} >= 45`))
+          .where(
+            and(
+              whereLanguage,
+              sql`${userWordProgress.interval} >= ${STORAGE_RULES.SRS_HIGH_INTERVAL_THRESHOLD_DAYS}`,
+            ),
+          )
       : await db
           .select({ count: sql<number>`count(*)` })
           .from(userWordProgress)
-          .where(sql`${userWordProgress.interval} >= 45`);
+          .where(sql`${userWordProgress.interval} >= ${STORAGE_RULES.SRS_HIGH_INTERVAL_THRESHOLD_DAYS}`);
 
     const lastAttemptResult = language
       ? await db
@@ -685,8 +691,11 @@ export class DatabaseStorage implements IStorage {
     const highIntervalCount = Number(highIntervalResult[0]?.count ?? 0);
     const lastAttemptAt = lastAttemptResult[0]?.lastAttemptAt ? new Date(lastAttemptResult[0].lastAttemptAt) : null;
     const emptyReviewDays = lastAttemptAt
-      ? Math.max(0, Math.floor((now.getTime() - lastAttemptAt.getTime()) / (1000 * 60 * 60 * 24)))
-      : 999;
+      ? Math.max(
+          0,
+          Math.floor((now.getTime() - lastAttemptAt.getTime()) / STORAGE_RULES.MILLISECONDS_PER_DAY),
+        )
+      : STORAGE_RULES.EMPTY_REVIEW_DAYS_FALLBACK;
 
     return summarizeSrsDrift({
       overdueCount,
@@ -708,7 +717,7 @@ export class DatabaseStorage implements IStorage {
 
   async getReviewQueue(
     status: ReviewStatusEnum,
-    limit: number = 50,
+    limit: number = STORAGE_RULES.DEFAULT_REVIEW_QUEUE_LIMIT,
   ): Promise<Word[]> {
     return db
       .select()
@@ -718,7 +727,7 @@ export class DatabaseStorage implements IStorage {
       .limit(limit);
   }
 
-  async getConflictReviewQueue(limit: number = 50): Promise<Word[]> {
+  async getConflictReviewQueue(limit: number = STORAGE_RULES.DEFAULT_REVIEW_QUEUE_LIMIT): Promise<Word[]> {
     return db
       .select()
       .from(words)
@@ -1107,7 +1116,14 @@ export class DatabaseStorage implements IStorage {
         name: cluster.name,
         wordCount: cluster.wordIds.size,
         attempts: cluster.attempts,
-        accuracy: cluster.attempts > 0 ? Number(((cluster.correct / cluster.attempts) * 100).toFixed(1)) : 0,
+        accuracy:
+          cluster.attempts > 0
+            ? Number(
+                ((cluster.correct / cluster.attempts) * STORAGE_RULES.PERCENT_MULTIPLIER).toFixed(
+                  STORAGE_RULES.ONE_DECIMAL_PLACE,
+                ),
+              )
+            : 0,
       }))
       .sort((left, right) => right.attempts - left.attempts);
 
@@ -1115,7 +1131,14 @@ export class DatabaseStorage implements IStorage {
       .map(([category, stats]) => ({
         category,
         attempts: stats.attempts,
-        accuracy: stats.attempts > 0 ? Number(((stats.correct / stats.attempts) * 100).toFixed(1)) : 0,
+        accuracy:
+          stats.attempts > 0
+            ? Number(
+                ((stats.correct / stats.attempts) * STORAGE_RULES.PERCENT_MULTIPLIER).toFixed(
+                  STORAGE_RULES.ONE_DECIMAL_PLACE,
+                ),
+              )
+            : 0,
       }))
       .sort((left, right) => right.attempts - left.attempts);
 
@@ -1436,8 +1459,12 @@ export class DatabaseStorage implements IStorage {
       weak,
       streak,
       xp,
-      recognitionAccuracy: Number((recognitionAccuracy * 100).toFixed(1)),
-      recallAccuracy: Number((recallAccuracy * 100).toFixed(1)),
+      recognitionAccuracy: Number(
+        (recognitionAccuracy * STORAGE_RULES.PERCENT_MULTIPLIER).toFixed(STORAGE_RULES.ONE_DECIMAL_PLACE),
+      ),
+      recallAccuracy: Number(
+        (recallAccuracy * STORAGE_RULES.PERCENT_MULTIPLIER).toFixed(STORAGE_RULES.ONE_DECIMAL_PLACE),
+      ),
       sourceToTargetStrength: Number(sourceToTargetStrength.toFixed(3)),
       targetToSourceStrength: Number(targetToSourceStrength.toFixed(3)),
       recommendedDirection,
