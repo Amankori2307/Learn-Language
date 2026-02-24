@@ -1,7 +1,9 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import App from "./App";
+import dynamic from "next/dynamic";
+
+const ClientApp = dynamic(() => import("./App"), { ssr: false });
 
 export default function NextSpaRoot() {
   const [mounted, setMounted] = useState(false);
@@ -14,5 +16,5 @@ export default function NextSpaRoot() {
     return null;
   }
 
-  return <App />;
+  return <ClientApp />;
 }

@@ -100,7 +100,6 @@ async function buildNestExpressApp() {
       },
     }),
   );
-  await nestApp.init();
   const configService = nestApp.get(ConfigService);
   const resolvedAuthConfig = configService.getOrThrow<ConfigType<typeof authConfig>>("auth");
   const resolvedDatabaseConfig = configService.getOrThrow<ConfigType<typeof databaseConfig>>("database");
@@ -120,6 +119,7 @@ async function buildNestExpressApp() {
     reviewerEmails: resolvedAuthConfig.reviewerEmails,
     adminEmails: resolvedAuthConfig.adminEmails,
   });
+  await nestApp.init();
 
   expressApp.use((err: unknown, req: Request, res: Response, next: NextFunction) => {
     const normalizedError = err as { status?: number; statusCode?: number; message?: string };
