@@ -3280,5 +3280,364 @@
       "generatedAt": "2026-02-21T17:38:53.830Z",
       "reviewStatus": "approved"
     }
+  },
+  {
+    "key": "telugu::avasaram::need",
+    "language": "telugu",
+    "originalScript": "అవసరం",
+    "transliteration": "avasaram",
+    "english": "need",
+    "partOfSpeech": "noun",
+    "difficulty": 1,
+    "difficultyLevel": "beginner",
+    "frequencyScore": 0.88,
+    "cefrLevel": "A1",
+    "tags": [
+      "model-seed",
+      "high-confidence-basic"
+    ],
+    "clusters": [
+      "daily-use",
+      "nouns"
+    ],
+    "source": {
+      "type": "model-knowledge",
+      "generatedAt": "2026-02-24T09:29:28.541Z",
+      "reviewStatus": "approved"
+    }
+  },
+  {
+    "key": "telugu::aasupatri::hospital",
+    "language": "telugu",
+    "originalScript": "ఆసుపత్రి",
+    "transliteration": "aasupatri",
+    "english": "hospital",
+    "partOfSpeech": "noun",
+    "difficulty": 1,
+    "difficultyLevel": "beginner",
+    "frequencyScore": 0.86,
+    "cefrLevel": "A1",
+    "tags": [
+      "model-seed",
+      "high-confidence-basic"
+    ],
+    "clusters": [
+      "health",
+      "places",
+      "nouns"
+    ],
+    "source": {
+      "type": "model-knowledge",
+      "generatedAt": "2026-02-24T09:29:28.541Z",
+      "reviewStatus": "approved"
+    }
+  },
+  {
+    "key": "telugu::dukaanam::shop",
+    "language": "telugu",
+    "originalScript": "దుకాణం",
+    "transliteration": "dukaanam",
+    "english": "shop",
+    "partOfSpeech": "noun",
+    "difficulty": 1,
+    "difficultyLevel": "beginner",
+    "frequencyScore": 0.86,
+    "cefrLevel": "A1",
+    "tags": [
+      "model-seed",
+      "high-confidence-basic"
+    ],
+    "clusters": [
+      "shopping",
+      "places",
+      "nouns"
+    ],
+    "source": {
+      "type": "model-knowledge",
+      "generatedAt": "2026-02-24T09:29:28.541Z",
+      "reviewStatus": "approved"
+    }
+  },
+  {
+    "key": "telugu::tiket::ticket",
+    "language": "telugu",
+    "originalScript": "టికెట్",
+    "transliteration": "tiket",
+    "english": "ticket",
+    "partOfSpeech": "noun",
+    "difficulty": 1,
+    "difficultyLevel": "beginner",
+    "frequencyScore": 0.85,
+    "cefrLevel": "A1",
+    "tags": [
+      "model-seed",
+      "high-confidence-basic"
+    ],
+    "clusters": [
+      "travel",
+      "nouns"
+    ],
+    "source": {
+      "type": "model-knowledge",
+      "generatedAt": "2026-02-24T09:29:28.541Z",
+      "reviewStatus": "approved"
+    }
+  },
+  {
+    "key": "telugu::prayaanam::journey",
+    "language": "telugu",
+    "originalScript": "ప్రయాణం",
+    "transliteration": "prayaanam",
+    "english": "journey",
+    "partOfSpeech": "noun",
+    "difficulty": 1,
+    "difficultyLevel": "beginner",
+    "frequencyScore": 0.84,
+    "cefrLevel": "A1",
+    "tags": [
+      "model-seed",
+      "high-confidence-basic"
+    ],
+    "clusters": [
+      "travel",
+      "nouns"
+    ],
+    "source": {
+      "type": "model-knowledge",
+      "generatedAt": "2026-02-24T09:29:28.541Z",
+      "reviewStatus": "approved"
+    }
+  },
+  {
+    "key": "telugu::samasya::problem",
+    "language": "telugu",
+    "originalScript": "సమస్య",
+    "transliteration": "samasya",
+    "english": "problem",
+    "partOfSpeech": "noun",
+    "difficulty": 1,
+    "difficultyLevel": "beginner",
+    "frequencyScore": 0.85,
+    "cefrLevel": "A1",
+    "tags": [
+      "model-seed",
+      "high-confidence-basic"
+    ],
+    "clusters": [
+      "work",
+      "daily-use",
+      "nouns"
+    ],
+    "source": {
+      "type": "model-knowledge",
+      "generatedAt": "2026-02-24T09:29:28.541Z",
+      "reviewStatus": "approved"
+    }
+  },
+  {
+    "key": "telugu::parishkaaram::solution",
+    "language": "telugu",
+    "originalScript": "పరిష్కారం",
+    "transliteration": "parishkaaram",
+    "english": "solution",
+    "partOfSpeech": "noun",
+    "difficulty": 1,
+    "difficultyLevel": "beginner",
+    "frequencyScore": 0.83,
+    "cefrLevel": "A1",
+    "tags": [
+      "model-seed",
+      "high-confidence-basic"
+    ],
+    "clusters": [
+      "work",
+      "education",
+      "nouns"
+    ],
+    "source": {
+      "type": "model-knowledge",
+      "generatedAt": "2026-02-24T09:29:28.541Z",
+      "reviewStatus": "approved"
+    }
+  },
+  {
+    "key": "telugu::samaavesam::meeting",
+    "language": "telugu",
+    "originalScript": "సమావేశం",
+    "transliteration": "samaavesam",
+    "english": "meeting",
+    "partOfSpeech": "noun",
+    "difficulty": 1,
+    "difficultyLevel": "beginner",
+    "frequencyScore": 0.82,
+    "cefrLevel": "A1",
+    "tags": [
+      "model-seed",
+      "high-confidence-basic"
+    ],
+    "clusters": [
+      "work",
+      "nouns"
+    ],
+    "source": {
+      "type": "model-knowledge",
+      "generatedAt": "2026-02-24T09:29:28.541Z",
+      "reviewStatus": "approved"
+    }
+  },
+  {
+    "key": "telugu::sahapaathi::classmate",
+    "language": "telugu",
+    "originalScript": "సహపాఠి",
+    "transliteration": "sahapaathi",
+    "english": "classmate",
+    "partOfSpeech": "noun",
+    "difficulty": 1,
+    "difficultyLevel": "beginner",
+    "frequencyScore": 0.82,
+    "cefrLevel": "A1",
+    "tags": [
+      "model-seed",
+      "high-confidence-basic"
+    ],
+    "clusters": [
+      "education",
+      "people",
+      "nouns"
+    ],
+    "source": {
+      "type": "model-knowledge",
+      "generatedAt": "2026-02-24T09:29:28.541Z",
+      "reviewStatus": "approved"
+    }
+  },
+  {
+    "key": "telugu::abhyaasam::practice",
+    "language": "telugu",
+    "originalScript": "అభ్యాసం",
+    "transliteration": "abhyaasam",
+    "english": "practice",
+    "partOfSpeech": "noun",
+    "difficulty": 1,
+    "difficultyLevel": "beginner",
+    "frequencyScore": 0.84,
+    "cefrLevel": "A1",
+    "tags": [
+      "model-seed",
+      "high-confidence-basic"
+    ],
+    "clusters": [
+      "education",
+      "daily-actions",
+      "nouns"
+    ],
+    "source": {
+      "type": "model-knowledge",
+      "generatedAt": "2026-02-24T09:29:28.541Z",
+      "reviewStatus": "approved"
+    }
+  },
+  {
+    "key": "telugu::tvaram::hurry",
+    "language": "telugu",
+    "originalScript": "త్వరం",
+    "transliteration": "tvaram",
+    "english": "hurry",
+    "partOfSpeech": "noun",
+    "difficulty": 1,
+    "difficultyLevel": "beginner",
+    "frequencyScore": 0.8,
+    "cefrLevel": "A1",
+    "tags": [
+      "model-seed",
+      "high-confidence-basic"
+    ],
+    "clusters": [
+      "daily-use",
+      "nouns"
+    ],
+    "source": {
+      "type": "model-knowledge",
+      "generatedAt": "2026-02-24T09:29:28.541Z",
+      "reviewStatus": "approved"
+    }
+  },
+  {
+    "key": "telugu::nemmadi::calm",
+    "language": "telugu",
+    "originalScript": "నెమ్మది",
+    "transliteration": "nemmadi",
+    "english": "calm",
+    "partOfSpeech": "noun",
+    "difficulty": 1,
+    "difficultyLevel": "beginner",
+    "frequencyScore": 0.8,
+    "cefrLevel": "A1",
+    "tags": [
+      "model-seed",
+      "high-confidence-basic"
+    ],
+    "clusters": [
+      "daily-use",
+      "adjectives",
+      "nouns"
+    ],
+    "source": {
+      "type": "model-knowledge",
+      "generatedAt": "2026-02-24T09:29:28.541Z",
+      "reviewStatus": "approved"
+    }
+  },
+  {
+    "key": "telugu::challani::cold",
+    "language": "telugu",
+    "originalScript": "చల్లని",
+    "transliteration": "challani",
+    "english": "cold",
+    "partOfSpeech": "adjective",
+    "difficulty": 1,
+    "difficultyLevel": "beginner",
+    "frequencyScore": 0.83,
+    "cefrLevel": "A1",
+    "tags": [
+      "model-seed",
+      "high-confidence-basic"
+    ],
+    "clusters": [
+      "adjectives",
+      "food",
+      "daily-use"
+    ],
+    "source": {
+      "type": "model-knowledge",
+      "generatedAt": "2026-02-24T09:29:28.541Z",
+      "reviewStatus": "approved"
+    }
+  },
+  {
+    "key": "telugu::vedi::hot",
+    "language": "telugu",
+    "originalScript": "వేడి",
+    "transliteration": "vedi",
+    "english": "hot",
+    "partOfSpeech": "adjective",
+    "difficulty": 1,
+    "difficultyLevel": "beginner",
+    "frequencyScore": 0.83,
+    "cefrLevel": "A1",
+    "tags": [
+      "model-seed",
+      "high-confidence-basic"
+    ],
+    "clusters": [
+      "adjectives",
+      "food",
+      "daily-use"
+    ],
+    "source": {
+      "type": "model-knowledge",
+      "generatedAt": "2026-02-24T09:29:28.541Z",
+      "reviewStatus": "approved"
+    }
   }
 ]

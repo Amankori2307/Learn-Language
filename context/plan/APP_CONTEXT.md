@@ -67,6 +67,17 @@ Build a text-first language learning app with high data correctness, strong memo
   - sentence records include `wordRefs` links so examples are deterministic and reusable
   - language is mandatory on all content rows
   - part-of-speech and tags are enum-backed across contracts, import, validation, and vocab forms
+- Seed expansion policy (persistent):
+  - when adding seed content, always add both:
+    - new words in `words.json`
+    - linked example sentences in `sentences.json`
+  - each new word should get at least 2 linked sentences via `wordRefs`
+  - sentence pronunciation must be complete sentence-level romanization (not word-level fragments)
+  - pronunciation/transliteration must be normalized for browser `speechSynthesis` (ASCII-friendly, no hidden unicode artifacts)
+  - keep validator rules green:
+    - no placeholders/dummy values
+    - lowercase kebab-case for clusters/context tags
+    - valid enum-backed `language`, `partOfSpeech`, and tags
 
 ## Runtime and quality gates
 

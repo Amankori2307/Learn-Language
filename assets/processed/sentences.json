@@ -4990,5 +4990,340 @@
       "telugu::tirugu::turn",
       "telugu::aapu::stop"
     ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "నాకు ఇది అవసరం.",
+    "pronunciation": "Naaku idi avasaram.",
+    "english": "I need this.",
+    "contextTag": "daily-use",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::avasaram::need"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "నాకు నీ సహాయం అవసరం.",
+    "pronunciation": "Naaku nee sahaayam avasaram.",
+    "english": "I need your help.",
+    "contextTag": "daily-use",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::avasaram::need"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "దగ్గరలో ఆసుపత్రి ఉంది.",
+    "pronunciation": "Daggaralo aasupatri undi.",
+    "english": "There is a hospital nearby.",
+    "contextTag": "health",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::aasupatri::hospital"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "అతన్ని వెంటనే ఆసుపత్రికి తీసుకెళ్ళు.",
+    "pronunciation": "Atanni ventane aasupatriki teesukellu.",
+    "english": "Take him to the hospital immediately.",
+    "contextTag": "health",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::aasupatri::hospital"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "ఆ దుకాణం ఇప్పుడు తెరిచి ఉంది.",
+    "pronunciation": "Aa dukaanam ippudu terichi undi.",
+    "english": "That shop is open now.",
+    "contextTag": "shopping",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::dukaanam::shop"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "ఈ దుకాణం రాత్రి వరకు తెరిచి ఉంటుంది.",
+    "pronunciation": "Ee dukaanam raatri varaku terichi untundi.",
+    "english": "This shop stays open until night.",
+    "contextTag": "shopping",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::dukaanam::shop"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "నాకు హైదరాబాద్ టికెట్ కావాలి.",
+    "pronunciation": "Naaku haidaraabaad tiket kaavaali.",
+    "english": "I need a ticket to Hyderabad.",
+    "contextTag": "travel",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::tiket::ticket"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "రెండు టికెట్‌లు బుక్ చేయి.",
+    "pronunciation": "Rendu tiketlu book cheyi.",
+    "english": "Book two tickets.",
+    "contextTag": "travel",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::tiket::ticket"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "రేపు మా ప్రయాణం మొదలవుతుంది.",
+    "pronunciation": "Repu maa prayaanam modalavutundi.",
+    "english": "Our journey starts tomorrow.",
+    "contextTag": "travel",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::prayaanam::journey"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "ఈ ప్రయాణం చాలా పొడవుగా ఉంది.",
+    "pronunciation": "Ee prayaanam chaala podavuga undi.",
+    "english": "This journey is very long.",
+    "contextTag": "travel",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::prayaanam::journey"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "ఇది చిన్న సమస్య మాత్రమే.",
+    "pronunciation": "Idi chinna samasya maatrame.",
+    "english": "This is only a small problem.",
+    "contextTag": "work",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::samasya::problem"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "ఆ సమస్యకు పరిష్కారం దొరికింది.",
+    "pronunciation": "Aa samasyaku parishkaaram dorikindi.",
+    "english": "A solution was found for that problem.",
+    "contextTag": "work",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::samasya::problem",
+      "telugu::parishkaaram::solution"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "నీ పరిష్కారం చాలా మంచిది.",
+    "pronunciation": "Nee parishkaaram chaala manchidi.",
+    "english": "Your solution is very good.",
+    "contextTag": "work",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::parishkaaram::solution"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "ప్రతి సమస్యకు ఒక పరిష్కారం ఉంటుంది.",
+    "pronunciation": "Prati samasyaku oka parishkaaram untundi.",
+    "english": "Every problem has a solution.",
+    "contextTag": "work",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::samasya::problem",
+      "telugu::parishkaaram::solution"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "మధ్యాహ్నం మూడు గంటలకు సమావేశం ఉంది.",
+    "pronunciation": "Madhyaahnam moodu gantalaku samaavesam undi.",
+    "english": "There is a meeting at 3 PM.",
+    "contextTag": "work",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::samaavesam::meeting"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "రేపటి సమావేశం చాలా ముఖ్యమైనది.",
+    "pronunciation": "Repati samaavesam chaala mukhyamainadi.",
+    "english": "Tomorrow’s meeting is very important.",
+    "contextTag": "work",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::samaavesam::meeting"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "అతను నా సహపాఠి మరియు స్నేహితుడు.",
+    "pronunciation": "Atanu naa sahapaathi mariyu snehitudu.",
+    "english": "He is my classmate and friend.",
+    "contextTag": "education",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::sahapaathi::classmate"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "నా సహపాఠి తెలుగు బాగా మాట్లాడుతాడు.",
+    "pronunciation": "Naa sahapaathi telugu baaga maatlaadutaadu.",
+    "english": "My classmate speaks Telugu well.",
+    "contextTag": "education",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::sahapaathi::classmate"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "ప్రతిరోజు అభ్యాసం చేస్తే త్వరగా నేర్చుకుంటావు.",
+    "pronunciation": "Pratiroju abhyaasam cheste tvaraga nerchukuntaavu.",
+    "english": "If you practice every day, you will learn quickly.",
+    "contextTag": "education",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::abhyaasam::practice"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "మాట్లాడే ముందు కొంచెం అభ్యాసం చేయి.",
+    "pronunciation": "Maatlaade mundu konchem abhyaasam cheyi.",
+    "english": "Practice a little before speaking.",
+    "contextTag": "education",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::abhyaasam::practice"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "నాకు ఇప్పుడు త్వర ఉంది.",
+    "pronunciation": "Naaku ippudu tvaram undi.",
+    "english": "I am in a hurry now.",
+    "contextTag": "daily-use",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::tvaram::hurry"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "అతనికి చాలా త్వర ఉంది.",
+    "pronunciation": "Ataniki chaala tvaram undi.",
+    "english": "He is in a lot of hurry.",
+    "contextTag": "daily-use",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::tvaram::hurry"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "నాకు కొంచెం నెమ్మది కావాలి.",
+    "pronunciation": "Naaku konchem nemmadi kaavaali.",
+    "english": "I need a little calm.",
+    "contextTag": "daily-use",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::nemmadi::calm"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "పని తర్వాత నెమ్మది మంచిది.",
+    "pronunciation": "Pani tarvaata nemmadi manchidi.",
+    "english": "Calm is good after work.",
+    "contextTag": "daily-use",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::nemmadi::calm"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "ఆమె చల్లని నీరు ఇచ్చింది.",
+    "pronunciation": "Aame challani neeru ichchindi.",
+    "english": "She gave cold water.",
+    "contextTag": "food",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::challani::cold"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "ఈరోజు చల్లని గాలి ఉంది.",
+    "pronunciation": "Ee roju challani gaali undi.",
+    "english": "Today there is a cold breeze.",
+    "contextTag": "weather",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::challani::cold"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "వేడి చాయ్ తాగు.",
+    "pronunciation": "Vedi chaay taagu.",
+    "english": "Drink hot tea.",
+    "contextTag": "food",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::vedi::hot"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "వేడి అన్నం చాలా రుచిగా ఉంది.",
+    "pronunciation": "Vedi annam chaala ruchiga undi.",
+    "english": "Hot rice is very tasty.",
+    "contextTag": "food",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::vedi::hot"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "చల్లని నీరు కాదు, వేడి నీరు ఇవ్వు.",
+    "pronunciation": "Challani neeru kaadu, vedi neeru ivvu.",
+    "english": "Not cold water, give hot water.",
+    "contextTag": "food",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::challani::cold",
+      "telugu::vedi::hot"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "ఈ సమస్యకు ఇప్పుడు పరిష్కారం అవసరం.",
+    "pronunciation": "Ee samasyaku ippudu parishkaaram avasaram.",
+    "english": "This problem needs a solution now.",
+    "contextTag": "work",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::samasya::problem",
+      "telugu::parishkaaram::solution",
+      "telugu::avasaram::need"
+    ]
   }
 ]
