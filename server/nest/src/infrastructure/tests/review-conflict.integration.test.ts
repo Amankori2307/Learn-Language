@@ -4,7 +4,7 @@ import { eq, inArray, sql } from "drizzle-orm";
 import { db } from "../db";
 import { storage } from "../storage";
 import { ReviewDisagreementStatusEnum, ReviewStatusEnum, UserTypeEnum, LanguageEnum } from "@shared/domain/enums";
-import { users, words, wordReviewEvents } from "@shared/schema";
+import { users, words, wordReviewEvents } from "../schema";
 
 function buildId(prefix: string) {
   return `${prefix}-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;

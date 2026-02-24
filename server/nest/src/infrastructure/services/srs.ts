@@ -1,4 +1,4 @@
-import type { UserWordProgress } from "@shared/schema";
+import type { UserWordProgress } from "../schema";
 import { QuizDirectionEnum } from "@shared/domain/enums";
 
 export type SrsInput = {

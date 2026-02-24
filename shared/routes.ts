@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { words, clusters } from './schema';
+import type { Word, Cluster } from "../server/nest/src/infrastructure/schema";
 import {
   LanguageEnum,
   PartOfSpeechEnum,
@@ -54,14 +54,14 @@ export const api = {
         limit: z.coerce.number().optional(),
       }).optional(),
       responses: {
-        200: z.array(z.custom<typeof words.$inferSelect>()),
+        200: z.array(z.custom<Word>()),
       },
     },
     get: {
       method: 'GET' as const,
       path: '/api/words/:id' as const,
       responses: {
-        200: z.custom<typeof words.$inferSelect>(),
+        200: z.custom<Word>(),
         404: errorSchemas.notFound,
       },
     },
@@ -90,7 +90,7 @@ export const api = {
         language: z.nativeEnum(LanguageEnum).optional(),
       }).optional(),
       responses: {
-        200: z.custom<typeof clusters.$inferSelect & { words: typeof words.$inferSelect[] }>(),
+        200: z.custom<Cluster & { words: Word[] }>(),
         404: errorSchemas.notFound,
       },
     },
@@ -137,7 +137,7 @@ export const api = {
       responses: {
         200: z.object({
           isCorrect: z.boolean(),
-          correctAnswer: z.custom<typeof words.$inferSelect>(),
+          correctAnswer: z.custom<Word>(),
           examples: z.array(z.object({
             originalScript: z.string(),
             pronunciation: z.string(),

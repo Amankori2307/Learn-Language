@@ -1,4 +1,4 @@
-import type { SrsConfig } from "@shared/schema";
+import type { SrsConfig } from "../schema";
 
 export const DEFAULT_SRS_CONFIG_VERSION = "v1";
 

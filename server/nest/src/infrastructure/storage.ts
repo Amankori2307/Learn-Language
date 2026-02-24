@@ -19,7 +19,7 @@ import {
   wordReviewEvents, srsConfigs,
   type Word, type Cluster, type UserWordProgress, type QuizAttempt, type SrsConfig,
   type CreateWordRequest, type CreateClusterRequest
-} from "@shared/schema";
+} from "./schema";
 import { rankQuizCandidates } from "./services/quiz-candidate-scoring";
 import { generateSessionWords, type QuizMode } from "./services/session-generator";
 import { computeStreak, computeXp } from "./services/stats";

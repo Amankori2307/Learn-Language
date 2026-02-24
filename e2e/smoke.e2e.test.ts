@@ -2,7 +2,7 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { sql } from "drizzle-orm";
 import { createServer } from "http";
-import { db } from "../server/db";
+import { db } from "../server/nest/src/infrastructure/db";
 import { getNestExpressApp } from "../server/nest/src/bootstrap/nest-app";
 import { QuizModeEnum } from "../shared/domain/enums";
 

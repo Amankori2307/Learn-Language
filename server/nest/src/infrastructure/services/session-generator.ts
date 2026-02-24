@@ -1,4 +1,4 @@
-import type { UserWordProgress, Word } from "@shared/schema";
+import type { UserWordProgress, Word } from "../schema";
 import { QuizModeEnum } from "@shared/domain/enums";
 import { rankQuizCandidates } from "./quiz-candidate-scoring";
 

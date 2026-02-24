@@ -1,4 +1,4 @@
-import type { UserWordProgress, Word } from "@shared/schema";
+import type { UserWordProgress, Word } from "../schema";
 
 export type CandidateScoreBreakdown = {
   difficultyWeight: number;

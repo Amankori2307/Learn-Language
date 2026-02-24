@@ -1,4 +1,4 @@
-import type { Word } from "@shared/schema";
+import type { Word } from "../schema";
 
 function transliterationSimilarity(a: string, b: string) {
   const x = a.toLowerCase();

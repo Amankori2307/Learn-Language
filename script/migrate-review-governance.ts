@@ -1,5 +1,5 @@
 import { sql } from "drizzle-orm";
-import { db, pool } from "../server/db";
+import { db, pool } from "../server/nest/src/infrastructure/db";
 
 async function run() {
   await db.execute(sql.raw(`

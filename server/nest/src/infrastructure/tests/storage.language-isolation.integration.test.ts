@@ -4,7 +4,7 @@ import { eq, inArray, sql } from "drizzle-orm";
 import { storage } from "../storage";
 import { db } from "../db";
 import { LanguageEnum, QuizDirectionEnum, QuizModeEnum, UserTypeEnum } from "@shared/domain/enums";
-import { clusters, quizAttempts, userWordProgress, users, wordClusters, words } from "@shared/schema";
+import { clusters, quizAttempts, userWordProgress, users, wordClusters, words } from "../schema";
 
 function buildId(prefix: string) {
   return `${prefix}-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
