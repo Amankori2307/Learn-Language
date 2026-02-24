@@ -1,0 +1,20 @@
+export const LEARNING_MASTERY_LEVEL = {
+  NEW_MAX_EXCLUSIVE: 1,
+  MASTERED_MIN: 4,
+  LEARNING_MIN: 1,
+  LEARNING_MAX_EXCLUSIVE: 4,
+} as const;
+
+export const LEARNING_WEAK_RULES = {
+  WRONG_COUNT_THRESHOLD: 2,
+} as const;
+
+export const LEARNING_STRENGTH = {
+  DEFAULT: 0.5,
+  DECIMAL_PLACES: 3,
+} as const;
+
+export const LEARNING_INSIGHTS = {
+  WEAK_WORDS_LIMIT: 5,
+  STRONG_WORDS_LIMIT: 5,
+} as const;

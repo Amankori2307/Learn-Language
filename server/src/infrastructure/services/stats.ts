@@ -1,3 +1,5 @@
+import { XP_RULES } from "./stats.constants";
+
 export function toDayKey(date: Date): string {
   return date.toISOString().slice(0, 10);
 }
@@ -32,5 +34,8 @@ export function computeXp(params: {
   correctAttempts: number;
   hardCorrectAttempts: number;
 }): number {
-  return params.correctAttempts * 10 + params.hardCorrectAttempts * 5;
+  return (
+    params.correctAttempts * XP_RULES.CORRECT_ATTEMPT_POINTS +
+    params.hardCorrectAttempts * XP_RULES.HARD_CORRECT_BONUS_POINTS
+  );
 }

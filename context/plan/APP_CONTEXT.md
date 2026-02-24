@@ -99,4 +99,5 @@ Build a text-first language learning app with high data correctness, strong memo
   - architecture boundaries and code hygiene (`P8-001` to `P8-003`)
   - UX cleanup tasks with functional outcomes (`P8-004`)
   - seed/content expansion (`P8-005`)
-  - deployment + performance + audio infra (`P8-006` to `P8-008`)
+  - performance + audio infra (`P8-007`, `P8-008`)
+  - deployment/CI-CD last (`P8-006`)

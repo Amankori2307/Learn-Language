@@ -26,6 +26,8 @@ import { computeStreak, computeXp } from "./services/stats";
 import { computeLeaderboard } from "./services/leaderboard";
 import { type SrsConfigSnapshot, resolveSrsConfig } from "./services/srs-config";
 import { summarizeSrsDrift, type SrsDriftSummary } from "./services/srs-drift";
+import { LEARNING_INSIGHTS, LEARNING_MASTERY_LEVEL, LEARNING_STRENGTH, LEARNING_WEAK_RULES } from "./services/learning.constants";
+import { XP_RULES } from "./services/stats.constants";
 
 function assertLanguage(value: string): LanguageEnum {
   if (Object.values(LanguageEnum).includes(value as LanguageEnum)) {
@@ -1123,7 +1125,7 @@ export class DatabaseStorage implements IStorage {
         if (wrongDelta !== 0) return wrongDelta;
         return (left.masteryLevel ?? 0) - (right.masteryLevel ?? 0);
       })
-      .slice(0, 5)
+      .slice(0, LEARNING_INSIGHTS.WEAK_WORDS_LIMIT)
       .map((row) => ({
         wordId: row.wordId,
         originalScript: row.originalScript,
@@ -1136,21 +1138,24 @@ export class DatabaseStorage implements IStorage {
     const strongWords = [...progressRows]
       .map((row) => ({
         ...row,
-        averageStrength: ((row.sourceToTargetStrength ?? 0.5) + (row.targetToSourceStrength ?? 0.5)) / 2,
+        averageStrength:
+          ((row.sourceToTargetStrength ?? LEARNING_STRENGTH.DEFAULT) +
+            (row.targetToSourceStrength ?? LEARNING_STRENGTH.DEFAULT)) /
+          2,
       }))
       .sort((left, right) => {
         const masteryDelta = (right.masteryLevel ?? 0) - (left.masteryLevel ?? 0);
         if (masteryDelta !== 0) return masteryDelta;
         return right.averageStrength - left.averageStrength;
       })
-      .slice(0, 5)
+      .slice(0, LEARNING_INSIGHTS.STRONG_WORDS_LIMIT)
       .map((row) => ({
         wordId: row.wordId,
         originalScript: row.originalScript,
         transliteration: row.transliteration,
         english: row.english,
         masteryLevel: row.masteryLevel ?? 0,
-        averageStrength: Number(row.averageStrength.toFixed(3)),
+        averageStrength: Number(row.averageStrength.toFixed(LEARNING_STRENGTH.DECIMAL_PLACES)),
       }));
 
     return {
@@ -1226,7 +1231,10 @@ export class DatabaseStorage implements IStorage {
       masteryLevel: row.masteryLevel ?? 0,
       wrongCount: row.wrongCount ?? 0,
       averageStrength: Number(
-        ((((row.sourceToTargetStrength ?? 0.5) + (row.targetToSourceStrength ?? 0.5)) / 2).toFixed(3)),
+        ((((row.sourceToTargetStrength ?? LEARNING_STRENGTH.DEFAULT) +
+          (row.targetToSourceStrength ?? LEARNING_STRENGTH.DEFAULT)) / 2).toFixed(
+          LEARNING_STRENGTH.DECIMAL_PLACES,
+        )),
       ),
     }));
 
@@ -1252,9 +1260,17 @@ export class DatabaseStorage implements IStorage {
     };
 
     const filtered = withStrength.filter((row) => {
-      if (input.bucket === "mastered") return row.masteryLevel >= 4;
-      if (input.bucket === "learning") return row.masteryLevel > 0 && row.masteryLevel < 4;
-      return row.wrongCount > 2 || (!!row.nextReview && new Date(row.nextReview) < now);
+      if (input.bucket === "mastered") return row.masteryLevel >= LEARNING_MASTERY_LEVEL.MASTERED_MIN;
+      if (input.bucket === "learning") {
+        return (
+          row.masteryLevel >= LEARNING_MASTERY_LEVEL.LEARNING_MIN &&
+          row.masteryLevel < LEARNING_MASTERY_LEVEL.LEARNING_MAX_EXCLUSIVE
+        );
+      }
+      return (
+        row.wrongCount > LEARNING_WEAK_RULES.WRONG_COUNT_THRESHOLD ||
+        (!!row.nextReview && new Date(row.nextReview) < now)
+      );
     });
 
     filtered.sort((left, right) => {
@@ -1322,13 +1338,19 @@ export class DatabaseStorage implements IStorage {
       : await db.select({ count: sql<number>`count(*)` }).from(words).where(eq(words.reviewStatus, ReviewStatusEnum.APPROVED));
     const totalWords = Number(totalWordsResult[0].count);
 
-    const mastered = progressList.filter(p => (p.masteryLevel || 0) >= 4).length;
-    const learning = progressList.filter(p => (p.masteryLevel || 0) > 0 && (p.masteryLevel || 0) < 4).length;
+    const mastered = progressList.filter(
+      (p) => (p.masteryLevel || 0) >= LEARNING_MASTERY_LEVEL.MASTERED_MIN,
+    ).length;
+    const learning = progressList.filter(
+      (p) =>
+        (p.masteryLevel || 0) >= LEARNING_MASTERY_LEVEL.LEARNING_MIN &&
+        (p.masteryLevel || 0) < LEARNING_MASTERY_LEVEL.LEARNING_MAX_EXCLUSIVE,
+    ).length;
     
-    // Weak: wrongCount > 2 or overdue
+    // Weak: wrong-count threshold exceeded or overdue.
     const now = new Date();
     const weak = progressList.filter(p => 
-      (p.wrongCount || 0) > 2 || 
+      (p.wrongCount || 0) > LEARNING_WEAK_RULES.WRONG_COUNT_THRESHOLD ||
       (p.nextReview && new Date(p.nextReview) < now)
     ).length;
 
@@ -1360,7 +1382,9 @@ export class DatabaseStorage implements IStorage {
 
     const correctAttempts = attemptRows.filter((row) => row.isCorrect).length;
     const hardCorrectAttempts = attemptRows.filter(
-      (row) => row.isCorrect && (row.difficulty ?? 1) >= 3,
+      (row) =>
+        row.isCorrect &&
+        (row.difficulty ?? XP_RULES.DEFAULT_WORD_DIFFICULTY) >= XP_RULES.HARD_WORD_DIFFICULTY_THRESHOLD,
     ).length;
     const xp = computeXp({ correctAttempts, hardCorrectAttempts });
 
@@ -1390,11 +1414,17 @@ export class DatabaseStorage implements IStorage {
     const recallAccuracy = recallAttempts.length > 0 ? recallCorrect / recallAttempts.length : 1;
     const recognitionAccuracy = recognitionAttempts.length > 0 ? recognitionCorrect / recognitionAttempts.length : 1;
     const sourceToTargetStrength = progressList.length > 0
-      ? progressList.reduce((sum, row) => sum + (row.sourceToTargetStrength ?? 0.5), 0) / progressList.length
-      : 0.5;
+      ? progressList.reduce(
+          (sum, row) => sum + (row.sourceToTargetStrength ?? LEARNING_STRENGTH.DEFAULT),
+          0,
+        ) / progressList.length
+      : LEARNING_STRENGTH.DEFAULT;
     const targetToSourceStrength = progressList.length > 0
-      ? progressList.reduce((sum, row) => sum + (row.targetToSourceStrength ?? 0.5), 0) / progressList.length
-      : 0.5;
+      ? progressList.reduce(
+          (sum, row) => sum + (row.targetToSourceStrength ?? LEARNING_STRENGTH.DEFAULT),
+          0,
+        ) / progressList.length
+      : LEARNING_STRENGTH.DEFAULT;
     const recommendedDirection = recallAccuracy < recognitionAccuracy
       ? QuizDirectionEnum.SOURCE_TO_TARGET
       : QuizDirectionEnum.TARGET_TO_SOURCE;
