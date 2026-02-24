@@ -5325,5 +5325,226 @@
       "telugu::parishkaaram::solution",
       "telugu::avasaram::need"
     ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "మీకు సందేహం ఉంటే అడగండి.",
+    "pronunciation": "Meeku sandeham unte adagandi.",
+    "english": "If you have a doubt, ask.",
+    "contextTag": "education",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::adagandi::ask"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "ఏమి కావాలో అడగండి.",
+    "pronunciation": "Emi kaavaalo adagandi.",
+    "english": "Ask what you need.",
+    "contextTag": "daily-use",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::adagandi::ask"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "దయచేసి జాగ్రత్తగా వినండి.",
+    "pronunciation": "Dayachesi jagrattaga vinandi.",
+    "english": "Please listen carefully.",
+    "contextTag": "daily-use",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::vinandi::listen-formal"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "మొదట నా మాట వినండి.",
+    "pronunciation": "Modata naa maata vinandi.",
+    "english": "First listen to what I say.",
+    "contextTag": "daily-use",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::vinandi::listen-formal"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "దయచేసి మీ పేరు చెప్పండి.",
+    "pronunciation": "Dayachesi mee peru chappandi.",
+    "english": "Please tell your name.",
+    "contextTag": "daily-use",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::chappandi::tell-formal"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "సమాధానం చెప్పండి.",
+    "pronunciation": "Samaadhaanam chappandi.",
+    "english": "Tell the answer.",
+    "contextTag": "education",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::chappandi::tell-formal"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "తిరిగి రండి.",
+    "pronunciation": "Tirigi randi.",
+    "english": "Come again.",
+    "contextTag": "daily-use",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::tirigi::again"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "అతను తిరిగి ఇంటికి వెళ్లాడు.",
+    "pronunciation": "Atanu tirigi intiki vellaadu.",
+    "english": "He went back home.",
+    "contextTag": "daily-use",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::tirigi::again"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "ఇది మొదటి పాఠం.",
+    "pronunciation": "Idi modati paatham.",
+    "english": "This is the first lesson.",
+    "contextTag": "education",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::modati::first"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "మొదటి ప్రశ్న సులభం.",
+    "pronunciation": "Modati prashna sulabham.",
+    "english": "The first question is easy.",
+    "contextTag": "education",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::modati::first"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "రెండవ రోజు పరీక్ష ఉంది.",
+    "pronunciation": "Rendava roju pariksha undi.",
+    "english": "The exam is on the second day.",
+    "contextTag": "education",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::rendava::second"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "రెండవ పేజీ చదవండి.",
+    "pronunciation": "Rendava peji chadavandi.",
+    "english": "Read the second page.",
+    "contextTag": "education",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::rendava::second"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "మూడవ అధ్యాయం చదవండి.",
+    "pronunciation": "Moodava adhyayam chadavandi.",
+    "english": "Read the third chapter.",
+    "contextTag": "education",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::moodava::third"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "మూడవ ప్రశ్న కష్టం.",
+    "pronunciation": "Moodava prashna kashtam.",
+    "english": "The third question is difficult.",
+    "contextTag": "education",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::moodava::third"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "మధ్యాహ్నం భోజనం చేద్దాం.",
+    "pronunciation": "Madhyaahnam bhojanam cheddaam.",
+    "english": "Let us have lunch in the afternoon.",
+    "contextTag": "time",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::madhyaahnam::afternoon"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "మధ్యాహ్నం మూడు గంటలకు కలుద్దాం.",
+    "pronunciation": "Madhyaahnam moodu gantalaku kaluddaam.",
+    "english": "Let us meet at three in the afternoon.",
+    "contextTag": "time",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::madhyaahnam::afternoon"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "అందరూ తరగతిలో ఉన్నారు.",
+    "pronunciation": "Andaroo taragatilo unnaru.",
+    "english": "Everyone is in the class.",
+    "contextTag": "education",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::andaroo::everyone"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "అందరూ కలిసి పాట పాడారు.",
+    "pronunciation": "Andaroo kalisi paata paadaaru.",
+    "english": "Everyone sang together.",
+    "contextTag": "daily-use",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::andaroo::everyone",
+      "telugu::kalisi::together"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "మనం కలిసి చదువుదాం.",
+    "pronunciation": "Manam kalisi chaduvudaam.",
+    "english": "Let us study together.",
+    "contextTag": "education",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::kalisi::together"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "వాళ్లు కలిసి పని చేశారు.",
+    "pronunciation": "Vaallu kalisi pani chesaaru.",
+    "english": "They worked together.",
+    "contextTag": "work",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::kalisi::together"
+    ]
   }
 ]

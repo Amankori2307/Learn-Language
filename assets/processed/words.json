@@ -3639,5 +3639,257 @@
       "generatedAt": "2026-02-24T09:29:28.541Z",
       "reviewStatus": "approved"
     }
+  },
+  {
+    "key": "telugu::adagandi::ask",
+    "language": "telugu",
+    "originalScript": "అడగండి",
+    "transliteration": "adagandi",
+    "english": "ask",
+    "partOfSpeech": "verb",
+    "difficulty": 1,
+    "difficultyLevel": "beginner",
+    "frequencyScore": 0.84,
+    "cefrLevel": "A1",
+    "tags": [
+      "model-seed",
+      "high-confidence-basic"
+    ],
+    "clusters": [
+      "daily-use",
+      "verbs"
+    ],
+    "source": {
+      "type": "model-knowledge",
+      "generatedAt": "2026-02-24T11:48:42.640Z",
+      "reviewStatus": "approved"
+    }
+  },
+  {
+    "key": "telugu::vinandi::listen-formal",
+    "language": "telugu",
+    "originalScript": "వినండి",
+    "transliteration": "vinandi",
+    "english": "listen formal",
+    "partOfSpeech": "verb",
+    "difficulty": 1,
+    "difficultyLevel": "beginner",
+    "frequencyScore": 0.84,
+    "cefrLevel": "A1",
+    "tags": [
+      "model-seed",
+      "high-confidence-basic"
+    ],
+    "clusters": [
+      "daily-use",
+      "verbs"
+    ],
+    "source": {
+      "type": "model-knowledge",
+      "generatedAt": "2026-02-24T11:48:42.640Z",
+      "reviewStatus": "approved"
+    }
+  },
+  {
+    "key": "telugu::chappandi::tell-formal",
+    "language": "telugu",
+    "originalScript": "చెప్పండి",
+    "transliteration": "chappandi",
+    "english": "tell formal",
+    "partOfSpeech": "verb",
+    "difficulty": 1,
+    "difficultyLevel": "beginner",
+    "frequencyScore": 0.84,
+    "cefrLevel": "A1",
+    "tags": [
+      "model-seed",
+      "high-confidence-basic"
+    ],
+    "clusters": [
+      "daily-use",
+      "verbs"
+    ],
+    "source": {
+      "type": "model-knowledge",
+      "generatedAt": "2026-02-24T11:48:42.640Z",
+      "reviewStatus": "approved"
+    }
+  },
+  {
+    "key": "telugu::tirigi::again",
+    "language": "telugu",
+    "originalScript": "తిరిగి",
+    "transliteration": "tirigi",
+    "english": "again",
+    "partOfSpeech": "adverb",
+    "difficulty": 1,
+    "difficultyLevel": "beginner",
+    "frequencyScore": 0.82,
+    "cefrLevel": "A1",
+    "tags": [
+      "model-seed",
+      "high-confidence-basic"
+    ],
+    "clusters": [
+      "daily-use",
+      "adverbs"
+    ],
+    "source": {
+      "type": "model-knowledge",
+      "generatedAt": "2026-02-24T11:48:42.640Z",
+      "reviewStatus": "approved"
+    }
+  },
+  {
+    "key": "telugu::modati::first",
+    "language": "telugu",
+    "originalScript": "మొదటి",
+    "transliteration": "modati",
+    "english": "first",
+    "partOfSpeech": "numeral",
+    "difficulty": 1,
+    "difficultyLevel": "beginner",
+    "frequencyScore": 0.82,
+    "cefrLevel": "A1",
+    "tags": [
+      "model-seed",
+      "high-confidence-basic"
+    ],
+    "clusters": [
+      "numbers",
+      "daily-use"
+    ],
+    "source": {
+      "type": "model-knowledge",
+      "generatedAt": "2026-02-24T11:48:42.640Z",
+      "reviewStatus": "approved"
+    }
+  },
+  {
+    "key": "telugu::rendava::second",
+    "language": "telugu",
+    "originalScript": "రెండవ",
+    "transliteration": "rendava",
+    "english": "second",
+    "partOfSpeech": "numeral",
+    "difficulty": 1,
+    "difficultyLevel": "beginner",
+    "frequencyScore": 0.82,
+    "cefrLevel": "A1",
+    "tags": [
+      "model-seed",
+      "high-confidence-basic"
+    ],
+    "clusters": [
+      "numbers",
+      "daily-use"
+    ],
+    "source": {
+      "type": "model-knowledge",
+      "generatedAt": "2026-02-24T11:48:42.640Z",
+      "reviewStatus": "approved"
+    }
+  },
+  {
+    "key": "telugu::moodava::third",
+    "language": "telugu",
+    "originalScript": "మూడవ",
+    "transliteration": "moodava",
+    "english": "third",
+    "partOfSpeech": "numeral",
+    "difficulty": 1,
+    "difficultyLevel": "beginner",
+    "frequencyScore": 0.81,
+    "cefrLevel": "A1",
+    "tags": [
+      "model-seed",
+      "high-confidence-basic"
+    ],
+    "clusters": [
+      "numbers",
+      "daily-use"
+    ],
+    "source": {
+      "type": "model-knowledge",
+      "generatedAt": "2026-02-24T11:48:42.640Z",
+      "reviewStatus": "approved"
+    }
+  },
+  {
+    "key": "telugu::madhyaahnam::afternoon",
+    "language": "telugu",
+    "originalScript": "మధ్యాహ్నం",
+    "transliteration": "madhyaahnam",
+    "english": "afternoon",
+    "partOfSpeech": "noun",
+    "difficulty": 1,
+    "difficultyLevel": "beginner",
+    "frequencyScore": 0.83,
+    "cefrLevel": "A1",
+    "tags": [
+      "model-seed",
+      "high-confidence-basic"
+    ],
+    "clusters": [
+      "time",
+      "daily-use",
+      "nouns"
+    ],
+    "source": {
+      "type": "model-knowledge",
+      "generatedAt": "2026-02-24T11:48:42.640Z",
+      "reviewStatus": "approved"
+    }
+  },
+  {
+    "key": "telugu::andaroo::everyone",
+    "language": "telugu",
+    "originalScript": "అందరూ",
+    "transliteration": "andaroo",
+    "english": "everyone",
+    "partOfSpeech": "pronoun",
+    "difficulty": 1,
+    "difficultyLevel": "beginner",
+    "frequencyScore": 0.83,
+    "cefrLevel": "A1",
+    "tags": [
+      "model-seed",
+      "high-confidence-basic"
+    ],
+    "clusters": [
+      "people",
+      "daily-use",
+      "pronouns"
+    ],
+    "source": {
+      "type": "model-knowledge",
+      "generatedAt": "2026-02-24T11:48:42.640Z",
+      "reviewStatus": "approved"
+    }
+  },
+  {
+    "key": "telugu::kalisi::together",
+    "language": "telugu",
+    "originalScript": "కలిసి",
+    "transliteration": "kalisi",
+    "english": "together",
+    "partOfSpeech": "adverb",
+    "difficulty": 1,
+    "difficultyLevel": "beginner",
+    "frequencyScore": 0.84,
+    "cefrLevel": "A1",
+    "tags": [
+      "model-seed",
+      "high-confidence-basic"
+    ],
+    "clusters": [
+      "daily-use",
+      "adverbs"
+    ],
+    "source": {
+      "type": "model-knowledge",
+      "generatedAt": "2026-02-24T11:48:42.640Z",
+      "reviewStatus": "approved"
+    }
   }
 ]
