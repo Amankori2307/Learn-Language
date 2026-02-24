@@ -10,6 +10,7 @@ import {
   LogOut, 
   Menu,
   MessageSquare,
+  PlusCircle,
   Moon,
   Sun
 } from "lucide-react";
@@ -47,20 +48,48 @@ export function Layout({ children }: { children: React.ReactNode }) {
     setMounted(true);
   }, []);
 
-  const navigation = [
-    { name: 'Dashboard', href: '/', icon: LayoutDashboard },
-    { name: 'Clusters', href: '/clusters', icon: Layers },
-    { name: 'Leaderboard', href: '/leaderboard', icon: Trophy },
-    { name: 'Profile', href: '/profile', icon: UserCircle },
-    { name: "Feedback", href: "/feedback", icon: MessageSquare },
-    { name: "Analytics", href: "/analytics", icon: BarChart3 },
-    ...((user?.role === UserTypeEnum.REVIEWER || user?.role === UserTypeEnum.ADMIN)
+  const isReviewer = user?.role === UserTypeEnum.REVIEWER || user?.role === UserTypeEnum.ADMIN;
+  const navigationSections = [
+    {
+      title: "Learn",
+      items: [
+        { name: "Dashboard", href: "/", icon: LayoutDashboard },
+        { name: "Clusters", href: "/clusters", icon: Layers },
+      ],
+    },
+    {
+      title: "Insights",
+      items: [
+        { name: "Analytics", href: "/analytics", icon: BarChart3 },
+        { name: "Leaderboard", href: "/leaderboard", icon: Trophy },
+      ],
+    },
+    {
+      title: "Account",
+      items: [
+        { name: "Profile", href: "/profile", icon: UserCircle },
+        { name: "Feedback", href: "/feedback", icon: MessageSquare },
+      ],
+    },
+    ...(isReviewer
       ? [
-          { name: "Review Vocabulary", href: "/review", icon: ShieldCheck },
-          { name: "Add Vocabulary", href: "/review/add", icon: ShieldCheck },
+          {
+            title: "Review",
+            items: [
+              { name: "Review Vocabulary", href: "/review", icon: ShieldCheck },
+              { name: "Add Vocabulary", href: "/review/add", icon: PlusCircle },
+            ],
+          },
         ]
       : []),
   ];
+
+  const isItemActive = (href: string) => {
+    if (href === "/") {
+      return location === "/";
+    }
+    return location === href || location.startsWith(`${href}/`) || location.startsWith(`${href}?`);
+  };
   const avatarUrl = buildAvatarUrl({
     profileImageUrl: user?.profileImageUrl,
     firstName: user?.firstName,
@@ -105,26 +134,40 @@ export function Layout({ children }: { children: React.ReactNode }) {
         </div>
       </div>
 
-      <nav className="flex-1 px-4 space-y-2">
-        {navigation.map((item) => {
-          const isActive = location === item.href;
-          return (
-            <Link key={item.name} href={item.href}>
-              <div
-                className={cn(
-                  "flex items-center gap-3 px-4 py-2.5 rounded-lg transition-all duration-200 cursor-pointer group",
-                  isActive 
-                    ? "bg-foreground text-background" 
-                    : "text-muted-foreground hover:bg-secondary/80 hover:text-foreground"
-                )}
-                onClick={() => setIsOpen(false)}
-              >
-                <item.icon className={cn("w-4 h-4", isActive ? "text-background" : "group-hover:text-foreground transition-colors")} />
-                <span className="font-medium">{item.name}</span>
-              </div>
-            </Link>
-          );
-        })}
+      <nav className="flex-1 px-4 pb-3 overflow-y-auto space-y-4">
+        {navigationSections.map((section) => (
+          <div key={section.title}>
+            <p className="px-2 text-[11px] uppercase tracking-wider text-muted-foreground font-semibold mb-2">
+              {section.title}
+            </p>
+            <div className="space-y-1">
+              {section.items.map((item) => {
+                const isActive = isItemActive(item.href);
+                return (
+                  <Link key={item.name} href={item.href}>
+                    <div
+                      className={cn(
+                        "flex items-center gap-3 px-3 py-2 rounded-lg transition-all duration-200 cursor-pointer group",
+                        isActive
+                          ? "bg-foreground text-background"
+                          : "text-muted-foreground hover:bg-secondary/80 hover:text-foreground",
+                      )}
+                      onClick={() => setIsOpen(false)}
+                    >
+                      <item.icon
+                        className={cn(
+                          "w-4 h-4",
+                          isActive ? "text-background" : "group-hover:text-foreground transition-colors",
+                        )}
+                      />
+                      <span className="font-medium text-sm">{item.name}</span>
+                    </div>
+                  </Link>
+                );
+              })}
+            </div>
+          </div>
+        ))}
       </nav>
 
       <div className="p-4 mt-auto border-t border-border/50 bg-secondary/30">
