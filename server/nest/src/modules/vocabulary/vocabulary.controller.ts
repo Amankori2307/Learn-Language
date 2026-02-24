@@ -4,7 +4,7 @@ import { VocabularyService } from "./vocabulary.service";
 import { AuthenticatedGuard } from "../../common/guards/authenticated.guard";
 import { ListClustersQueryDto, ListWordsQueryDto } from "./vocabulary.dto";
 import { AppError } from "../../common/errors/app-error";
-import { sendError } from "../../../../http";
+import { sendError } from "../../common/http";
 
 @Controller()
 @UseGuards(AuthenticatedGuard)

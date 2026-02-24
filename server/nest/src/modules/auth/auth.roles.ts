@@ -1,4 +1,4 @@
-import { config } from "../../../../config";
+import { config } from "../../config/runtime.config";
 import { UserTypeEnum } from "@shared/domain/enums";
 
 function parseEmailList(value?: string): Set<string> {

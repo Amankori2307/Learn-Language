@@ -1,6 +1,6 @@
 import type { Request, RequestHandler } from "express";
 import { authStorage } from "./auth.storage";
-import { sendError } from "../../../../http";
+import { sendError } from "../../common/http";
 import { UserTypeEnum } from "@shared/domain/enums";
 
 function getUserId(req: Request): string | undefined {

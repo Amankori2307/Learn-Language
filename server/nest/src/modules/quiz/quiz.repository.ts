@@ -1,5 +1,5 @@
 import { Injectable } from "@nestjs/common";
-import { storage } from "../../../../storage";
+import { storage } from "../../infrastructure/storage";
 import { LanguageEnum, QuizModeEnum } from "@shared/domain/enums";
 
 type ICreateProgressInput = Parameters<typeof storage.createUserProgress>[0];

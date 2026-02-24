@@ -3,7 +3,7 @@ import assert from "node:assert/strict";
 import { sql } from "drizzle-orm";
 import { createServer } from "http";
 import { db } from "../server/db";
-import { getNestExpressApp } from "../server/nest/nest-app";
+import { getNestExpressApp } from "../server/nest/src/bootstrap/nest-app";
 import { QuizModeEnum } from "../shared/domain/enums";
 
 test("e2e smoke: api is live and all quiz modes return arrays", async (t) => {

@@ -4,7 +4,7 @@ import { AuthService } from "./auth.service";
 import { AuthenticatedGuard } from "../../common/guards/authenticated.guard";
 import { UpdateProfileBodyDto } from "./auth.dto";
 import { AppError } from "../../common/errors/app-error";
-import { sendError } from "../../../../http";
+import { sendError } from "../../common/http";
 
 @Controller()
 export class AuthApiController {

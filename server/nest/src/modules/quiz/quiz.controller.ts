@@ -4,7 +4,7 @@ import { QuizService } from "./quiz.service";
 import { AuthenticatedGuard } from "../../common/guards/authenticated.guard";
 import { GenerateQuizQueryDto, SubmitQuizBodyDto } from "./quiz.dto";
 import { AppError } from "../../common/errors/app-error";
-import { logApiEvent, sendError } from "../../../../http";
+import { logApiEvent, sendError } from "../../common/http";
 
 @Controller()
 @UseGuards(AuthenticatedGuard)

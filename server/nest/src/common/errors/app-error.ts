@@ -1,4 +1,4 @@
-import type { ErrorCode } from "../../../../http";
+import type { ErrorCode } from "../http";
 
 export class AppError extends Error {
   constructor(

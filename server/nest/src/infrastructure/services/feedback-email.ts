@@ -1,6 +1,6 @@
 import net from "node:net";
 import tls from "node:tls";
-import { config } from "../config";
+import { config } from "../../config/runtime.config";
 
 type SocketLike = net.Socket | tls.TLSSocket;
 

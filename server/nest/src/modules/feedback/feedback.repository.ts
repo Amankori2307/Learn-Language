@@ -1,5 +1,5 @@
 import { Injectable } from "@nestjs/common";
-import { config } from "../../../../config";
+import { config } from "../../config/runtime.config";
 
 @Injectable()
 export class FeedbackRepository {

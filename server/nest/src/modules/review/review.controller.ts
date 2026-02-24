@@ -12,7 +12,7 @@ import {
   ReviewTransitionBodyDto,
 } from "./review.dto";
 import { AppError } from "../../common/errors/app-error";
-import { sendError } from "../../../../http";
+import { sendError } from "../../common/http";
 
 @Controller()
 export class ReviewApiController {

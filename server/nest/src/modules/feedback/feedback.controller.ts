@@ -4,7 +4,7 @@ import { FeedbackService } from "./feedback.service";
 import { AuthenticatedGuard } from "../../common/guards/authenticated.guard";
 import { SubmitFeedbackBodyDto } from "./feedback.dto";
 import { AppError } from "../../common/errors/app-error";
-import { logApiEvent, sendError } from "../../../../http";
+import { logApiEvent, sendError } from "../../common/http";
 
 @Controller()
 @UseGuards(AuthenticatedGuard)

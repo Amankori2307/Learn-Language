@@ -1,5 +1,5 @@
 import { Injectable } from "@nestjs/common";
-import { storage } from "../../../../storage";
+import { storage } from "../../infrastructure/storage";
 import { ReviewDisagreementStatusEnum, ReviewStatusEnum } from "@shared/domain/enums";
 
 type ITransitionOptions = {

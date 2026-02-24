@@ -1,5 +1,5 @@
 import { eq } from "drizzle-orm";
-import { db } from "../server/db";
+import { db } from "../server/nest/src/infrastructure/db";
 import { users } from "../shared/schema";
 
 type Role = "learner" | "reviewer" | "admin";

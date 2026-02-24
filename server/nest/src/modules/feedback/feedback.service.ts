@@ -1,7 +1,7 @@
 import { Injectable } from "@nestjs/common";
 import { z } from "zod";
 import { api } from "@shared/routes";
-import { sendFeedbackEmail } from "../../../../services/feedback-email";
+import { sendFeedbackEmail } from "../../infrastructure/services/feedback-email";
 import { FeedbackRepository } from "./feedback.repository";
 import { AppError } from "../../common/errors/app-error";
 

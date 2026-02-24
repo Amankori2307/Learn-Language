@@ -1,8 +1,8 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { eq, inArray, sql } from "drizzle-orm";
-import { db } from "./db";
-import { storage } from "./storage";
+import { db } from "../db";
+import { storage } from "../storage";
 import { ReviewDisagreementStatusEnum, ReviewStatusEnum, UserTypeEnum, LanguageEnum } from "@shared/domain/enums";
 import { users, words, wordReviewEvents } from "@shared/schema";
 

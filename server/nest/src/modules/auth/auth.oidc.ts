@@ -7,8 +7,8 @@ import type { Express, RequestHandler } from "express";
 import memoize from "memoizee";
 import connectPg from "connect-pg-simple";
 import { authStorage } from "./auth.storage";
-import { getAuthConfig } from "../../../../config";
-import { sendError } from "../../../../http";
+import { getAuthConfig } from "../../config/runtime.config";
+import { sendError } from "../../common/http";
 import { resolveRoleFromEmail } from "./auth.roles";
 
 const authConfig = getAuthConfig();

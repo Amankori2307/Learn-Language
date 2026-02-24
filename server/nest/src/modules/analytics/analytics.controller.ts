@@ -4,7 +4,7 @@ import { AnalyticsService } from "./analytics.service";
 import { AuthenticatedGuard } from "../../common/guards/authenticated.guard";
 import { AttemptHistoryQueryDto, LanguageQueryDto, LeaderboardQueryDto } from "./analytics.dto";
 import { AppError } from "../../common/errors/app-error";
-import { sendError } from "../../../../http";
+import { sendError } from "../../common/http";
 
 @Controller()
 @UseGuards(AuthenticatedGuard)
