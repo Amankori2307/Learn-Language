@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import { getExpressApp } from "../../server/express-app";
+import { getNestExpressApp } from "../../server/nest/nest-app";
 
 export const config = {
   api: {
@@ -9,7 +9,6 @@ export const config = {
 };
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-  const expressApp = await getExpressApp();
-  return expressApp(req as never, res as never);
+  const nestExpressApp = await getNestExpressApp();
+  return nestExpressApp(req as never, res as never);
 }
-
