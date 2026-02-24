@@ -7,13 +7,11 @@ import { VocabularyApiModule } from "./modules/vocabulary/vocabulary.module";
 import { AnalyticsApiModule } from "./modules/analytics/analytics.module";
 import { QuizApiModule } from "./modules/quiz/quiz.module";
 import { ReviewApiModule } from "./modules/review/review.module";
-import { FeedbackApiModule } from "./modules/feedback/feedback.module";
 import { InfraApiModule } from "./modules/infra/infra.module";
 import { AudioApiModule } from "./modules/audio/audio.module";
 import { nestAppConfig } from "./config/app.config";
 import { authConfig } from "./config/auth.config";
 import { databaseConfig } from "./config/database.config";
-import { feedbackConfig } from "./config/feedback.config";
 import { audioConfig } from "./config/audio.config";
 import { validateEnv } from "./config/env.validation";
 
@@ -22,7 +20,7 @@ import { validateEnv } from "./config/env.validation";
     ConfigModule.forRoot({
       isGlobal: true,
       validate: validateEnv,
-      load: [nestAppConfig, authConfig, databaseConfig, feedbackConfig, audioConfig],
+      load: [nestAppConfig, authConfig, databaseConfig, audioConfig],
       cache: true,
     }),
     AuthApiModule,
@@ -30,7 +28,6 @@ import { validateEnv } from "./config/env.validation";
     AnalyticsApiModule,
     QuizApiModule,
     ReviewApiModule,
-    FeedbackApiModule,
     InfraApiModule,
     AudioApiModule,
   ],

@@ -388,40 +388,6 @@ export const api = {
       },
     },
   },
-  feedback: {
-    submit: {
-      method: "POST" as const,
-      path: "/api/feedback" as const,
-      input: z.object({
-        subject: z
-          .string()
-          .trim()
-          .min(API_VALIDATION_LIMITS.FEEDBACK_SUBJECT_MIN)
-          .max(API_VALIDATION_LIMITS.FEEDBACK_SUBJECT_MAX),
-        message: z
-          .string()
-          .trim()
-          .min(API_VALIDATION_LIMITS.FEEDBACK_MESSAGE_MIN)
-          .max(API_VALIDATION_LIMITS.FEEDBACK_MESSAGE_MAX),
-        pageUrl: z.string().url().optional(),
-        rating: z
-          .number()
-          .int()
-          .min(API_VALIDATION_LIMITS.REVIEWER_CONFIDENCE_MIN)
-          .max(API_VALIDATION_LIMITS.REVIEWER_CONFIDENCE_MAX)
-          .optional(),
-      }),
-      responses: {
-        200: z.object({
-          ok: z.literal(true),
-          sentTo: z.string().email(),
-        }),
-        400: errorSchemas.validation,
-        401: errorSchemas.unauthorized,
-        500: errorSchemas.internal,
-      },
-    },
-  },
   review: {
     queue: {
       method: "GET" as const,

@@ -68,7 +68,12 @@ export function Layout({ children }: { children: React.ReactNode }) {
       title: "Account",
       items: [
         { name: "Profile", href: "/profile", icon: UserCircle },
-        { name: "Feedback", href: "/feedback", icon: MessageSquare },
+        {
+          name: "Feedback",
+          href: "https://forms.gle/f2hH1BL3v4eNsxEg8",
+          icon: MessageSquare,
+          external: true,
+        },
       ],
     },
     ...(isReviewer
@@ -142,7 +147,22 @@ export function Layout({ children }: { children: React.ReactNode }) {
             </p>
             <div className="space-y-1">
               {section.items.map((item) => {
-                const isActive = isItemActive(item.href);
+                const isActive = item.external ? false : isItemActive(item.href);
+                if (item.external) {
+                  return (
+                    <a
+                      key={item.name}
+                      href={item.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-3 px-3 py-2 rounded-lg transition-all duration-200 cursor-pointer group text-muted-foreground hover:bg-secondary/80 hover:text-foreground"
+                      onClick={() => setIsOpen(false)}
+                    >
+                      <item.icon className="w-4 h-4 group-hover:text-foreground transition-colors" />
+                      <span className="font-medium text-sm">{item.name}</span>
+                    </a>
+                  );
+                }
                 return (
                   <Link key={item.name} href={item.href}>
                     <div

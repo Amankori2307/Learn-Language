@@ -181,16 +181,6 @@ test("profile update contract rejects invalid avatar URL", () => {
   });
 });
 
-test("feedback submit contract validates payload", () => {
-  const parsed = api.feedback.submit.input.parse({
-    subject: "UI feedback",
-    message: "The quiz flow is good but feedback contrast can be improved.",
-    pageUrl: "https://example.com/quiz",
-    rating: 4,
-  });
-  assert.equal(parsed.rating, 4);
-});
-
 test("audio resolve contract validates and accepts cached miss payload", () => {
   const input = api.audio.resolve.input.parse({
     language: LanguageEnum.TELUGU,
