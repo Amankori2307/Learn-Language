@@ -9,6 +9,7 @@ Build a text-first language learning app with high data correctness, strong memo
 - Phase 4 complete.
 - Phase 6 core hardening complete (`P6-001` to `P6-011`).
 - Active tasks: `P7-004` backend runtime migration to Next.js (currently blocked in constrained environment).
+- Active priority mode: functionality-first delivery (feature correctness and reliability over visual-only work).
 
 ## Core capabilities live
 
@@ -93,5 +94,9 @@ Build a text-first language learning app with high data correctness, strong memo
 
 ## Immediate next implementation
 
-- Execute in order: continue backlog from `context/plan/61-pronunciation-strategy.md`.
-- Latest planning artifact: `context/plan/61-pronunciation-strategy.md`.
+- Execute in order from `context/plan/01-master-task-registry.md` (latest active section: Phase 8).
+- Keep functionality-first sequencing:
+  - architecture boundaries and code hygiene (`P8-001` to `P8-003`)
+  - UX cleanup tasks with functional outcomes (`P8-004`)
+  - seed/content expansion (`P8-005`)
+  - deployment + performance + audio infra (`P8-006` to `P8-008`)

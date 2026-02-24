@@ -1,0 +1,1 @@
+export const DASHBOARD_NEW_WORDS_CARD_COUNT = 10;

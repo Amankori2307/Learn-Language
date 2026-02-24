@@ -1,15 +1,12 @@
 import { Layout } from "@/components/layout";
-import { useAuth } from "@/hooks/use-auth";
-import { useStats } from "@/hooks/use-quiz";
 import { StatCard } from "@/components/stat-card";
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
-import { BookOpen, Dumbbell, Layers3, PlayCircle, Target, Zap } from "lucide-react";
-import { QuizDirectionEnum, QuizModeEnum } from "@shared/domain/enums";
+import { PlayCircle, Zap } from "lucide-react";
+import { useDashboardViewModel } from "@/features/dashboard/use-dashboard-view-model";
 
 export default function Dashboard() {
-  const { user } = useAuth();
-  const { data: stats, isLoading } = useStats();
+  const { isLoading, userName, stats, primaryMode, primaryLabel, coreActions, bucketCards } = useDashboardViewModel();
 
   if (isLoading) {
     return (
@@ -20,79 +17,7 @@ export default function Dashboard() {
       </Layout>
     );
   }
-
-  const defaultStats = {
-    totalWords: 0,
-    mastered: 0,
-    learning: 0,
-    weak: 0,
-    streak: 0,
-    xp: 0,
-    recognitionAccuracy: 0,
-    recallAccuracy: 0,
-    sourceToTargetStrength: 0.5,
-    targetToSourceStrength: 0.5,
-    recommendedDirection: QuizDirectionEnum.SOURCE_TO_TARGET as const,
-  };
-
-  const s = stats ?? defaultStats;
-  const primaryMode = s.weak > 0 ? QuizModeEnum.WEAK_WORDS : QuizModeEnum.DAILY_REVIEW;
-  const primaryLabel = primaryMode === QuizModeEnum.WEAK_WORDS ? "Resume Weak Words" : "Start Daily Review";
-
-  const coreActions = [
-    {
-      title: "Daily Review",
-      description: "Review words due for repetition.",
-      icon: Zap,
-      href: `/quiz?mode=${QuizModeEnum.DAILY_REVIEW}`,
-      count: s.learning,
-    },
-    {
-      title: "New Words",
-      description: "Learn a new set of words.",
-      icon: BookOpen,
-      href: `/quiz?mode=${QuizModeEnum.NEW_WORDS}`,
-      count: 10,
-    },
-    {
-      title: "Weak Words",
-      description: "Reinforce words you miss often.",
-      icon: Dumbbell,
-      href: `/quiz?mode=${QuizModeEnum.WEAK_WORDS}`,
-      count: s.weak,
-    },
-    {
-      title: "Practice by Cluster",
-      description: "Choose topic clusters and practice.",
-      icon: Layers3,
-      href: "/clusters",
-      count: s.totalWords,
-    },
-  ];
-
-  const bucketCards = [
-    {
-      key: "mastered",
-      label: "Words Mastered",
-      value: s.mastered,
-      meaning: "Mastered means you answered this word correctly enough times to reach mastery level 4+.",
-      improve: "To master more words: finish daily review consistently and maintain correct answers in both directions.",
-    },
-    {
-      key: "learning",
-      label: "Learning",
-      value: s.learning,
-      meaning: "Learning means the word is in active progress (mastery level 1-3).",
-      improve: "To move words out of learning: keep practicing daily and answer with higher confidence.",
-    },
-    {
-      key: "needs_review",
-      label: "Needs Review",
-      value: s.weak,
-      meaning: "Needs Review means the word is overdue or has repeated mistakes.",
-      improve: "To reduce this list: run weak words + daily review and clear missed words with repeated correct recall.",
-    },
-  ] as const;
+  const s = stats;
 
   return (
     <Layout>
@@ -103,7 +28,7 @@ export default function Dashboard() {
               <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">Primary Action</p>
               <h1 className="text-3xl font-semibold mt-1">Start Learning</h1>
               <p className="text-muted-foreground mt-2">
-                Welcome back, {user?.firstName || "Learner"}. Continue with the next recommended session.
+                Welcome back, {userName}. Continue with the next recommended session.
               </p>
               <p className="text-sm text-muted-foreground mt-1">{s.streak} day streak • {s.mastered} mastered words</p>
             </div>
@@ -133,9 +58,7 @@ export default function Dashboard() {
                   <h3 className="text-2xl font-semibold mt-1 tracking-tight">{card.value}</h3>
                 </div>
                 <div className="p-2.5 rounded-lg border bg-secondary text-foreground border-border">
-                  {card.key === "mastered" ? <Target className="w-4 h-4" /> : null}
-                  {card.key === "learning" ? <BookOpen className="w-4 h-4" /> : null}
-                  {card.key === "needs_review" ? <Dumbbell className="w-4 h-4" /> : null}
+                  <card.icon className="w-4 h-4" />
                 </div>
               </div>
               <p className="text-xs text-muted-foreground mt-3">{card.meaning}</p>

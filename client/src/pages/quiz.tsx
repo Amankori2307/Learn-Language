@@ -1,89 +1,35 @@
-import { useCallback, useEffect, useState } from "react";
-import { useLocation, useSearch } from "wouter";
-import { useGenerateQuiz, useSubmitAnswer, type QuizMode } from "@/hooks/use-quiz";
 import { QuizCard } from "@/components/quiz-card";
 import { Button } from "@/components/ui/button";
 import { X } from "lucide-react";
 import { Layout } from "@/components/layout";
-import { QuizDirectionEnum, QuizModeEnum, QuizQuestionTypeEnum } from "@shared/domain/enums";
-import { useLearningLanguage } from "@/hooks/use-language";
+import { QuizModeEnum } from "@shared/domain/enums";
+import { useQuizPageViewModel } from "@/features/quiz/use-quiz-page-view-model";
 
 export default function QuizPage() {
-  const [, setLocation] = useLocation();
-  const searchStr = useSearch();
-  const params = new URLSearchParams(searchStr);
-  const mode = (params.get("mode") as QuizMode) || QuizModeEnum.DAILY_REVIEW;
-  const clusterId = params.get("clusterId") ? Number(params.get("clusterId")) : undefined;
-
-  const { data: questions, isLoading, isError } = useGenerateQuiz(mode, clusterId);
-  const submitAnswer = useSubmitAnswer();
-  const { language } = useLearningLanguage();
-
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [result, setResult] = useState<any>(null);
-  const [sessionStats, setSessionStats] = useState({ correct: 0, total: 0 });
-  const [isFinished, setIsFinished] = useState(false);
-  const [questionStartedAt, setQuestionStartedAt] = useState<number>(Date.now());
-  const [confidenceLevel, setConfidenceLevel] = useState<1 | 2 | 3>(2);
-
-  const currentQuestion = questions?.[currentIndex];
-  const progress = questions ? ((currentIndex) / questions.length) * 100 : 0;
-  const resetSession = useCallback(() => {
-    setCurrentIndex(0);
-    setResult(null);
-    setSessionStats({ correct: 0, total: 0 });
-    setIsFinished(false);
-    setQuestionStartedAt(Date.now());
-  }, []);
-  const startSession = (target: string) => {
-    resetSession();
-    setLocation(target);
-  };
-
-  const handleAnswer = async (optionId: number, answerConfidence: 1 | 2 | 3) => {
-    if (!currentQuestion) return;
-
-    try {
-      const responseTimeMs = Math.max(1, Date.now() - questionStartedAt);
-      const direction = currentQuestion.type === QuizQuestionTypeEnum.TARGET_TO_SOURCE
-        ? QuizDirectionEnum.TARGET_TO_SOURCE
-        : QuizDirectionEnum.SOURCE_TO_TARGET;
-      const response = await submitAnswer.mutateAsync({
-        wordId: currentQuestion.wordId,
-        selectedOptionId: optionId,
-        questionType: currentQuestion.type,
-        direction,
-        confidenceLevel: answerConfidence,
-        responseTimeMs,
-      });
-
-      setResult(response);
-      setSessionStats(prev => ({
-        correct: prev.correct + (response.isCorrect ? 1 : 0),
-        total: prev.total + 1
-      }));
-    } catch (error) {
-      console.error("Failed to submit answer:", error);
-    }
-  };
-
-  const handleNext = () => {
-    setResult(null);
-    setQuestionStartedAt(Date.now());
-    if (questions && currentIndex < questions.length - 1) {
-      setCurrentIndex(prev => prev + 1);
-    } else {
-      setIsFinished(true);
-    }
-  };
-
-  useEffect(() => {
-    setQuestionStartedAt(Date.now());
-  }, [currentIndex]);
-
-  useEffect(() => {
-    resetSession();
-  }, [mode, clusterId, resetSession]);
+  const {
+    clusterId,
+    language,
+    isLoading,
+    isError,
+    questions,
+    currentQuestion,
+    progress,
+    result,
+    sessionStats,
+    isFinished,
+    confidenceLevel,
+    setConfidenceLevel,
+    submitPending,
+    startSession,
+    setLocation,
+    handleAnswer,
+    handleNext,
+    completionMessage,
+    percentage,
+    incorrectCount,
+    recommendedMode,
+    recommendedLabel,
+  } = useQuizPageViewModel();
 
   if (isLoading) {
     return (
@@ -97,10 +43,6 @@ export default function QuizPage() {
   }
 
   if (isError || !questions || questions.length === 0) {
-    const completionMessage =
-      mode === QuizModeEnum.NEW_WORDS
-        ? "You finished the current new-word queue."
-        : "Great job! You've completed all due items for this session.";
     return (
       <Layout>
         <div className="max-w-2xl mx-auto rounded-2xl border border-border/50 bg-card p-8 md:p-10 text-center">
@@ -144,20 +86,6 @@ export default function QuizPage() {
   }
 
   if (isFinished) {
-    const percentage = Math.round((sessionStats.correct / sessionStats.total) * 100);
-    const incorrectCount = Math.max(0, sessionStats.total - sessionStats.correct);
-    const recommendedMode =
-      percentage < 70
-        ? QuizModeEnum.WEAK_WORDS
-        : mode === QuizModeEnum.DAILY_REVIEW
-          ? QuizModeEnum.NEW_WORDS
-          : QuizModeEnum.DAILY_REVIEW;
-    const recommendedLabel =
-      recommendedMode === QuizModeEnum.WEAK_WORDS
-        ? "Practice Weak Words"
-        : recommendedMode === QuizModeEnum.NEW_WORDS
-          ? "Start Next New-Word Set"
-          : "Start Next Daily Review";
     return (
       <div className="min-h-screen bg-background flex flex-col items-center justify-center p-4">
         <div className="max-w-md w-full bg-card rounded-3xl p-8 border border-border/50 shadow-2xl text-center">
@@ -248,7 +176,7 @@ export default function QuizPage() {
           confidenceLevel={confidenceLevel}
           onConfidenceChange={setConfidenceLevel}
           onAnswer={handleAnswer}
-          isSubmitting={submitAnswer.isPending}
+          isSubmitting={submitPending}
           result={result}
           onNext={handleNext}
         />

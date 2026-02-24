@@ -1,34 +1,10 @@
-import { useMemo, useState } from "react";
-import { useLocation, useSearch } from "wouter";
 import { Layout } from "@/components/layout";
 import { Button } from "@/components/ui/button";
-import { useWordBucket, type WordBucketType } from "@/hooks/use-word-bucket";
-
-const PAGE_SIZE = 20;
-
-function parseBucket(raw: string | null): WordBucketType {
-  if (raw === "mastered" || raw === "learning" || raw === "needs_review") return raw;
-  return "learning";
-}
+import { useWordBucketsViewModel } from "@/features/analytics/use-word-buckets-view-model";
 
 export default function WordBucketsPage() {
-  const [, navigate] = useLocation();
-  const searchText = useSearch();
-  const bucket = useMemo(() => {
-    const params = new URLSearchParams(searchText);
-    return parseBucket(params.get("bucket"));
-  }, [searchText]);
-  const [page, setPage] = useState(1);
-  const bucketQuery = useWordBucket(bucket, page, PAGE_SIZE);
-
+  const { bucket, page, totalPages, setPage, bucketQuery, changeBucket, navigate } = useWordBucketsViewModel();
   const data = bucketQuery.data;
-  const totalPages = Math.max(1, Math.ceil((data?.total ?? 0) / PAGE_SIZE));
-  const safePage = Math.min(page, totalPages);
-
-  const changeBucket = (nextBucket: WordBucketType) => {
-    setPage(1);
-    navigate(`/analytics/words?bucket=${nextBucket}`);
-  };
 
   return (
     <Layout>
@@ -104,17 +80,17 @@ export default function WordBucketsPage() {
             </div>
             <div className="flex items-center justify-between px-4 py-3 border-t border-border/50 bg-secondary/20">
               <p className="text-xs text-muted-foreground">
-                Page {safePage} of {totalPages} • {data?.total ?? 0} words
+                Page {page} of {totalPages} • {data?.total ?? 0} words
               </p>
               <div className="flex items-center gap-2">
-                <Button variant="outline" size="sm" onClick={() => setPage((p) => Math.max(1, p - 1))} disabled={safePage <= 1}>
+                <Button variant="outline" size="sm" onClick={() => setPage((p) => Math.max(1, p - 1))} disabled={page <= 1}>
                   Prev
                 </Button>
                 <Button
                   variant="outline"
                   size="sm"
                   onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
-                  disabled={safePage >= totalPages}
+                  disabled={page >= totalPages}
                 >
                   Next
                 </Button>
