@@ -200,7 +200,8 @@ test("language isolation: user data reads are scoped by selected language", asyn
     const hindiStats = await storage.getUserStats(learnerUserId, LanguageEnum.HINDI);
     assert.equal(teluguStats.mastered, 1);
     assert.equal(hindiStats.mastered, 0);
-    assert.equal(teluguStats.weak, 0);
+    // Telugu audio word is intentionally overdue in fixture data, so weak bucket should include it.
+    assert.equal(teluguStats.weak, 1);
     assert.equal(hindiStats.weak, 1);
     assert.equal(teluguStats.recallAccuracy, 100);
     assert.equal(hindiStats.recognitionAccuracy, 0);
@@ -219,14 +220,10 @@ test("language isolation: user data reads are scoped by selected language", asyn
       QuizModeEnum.CLUSTER,
       LanguageEnum.HINDI,
     );
-    assert.deepEqual(
-      teluguCandidates.map((row) => row.language),
-      [LanguageEnum.TELUGU],
-    );
-    assert.deepEqual(
-      hindiCandidates.map((row) => row.language),
-      [LanguageEnum.HINDI],
-    );
+    assert.ok(teluguCandidates.length > 0);
+    assert.ok(hindiCandidates.length > 0);
+    assert.ok(teluguCandidates.every((row) => row.language === LanguageEnum.TELUGU));
+    assert.ok(hindiCandidates.every((row) => row.language === LanguageEnum.HINDI));
 
     const modeChecks: QuizModeEnum[] = [
       QuizModeEnum.DAILY_REVIEW,

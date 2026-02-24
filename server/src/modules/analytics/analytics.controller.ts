@@ -2,7 +2,7 @@ import { Controller, Get, Query, Req, Res, UseGuards } from "@nestjs/common";
 import type { Request, Response } from "express";
 import { AnalyticsService } from "./analytics.service";
 import { AuthenticatedGuard } from "../../common/guards/authenticated.guard";
-import { AttemptHistoryQueryDto, LanguageQueryDto, LeaderboardQueryDto } from "./analytics.dto";
+import { AttemptHistoryQueryDto, LanguageQueryDto, LeaderboardQueryDto, WordBucketQueryDto } from "./analytics.dto";
 import { AppError } from "../../common/errors/app-error";
 import { sendError } from "../../common/http";
 
@@ -28,6 +28,17 @@ export class AnalyticsApiController {
       const userId = (req.user as { claims: { sub: string } }).claims.sub;
       const insights = await this.analyticsService.getLearningInsights(userId, query.language);
       res.json(insights);
+    } catch (error) {
+      this.handleError(req, res, error);
+    }
+  }
+
+  @Get("/api/analytics/word-buckets")
+  async getWordBucket(@Req() req: Request, @Res() res: Response, @Query() query: WordBucketQueryDto) {
+    try {
+      const userId = (req.user as { claims: { sub: string } }).claims.sub;
+      const result = await this.analyticsService.getWordBucket(userId, query);
+      res.json(result);
     } catch (error) {
       this.handleError(req, res, error);
     }

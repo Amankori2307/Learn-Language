@@ -17,6 +17,7 @@ import FeedbackPage from "@/pages/feedback";
 import ReviewPage from "@/pages/review";
 import AddVocabularyPage from "@/pages/add-vocabulary";
 import HistoryPage from "@/pages/history";
+import WordBucketsPage from "@/pages/word-buckets";
 import AuthPage from "@/pages/auth";
 import NotFound from "@/pages/not-found";
 
@@ -64,6 +65,9 @@ function Router() {
       </Route>
       <Route path="/analytics">
         {() => <ProtectedRoute component={HistoryPage} />}
+      </Route>
+      <Route path="/analytics/words">
+        {() => <ProtectedRoute component={WordBucketsPage} />}
       </Route>
       <Route path="/review">
         {() => <ProtectedRoute component={ReviewPage} />}

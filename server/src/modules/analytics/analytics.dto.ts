@@ -38,3 +38,24 @@ export class LeaderboardQueryDto {
   language?: LanguageEnum;
 }
 
+export class WordBucketQueryDto {
+  @IsIn(["mastered", "learning", "needs_review"])
+  bucket!: "mastered" | "learning" | "needs_review";
+
+  @IsOptional()
+  @Type(() => Number)
+  @IsInt()
+  @Min(1)
+  page?: number;
+
+  @IsOptional()
+  @Type(() => Number)
+  @IsInt()
+  @Min(1)
+  @Max(200)
+  limit?: number;
+
+  @IsOptional()
+  @IsEnum(LanguageEnum)
+  language?: LanguageEnum;
+}

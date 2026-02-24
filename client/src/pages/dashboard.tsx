@@ -70,6 +70,30 @@ export default function Dashboard() {
     },
   ];
 
+  const bucketCards = [
+    {
+      key: "mastered",
+      label: "Words Mastered",
+      value: s.mastered,
+      meaning: "Mastered means you answered this word correctly enough times to reach mastery level 4+.",
+      improve: "To master more words: finish daily review consistently and maintain correct answers in both directions.",
+    },
+    {
+      key: "learning",
+      label: "Learning",
+      value: s.learning,
+      meaning: "Learning means the word is in active progress (mastery level 1-3).",
+      improve: "To move words out of learning: keep practicing daily and answer with higher confidence.",
+    },
+    {
+      key: "needs_review",
+      label: "Needs Review",
+      value: s.weak,
+      meaning: "Needs Review means the word is overdue or has repeated mistakes.",
+      improve: "To reduce this list: run weak words + daily review and clear missed words with repeated correct recall.",
+    },
+  ] as const;
+
   return (
     <Layout>
       <div className="space-y-6">
@@ -101,9 +125,28 @@ export default function Dashboard() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
           <StatCard label="Total XP" value={s.xp} icon={Zap} color="accent" />
-          <StatCard label="Words Mastered" value={s.mastered} icon={Target} color="primary" />
-          <StatCard label="Learning" value={s.learning} icon={BookOpen} color="blue" />
-          <StatCard label="Needs Review" value={s.weak} icon={Dumbbell} color="orange" />
+          {bucketCards.map((card) => (
+            <div key={card.key} className="rounded-xl border border-border/60 bg-card p-4">
+              <div className="flex items-start justify-between gap-3">
+                <div>
+                  <p className="text-sm font-medium text-muted-foreground">{card.label}</p>
+                  <h3 className="text-2xl font-semibold mt-1 tracking-tight">{card.value}</h3>
+                </div>
+                <div className="p-2.5 rounded-lg border bg-secondary text-foreground border-border">
+                  {card.key === "mastered" ? <Target className="w-4 h-4" /> : null}
+                  {card.key === "learning" ? <BookOpen className="w-4 h-4" /> : null}
+                  {card.key === "needs_review" ? <Dumbbell className="w-4 h-4" /> : null}
+                </div>
+              </div>
+              <p className="text-xs text-muted-foreground mt-3">{card.meaning}</p>
+              <p className="text-xs text-muted-foreground mt-1">{card.improve}</p>
+              <Link href={`/analytics/words?bucket=${card.key}`}>
+                <Button variant="outline" size="sm" className="mt-3 w-full">
+                  View Words
+                </Button>
+              </Link>
+            </div>
+          ))}
         </div>
 
         <section className="rounded-2xl border border-border/60 bg-card p-5 md:p-6">

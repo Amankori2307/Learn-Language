@@ -220,6 +220,38 @@ export const api = {
         401: errorSchemas.unauthorized,
       },
     },
+    wordBuckets: {
+      method: "GET" as const,
+      path: "/api/analytics/word-buckets" as const,
+      input: z.object({
+        bucket: z.enum(["mastered", "learning", "needs_review"]),
+        page: z.coerce.number().int().positive().default(1),
+        limit: z.coerce.number().int().positive().max(200).default(50),
+        language: z.nativeEnum(LanguageEnum).optional(),
+      }),
+      responses: {
+        200: z.object({
+          bucket: z.enum(["mastered", "learning", "needs_review"]),
+          title: z.string(),
+          meaning: z.string(),
+          howToImprove: z.string(),
+          page: z.number(),
+          limit: z.number(),
+          total: z.number(),
+          words: z.array(z.object({
+            wordId: z.number(),
+            originalScript: z.string(),
+            transliteration: z.string(),
+            english: z.string(),
+            masteryLevel: z.number(),
+            wrongCount: z.number(),
+            nextReview: z.string().nullable(),
+            averageStrength: z.number(),
+          })),
+        }),
+        401: errorSchemas.unauthorized,
+      },
+    },
   },
   attempts: {
     history: {

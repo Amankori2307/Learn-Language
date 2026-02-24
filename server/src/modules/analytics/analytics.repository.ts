@@ -12,6 +12,13 @@ export class AnalyticsRepository {
     return storage.getLearningInsights(userId, language);
   }
 
+  getWordBucket(
+    userId: string,
+    input: { bucket: "mastered" | "learning" | "needs_review"; page: number; limit: number; language?: LanguageEnum },
+  ) {
+    return storage.getWordBucket(userId, input);
+  }
+
   getUserAttemptHistory(userId: string, limit: number, language?: LanguageEnum) {
     return storage.getUserAttemptHistory(userId, limit, language);
   }

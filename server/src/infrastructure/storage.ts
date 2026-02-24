@@ -132,6 +132,33 @@ export interface IStorage {
       averageStrength: number;
     }>;
   }>;
+  getWordBucket(
+    userId: string,
+    input: {
+      bucket: "mastered" | "learning" | "needs_review";
+      page: number;
+      limit: number;
+      language?: LanguageEnum;
+    },
+  ): Promise<{
+    bucket: "mastered" | "learning" | "needs_review";
+    title: string;
+    meaning: string;
+    howToImprove: string;
+    page: number;
+    limit: number;
+    total: number;
+    words: Array<{
+      wordId: number;
+      originalScript: string;
+      transliteration: string;
+      english: string;
+      masteryLevel: number;
+      wrongCount: number;
+      nextReview: string | null;
+      averageStrength: number;
+    }>;
+  }>;
   getRecentAccuracy(userId: string, limit?: number, language?: LanguageEnum): Promise<number>;
   getLeaderboard(
     window: "daily" | "weekly" | "all_time",
@@ -1131,6 +1158,146 @@ export class DatabaseStorage implements IStorage {
       categories: categoriesInsight,
       weakWords,
       strongWords,
+    };
+  }
+
+  async getWordBucket(
+    userId: string,
+    input: {
+      bucket: "mastered" | "learning" | "needs_review";
+      page: number;
+      limit: number;
+      language?: LanguageEnum;
+    },
+  ): Promise<{
+    bucket: "mastered" | "learning" | "needs_review";
+    title: string;
+    meaning: string;
+    howToImprove: string;
+    page: number;
+    limit: number;
+    total: number;
+    words: Array<{
+      wordId: number;
+      originalScript: string;
+      transliteration: string;
+      english: string;
+      masteryLevel: number;
+      wrongCount: number;
+      nextReview: string | null;
+      averageStrength: number;
+    }>;
+  }> {
+    const progressRows = input.language
+      ? await db
+          .select({
+            wordId: userWordProgress.wordId,
+            wrongCount: userWordProgress.wrongCount,
+            masteryLevel: userWordProgress.masteryLevel,
+            nextReview: userWordProgress.nextReview,
+            sourceToTargetStrength: userWordProgress.sourceToTargetStrength,
+            targetToSourceStrength: userWordProgress.targetToSourceStrength,
+            originalScript: words.originalScript,
+            transliteration: words.transliteration,
+            english: words.english,
+          })
+          .from(userWordProgress)
+          .innerJoin(words, eq(userWordProgress.wordId, words.id))
+          .where(and(eq(userWordProgress.userId, userId), eq(words.language, input.language)))
+      : await db
+          .select({
+            wordId: userWordProgress.wordId,
+            wrongCount: userWordProgress.wrongCount,
+            masteryLevel: userWordProgress.masteryLevel,
+            nextReview: userWordProgress.nextReview,
+            sourceToTargetStrength: userWordProgress.sourceToTargetStrength,
+            targetToSourceStrength: userWordProgress.targetToSourceStrength,
+            originalScript: words.originalScript,
+            transliteration: words.transliteration,
+            english: words.english,
+          })
+          .from(userWordProgress)
+          .innerJoin(words, eq(userWordProgress.wordId, words.id))
+          .where(eq(userWordProgress.userId, userId));
+
+    const now = new Date();
+    const withStrength = progressRows.map((row) => ({
+      ...row,
+      masteryLevel: row.masteryLevel ?? 0,
+      wrongCount: row.wrongCount ?? 0,
+      averageStrength: Number(
+        ((((row.sourceToTargetStrength ?? 0.5) + (row.targetToSourceStrength ?? 0.5)) / 2).toFixed(3)),
+      ),
+    }));
+
+    const bucketConfig: Record<
+      "mastered" | "learning" | "needs_review",
+      { title: string; meaning: string; howToImprove: string }
+    > = {
+      mastered: {
+        title: "Mastered Words",
+        meaning: "Words with mastery level 4+ from your repeated correct recall.",
+        howToImprove: "Keep your streak active and complete daily review so more learning words graduate to mastered.",
+      },
+      learning: {
+        title: "Learning Words",
+        meaning: "Words currently in progress (mastery level 1 to 3).",
+        howToImprove: "Practice these daily and answer confidently in both directions to move them to mastered.",
+      },
+      needs_review: {
+        title: "Needs Review Words",
+        meaning: "Words flagged by high errors or overdue review schedule.",
+        howToImprove: "Run weak words and daily review sessions, then lower wrong counts with repeated correct answers.",
+      },
+    };
+
+    const filtered = withStrength.filter((row) => {
+      if (input.bucket === "mastered") return row.masteryLevel >= 4;
+      if (input.bucket === "learning") return row.masteryLevel > 0 && row.masteryLevel < 4;
+      return row.wrongCount > 2 || (!!row.nextReview && new Date(row.nextReview) < now);
+    });
+
+    filtered.sort((left, right) => {
+      if (input.bucket === "mastered") {
+        const masteryDelta = right.masteryLevel - left.masteryLevel;
+        if (masteryDelta !== 0) return masteryDelta;
+        return right.averageStrength - left.averageStrength;
+      }
+
+      if (input.bucket === "learning") {
+        const masteryDelta = left.masteryLevel - right.masteryLevel;
+        if (masteryDelta !== 0) return masteryDelta;
+        return right.wrongCount - left.wrongCount;
+      }
+
+      const wrongDelta = right.wrongCount - left.wrongCount;
+      if (wrongDelta !== 0) return wrongDelta;
+      const leftReview = left.nextReview ? new Date(left.nextReview).getTime() : Number.MAX_SAFE_INTEGER;
+      const rightReview = right.nextReview ? new Date(right.nextReview).getTime() : Number.MAX_SAFE_INTEGER;
+      return leftReview - rightReview;
+    });
+
+    const total = filtered.length;
+    const page = Math.max(1, input.page);
+    const offset = (page - 1) * input.limit;
+    const pageItems = filtered.slice(offset, offset + input.limit).map((row) => ({
+      wordId: row.wordId,
+      originalScript: row.originalScript,
+      transliteration: row.transliteration,
+      english: row.english,
+      masteryLevel: row.masteryLevel,
+      wrongCount: row.wrongCount,
+      nextReview: row.nextReview?.toISOString() ?? null,
+      averageStrength: row.averageStrength,
+    }));
+
+    return {
+      bucket: input.bucket,
+      ...bucketConfig[input.bucket],
+      page,
+      limit: input.limit,
+      total,
+      words: pageItems,
     };
   }
 

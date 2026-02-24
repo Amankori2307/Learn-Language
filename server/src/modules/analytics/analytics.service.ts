@@ -15,6 +15,13 @@ type LeaderboardInput = {
   language?: LanguageEnum;
 };
 
+type WordBucketInput = {
+  bucket: "mastered" | "learning" | "needs_review";
+  page?: number;
+  limit?: number;
+  language?: LanguageEnum;
+};
+
 @Injectable()
 export class AnalyticsService {
   constructor(private readonly repository: AnalyticsRepository) {}
@@ -27,6 +34,11 @@ export class AnalyticsService {
   async getLearningInsights(userId: string, language?: LanguageEnum) {
     const parsed = api.analytics.learning.input?.parse({ language }) ?? {};
     return this.repository.getLearningInsights(userId, parsed.language);
+  }
+
+  async getWordBucket(userId: string, input: WordBucketInput) {
+    const parsed = api.analytics.wordBuckets.input.parse(input);
+    return this.repository.getWordBucket(userId, parsed);
   }
 
   async getAttemptHistory(userId: string, input: AttemptHistoryInput) {
