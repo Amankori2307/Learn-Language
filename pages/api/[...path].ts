@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import { getNestExpressApp } from "../../server/nest/src/bootstrap/nest-app";
+import { getNestExpressApp } from "../../server/src/bootstrap/nest-app";
 
 export const config = {
   api: {

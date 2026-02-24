@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import type { Word, Cluster } from "../server/nest/src/infrastructure/schema";
+import type { Word, Cluster } from "../server/src/infrastructure/schema";
 import {
   LanguageEnum,
   PartOfSpeechEnum,

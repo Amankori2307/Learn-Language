@@ -1,7 +1,7 @@
 import fs from "fs/promises";
 import path from "path";
 import { and, eq, inArray, sql } from "drizzle-orm";
-import { db } from "../server/nest/src/infrastructure/db";
+import { db } from "../server/src/infrastructure/db";
 import { LanguageEnum, PartOfSpeechEnum, VocabularyTagEnum } from "../shared/domain/enums";
 import { getClusterDescription } from "../shared/domain/cluster-metadata";
 import { isPartOfSpeech } from "../shared/domain/part-of-speech";
@@ -14,7 +14,7 @@ import {
   wordExamples,
   wordReviewEvents,
   words,
-} from "../server/nest/src/infrastructure/schema";
+} from "../server/src/infrastructure/schema";
 
 type ContentWord = {
   key: string;

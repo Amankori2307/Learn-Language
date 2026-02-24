@@ -1,5 +1,5 @@
 
-import { storage } from "./server/nest/src/infrastructure/storage";
+import { storage } from "./server/src/infrastructure/storage";
 
 async function main() {
   console.log("Seeding database...");
