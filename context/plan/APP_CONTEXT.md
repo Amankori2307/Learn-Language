@@ -8,7 +8,7 @@ Build a text-first language learning app with high data correctness, strong memo
 
 - Phase 4 complete.
 - Phase 6 core hardening complete (`P6-001` to `P6-011`).
-- Active tasks: `P7-004` backend runtime migration to Next.js (currently blocked in constrained environment).
+- Phase 8 feature hardening complete through `P8-008`.
 - Active priority mode: functionality-first delivery (feature correctness and reliability over visual-only work).
 
 ## Core capabilities live
@@ -19,6 +19,11 @@ Build a text-first language learning app with high data correctness, strong memo
 - Learning:
   - Quiz modes: `daily_review`, `new_words`, `cluster`, `weak_words`, `complex_workout`
   - Optional audio mode: `listen_identify` (serves only audio-enabled words)
+  - Audio resolver pipeline:
+    - `POST /api/audio/resolve`
+    - returns existing `audioUrl` when available
+    - generates and caches missing non-ASCII audio with Google Cloud Text-to-Speech when enabled
+    - persists generated word-level audio URLs for reuse
   - Optional image hints via `imageUrl` in quiz payload/UI (rendered only when present)
   - Language-scoped learner data isolation for quiz/stats/attempts/clusters/leaderboard/words
   - SRS scheduling with:
@@ -89,15 +94,14 @@ Build a text-first language learning app with high data correctness, strong memo
 - Docker compose:
   - hot reload enabled
   - app uses in-network DB connection: `postgresql://postgres:postgres@db:5432/mydb`
+- Optional TTS env knobs:
+  - `ENABLE_GCP_TTS=true`
+  - `GOOGLE_TTS_API_KEY=<your_google_cloud_api_key>`
 - CI:
   - pnpm-based workflow parity with local/docker checks
 
 ## Immediate next implementation
 
 - Execute in order from `context/plan/01-master-task-registry.md` (latest active section: Phase 8).
-- Keep functionality-first sequencing:
-  - architecture boundaries and code hygiene (`P8-001` to `P8-003`)
-  - UX cleanup tasks with functional outcomes (`P8-004`)
-  - seed/content expansion (`P8-005`)
-  - performance + audio infra (`P8-007`, `P8-008`)
+- Remaining Phase 8 execution:
   - deployment/CI-CD last (`P8-006`)

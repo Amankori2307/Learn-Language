@@ -9,6 +9,7 @@ import { QuizApiModule } from "./modules/quiz/quiz.module";
 import { ReviewApiModule } from "./modules/review/review.module";
 import { FeedbackApiModule } from "./modules/feedback/feedback.module";
 import { InfraApiModule } from "./modules/infra/infra.module";
+import { AudioApiModule } from "./modules/audio/audio.module";
 import { nestAppConfig } from "./config/app.config";
 
 @Module({
@@ -25,6 +26,7 @@ import { nestAppConfig } from "./config/app.config";
     ReviewApiModule,
     FeedbackApiModule,
     InfraApiModule,
+    AudioApiModule,
   ],
   providers: [AuthenticatedGuard, ReviewerGuard],
 })

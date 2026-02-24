@@ -14,6 +14,7 @@ interface QuizOption {
 }
 
 interface QuizCardProps {
+  wordId?: number;
   question: string;
   pronunciation?: string | null;
   audioUrl?: string | null;
@@ -45,6 +46,7 @@ interface QuizCardProps {
 }
 
 export function QuizCard({ 
+  wordId,
   question, 
   pronunciation,
   audioUrl,
@@ -153,8 +155,10 @@ export function QuizCard({
                       play({
                         key: "question-audio",
                         audioUrl,
+                        wordId,
                         text: question,
                         speechText: pronunciation ?? question,
+                        resolveText: question,
                         language,
                       })
                     }
@@ -298,14 +302,16 @@ export function QuizCard({
                           size="sm"
                           className="mt-2 rounded-full gap-2"
                           onClick={() =>
-                            play({
-                              key: "answer-audio",
-                              audioUrl: result.correctAnswer.audioUrl ?? null,
-                              text: result.correctAnswer.originalScript,
-                              speechText: result.correctAnswer.transliteration ?? result.correctAnswer.originalScript,
-                              language,
-                            })
-                          }
+                              play({
+                                key: "answer-audio",
+                                audioUrl: result.correctAnswer.audioUrl ?? null,
+                                wordId: result.correctAnswer.id,
+                                text: result.correctAnswer.originalScript,
+                                speechText: result.correctAnswer.transliteration ?? result.correctAnswer.originalScript,
+                                resolveText: result.correctAnswer.originalScript,
+                                language,
+                              })
+                            }
                         >
                           <Volume2 className="h-4 w-4" />
                           {activeKey === "answer-audio" ? "Stop Audio" : "Listen Answer"}
@@ -331,6 +337,7 @@ export function QuizCard({
                                     key: `example-audio-${index}`,
                                     text: example.originalScript,
                                     speechText: example.pronunciation ?? example.originalScript,
+                                    resolveText: example.originalScript,
                                     language,
                                   })
                                 }

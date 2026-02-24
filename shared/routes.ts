@@ -155,6 +155,26 @@ export const api = {
       },
     },
   },
+  audio: {
+    resolve: {
+      method: "POST" as const,
+      path: "/api/audio/resolve" as const,
+      input: z.object({
+        wordId: z.number().int().positive().optional(),
+        language: z.nativeEnum(LanguageEnum),
+        text: z.string().trim().min(1).max(280).optional(),
+        audioUrl: z.string().url().optional(),
+      }),
+      responses: {
+        200: z.object({
+          audioUrl: z.string().url().nullable(),
+          source: z.enum(["existing", "cache", "generated", "unavailable"]),
+          cached: z.boolean(),
+        }),
+        401: errorSchemas.unauthorized,
+      },
+    },
+  },
   stats: {
     get: {
       method: 'GET' as const,

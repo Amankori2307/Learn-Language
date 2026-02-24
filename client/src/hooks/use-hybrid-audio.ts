@@ -1,11 +1,14 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { LanguageEnum } from "@shared/domain/enums";
+import { api } from "@shared/routes";
 
 interface IPlayHybridAudioInput {
   key: string;
   audioUrl?: string | null;
+  wordId?: number | null;
   text?: string | null;
   speechText?: string | null;
+  resolveText?: string | null;
   language?: LanguageEnum | null;
 }
 
@@ -62,6 +65,7 @@ export function useHybridAudio() {
   const [activeKey, setActiveKey] = useState<string | null>(null);
   const htmlAudioRef = useRef<HTMLAudioElement | null>(null);
   const utteranceRef = useRef<SpeechSynthesisUtterance | null>(null);
+  const resolvedAudioRef = useRef<Map<string, string>>(new Map());
 
   const stop = useCallback(() => {
     if (htmlAudioRef.current) {
@@ -77,7 +81,7 @@ export function useHybridAudio() {
   }, []);
 
   const play = useCallback(
-    async ({ key, audioUrl, text, speechText, language }: IPlayHybridAudioInput): Promise<void> => {
+    async ({ key, audioUrl, wordId, text, speechText, resolveText, language }: IPlayHybridAudioInput): Promise<void> => {
       if (!isQuizAudioEnabled()) {
         setActiveKey(null);
         return;
@@ -91,6 +95,13 @@ export function useHybridAudio() {
       stop();
       setActiveKey(key);
       const playbackMode = getAudioPlaybackMode();
+      const resolvedAudioUrl = await resolveServerAudioUrl({
+        cachedUrl: audioUrl,
+        cacheRef: resolvedAudioRef.current,
+        wordId,
+        language,
+        text: resolveText ?? text ?? speechText,
+      });
 
       const fallbackToSpeech = () => {
         if (playbackMode === "url_only") {
@@ -118,13 +129,13 @@ export function useHybridAudio() {
         window.speechSynthesis.speak(utterance);
       };
 
-      if (playbackMode === "tts_only" || !audioUrl) {
+      if (playbackMode === "tts_only" || !resolvedAudioUrl) {
         fallbackToSpeech();
         return;
       }
 
       try {
-        const audio = new Audio(audioUrl);
+        const audio = new Audio(resolvedAudioUrl);
         audio.preload = "auto";
         audio.crossOrigin = "anonymous";
         htmlAudioRef.current = audio;
@@ -146,4 +157,51 @@ export function useHybridAudio() {
     play,
     stop,
   };
+}
+
+async function resolveServerAudioUrl(input: {
+  cachedUrl?: string | null;
+  cacheRef: Map<string, string>;
+  wordId?: number | null;
+  language?: LanguageEnum | null;
+  text?: string | null;
+}): Promise<string | null> {
+  if (input.cachedUrl?.trim()) {
+    return input.cachedUrl.trim();
+  }
+
+  const normalizedText = input.text?.trim();
+  if (!normalizedText || !input.language || isMostlyAscii(normalizedText)) {
+    return null;
+  }
+
+  const cacheKey = `${input.wordId ?? "text"}:${input.language}:${normalizedText}`;
+  const cached = input.cacheRef.get(cacheKey);
+  if (cached) {
+    return cached;
+  }
+
+  try {
+    const response = await fetch(api.audio.resolve.path, {
+      method: api.audio.resolve.method,
+      headers: { "content-type": "application/json" },
+      credentials: "include",
+      body: JSON.stringify({
+        wordId: input.wordId ?? undefined,
+        language: input.language,
+        text: normalizedText,
+      }),
+    });
+    if (!response.ok) {
+      return null;
+    }
+    const parsed = api.audio.resolve.responses[200].parse(await response.json());
+    if (!parsed.audioUrl) {
+      return null;
+    }
+    input.cacheRef.set(cacheKey, parsed.audioUrl);
+    return parsed.audioUrl;
+  } catch {
+    return null;
+  }
 }

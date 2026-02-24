@@ -191,6 +191,21 @@ test("feedback submit contract validates payload", () => {
   assert.equal(parsed.rating, 4);
 });
 
+test("audio resolve contract validates and accepts cached miss payload", () => {
+  const input = api.audio.resolve.input.parse({
+    language: LanguageEnum.TELUGU,
+    text: "నమస్తే",
+  });
+  assert.equal(input.language, LanguageEnum.TELUGU);
+
+  const output = api.audio.resolve.responses[200].parse({
+    audioUrl: null,
+    source: "unavailable",
+    cached: false,
+  });
+  assert.equal(output.cached, false);
+});
+
 test("review queue contract accepts pending review payload", () => {
   const payload = [
     {

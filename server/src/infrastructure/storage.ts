@@ -48,6 +48,7 @@ export interface IStorage {
   // Words & Clusters
   getWords(limit?: number, language?: LanguageEnum): Promise<Word[]>;
   getWord(id: number): Promise<Word | undefined>;
+  updateWordAudioUrl(wordId: number, audioUrl: string): Promise<void>;
   getWordsByCluster(clusterId: number, language?: LanguageEnum): Promise<Word[]>;
   createWord(word: CreateWordRequest): Promise<Word>;
   
@@ -269,6 +270,13 @@ export class DatabaseStorage implements IStorage {
       .from(words)
       .where(and(eq(words.id, id), eq(words.reviewStatus, ReviewStatusEnum.APPROVED)));
     return word;
+  }
+
+  async updateWordAudioUrl(wordId: number, audioUrl: string): Promise<void> {
+    await db
+      .update(words)
+      .set({ audioUrl })
+      .where(eq(words.id, wordId));
   }
 
   async getWordsByCluster(clusterId: number, language?: LanguageEnum): Promise<Word[]> {
