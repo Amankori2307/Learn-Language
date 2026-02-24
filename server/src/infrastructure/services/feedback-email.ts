@@ -1,7 +1,8 @@
 import net from "node:net";
 import tls from "node:tls";
-import { config } from "../../config/runtime.config";
 import { FeedbackEmailInput, SocketLike } from "./feedback-email.types";
+import { feedbackConfig } from "../../config/feedback.config";
+import type { ConfigType } from "@nestjs/config";
 
 function parseEmailFromHeader(header: string): string {
   const match = header.match(/<([^>]+)>/);
@@ -26,8 +27,10 @@ function createEnvelope(input: FeedbackEmailInput) {
   return lines.join("\r\n");
 }
 
-function ensureSmtpConfig() {
-  if (!config.SMTP_HOST || !config.SMTP_USER || !config.SMTP_PASS) {
+type FeedbackEmailConfig = ConfigType<typeof feedbackConfig>;
+
+function ensureSmtpConfig(config: FeedbackEmailConfig) {
+  if (!config.smtpHost || !config.smtpUser || !config.smtpPass) {
     throw new Error("SMTP is not configured. Set SMTP_HOST, SMTP_USER, and SMTP_PASS.");
   }
 }
@@ -80,15 +83,15 @@ async function sendCommand(
   return response;
 }
 
-export async function sendFeedbackEmail(input: FeedbackEmailInput) {
-  ensureSmtpConfig();
+export async function sendFeedbackEmail(input: FeedbackEmailInput, config: FeedbackEmailConfig) {
+  ensureSmtpConfig(config);
 
-  const host = config.SMTP_HOST as string;
-  const port = config.SMTP_PORT;
-  const secure = config.SMTP_SECURE === true;
-  const fromHeader = config.SMTP_FROM;
+  const host = config.smtpHost as string;
+  const port = config.smtpPort;
+  const secure = config.smtpSecure === true;
+  const fromHeader = config.smtpFrom;
   const fromAddress = parseEmailFromHeader(fromHeader);
-  const toAddress = config.FEEDBACK_EMAIL_TO;
+  const toAddress = config.emailTo;
   const messageBody = createEnvelope(input)
     .replace(/\r?\n\./g, "\r\n..");
   const subject = `[Learn Language Feedback] ${input.subject.trim()}`;
@@ -118,8 +121,8 @@ export async function sendFeedbackEmail(input: FeedbackEmailInput) {
       const upgradedReadLine = createLineReader(upgraded);
       await sendCommand(upgraded, upgradedReadLine, "EHLO localhost", 2);
       await sendCommand(upgraded, upgradedReadLine, "AUTH LOGIN", 3);
-      await sendCommand(upgraded, upgradedReadLine, Buffer.from(config.SMTP_USER as string).toString("base64"), 3);
-      await sendCommand(upgraded, upgradedReadLine, Buffer.from(config.SMTP_PASS as string).toString("base64"), 2);
+      await sendCommand(upgraded, upgradedReadLine, Buffer.from(config.smtpUser as string).toString("base64"), 3);
+      await sendCommand(upgraded, upgradedReadLine, Buffer.from(config.smtpPass as string).toString("base64"), 2);
       await sendCommand(upgraded, upgradedReadLine, `MAIL FROM:<${fromAddress}>`, 2);
       await sendCommand(upgraded, upgradedReadLine, `RCPT TO:<${toAddress}>`, 2);
       await sendCommand(upgraded, upgradedReadLine, "DATA", 3);
@@ -135,8 +138,8 @@ export async function sendFeedbackEmail(input: FeedbackEmailInput) {
     }
 
     await sendCommand(socket, readLine, "AUTH LOGIN", 3);
-    await sendCommand(socket, readLine, Buffer.from(config.SMTP_USER as string).toString("base64"), 3);
-    await sendCommand(socket, readLine, Buffer.from(config.SMTP_PASS as string).toString("base64"), 2);
+    await sendCommand(socket, readLine, Buffer.from(config.smtpUser as string).toString("base64"), 3);
+    await sendCommand(socket, readLine, Buffer.from(config.smtpPass as string).toString("base64"), 2);
     await sendCommand(socket, readLine, `MAIL FROM:<${fromAddress}>`, 2);
     await sendCommand(socket, readLine, `RCPT TO:<${toAddress}>`, 2);
     await sendCommand(socket, readLine, "DATA", 3);

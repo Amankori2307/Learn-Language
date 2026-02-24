@@ -11,12 +11,18 @@ import { FeedbackApiModule } from "./modules/feedback/feedback.module";
 import { InfraApiModule } from "./modules/infra/infra.module";
 import { AudioApiModule } from "./modules/audio/audio.module";
 import { nestAppConfig } from "./config/app.config";
+import { authConfig } from "./config/auth.config";
+import { databaseConfig } from "./config/database.config";
+import { feedbackConfig } from "./config/feedback.config";
+import { audioConfig } from "./config/audio.config";
+import { validateEnv } from "./config/env.validation";
 
 @Module({
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
-      load: [nestAppConfig],
+      validate: validateEnv,
+      load: [nestAppConfig, authConfig, databaseConfig, feedbackConfig, audioConfig],
       cache: true,
     }),
     AuthApiModule,

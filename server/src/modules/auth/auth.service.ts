@@ -1,4 +1,5 @@
 import { Injectable } from "@nestjs/common";
+import { ConfigService, type ConfigType } from "@nestjs/config";
 import { z } from "zod";
 import { api } from "@shared/routes";
 import { UserTypeEnum } from "@shared/domain/enums";
@@ -6,10 +7,14 @@ import { resolveRoleFromEmail } from "./auth.roles";
 import { AuthRepository } from "./auth.repository";
 import { AppError } from "../../common/errors/app-error";
 import { UserClaims } from "./auth.types";
+import { authConfig } from "../../config/auth.config";
 
 @Injectable()
 export class AuthService {
-  constructor(private readonly repository: AuthRepository) {}
+  constructor(
+    private readonly repository: AuthRepository,
+    private readonly configService: ConfigService,
+  ) {}
 
   async getAuthUser(claims: UserClaims) {
     try {
@@ -19,7 +24,11 @@ export class AuthService {
       const claimFirstName = claims.first_name ?? claims.given_name ?? null;
       const claimLastName = claims.last_name ?? claims.family_name ?? null;
       const claimProfileImageUrl = claims.profile_image_url ?? claims.picture ?? null;
-      const resolvedRole = resolveRoleFromEmail(claims.email ?? user?.email ?? null);
+      const config = this.configService.getOrThrow<ConfigType<typeof authConfig>>("auth");
+      const resolvedRole = resolveRoleFromEmail(claims.email ?? user?.email ?? null, {
+        reviewerEmails: config.reviewerEmails,
+        adminEmails: config.adminEmails,
+      });
 
       if (!user) {
         user = await this.repository.upsertUser({

@@ -4,9 +4,12 @@ import { randomUUID } from "crypto";
 import { NestFactory } from "@nestjs/core";
 import { ExpressAdapter } from "@nestjs/platform-express";
 import { ValidationPipe } from "@nestjs/common";
+import { ConfigService, type ConfigType } from "@nestjs/config";
 import { sendError } from "../common/http";
 import { setupAuth } from "../modules/auth";
 import { AppModule } from "../app.module";
+import { authConfig } from "../config/auth.config";
+import { databaseConfig } from "../config/database.config";
 
 declare module "http" {
   interface IncomingMessage {
@@ -92,8 +95,26 @@ async function buildNestExpressApp() {
       },
     }),
   );
-  await setupAuth(expressApp);
   await nestApp.init();
+  const configService = nestApp.get(ConfigService);
+  const resolvedAuthConfig = configService.getOrThrow<ConfigType<typeof authConfig>>("auth");
+  const resolvedDatabaseConfig = configService.getOrThrow<ConfigType<typeof databaseConfig>>("database");
+  if (!resolvedAuthConfig.sessionSecret) {
+    throw new Error("Invalid environment configuration: SESSION_SECRET is required for auth setup");
+  }
+  if (resolvedAuthConfig.provider === "google" && !resolvedAuthConfig.googleClientId) {
+    throw new Error("Invalid environment configuration: GOOGLE_CLIENT_ID is required for google auth");
+  }
+  await setupAuth(expressApp, {
+    provider: resolvedAuthConfig.provider,
+    googleClientId: resolvedAuthConfig.googleClientId,
+    googleClientSecret: resolvedAuthConfig.googleClientSecret,
+    googleIssuerUrl: resolvedAuthConfig.googleIssuerUrl,
+    sessionSecret: resolvedAuthConfig.sessionSecret,
+    databaseUrl: resolvedDatabaseConfig.url,
+    reviewerEmails: resolvedAuthConfig.reviewerEmails,
+    adminEmails: resolvedAuthConfig.adminEmails,
+  });
 
   expressApp.use((err: unknown, req: Request, res: Response, next: NextFunction) => {
     const normalizedError = err as { status?: number; statusCode?: number; message?: string };

@@ -1,9 +1,13 @@
 import { Injectable } from "@nestjs/common";
-import { config } from "../../config/runtime.config";
+import { ConfigService, type ConfigType } from "@nestjs/config";
+import { feedbackConfig } from "../../config/feedback.config";
 
 @Injectable()
 export class FeedbackRepository {
+  constructor(private readonly configService: ConfigService) {}
+
   getFeedbackRecipientEmail(): string {
-    return config.FEEDBACK_EMAIL_TO;
+    const config = this.configService.getOrThrow<ConfigType<typeof feedbackConfig>>("feedback");
+    return config.emailTo;
   }
 }

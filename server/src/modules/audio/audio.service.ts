@@ -2,13 +2,14 @@ import { createHash } from "crypto";
 import { mkdir, access, writeFile } from "fs/promises";
 import path from "path";
 import { Injectable } from "@nestjs/common";
+import { ConfigService, type ConfigType } from "@nestjs/config";
 import { z } from "zod";
 import { api } from "@shared/routes";
 import { AppError } from "../../common/errors/app-error";
-import { config } from "../../config/runtime.config";
 import { AUDIO_MODULE_CONSTANTS, LANGUAGE_TO_VOICE_CODE } from "./audio.constants";
 import { AudioRepository } from "./audio.repository";
 import { ResolveAudioInput, ResolveAudioResult, TtsRequest } from "./audio.types";
+import { audioConfig } from "../../config/audio.config";
 
 type GoogleTextToSpeechResponse = {
   audioContent?: string;
@@ -18,7 +19,10 @@ type GoogleTextToSpeechResponse = {
 export class AudioService {
   private readonly inFlight = new Map<string, Promise<string | null>>();
 
-  constructor(private readonly repository: AudioRepository) {}
+  constructor(
+    private readonly repository: AudioRepository,
+    private readonly configService: ConfigService,
+  ) {}
 
   async resolveAudio(input: ResolveAudioInput): Promise<ResolveAudioResult> {
     try {
@@ -83,7 +87,7 @@ export class AudioService {
   }
 
   private async resolveAndCacheAudio(input: TtsRequest): Promise<string | null> {
-    if (!isGoogleTtsConfigured()) {
+    if (!this.isGoogleTtsConfigured()) {
       return null;
     }
 
@@ -145,7 +149,7 @@ export class AudioService {
     }
 
     const endpoint = new URL("https://texttospeech.googleapis.com/v1/text:synthesize");
-    endpoint.searchParams.set("key", config.GOOGLE_TTS_API_KEY ?? "");
+    endpoint.searchParams.set("key", this.getAudioConfig().googleTtsApiKey ?? "");
 
     const response = await fetch(endpoint.toString(), {
       method: "POST",
@@ -174,6 +178,15 @@ export class AudioService {
     }
     return Buffer.from(payload.audioContent, "base64");
   }
+
+  private getAudioConfig() {
+    return this.configService.getOrThrow<ConfigType<typeof audioConfig>>("audio");
+  }
+
+  private isGoogleTtsConfigured(): boolean {
+    const config = this.getAudioConfig();
+    return config.enableGcpTts === true && Boolean(config.googleTtsApiKey);
+  }
 }
 
 function normalizeSynthesisText(value: string): string {
@@ -187,10 +200,6 @@ function isMostlyAscii(value: string): boolean {
 function createAudioFileName(input: TtsRequest): string {
   const hash = createHash("sha256").update(`${input.language}:${input.text}`).digest("hex");
   return `${hash}.mp3`;
-}
-
-function isGoogleTtsConfigured(): boolean {
-  return config.ENABLE_GCP_TTS === true && Boolean(config.GOOGLE_TTS_API_KEY);
 }
 
 async function fileExists(filePath: string): Promise<boolean> {

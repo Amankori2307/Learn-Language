@@ -1,14 +1,19 @@
 import { Injectable } from "@nestjs/common";
+import { ConfigService, type ConfigType } from "@nestjs/config";
 import { z } from "zod";
 import { api } from "@shared/routes";
 import { sendFeedbackEmail } from "../../infrastructure/services/feedback-email";
 import { FeedbackRepository } from "./feedback.repository";
 import { AppError } from "../../common/errors/app-error";
 import { FeedbackUser } from "./feedback.types";
+import { feedbackConfig } from "../../config/feedback.config";
 
 @Injectable()
 export class FeedbackService {
-  constructor(private readonly repository: FeedbackRepository) {}
+  constructor(
+    private readonly repository: FeedbackRepository,
+    private readonly configService: ConfigService,
+  ) {}
 
   async submitFeedback(user: FeedbackUser, payload: unknown) {
     try {
@@ -28,7 +33,7 @@ export class FeedbackService {
         message: parsed.message,
         pageUrl: parsed.pageUrl,
         rating: parsed.rating,
-      });
+      }, this.configService.getOrThrow<ConfigType<typeof feedbackConfig>>("feedback"));
 
       return {
         ok: true as const,

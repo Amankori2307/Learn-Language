@@ -7,23 +7,40 @@ import type { Express, RequestHandler } from "express";
 import memoize from "memoizee";
 import connectPg from "connect-pg-simple";
 import { authStorage } from "./auth.storage";
-import { getAuthConfig } from "../../config/runtime.config";
 import { sendError } from "../../common/http";
 import { resolveRoleFromEmail } from "./auth.roles";
 import { AUTH_SESSION_RULES } from "./auth.constants";
 
-const authConfig = getAuthConfig();
+export type AuthRuntimeConfig = {
+  provider: "google" | "dev";
+  googleClientId?: string;
+  googleClientSecret?: string;
+  googleIssuerUrl: string;
+  sessionSecret: string;
+  databaseUrl: string;
+  reviewerEmails: Set<string>;
+  adminEmails: Set<string>;
+};
+
+let authConfig: AuthRuntimeConfig = {
+  provider: "dev",
+  googleIssuerUrl: "https://accounts.google.com",
+  sessionSecret: "dev-session-secret-min-16",
+  databaseUrl: "",
+  reviewerEmails: new Set<string>(),
+  adminEmails: new Set<string>(),
+};
 
 const getOidcConfig = memoize(
   async () => {
-    if (!authConfig.ISSUER_URL || !authConfig.CLIENT_ID) {
+    if (!authConfig.googleIssuerUrl || !authConfig.googleClientId) {
       throw new Error("OIDC config is not available for current auth provider");
     }
 
     return await client.discovery(
-      new URL(authConfig.ISSUER_URL),
-      authConfig.CLIENT_ID,
-      authConfig.CLIENT_SECRET
+      new URL(authConfig.googleIssuerUrl),
+      authConfig.googleClientId,
+      authConfig.googleClientSecret,
     );
   },
   { maxAge: AUTH_SESSION_RULES.OIDC_CONFIG_CACHE_MAX_AGE_MS }
@@ -33,13 +50,13 @@ export function getSession() {
   const sessionTtl = AUTH_SESSION_RULES.SESSION_TTL_MS;
   const pgStore = connectPg(session);
   const sessionStore = new pgStore({
-    conString: authConfig.DATABASE_URL,
+    conString: authConfig.databaseUrl,
     createTableIfMissing: false,
     ttl: sessionTtl,
     tableName: "sessions",
   });
   return session({
-    secret: authConfig.SESSION_SECRET,
+    secret: authConfig.sessionSecret,
     store: sessionStore,
     resave: false,
     saveUninitialized: false,
@@ -63,7 +80,10 @@ function updateUserSession(
 
 async function upsertUser(claims: any) {
   const email = claims["email"] as string | undefined;
-  const role = resolveRoleFromEmail(email ?? null);
+  const role = resolveRoleFromEmail(email ?? null, {
+    reviewerEmails: authConfig.reviewerEmails,
+    adminEmails: authConfig.adminEmails,
+  });
 
   await authStorage.upsertUser({
     id: claims["sub"],
@@ -75,13 +95,14 @@ async function upsertUser(claims: any) {
   });
 }
 
-export async function setupAuth(app: Express) {
+export async function setupAuth(app: Express, config: AuthRuntimeConfig) {
+  authConfig = config;
   app.set("trust proxy", 1);
   app.use(getSession());
   app.use(passport.initialize());
   app.use(passport.session());
 
-  if (authConfig.AUTH_PROVIDER === "dev") {
+  if (authConfig.provider === "dev") {
     app.get("/api/login", (_req, res) => res.redirect("/"));
     app.get("/api/callback", (_req, res) => res.redirect("/"));
     app.get("/api/logout", (req, res) => {
@@ -155,7 +176,7 @@ export async function setupAuth(app: Express) {
 }
 
 export const isAuthenticated: RequestHandler = async (req, res, next) => {
-  if (authConfig.AUTH_PROVIDER === "dev") {
+  if (authConfig.provider === "dev") {
     (req as any).user = {
       claims: {
         sub: "dev-user",
