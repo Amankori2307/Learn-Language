@@ -1,9 +1,10 @@
 import { index, integer, pgTable, serial, text, timestamp, varchar } from "drizzle-orm/pg-core";
 import { users } from "../auth/auth.schema";
 import { words } from "../vocabulary/vocabulary.schema";
+import { DbTableNameEnum } from "../../infrastructure/database.enums";
 
 export const wordReviewEvents = pgTable(
-  "word_review_events",
+  DbTableNameEnum.WORD_REVIEW_EVENTS,
   {
     id: serial("id").primaryKey(),
     wordId: integer("word_id").references(() => words.id).notNull(),

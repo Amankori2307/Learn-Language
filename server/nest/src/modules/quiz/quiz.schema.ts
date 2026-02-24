@@ -1,9 +1,10 @@
 import { boolean, index, integer, pgTable, primaryKey, real, serial, text, timestamp, varchar, jsonb } from "drizzle-orm/pg-core";
 import { users } from "../auth/auth.schema";
 import { words } from "../vocabulary/vocabulary.schema";
+import { DbTableNameEnum } from "../../infrastructure/database.enums";
 
 export const userWordProgress = pgTable(
-  "user_word_progress",
+  DbTableNameEnum.USER_WORD_PROGRESS,
   {
     userId: varchar("user_id").references(() => users.id).notNull(),
     wordId: integer("word_id").references(() => words.id).notNull(),
@@ -24,7 +25,7 @@ export const userWordProgress = pgTable(
   }),
 );
 
-export const srsConfigs = pgTable("srs_configs", {
+export const srsConfigs = pgTable(DbTableNameEnum.SRS_CONFIGS, {
   version: text("version").primaryKey(),
   config: jsonb("config")
     .$type<{
@@ -39,7 +40,7 @@ export const srsConfigs = pgTable("srs_configs", {
 });
 
 export const quizAttempts = pgTable(
-  "quiz_attempts",
+  DbTableNameEnum.QUIZ_ATTEMPTS,
   {
     id: serial("id").primaryKey(),
     userId: varchar("user_id").references(() => users.id).notNull(),

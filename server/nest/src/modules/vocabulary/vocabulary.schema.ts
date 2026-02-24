@@ -6,9 +6,10 @@ import {
   ReviewStatusEnum,
   VocabularyTagEnum,
 } from "@shared/domain/enums";
+import { DbTableNameEnum } from "../../infrastructure/database.enums";
 
 export const words = pgTable(
-  "words",
+  DbTableNameEnum.WORDS,
   {
     id: serial("id").primaryKey(),
     language: text("language").$type<LanguageEnum>().notNull(),
@@ -45,7 +46,7 @@ export const words = pgTable(
   }),
 );
 
-export const clusters = pgTable("clusters", {
+export const clusters = pgTable(DbTableNameEnum.CLUSTERS, {
   id: serial("id").primaryKey(),
   name: text("name").notNull(),
   type: text("type").notNull(),
@@ -53,7 +54,7 @@ export const clusters = pgTable("clusters", {
 });
 
 export const wordClusters = pgTable(
-  "word_clusters",
+  DbTableNameEnum.WORD_CLUSTERS,
   {
     wordId: integer("word_id").references(() => words.id).notNull(),
     clusterId: integer("cluster_id").references(() => clusters.id).notNull(),
@@ -64,7 +65,7 @@ export const wordClusters = pgTable(
   }),
 );
 
-export const sentences = pgTable("sentences", {
+export const sentences = pgTable(DbTableNameEnum.SENTENCES, {
   id: serial("id").primaryKey(),
   language: text("language").$type<LanguageEnum>().notNull(),
   originalScript: text("original_script").notNull(),
@@ -72,7 +73,7 @@ export const sentences = pgTable("sentences", {
   difficulty: integer("difficulty").notNull(),
 });
 
-export const wordExamples = pgTable("word_examples", {
+export const wordExamples = pgTable(DbTableNameEnum.WORD_EXAMPLES, {
   id: serial("id").primaryKey(),
   wordId: integer("word_id").references(() => words.id).notNull(),
   language: text("language").$type<LanguageEnum>().notNull(),
