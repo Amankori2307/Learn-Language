@@ -1,6 +1,6 @@
 import { CanActivate, ExecutionContext, Injectable } from "@nestjs/common";
 import { UserTypeEnum } from "@shared/domain/enums";
-import { getCurrentUserRole } from "../../auth/permissions";
+import { getCurrentUserRole } from "../../../../auth/permissions";
 
 @Injectable()
 export class ReviewerGuard implements CanActivate {
@@ -10,4 +10,3 @@ export class ReviewerGuard implements CanActivate {
     return role === UserTypeEnum.REVIEWER || role === UserTypeEnum.ADMIN;
   }
 }
-

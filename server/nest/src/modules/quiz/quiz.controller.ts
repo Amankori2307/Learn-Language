@@ -1,8 +1,8 @@
 import { Body, Controller, Get, Post, Query, Req, Res, UseGuards } from "@nestjs/common";
 import type { Request, Response } from "express";
-import { QuizService } from "../../domains/quiz/quiz.service";
-import { AuthenticatedGuard } from "../guards/authenticated.guard";
-import { GenerateQuizQueryDto, SubmitQuizBodyDto } from "../dto/quiz.dto";
+import { QuizService } from "../../../../domains/quiz/quiz.service";
+import { AuthenticatedGuard } from "../../common/guards/authenticated.guard";
+import { GenerateQuizQueryDto, SubmitQuizBodyDto } from "../../common/dto/quiz.dto";
 
 @Controller()
 @UseGuards(AuthenticatedGuard)

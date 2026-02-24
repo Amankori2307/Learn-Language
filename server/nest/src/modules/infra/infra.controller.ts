@@ -1,9 +1,9 @@
 import { Controller, Get, Post, Query, Req, Res, UseGuards } from "@nestjs/common";
 import type { Request, Response } from "express";
-import { InfraService } from "../../domains/infra/infra.service";
-import { AuthenticatedGuard } from "../guards/authenticated.guard";
-import { ReviewerGuard } from "../guards/reviewer.guard";
-import { SrsDriftQueryDto } from "../dto/infra.dto";
+import { InfraService } from "../../../../domains/infra/infra.service";
+import { AuthenticatedGuard } from "../../common/guards/authenticated.guard";
+import { ReviewerGuard } from "../../common/guards/reviewer.guard";
+import { SrsDriftQueryDto } from "../../common/dto/infra.dto";
 
 @Controller()
 export class InfraApiController {

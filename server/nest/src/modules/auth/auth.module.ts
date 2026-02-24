@@ -1,7 +1,7 @@
 import { Module } from "@nestjs/common";
-import { AuthApiController } from "../controllers/auth.controller";
-import { AuthRepository } from "../../auth/auth.repository";
-import { AuthService } from "../../auth/auth.service";
+import { AuthApiController } from "./auth.controller";
+import { AuthRepository } from "../../../../auth/auth.repository";
+import { AuthService } from "../../../../auth/auth.service";
 
 @Module({
   controllers: [AuthApiController],
@@ -9,4 +9,3 @@ import { AuthService } from "../../auth/auth.service";
   exports: [AuthRepository, AuthService],
 })
 export class AuthApiModule {}
-

@@ -1,8 +1,8 @@
 import { Body, Controller, Get, Param, ParseIntPipe, Patch, Post, Query, Req, Res, UseGuards } from "@nestjs/common";
 import type { Request, Response } from "express";
-import { ReviewService } from "../../domains/review/review.service";
-import { AuthenticatedGuard } from "../guards/authenticated.guard";
-import { ReviewerGuard } from "../guards/reviewer.guard";
+import { ReviewService } from "../../../../domains/review/review.service";
+import { AuthenticatedGuard } from "../../common/guards/authenticated.guard";
+import { ReviewerGuard } from "../../common/guards/reviewer.guard";
 import {
   ReviewBulkTransitionBodyDto,
   ReviewConflictsQueryDto,
@@ -10,7 +10,7 @@ import {
   ReviewResolveConflictBodyDto,
   ReviewSubmitDraftBodyDto,
   ReviewTransitionBodyDto,
-} from "../dto/review.dto";
+} from "../../common/dto/review.dto";
 
 @Controller()
 export class ReviewApiController {

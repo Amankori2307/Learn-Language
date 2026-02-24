@@ -1,8 +1,8 @@
 import { Controller, Get, Param, ParseIntPipe, Query, Req, Res, UseGuards } from "@nestjs/common";
 import type { Request, Response } from "express";
-import { VocabularyService } from "../../domains/vocabulary/vocabulary.service";
-import { AuthenticatedGuard } from "../guards/authenticated.guard";
-import { ListClustersQueryDto, ListWordsQueryDto } from "../dto/vocabulary.dto";
+import { VocabularyService } from "../../../../domains/vocabulary/vocabulary.service";
+import { AuthenticatedGuard } from "../../common/guards/authenticated.guard";
+import { ListClustersQueryDto, ListWordsQueryDto } from "../../common/dto/vocabulary.dto";
 
 @Controller()
 @UseGuards(AuthenticatedGuard)

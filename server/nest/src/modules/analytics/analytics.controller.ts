@@ -1,8 +1,8 @@
 import { Controller, Get, Query, Req, Res, UseGuards } from "@nestjs/common";
 import type { Request, Response } from "express";
-import { AnalyticsService } from "../../domains/analytics/analytics.service";
-import { AuthenticatedGuard } from "../guards/authenticated.guard";
-import { AttemptHistoryQueryDto, LanguageQueryDto, LeaderboardQueryDto } from "../dto/analytics.dto";
+import { AnalyticsService } from "../../../../domains/analytics/analytics.service";
+import { AuthenticatedGuard } from "../../common/guards/authenticated.guard";
+import { AttemptHistoryQueryDto, LanguageQueryDto, LeaderboardQueryDto } from "../../common/dto/analytics.dto";
 
 @Controller()
 @UseGuards(AuthenticatedGuard)

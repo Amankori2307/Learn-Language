@@ -1,8 +1,8 @@
 import { Body, Controller, Post, Req, Res, UseGuards } from "@nestjs/common";
 import type { Request, Response } from "express";
-import { FeedbackService } from "../../domains/feedback/feedback.service";
-import { AuthenticatedGuard } from "../guards/authenticated.guard";
-import { SubmitFeedbackBodyDto } from "../dto/feedback.dto";
+import { FeedbackService } from "../../../../domains/feedback/feedback.service";
+import { AuthenticatedGuard } from "../../common/guards/authenticated.guard";
+import { SubmitFeedbackBodyDto } from "../../common/dto/feedback.dto";
 
 @Controller()
 @UseGuards(AuthenticatedGuard)
