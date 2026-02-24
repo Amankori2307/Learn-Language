@@ -4,13 +4,7 @@ import { api } from "@shared/routes";
 import { sendFeedbackEmail } from "../../infrastructure/services/feedback-email";
 import { FeedbackRepository } from "./feedback.repository";
 import { AppError } from "../../common/errors/app-error";
-
-type FeedbackUser = {
-  sub?: string;
-  email?: string;
-  first_name?: string;
-  last_name?: string;
-};
+import { FeedbackUser } from "./feedback.types";
 
 @Injectable()
 export class FeedbackService {

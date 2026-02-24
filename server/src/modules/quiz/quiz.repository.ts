@@ -1,9 +1,7 @@
 import { Injectable } from "@nestjs/common";
 import { storage } from "../../infrastructure/storage";
 import { LanguageEnum, QuizModeEnum } from "@shared/domain/enums";
-
-type ICreateProgressInput = Parameters<typeof storage.createUserProgress>[0];
-type IQuizAttemptInput = Parameters<typeof storage.logQuizAttempt>[0];
+import { ICreateProgressInput, IQuizAttemptInput } from "./quiz.repository.types";
 
 @Injectable()
 export class QuizRepository {

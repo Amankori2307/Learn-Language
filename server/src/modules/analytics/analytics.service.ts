@@ -3,24 +3,7 @@ import { LanguageEnum } from "@shared/domain/enums";
 import { api } from "@shared/routes";
 import { parseLanguage } from "../../common/utils/language";
 import { AnalyticsRepository } from "./analytics.repository";
-
-type AttemptHistoryInput = {
-  limit?: number;
-  language?: LanguageEnum;
-};
-
-type LeaderboardInput = {
-  window?: "daily" | "weekly" | "all_time";
-  limit?: number;
-  language?: LanguageEnum;
-};
-
-type WordBucketInput = {
-  bucket: "mastered" | "learning" | "needs_review";
-  page?: number;
-  limit?: number;
-  language?: LanguageEnum;
-};
+import { AttemptHistoryInput, LeaderboardInput, WordBucketInput } from "./analytics.types";
 
 @Injectable()
 export class AnalyticsService {

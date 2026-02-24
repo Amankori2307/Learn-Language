@@ -1,18 +1,7 @@
 import net from "node:net";
 import tls from "node:tls";
 import { config } from "../../config/runtime.config";
-
-type SocketLike = net.Socket | tls.TLSSocket;
-
-export type FeedbackEmailInput = {
-  userId: string;
-  userEmail?: string | null;
-  userName?: string | null;
-  subject: string;
-  message: string;
-  pageUrl?: string;
-  rating?: number;
-};
+import { FeedbackEmailInput, SocketLike } from "./feedback-email.types";
 
 function parseEmailFromHeader(header: string): string {
   const match = header.match(/<([^>]+)>/);

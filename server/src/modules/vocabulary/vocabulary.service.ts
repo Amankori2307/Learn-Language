@@ -3,13 +3,7 @@ import { api } from "@shared/routes";
 import { LanguageEnum } from "@shared/domain/enums";
 import { VocabularyRepository } from "./vocabulary.repository";
 import { AppError } from "../../common/errors/app-error";
-
-type ListWordsInput = {
-  language?: LanguageEnum;
-  search?: string;
-  clusterId?: number;
-  limit?: number;
-};
+import { ListWordsInput } from "./vocabulary.types";
 
 @Injectable()
 export class VocabularyService {

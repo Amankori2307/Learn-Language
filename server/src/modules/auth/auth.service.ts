@@ -5,17 +5,7 @@ import { UserTypeEnum } from "@shared/domain/enums";
 import { resolveRoleFromEmail } from "./auth.roles";
 import { AuthRepository } from "./auth.repository";
 import { AppError } from "../../common/errors/app-error";
-
-type UserClaims = {
-  sub: string;
-  email?: string | null;
-  first_name?: string | null;
-  last_name?: string | null;
-  given_name?: string | null;
-  family_name?: string | null;
-  profile_image_url?: string | null;
-  picture?: string | null;
-};
+import { UserClaims } from "./auth.types";
 
 @Injectable()
 export class AuthService {

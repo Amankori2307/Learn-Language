@@ -1,8 +1,6 @@
 import { Injectable } from "@nestjs/common";
 import { authStorage } from "./auth.storage";
-
-type IUpsertUserInput = Parameters<typeof authStorage.upsertUser>[0];
-type IProfileInput = Parameters<typeof authStorage.updateUserProfile>[1];
+import { IProfileInput, IUpsertUserInput } from "./auth.repository.types";
 
 @Injectable()
 export class AuthRepository {

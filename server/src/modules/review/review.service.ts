@@ -4,15 +4,7 @@ import { api } from "@shared/routes";
 import { ReviewDisagreementStatusEnum, ReviewStatusEnum } from "@shared/domain/enums";
 import { ReviewRepository } from "./review.repository";
 import { AppError } from "../../common/errors/app-error";
-
-type ReviewQueueInput = {
-  status?: ReviewStatusEnum;
-  limit?: number;
-};
-
-type ReviewConflictInput = {
-  limit?: number;
-};
+import { ReviewConflictInput, ReviewQueueInput } from "./review.types";
 
 @Injectable()
 export class ReviewService {

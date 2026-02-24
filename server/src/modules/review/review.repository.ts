@@ -1,21 +1,7 @@
 import { Injectable } from "@nestjs/common";
 import { storage } from "../../infrastructure/storage";
-import { ReviewDisagreementStatusEnum, ReviewStatusEnum } from "@shared/domain/enums";
-
-type ITransitionOptions = {
-  notes?: string;
-  reviewerConfidenceScore?: number;
-  requiresSecondaryReview?: boolean;
-  disagreementStatus?: ReviewDisagreementStatusEnum;
-};
-
-type IResolveConflictOptions = {
-  toStatus: ReviewStatusEnum;
-  notes?: string;
-  reviewerConfidenceScore?: number;
-};
-
-type ICreateWordDraftInput = Parameters<typeof storage.createWordDraft>[0];
+import { ReviewStatusEnum } from "@shared/domain/enums";
+import { ICreateWordDraftInput, IResolveConflictOptions, ITransitionOptions } from "./review.repository.types";
 
 @Injectable()
 export class ReviewRepository {

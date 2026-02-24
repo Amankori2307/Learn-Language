@@ -7,19 +7,7 @@ import { chooseDistractors } from "../../infrastructure/services/distractors";
 import { formatPronunciationFirst, parseLanguage } from "../../common/utils/language";
 import { QuizRepository } from "./quiz.repository";
 import { AppError } from "../../common/errors/app-error";
-
-type GenerateQuizInput = {
-  userId: string;
-  mode?: QuizModeEnum;
-  clusterId?: number;
-  count?: number;
-  language?: unknown;
-};
-
-type SubmitQuizInput = {
-  userId: string;
-  payload: unknown;
-};
+import { GenerateQuizInput, SubmitQuizInput } from "./quiz.types";
 
 @Injectable()
 export class QuizService {
