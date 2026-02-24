@@ -1,7 +1,8 @@
 import { LanguageEnum } from "@shared/domain/enums";
 
 export const AUDIO_MODULE_CONSTANTS = {
-  GENERATED_AUDIO_DIR: "public/audio/generated",
+  GENERATED_AUDIO_DIR: "assets/audio",
+  GENERATED_AUDIO_PUBLIC_PATH: "/audio/generated",
   MAX_SYNTHESIS_CHARACTERS: 280,
   MAX_TTS_RETRIES: 3,
   RETRY_BACKOFF_MS: 300,

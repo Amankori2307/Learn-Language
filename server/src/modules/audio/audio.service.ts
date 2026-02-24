@@ -72,7 +72,7 @@ export class AudioService {
 
       return {
         audioUrl: generatedAudioUrl,
-        source: generatedAudioUrl.includes("/audio/generated/") ? "generated" : "cache",
+        source: generatedAudioUrl.includes(`${AUDIO_MODULE_CONSTANTS.GENERATED_AUDIO_PUBLIC_PATH}/`) ? "generated" : "cache",
         cached: true,
       };
     } catch (error) {
@@ -92,9 +92,9 @@ export class AudioService {
     }
 
     const fileName = createAudioFileName(input);
-    const relativePath = path.join("audio/generated", input.language, fileName);
-    const absolutePath = path.join(process.cwd(), "public", relativePath);
-    const publicUrl = `/${relativePath.replaceAll(path.sep, "/")}`;
+    const relativePath = path.join(input.language, fileName);
+    const absolutePath = path.join(process.cwd(), AUDIO_MODULE_CONSTANTS.GENERATED_AUDIO_DIR, relativePath);
+    const publicUrl = `${AUDIO_MODULE_CONSTANTS.GENERATED_AUDIO_PUBLIC_PATH}/${relativePath.replaceAll(path.sep, "/")}`;
 
     if (await fileExists(absolutePath)) {
       return publicUrl;

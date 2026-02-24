@@ -5,6 +5,7 @@ import { NestFactory } from "@nestjs/core";
 import { ExpressAdapter } from "@nestjs/platform-express";
 import { ValidationPipe } from "@nestjs/common";
 import { ConfigService, type ConfigType } from "@nestjs/config";
+import path from "path";
 import { sendError } from "../common/http";
 import { setupAuth } from "../modules/auth";
 import { AppModule } from "../app.module";
@@ -47,6 +48,10 @@ async function buildNestExpressApp() {
     }),
   );
   expressApp.use(express.urlencoded({ extended: false }));
+  expressApp.use(
+    "/audio/generated",
+    express.static(path.join(process.cwd(), "assets/audio")),
+  );
 
   expressApp.use((req, res, next) => {
     const requestId = req.get("x-request-id") ?? randomUUID();
