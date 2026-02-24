@@ -1,11 +1,10 @@
 import "reflect-metadata";
 import express, { type NextFunction, type Request, type Response } from "express";
-import { createServer } from "http";
 import { randomUUID } from "crypto";
 import { NestFactory } from "@nestjs/core";
 import { ExpressAdapter } from "@nestjs/platform-express";
 import { sendError } from "../http";
-import { registerRoutes } from "../routes";
+import { setupAuth } from "../auth";
 import { AppModule } from "./app.module";
 
 declare module "http" {
@@ -35,7 +34,6 @@ function log(message: string, source = "next-api") {
 
 async function buildNestExpressApp() {
   const expressApp = express();
-  const httpServer = createServer(expressApp);
 
   expressApp.use(
     express.json({
@@ -83,7 +81,7 @@ async function buildNestExpressApp() {
   const nestApp = await NestFactory.create(AppModule, adapter, {
     bodyParser: false,
   });
-  await registerRoutes(httpServer, expressApp);
+  await setupAuth(expressApp);
   await nestApp.init();
 
   expressApp.use((err: unknown, req: Request, res: Response, next: NextFunction) => {

@@ -1,3 +1,4 @@
+import { Injectable } from "@nestjs/common";
 import { storage } from "../../storage";
 import { ReviewDisagreementStatusEnum, ReviewStatusEnum } from "@shared/domain/enums";
 
@@ -34,6 +35,7 @@ export interface IReviewRepository {
   createWordDraft(input: ICreateWordDraftInput): Promise<Awaited<ReturnType<typeof storage.createWordDraft>>>;
 }
 
+@Injectable()
 export class ReviewRepository implements IReviewRepository {
   getReviewQueue(status: ReviewStatusEnum, limit: number) {
     return storage.getReviewQueue(status, limit);

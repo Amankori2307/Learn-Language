@@ -1,3 +1,4 @@
+import { Injectable } from "@nestjs/common";
 import { storage } from "../../storage";
 import { LanguageEnum } from "@shared/domain/enums";
 
@@ -8,6 +9,7 @@ export interface IVocabularyRepository {
   getCluster(clusterId: number, language?: LanguageEnum): Promise<Awaited<ReturnType<typeof storage.getCluster>>>;
 }
 
+@Injectable()
 export class VocabularyRepository implements IVocabularyRepository {
   getWords(limit: number, language?: LanguageEnum) {
     return storage.getWords(limit, language);
@@ -25,4 +27,3 @@ export class VocabularyRepository implements IVocabularyRepository {
     return storage.getCluster(clusterId, language);
   }
 }
-

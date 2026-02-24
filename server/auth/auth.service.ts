@@ -1,10 +1,11 @@
+import { Injectable } from "@nestjs/common";
 import type { Request, Response } from "express";
 import { z } from "zod";
 import { api } from "@shared/routes";
 import { UserTypeEnum } from "@shared/domain/enums";
 import { resolveRoleFromEmail } from "./roles";
 import { sendError } from "../http";
-import type { IAuthRepository } from "./auth.repository";
+import { AuthRepository } from "./auth.repository";
 
 interface IUserClaimsRequest extends Request {
   user: {
@@ -27,8 +28,9 @@ export interface IAuthService {
   updateProfile(req: Request, res: Response): Promise<void>;
 }
 
+@Injectable()
 export class AuthService implements IAuthService {
-  constructor(private readonly repository: IAuthRepository) {}
+  constructor(private readonly repository: AuthRepository) {}
 
   async getAuthUser(req: Request, res: Response): Promise<void> {
     try {
@@ -123,4 +125,3 @@ export class AuthService implements IAuthService {
     }
   }
 }
-

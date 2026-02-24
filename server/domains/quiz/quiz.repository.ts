@@ -1,3 +1,4 @@
+import { Injectable } from "@nestjs/common";
 import { storage } from "../../storage";
 import { LanguageEnum, QuizModeEnum } from "@shared/domain/enums";
 
@@ -27,6 +28,7 @@ export interface IQuizRepository {
   logQuizAttempt(input: IQuizAttemptInput): Promise<void>;
 }
 
+@Injectable()
 export class QuizRepository implements IQuizRepository {
   getQuizCandidates(userId: string, limit: number, clusterId?: number, mode?: QuizModeEnum, language?: LanguageEnum) {
     return storage.getQuizCandidates(userId, limit, clusterId, mode, language);
@@ -72,4 +74,3 @@ export class QuizRepository implements IQuizRepository {
     await storage.logQuizAttempt(input);
   }
 }
-

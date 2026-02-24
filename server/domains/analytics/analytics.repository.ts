@@ -1,3 +1,4 @@
+import { Injectable } from "@nestjs/common";
 import { storage } from "../../storage";
 import { LanguageEnum } from "@shared/domain/enums";
 
@@ -19,6 +20,7 @@ export interface IAnalyticsRepository {
   ): Promise<Awaited<ReturnType<typeof storage.getLeaderboard>>>;
 }
 
+@Injectable()
 export class AnalyticsRepository implements IAnalyticsRepository {
   getUserStats(userId: string, language?: LanguageEnum) {
     return storage.getUserStats(userId, language);

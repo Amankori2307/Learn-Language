@@ -1,9 +1,10 @@
+import { Injectable } from "@nestjs/common";
 import type { Request, Response } from "express";
 import { z } from "zod";
 import { api } from "@shared/routes";
 import { ReviewDisagreementStatusEnum, ReviewStatusEnum } from "@shared/domain/enums";
 import { sendError } from "../../http";
-import type { IReviewRepository } from "./review.repository";
+import { ReviewRepository } from "./review.repository";
 
 interface IUserClaimsRequest extends Request {
   user: {
@@ -23,8 +24,9 @@ export interface IReviewService {
   submitDraft(req: Request, res: Response): Promise<void>;
 }
 
+@Injectable()
 export class ReviewService implements IReviewService {
-  constructor(private readonly repository: IReviewRepository) {}
+  constructor(private readonly repository: ReviewRepository) {}
 
   async getQueue(req: Request, res: Response): Promise<void> {
     const parsed = api.review.queue.input?.parse(req.query) ?? { status: ReviewStatusEnum.PENDING_REVIEW, limit: 50 };
@@ -251,4 +253,3 @@ export class ReviewService implements IReviewService {
     }
   }
 }
-

@@ -1,3 +1,4 @@
+import { Injectable } from "@nestjs/common";
 import { storage } from "../../storage";
 import { LanguageEnum } from "@shared/domain/enums";
 
@@ -6,6 +7,7 @@ export interface IInfraRepository {
   getSrsDriftSummary(language?: LanguageEnum): Promise<Awaited<ReturnType<typeof storage.getSrsDriftSummary>>>;
 }
 
+@Injectable()
 export class InfraRepository implements IInfraRepository {
   seedInitialData() {
     return storage.seedInitialData();
@@ -15,4 +17,3 @@ export class InfraRepository implements IInfraRepository {
     return storage.getSrsDriftSummary(language);
   }
 }
-

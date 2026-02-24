@@ -1,7 +1,8 @@
+import { Injectable } from "@nestjs/common";
 import type { Request, Response } from "express";
 import { api } from "@shared/routes";
 import { parseLanguage } from "../common/language";
-import type { IAnalyticsRepository } from "./analytics.repository";
+import { AnalyticsRepository } from "./analytics.repository";
 
 export interface IAnalyticsService {
   getStats(req: Request, res: Response): Promise<void>;
@@ -10,8 +11,9 @@ export interface IAnalyticsService {
   getLeaderboard(req: Request, res: Response): Promise<void>;
 }
 
+@Injectable()
 export class AnalyticsService implements IAnalyticsService {
-  constructor(private readonly repository: IAnalyticsRepository) {}
+  constructor(private readonly repository: AnalyticsRepository) {}
 
   async getStats(req: Request, res: Response): Promise<void> {
     const userId = (req.user as { claims: { sub: string } }).claims.sub;
@@ -50,4 +52,3 @@ export class AnalyticsService implements IAnalyticsService {
     res.json(leaderboard);
   }
 }
-

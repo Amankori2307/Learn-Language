@@ -1,14 +1,16 @@
+import { Injectable } from "@nestjs/common";
 import type { Request, Response } from "express";
 import { api } from "@shared/routes";
-import type { IInfraRepository } from "./infra.repository";
+import { InfraRepository } from "./infra.repository";
 
 export interface IInfraService {
   seed(req: Request, res: Response): Promise<void>;
   getSrsDrift(req: Request, res: Response): Promise<void>;
 }
 
+@Injectable()
 export class InfraService implements IInfraService {
-  constructor(private readonly repository: IInfraRepository) {}
+  constructor(private readonly repository: InfraRepository) {}
 
   async seed(_req: Request, res: Response): Promise<void> {
     await this.repository.seedInitialData();
@@ -21,4 +23,3 @@ export class InfraService implements IInfraService {
     res.json(summary);
   }
 }
-

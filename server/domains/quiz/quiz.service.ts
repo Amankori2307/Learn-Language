@@ -1,3 +1,4 @@
+import { Injectable } from "@nestjs/common";
 import type { Request, Response } from "express";
 import { z } from "zod";
 import { api } from "@shared/routes";
@@ -6,7 +7,7 @@ import { applySrsUpdate } from "../../services/srs";
 import { chooseDistractors } from "../../services/distractors";
 import { logApiEvent, sendError } from "../../http";
 import { formatPronunciationFirst, parseLanguage } from "../common/language";
-import type { IQuizRepository } from "./quiz.repository";
+import { QuizRepository } from "./quiz.repository";
 
 interface IUserClaimsRequest extends Request {
   user: {
@@ -21,8 +22,9 @@ export interface IQuizService {
   submitQuizAnswer(req: Request, res: Response): Promise<void>;
 }
 
+@Injectable()
 export class QuizService implements IQuizService {
-  constructor(private readonly repository: IQuizRepository) {}
+  constructor(private readonly repository: QuizRepository) {}
 
   async generateQuiz(req: Request, res: Response): Promise<void> {
     const userId = (req as IUserClaimsRequest).user.claims.sub;
@@ -211,4 +213,3 @@ export class QuizService implements IQuizService {
     }
   }
 }
-

@@ -1,3 +1,4 @@
+import { Injectable } from "@nestjs/common";
 import { authStorage } from "./storage";
 
 type IUpsertUserInput = Parameters<typeof authStorage.upsertUser>[0];
@@ -12,6 +13,7 @@ export interface IAuthRepository {
   ): Promise<Awaited<ReturnType<typeof authStorage.updateUserProfile>>>;
 }
 
+@Injectable()
 export class AuthRepository implements IAuthRepository {
   getUser(userId: string) {
     return authStorage.getUser(userId);
@@ -25,4 +27,3 @@ export class AuthRepository implements IAuthRepository {
     return authStorage.updateUserProfile(userId, profile);
   }
 }
-

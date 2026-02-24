@@ -1,9 +1,10 @@
+import { Injectable } from "@nestjs/common";
 import { z } from "zod";
 import type { Request, Response } from "express";
 import { api } from "@shared/routes";
 import { logApiEvent, sendError } from "../../http";
 import { sendFeedbackEmail } from "../../services/feedback-email";
-import type { IFeedbackRepository } from "./feedback.repository";
+import { FeedbackRepository } from "./feedback.repository";
 
 interface IClaims {
   sub?: string;
@@ -16,8 +17,9 @@ export interface IFeedbackService {
   submitFeedback(req: Request, res: Response): Promise<void>;
 }
 
+@Injectable()
 export class FeedbackService implements IFeedbackService {
-  constructor(private readonly repository: IFeedbackRepository) {}
+  constructor(private readonly repository: FeedbackRepository) {}
 
   async submitFeedback(req: Request, res: Response): Promise<void> {
     try {
@@ -60,4 +62,3 @@ export class FeedbackService implements IFeedbackService {
     }
   }
 }
-

@@ -1,6 +1,7 @@
+import { Injectable } from "@nestjs/common";
 import { sendError } from "../../http";
 import type { Request, Response } from "express";
-import type { IVocabularyRepository } from "./vocabulary.repository";
+import { VocabularyRepository } from "./vocabulary.repository";
 import { api } from "@shared/routes";
 
 export interface IVocabularyService {
@@ -10,8 +11,9 @@ export interface IVocabularyService {
   getCluster(req: Request, res: Response): Promise<void>;
 }
 
+@Injectable()
 export class VocabularyService implements IVocabularyService {
-  constructor(private readonly repository: IVocabularyRepository) {}
+  constructor(private readonly repository: VocabularyRepository) {}
 
   async listWords(req: Request, res: Response): Promise<void> {
     const parsed = api.words.list.input?.parse(req.query) ?? {};
