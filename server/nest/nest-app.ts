@@ -3,6 +3,7 @@ import express, { type NextFunction, type Request, type Response } from "express
 import { randomUUID } from "crypto";
 import { NestFactory } from "@nestjs/core";
 import { ExpressAdapter } from "@nestjs/platform-express";
+import { ValidationPipe } from "@nestjs/common";
 import { sendError } from "../http";
 import { setupAuth } from "../auth";
 import { AppModule } from "./app.module";
@@ -81,6 +82,16 @@ async function buildNestExpressApp() {
   const nestApp = await NestFactory.create(AppModule, adapter, {
     bodyParser: false,
   });
+  nestApp.useGlobalPipes(
+    new ValidationPipe({
+      transform: true,
+      whitelist: true,
+      forbidUnknownValues: false,
+      transformOptions: {
+        enableImplicitConversion: true,
+      },
+    }),
+  );
   await setupAuth(expressApp);
   await nestApp.init();
 

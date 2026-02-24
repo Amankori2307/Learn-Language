@@ -1,8 +1,9 @@
-import { Controller, Get, Post, Req, Res, UseGuards } from "@nestjs/common";
+import { Controller, Get, Post, Query, Req, Res, UseGuards } from "@nestjs/common";
 import type { Request, Response } from "express";
 import { InfraService } from "../../domains/infra/infra.service";
 import { AuthenticatedGuard } from "../guards/authenticated.guard";
 import { ReviewerGuard } from "../guards/reviewer.guard";
+import { SrsDriftQueryDto } from "../dto/infra.dto";
 
 @Controller()
 export class InfraApiController {
@@ -16,8 +17,8 @@ export class InfraApiController {
 
   @Get("/api/admin/srs/drift")
   @UseGuards(AuthenticatedGuard, ReviewerGuard)
-  getSrsDrift(@Req() req: Request, @Res() res: Response) {
+  getSrsDrift(@Req() req: Request, @Res() res: Response, @Query() query: SrsDriftQueryDto) {
+    req.query = query as unknown as Request["query"];
     return this.infraService.getSrsDrift(req, res);
   }
 }
-
