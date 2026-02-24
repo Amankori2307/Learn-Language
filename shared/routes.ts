@@ -11,6 +11,7 @@ import {
   UserTypeEnum,
   VocabularyTagEnum,
 } from './domain/enums';
+import { API_PAGINATION_DEFAULTS, API_PAGINATION_LIMITS, API_VALIDATION_LIMITS } from "./domain/api-limits";
 
 // ============================================
 // SHARED ERROR SCHEMAS
@@ -102,7 +103,7 @@ export const api = {
       input: z.object({
         mode: z.nativeEnum(QuizModeEnum).default(QuizModeEnum.DAILY_REVIEW),
         clusterId: z.coerce.number().optional(),
-        count: z.coerce.number().default(10),
+        count: z.coerce.number().default(API_PAGINATION_DEFAULTS.QUIZ_COUNT),
         language: z.nativeEnum(LanguageEnum).optional(),
       }).optional(),
       responses: {
@@ -225,8 +226,13 @@ export const api = {
       path: "/api/analytics/word-buckets" as const,
       input: z.object({
         bucket: z.enum(["mastered", "learning", "needs_review"]),
-        page: z.coerce.number().int().positive().default(1),
-        limit: z.coerce.number().int().positive().max(200).default(50),
+        page: z.coerce.number().int().positive().default(API_PAGINATION_DEFAULTS.PAGE),
+        limit: z.coerce
+          .number()
+          .int()
+          .positive()
+          .max(API_PAGINATION_LIMITS.GENERIC_MAX)
+          .default(API_PAGINATION_DEFAULTS.WORD_BUCKET_LIMIT),
         language: z.nativeEnum(LanguageEnum).optional(),
       }),
       responses: {
@@ -258,7 +264,12 @@ export const api = {
       method: "GET" as const,
       path: "/api/attempts/history" as const,
       input: z.object({
-        limit: z.coerce.number().int().positive().max(200).default(100),
+        limit: z.coerce
+          .number()
+          .int()
+          .positive()
+          .max(API_PAGINATION_LIMITS.GENERIC_MAX)
+          .default(API_PAGINATION_DEFAULTS.ATTEMPT_HISTORY_LIMIT),
         language: z.nativeEnum(LanguageEnum).optional(),
       }).optional(),
       responses: {
@@ -288,7 +299,12 @@ export const api = {
       path: "/api/leaderboard" as const,
       input: z.object({
         window: z.enum(["daily", "weekly", "all_time"]).default("weekly"),
-        limit: z.coerce.number().int().positive().max(100).default(25),
+        limit: z.coerce
+          .number()
+          .int()
+          .positive()
+          .max(API_PAGINATION_LIMITS.LEADERBOARD_MAX)
+          .default(API_PAGINATION_DEFAULTS.LEADERBOARD_LIMIT),
         language: z.nativeEnum(LanguageEnum).optional(),
       }).optional(),
       responses: {
@@ -357,10 +373,23 @@ export const api = {
       method: "POST" as const,
       path: "/api/feedback" as const,
       input: z.object({
-        subject: z.string().trim().min(3).max(120),
-        message: z.string().trim().min(10).max(4000),
+        subject: z
+          .string()
+          .trim()
+          .min(API_VALIDATION_LIMITS.FEEDBACK_SUBJECT_MIN)
+          .max(API_VALIDATION_LIMITS.FEEDBACK_SUBJECT_MAX),
+        message: z
+          .string()
+          .trim()
+          .min(API_VALIDATION_LIMITS.FEEDBACK_MESSAGE_MIN)
+          .max(API_VALIDATION_LIMITS.FEEDBACK_MESSAGE_MAX),
         pageUrl: z.string().url().optional(),
-        rating: z.number().int().min(1).max(5).optional(),
+        rating: z
+          .number()
+          .int()
+          .min(API_VALIDATION_LIMITS.REVIEWER_CONFIDENCE_MIN)
+          .max(API_VALIDATION_LIMITS.REVIEWER_CONFIDENCE_MAX)
+          .optional(),
       }),
       responses: {
         200: z.object({
@@ -379,7 +408,12 @@ export const api = {
       path: "/api/review/queue" as const,
       input: z.object({
         status: z.nativeEnum(ReviewStatusEnum).default(ReviewStatusEnum.PENDING_REVIEW),
-        limit: z.coerce.number().int().positive().max(200).default(50),
+        limit: z.coerce
+          .number()
+          .int()
+          .positive()
+          .max(API_PAGINATION_LIMITS.GENERIC_MAX)
+          .default(API_PAGINATION_DEFAULTS.REVIEW_LIMIT),
       }).optional(),
       responses: {
         200: z.array(z.object({
@@ -410,8 +444,13 @@ export const api = {
       path: "/api/review/words/:id" as const,
       input: z.object({
         toStatus: z.nativeEnum(ReviewStatusEnum),
-        notes: z.string().max(1000).optional(),
-        reviewerConfidenceScore: z.number().int().min(1).max(5).optional(),
+        notes: z.string().max(API_VALIDATION_LIMITS.REVIEW_NOTES_MAX).optional(),
+        reviewerConfidenceScore: z
+          .number()
+          .int()
+          .min(API_VALIDATION_LIMITS.REVIEWER_CONFIDENCE_MIN)
+          .max(API_VALIDATION_LIMITS.REVIEWER_CONFIDENCE_MAX)
+          .optional(),
         requiresSecondaryReview: z.boolean().optional(),
         disagreementStatus: z.nativeEnum(ReviewDisagreementStatusEnum).optional(),
       }),
@@ -436,10 +475,18 @@ export const api = {
       method: "PATCH" as const,
       path: "/api/review/words/bulk" as const,
       input: z.object({
-        ids: z.array(z.number().int().positive()).min(1).max(200),
+        ids: z
+          .array(z.number().int().positive())
+          .min(API_VALIDATION_LIMITS.BULK_IDS_MIN)
+          .max(API_VALIDATION_LIMITS.BULK_IDS_MAX),
         toStatus: z.nativeEnum(ReviewStatusEnum),
-        notes: z.string().max(1000).optional(),
-        reviewerConfidenceScore: z.number().int().min(1).max(5).optional(),
+        notes: z.string().max(API_VALIDATION_LIMITS.REVIEW_NOTES_MAX).optional(),
+        reviewerConfidenceScore: z
+          .number()
+          .int()
+          .min(API_VALIDATION_LIMITS.REVIEWER_CONFIDENCE_MIN)
+          .max(API_VALIDATION_LIMITS.REVIEWER_CONFIDENCE_MAX)
+          .optional(),
         requiresSecondaryReview: z.boolean().optional(),
         disagreementStatus: z.nativeEnum(ReviewDisagreementStatusEnum).optional(),
       }),
@@ -504,7 +551,12 @@ export const api = {
       method: "GET" as const,
       path: "/api/review/conflicts" as const,
       input: z.object({
-        limit: z.coerce.number().int().positive().max(200).default(50),
+        limit: z.coerce
+          .number()
+          .int()
+          .positive()
+          .max(API_PAGINATION_LIMITS.GENERIC_MAX)
+          .default(API_PAGINATION_DEFAULTS.REVIEW_LIMIT),
       }).optional(),
       responses: {
         200: z.array(z.object({
@@ -531,8 +583,13 @@ export const api = {
       path: "/api/review/words/:id/resolve-conflict" as const,
       input: z.object({
         toStatus: z.nativeEnum(ReviewStatusEnum),
-        notes: z.string().max(1000).optional(),
-        reviewerConfidenceScore: z.number().int().min(1).max(5).optional(),
+        notes: z.string().max(API_VALIDATION_LIMITS.REVIEW_NOTES_MAX).optional(),
+        reviewerConfidenceScore: z
+          .number()
+          .int()
+          .min(API_VALIDATION_LIMITS.REVIEWER_CONFIDENCE_MIN)
+          .max(API_VALIDATION_LIMITS.REVIEWER_CONFIDENCE_MAX)
+          .optional(),
       }),
       responses: {
         200: z.object({
@@ -571,7 +628,12 @@ export const api = {
           pronunciation: z.string().trim().min(1),
           englishSentence: z.string().trim().min(1),
           contextTag: z.string().trim().min(1).default("general"),
-          difficulty: z.number().int().min(1).max(5).default(1),
+          difficulty: z
+            .number()
+            .int()
+            .min(API_VALIDATION_LIMITS.EXAMPLE_DIFFICULTY_MIN)
+            .max(API_VALIDATION_LIMITS.EXAMPLE_DIFFICULTY_MAX)
+            .default(API_VALIDATION_LIMITS.EXAMPLE_DIFFICULTY_MIN),
         })).min(1),
       }),
       responses: {

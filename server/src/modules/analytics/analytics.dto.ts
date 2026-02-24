@@ -1,6 +1,7 @@
 import { Type } from "class-transformer";
 import { IsEnum, IsIn, IsInt, IsOptional, Max, Min } from "class-validator";
 import { LanguageEnum } from "@shared/domain/enums";
+import { API_PAGINATION_LIMITS } from "@shared/domain/api-limits";
 
 export class LanguageQueryDto {
   @IsOptional()
@@ -13,7 +14,7 @@ export class AttemptHistoryQueryDto {
   @Type(() => Number)
   @IsInt()
   @Min(1)
-  @Max(200)
+  @Max(API_PAGINATION_LIMITS.GENERIC_MAX)
   limit?: number;
 
   @IsOptional()
@@ -30,7 +31,7 @@ export class LeaderboardQueryDto {
   @Type(() => Number)
   @IsInt()
   @Min(1)
-  @Max(100)
+  @Max(API_PAGINATION_LIMITS.LEADERBOARD_MAX)
   limit?: number;
 
   @IsOptional()
@@ -52,7 +53,7 @@ export class WordBucketQueryDto {
   @Type(() => Number)
   @IsInt()
   @Min(1)
-  @Max(200)
+  @Max(API_PAGINATION_LIMITS.GENERIC_MAX)
   limit?: number;
 
   @IsOptional()

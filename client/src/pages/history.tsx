@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { QuizDirectionEnum } from "@shared/domain/enums";
+import { HISTORY_PAGE_SIZE } from "@/features/history/history.constants";
 
 function toLabel(direction: QuizDirectionEnum | null) {
   if (direction === QuizDirectionEnum.SOURCE_TO_TARGET) return "Source Language -> English";
@@ -20,7 +21,6 @@ function formatWhen(value: string | null) {
   return date.toLocaleString();
 }
 
-const PAGE_SIZE = 20;
 type ResultFilter = "all" | "correct" | "wrong";
 type DirectionFilter = "all" | QuizDirectionEnum.SOURCE_TO_TARGET | QuizDirectionEnum.TARGET_TO_SOURCE;
 type SortOption = "newest" | "oldest" | "confidence_desc" | "response_time_desc";
@@ -71,9 +71,12 @@ export default function HistoryPage() {
     return filtered;
   }, [directionFilter, history.data, resultFilter, search, sortBy]);
 
-  const totalPages = Math.max(1, Math.ceil(filteredAttempts.length / PAGE_SIZE));
+  const totalPages = Math.max(1, Math.ceil(filteredAttempts.length / HISTORY_PAGE_SIZE));
   const currentPage = Math.min(page, totalPages);
-  const pageAttempts = filteredAttempts.slice((currentPage - 1) * PAGE_SIZE, currentPage * PAGE_SIZE);
+  const pageAttempts = filteredAttempts.slice(
+    (currentPage - 1) * HISTORY_PAGE_SIZE,
+    currentPage * HISTORY_PAGE_SIZE,
+  );
 
   const summary = useMemo(() => {
     const total = filteredAttempts.length;

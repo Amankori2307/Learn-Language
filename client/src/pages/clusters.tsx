@@ -6,8 +6,8 @@ import { Label } from "@/components/ui/label";
 import { Link, useLocation, useSearch } from "wouter";
 import { ArrowRight, BookOpen, Hash, Sparkles } from "lucide-react";
 import { useMemo } from "react";
+import { CLUSTERS_PAGE_SIZE } from "@/features/clusters/clusters.constants";
 
-const PAGE_SIZE = 12;
 type SortBy = "name_asc" | "name_desc" | "type_asc" | "words_desc" | "words_asc";
 
 export default function ClustersPage() {
@@ -81,9 +81,12 @@ export default function ClustersPage() {
   const totalWords = allClusters.reduce((sum, cluster) => sum + cluster.wordCount, 0);
   const nonEmptyClusters = allClusters.filter((cluster) => cluster.wordCount > 0).length;
   const totalResults = filteredAndSorted.length;
-  const totalPages = Math.max(1, Math.ceil(totalResults / PAGE_SIZE));
+  const totalPages = Math.max(1, Math.ceil(totalResults / CLUSTERS_PAGE_SIZE));
   const currentPage = Math.min(page, totalPages);
-  const pageRows = filteredAndSorted.slice((currentPage - 1) * PAGE_SIZE, currentPage * PAGE_SIZE);
+  const pageRows = filteredAndSorted.slice(
+    (currentPage - 1) * CLUSTERS_PAGE_SIZE,
+    currentPage * CLUSTERS_PAGE_SIZE,
+  );
 
   return (
     <Layout>
