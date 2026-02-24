@@ -1,13 +1,34 @@
-import { relations, sql } from "drizzle-orm";
+import { relations } from "drizzle-orm";
 import { createInsertSchema } from "drizzle-zod";
 import { z } from "zod";
 import { QuizQuestionTypeEnum } from "@shared/domain/enums";
-import { users, sessions } from "../modules/auth/auth.schema";
-import { words, clusters, wordClusters, sentences, wordExamples } from "../modules/vocabulary/vocabulary.schema";
-import { userWordProgress, srsConfigs, quizAttempts } from "../modules/quiz/quiz.schema";
-import { wordReviewEvents } from "../modules/review/review.schema";
+import { sessions } from "./tables/sessions.table";
+import { users, type UpsertUser, type User } from "./tables/users.table";
+import { words, type Word } from "./tables/words.table";
+import { clusters, type Cluster } from "./tables/clusters.table";
+import { wordClusters } from "./tables/word-clusters.table";
+import { sentences } from "./tables/sentences.table";
+import { wordExamples } from "./tables/word-examples.table";
+import { userWordProgress, type UserWordProgress } from "./tables/user-word-progress.table";
+import { srsConfigs, type SrsConfig } from "./tables/srs-configs.table";
+import { quizAttempts, type QuizAttempt } from "./tables/quiz-attempts.table";
+import { wordReviewEvents, type WordReviewEvent } from "./tables/word-review-events.table";
 
-export { users, sessions, words, clusters, wordClusters, sentences, wordExamples, userWordProgress, srsConfigs, quizAttempts, wordReviewEvents };
+export {
+  sessions,
+  users,
+  words,
+  clusters,
+  wordClusters,
+  sentences,
+  wordExamples,
+  userWordProgress,
+  srsConfigs,
+  quizAttempts,
+  wordReviewEvents,
+};
+
+export type { User, UpsertUser, Word, Cluster, UserWordProgress, QuizAttempt, SrsConfig, WordReviewEvent };
 
 export const usersRelations = relations(users, ({ many }) => ({
   progress: many(userWordProgress),
@@ -61,14 +82,6 @@ export const insertClusterSchema = createInsertSchema(clusters).omit({ id: true 
 export const insertUserWordProgressSchema = createInsertSchema(userWordProgress);
 export const insertQuizAttemptSchema = createInsertSchema(quizAttempts).omit({ id: true, createdAt: true });
 
-export type User = typeof users.$inferSelect;
-export type Word = typeof words.$inferSelect;
-export type Cluster = typeof clusters.$inferSelect;
-export type UserWordProgress = typeof userWordProgress.$inferSelect;
-export type QuizAttempt = typeof quizAttempts.$inferSelect;
-export type WordReviewEvent = typeof wordReviewEvents.$inferSelect;
-export type SrsConfig = typeof srsConfigs.$inferSelect;
-
 export type CreateWordRequest = z.infer<typeof insertWordSchema>;
 export type CreateClusterRequest = z.infer<typeof insertClusterSchema>;
 
@@ -83,5 +96,3 @@ export type QuizQuestion = {
   }[];
   correctAnswerId: number;
 };
-
-export { sql };

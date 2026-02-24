@@ -1,4 +1,4 @@
-import { users, type User, type UpsertUser } from "./auth.schema";
+import { users, type User, type UpsertUser } from "../../infrastructure/schema";
 import { db } from "../../infrastructure/db";
 import { eq } from "drizzle-orm";
 
