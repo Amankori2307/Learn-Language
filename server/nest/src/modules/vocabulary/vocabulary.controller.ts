@@ -1,8 +1,10 @@
 import { Controller, Get, Param, ParseIntPipe, Query, Req, Res, UseGuards } from "@nestjs/common";
 import type { Request, Response } from "express";
-import { VocabularyService } from "../../../../domains/vocabulary/vocabulary.service";
+import { VocabularyService } from "./vocabulary.service";
 import { AuthenticatedGuard } from "../../common/guards/authenticated.guard";
-import { ListClustersQueryDto, ListWordsQueryDto } from "../../common/dto/vocabulary.dto";
+import { ListClustersQueryDto, ListWordsQueryDto } from "./vocabulary.dto";
+import { AppError } from "../../common/errors/app-error";
+import { sendError } from "../../../../http";
 
 @Controller()
 @UseGuards(AuthenticatedGuard)
@@ -10,32 +12,55 @@ export class VocabularyApiController {
   constructor(private readonly vocabularyService: VocabularyService) {}
 
   @Get("/api/words")
-  listWords(@Req() req: Request, @Res() res: Response, @Query() query: ListWordsQueryDto) {
-    req.query = query as unknown as Request["query"];
-    return this.vocabularyService.listWords(req, res);
+  async listWords(@Req() req: Request, @Res() res: Response, @Query() query: ListWordsQueryDto) {
+    try {
+      const words = await this.vocabularyService.listWords(query);
+      res.json(words);
+    } catch (error) {
+      this.handleError(req, res, error);
+    }
   }
 
   @Get("/api/words/:id")
-  getWord(@Req() req: Request, @Res() res: Response, @Param("id", ParseIntPipe) id: number) {
-    req.params.id = String(id);
-    return this.vocabularyService.getWord(req, res);
+  async getWord(@Req() req: Request, @Res() res: Response, @Param("id", ParseIntPipe) id: number) {
+    try {
+      const word = await this.vocabularyService.getWord(id);
+      res.json(word);
+    } catch (error) {
+      this.handleError(req, res, error);
+    }
   }
 
   @Get("/api/clusters")
-  listClusters(@Req() req: Request, @Res() res: Response, @Query() query: ListClustersQueryDto) {
-    req.query = query as unknown as Request["query"];
-    return this.vocabularyService.listClusters(req, res);
+  async listClusters(@Req() req: Request, @Res() res: Response, @Query() query: ListClustersQueryDto) {
+    try {
+      const clusters = await this.vocabularyService.listClusters(query.language);
+      res.json(clusters);
+    } catch (error) {
+      this.handleError(req, res, error);
+    }
   }
 
   @Get("/api/clusters/:id")
-  getCluster(
+  async getCluster(
     @Req() req: Request,
     @Res() res: Response,
     @Param("id", ParseIntPipe) id: number,
     @Query() query: ListClustersQueryDto,
   ) {
-    req.params.id = String(id);
-    req.query = query as unknown as Request["query"];
-    return this.vocabularyService.getCluster(req, res);
+    try {
+      const cluster = await this.vocabularyService.getCluster(id, query.language);
+      res.json(cluster);
+    } catch (error) {
+      this.handleError(req, res, error);
+    }
+  }
+
+  private handleError(req: Request, res: Response, error: unknown) {
+    if (error instanceof AppError) {
+      sendError(req, res, error.status, error.code, error.message, error.details);
+      return;
+    }
+    sendError(req, res, 500, "INTERNAL_ERROR", "Internal Server Error");
   }
 }

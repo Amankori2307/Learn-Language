@@ -1,7 +1,7 @@
 import { Module } from "@nestjs/common";
 import { ReviewApiController } from "./review.controller";
-import { ReviewRepository } from "../../../../domains/review/review.repository";
-import { ReviewService } from "../../../../domains/review/review.service";
+import { ReviewRepository } from "./review.repository";
+import { ReviewService } from "./review.service";
 
 @Module({
   controllers: [ReviewApiController],

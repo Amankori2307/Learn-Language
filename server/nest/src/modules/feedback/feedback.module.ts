@@ -1,7 +1,7 @@
 import { Module } from "@nestjs/common";
 import { FeedbackApiController } from "./feedback.controller";
-import { FeedbackRepository } from "../../../../domains/feedback/feedback.repository";
-import { FeedbackService } from "../../../../domains/feedback/feedback.service";
+import { FeedbackRepository } from "./feedback.repository";
+import { FeedbackService } from "./feedback.service";
 
 @Module({
   controllers: [FeedbackApiController],

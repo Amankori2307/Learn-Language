@@ -1,7 +1,7 @@
 import { Module } from "@nestjs/common";
 import { AuthApiController } from "./auth.controller";
-import { AuthRepository } from "../../../../auth/auth.repository";
-import { AuthService } from "../../../../auth/auth.service";
+import { AuthRepository } from "./auth.repository";
+import { AuthService } from "./auth.service";
 
 @Module({
   controllers: [AuthApiController],

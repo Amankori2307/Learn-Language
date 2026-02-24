@@ -1,11 +1,9 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import express from "express";
-import { createServer } from "http";
-import { randomUUID } from "crypto";
 import { sql } from "drizzle-orm";
-import { registerRoutes } from "../server/routes";
+import { createServer } from "http";
 import { db } from "../server/db";
+import { getNestExpressApp } from "../server/nest/nest-app";
 import { QuizModeEnum } from "../shared/domain/enums";
 
 test("e2e smoke: api is live and all quiz modes return arrays", async (t) => {
@@ -20,23 +18,8 @@ test("e2e smoke: api is live and all quiz modes return arrays", async (t) => {
     throw error;
   }
 
-  const app = express();
+  const app = await getNestExpressApp();
   const httpServer = createServer(app);
-
-  app.use(
-    express.json({
-      verify: (req, _res, buf) => {
-        (req as any).rawBody = buf;
-      },
-    }),
-  );
-  app.use(express.urlencoded({ extended: false }));
-  app.use((req, res, next) => {
-    req.headers["x-request-id"] = req.headers["x-request-id"] ?? randomUUID();
-    next();
-  });
-
-  await registerRoutes(httpServer, app);
 
   await new Promise<void>((resolve) => {
     httpServer.listen(0, "127.0.0.1", () => resolve());
@@ -76,4 +59,3 @@ test("e2e smoke: api is live and all quiz modes return arrays", async (t) => {
     assert.equal(Array.isArray(payload), true, `mode=${mode} should return array payload`);
   }
 });
-

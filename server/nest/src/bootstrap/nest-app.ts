@@ -5,7 +5,7 @@ import { NestFactory } from "@nestjs/core";
 import { ExpressAdapter } from "@nestjs/platform-express";
 import { ValidationPipe } from "@nestjs/common";
 import { sendError } from "../../../http";
-import { setupAuth } from "../../../auth";
+import { setupAuth } from "../modules/auth";
 import { AppModule } from "../app.module";
 
 declare module "http" {

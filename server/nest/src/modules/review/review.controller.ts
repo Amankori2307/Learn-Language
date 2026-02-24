@@ -1,6 +1,6 @@
 import { Body, Controller, Get, Param, ParseIntPipe, Patch, Post, Query, Req, Res, UseGuards } from "@nestjs/common";
 import type { Request, Response } from "express";
-import { ReviewService } from "../../../../domains/review/review.service";
+import { ReviewService } from "./review.service";
 import { AuthenticatedGuard } from "../../common/guards/authenticated.guard";
 import { ReviewerGuard } from "../../common/guards/reviewer.guard";
 import {
@@ -10,7 +10,9 @@ import {
   ReviewResolveConflictBodyDto,
   ReviewSubmitDraftBodyDto,
   ReviewTransitionBodyDto,
-} from "../../common/dto/review.dto";
+} from "./review.dto";
+import { AppError } from "../../common/errors/app-error";
+import { sendError } from "../../../../http";
 
 @Controller()
 export class ReviewApiController {
@@ -18,62 +20,100 @@ export class ReviewApiController {
 
   @Get("/api/review/queue")
   @UseGuards(AuthenticatedGuard, ReviewerGuard)
-  getQueue(@Req() req: Request, @Res() res: Response, @Query() query: ReviewQueueQueryDto) {
-    req.query = query as unknown as Request["query"];
-    return this.reviewService.getQueue(req, res);
+  async getQueue(@Req() req: Request, @Res() res: Response, @Query() query: ReviewQueueQueryDto) {
+    try {
+      const result = await this.reviewService.getQueue(query);
+      res.json(result);
+    } catch (error) {
+      this.handleError(req, res, error);
+    }
   }
 
   @Get("/api/review/conflicts")
   @UseGuards(AuthenticatedGuard, ReviewerGuard)
-  getConflicts(@Req() req: Request, @Res() res: Response, @Query() query: ReviewConflictsQueryDto) {
-    req.query = query as unknown as Request["query"];
-    return this.reviewService.getConflicts(req, res);
+  async getConflicts(@Req() req: Request, @Res() res: Response, @Query() query: ReviewConflictsQueryDto) {
+    try {
+      const result = await this.reviewService.getConflicts(query);
+      res.json(result);
+    } catch (error) {
+      this.handleError(req, res, error);
+    }
   }
 
   @Patch("/api/review/words/:id")
   @UseGuards(AuthenticatedGuard, ReviewerGuard)
-  transition(
+  async transition(
     @Req() req: Request,
     @Res() res: Response,
     @Param("id", ParseIntPipe) id: number,
     @Body() body: ReviewTransitionBodyDto,
   ) {
-    req.params.id = String(id);
-    req.body = body;
-    return this.reviewService.transition(req, res);
+    try {
+      const reviewerId = (req.user as { claims: { sub: string } }).claims.sub;
+      const result = await this.reviewService.transition(id, reviewerId, body);
+      res.json(result);
+    } catch (error) {
+      this.handleError(req, res, error);
+    }
   }
 
   @Patch("/api/review/words/bulk")
   @UseGuards(AuthenticatedGuard, ReviewerGuard)
-  bulkTransition(@Req() req: Request, @Res() res: Response, @Body() body: ReviewBulkTransitionBodyDto) {
-    req.body = body;
-    return this.reviewService.bulkTransition(req, res);
+  async bulkTransition(@Req() req: Request, @Res() res: Response, @Body() body: ReviewBulkTransitionBodyDto) {
+    try {
+      const reviewerId = (req.user as { claims: { sub: string } }).claims.sub;
+      const result = await this.reviewService.bulkTransition(reviewerId, body);
+      res.json(result);
+    } catch (error) {
+      this.handleError(req, res, error);
+    }
   }
 
   @Patch("/api/review/words/:id/resolve-conflict")
   @UseGuards(AuthenticatedGuard, ReviewerGuard)
-  resolveConflict(
+  async resolveConflict(
     @Req() req: Request,
     @Res() res: Response,
     @Param("id", ParseIntPipe) id: number,
     @Body() body: ReviewResolveConflictBodyDto,
   ) {
-    req.params.id = String(id);
-    req.body = body;
-    return this.reviewService.resolveConflict(req, res);
+    try {
+      const reviewerId = (req.user as { claims: { sub: string } }).claims.sub;
+      const result = await this.reviewService.resolveConflict(id, reviewerId, body);
+      res.json(result);
+    } catch (error) {
+      this.handleError(req, res, error);
+    }
   }
 
   @Get("/api/review/words/:id/history")
   @UseGuards(AuthenticatedGuard, ReviewerGuard)
-  getHistory(@Req() req: Request, @Res() res: Response, @Param("id", ParseIntPipe) id: number) {
-    req.params.id = String(id);
-    return this.reviewService.getHistory(req, res);
+  async getHistory(@Req() req: Request, @Res() res: Response, @Param("id", ParseIntPipe) id: number) {
+    try {
+      const result = await this.reviewService.getHistory(id);
+      res.json(result);
+    } catch (error) {
+      this.handleError(req, res, error);
+    }
   }
 
   @Post("/api/review/words")
   @UseGuards(AuthenticatedGuard)
-  submitDraft(@Req() req: Request, @Res() res: Response, @Body() body: ReviewSubmitDraftBodyDto) {
-    req.body = body;
-    return this.reviewService.submitDraft(req, res);
+  async submitDraft(@Req() req: Request, @Res() res: Response, @Body() body: ReviewSubmitDraftBodyDto) {
+    try {
+      const submittedBy = (req.user as { claims: { sub: string } }).claims.sub;
+      const result = await this.reviewService.submitDraft(submittedBy, body);
+      res.json(result);
+    } catch (error) {
+      this.handleError(req, res, error);
+    }
+  }
+
+  private handleError(req: Request, res: Response, error: unknown) {
+    if (error instanceof AppError) {
+      sendError(req, res, error.status, error.code, error.message, error.details);
+      return;
+    }
+    sendError(req, res, 500, "INTERNAL_ERROR", "Internal Server Error");
   }
 }

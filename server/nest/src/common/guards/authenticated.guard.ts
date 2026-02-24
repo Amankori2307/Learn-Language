@@ -1,6 +1,6 @@
 import { CanActivate, ExecutionContext, Injectable } from "@nestjs/common";
 import type { Request, Response } from "express";
-import { isAuthenticated } from "../../../../auth/oidcAuth";
+import { isAuthenticated } from "../../modules/auth/auth.oidc";
 
 @Injectable()
 export class AuthenticatedGuard implements CanActivate {

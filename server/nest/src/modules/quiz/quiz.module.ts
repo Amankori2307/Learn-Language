@@ -1,7 +1,7 @@
 import { Module } from "@nestjs/common";
 import { QuizApiController } from "./quiz.controller";
-import { QuizRepository } from "../../../../domains/quiz/quiz.repository";
-import { QuizService } from "../../../../domains/quiz/quiz.service";
+import { QuizRepository } from "./quiz.repository";
+import { QuizService } from "./quiz.service";
 
 @Module({
   controllers: [QuizApiController],
