@@ -104,4 +104,4 @@ Build a text-first language learning app with high data correctness, strong memo
 
 - Execute in order from `context/plan/01-master-task-registry.md` (latest active section: Phase 8).
 - Remaining Phase 8 execution:
-  - deployment/CI-CD last (`P8-006`)
+  - deployment/CI-CD last (`P8-006`) is currently on hold
