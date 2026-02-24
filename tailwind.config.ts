@@ -7,7 +7,6 @@ export default {
   content: [
     "./app/**/*.{js,jsx,ts,tsx}",
     "./pages/**/*.{js,jsx,ts,tsx}",
-    "./client/index.html",
     "./client/src/**/*.{js,jsx,ts,tsx}",
   ],
   theme: {
