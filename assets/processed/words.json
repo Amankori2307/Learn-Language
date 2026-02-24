@@ -788,10 +788,10 @@
     }
   },
   {
-    "key": "telugu::eeroju::today",
+    "key": "telugu::ee roju::today",
     "language": "telugu",
     "originalScript": "ఈరోజు",
-    "transliteration": "eeroju",
+    "transliteration": "ee roju",
     "english": "today",
     "partOfSpeech": "noun",
     "difficulty": 1,
@@ -1304,10 +1304,10 @@
     }
   },
   {
-    "key": "telugu::paatashaala::school",
+    "key": "telugu::paathashaala::school",
     "language": "telugu",
     "originalScript": "పాఠశాల",
-    "transliteration": "paatashaala",
+    "transliteration": "paathashaala",
     "english": "school",
     "partOfSpeech": "noun",
     "difficulty": 1,
@@ -1432,10 +1432,10 @@
     }
   },
   {
-    "key": "telugu::rodu::road",
+    "key": "telugu::roadu::road",
     "language": "telugu",
     "originalScript": "రోడు",
-    "transliteration": "rodu",
+    "transliteration": "roadu",
     "english": "road",
     "partOfSpeech": "noun",
     "difficulty": 1,
