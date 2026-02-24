@@ -1,10 +1,37 @@
 import { Layout } from "@/components/layout";
 import { Button } from "@/components/ui/button";
 import { useWordBucketsViewModel } from "@/features/analytics/use-word-buckets-view-model";
+import { QuizModeEnum } from "@shared/domain/enums";
 
 export default function WordBucketsPage() {
   const { bucket, page, totalPages, setPage, bucketQuery, changeBucket, navigate } = useWordBucketsViewModel();
   const data = bucketQuery.data;
+  const bucketCta = {
+    mastered: {
+      title: "Keep Mastered Words Fresh",
+      description: "Run a daily review to keep retention high and avoid memory decay.",
+      primaryLabel: "Start Daily Review",
+      primaryHref: `/quiz?mode=${QuizModeEnum.DAILY_REVIEW}`,
+      secondaryLabel: "Practice by Cluster",
+      secondaryHref: "/clusters",
+    },
+    learning: {
+      title: "Push Learning Words to Mastered",
+      description: "Continue new words and daily review to move in-progress words to mastery.",
+      primaryLabel: "Continue New Words",
+      primaryHref: `/quiz?mode=${QuizModeEnum.NEW_WORDS}`,
+      secondaryLabel: "Start Daily Review",
+      secondaryHref: `/quiz?mode=${QuizModeEnum.DAILY_REVIEW}`,
+    },
+    needs_review: {
+      title: "Recover Needs Review Words",
+      description: "Start weak-word drills and then run daily review for reinforcement.",
+      primaryLabel: "Practice Weak Words",
+      primaryHref: `/quiz?mode=${QuizModeEnum.WEAK_WORDS}`,
+      secondaryLabel: "Start Daily Review",
+      secondaryHref: `/quiz?mode=${QuizModeEnum.DAILY_REVIEW}`,
+    },
+  }[bucket];
 
   return (
     <Layout>
@@ -22,6 +49,22 @@ export default function WordBucketsPage() {
         <div className="rounded-xl border border-border/50 bg-card p-4">
           <p className="text-sm text-muted-foreground">How to improve</p>
           <p className="font-medium mt-1">{data?.howToImprove ?? "Keep practicing daily with consistent review."}</p>
+        </div>
+
+        <div className="rounded-xl border border-border/50 bg-card p-4 md:p-5">
+          <div className="flex flex-wrap items-center justify-between gap-4">
+            <div>
+              <p className="text-sm text-muted-foreground">Next action</p>
+              <h2 className="text-lg font-semibold mt-1">{bucketCta.title}</h2>
+              <p className="text-sm text-muted-foreground mt-1">{bucketCta.description}</p>
+            </div>
+            <div className="flex flex-wrap gap-2">
+              <Button onClick={() => navigate(bucketCta.primaryHref)}>{bucketCta.primaryLabel}</Button>
+              <Button variant="outline" onClick={() => navigate(bucketCta.secondaryHref)}>
+                {bucketCta.secondaryLabel}
+              </Button>
+            </div>
+          </div>
         </div>
 
         <div className="flex flex-wrap gap-2">
