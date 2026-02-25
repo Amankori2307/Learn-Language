@@ -1,5 +1,5 @@
 {
-  "id": "25bed9de-1e86-453e-8c26-fe5a38589d37",
+  "id": "54be0784-58e7-4e5c-9bfe-d455190edbd1",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -190,8 +190,7 @@
           "name": "difficulty",
           "type": "integer",
           "primaryKey": false,
-          "notNull": false,
-          "default": 1
+          "notNull": true
         }
       },
       "indexes": {},
@@ -225,8 +224,83 @@
           "notNull": true
         }
       },
-      "indexes": {},
+      "indexes": {
+        "IDX_session_expire": {
+          "name": "IDX_session_expire",
+          "columns": [
+            {
+              "expression": "expire",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
       "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.srs_configs": {
+      "name": "srs_configs",
+      "schema": "",
+      "columns": {
+        "version": {
+          "name": "version",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "config": {
+          "name": "config",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "is_active": {
+          "name": "is_active",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true,
+          "default": false
+        },
+        "created_by": {
+          "name": "created_by",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "srs_configs_created_by_users_id_fk": {
+          "name": "srs_configs_created_by_users_id_fk",
+          "tableFrom": "srs_configs",
+          "tableTo": "users",
+          "columnsFrom": [
+            "created_by"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
       "compositePrimaryKeys": {},
       "uniqueConstraints": {},
       "policies": {},
@@ -276,6 +350,27 @@
           "primaryKey": false,
           "notNull": false,
           "default": 1
+        },
+        "srs_config_version": {
+          "name": "srs_config_version",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'v1'"
+        },
+        "source_to_target_strength": {
+          "name": "source_to_target_strength",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 0.5
+        },
+        "target_to_source_strength": {
+          "name": "target_to_source_strength",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 0.5
         },
         "last_seen": {
           "name": "last_seen",
@@ -551,7 +646,7 @@
           "name": "pronunciation",
           "type": "text",
           "primaryKey": false,
-          "notNull": false
+          "notNull": true
         },
         "english_sentence": {
           "name": "english_sentence",
@@ -563,15 +658,13 @@
           "name": "context_tag",
           "type": "text",
           "primaryKey": false,
-          "notNull": false,
-          "default": "'general'"
+          "notNull": true
         },
         "difficulty": {
           "name": "difficulty",
           "type": "integer",
           "primaryKey": false,
-          "notNull": false,
-          "default": 1
+          "notNull": true
         },
         "created_at": {
           "name": "created_at",
@@ -764,22 +857,19 @@
           "name": "difficulty",
           "type": "integer",
           "primaryKey": false,
-          "notNull": false,
-          "default": 1
+          "notNull": true
         },
         "difficulty_level": {
           "name": "difficulty_level",
           "type": "text",
           "primaryKey": false,
-          "notNull": false,
-          "default": "'beginner'"
+          "notNull": true
         },
         "frequency_score": {
           "name": "frequency_score",
           "type": "real",
           "primaryKey": false,
-          "notNull": false,
-          "default": 0.5
+          "notNull": true
         },
         "cefr_level": {
           "name": "cefr_level",
@@ -789,6 +879,12 @@
         },
         "audio_url": {
           "name": "audio_url",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "image_url": {
+          "name": "image_url",
           "type": "text",
           "primaryKey": false,
           "notNull": false
@@ -844,6 +940,26 @@
           "type": "text",
           "primaryKey": false,
           "notNull": false
+        },
+        "reviewer_confidence_score": {
+          "name": "reviewer_confidence_score",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "requires_secondary_review": {
+          "name": "requires_secondary_review",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true,
+          "default": false
+        },
+        "disagreement_status": {
+          "name": "disagreement_status",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'none'"
         },
         "source_url": {
           "name": "source_url",
