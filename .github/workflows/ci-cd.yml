@@ -30,13 +30,23 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Configure npm auth (optional)
+        if: ${{ secrets.NPM_TOKEN != '' }}
+        run: |
+          echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > ~/.npmrc
+          echo "always-auth=true" >> ~/.npmrc
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+
       - name: Setup pnpm
-        uses: pnpm/action-setup@v2.0.1
+        uses: pnpm/action-setup@v4
         with:
           version: ${{ env.PNPM_VERSION }}
+          standalone: true
+          run_install: false
 
       - name: Setup Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
           cache: pnpm
