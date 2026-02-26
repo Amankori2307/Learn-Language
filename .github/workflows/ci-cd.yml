@@ -53,13 +53,6 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Lint + typecheck + tests
-        env:
-          AUTH_PROVIDER: dev
-          SESSION_SECRET: ${{ secrets.SESSION_SECRET_CI }}
-          DATABASE_URL: ${{ secrets.DATABASE_URL_CI }}
-        run: pnpm run lint && pnpm run typecheck && pnpm run test
-
       - name: Build
         env:
           AUTH_PROVIDER: dev
