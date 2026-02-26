@@ -10,7 +10,14 @@ import { extractUserClaims, extractUserId } from "./auth.request-user";
 
 @Controller()
 export class AuthApiController {
-  constructor(private readonly authService: AuthService) {}
+  private readonly authService: AuthService;
+
+  constructor(authService: AuthService) {
+    this.authService = authService;
+    this.getAuthUser = this.getAuthUser.bind(this);
+    this.getProfile = this.getProfile.bind(this);
+    this.updateProfile = this.updateProfile.bind(this);
+  }
 
   @Get("/auth/me")
   @UseGuards(AuthenticatedGuard)
