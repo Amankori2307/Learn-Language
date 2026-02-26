@@ -36,3 +36,43 @@ export const httpRequestLogger = morgan(
     },
   },
 );
+
+export function runWithLifecycle<T>(functionName: string, fn: () => T): T {
+  const startedAt = Date.now();
+  appLogger.debug("function.start", { functionName });
+
+  try {
+    const result = fn();
+    if (result instanceof Promise) {
+      return result
+        .then((resolved) => {
+          appLogger.debug("function.end", {
+            functionName,
+            durationMs: Date.now() - startedAt,
+          });
+          return resolved;
+        })
+        .catch((error: unknown) => {
+          appLogger.error("function.error", {
+            functionName,
+            durationMs: Date.now() - startedAt,
+            error: error instanceof Error ? error.message : String(error),
+          });
+          throw error;
+        }) as T;
+    }
+
+    appLogger.debug("function.end", {
+      functionName,
+      durationMs: Date.now() - startedAt,
+    });
+    return result;
+  } catch (error) {
+    appLogger.error("function.error", {
+      functionName,
+      durationMs: Date.now() - startedAt,
+      error: error instanceof Error ? error.message : String(error),
+    });
+    throw error;
+  }
+}

@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { runWithLifecycle } from "../common/logger/logger";
 
 export const envSchema = z
   .object({
@@ -53,13 +54,15 @@ export const envSchema = z
 export type EnvConfig = z.infer<typeof envSchema>;
 
 export function validateEnv(config: Record<string, unknown>): EnvConfig {
-  const parsed = envSchema.safeParse(config);
-  if (!parsed.success) {
-    const message = parsed.error.issues
-      .map((issue) => `${issue.path.join(".")}: ${issue.message}`)
-      .join("; ");
-    throw new Error(`Invalid environment configuration: ${message}`);
-  }
+  return runWithLifecycle("validateEnv", () => {
+    const parsed = envSchema.safeParse(config);
+    if (!parsed.success) {
+      const message = parsed.error.issues
+        .map((issue) => `${issue.path.join(".")}: ${issue.message}`)
+        .join("; ");
+      throw new Error(`Invalid environment configuration: ${message}`);
+    }
 
-  return parsed.data;
+    return parsed.data;
+  });
 }

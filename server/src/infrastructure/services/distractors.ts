@@ -1,11 +1,14 @@
 import type { Word } from "../schema";
+import { runWithLifecycle } from "../../common/logger/logger";
 
 function transliterationSimilarity(a: string, b: string) {
-  const x = a.toLowerCase();
-  const y = b.toLowerCase();
-  let i = 0;
-  while (i < x.length && i < y.length && x[i] === y[i]) i += 1;
-  return i;
+  return runWithLifecycle("transliterationSimilarity", () => {
+    const x = a.toLowerCase();
+    const y = b.toLowerCase();
+    let i = 0;
+    while (i < x.length && i < y.length && x[i] === y[i]) i += 1;
+    return i;
+  });
 }
 
 export function chooseDistractors(params: {
@@ -15,9 +18,10 @@ export function chooseDistractors(params: {
   count?: number;
   random?: () => number;
 }): Word[] {
-  const count = params.count ?? 3;
-  const rand = params.random ?? Math.random;
-  const wordClusters = params.clusterByWord.get(params.word.id) ?? new Set<number>();
+  return runWithLifecycle("chooseDistractors", () => {
+    const count = params.count ?? 3;
+    const rand = params.random ?? Math.random;
+    const wordClusters = params.clusterByWord.get(params.word.id) ?? new Set<number>();
 
   const scored = params.allWords
     .filter((candidate) => candidate.id !== params.word.id)
@@ -58,5 +62,6 @@ export function chooseDistractors(params: {
     if (out.length >= count) break;
   }
 
-  return out;
+    return out;
+  });
 }

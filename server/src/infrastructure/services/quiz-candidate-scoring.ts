@@ -1,5 +1,6 @@
 import type { UserWordProgress, Word } from "../schema";
 import { QUIZ_CANDIDATE_SCORING } from "./quiz-candidate-scoring.constants";
+import { runWithLifecycle } from "../../common/logger/logger";
 
 export type CandidateScoreBreakdown = {
   difficultyWeight: number;
@@ -19,8 +20,9 @@ export type ScoreCandidateInput = {
 };
 
 export function computeCandidateScore(input: ScoreCandidateInput): CandidateScoreBreakdown {
-  const now = input.now ?? new Date();
-  const difficultyWeight = input.word.difficulty ?? QUIZ_CANDIDATE_SCORING.DEFAULT_WORD_DIFFICULTY;
+  return runWithLifecycle("computeCandidateScore", () => {
+    const now = input.now ?? new Date();
+    const difficultyWeight = input.word.difficulty ?? QUIZ_CANDIDATE_SCORING.DEFAULT_WORD_DIFFICULTY;
 
   if (!input.progress) {
     const total =
@@ -70,16 +72,17 @@ export function computeCandidateScore(input: ScoreCandidateInput): CandidateScor
     directionWeaknessBonus +
     masteredPenalty;
 
-  return {
-    difficultyWeight,
-    daysSinceLastSeen,
-    wrongPenaltyBonus,
-    streakPenalty,
-    directionWeaknessBonus,
-    newWordBoost: 0,
-    masteredPenalty,
-    total,
-  };
+    return {
+      difficultyWeight,
+      daysSinceLastSeen,
+      wrongPenaltyBonus,
+      streakPenalty,
+      directionWeaknessBonus,
+      newWordBoost: 0,
+      masteredPenalty,
+      total,
+    };
+  });
 }
 
 export function rankQuizCandidates(
@@ -87,23 +90,25 @@ export function rankQuizCandidates(
   progressMap: Map<number, UserWordProgress>,
   now = new Date(),
 ): Word[] {
-  return words
-    .map((word) => ({
-      word,
-      score: computeCandidateScore({ word, progress: progressMap.get(word.id), now }),
-    }))
-    .sort((a, b) => {
-      if (b.score.total !== a.score.total) {
-        return b.score.total - a.score.total;
-      }
+  return runWithLifecycle("rankQuizCandidates", () =>
+    words
+      .map((word) => ({
+        word,
+        score: computeCandidateScore({ word, progress: progressMap.get(word.id), now }),
+      }))
+      .sort((a, b) => {
+        if (b.score.total !== a.score.total) {
+          return b.score.total - a.score.total;
+        }
 
-      const leftDifficulty = a.word.difficulty ?? QUIZ_CANDIDATE_SCORING.DEFAULT_WORD_DIFFICULTY;
-      const rightDifficulty = b.word.difficulty ?? QUIZ_CANDIDATE_SCORING.DEFAULT_WORD_DIFFICULTY;
-      if (rightDifficulty !== leftDifficulty) {
-        return rightDifficulty - leftDifficulty;
-      }
+        const leftDifficulty = a.word.difficulty ?? QUIZ_CANDIDATE_SCORING.DEFAULT_WORD_DIFFICULTY;
+        const rightDifficulty = b.word.difficulty ?? QUIZ_CANDIDATE_SCORING.DEFAULT_WORD_DIFFICULTY;
+        if (rightDifficulty !== leftDifficulty) {
+          return rightDifficulty - leftDifficulty;
+        }
 
-      return a.word.id - b.word.id;
-    })
-    .map((item) => item.word);
+        return a.word.id - b.word.id;
+      })
+      .map((item) => item.word),
+  );
 }

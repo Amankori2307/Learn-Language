@@ -1,35 +1,44 @@
 import type { UserWordProgress, Word } from "../schema";
 import { QuizModeEnum } from "@shared/domain/enums";
 import { rankQuizCandidates } from "./quiz-candidate-scoring";
+import { runWithLifecycle } from "../../common/logger/logger";
 
 export type QuizMode = QuizModeEnum;
 
 function isDue(progress?: UserWordProgress, now = new Date()): boolean {
-  if (!progress?.nextReview) return false;
-  return new Date(progress.nextReview) <= now;
+  return runWithLifecycle("isDue", () => {
+    if (!progress?.nextReview) return false;
+    return new Date(progress.nextReview) <= now;
+  });
 }
 
 function isWeak(progress?: UserWordProgress, now = new Date()): boolean {
-  if (!progress) return false;
-  const overdue = progress.nextReview ? new Date(progress.nextReview) < now : false;
-  return (progress.wrongCount ?? 0) >= 2 || overdue;
+  return runWithLifecycle("isWeak", () => {
+    if (!progress) return false;
+    const overdue = progress.nextReview ? new Date(progress.nextReview) < now : false;
+    return (progress.wrongCount ?? 0) >= 2 || overdue;
+  });
 }
 
 function uniqueById(words: Word[]): Word[] {
-  const seen = new Set<number>();
-  const out: Word[] = [];
-  for (const word of words) {
-    if (!seen.has(word.id)) {
-      seen.add(word.id);
-      out.push(word);
+  return runWithLifecycle("uniqueById", () => {
+    const seen = new Set<number>();
+    const out: Word[] = [];
+    for (const word of words) {
+      if (!seen.has(word.id)) {
+        seen.add(word.id);
+        out.push(word);
+      }
     }
-  }
-  return out;
+    return out;
+  });
 }
 
 function take(words: Word[], n: number): Word[] {
-  if (n <= 0) return [];
-  return words.slice(0, n);
+  return runWithLifecycle("take", () => {
+    if (n <= 0) return [];
+    return words.slice(0, n);
+  });
 }
 
 export function generateSessionWords(params: {
@@ -40,8 +49,9 @@ export function generateSessionWords(params: {
   recentAccuracy?: number;
   now?: Date;
 }): Word[] {
-  const now = params.now ?? new Date();
-  const ranked = rankQuizCandidates(params.words, params.progressMap, now);
+  return runWithLifecycle("generateSessionWords", () => {
+    const now = params.now ?? new Date();
+    const ranked = rankQuizCandidates(params.words, params.progressMap, now);
 
   const due = ranked.filter((word) => isDue(params.progressMap.get(word.id), now));
   const weak = ranked.filter((word) => isWeak(params.progressMap.get(word.id), now));
@@ -93,5 +103,6 @@ export function generateSessionWords(params: {
     ...ranked,
   ]);
 
-  return mixed.slice(0, params.count);
+    return mixed.slice(0, params.count);
+  });
 }

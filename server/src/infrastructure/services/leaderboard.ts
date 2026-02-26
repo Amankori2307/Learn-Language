@@ -1,18 +1,20 @@
 import { computeStreak, computeXp } from "./stats";
 import { LEADERBOARD_RULES } from "./leaderboard.constants";
 import { IAttemptRow, ILeaderboardEntry, IUserIdentity } from "./leaderboard.types";
+import { runWithLifecycle } from "../../common/logger/logger";
 
 export function computeLeaderboard(
   users: IUserIdentity[],
   attempts: IAttemptRow[],
   limit: number,
 ): ILeaderboardEntry[] {
-  const byUser = new Map<string, IAttemptRow[]>();
-  for (const attempt of attempts) {
-    const list = byUser.get(attempt.userId) ?? [];
-    list.push(attempt);
-    byUser.set(attempt.userId, list);
-  }
+  return runWithLifecycle("computeLeaderboard", () => {
+    const byUser = new Map<string, IAttemptRow[]>();
+    for (const attempt of attempts) {
+      const list = byUser.get(attempt.userId) ?? [];
+      list.push(attempt);
+      byUser.set(attempt.userId, list);
+    }
 
   const rows: ILeaderboardEntry[] = users.map((user) => {
     const userAttempts = byUser.get(user.id) ?? [];
@@ -58,5 +60,6 @@ export function computeLeaderboard(
     return a.userId.localeCompare(b.userId);
   });
 
-  return rows.slice(0, limit).map((row, idx) => ({ ...row, rank: idx + LEADERBOARD_RULES.RANK_START }));
+    return rows.slice(0, limit).map((row, idx) => ({ ...row, rank: idx + LEADERBOARD_RULES.RANK_START }));
+  });
 }
