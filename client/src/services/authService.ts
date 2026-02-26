@@ -4,7 +4,7 @@ import { apiClient, buildApiUrl } from "./apiClient";
 export const authService = {
   async getCurrentUser(): Promise<User | null> {
     try {
-      const response = await apiClient.get<User>(buildApiUrl("/api/auth/user"));
+      const response = await apiClient.get<User>(buildApiUrl("/auth/me"));
       return response.data;
     } catch (error) {
       const status = (error as { response?: { status?: number } })?.response?.status;
@@ -15,10 +15,9 @@ export const authService = {
     }
   },
   getLoginUrl(): string {
-    return buildApiUrl("/api/login");
+    return buildApiUrl("/auth/google");
   },
-  getLogoutUrl(): string {
-    return buildApiUrl("/api/logout");
+  async logout(): Promise<void> {
+    await apiClient.post(buildApiUrl("/auth/logout"));
   },
 };
-
