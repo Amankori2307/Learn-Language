@@ -147,3 +147,17 @@ export async function getNestExpressApp() {
   }
   return nestExpressAppPromise;
 }
+
+export async function startStandaloneNestApiServer(inputPort?: number) {
+  const app = await getNestExpressApp();
+  const resolvedPort =
+    inputPort ??
+    Number(process.env.BACKEND_PORT ?? process.env.PORT ?? 4000);
+
+  return await new Promise<import("http").Server>((resolve) => {
+    const server = app.listen(resolvedPort, () => {
+      log(`Backend API listening on http://localhost:${resolvedPort}`, "nest-api");
+      resolve(server);
+    });
+  });
+}
