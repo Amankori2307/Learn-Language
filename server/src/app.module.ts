@@ -13,12 +13,14 @@ import { nestAppConfig } from "./config/app.config";
 import { authConfig } from "./config/auth.config";
 import { databaseConfig } from "./config/database.config";
 import { audioConfig } from "./config/audio.config";
+import { resolveEnvFile } from "./config/env-files";
 import { validateEnv } from "./config/env.validation";
 
 @Module({
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
+      envFilePath: resolveEnvFile(process.env.APP_ENV ?? process.env.NODE_ENV),
       validate: validateEnv,
       load: [nestAppConfig, authConfig, databaseConfig, audioConfig],
       cache: true,

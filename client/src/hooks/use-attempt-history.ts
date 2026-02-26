@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { api } from "@shared/routes";
 import { useLearningLanguage } from "@/hooks/use-language";
+import { toApiUrl } from "@/lib/api-base";
 
 export function useAttemptHistory(limit: number = 100) {
   const { language } = useLearningLanguage();
@@ -8,7 +9,7 @@ export function useAttemptHistory(limit: number = 100) {
     queryKey: [api.attempts.history.path, limit, language],
     queryFn: async () => {
       const params = new URLSearchParams({ limit: String(limit), language });
-      const res = await fetch(`${api.attempts.history.path}?${params.toString()}`, { credentials: "include" });
+      const res = await fetch(toApiUrl(`${api.attempts.history.path}?${params.toString()}`), { credentials: "include" });
       if (!res.ok) throw new Error("Failed to load attempt history");
       return api.attempts.history.responses[200].parse(await res.json());
     },

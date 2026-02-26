@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { api } from "@shared/routes";
 import { useLearningLanguage } from "@/hooks/use-language";
+import { toApiUrl } from "@/lib/api-base";
 
 export type LeaderboardWindow = "daily" | "weekly" | "all_time";
 
@@ -14,7 +15,7 @@ export function useLeaderboard(window: LeaderboardWindow, limit = 25) {
         limit: String(limit),
         language,
       });
-      const res = await fetch(`${api.leaderboard.list.path}?${params.toString()}`, {
+      const res = await fetch(toApiUrl(`${api.leaderboard.list.path}?${params.toString()}`), {
         credentials: "include",
       });
       if (!res.ok) throw new Error("Failed to load leaderboard");

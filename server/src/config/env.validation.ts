@@ -10,6 +10,7 @@ export const envSchema = z
     GOOGLE_CLIENT_SECRET: z.string().optional(),
     SESSION_SECRET: z.string().min(16).optional(),
     GOOGLE_ISSUER_URL: z.string().url().default("https://accounts.google.com"),
+    FRONTEND_ORIGINS: z.string().optional(),
     REVIEWER_EMAILS: z.string().optional(),
     ADMIN_EMAILS: z.string().optional(),
     ENABLE_GCP_TTS: z

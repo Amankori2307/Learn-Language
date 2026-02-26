@@ -3,6 +3,7 @@ import { api } from "@shared/routes";
 import { z } from "zod";
 import { QuizModeEnum } from "@shared/domain/enums";
 import { useLearningLanguage } from "@/hooks/use-language";
+import { toApiUrl } from "@/lib/api-base";
 
 // Types derived from API definition
 export type QuizMode = QuizModeEnum;
@@ -18,7 +19,7 @@ export function useGenerateQuiz(mode: QuizMode = QuizModeEnum.DAILY_REVIEW, clus
       params.append("language", language);
       if (clusterId) params.append('clusterId', clusterId.toString());
       
-      const res = await fetch(`${api.quiz.generate.path}?${params.toString()}`, { credentials: "include" });
+      const res = await fetch(toApiUrl(`${api.quiz.generate.path}?${params.toString()}`), { credentials: "include" });
       if (!res.ok) throw new Error("Failed to generate quiz");
       return api.quiz.generate.responses[200].parse(await res.json());
     },
@@ -36,7 +37,7 @@ export function useSubmitAnswer() {
         ...data,
         language,
       };
-      const res = await fetch(api.quiz.submit.path, {
+      const res = await fetch(toApiUrl(api.quiz.submit.path), {
         method: api.quiz.submit.method,
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
@@ -59,7 +60,7 @@ export function useStats() {
     queryKey: [api.stats.get.path, language],
     queryFn: async () => {
       const params = new URLSearchParams({ language });
-      const res = await fetch(`${api.stats.get.path}?${params.toString()}`, { credentials: "include" });
+      const res = await fetch(toApiUrl(`${api.stats.get.path}?${params.toString()}`), { credentials: "include" });
       if (res.status === 401) return null;
       if (!res.ok) throw new Error("Failed to fetch stats");
       return api.stats.get.responses[200].parse(await res.json());
@@ -73,7 +74,7 @@ export function useLearningInsights() {
     queryKey: [api.analytics.learning.path, language],
     queryFn: async () => {
       const params = new URLSearchParams({ language });
-      const res = await fetch(`${api.analytics.learning.path}?${params.toString()}`, { credentials: "include" });
+      const res = await fetch(toApiUrl(`${api.analytics.learning.path}?${params.toString()}`), { credentials: "include" });
       if (res.status === 401) return null;
       if (!res.ok) throw new Error("Failed to fetch learning insights");
       return api.analytics.learning.responses[200].parse(await res.json());
@@ -85,7 +86,7 @@ export function useSeedData() {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async () => {
-      const res = await fetch(api.admin.seed.path, {
+      const res = await fetch(toApiUrl(api.admin.seed.path), {
         method: "POST",
         credentials: "include",
       });

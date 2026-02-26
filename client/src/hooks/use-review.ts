@@ -1,6 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { api } from "@shared/routes";
 import { LanguageEnum, PartOfSpeechEnum, ReviewStatusEnum, VocabularyTagEnum } from "@shared/domain/enums";
+import { toApiUrl } from "@/lib/api-base";
 
 export type ReviewStatus = ReviewStatusEnum;
 
@@ -12,7 +13,7 @@ export function useReviewQueue(status: ReviewStatus, limit = 50) {
         status,
         limit: String(limit),
       });
-      const res = await fetch(`${api.review.queue.path}?${params.toString()}`, { credentials: "include" });
+      const res = await fetch(toApiUrl(`${api.review.queue.path}?${params.toString()}`), { credentials: "include" });
       if (!res.ok) throw new Error("Failed to load review queue");
       return api.review.queue.responses[200].parse(await res.json());
     },
@@ -24,7 +25,7 @@ export function useReviewHistory(wordId?: number) {
     queryKey: [api.review.history.path, wordId],
     enabled: Boolean(wordId),
     queryFn: async () => {
-      const res = await fetch(`/api/review/words/${wordId}/history`, { credentials: "include" });
+      const res = await fetch(toApiUrl(`/api/review/words/${wordId}/history`), { credentials: "include" });
       if (!res.ok) throw new Error("Failed to load review history");
       return api.review.history.responses[200].parse(await res.json());
     },
@@ -35,7 +36,7 @@ export function useTransitionReview() {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async (payload: { id: number; toStatus: ReviewStatus; notes?: string }) => {
-      const res = await fetch(`/api/review/words/${payload.id}`, {
+      const res = await fetch(toApiUrl(`/api/review/words/${payload.id}`), {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
         credentials: "include",
@@ -55,7 +56,7 @@ export function useBulkTransitionReview() {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async (payload: { ids: number[]; toStatus: ReviewStatus; notes?: string }) => {
-      const res = await fetch(api.review.bulkTransition.path, {
+      const res = await fetch(toApiUrl(api.review.bulkTransition.path), {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
         credentials: "include",
@@ -93,7 +94,7 @@ export function useCreateReviewDraft() {
         difficulty: number;
       }>;
     }) => {
-      const res = await fetch(api.review.submitDraft.path, {
+      const res = await fetch(toApiUrl(api.review.submitDraft.path), {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include",

@@ -1,5 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { api } from "@shared/routes";
+import { toApiUrl } from "@/lib/api-base";
 
 export interface IUserProfile {
   id: string;
@@ -21,7 +22,7 @@ export function useProfile() {
   return useQuery({
     queryKey: [api.profile.get.path],
     queryFn: async () => {
-      const res = await fetch(api.profile.get.path, { credentials: "include" });
+      const res = await fetch(toApiUrl(api.profile.get.path), { credentials: "include" });
       if (!res.ok) throw new Error("Failed to load profile");
       return api.profile.get.responses[200].parse(await res.json()) as IUserProfile;
     },
@@ -33,7 +34,7 @@ export function useUpdateProfile() {
 
   return useMutation({
     mutationFn: async (payload: IProfileUpdateInput) => {
-      const res = await fetch(api.profile.update.path, {
+      const res = await fetch(toApiUrl(api.profile.update.path), {
         method: api.profile.update.method,
         headers: { "Content-Type": "application/json" },
         credentials: "include",

@@ -37,8 +37,22 @@ function log(message: string, source = "next-api") {
   console.log(`${formattedTime} [${source}] ${message}`);
 }
 
+const DEFAULT_ALLOWED_FRONTEND_ORIGINS = [
+  "http://localhost:3000",
+  "https://learn-lang.amankori.me",
+];
+
+function resolveAllowedOrigins(rawOrigins?: string): Set<string> {
+  const configured = (rawOrigins ?? "")
+    .split(",")
+    .map((entry) => entry.trim())
+    .filter(Boolean);
+  return new Set([...DEFAULT_ALLOWED_FRONTEND_ORIGINS, ...configured]);
+}
+
 async function buildNestExpressApp() {
   const expressApp = express();
+  const allowedOrigins = resolveAllowedOrigins(process.env.FRONTEND_ORIGINS);
 
   expressApp.use(
     express.json({
@@ -52,6 +66,24 @@ async function buildNestExpressApp() {
     "/audio/generated",
     express.static(path.join(process.cwd(), "assets/audio")),
   );
+  expressApp.use((req, res, next) => {
+    const origin = req.headers.origin;
+    if (typeof origin === "string" && allowedOrigins.has(origin)) {
+      res.header("Access-Control-Allow-Origin", origin);
+      res.header("Vary", "Origin");
+      res.header("Access-Control-Allow-Credentials", "true");
+      res.header(
+        "Access-Control-Allow-Headers",
+        "Content-Type, Authorization, X-Requested-With, X-Request-Id",
+      );
+      res.header("Access-Control-Allow-Methods", "GET,POST,PUT,PATCH,DELETE,OPTIONS");
+    }
+
+    if (req.method === "OPTIONS") {
+      return res.sendStatus(204);
+    }
+    return next();
+  });
 
   expressApp.use((req, res, next) => {
     const requestId = req.get("x-request-id") ?? randomUUID();
@@ -152,7 +184,7 @@ export async function startStandaloneNestApiServer(inputPort?: number) {
   const app = await getNestExpressApp();
   const resolvedPort =
     inputPort ??
-    Number(process.env.BACKEND_PORT ?? process.env.PORT ?? 4000);
+    Number(process.env.BACKEND_PORT ?? process.env.PORT ?? 5000);
 
   return await new Promise<import("http").Server>((resolve) => {
     const server = app.listen(resolvedPort, () => {

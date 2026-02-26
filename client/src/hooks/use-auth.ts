@@ -1,9 +1,10 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import type { User } from "@shared/models/auth";
 import { AUTH_QUERY_RULES } from "./auth.constants";
+import { toApiUrl, toAuthUrl } from "@/lib/api-base";
 
 async function fetchUser(): Promise<User | null> {
-  const response = await fetch("/api/auth/user", {
+  const response = await fetch(toApiUrl("/api/auth/user"), {
     credentials: "include",
   });
 
@@ -19,7 +20,7 @@ async function fetchUser(): Promise<User | null> {
 }
 
 async function logout(): Promise<void> {
-  window.location.href = "/api/logout";
+  window.location.href = toAuthUrl("/api/logout");
 }
 
 export function useAuth() {
