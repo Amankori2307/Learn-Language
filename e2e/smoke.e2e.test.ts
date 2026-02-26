@@ -3,29 +3,40 @@ import assert from "node:assert/strict";
 import { sql } from "drizzle-orm";
 import { createServer } from "http";
 import { db } from "../server/src/infrastructure/db";
-import { getNestExpressApp } from "../server/src/bootstrap/nest-app";
+import { createNestApiApp } from "../server/src/main";
 import { QuizModeEnum } from "../shared/domain/enums";
 
 test("e2e smoke: api is live and all quiz modes return arrays", async (t) => {
   try {
     await db.execute(sql`select 1`);
   } catch (error) {
-    const code = typeof error === "object" && error !== null && "code" in error ? String((error as { code?: string }).code) : "";
-    if (code === "ECONNREFUSED" || code === "EPERM") {
+    const code =
+      typeof error === "object" && error !== null && "code" in error
+        ? String((error as { code?: string }).code)
+        : "";
+    const serializedError = JSON.stringify(error, Object.getOwnPropertyNames(error ?? {}));
+    const hasDbConnectionPermissionIssue =
+      code === "ECONNREFUSED" ||
+      code === "EPERM" ||
+      serializedError.includes("ECONNREFUSED") ||
+      serializedError.includes("EPERM");
+
+    if (hasDbConnectionPermissionIssue) {
       t.skip("Postgres is unavailable in current environment; skipping e2e smoke");
       return;
     }
     throw error;
   }
 
-  const app = await getNestExpressApp();
-  const httpServer = createServer(app);
+  const { expressApp, app: nestApp } = await createNestApiApp();
+  const httpServer = createServer(expressApp);
 
   await new Promise<void>((resolve) => {
     httpServer.listen(0, "127.0.0.1", () => resolve());
   });
 
   t.after(async () => {
+    await nestApp.close();
     await new Promise<void>((resolve, reject) => {
       httpServer.close((error) => {
         if (error) {
