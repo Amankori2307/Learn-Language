@@ -56,8 +56,8 @@ jobs:
       - name: Build
         env:
           AUTH_PROVIDER: dev
-          SESSION_SECRET: ${{ secrets.SESSION_SECRET_CI }}
-          DATABASE_URL: ${{ secrets.DATABASE_URL_CI }}
+          SESSION_SECRET: ci-session-secret-min-16
+          DATABASE_URL: postgresql://ci:ci@localhost:5432/ci_db
         run: pnpm run build
 
   docker-publish:
@@ -108,7 +108,3 @@ jobs:
           echo "- Registry: \`ghcr.io\`" >> "$GITHUB_STEP_SUMMARY"
           echo "- Image: \`ghcr.io/${{ steps.owner.outputs.value }}/learn-language\`" >> "$GITHUB_STEP_SUMMARY"
           echo "- Tags: \`latest\`, \`sha-${GITHUB_SHA::7}\`" >> "$GITHUB_STEP_SUMMARY"
-          echo "" >> "$GITHUB_STEP_SUMMARY"
-          echo "### CI Secrets to set in GitHub" >> "$GITHUB_STEP_SUMMARY"
-          echo "- \`SESSION_SECRET_CI\` (min 16 chars)" >> "$GITHUB_STEP_SUMMARY"
-          echo "- \`DATABASE_URL_CI\` (CI database URL)" >> "$GITHUB_STEP_SUMMARY"
