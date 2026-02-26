@@ -11,6 +11,7 @@ import { setupAuth } from "./modules/auth";
 import { authConfig } from "./config/auth.config";
 import { randomUUID } from "crypto";
 import { appLogger, httpRequestLogger } from "./common/logger/logger";
+import { NestAppLogger } from "./common/logger/nest-app-logger";
 
 const DEFAULT_ALLOWED_FRONTEND_ORIGINS = [
   "http://localhost:3000",
@@ -36,7 +37,8 @@ export async function createNestApiApp(): Promise<{
   app: INestApplication;
   expressApp: Express;
 }> {
-  const app = await NestFactory.create(AppModule);
+  const app = await NestFactory.create(AppModule, { logger: false });
+  app.useLogger(new NestAppLogger());
   app.useGlobalPipes(
     new ValidationPipe({
       transform: true,
