@@ -30,19 +30,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Configure npm auth (optional)
-        if: ${{ secrets.NPM_TOKEN != '' }}
-        run: |
-          echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > ~/.npmrc
-          echo "always-auth=true" >> ~/.npmrc
-        env:
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
         with:
           version: ${{ env.PNPM_VERSION }}
-          standalone: true
           run_install: false
 
       - name: Setup Node.js
@@ -50,6 +41,14 @@ jobs:
         with:
           node-version: ${{ env.NODE_VERSION }}
           cache: pnpm
+
+      - name: Configure npm auth (optional)
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+        if: env.NPM_TOKEN != ''
+        run: |
+          echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > ~/.npmrc
+          echo "always-auth=true" >> ~/.npmrc
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
@@ -59,7 +58,7 @@ jobs:
           AUTH_PROVIDER: dev
           SESSION_SECRET: ${{ secrets.SESSION_SECRET_CI }}
           DATABASE_URL: ${{ secrets.DATABASE_URL_CI }}
-        run: pnpm run lint
+        run: pnpm run lint && pnpm run typecheck && pnpm run test
 
       - name: Build
         env:
@@ -115,7 +114,7 @@ jobs:
           echo "" >> "$GITHUB_STEP_SUMMARY"
           echo "- Registry: \`ghcr.io\`" >> "$GITHUB_STEP_SUMMARY"
           echo "- Image: \`ghcr.io/${{ steps.owner.outputs.value }}/learn-language\`" >> "$GITHUB_STEP_SUMMARY"
-          echo "- Tags: \`latest\`, \`sha-${GITHUB_SHA}\`" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Tags: \`latest\`, \`sha-${GITHUB_SHA::7}\`" >> "$GITHUB_STEP_SUMMARY"
           echo "" >> "$GITHUB_STEP_SUMMARY"
           echo "### CI Secrets to set in GitHub" >> "$GITHUB_STEP_SUMMARY"
           echo "- \`SESSION_SECRET_CI\` (min 16 chars)" >> "$GITHUB_STEP_SUMMARY"
