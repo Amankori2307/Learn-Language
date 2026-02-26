@@ -1,4 +1,5 @@
 import type { Request, Response } from "express";
+import { appLogger } from "./logger/logger";
 
 export type ErrorCode =
   | "UNAUTHORIZED"
@@ -51,5 +52,5 @@ export function logApiEvent(
     ...payload,
   };
 
-  console.log(`[api-event] ${JSON.stringify(entry)}`);
+  appLogger.info("[api-event]", entry);
 }

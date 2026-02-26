@@ -100,6 +100,12 @@ export function LogMethodLifecycle(): ClassDecorator {
         configurable: false,
       });
 
+      const metadataKeys = Reflect.getMetadataKeys(originalMethod);
+      for (const metadataKey of metadataKeys) {
+        const metadataValue = Reflect.getMetadata(metadataKey, originalMethod);
+        Reflect.defineMetadata(metadataKey, metadataValue, wrappedMethod);
+      }
+
       Object.defineProperty(typedTarget.prototype, propertyName, {
         ...descriptor,
         value: wrappedMethod,

@@ -15,6 +15,7 @@ import {
 } from "@shared/domain/enums";
 import { getClusterDescription, isGenericClusterDescription } from "@shared/domain/cluster-metadata";
 import { isPartOfSpeech } from "@shared/domain/part-of-speech";
+import { appLogger } from "../common/logger/logger";
 import {
   words, clusters, wordClusters, userWordProgress, quizAttempts, wordExamples, users,
   wordReviewEvents, srsConfigs,
@@ -1664,7 +1665,12 @@ export class DatabaseStorage implements IStorage {
     const [{ count: linksCount }] = await db.select({ count: sql<number>`count(*)` }).from(wordClusters);
     const [{ count: examplesCount }] = await db.select({ count: sql<number>`count(*)` }).from(wordExamples);
 
-    console.log(`Database seeded successfully! words=${wordsCount}, clusters=${clustersCount}, links=${linksCount}, examples=${examplesCount}`);
+    appLogger.info("Database seeded successfully", {
+      wordsCount,
+      clustersCount,
+      linksCount,
+      examplesCount,
+    });
   }
 }
 
