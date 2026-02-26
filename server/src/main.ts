@@ -9,6 +9,8 @@ import { type INestApplication } from "@nestjs/common";
 import { AppModule } from "./app.module";
 import { setupAuth } from "./modules/auth";
 import { authConfig } from "./config/auth.config";
+import { randomUUID } from "crypto";
+import { appLogger, httpRequestLogger } from "./common/logger/logger";
 
 const DEFAULT_ALLOWED_FRONTEND_ORIGINS = [
   "http://localhost:3000",
@@ -27,7 +29,7 @@ async function bootstrap() {
   const { app } = await createNestApiApp();
   const port = Number(process.env.BACKEND_PORT ?? process.env.PORT ?? 5001);
   await app.listen(port);
-  console.log(`[nest-api] Backend API listening on http://localhost:${port}`);
+  appLogger.info(`[nest-api] Backend API listening on http://localhost:${port}`);
 }
 
 export async function createNestApiApp(): Promise<{
@@ -64,6 +66,16 @@ export async function createNestApiApp(): Promise<{
   });
 
   const expressApp = app.getHttpAdapter().getInstance() as Express;
+  expressApp.use((req, res, next) => {
+    const incomingRequestId = req.headers["x-request-id"];
+    const requestId = typeof incomingRequestId === "string" && incomingRequestId.trim().length > 0
+      ? incomingRequestId
+      : randomUUID();
+    req.requestId = requestId;
+    res.setHeader("x-request-id", requestId);
+    next();
+  });
+  expressApp.use(httpRequestLogger);
   expressApp.use(
     "/audio/generated",
     express.static(path.join(process.cwd(), "assets/audio")),
@@ -96,16 +108,16 @@ const isDirectExecution =
 
 if (isDirectExecution) {
   process.on("unhandledRejection", (reason: unknown) => {
-    console.error(`[UnhandledRejection] Reason: ${String(reason)}`);
+    appLogger.error(`[UnhandledRejection] Reason: ${String(reason)}`);
   });
 
   process.on("uncaughtException", (error: Error) => {
-    console.error(`[UncaughtException] Error: ${error.message}`, error.stack);
+    appLogger.error(`[UncaughtException] Error: ${error.message}`, { stack: error.stack });
     process.exit(1);
   });
 
   void bootstrap().catch((error) => {
-    console.error("Failed to start backend API server", error);
+    appLogger.error("Failed to start backend API server", { error });
     process.exit(1);
   });
 }

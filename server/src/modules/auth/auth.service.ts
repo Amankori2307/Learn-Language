@@ -8,6 +8,7 @@ import { AuthRepository } from "./auth.repository";
 import { AppError } from "../../common/errors/app-error";
 import { UserClaims } from "./auth.types";
 import { authConfig } from "../../config/auth.config";
+import { appLogger } from "../../common/logger/logger";
 
 @Injectable()
 export class AuthService {
@@ -17,19 +18,32 @@ export class AuthService {
   ) {}
 
   async getAuthUser(claims: UserClaims) {
+    const userId = claims.sub?.trim();
+    if (!userId) {
+      throw new AppError(401, "UNAUTHORIZED", "Unauthorized");
+    }
+
+    const claimEmail = claims.email ?? null;
+    const claimFirstName = claims.first_name ?? claims.given_name ?? null;
+    const claimLastName = claims.last_name ?? claims.family_name ?? null;
+    const claimProfileImageUrl = claims.profile_image_url ?? claims.picture ?? null;
+
+    let resolvedRole = UserTypeEnum.LEARNER;
     try {
-      const userId = claims.sub;
-      let user = await this.repository.getUser(userId);
-      const claimEmail = claims.email ?? null;
-      const claimFirstName = claims.first_name ?? claims.given_name ?? null;
-      const claimLastName = claims.last_name ?? claims.family_name ?? null;
-      const claimProfileImageUrl = claims.profile_image_url ?? claims.picture ?? null;
       const config = this.configService.getOrThrow<ConfigType<typeof authConfig>>("auth");
-      const resolvedRole = resolveRoleFromEmail(claims.email ?? user?.email ?? null, {
+      resolvedRole = resolveRoleFromEmail(claims.email ?? null, {
         reviewerEmails: config.reviewerEmails,
         adminEmails: config.adminEmails,
       });
+    } catch (error) {
+      appLogger.warn("Auth config lookup failed while resolving role", {
+        userId,
+        error: error instanceof Error ? error.message : String(error),
+      });
+    }
 
+    try {
+      let user = await this.repository.getUser(userId);
       if (!user) {
         user = await this.repository.upsertUser({
           id: userId,
@@ -62,8 +76,22 @@ export class AuthService {
 
       return user;
     } catch (error) {
-      console.error("Error fetching user:", error);
-      throw new AppError(500, "INTERNAL_ERROR", "Failed to fetch user");
+      appLogger.error("Failed to read or upsert auth user from database", {
+        userId,
+        error: error instanceof Error ? error.message : String(error),
+      });
+
+      // JWT is valid; return claims-backed user object to avoid blocking auth state.
+      return {
+        id: userId,
+        email: claimEmail,
+        firstName: claimFirstName,
+        lastName: claimLastName,
+        profileImageUrl: claimProfileImageUrl,
+        role: userId === "dev-user" ? UserTypeEnum.ADMIN : resolvedRole,
+        createdAt: null,
+        updatedAt: null,
+      };
     }
   }
 

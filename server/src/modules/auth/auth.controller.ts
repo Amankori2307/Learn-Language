@@ -5,6 +5,7 @@ import { AuthenticatedGuard } from "../../common/guards/authenticated.guard";
 import { UpdateProfileBodyDto } from "./auth.dto";
 import { AppError } from "../../common/errors/app-error";
 import { sendError } from "../../common/http";
+import { appLogger } from "../../common/logger/logger";
 
 @Controller()
 export class AuthApiController {
@@ -51,6 +52,10 @@ export class AuthApiController {
       sendError(req, res, error.status, error.code, error.message, error.details);
       return;
     }
+    appLogger.error("Unhandled auth controller error", {
+      requestId: req.requestId ?? "unknown",
+      error: error instanceof Error ? error.message : String(error),
+    });
     sendError(req, res, 500, "INTERNAL_ERROR", "Internal Server Error");
   }
 }
