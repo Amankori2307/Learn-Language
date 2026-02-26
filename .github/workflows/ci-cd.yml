@@ -18,8 +18,8 @@ permissions:
   packages: write
 
 env:
-  NODE_VERSION: "24"
-  PNPM_VERSION: "10.29.3"
+  NODE_VERSION: "24.x"
+  PNPM_VERSION: "10"
 
 jobs:
   quality:
