@@ -3,9 +3,10 @@ import { authStorage } from "./auth.storage";
 import { sendError } from "../../common/http";
 import { UserTypeEnum } from "@shared/domain/enums";
 import { runWithLifecycle } from "../../common/logger/logger";
+import { extractUserId } from "./auth.request-user";
 
 function getUserId(req: Request): string | undefined {
-  return runWithLifecycle("getUserId", () => (req.user as any)?.claims?.sub);
+  return runWithLifecycle("getUserId", () => extractUserId(req));
 }
 
 export async function getCurrentUserRole(req: Request): Promise<UserTypeEnum | undefined> {

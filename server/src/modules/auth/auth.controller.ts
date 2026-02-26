@@ -7,6 +7,7 @@ import { UpdateProfileBodyDto } from "./auth.dto";
 import { AppError } from "../../common/errors/app-error";
 import { sendError } from "../../common/http";
 import { appLogger } from "../../common/logger/logger";
+import { extractUserClaims, extractUserId } from "./auth.request-user";
 
 @Controller()
 @LogMethodLifecycle()
@@ -17,7 +18,11 @@ export class AuthApiController {
   @UseGuards(AuthenticatedGuard)
   async getAuthUser(@Req() req: Request, @Res() res: Response) {
     try {
-      const claims = (req.user as { claims: Parameters<AuthService["getAuthUser"]>[0] }).claims;
+      const claims = extractUserClaims(req);
+      if (!claims?.sub) {
+        sendError(req, res, 401, "UNAUTHORIZED", "Unauthorized");
+        return;
+      }
       const user = await this.authService.getAuthUser(claims);
       res.json(user);
     } catch (error) {
@@ -29,7 +34,11 @@ export class AuthApiController {
   @UseGuards(AuthenticatedGuard)
   async getProfile(@Req() req: Request, @Res() res: Response) {
     try {
-      const userId = (req.user as { claims: { sub: string } }).claims.sub;
+      const userId = extractUserId(req);
+      if (!userId) {
+        sendError(req, res, 401, "UNAUTHORIZED", "Unauthorized");
+        return;
+      }
       const profile = await this.authService.getProfile(userId);
       res.json(profile);
     } catch (error) {
@@ -41,7 +50,11 @@ export class AuthApiController {
   @UseGuards(AuthenticatedGuard)
   async updateProfile(@Req() req: Request, @Res() res: Response, @Body() body: UpdateProfileBodyDto) {
     try {
-      const userId = (req.user as { claims: { sub: string } }).claims.sub;
+      const userId = extractUserId(req);
+      if (!userId) {
+        sendError(req, res, 401, "UNAUTHORIZED", "Unauthorized");
+        return;
+      }
       const profile = await this.authService.updateProfile(userId, body);
       res.json(profile);
     } catch (error) {
