@@ -1,4 +1,5 @@
 import { Injectable } from "@nestjs/common";
+import { LogMethodLifecycle } from "../../common/logger/log-method-lifecycle.decorator";
 import { z } from "zod";
 import { api } from "@shared/routes";
 import { QuizModeEnum, QuizQuestionTypeEnum } from "@shared/domain/enums";
@@ -10,6 +11,7 @@ import { AppError } from "../../common/errors/app-error";
 import { GenerateQuizInput, SubmitQuizInput } from "./quiz.types";
 
 @Injectable()
+@LogMethodLifecycle()
 export class QuizService {
   constructor(private readonly repository: QuizRepository) {}
 

@@ -1,4 +1,5 @@
 import { Body, Controller, Get, Param, ParseIntPipe, Patch, Post, Query, Req, Res, UseGuards } from "@nestjs/common";
+import { LogMethodLifecycle } from "../../common/logger/log-method-lifecycle.decorator";
 import type { Request, Response } from "express";
 import { ReviewService } from "./review.service";
 import { AuthenticatedGuard } from "../../common/guards/authenticated.guard";
@@ -15,6 +16,7 @@ import { AppError } from "../../common/errors/app-error";
 import { sendError } from "../../common/http";
 
 @Controller()
+@LogMethodLifecycle()
 export class ReviewApiController {
   constructor(private readonly reviewService: ReviewService) {}
 

@@ -1,9 +1,11 @@
 import { Injectable } from "@nestjs/common";
+import { LogMethodLifecycle } from "../../common/logger/log-method-lifecycle.decorator";
 import { storage } from "../../infrastructure/storage";
 import { LanguageEnum, QuizModeEnum } from "@shared/domain/enums";
 import { ICreateProgressInput, IQuizAttemptInput } from "./quiz.repository.types";
 
 @Injectable()
+@LogMethodLifecycle()
 export class QuizRepository {
   getQuizCandidates(userId: string, limit: number, clusterId?: number, mode?: QuizModeEnum, language?: LanguageEnum) {
     return storage.getQuizCandidates(userId, limit, clusterId, mode, language);

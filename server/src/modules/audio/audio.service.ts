@@ -1,4 +1,5 @@
 import { createHash } from "crypto";
+import { LogMethodLifecycle } from "../../common/logger/log-method-lifecycle.decorator";
 import { mkdir, access, writeFile } from "fs/promises";
 import path from "path";
 import { Injectable } from "@nestjs/common";
@@ -16,6 +17,7 @@ type GoogleTextToSpeechResponse = {
 };
 
 @Injectable()
+@LogMethodLifecycle()
 export class AudioService {
   private readonly inFlight = new Map<string, Promise<string | null>>();
 

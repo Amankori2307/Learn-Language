@@ -1,4 +1,5 @@
 import { Injectable } from "@nestjs/common";
+import { LogMethodLifecycle } from "../../common/logger/log-method-lifecycle.decorator";
 import { z } from "zod";
 import { api } from "@shared/routes";
 import { ReviewDisagreementStatusEnum, ReviewStatusEnum } from "@shared/domain/enums";
@@ -7,6 +8,7 @@ import { AppError } from "../../common/errors/app-error";
 import { ReviewConflictInput, ReviewQueueInput } from "./review.types";
 
 @Injectable()
+@LogMethodLifecycle()
 export class ReviewService {
   constructor(private readonly repository: ReviewRepository) {}
 

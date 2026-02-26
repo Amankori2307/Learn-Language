@@ -1,4 +1,5 @@
 import { db } from "./db";
+import { LogMethodLifecycle } from "../common/logger/log-method-lifecycle.decorator";
 import { eq, ne, sql, and, inArray } from "drizzle-orm";
 import fs from "fs/promises";
 import path from "path";
@@ -252,6 +253,7 @@ export interface IStorage {
   seedInitialData(): Promise<void>;
 }
 
+@LogMethodLifecycle()
 export class DatabaseStorage implements IStorage {
   async getWords(limit: number = 100, language?: LanguageEnum): Promise<Word[]> {
     const whereClause = language

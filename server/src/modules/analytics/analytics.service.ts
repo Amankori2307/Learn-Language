@@ -1,4 +1,5 @@
 import { Injectable } from "@nestjs/common";
+import { LogMethodLifecycle } from "../../common/logger/log-method-lifecycle.decorator";
 import { LanguageEnum } from "@shared/domain/enums";
 import { api } from "@shared/routes";
 import { parseLanguage } from "../../common/utils/language";
@@ -6,6 +7,7 @@ import { AnalyticsRepository } from "./analytics.repository";
 import { AttemptHistoryInput, LeaderboardInput, WordBucketInput } from "./analytics.types";
 
 @Injectable()
+@LogMethodLifecycle()
 export class AnalyticsService {
   constructor(private readonly repository: AnalyticsRepository) {}
 

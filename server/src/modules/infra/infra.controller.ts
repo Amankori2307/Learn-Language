@@ -1,4 +1,5 @@
 import { Controller, Get, Post, Query, Req, Res, UseGuards } from "@nestjs/common";
+import { LogMethodLifecycle } from "../../common/logger/log-method-lifecycle.decorator";
 import type { Request, Response } from "express";
 import { InfraService } from "./infra.service";
 import { AuthenticatedGuard } from "../../common/guards/authenticated.guard";
@@ -8,6 +9,7 @@ import { AppError } from "../../common/errors/app-error";
 import { sendError } from "../../common/http";
 
 @Controller()
+@LogMethodLifecycle()
 export class InfraApiController {
   constructor(private readonly infraService: InfraService) {}
 

@@ -1,4 +1,5 @@
 import { Controller, Get, Param, ParseIntPipe, Query, Req, Res, UseGuards } from "@nestjs/common";
+import { LogMethodLifecycle } from "../../common/logger/log-method-lifecycle.decorator";
 import type { Request, Response } from "express";
 import { VocabularyService } from "./vocabulary.service";
 import { AuthenticatedGuard } from "../../common/guards/authenticated.guard";
@@ -8,6 +9,7 @@ import { sendError } from "../../common/http";
 
 @Controller()
 @UseGuards(AuthenticatedGuard)
+@LogMethodLifecycle()
 export class VocabularyApiController {
   constructor(private readonly vocabularyService: VocabularyService) {}
 

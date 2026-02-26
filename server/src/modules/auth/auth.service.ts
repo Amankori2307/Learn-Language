@@ -1,4 +1,5 @@
 import { Injectable } from "@nestjs/common";
+import { LogMethodLifecycle } from "../../common/logger/log-method-lifecycle.decorator";
 import { ConfigService, type ConfigType } from "@nestjs/config";
 import { z } from "zod";
 import { api } from "@shared/routes";
@@ -11,6 +12,7 @@ import { authConfig } from "../../config/auth.config";
 import { appLogger } from "../../common/logger/logger";
 
 @Injectable()
+@LogMethodLifecycle()
 export class AuthService {
   constructor(
     private readonly repository: AuthRepository,

@@ -1,4 +1,5 @@
 import { Injectable } from "@nestjs/common";
+import { LogMethodLifecycle } from "../../common/logger/log-method-lifecycle.decorator";
 import { api } from "@shared/routes";
 import { LanguageEnum } from "@shared/domain/enums";
 import { VocabularyRepository } from "./vocabulary.repository";
@@ -6,6 +7,7 @@ import { AppError } from "../../common/errors/app-error";
 import { ListWordsInput } from "./vocabulary.types";
 
 @Injectable()
+@LogMethodLifecycle()
 export class VocabularyService {
   constructor(private readonly repository: VocabularyRepository) {}
 

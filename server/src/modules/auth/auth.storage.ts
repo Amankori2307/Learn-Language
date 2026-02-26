@@ -1,4 +1,5 @@
 import { users, type User, type UpsertUser } from "../../infrastructure/schema";
+import { LogMethodLifecycle } from "../../common/logger/log-method-lifecycle.decorator";
 import { db } from "../../infrastructure/db";
 import { eq } from "drizzle-orm";
 
@@ -13,6 +14,7 @@ export interface IAuthStorage {
   ): Promise<User | undefined>;
 }
 
+@LogMethodLifecycle()
 class AuthStorage implements IAuthStorage {
   async getUser(id: string): Promise<User | undefined> {
     const [user] = await db.select().from(users).where(eq(users.id, id));

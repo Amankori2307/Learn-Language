@@ -1,8 +1,10 @@
 import { Injectable } from "@nestjs/common";
+import { LogMethodLifecycle } from "../../common/logger/log-method-lifecycle.decorator";
 import { storage } from "../../infrastructure/storage";
 import { LanguageEnum } from "@shared/domain/enums";
 
 @Injectable()
+@LogMethodLifecycle()
 export class AnalyticsRepository {
   getUserStats(userId: string, language?: LanguageEnum) {
     return storage.getUserStats(userId, language);
