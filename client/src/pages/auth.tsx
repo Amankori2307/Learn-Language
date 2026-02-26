@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useAuth } from "@/hooks/use-auth";
 import { useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
+import { APP_BRAND_NAME } from "@shared/domain/constants/app-brand";
 
 export default function AuthPage() {
   const { user, isLoading } = useAuth();
@@ -27,13 +28,13 @@ export default function AuthPage() {
         <div className="relative z-10 max-w-lg text-center">
           {/* Decorative Source Language Script bg text */}
           <h1 className="text-9xl font-originalScript opacity-10 absolute -top-32 left-1/2 -translate-x-1/2 pointer-events-none whitespace-nowrap">
-            Learn a language
+            {APP_BRAND_NAME}
           </h1>
           
-          <h2 className="text-5xl font-bold mb-6 tracking-tight">Master Source Language the Natural Way.</h2>
+          <h2 className="text-5xl font-bold mb-6 tracking-tight">Master languages the natural way.</h2>
           <p className="text-lg opacity-90 leading-relaxed">
             Learn vocabulary through semantic clusters, spaced repetition, and real-world examples. 
-            The smartest way to fluency.
+            {APP_BRAND_NAME} helps you build fluency step by step.
           </p>
         </div>
       </div>
@@ -43,7 +44,7 @@ export default function AuthPage() {
         <div className="max-w-md w-full space-y-8 text-center">
           <div>
             <h1 className="text-3xl font-bold tracking-tight text-foreground">Welcome Back</h1>
-            <p className="mt-2 text-muted-foreground">Sign in to continue your learning journey</p>
+            <p className="mt-2 text-muted-foreground">Sign in to continue with {APP_BRAND_NAME}</p>
           </div>
 
           <div className="bg-card p-8 rounded-3xl shadow-xl border border-border/50">

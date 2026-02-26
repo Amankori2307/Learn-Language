@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
 import { LanguageEnum } from "@shared/domain/enums";
+import { APP_STORAGE_KEYS } from "@shared/domain/constants/app-brand";
 
-const STORAGE_KEY = "learn-language:selected-language";
+const STORAGE_KEY = APP_STORAGE_KEYS.selectedLanguage;
+const LEGACY_STORAGE_KEY = "learn-language:selected-language";
 
 export type IUserLanguageOption = {
   value: LanguageEnum;
@@ -25,7 +27,7 @@ function getInitialLanguage(): LanguageEnum {
     return fallback;
   }
 
-  const stored = window.localStorage.getItem(STORAGE_KEY);
+  const stored = window.localStorage.getItem(STORAGE_KEY) ?? window.localStorage.getItem(LEGACY_STORAGE_KEY);
   const isValid = stored && Object.values(LanguageEnum).includes(stored as LanguageEnum);
   return isValid ? (stored as LanguageEnum) : fallback;
 }
@@ -35,6 +37,7 @@ export function useLearningLanguage() {
 
   useEffect(() => {
     window.localStorage.setItem(STORAGE_KEY, language);
+    window.localStorage.removeItem(LEGACY_STORAGE_KEY);
   }, [language]);
 
   const setLanguage = (nextLanguage: LanguageEnum) => {

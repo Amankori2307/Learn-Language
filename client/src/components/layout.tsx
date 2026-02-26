@@ -28,6 +28,7 @@ import { buildAvatarUrl } from "@/lib/avatar";
 import { LanguageEnum, UserTypeEnum } from "@shared/domain/enums";
 import { useLearningLanguage } from "@/hooks/use-language";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { APP_BRAND_NAME, APP_BRAND_TAGLINE } from "@shared/domain/constants/app-brand";
 
 function getInitials(firstName?: string | null, lastName?: string | null, email?: string | null) {
   const fromNames = `${firstName ?? ""} ${lastName ?? ""}`.trim();
@@ -110,8 +111,8 @@ export function Layout({ children }: { children: React.ReactNode }) {
             </div>
             {!compact && (
               <div>
-                <h1 className="text-lg font-semibold text-foreground leading-none">Learn Language</h1>
-                <p className="text-xs text-muted-foreground mt-1">Practice Hub</p>
+                <h1 className="text-lg font-semibold text-foreground leading-none">{APP_BRAND_NAME}</h1>
+                <p className="text-xs text-muted-foreground mt-1">{APP_BRAND_TAGLINE}</p>
               </div>
             )}
           </div>
@@ -340,7 +341,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
           <div className="size-8 rounded-lg bg-gradient-to-br from-primary/90 to-emerald-500/80 text-primary-foreground flex items-center justify-center">
             <Languages className="size-4" />
           </div>
-          <h1 className="text-lg font-semibold text-foreground">Learn Language</h1>
+          <h1 className="text-lg font-semibold text-foreground">{APP_BRAND_NAME}</h1>
         </div>
         <div className="flex items-center gap-2">
           <Sheet open={isOpen} onOpenChange={setIsOpen}>
