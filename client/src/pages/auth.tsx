@@ -4,10 +4,22 @@ import { useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import { APP_BRAND_NAME } from "@shared/domain/constants/app-brand";
 import { authService } from "@/services/authService";
+import { clearAuthTokenFromUrl, readAuthTokenFromUrl } from "@/services/authTokenStorage";
 
 export default function AuthPage() {
   const { user, isLoading } = useAuth();
   const [, setLocation] = useLocation();
+
+  useEffect(() => {
+    const tokenFromUrl = readAuthTokenFromUrl();
+    if (!tokenFromUrl) {
+      return;
+    }
+
+    authService.setToken(tokenFromUrl);
+    clearAuthTokenFromUrl();
+    setLocation("/");
+  }, [setLocation]);
 
   useEffect(() => {
     if (!isLoading && user) {

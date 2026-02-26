@@ -58,6 +58,17 @@ function getFrontendRedirectUrl(path = "/"): string {
   return new URL(path, base).toString();
 }
 
+function getFrontendAuthRedirectWithToken(token: string): string {
+  const base = authConfig.frontendBaseUrl?.trim();
+  if (!base) {
+    return `/auth#token=${encodeURIComponent(token)}`;
+  }
+
+  const url = new URL("/auth", base);
+  url.hash = `token=${encodeURIComponent(token)}`;
+  return url.toString();
+}
+
 const getOidcConfig = memoize(
   async () => {
     if (!authConfig.googleIssuerUrl || !authConfig.googleClientId) {
@@ -192,8 +203,9 @@ export async function setupAuth(app: Express, config: AuthRuntimeConfig) {
         picture: null,
       };
       await upsertUser(claims);
-      setAuthCookie(res, signAuthToken(claims));
-      res.redirect(getFrontendRedirectUrl("/"));
+      const signedToken = signAuthToken(claims);
+      setAuthCookie(res, signedToken);
+      res.redirect(getFrontendAuthRedirectWithToken(signedToken));
     });
     app.get(AUTH_GOOGLE_CALLBACK_ROUTE, (_req, res) => res.redirect(getFrontendRedirectUrl("/")));
     app.post(AUTH_LOGOUT_ROUTE, (_req, res) => {
@@ -279,8 +291,9 @@ export async function setupAuth(app: Express, config: AuthRuntimeConfig) {
         return res.redirect(AUTH_GOOGLE_ROUTE);
       }
 
-      setAuthCookie(res, signAuthToken(user.claims));
-      return res.redirect(getFrontendRedirectUrl("/"));
+      const signedToken = signAuthToken(user.claims);
+      setAuthCookie(res, signedToken);
+      return res.redirect(getFrontendAuthRedirectWithToken(signedToken));
     },
     )(req, res, next);
   });

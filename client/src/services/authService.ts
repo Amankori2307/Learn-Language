@@ -1,5 +1,6 @@
 import type { User } from "@shared/models/auth";
 import { apiClient, buildApiUrl } from "./apiClient";
+import { clearAuthToken, setAuthToken } from "./authTokenStorage";
 
 export const authService = {
   async getCurrentUser(): Promise<User | null> {
@@ -17,7 +18,14 @@ export const authService = {
   getLoginUrl(): string {
     return buildApiUrl("/auth/google");
   },
+  setToken(token: string): void {
+    setAuthToken(token);
+  },
   async logout(): Promise<void> {
-    await apiClient.post(buildApiUrl("/auth/logout"));
+    try {
+      await apiClient.post(buildApiUrl("/auth/logout"));
+    } finally {
+      clearAuthToken();
+    }
   },
 };
