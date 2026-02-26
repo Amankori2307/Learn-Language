@@ -11,16 +11,6 @@ export const envSchema = z.object({
   GOOGLE_ISSUER_URL: z.string().url().default("https://accounts.google.com"),
   REVIEWER_EMAILS: z.string().optional(),
   ADMIN_EMAILS: z.string().optional(),
-  FEEDBACK_EMAIL_TO: z.string().email().default("amankori2307@gmail.com"),
-  SMTP_HOST: z.string().optional(),
-  SMTP_PORT: z.coerce.number().int().positive().default(587),
-  SMTP_SECURE: z
-    .string()
-    .optional()
-    .transform((value) => value === "true"),
-  SMTP_USER: z.string().optional(),
-  SMTP_PASS: z.string().optional(),
-  SMTP_FROM: z.string().default("Learn Language <no-reply@learn-language.local>"),
   ENABLE_GCP_TTS: z
     .string()
     .optional()

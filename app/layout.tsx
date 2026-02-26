@@ -2,23 +2,16 @@
 import type { Metadata } from "next";
 import "../client/src/index.css";
 import { APP_BRAND_NAME } from "@shared/domain/constants/app-brand";
+import { APP_DEFAULT_DESCRIPTION, APP_KEYWORDS, APP_SITE_URL } from "@shared/domain/constants/seo";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://learn-lang.amankori.me"),
+  metadataBase: new URL(APP_SITE_URL),
   title: {
     default: APP_BRAND_NAME,
     template: `%s | ${APP_BRAND_NAME}`,
   },
-  description: `${APP_BRAND_NAME} helps you learn languages with spaced repetition, adaptive review, and pronunciation-aware vocabulary practice.`,
-  keywords: [
-    "language learning",
-    "spaced repetition",
-    "vocabulary trainer",
-    "pronunciation practice",
-    "learn languages",
-    "learn-lang",
-    "flashcards",
-  ],
+  description: APP_DEFAULT_DESCRIPTION,
+  keywords: APP_KEYWORDS,
   applicationName: APP_BRAND_NAME,
   alternates: {
     canonical: "/",
@@ -40,17 +33,25 @@ export const metadata: Metadata = {
   themeColor: "#0ea5e9",
   openGraph: {
     type: "website",
-    url: "/",
+    url: APP_SITE_URL,
     title: APP_BRAND_NAME,
-    description:
-      "Learn languages with adaptive quizzes, review cycles, and structured vocabulary practice.",
+    description: APP_DEFAULT_DESCRIPTION,
     siteName: APP_BRAND_NAME,
+    locale: "en_US",
+    images: [
+      {
+        url: "/android-chrome-512x512.png",
+        width: 512,
+        height: 512,
+        alt: `${APP_BRAND_NAME} icon`,
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: APP_BRAND_NAME,
-    description:
-      "Adaptive language learning with review loops, pronunciation support, and focused vocabulary practice.",
+    description: APP_DEFAULT_DESCRIPTION,
+    images: ["/android-chrome-512x512.png"],
   },
   robots: {
     index: true,
@@ -63,6 +64,12 @@ export const metadata: Metadata = {
       "max-video-preview": -1,
     },
   },
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
+  category: "education",
 };
 
 export default function RootLayout({
@@ -70,9 +77,42 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const websiteStructuredData = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: APP_BRAND_NAME,
+    url: APP_SITE_URL,
+    description: APP_DEFAULT_DESCRIPTION,
+    inLanguage: "en",
+    potentialAction: {
+      "@type": "SearchAction",
+      target: `${APP_SITE_URL}/clusters?query={search_term_string}`,
+      "query-input": "required name=search_term_string",
+    },
+  };
+
+  const softwareStructuredData = {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    name: APP_BRAND_NAME,
+    applicationCategory: "EducationalApplication",
+    operatingSystem: "Web",
+    offers: {
+      "@type": "Offer",
+      price: "0",
+      priceCurrency: "USD",
+    },
+    url: APP_SITE_URL,
+    description: APP_DEFAULT_DESCRIPTION,
+  };
+
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteStructuredData) }} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(softwareStructuredData) }} />
+        {children}
+      </body>
     </html>
   );
 }
