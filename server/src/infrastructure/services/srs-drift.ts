@@ -1,5 +1,3 @@
-import { runWithLifecycle } from "../../common/logger/logger";
-
 export type DriftAlert = {
   code: "overdue_growth" | "interval_spike" | "empty_review_days";
   severity: "warning" | "critical";
@@ -24,11 +22,10 @@ export function summarizeSrsDrift(input: {
   emptyReviewDays: number;
   generatedAt?: Date;
 }): SrsDriftSummary {
-  return runWithLifecycle("summarizeSrsDrift", () => {
-    const totalTracked = Math.max(0, input.totalTracked);
-    const overdueCount = Math.max(0, input.overdueCount);
-    const highIntervalCount = Math.max(0, input.highIntervalCount);
-    const emptyReviewDays = Math.max(0, input.emptyReviewDays);
+  const totalTracked = Math.max(0, input.totalTracked);
+  const overdueCount = Math.max(0, input.overdueCount);
+  const highIntervalCount = Math.max(0, input.highIntervalCount);
+  const emptyReviewDays = Math.max(0, input.emptyReviewDays);
 
   const overdueRatio = totalTracked > 0 ? overdueCount / totalTracked : 0;
   const highIntervalRatio = totalTracked > 0 ? highIntervalCount / totalTracked : 0;
@@ -70,15 +67,14 @@ export function summarizeSrsDrift(input: {
     });
   }
 
-    return {
-      generatedAt: (input.generatedAt ?? new Date()).toISOString(),
-      overdueCount,
-      totalTracked,
-      overdueRatio: Number(overdueRatio.toFixed(4)),
-      highIntervalCount,
-      highIntervalRatio: Number(highIntervalRatio.toFixed(4)),
-      emptyReviewDays,
-      alerts,
-    };
-  });
+  return {
+    generatedAt: (input.generatedAt ?? new Date()).toISOString(),
+    overdueCount,
+    totalTracked,
+    overdueRatio: Number(overdueRatio.toFixed(4)),
+    highIntervalCount,
+    highIntervalRatio: Number(highIntervalRatio.toFixed(4)),
+    emptyReviewDays,
+    alerts,
+  };
 }

@@ -1,15 +1,18 @@
 import { CanActivate, ExecutionContext, Injectable } from "@nestjs/common";
-import { LogMethodLifecycle } from "../logger/log-method-lifecycle.decorator";
 import type { Request, Response } from "express";
 import { isAuthenticated } from "../../modules/auth/auth.oidc";
 import { appLogger } from "../logger/logger";
 
 @Injectable()
-@LogMethodLifecycle()
 export class AuthenticatedGuard implements CanActivate {
   canActivate(context: ExecutionContext): Promise<boolean> {
     const request = context.switchToHttp().getRequest<Request>();
     const response = context.switchToHttp().getResponse<Response>();
+    appLogger.debug("AuthenticatedGuard.canActivate.start", {
+      requestId: request.requestId ?? "unknown",
+      path: request.path,
+      method: request.method,
+    });
 
     return new Promise((resolve, reject) => {
       isAuthenticated(request, response, (err?: unknown) => {
@@ -33,6 +36,12 @@ export class AuthenticatedGuard implements CanActivate {
           resolve(false);
           return;
         }
+        appLogger.debug("AuthenticatedGuard.canActivate.end", {
+          requestId: request.requestId ?? "unknown",
+          path: request.path,
+          method: request.method,
+          allowed: true,
+        });
         resolve(true);
       });
     });

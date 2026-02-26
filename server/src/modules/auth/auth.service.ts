@@ -1,5 +1,4 @@
 import { Injectable } from "@nestjs/common";
-import { LogMethodLifecycle } from "../../common/logger/log-method-lifecycle.decorator";
 import { ConfigService, type ConfigType } from "@nestjs/config";
 import { z } from "zod";
 import { api } from "@shared/routes";
@@ -12,7 +11,6 @@ import { authConfig } from "../../config/auth.config";
 import { appLogger } from "../../common/logger/logger";
 
 @Injectable()
-@LogMethodLifecycle()
 export class AuthService {
   constructor(
     private readonly repository: AuthRepository,
@@ -20,6 +18,9 @@ export class AuthService {
   ) {}
 
   async getAuthUser(claims: UserClaims) {
+    appLogger.debug("AuthService.getAuthUser.start", {
+      userId: claims.sub ?? null,
+    });
     const userId = claims.sub?.trim();
     if (!userId) {
       throw new AppError(401, "UNAUTHORIZED", "Unauthorized");
@@ -94,22 +95,39 @@ export class AuthService {
         createdAt: null,
         updatedAt: null,
       };
+    } finally {
+      appLogger.debug("AuthService.getAuthUser.end", {
+        userId: claims.sub ?? null,
+      });
     }
   }
 
   async getProfile(userId: string) {
-    const user = await this.repository.getUser(userId);
-    if (!user) {
-      throw new AppError(404, "NOT_FOUND", "Profile not found");
+    appLogger.debug("AuthService.getProfile.start", { userId });
+    try {
+      const user = await this.repository.getUser(userId);
+      if (!user) {
+        throw new AppError(404, "NOT_FOUND", "Profile not found");
+      }
+      return {
+        ...user,
+        createdAt: user.createdAt?.toISOString() ?? null,
+        updatedAt: user.updatedAt?.toISOString() ?? null,
+      };
+    } catch (error) {
+      appLogger.error("AuthService.getProfile.error", {
+        userId,
+        error: error instanceof Error ? error.message : String(error),
+        stack: error instanceof Error ? error.stack : undefined,
+      });
+      throw error;
+    } finally {
+      appLogger.debug("AuthService.getProfile.end", { userId });
     }
-    return {
-      ...user,
-      createdAt: user.createdAt?.toISOString() ?? null,
-      updatedAt: user.updatedAt?.toISOString() ?? null,
-    };
   }
 
   async updateProfile(userId: string, payload: unknown) {
+    appLogger.debug("AuthService.updateProfile.start", { userId });
     try {
       const parsed = api.profile.update.input.parse(payload);
       const updated = await this.repository.updateUserProfile(userId, {
@@ -134,7 +152,14 @@ export class AuthService {
       if (error instanceof z.ZodError) {
         throw new AppError(400, "VALIDATION_ERROR", error.issues[0]?.message ?? "Invalid request");
       }
+      appLogger.error("AuthService.updateProfile.error", {
+        userId,
+        error: error instanceof Error ? error.message : String(error),
+        stack: error instanceof Error ? error.stack : undefined,
+      });
       throw new AppError(500, "INTERNAL_ERROR", "Failed to update profile");
+    } finally {
+      appLogger.debug("AuthService.updateProfile.end", { userId });
     }
   }
 }

@@ -1,5 +1,4 @@
 import type { SrsConfig } from "../schema";
-import { runWithLifecycle } from "../../common/logger/logger";
 
 export const DEFAULT_SRS_CONFIG_VERSION = "v1";
 
@@ -18,10 +17,9 @@ export const DEFAULT_SRS_CONFIG: SrsConfigSnapshot = {
 };
 
 export function resolveSrsConfig(row?: SrsConfig | null): SrsConfigSnapshot {
-  return runWithLifecycle("resolveSrsConfig", () => {
-    if (!row?.config) {
-      return DEFAULT_SRS_CONFIG;
-    }
+  if (!row?.config) {
+    return DEFAULT_SRS_CONFIG;
+  }
 
   const easeMin = Number(row.config.easeMin);
   const easeMax = Number(row.config.easeMax);
@@ -35,11 +33,10 @@ export function resolveSrsConfig(row?: SrsConfig | null): SrsConfigSnapshot {
     return DEFAULT_SRS_CONFIG;
   }
 
-    return {
-      version: row.version || DEFAULT_SRS_CONFIG_VERSION,
-      easeMin,
-      easeMax,
-      incorrectEasePenalty,
-    };
-  });
+  return {
+    version: row.version || DEFAULT_SRS_CONFIG_VERSION,
+    easeMin,
+    easeMax,
+    incorrectEasePenalty,
+  };
 }

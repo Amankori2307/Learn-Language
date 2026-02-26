@@ -1,15 +1,12 @@
 import { registerAs } from "@nestjs/config";
 import { UserTypeEnum } from "@shared/domain/enums";
-import { runWithLifecycle } from "../common/logger/logger";
 
 function parseEmailList(value?: string): Set<string> {
-  return runWithLifecycle("parseEmailList", () =>
-    new Set(
-      (value ?? "")
-        .split(",")
-        .map((entry) => entry.trim().toLowerCase())
-        .filter(Boolean),
-    ),
+  return new Set(
+    (value ?? "")
+      .split(",")
+      .map((entry) => entry.trim().toLowerCase())
+      .filter(Boolean),
   );
 }
 
@@ -31,20 +28,18 @@ export function resolveRoleFromEmailFromConfig(
     adminEmails: Set<string>;
   },
 ): UserTypeEnum {
-  return runWithLifecycle("resolveRoleFromEmailFromConfig", () => {
-    const normalized = email?.trim().toLowerCase();
-    if (!normalized) {
-      return UserTypeEnum.LEARNER;
-    }
-
-    if (input.adminEmails.has(normalized)) {
-      return UserTypeEnum.ADMIN;
-    }
-
-    if (input.reviewerEmails.has(normalized)) {
-      return UserTypeEnum.REVIEWER;
-    }
-
+  const normalized = email?.trim().toLowerCase();
+  if (!normalized) {
     return UserTypeEnum.LEARNER;
-  });
+  }
+
+  if (input.adminEmails.has(normalized)) {
+    return UserTypeEnum.ADMIN;
+  }
+
+  if (input.reviewerEmails.has(normalized)) {
+    return UserTypeEnum.REVIEWER;
+  }
+
+  return UserTypeEnum.LEARNER;
 }

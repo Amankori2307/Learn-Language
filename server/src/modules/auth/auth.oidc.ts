@@ -11,7 +11,7 @@ import { sendError } from "../../common/http";
 import { resolveRoleFromEmail } from "./auth.roles";
 import { AUTH_SESSION_RULES } from "./auth.constants";
 import { UserClaims } from "./auth.types";
-import { appLogger, runWithLifecycle } from "../../common/logger/logger";
+import { appLogger } from "../../common/logger/logger";
 
 export type AuthRuntimeConfig = {
   provider: "google" | "dev";
@@ -52,26 +52,22 @@ const AUTH_GOOGLE_CALLBACK_ROUTE = "/auth/google/callback";
 const AUTH_LOGOUT_ROUTE = "/auth/logout";
 
 function getFrontendRedirectUrl(path = "/"): string {
-  return runWithLifecycle("getFrontendRedirectUrl", () => {
-    const base = authConfig.frontendBaseUrl?.trim();
-    if (!base) {
-      return path;
-    }
-    return new URL(path, base).toString();
-  });
+  const base = authConfig.frontendBaseUrl?.trim();
+  if (!base) {
+    return path;
+  }
+  return new URL(path, base).toString();
 }
 
 function getFrontendAuthRedirectWithToken(token: string): string {
-  return runWithLifecycle("getFrontendAuthRedirectWithToken", () => {
-    const base = authConfig.frontendBaseUrl?.trim();
-    if (!base) {
-      return `/auth#token=${encodeURIComponent(token)}`;
-    }
+  const base = authConfig.frontendBaseUrl?.trim();
+  if (!base) {
+    return `/auth#token=${encodeURIComponent(token)}`;
+  }
 
-    const url = new URL("/auth", base);
-    url.hash = `token=${encodeURIComponent(token)}`;
-    return url.toString();
-  });
+  const url = new URL("/auth", base);
+  url.hash = `token=${encodeURIComponent(token)}`;
+  return url.toString();
 }
 
 const getOidcConfig = memoize(
@@ -90,7 +86,7 @@ const getOidcConfig = memoize(
 );
 
 function buildClaimsFromOidc(input: any): UserClaims {
-  return runWithLifecycle("buildClaimsFromOidc", () => ({
+  return {
     sub: String(input?.sub ?? ""),
     email: input?.email ?? null,
     first_name: input?.first_name ?? input?.given_name ?? null,
@@ -99,114 +95,105 @@ function buildClaimsFromOidc(input: any): UserClaims {
     family_name: input?.family_name ?? null,
     profile_image_url: input?.profile_image_url ?? input?.picture ?? null,
     picture: input?.picture ?? null,
-  }));
+  };
 }
 
 function signAuthToken(claims: UserClaims): string {
-  return runWithLifecycle("signAuthToken", () =>
-    jwt.sign(claims, authConfig.jwtSecret, {
-      algorithm: "HS256",
-      expiresIn: AUTH_TOKEN_TTL_SEC,
-    }),
-  );
+  return jwt.sign(claims, authConfig.jwtSecret, {
+    algorithm: "HS256",
+    expiresIn: AUTH_TOKEN_TTL_SEC,
+  });
 }
 
 function setAuthCookie(res: any, token: string) {
-  return runWithLifecycle("setAuthCookie", () => {
-    res.cookie(AUTH_TOKEN_COOKIE, token, {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      sameSite: "lax",
-      maxAge: AUTH_TOKEN_TTL_MS,
-      path: "/",
-    });
+  res.cookie(AUTH_TOKEN_COOKIE, token, {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production",
+    sameSite: "lax",
+    maxAge: AUTH_TOKEN_TTL_MS,
+    path: "/",
   });
 }
 
 function clearAuthCookie(res: any) {
-  return runWithLifecycle("clearAuthCookie", () => {
-    res.clearCookie(AUTH_TOKEN_COOKIE, {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      sameSite: "lax",
-      path: "/",
-    });
+  res.clearCookie(AUTH_TOKEN_COOKIE, {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production",
+    sameSite: "lax",
+    path: "/",
   });
 }
 
 function parseCookies(cookieHeader?: string): Record<string, string> {
-  return runWithLifecycle("parseCookies", () => {
-    if (!cookieHeader) {
-      return {};
-    }
+  if (!cookieHeader) {
+    return {};
+  }
 
-    return cookieHeader.split(";").reduce<Record<string, string>>((acc, part) => {
-      const [rawKey, ...rawValue] = part.trim().split("=");
-      if (!rawKey) {
-        return acc;
-      }
-      acc[rawKey] = decodeURIComponent(rawValue.join("="));
+  return cookieHeader.split(";").reduce<Record<string, string>>((acc, part) => {
+    const [rawKey, ...rawValue] = part.trim().split("=");
+    if (!rawKey) {
       return acc;
-    }, {});
-  });
+    }
+    acc[rawKey] = decodeURIComponent(rawValue.join("="));
+    return acc;
+  }, {});
 }
 
 function getAuthTokenFromRequest(req: any): string | null {
-  return runWithLifecycle("getAuthTokenFromRequest", () => {
-    const header = req.headers?.authorization;
-    if (typeof header === "string" && header.toLowerCase().startsWith("bearer ")) {
-      return header.slice(7).trim();
-    }
+  const header = req.headers?.authorization;
+  if (typeof header === "string" && header.toLowerCase().startsWith("bearer ")) {
+    return header.slice(7).trim();
+  }
 
-    const cookies = parseCookies(req.headers?.cookie);
-    const cookieToken = cookies[AUTH_TOKEN_COOKIE];
-    if (typeof cookieToken === "string" && cookieToken.length > 0) {
-      return cookieToken;
-    }
+  const cookies = parseCookies(req.headers?.cookie);
+  const cookieToken = cookies[AUTH_TOKEN_COOKIE];
+  if (typeof cookieToken === "string" && cookieToken.length > 0) {
+    return cookieToken;
+  }
 
-    return null;
-  });
+  return null;
 }
 
 async function upsertUser(claims: any) {
-  return runWithLifecycle("upsertUser", async () => {
-    const email = claims["email"] as string | undefined;
-    const role = resolveRoleFromEmail(email ?? null, {
-      reviewerEmails: authConfig.reviewerEmails,
-      adminEmails: authConfig.adminEmails,
-    });
+  const email = claims["email"] as string | undefined;
+  const role = resolveRoleFromEmail(email ?? null, {
+    reviewerEmails: authConfig.reviewerEmails,
+    adminEmails: authConfig.adminEmails,
+  });
 
-    await authStorage.upsertUser({
-      id: claims["sub"],
-      email,
-      firstName: claims["first_name"] ?? claims["given_name"],
-      lastName: claims["last_name"] ?? claims["family_name"],
-      profileImageUrl: claims["profile_image_url"] ?? claims["picture"],
-      role,
-    });
+  await authStorage.upsertUser({
+    id: claims["sub"],
+    email,
+    firstName: claims["first_name"] ?? claims["given_name"],
+    lastName: claims["last_name"] ?? claims["family_name"],
+    profileImageUrl: claims["profile_image_url"] ?? claims["picture"],
+    role,
   });
 }
 
 export async function setupAuth(app: Express, config: AuthRuntimeConfig) {
-  return runWithLifecycle("setupAuth", async () => {
-    authConfig = config;
-    app.set("trust proxy", 1);
-    app.use(
-      session({
-        name: OAUTH_SESSION_COOKIE,
-        secret: authConfig.jwtSecret,
-        resave: false,
-        saveUninitialized: false,
-        cookie: {
-          httpOnly: true,
-          secure: process.env.NODE_ENV === "production",
-          sameSite: "lax",
-          maxAge: OAUTH_SESSION_TTL_MS,
-          path: "/",
-        },
-      }),
-    );
-    app.use(passport.initialize());
+  appLogger.debug("setupAuth.start", {
+    provider: config.provider,
+    hasFrontendBaseUrl: Boolean(config.frontendBaseUrl),
+  });
+  authConfig = config;
+  app.set("trust proxy", 1);
+  app.use(
+    session({
+      name: OAUTH_SESSION_COOKIE,
+      secret: authConfig.jwtSecret,
+      resave: false,
+      saveUninitialized: false,
+      cookie: {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === "production",
+        sameSite: "lax",
+        maxAge: OAUTH_SESSION_TTL_MS,
+        path: "/",
+      },
+    }),
+  );
+  app.use(passport.initialize());
 
   if (authConfig.provider === "dev") {
     app.get(AUTH_GOOGLE_ROUTE, async (_req, res) => {
@@ -230,10 +217,11 @@ export async function setupAuth(app: Express, config: AuthRuntimeConfig) {
       clearAuthCookie(res);
       res.status(204).send();
     });
-      return;
-    }
+    appLogger.debug("setupAuth.end", { provider: authConfig.provider });
+    return;
+  }
 
-    const oidcConfig = await getOidcConfig();
+  const oidcConfig = await getOidcConfig();
 
   const verify: VerifyFunction = async (
     tokens: client.TokenEndpointResponse & client.TokenEndpointResponseHelpers,
@@ -316,73 +304,85 @@ export async function setupAuth(app: Express, config: AuthRuntimeConfig) {
     )(req, res, next);
   });
 
-    app.post(AUTH_LOGOUT_ROUTE, (_req, res) => {
-      clearAuthCookie(res);
-      res.status(204).send();
-    });
+  app.post(AUTH_LOGOUT_ROUTE, (_req, res) => {
+    clearAuthCookie(res);
+    res.status(204).send();
   });
+  appLogger.debug("setupAuth.end", { provider: authConfig.provider });
 }
 
 export const isAuthenticated: RequestHandler = async (req, res, next) => {
-  return runWithLifecycle("isAuthenticated", async () => {
-    const requestId = req.requestId ?? "unknown";
-
-    if (authConfig.provider === "dev") {
-      (req as any).user = {
-        claims: {
-          sub: "dev-user",
-          email: "dev@example.com",
-          first_name: "Dev",
-          last_name: "User",
-        },
-        expires_at: Math.floor(Date.now() / 1000) + 3600,
-      };
-      return next();
-    }
-
-    const token = getAuthTokenFromRequest(req);
-    if (!token) {
-      appLogger.warn("Auth rejected: missing token", {
-        requestId,
-        path: req.path,
-        method: req.method,
-      });
-      return sendError(req, res, 401, "UNAUTHORIZED", "Unauthorized");
-    }
-
-    try {
-      const payload = jwt.verify(token, authConfig.jwtSecret) as AuthJwtPayload;
-      if (!payload?.sub) {
-        appLogger.warn("Auth rejected: token missing sub", {
-          requestId,
-          path: req.path,
-          method: req.method,
-        });
-        return sendError(req, res, 401, "UNAUTHORIZED", "Unauthorized");
-      }
-      req.user = {
-        claims: {
-          sub: payload.sub,
-          email: payload.email ?? null,
-          first_name: payload.first_name ?? payload.given_name ?? null,
-          last_name: payload.last_name ?? payload.family_name ?? null,
-          given_name: payload.given_name ?? null,
-          family_name: payload.family_name ?? null,
-          profile_image_url: payload.profile_image_url ?? payload.picture ?? null,
-          picture: payload.picture ?? null,
-        },
-        expires_at: payload.exp,
-      };
-      return next();
-    } catch (error) {
-      appLogger.warn("Auth rejected: token verification failed", {
-        requestId,
-        path: req.path,
-        method: req.method,
-        error: error instanceof Error ? error.message : String(error),
-        stack: error instanceof Error ? error.stack : undefined,
-      });
-      return sendError(req, res, 401, "UNAUTHORIZED", "Unauthorized");
-    }
+  appLogger.debug("isAuthenticated.start", {
+    requestId: req.requestId ?? "unknown",
+    path: req.path,
+    method: req.method,
   });
+  if (authConfig.provider === "dev") {
+    (req as any).user = {
+      claims: {
+        sub: "dev-user",
+        email: "dev@example.com",
+        first_name: "Dev",
+        last_name: "User",
+      },
+      expires_at: Math.floor(Date.now() / 1000) + 3600,
+    };
+    appLogger.debug("isAuthenticated.end", {
+      requestId: req.requestId ?? "unknown",
+      provider: authConfig.provider,
+      authenticated: true,
+    });
+    return next();
+  }
+
+  const token = getAuthTokenFromRequest(req);
+  if (!token) {
+    appLogger.warn("isAuthenticated.reject.missing_token", {
+      requestId: req.requestId ?? "unknown",
+      path: req.path,
+      method: req.method,
+    });
+    return sendError(req, res, 401, "UNAUTHORIZED", "Unauthorized");
+  }
+
+  try {
+    const payload = jwt.verify(token, authConfig.jwtSecret) as AuthJwtPayload;
+    if (!payload?.sub) {
+      appLogger.warn("isAuthenticated.reject.missing_sub", {
+        requestId: req.requestId ?? "unknown",
+        path: req.path,
+        method: req.method,
+      });
+      return sendError(req, res, 401, "UNAUTHORIZED", "Unauthorized");
+    }
+    req.user = {
+      claims: {
+        sub: payload.sub,
+        email: payload.email ?? null,
+        first_name: payload.first_name ?? payload.given_name ?? null,
+        last_name: payload.last_name ?? payload.family_name ?? null,
+        given_name: payload.given_name ?? null,
+        family_name: payload.family_name ?? null,
+        profile_image_url: payload.profile_image_url ?? payload.picture ?? null,
+        picture: payload.picture ?? null,
+      },
+      expires_at: payload.exp,
+    };
+    appLogger.debug("isAuthenticated.end", {
+      requestId: req.requestId ?? "unknown",
+      provider: authConfig.provider,
+      authenticated: true,
+      userId: payload.sub,
+    });
+    return next();
+  } catch (error) {
+    appLogger.warn("isAuthenticated.reject.verify_failed", {
+      requestId: req.requestId ?? "unknown",
+      path: req.path,
+      method: req.method,
+      error: error instanceof Error ? error.message : String(error),
+      stack: error instanceof Error ? error.stack : undefined,
+    });
+    return sendError(req, res, 401, "UNAUTHORIZED", "Unauthorized");
+  }
 };

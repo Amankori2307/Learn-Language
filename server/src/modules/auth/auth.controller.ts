@@ -15,6 +15,9 @@ export class AuthApiController {
   @Get("/auth/me")
   @UseGuards(AuthenticatedGuard)
   async getAuthUser(@Req() req: Request, @Res() res: Response) {
+    appLogger.debug("AuthApiController.getAuthUser.start", {
+      requestId: req.requestId ?? "unknown",
+    });
     try {
       const claims = extractUserClaims(req);
       if (!claims?.sub) {
@@ -25,12 +28,19 @@ export class AuthApiController {
       res.json(user);
     } catch (error) {
       this.handleError(req, res, error);
+    } finally {
+      appLogger.debug("AuthApiController.getAuthUser.end", {
+        requestId: req.requestId ?? "unknown",
+      });
     }
   }
 
   @Get("/api/profile")
   @UseGuards(AuthenticatedGuard)
   async getProfile(@Req() req: Request, @Res() res: Response) {
+    appLogger.debug("AuthApiController.getProfile.start", {
+      requestId: req.requestId ?? "unknown",
+    });
     try {
       const userId = extractUserId(req);
       if (!userId) {
@@ -41,12 +51,19 @@ export class AuthApiController {
       res.json(profile);
     } catch (error) {
       this.handleError(req, res, error);
+    } finally {
+      appLogger.debug("AuthApiController.getProfile.end", {
+        requestId: req.requestId ?? "unknown",
+      });
     }
   }
 
   @Patch("/api/profile")
   @UseGuards(AuthenticatedGuard)
   async updateProfile(@Req() req: Request, @Res() res: Response, @Body() body: UpdateProfileBodyDto) {
+    appLogger.debug("AuthApiController.updateProfile.start", {
+      requestId: req.requestId ?? "unknown",
+    });
     try {
       const userId = extractUserId(req);
       if (!userId) {
@@ -57,10 +74,21 @@ export class AuthApiController {
       res.json(profile);
     } catch (error) {
       this.handleError(req, res, error);
+    } finally {
+      appLogger.debug("AuthApiController.updateProfile.end", {
+        requestId: req.requestId ?? "unknown",
+      });
     }
   }
 
   private handleError(req: Request, res: Response, error: unknown) {
+    appLogger.error("AuthApiController.handleError", {
+      requestId: req.requestId ?? "unknown",
+      path: req.path,
+      method: req.method,
+      error: error instanceof Error ? error.message : String(error),
+      stack: error instanceof Error ? error.stack : undefined,
+    });
     if (error instanceof AppError) {
       appLogger.warn("Auth controller handled AppError", {
         requestId: req.requestId ?? "unknown",

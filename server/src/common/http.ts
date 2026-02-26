@@ -1,5 +1,5 @@
 import type { Request, Response } from "express";
-import { appLogger, runWithLifecycle } from "./logger/logger";
+import { appLogger } from "./logger/logger";
 
 export type ErrorCode =
   | "UNAUTHORIZED"
@@ -15,10 +15,8 @@ export type ErrorEnvelope = {
 };
 
 export function getRequestId(req: Request): string {
-  return runWithLifecycle("getRequestId", () => {
-    const requestId = (req as Request & { requestId?: string }).requestId;
-    return requestId ?? "unknown";
-  });
+  const requestId = (req as Request & { requestId?: string }).requestId;
+  return requestId ?? "unknown";
 }
 
 export function sendError(
@@ -29,19 +27,17 @@ export function sendError(
   message: string,
   details?: unknown,
 ) {
-  return runWithLifecycle("sendError", () => {
-    const body: ErrorEnvelope = {
-      code,
-      message,
-      requestId: getRequestId(req),
-    };
+  const body: ErrorEnvelope = {
+    code,
+    message,
+    requestId: getRequestId(req),
+  };
 
-    if (details !== undefined) {
-      body.details = details;
-    }
+  if (details !== undefined) {
+    body.details = details;
+  }
 
-    return res.status(status).json(body);
-  });
+  return res.status(status).json(body);
 }
 
 export function logApiEvent(
@@ -49,14 +45,12 @@ export function logApiEvent(
   event: string,
   payload: Record<string, unknown> = {},
 ) {
-  return runWithLifecycle("logApiEvent", () => {
-    const entry = {
-      requestId: getRequestId(req),
-      event,
-      ts: new Date().toISOString(),
-      ...payload,
-    };
+  const entry = {
+    requestId: getRequestId(req),
+    event,
+    ts: new Date().toISOString(),
+    ...payload,
+  };
 
-    appLogger.info("[api-event]", entry);
-  });
+  appLogger.info("[api-event]", entry);
 }
