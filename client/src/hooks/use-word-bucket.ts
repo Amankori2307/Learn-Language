@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { api } from "@shared/routes";
 import { useLearningLanguage } from "@/hooks/use-language";
-import { toApiUrl } from "@/lib/api-base";
+import { apiClient, buildApiUrl } from "@/services/apiClient";
 
 export type WordBucketType = "mastered" | "learning" | "needs_review";
 
@@ -17,11 +17,8 @@ export function useWordBucket(bucket: WordBucketType, page: number, limit: numbe
         limit: String(limit),
         language,
       });
-      const res = await fetch(toApiUrl(`${api.analytics.wordBuckets.path}?${params.toString()}`), {
-        credentials: "include",
-      });
-      if (!res.ok) throw new Error("Failed to load word bucket");
-      return api.analytics.wordBuckets.responses[200].parse(await res.json());
+      const res = await apiClient.get(buildApiUrl(`${api.analytics.wordBuckets.path}?${params.toString()}`));
+      return api.analytics.wordBuckets.responses[200].parse(res.data);
     },
   });
 }

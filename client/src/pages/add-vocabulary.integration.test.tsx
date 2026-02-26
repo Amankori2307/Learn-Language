@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { LanguageEnum, PartOfSpeechEnum, UserTypeEnum } from "@shared/domain/enums";
 import AddVocabularyPage from "./add-vocabulary";
+import { apiClient } from "@/services/apiClient";
 
 const createDraftMutateAsync = vi
   .fn()
@@ -35,14 +36,18 @@ afterEach(() => {
   vi.restoreAllMocks();
 });
 
+vi.mock("@/services/apiClient", () => ({
+  apiClient: {
+    get: vi.fn().mockResolvedValue({ data: [] }),
+  },
+  buildApiUrl: (path: string) => path,
+}));
+
 describe("AddVocabularyPage integration", () => {
   it("creates a draft with example payload", async () => {
     const user = userEvent.setup();
     const queryClient = new QueryClient();
-    vi.spyOn(globalThis, "fetch").mockResolvedValue({
-      ok: true,
-      json: async () => [],
-    } as Response);
+    vi.mocked(apiClient.get).mockResolvedValue({ data: [] });
 
     render(
       <QueryClientProvider client={queryClient}>

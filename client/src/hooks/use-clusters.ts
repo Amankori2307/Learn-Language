@@ -1,7 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
 import { api, buildUrl } from "@shared/routes";
 import { useLearningLanguage } from "@/hooks/use-language";
-import { toApiUrl } from "@/lib/api-base";
+import { AxiosError } from "axios";
+import { apiClient, buildApiUrl } from "@/services/apiClient";
 
 export function useClusters() {
   const { language } = useLearningLanguage();
@@ -9,9 +10,8 @@ export function useClusters() {
     queryKey: [api.clusters.list.path, language],
     queryFn: async () => {
       const params = new URLSearchParams({ language });
-      const res = await fetch(toApiUrl(`${api.clusters.list.path}?${params.toString()}`), { credentials: "include" });
-      if (!res.ok) throw new Error("Failed to fetch clusters");
-      return api.clusters.list.responses[200].parse(await res.json());
+      const res = await apiClient.get(buildApiUrl(`${api.clusters.list.path}?${params.toString()}`));
+      return api.clusters.list.responses[200].parse(res.data);
     },
   });
 }
@@ -23,10 +23,15 @@ export function useCluster(id: number) {
     queryFn: async () => {
       const url = buildUrl(api.clusters.get.path, { id });
       const params = new URLSearchParams({ language });
-      const res = await fetch(toApiUrl(`${url}?${params.toString()}`), { credentials: "include" });
-      if (res.status === 404) return null;
-      if (!res.ok) throw new Error("Failed to fetch cluster details");
-      return api.clusters.get.responses[200].parse(await res.json());
+      try {
+        const res = await apiClient.get(buildApiUrl(`${url}?${params.toString()}`));
+        return api.clusters.get.responses[200].parse(res.data);
+      } catch (error) {
+        if ((error as AxiosError).response?.status === 404) {
+          return null;
+        }
+        throw new Error("Failed to fetch cluster details", { cause: error });
+      }
     },
     enabled: !!id,
   });

@@ -1,0 +1,20 @@
+FROM node:20-alpine
+
+WORKDIR /app
+
+RUN corepack enable && corepack prepare pnpm@10.29.3 --activate
+
+COPY package.json pnpm-lock.yaml ./
+RUN pnpm install --frozen-lockfile
+
+COPY . .
+
+ARG NEXT_PUBLIC_API_BASE_URL=https://api.learn-lang.amankori.me
+ENV NEXT_PUBLIC_API_BASE_URL=${NEXT_PUBLIC_API_BASE_URL}
+ENV NODE_ENV=production
+ENV FRONTEND_PORT=3000
+RUN pnpm run build:frontend
+
+EXPOSE 3000
+
+CMD ["pnpm", "run", "start:frontend"]

@@ -1,26 +1,14 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import type { User } from "@shared/models/auth";
 import { AUTH_QUERY_RULES } from "./auth.constants";
-import { toApiUrl, toAuthUrl } from "@/lib/api-base";
+import { authService } from "@/services/authService";
 
 async function fetchUser(): Promise<User | null> {
-  const response = await fetch(toApiUrl("/api/auth/user"), {
-    credentials: "include",
-  });
-
-  if (response.status === 401) {
-    return null;
-  }
-
-  if (!response.ok) {
-    throw new Error(`${response.status}: ${response.statusText}`);
-  }
-
-  return response.json();
+  return authService.getCurrentUser();
 }
 
 async function logout(): Promise<void> {
-  window.location.href = toAuthUrl("/api/logout");
+  window.location.href = authService.getLogoutUrl();
 }
 
 export function useAuth() {

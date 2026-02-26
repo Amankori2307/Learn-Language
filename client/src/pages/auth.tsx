@@ -3,7 +3,7 @@ import { useAuth } from "@/hooks/use-auth";
 import { useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import { APP_BRAND_NAME } from "@shared/domain/constants/app-brand";
-import { toAuthUrl } from "@/lib/api-base";
+import { authService } from "@/services/authService";
 
 export default function AuthPage() {
   const { user, isLoading } = useAuth();
@@ -16,7 +16,7 @@ export default function AuthPage() {
   }, [user, isLoading, setLocation]);
 
   const handleLogin = () => {
-    window.location.href = toAuthUrl("/api/login");
+    window.location.href = authService.getLoginUrl();
   };
 
   return (

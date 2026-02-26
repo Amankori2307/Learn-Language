@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { LanguageEnum } from "@shared/domain/enums";
 import { api } from "@shared/routes";
-import { toApiUrl } from "@/lib/api-base";
+import { apiClient, buildApiUrl } from "@/services/apiClient";
 
 interface IPlayHybridAudioInput {
   key: string;
@@ -183,20 +183,16 @@ async function resolveServerAudioUrl(input: {
   }
 
   try {
-    const response = await fetch(toApiUrl(api.audio.resolve.path), {
+    const response = await apiClient({
+      url: buildApiUrl(api.audio.resolve.path),
       method: api.audio.resolve.method,
-      headers: { "content-type": "application/json" },
-      credentials: "include",
-      body: JSON.stringify({
+      data: {
         wordId: input.wordId ?? undefined,
         language: input.language,
         text: normalizedText,
-      }),
+      },
     });
-    if (!response.ok) {
-      return null;
-    }
-    const parsed = api.audio.resolve.responses[200].parse(await response.json());
+    const parsed = api.audio.resolve.responses[200].parse(response.data);
     if (!parsed.audioUrl) {
       return null;
     }

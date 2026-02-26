@@ -10,7 +10,7 @@ import { LanguageEnum, PartOfSpeechEnum, VocabularyTagEnum } from "@shared/domai
 import { PART_OF_SPEECH_OPTIONS } from "@shared/domain/part-of-speech";
 import { VOCABULARY_TAG_OPTIONS } from "@shared/domain/vocabulary-tags";
 import { api } from "@shared/routes";
-import { toApiUrl } from "@/lib/api-base";
+import { apiClient, buildApiUrl } from "@/services/apiClient";
 
 type DraftExample = {
   originalScript: string;
@@ -48,11 +48,8 @@ export function CreateVocabularyDraftForm() {
     queryKey: [api.clusters.list.path, draftLanguage, "draft-form"],
     queryFn: async () => {
       const params = new URLSearchParams({ language: draftLanguage });
-      const res = await fetch(toApiUrl(`${api.clusters.list.path}?${params.toString()}`), { credentials: "include" });
-      if (!res.ok) {
-        throw new Error("Failed to load clusters");
-      }
-      return api.clusters.list.responses[200].parse(await res.json());
+      const res = await apiClient.get(buildApiUrl(`${api.clusters.list.path}?${params.toString()}`));
+      return api.clusters.list.responses[200].parse(res.data);
     },
   });
   const clusterOptions = availableClusters.map((cluster) => ({

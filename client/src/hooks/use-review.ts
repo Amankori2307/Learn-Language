@@ -1,22 +1,14 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { api } from "@shared/routes";
-import { LanguageEnum, PartOfSpeechEnum, ReviewStatusEnum, VocabularyTagEnum } from "@shared/domain/enums";
-import { toApiUrl } from "@/lib/api-base";
+import { LanguageEnum, PartOfSpeechEnum, VocabularyTagEnum } from "@shared/domain/enums";
+import { reviewService, type ReviewStatus } from "@/services/reviewService";
 
-export type ReviewStatus = ReviewStatusEnum;
+export type { ReviewStatus };
 
 export function useReviewQueue(status: ReviewStatus, limit = 50) {
   return useQuery({
     queryKey: [api.review.queue.path, status, limit],
-    queryFn: async () => {
-      const params = new URLSearchParams({
-        status,
-        limit: String(limit),
-      });
-      const res = await fetch(toApiUrl(`${api.review.queue.path}?${params.toString()}`), { credentials: "include" });
-      if (!res.ok) throw new Error("Failed to load review queue");
-      return api.review.queue.responses[200].parse(await res.json());
-    },
+    queryFn: () => reviewService.getQueue(status, limit),
   });
 }
 
@@ -24,27 +16,14 @@ export function useReviewHistory(wordId?: number) {
   return useQuery({
     queryKey: [api.review.history.path, wordId],
     enabled: Boolean(wordId),
-    queryFn: async () => {
-      const res = await fetch(toApiUrl(`/api/review/words/${wordId}/history`), { credentials: "include" });
-      if (!res.ok) throw new Error("Failed to load review history");
-      return api.review.history.responses[200].parse(await res.json());
-    },
+    queryFn: () => reviewService.getHistory(wordId!),
   });
 }
 
 export function useTransitionReview() {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: async (payload: { id: number; toStatus: ReviewStatus; notes?: string }) => {
-      const res = await fetch(toApiUrl(`/api/review/words/${payload.id}`), {
-        method: "PATCH",
-        headers: { "Content-Type": "application/json" },
-        credentials: "include",
-        body: JSON.stringify({ toStatus: payload.toStatus, notes: payload.notes }),
-      });
-      if (!res.ok) throw new Error("Failed to update review status");
-      return api.review.transition.responses[200].parse(await res.json());
-    },
+    mutationFn: (payload: { id: number; toStatus: ReviewStatus; notes?: string }) => reviewService.transition(payload),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: [api.review.queue.path] });
       queryClient.invalidateQueries({ queryKey: [api.review.history.path] });
@@ -55,16 +34,7 @@ export function useTransitionReview() {
 export function useBulkTransitionReview() {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: async (payload: { ids: number[]; toStatus: ReviewStatus; notes?: string }) => {
-      const res = await fetch(toApiUrl(api.review.bulkTransition.path), {
-        method: "PATCH",
-        headers: { "Content-Type": "application/json" },
-        credentials: "include",
-        body: JSON.stringify(payload),
-      });
-      if (!res.ok) throw new Error("Failed to bulk update review statuses");
-      return api.review.bulkTransition.responses[200].parse(await res.json());
-    },
+    mutationFn: (payload: { ids: number[]; toStatus: ReviewStatus; notes?: string }) => reviewService.bulkTransition(payload),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: [api.review.queue.path] });
       queryClient.invalidateQueries({ queryKey: [api.review.history.path] });
@@ -93,16 +63,7 @@ export function useCreateReviewDraft() {
         contextTag: string;
         difficulty: number;
       }>;
-    }) => {
-      const res = await fetch(toApiUrl(api.review.submitDraft.path), {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        credentials: "include",
-        body: JSON.stringify(payload),
-      });
-      if (!res.ok) throw new Error("Failed to submit draft");
-      return api.review.submitDraft.responses[200].parse(await res.json());
-    },
+    }) => reviewService.createDraft(payload),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: [api.review.queue.path] });
     },
