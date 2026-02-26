@@ -22,8 +22,8 @@ pnpm run db:migrate:review-governance
 pnpm run db:backfill:review-governance
 
 if [ -f "assets/processed/words.json" ] && [ -f "assets/processed/sentences.json" ]; then
-  echo "Importing MVP dataset..."
-  pnpm run content:import:mvp
+  echo "Importing dataset..."
+  pnpm run content:import
 fi
 
 echo "Starting dev server with hot reload..."

@@ -18,8 +18,8 @@ echo "Applying review governance migration/backfill..."
 pnpm run db:migrate:review-governance
 pnpm run db:backfill:review-governance
 
-echo "Importing MVP dataset..."
-pnpm run content:import:mvp
+echo "Importing dataset..."
+pnpm run content:import
 
 echo "Building app..."
 pnpm run build

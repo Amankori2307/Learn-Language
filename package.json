@@ -25,7 +25,6 @@
     "seed:verify-single-source": "node --import tsx script/verify-seed-single-source.ts",
     "content:import": "APP_ENV=local node --import tsx script/import-content.ts assets/processed/words.json assets/processed/sentences.json",
     "content:import:production": "APP_ENV=production node --import tsx script/import-content.ts assets/processed/words.json assets/processed/sentences.json",
-    "content:import:mvp": "pnpm run content:import",
     "db:migrate:review-governance": "APP_ENV=local node --import tsx script/migrate-review-governance.ts",
     "db:migrate:review-governance:production": "APP_ENV=production node --import tsx script/migrate-review-governance.ts",
     "db:backfill:review-governance": "APP_ENV=local node --import tsx script/backfill-review-governance.ts",
@@ -34,10 +33,9 @@
     "user:set-role:production": "APP_ENV=production node --import tsx script/set-user-role.ts",
     "db:generate": "DRIZZLE_ENV=local drizzle-kit generate",
     "db:migrate": "DRIZZLE_ENV=local drizzle-kit migrate",
-    "db:push": "DRIZZLE_ENV=local drizzle-kit push",
     "db:generate:production": "DRIZZLE_ENV=production drizzle-kit generate",
     "db:migrate:production": "DRIZZLE_ENV=production drizzle-kit migrate",
-    "db:push:production": "DRIZZLE_ENV=production drizzle-kit push"
+    "db:migrate:production": "DRIZZLE_ENV=production drizzle-kit migrate"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",
