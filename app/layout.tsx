@@ -4,7 +4,7 @@ import "../client/src/index.css";
 import { APP_BRAND_NAME } from "@shared/domain/constants/app-brand";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://learn-lang.app"),
+  metadataBase: new URL("https://learn-lang.amankori.me"),
   title: {
     default: APP_BRAND_NAME,
     template: `%s | ${APP_BRAND_NAME}`,
