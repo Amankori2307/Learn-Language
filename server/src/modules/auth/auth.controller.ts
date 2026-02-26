@@ -10,7 +10,7 @@ import { sendError } from "../../common/http";
 export class AuthApiController {
   constructor(private readonly authService: AuthService) {}
 
-  @Get(["/auth/me", "/api/auth/user"])
+  @Get("/auth/me")
   @UseGuards(AuthenticatedGuard)
   async getAuthUser(@Req() req: Request, @Res() res: Response) {
     try {

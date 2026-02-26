@@ -180,7 +180,7 @@ export async function setupAuth(app: Express, config: AuthRuntimeConfig) {
   app.use(passport.initialize());
 
   if (authConfig.provider === "dev") {
-    app.get([AUTH_GOOGLE_ROUTE, "/api/login"], async (_req, res) => {
+    app.get(AUTH_GOOGLE_ROUTE, async (_req, res) => {
       const claims: UserClaims = {
         sub: "dev-user",
         email: "dev@example.com",
@@ -195,10 +195,10 @@ export async function setupAuth(app: Express, config: AuthRuntimeConfig) {
       setAuthCookie(res, signAuthToken(claims));
       res.redirect(getFrontendRedirectUrl("/"));
     });
-    app.get([AUTH_GOOGLE_CALLBACK_ROUTE, "/api/callback"], (_req, res) => res.redirect(getFrontendRedirectUrl("/")));
-    app.post([AUTH_LOGOUT_ROUTE, "/api/logout"], (_req, res) => {
+    app.get(AUTH_GOOGLE_CALLBACK_ROUTE, (_req, res) => res.redirect(getFrontendRedirectUrl("/")));
+    app.post(AUTH_LOGOUT_ROUTE, (_req, res) => {
       clearAuthCookie(res);
-      res.redirect(getFrontendRedirectUrl("/"));
+      res.status(204).send();
     });
     return;
   }
@@ -237,7 +237,7 @@ export async function setupAuth(app: Express, config: AuthRuntimeConfig) {
     }
   };
 
-  app.get([AUTH_GOOGLE_ROUTE, "/api/login"], (req, res, next) => {
+  app.get(AUTH_GOOGLE_ROUTE, (req, res, next) => {
     ensureStrategy(req);
     const strategyName = `google:${req.hostname}`;
     const authOptions = {
@@ -249,7 +249,7 @@ export async function setupAuth(app: Express, config: AuthRuntimeConfig) {
     passport.authenticate(strategyName, { ...authOptions, session: false })(req, res, next);
   });
 
-  app.get([AUTH_GOOGLE_CALLBACK_ROUTE, "/api/callback"], (req, res, next) => {
+  app.get(AUTH_GOOGLE_CALLBACK_ROUTE, (req, res, next) => {
     ensureStrategy(req);
     const strategyName = `google:${req.hostname}`;
     passport.authenticate(
@@ -285,9 +285,9 @@ export async function setupAuth(app: Express, config: AuthRuntimeConfig) {
     )(req, res, next);
   });
 
-  app.post([AUTH_LOGOUT_ROUTE, "/api/logout"], (_req, res) => {
+  app.post(AUTH_LOGOUT_ROUTE, (_req, res) => {
     clearAuthCookie(res);
-    res.redirect(getFrontendRedirectUrl("/"));
+    res.status(204).send();
   });
 }
 
