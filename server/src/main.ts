@@ -9,7 +9,6 @@ import { type INestApplication } from "@nestjs/common";
 import { AppModule } from "./app.module";
 import { setupAuth } from "./modules/auth";
 import { authConfig } from "./config/auth.config";
-import { databaseConfig } from "./config/database.config";
 
 const DEFAULT_ALLOWED_FRONTEND_ORIGINS = [
   "http://localhost:3000",
@@ -49,7 +48,6 @@ export async function createNestApiApp(): Promise<{
 
   const configService = app.get(ConfigService);
   const resolvedAuthConfig = configService.getOrThrow<ConfigType<typeof authConfig>>("auth");
-  const resolvedDatabaseConfig = configService.getOrThrow<ConfigType<typeof databaseConfig>>("database");
   const allowedOrigins = resolveAllowedOrigins(process.env.FRONTEND_ORIGINS);
 
   app.enableCors({
@@ -71,8 +69,8 @@ export async function createNestApiApp(): Promise<{
     express.static(path.join(process.cwd(), "assets/audio")),
   );
 
-  if (!resolvedAuthConfig.sessionSecret) {
-    throw new Error("Invalid environment configuration: SESSION_SECRET is required for auth setup");
+  if (!resolvedAuthConfig.jwtSecret) {
+    throw new Error("Invalid environment configuration: JWT_SECRET is required for auth setup");
   }
   if (resolvedAuthConfig.provider === "google" && !resolvedAuthConfig.googleClientId) {
     throw new Error("Invalid environment configuration: GOOGLE_CLIENT_ID is required for google auth");
@@ -84,8 +82,7 @@ export async function createNestApiApp(): Promise<{
     googleClientSecret: resolvedAuthConfig.googleClientSecret,
     googleIssuerUrl: resolvedAuthConfig.googleIssuerUrl,
     frontendBaseUrl: resolvedAuthConfig.frontendBaseUrl,
-    sessionSecret: resolvedAuthConfig.sessionSecret,
-    databaseUrl: resolvedDatabaseConfig.url,
+    jwtSecret: resolvedAuthConfig.jwtSecret,
     reviewerEmails: resolvedAuthConfig.reviewerEmails,
     adminEmails: resolvedAuthConfig.adminEmails,
   });

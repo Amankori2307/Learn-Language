@@ -8,7 +8,7 @@ export const envSchema = z
     AUTH_PROVIDER: z.enum(["google", "dev"]).default("google"),
     GOOGLE_CLIENT_ID: z.string().optional(),
     GOOGLE_CLIENT_SECRET: z.string().optional(),
-    SESSION_SECRET: z.string().min(16).optional(),
+    JWT_SECRET: z.string().min(16).optional(),
     GOOGLE_ISSUER_URL: z.string().url().default("https://accounts.google.com"),
     FRONTEND_BASE_URL: z.string().url().optional(),
     FRONTEND_ORIGINS: z.string().optional(),
@@ -41,11 +41,11 @@ export const envSchema = z
       });
     }
 
-    if (!data.SESSION_SECRET?.trim()) {
+    if (!data.JWT_SECRET?.trim()) {
       ctx.addIssue({
         code: z.ZodIssueCode.custom,
-        path: ["SESSION_SECRET"],
-        message: "SESSION_SECRET is required when AUTH_PROVIDER=google",
+        path: ["JWT_SECRET"],
+        message: "JWT_SECRET is required when AUTH_PROVIDER=google",
       });
     }
   });

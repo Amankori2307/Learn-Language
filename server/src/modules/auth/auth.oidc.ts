@@ -2,14 +2,14 @@ import * as client from "openid-client";
 import { Strategy, type VerifyFunction } from "openid-client/passport";
 
 import passport from "passport";
-import session from "express-session";
 import type { Express, RequestHandler } from "express";
 import memoize from "memoizee";
-import connectPg from "connect-pg-simple";
+import jwt from "jsonwebtoken";
 import { authStorage } from "./auth.storage";
 import { sendError } from "../../common/http";
 import { resolveRoleFromEmail } from "./auth.roles";
 import { AUTH_SESSION_RULES } from "./auth.constants";
+import { UserClaims } from "./auth.types";
 
 export type AuthRuntimeConfig = {
   provider: "google" | "dev";
@@ -17,8 +17,7 @@ export type AuthRuntimeConfig = {
   googleClientSecret?: string;
   googleIssuerUrl: string;
   frontendBaseUrl?: string;
-  sessionSecret: string;
-  databaseUrl: string;
+  jwtSecret: string;
   reviewerEmails: Set<string>;
   adminEmails: Set<string>;
 };
@@ -27,11 +26,23 @@ let authConfig: AuthRuntimeConfig = {
   provider: "dev",
   googleIssuerUrl: "https://accounts.google.com",
   frontendBaseUrl: undefined,
-  sessionSecret: "dev-session-secret-min-16",
-  databaseUrl: "",
+  jwtSecret: "dev-jwt-secret-min-16",
   reviewerEmails: new Set<string>(),
   adminEmails: new Set<string>(),
 };
+
+type AuthJwtPayload = UserClaims & {
+  exp?: number;
+  iat?: number;
+};
+
+type PassportUser = {
+  claims: UserClaims;
+};
+
+const AUTH_TOKEN_COOKIE = "learn_lang_auth";
+const AUTH_TOKEN_TTL_MS = AUTH_SESSION_RULES.SESSION_TTL_MS;
+const AUTH_TOKEN_TTL_SEC = Math.floor(AUTH_TOKEN_TTL_MS / 1000);
 
 function getFrontendRedirectUrl(path = "/"): string {
   const base = authConfig.frontendBaseUrl?.trim();
@@ -56,36 +67,74 @@ const getOidcConfig = memoize(
   { maxAge: AUTH_SESSION_RULES.OIDC_CONFIG_CACHE_MAX_AGE_MS }
 );
 
-export function getSession() {
-  const sessionTtl = AUTH_SESSION_RULES.SESSION_TTL_MS;
-  const pgStore = connectPg(session);
-  const sessionStore = new pgStore({
-    conString: authConfig.databaseUrl,
-    createTableIfMissing: false,
-    ttl: sessionTtl,
-    tableName: "sessions",
-  });
-  return session({
-    secret: authConfig.sessionSecret,
-    store: sessionStore,
-    resave: false,
-    saveUninitialized: false,
-    cookie: {
-      httpOnly: true,
-      secure: "auto",
-      maxAge: sessionTtl,
-    },
+function buildClaimsFromOidc(input: any): UserClaims {
+  return {
+    sub: String(input?.sub ?? ""),
+    email: input?.email ?? null,
+    first_name: input?.first_name ?? input?.given_name ?? null,
+    last_name: input?.last_name ?? input?.family_name ?? null,
+    given_name: input?.given_name ?? null,
+    family_name: input?.family_name ?? null,
+    profile_image_url: input?.profile_image_url ?? input?.picture ?? null,
+    picture: input?.picture ?? null,
+  };
+}
+
+function signAuthToken(claims: UserClaims): string {
+  return jwt.sign(claims, authConfig.jwtSecret, {
+    algorithm: "HS256",
+    expiresIn: AUTH_TOKEN_TTL_SEC,
+    subject: claims.sub,
   });
 }
 
-function updateUserSession(
-  user: any,
-  tokens: client.TokenEndpointResponse & client.TokenEndpointResponseHelpers
-) {
-  user.claims = tokens.claims();
-  user.access_token = tokens.access_token;
-  user.refresh_token = tokens.refresh_token;
-  user.expires_at = user.claims?.exp;
+function setAuthCookie(res: any, token: string) {
+  res.cookie(AUTH_TOKEN_COOKIE, token, {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production",
+    sameSite: "lax",
+    maxAge: AUTH_TOKEN_TTL_MS,
+    path: "/",
+  });
+}
+
+function clearAuthCookie(res: any) {
+  res.clearCookie(AUTH_TOKEN_COOKIE, {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production",
+    sameSite: "lax",
+    path: "/",
+  });
+}
+
+function parseCookies(cookieHeader?: string): Record<string, string> {
+  if (!cookieHeader) {
+    return {};
+  }
+
+  return cookieHeader.split(";").reduce<Record<string, string>>((acc, part) => {
+    const [rawKey, ...rawValue] = part.trim().split("=");
+    if (!rawKey) {
+      return acc;
+    }
+    acc[rawKey] = decodeURIComponent(rawValue.join("="));
+    return acc;
+  }, {});
+}
+
+function getAuthTokenFromRequest(req: any): string | null {
+  const header = req.headers?.authorization;
+  if (typeof header === "string" && header.toLowerCase().startsWith("bearer ")) {
+    return header.slice(7).trim();
+  }
+
+  const cookies = parseCookies(req.headers?.cookie);
+  const cookieToken = cookies[AUTH_TOKEN_COOKIE];
+  if (typeof cookieToken === "string" && cookieToken.length > 0) {
+    return cookieToken;
+  }
+
+  return null;
 }
 
 async function upsertUser(claims: any) {
@@ -108,15 +157,28 @@ async function upsertUser(claims: any) {
 export async function setupAuth(app: Express, config: AuthRuntimeConfig) {
   authConfig = config;
   app.set("trust proxy", 1);
-  app.use(getSession());
   app.use(passport.initialize());
-  app.use(passport.session());
 
   if (authConfig.provider === "dev") {
-    app.get("/api/login", (_req, res) => res.redirect(getFrontendRedirectUrl("/")));
+    app.get("/api/login", async (_req, res) => {
+      const claims: UserClaims = {
+        sub: "dev-user",
+        email: "dev@example.com",
+        first_name: "Dev",
+        last_name: "User",
+        given_name: "Dev",
+        family_name: "User",
+        profile_image_url: null,
+        picture: null,
+      };
+      await upsertUser(claims);
+      setAuthCookie(res, signAuthToken(claims));
+      res.redirect(getFrontendRedirectUrl("/"));
+    });
     app.get("/api/callback", (_req, res) => res.redirect(getFrontendRedirectUrl("/")));
-    app.get("/api/logout", (req, res) => {
-      req.logout(() => res.redirect(getFrontendRedirectUrl("/")));
+    app.get("/api/logout", (_req, res) => {
+      clearAuthCookie(res);
+      res.redirect(getFrontendRedirectUrl("/"));
     });
     return;
   }
@@ -127,9 +189,9 @@ export async function setupAuth(app: Express, config: AuthRuntimeConfig) {
     tokens: client.TokenEndpointResponse & client.TokenEndpointResponseHelpers,
     verified: passport.AuthenticateCallback
   ) => {
-    const user = {};
-    updateUserSession(user, tokens);
-    await upsertUser(tokens.claims());
+    const claims = buildClaimsFromOidc(tokens.claims());
+    await upsertUser(claims);
+    const user: PassportUser = { claims };
     verified(null, user);
   };
 
@@ -155,9 +217,6 @@ export async function setupAuth(app: Express, config: AuthRuntimeConfig) {
     }
   };
 
-  passport.serializeUser((user: Express.User, cb) => cb(null, user));
-  passport.deserializeUser((user: Express.User, cb) => cb(null, user));
-
   app.get("/api/login", (req, res, next) => {
     ensureStrategy(req);
     const strategyName = `google:${req.hostname}`;
@@ -173,7 +232,10 @@ export async function setupAuth(app: Express, config: AuthRuntimeConfig) {
   app.get("/api/callback", (req, res, next) => {
     ensureStrategy(req);
     const strategyName = `google:${req.hostname}`;
-    passport.authenticate(strategyName, (error: unknown, user: Express.User | false) => {
+    passport.authenticate(
+      strategyName,
+      { session: false },
+      (error: unknown, user: PassportUser | false) => {
       const oauthError = error as {
         code?: string;
         error?: string;
@@ -197,29 +259,15 @@ export async function setupAuth(app: Express, config: AuthRuntimeConfig) {
         return res.redirect("/api/login");
       }
 
-      req.logIn(user, (logInError) => {
-        if (logInError) {
-          return next(logInError);
-        }
-
-        const sessionData = req.session as unknown as { returnTo?: string } | undefined;
-        const returnTo = sessionData?.returnTo;
-        if (typeof returnTo === "string" && returnTo.length > 0) {
-          if (req.session) {
-            delete (req.session as unknown as { returnTo?: string }).returnTo;
-          }
-          return res.redirect(returnTo);
-        }
-
-        return res.redirect(getFrontendRedirectUrl("/"));
-      });
-    })(req, res, next);
+      setAuthCookie(res, signAuthToken(user.claims));
+      return res.redirect(getFrontendRedirectUrl("/"));
+    },
+    )(req, res, next);
   });
 
-  app.get("/api/logout", (req, res) => {
-    req.logout(() => {
-      res.redirect(getFrontendRedirectUrl("/"));
-    });
+  app.get("/api/logout", (_req, res) => {
+    clearAuthCookie(res);
+    res.redirect(getFrontendRedirectUrl("/"));
   });
 }
 
@@ -237,30 +285,31 @@ export const isAuthenticated: RequestHandler = async (req, res, next) => {
     return next();
   }
 
-  const user = req.user as any;
-
-  if (!req.isAuthenticated() || !user.expires_at) {
+  const token = getAuthTokenFromRequest(req);
+  if (!token) {
     return sendError(req, res, 401, "UNAUTHORIZED", "Unauthorized");
   }
 
-  const now = Math.floor(Date.now() / 1000);
-  if (now <= user.expires_at) {
-    return next();
-  }
-
-  const refreshToken = user.refresh_token;
-  if (!refreshToken) {
-    sendError(req, res, 401, "UNAUTHORIZED", "Unauthorized");
-    return;
-  }
-
   try {
-    const oidcConfig = await getOidcConfig();
-    const tokenResponse = await client.refreshTokenGrant(oidcConfig, refreshToken);
-    updateUserSession(user, tokenResponse);
+    const payload = jwt.verify(token, authConfig.jwtSecret) as AuthJwtPayload;
+    if (!payload?.sub) {
+      return sendError(req, res, 401, "UNAUTHORIZED", "Unauthorized");
+    }
+    req.user = {
+      claims: {
+        sub: payload.sub,
+        email: payload.email ?? null,
+        first_name: payload.first_name ?? payload.given_name ?? null,
+        last_name: payload.last_name ?? payload.family_name ?? null,
+        given_name: payload.given_name ?? null,
+        family_name: payload.family_name ?? null,
+        profile_image_url: payload.profile_image_url ?? payload.picture ?? null,
+        picture: payload.picture ?? null,
+      },
+      expires_at: payload.exp,
+    };
     return next();
   } catch (_error) {
-    sendError(req, res, 401, "UNAUTHORIZED", "Unauthorized");
-    return;
+    return sendError(req, res, 401, "UNAUTHORIZED", "Unauthorized");
   }
 };
