@@ -87,7 +87,6 @@ function signAuthToken(claims: UserClaims): string {
   return jwt.sign(claims, authConfig.jwtSecret, {
     algorithm: "HS256",
     expiresIn: AUTH_TOKEN_TTL_SEC,
-    subject: claims.sub,
   });
 }
 
