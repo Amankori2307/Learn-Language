@@ -12,6 +12,7 @@ import { authConfig } from "./config/auth.config";
 import { randomUUID } from "crypto";
 import { appLogger, httpRequestLogger } from "./common/logger/logger";
 import { NestAppLogger } from "./common/logger/nest-app-logger";
+import { ControllerLoggingInterceptor } from "./common/logger/controller-logging.interceptor";
 
 const DEFAULT_ALLOWED_FRONTEND_ORIGINS = [
   "http://localhost:3000",
@@ -49,6 +50,7 @@ export async function createNestApiApp(): Promise<{
       },
     }),
   );
+  app.useGlobalInterceptors(new ControllerLoggingInterceptor());
 
   const configService = app.get(ConfigService);
   const resolvedAuthConfig = configService.getOrThrow<ConfigType<typeof authConfig>>("auth");

@@ -1,5 +1,4 @@
 import { Body, Controller, Get, Patch, Req, Res, UseGuards } from "@nestjs/common";
-import { LogMethodLifecycle } from "../../common/logger/log-method-lifecycle.decorator";
 import type { Request, Response } from "express";
 import { AuthService } from "./auth.service";
 import { AuthenticatedGuard } from "../../common/guards/authenticated.guard";
@@ -10,7 +9,6 @@ import { appLogger } from "../../common/logger/logger";
 import { extractUserClaims, extractUserId } from "./auth.request-user";
 
 @Controller()
-@LogMethodLifecycle()
 export class AuthApiController {
   constructor(private readonly authService: AuthService) {}
 

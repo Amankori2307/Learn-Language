@@ -1,5 +1,4 @@
 import { Body, Controller, Post, Req, Res, UseGuards } from "@nestjs/common";
-import { LogMethodLifecycle } from "../../common/logger/log-method-lifecycle.decorator";
 import type { Request, Response } from "express";
 import { AuthenticatedGuard } from "../../common/guards/authenticated.guard";
 import { AppError } from "../../common/errors/app-error";
@@ -9,7 +8,6 @@ import { AudioService } from "./audio.service";
 
 @Controller()
 @UseGuards(AuthenticatedGuard)
-@LogMethodLifecycle()
 export class AudioApiController {
   constructor(private readonly audioService: AudioService) {}
 

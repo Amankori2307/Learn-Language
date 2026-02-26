@@ -1,5 +1,4 @@
 import { Body, Controller, Get, Post, Query, Req, Res, UseGuards } from "@nestjs/common";
-import { LogMethodLifecycle } from "../../common/logger/log-method-lifecycle.decorator";
 import type { Request, Response } from "express";
 import { QuizService } from "./quiz.service";
 import { AuthenticatedGuard } from "../../common/guards/authenticated.guard";
@@ -9,7 +8,6 @@ import { logApiEvent, sendError } from "../../common/http";
 
 @Controller()
 @UseGuards(AuthenticatedGuard)
-@LogMethodLifecycle()
 export class QuizApiController {
   constructor(private readonly quizService: QuizService) {}
 
