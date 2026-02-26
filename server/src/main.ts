@@ -83,6 +83,7 @@ export async function createNestApiApp(): Promise<{
     googleClientId: resolvedAuthConfig.googleClientId,
     googleClientSecret: resolvedAuthConfig.googleClientSecret,
     googleIssuerUrl: resolvedAuthConfig.googleIssuerUrl,
+    frontendBaseUrl: resolvedAuthConfig.frontendBaseUrl,
     sessionSecret: resolvedAuthConfig.sessionSecret,
     databaseUrl: resolvedDatabaseConfig.url,
     reviewerEmails: resolvedAuthConfig.reviewerEmails,

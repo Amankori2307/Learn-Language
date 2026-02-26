@@ -16,6 +16,7 @@ export type AuthRuntimeConfig = {
   googleClientId?: string;
   googleClientSecret?: string;
   googleIssuerUrl: string;
+  frontendBaseUrl?: string;
   sessionSecret: string;
   databaseUrl: string;
   reviewerEmails: Set<string>;
@@ -25,11 +26,20 @@ export type AuthRuntimeConfig = {
 let authConfig: AuthRuntimeConfig = {
   provider: "dev",
   googleIssuerUrl: "https://accounts.google.com",
+  frontendBaseUrl: undefined,
   sessionSecret: "dev-session-secret-min-16",
   databaseUrl: "",
   reviewerEmails: new Set<string>(),
   adminEmails: new Set<string>(),
 };
+
+function getFrontendRedirectUrl(path = "/"): string {
+  const base = authConfig.frontendBaseUrl?.trim();
+  if (!base) {
+    return path;
+  }
+  return new URL(path, base).toString();
+}
 
 const getOidcConfig = memoize(
   async () => {
@@ -103,10 +113,10 @@ export async function setupAuth(app: Express, config: AuthRuntimeConfig) {
   app.use(passport.session());
 
   if (authConfig.provider === "dev") {
-    app.get("/api/login", (_req, res) => res.redirect("/"));
-    app.get("/api/callback", (_req, res) => res.redirect("/"));
+    app.get("/api/login", (_req, res) => res.redirect(getFrontendRedirectUrl("/")));
+    app.get("/api/callback", (_req, res) => res.redirect(getFrontendRedirectUrl("/")));
     app.get("/api/logout", (req, res) => {
-      req.logout(() => res.redirect("/"));
+      req.logout(() => res.redirect(getFrontendRedirectUrl("/")));
     });
     return;
   }
@@ -201,14 +211,14 @@ export async function setupAuth(app: Express, config: AuthRuntimeConfig) {
           return res.redirect(returnTo);
         }
 
-        return res.redirect("/");
+        return res.redirect(getFrontendRedirectUrl("/"));
       });
     })(req, res, next);
   });
 
   app.get("/api/logout", (req, res) => {
     req.logout(() => {
-      res.redirect("/");
+      res.redirect(getFrontendRedirectUrl("/"));
     });
   });
 }

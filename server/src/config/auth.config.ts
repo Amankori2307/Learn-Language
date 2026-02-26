@@ -15,6 +15,7 @@ export const authConfig = registerAs("auth", () => ({
   googleClientId: process.env.GOOGLE_CLIENT_ID,
   googleClientSecret: process.env.GOOGLE_CLIENT_SECRET,
   googleIssuerUrl: process.env.GOOGLE_ISSUER_URL ?? "https://accounts.google.com",
+  frontendBaseUrl: process.env.FRONTEND_BASE_URL,
   sessionSecret: process.env.SESSION_SECRET,
   reviewerEmails: parseEmailList(process.env.REVIEWER_EMAILS),
   adminEmails: parseEmailList(process.env.ADMIN_EMAILS),
