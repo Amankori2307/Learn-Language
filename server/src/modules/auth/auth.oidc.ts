@@ -2,6 +2,7 @@ import * as client from "openid-client";
 import { Strategy, type VerifyFunction } from "openid-client/passport";
 
 import passport from "passport";
+import session from "express-session";
 import type { Express, RequestHandler } from "express";
 import memoize from "memoizee";
 import jwt from "jsonwebtoken";
@@ -43,6 +44,8 @@ type PassportUser = {
 const AUTH_TOKEN_COOKIE = "learn_lang_auth";
 const AUTH_TOKEN_TTL_MS = AUTH_SESSION_RULES.SESSION_TTL_MS;
 const AUTH_TOKEN_TTL_SEC = Math.floor(AUTH_TOKEN_TTL_MS / 1000);
+const OAUTH_SESSION_COOKIE = "learn_lang_oauth";
+const OAUTH_SESSION_TTL_MS = 10 * 60 * 1000;
 
 function getFrontendRedirectUrl(path = "/"): string {
   const base = authConfig.frontendBaseUrl?.trim();
@@ -157,6 +160,21 @@ async function upsertUser(claims: any) {
 export async function setupAuth(app: Express, config: AuthRuntimeConfig) {
   authConfig = config;
   app.set("trust proxy", 1);
+  app.use(
+    session({
+      name: OAUTH_SESSION_COOKIE,
+      secret: authConfig.jwtSecret,
+      resave: false,
+      saveUninitialized: false,
+      cookie: {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === "production",
+        sameSite: "lax",
+        maxAge: OAUTH_SESSION_TTL_MS,
+        path: "/",
+      },
+    }),
+  );
   app.use(passport.initialize());
 
   if (authConfig.provider === "dev") {
@@ -226,7 +244,7 @@ export async function setupAuth(app: Express, config: AuthRuntimeConfig) {
       scope: ["openid", "email", "profile"],
     };
 
-    passport.authenticate(strategyName, authOptions)(req, res, next);
+    passport.authenticate(strategyName, { ...authOptions, session: false })(req, res, next);
   });
 
   app.get("/api/callback", (req, res, next) => {
