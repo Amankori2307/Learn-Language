@@ -46,6 +46,9 @@ const AUTH_TOKEN_TTL_MS = AUTH_SESSION_RULES.SESSION_TTL_MS;
 const AUTH_TOKEN_TTL_SEC = Math.floor(AUTH_TOKEN_TTL_MS / 1000);
 const OAUTH_SESSION_COOKIE = "learn_lang_oauth";
 const OAUTH_SESSION_TTL_MS = 10 * 60 * 1000;
+const AUTH_GOOGLE_ROUTE = "/auth/google";
+const AUTH_GOOGLE_CALLBACK_ROUTE = "/auth/google/callback";
+const AUTH_LOGOUT_ROUTE = "/auth/logout";
 
 function getFrontendRedirectUrl(path = "/"): string {
   const base = authConfig.frontendBaseUrl?.trim();
@@ -177,7 +180,7 @@ export async function setupAuth(app: Express, config: AuthRuntimeConfig) {
   app.use(passport.initialize());
 
   if (authConfig.provider === "dev") {
-    app.get("/api/login", async (_req, res) => {
+    app.get([AUTH_GOOGLE_ROUTE, "/api/login"], async (_req, res) => {
       const claims: UserClaims = {
         sub: "dev-user",
         email: "dev@example.com",
@@ -192,8 +195,8 @@ export async function setupAuth(app: Express, config: AuthRuntimeConfig) {
       setAuthCookie(res, signAuthToken(claims));
       res.redirect(getFrontendRedirectUrl("/"));
     });
-    app.get("/api/callback", (_req, res) => res.redirect(getFrontendRedirectUrl("/")));
-    app.get("/api/logout", (_req, res) => {
+    app.get([AUTH_GOOGLE_CALLBACK_ROUTE, "/api/callback"], (_req, res) => res.redirect(getFrontendRedirectUrl("/")));
+    app.post([AUTH_LOGOUT_ROUTE, "/api/logout"], (_req, res) => {
       clearAuthCookie(res);
       res.redirect(getFrontendRedirectUrl("/"));
     });
@@ -217,7 +220,7 @@ export async function setupAuth(app: Express, config: AuthRuntimeConfig) {
   const ensureStrategy = (req: any) => {
     const strategyName = `google:${req.hostname}`;
     if (!registeredStrategies.has(strategyName)) {
-      const callbackURL = `${req.protocol}://${req.get("host")}/api/callback`;
+      const callbackURL = `${req.protocol}://${req.get("host")}${AUTH_GOOGLE_CALLBACK_ROUTE}`;
       const scope = "openid email profile";
 
       const strategy = new Strategy(
@@ -234,7 +237,7 @@ export async function setupAuth(app: Express, config: AuthRuntimeConfig) {
     }
   };
 
-  app.get("/api/login", (req, res, next) => {
+  app.get([AUTH_GOOGLE_ROUTE, "/api/login"], (req, res, next) => {
     ensureStrategy(req);
     const strategyName = `google:${req.hostname}`;
     const authOptions = {
@@ -246,7 +249,7 @@ export async function setupAuth(app: Express, config: AuthRuntimeConfig) {
     passport.authenticate(strategyName, { ...authOptions, session: false })(req, res, next);
   });
 
-  app.get("/api/callback", (req, res, next) => {
+  app.get([AUTH_GOOGLE_CALLBACK_ROUTE, "/api/callback"], (req, res, next) => {
     ensureStrategy(req);
     const strategyName = `google:${req.hostname}`;
     passport.authenticate(
@@ -273,7 +276,7 @@ export async function setupAuth(app: Express, config: AuthRuntimeConfig) {
       }
 
       if (!user) {
-        return res.redirect("/api/login");
+        return res.redirect(AUTH_GOOGLE_ROUTE);
       }
 
       setAuthCookie(res, signAuthToken(user.claims));
@@ -282,7 +285,7 @@ export async function setupAuth(app: Express, config: AuthRuntimeConfig) {
     )(req, res, next);
   });
 
-  app.get("/api/logout", (_req, res) => {
+  app.post([AUTH_LOGOUT_ROUTE, "/api/logout"], (_req, res) => {
     clearAuthCookie(res);
     res.redirect(getFrontendRedirectUrl("/"));
   });
