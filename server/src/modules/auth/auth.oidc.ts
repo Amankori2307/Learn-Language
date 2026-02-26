@@ -162,9 +162,47 @@ export async function setupAuth(app: Express, config: AuthRuntimeConfig) {
 
   app.get("/api/callback", (req, res, next) => {
     ensureStrategy(req);
-    passport.authenticate(`google:${req.hostname}`, {
-      successReturnToOrRedirect: "/",
-      failureRedirect: "/api/login",
+    const strategyName = `google:${req.hostname}`;
+    passport.authenticate(strategyName, (error: unknown, user: Express.User | false) => {
+      const oauthError = error as {
+        code?: string;
+        error?: string;
+      } | null;
+
+      if (oauthError?.code === "OAUTH_RESPONSE_BODY_ERROR" && oauthError?.error === "invalid_client") {
+        return sendError(
+          req,
+          res,
+          500,
+          "INTERNAL_ERROR",
+          "Google OAuth client credentials are invalid. Verify GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, and callback URI configuration.",
+        );
+      }
+
+      if (error) {
+        return next(error);
+      }
+
+      if (!user) {
+        return res.redirect("/api/login");
+      }
+
+      req.logIn(user, (logInError) => {
+        if (logInError) {
+          return next(logInError);
+        }
+
+        const sessionData = req.session as unknown as { returnTo?: string } | undefined;
+        const returnTo = sessionData?.returnTo;
+        if (typeof returnTo === "string" && returnTo.length > 0) {
+          if (req.session) {
+            delete (req.session as unknown as { returnTo?: string }).returnTo;
+          }
+          return res.redirect(returnTo);
+        }
+
+        return res.redirect("/");
+      });
     })(req, res, next);
   });
 

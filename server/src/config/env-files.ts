@@ -1,11 +1,11 @@
-export type EnvTarget = "local" | "production";
+export type EnvTarget = "development" | "production";
 
 export function resolveEnvFile(inputTarget?: string): string {
   const target = normalizeEnvTarget(inputTarget);
   if (target === "production") {
     return ".env.production";
   }
-  return ".env.local";
+  return ".env.development";
 }
 
 export function normalizeEnvTarget(inputTarget?: string): EnvTarget {
@@ -13,5 +13,8 @@ export function normalizeEnvTarget(inputTarget?: string): EnvTarget {
   if (normalized === "production" || normalized === "prod") {
     return "production";
   }
-  return "local";
+  if (normalized === "development" || normalized === "dev" || normalized === "local") {
+    return "development";
+  }
+  return "development";
 }
