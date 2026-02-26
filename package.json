@@ -28,9 +28,12 @@
     "db:migrate:review-governance": "node --import tsx script/migrate-review-governance.ts",
     "db:backfill:review-governance": "node --import tsx script/backfill-review-governance.ts",
     "user:set-role": "node --import tsx script/set-user-role.ts",
-    "db:generate": "drizzle-kit generate",
-    "db:migrate": "drizzle-kit migrate",
-    "db:push": "drizzle-kit push"
+    "db:generate": "DRIZZLE_ENV=local drizzle-kit generate",
+    "db:migrate": "DRIZZLE_ENV=local drizzle-kit migrate",
+    "db:push": "DRIZZLE_ENV=local drizzle-kit push",
+    "db:generate:production": "DRIZZLE_ENV=production drizzle-kit generate",
+    "db:migrate:production": "DRIZZLE_ENV=production drizzle-kit migrate",
+    "db:push:production": "DRIZZLE_ENV=production drizzle-kit push"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",

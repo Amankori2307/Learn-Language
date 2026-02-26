@@ -1,7 +1,8 @@
 import { defineConfig } from "drizzle-kit";
 import { config as loadEnv } from "dotenv";
+import { resolveEnvFile } from "./server/src/config/env-files";
 
-loadEnv();
+loadEnv({ path: resolveEnvFile(process.env.DRIZZLE_ENV) });
 
 if (!process.env.DATABASE_URL) {
   throw new Error("DATABASE_URL, ensure the database is provisioned");
