@@ -57,6 +57,7 @@ export function runWithLifecycle<T>(functionName: string, fn: () => T): T {
             functionName,
             durationMs: Date.now() - startedAt,
             error: error instanceof Error ? error.message : String(error),
+            stack: error instanceof Error ? error.stack : undefined,
           });
           throw error;
         }) as T;
@@ -72,6 +73,7 @@ export function runWithLifecycle<T>(functionName: string, fn: () => T): T {
       functionName,
       durationMs: Date.now() - startedAt,
       error: error instanceof Error ? error.message : String(error),
+      stack: error instanceof Error ? error.stack : undefined,
     });
     throw error;
   }

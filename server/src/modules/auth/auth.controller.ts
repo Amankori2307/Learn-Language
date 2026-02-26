@@ -64,6 +64,15 @@ export class AuthApiController {
 
   private handleError(req: Request, res: Response, error: unknown) {
     if (error instanceof AppError) {
+      appLogger.warn("Auth controller handled AppError", {
+        requestId: req.requestId ?? "unknown",
+        path: req.path,
+        method: req.method,
+        status: error.status,
+        code: error.code,
+        message: error.message,
+        details: error.details,
+      });
       sendError(req, res, error.status, error.code, error.message, error.details);
       return;
     }

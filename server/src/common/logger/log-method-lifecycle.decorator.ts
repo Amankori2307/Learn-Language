@@ -74,6 +74,7 @@ export function LogMethodLifecycle(): ClassDecorator {
                   ...context,
                   durationMs: Date.now() - startedAt,
                   error: error instanceof Error ? error.message : String(error),
+                  stack: error instanceof Error ? error.stack : undefined,
                 });
                 throw error;
               });
@@ -89,6 +90,7 @@ export function LogMethodLifecycle(): ClassDecorator {
             ...context,
             durationMs: Date.now() - startedAt,
             error: error instanceof Error ? error.message : String(error),
+            stack: error instanceof Error ? error.stack : undefined,
           });
           throw error;
         }

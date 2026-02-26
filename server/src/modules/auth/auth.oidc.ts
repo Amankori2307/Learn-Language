@@ -11,7 +11,7 @@ import { sendError } from "../../common/http";
 import { resolveRoleFromEmail } from "./auth.roles";
 import { AUTH_SESSION_RULES } from "./auth.constants";
 import { UserClaims } from "./auth.types";
-import { runWithLifecycle } from "../../common/logger/logger";
+import { appLogger, runWithLifecycle } from "../../common/logger/logger";
 
 export type AuthRuntimeConfig = {
   provider: "google" | "dev";
@@ -325,6 +325,8 @@ export async function setupAuth(app: Express, config: AuthRuntimeConfig) {
 
 export const isAuthenticated: RequestHandler = async (req, res, next) => {
   return runWithLifecycle("isAuthenticated", async () => {
+    const requestId = req.requestId ?? "unknown";
+
     if (authConfig.provider === "dev") {
       (req as any).user = {
         claims: {
@@ -340,12 +342,22 @@ export const isAuthenticated: RequestHandler = async (req, res, next) => {
 
     const token = getAuthTokenFromRequest(req);
     if (!token) {
+      appLogger.warn("Auth rejected: missing token", {
+        requestId,
+        path: req.path,
+        method: req.method,
+      });
       return sendError(req, res, 401, "UNAUTHORIZED", "Unauthorized");
     }
 
     try {
       const payload = jwt.verify(token, authConfig.jwtSecret) as AuthJwtPayload;
       if (!payload?.sub) {
+        appLogger.warn("Auth rejected: token missing sub", {
+          requestId,
+          path: req.path,
+          method: req.method,
+        });
         return sendError(req, res, 401, "UNAUTHORIZED", "Unauthorized");
       }
       req.user = {
@@ -362,7 +374,14 @@ export const isAuthenticated: RequestHandler = async (req, res, next) => {
         expires_at: payload.exp,
       };
       return next();
-    } catch (_error) {
+    } catch (error) {
+      appLogger.warn("Auth rejected: token verification failed", {
+        requestId,
+        path: req.path,
+        method: req.method,
+        error: error instanceof Error ? error.message : String(error),
+        stack: error instanceof Error ? error.stack : undefined,
+      });
       return sendError(req, res, 401, "UNAUTHORIZED", "Unauthorized");
     }
   });
