@@ -13,7 +13,9 @@ function shiftDay(dayKey: string, delta: number): string {
 export function computeStreak(attemptDates: Date[]): number {
   if (attemptDates.length === 0) return 0;
 
-  const days = Array.from(new Set(attemptDates.map(toDayKey))).sort().reverse();
+  const days = Array.from(new Set(attemptDates.map(toDayKey)))
+    .sort()
+    .reverse();
   let streak = 1;
   let cursor = days[0];
 

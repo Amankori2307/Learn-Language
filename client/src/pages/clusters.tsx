@@ -23,7 +23,10 @@ export default function ClustersPage() {
   const allClusters = useMemo(() => clusters ?? [], [clusters]);
 
   const clusterTypes = useMemo(
-    () => ["all", ...Array.from(new Set(allClusters.map((cluster) => cluster.type).filter(Boolean))).sort()],
+    () => [
+      "all",
+      ...Array.from(new Set(allClusters.map((cluster) => cluster.type).filter(Boolean))).sort(),
+    ],
     [allClusters],
   );
 
@@ -64,7 +67,10 @@ export default function ClustersPage() {
       if (!term) {
         return true;
       }
-      return [cluster.name, cluster.description ?? "", cluster.type].join(" ").toLowerCase().includes(term);
+      return [cluster.name, cluster.description ?? "", cluster.type]
+        .join(" ")
+        .toLowerCase()
+        .includes(term);
     });
 
     filtered.sort((a, b) => {
@@ -104,7 +110,11 @@ export default function ClustersPage() {
                 Top Cluster
               </p>
               <p className="text-sm font-semibold mt-1">
-                {[...allClusters].sort((left, right) => right.wordCount - left.wordCount)[0]?.name} · {[...allClusters].sort((left, right) => right.wordCount - left.wordCount)[0]?.wordCount ?? 0} words
+                {[...allClusters].sort((left, right) => right.wordCount - left.wordCount)[0]?.name}{" "}
+                ·{" "}
+                {[...allClusters].sort((left, right) => right.wordCount - left.wordCount)[0]
+                  ?.wordCount ?? 0}{" "}
+                words
               </p>
             </div>
           )}
@@ -128,7 +138,9 @@ export default function ClustersPage() {
       </section>
 
       {isLoading ? (
-        <div className="rounded-2xl border border-border/50 bg-card p-8 text-muted-foreground">Loading clusters...</div>
+        <div className="rounded-2xl border border-border/50 bg-card p-8 text-muted-foreground">
+          Loading clusters...
+        </div>
       ) : (
         <div className="space-y-4">
           <div className="rounded-2xl border border-border/50 bg-card p-4 md:p-6 grid grid-cols-1 md:grid-cols-4 gap-3">
@@ -183,7 +195,9 @@ export default function ClustersPage() {
             </div>
 
             {pageRows.length === 0 ? (
-              <div className="px-4 py-8 text-muted-foreground text-sm">No clusters match current filters.</div>
+              <div className="px-4 py-8 text-muted-foreground text-sm">
+                No clusters match current filters.
+              </div>
             ) : (
               <div className="divide-y divide-border/50">
                 {pageRows.map((cluster) => (

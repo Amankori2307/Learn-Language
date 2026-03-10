@@ -1,7 +1,13 @@
 import { useMemo, useState } from "react";
 import { Check, ChevronsUpDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Command, CommandEmpty, CommandInput, CommandItem, CommandList } from "@/components/ui/command";
+import {
+  Command,
+  CommandEmpty,
+  CommandInput,
+  CommandItem,
+  CommandList,
+} from "@/components/ui/command";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { cn } from "@/lib/utils";
 
@@ -78,7 +84,9 @@ export function SearchableSelect<TValue extends string>({
                   setOpen(false);
                 }}
               >
-                <Check className={cn("h-4 w-4", value === option.value ? "opacity-100" : "opacity-0")} />
+                <Check
+                  className={cn("h-4 w-4", value === option.value ? "opacity-100" : "opacity-0")}
+                />
                 <span>{option.label}</span>
               </CommandItem>
             ))}

@@ -56,9 +56,18 @@ test("daily_review prioritizes due/new/weak mix", () => {
   });
 
   assert.equal(result.length, 6);
-  assert.ok(result.some((w: any) => [1, 2, 4].includes(w.id)), "expected at least one due review item");
-  assert.ok(result.some((w: any) => [1, 3, 4].includes(w.id)), "expected at least one weak item");
-  assert.ok(result.some((w: any) => w.id >= 5), "expected at least one new item");
+  assert.ok(
+    result.some((w: any) => [1, 2, 4].includes(w.id)),
+    "expected at least one due review item",
+  );
+  assert.ok(
+    result.some((w: any) => [1, 3, 4].includes(w.id)),
+    "expected at least one weak item",
+  );
+  assert.ok(
+    result.some((w: any) => w.id >= 5),
+    "expected at least one new item",
+  );
 });
 
 test("weak_words mode prioritizes weak items first", () => {
@@ -68,7 +77,13 @@ test("weak_words mode prioritizes weak items first", () => {
     [2, makeProgress(2, new Date("2026-03-01T00:00:00.000Z"), 3)],
   ]);
 
-  const result = generateSessionWords({ mode: QuizModeEnum.WEAK_WORDS, count: 3, words, progressMap, now });
+  const result = generateSessionWords({
+    mode: QuizModeEnum.WEAK_WORDS,
+    count: 3,
+    words,
+    progressMap,
+    now,
+  });
 
   assert.equal(result.length, 3);
   assert.deepEqual(
@@ -225,5 +240,8 @@ test("listen_identify returns only words with audio", () => {
     now,
   });
 
-  assert.deepEqual(result.map((word: any) => word.id), [1, 3]);
+  assert.deepEqual(
+    result.map((word: any) => word.id),
+    [1, 3],
+  );
 });

@@ -5,14 +5,15 @@ import { AudioService } from "./audio.service";
 
 function createRepositoryMock() {
   return {
-    getWord: async (_wordId: number) => undefined as
-      | {
-          id: number;
-          language: LanguageEnum;
-          originalScript: string;
-          audioUrl: string | null;
-        }
-      | undefined,
+    getWord: async (_wordId: number) =>
+      undefined as
+        | {
+            id: number;
+            language: LanguageEnum;
+            originalScript: string;
+            audioUrl: string | null;
+          }
+        | undefined,
     updateWordAudioUrl: async (_wordId: number, _audioUrl: string) => {},
   };
 }
@@ -92,8 +93,14 @@ test("resolveAudio persists generated word audio URL", async () => {
   };
 
   const service = new AudioService(repository);
-  (service as unknown as { resolveAndCacheAudio: (input: { text: string; language: LanguageEnum }) => Promise<string | null> }).resolveAndCacheAudio =
-    async () => "/audio/generated/telugu/generated-word.mp3";
+  (
+    service as unknown as {
+      resolveAndCacheAudio: (input: {
+        text: string;
+        language: LanguageEnum;
+      }) => Promise<string | null>;
+    }
+  ).resolveAndCacheAudio = async () => "/audio/generated/telugu/generated-word.mp3";
 
   const result = await service.resolveAudio({
     userId: "u-1",

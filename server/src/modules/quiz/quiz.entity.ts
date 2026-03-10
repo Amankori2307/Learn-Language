@@ -31,4 +31,3 @@ export class QuizSubmitResponseEntity {
     nextReview: string;
   };
 }
-

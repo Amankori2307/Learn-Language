@@ -15,6 +15,7 @@ Owner: Codex
 ## Verification Evidence
 
 ### 1) Core Flow Quality
+
 - Quiz generation returns real source language entries with transliteration pronunciation metadata.
 - Quiz result feedback shows:
   - word/sentence
@@ -25,6 +26,7 @@ Owner: Codex
 Result: `pass`
 
 ### 2) Review Governance
+
 - Reviewer/admin middleware exists and is tested.
 - Review queue/transition/history endpoints are role-protected.
 - Learner-facing content fetches approved vocabulary only.
@@ -32,6 +34,7 @@ Result: `pass`
 Result: `pass`
 
 ### 3) Content Quality
+
 - `assets/processed/seed.json` uses realistic source language seed rows.
 - Import pipeline purges legacy placeholder rows (`sample-word-*`, `word-*`, `padam-*`) before MVP import.
 - Content validator passes on MVP file.
@@ -39,6 +42,7 @@ Result: `pass`
 Result: `pass`
 
 ### 4) Runtime Stability (Docker Compose)
+
 - `docker compose up -d --build` succeeds.
 - Startup sequence applies schema, migration/backfill, imports MVP dataset, starts dev server.
 - Hot reload is active in compose runtime.
@@ -46,6 +50,7 @@ Result: `pass`
 Result: `pass`
 
 ### 5) Automated Checks
+
 - `pnpm run check` passes.
 - `pnpm run test` passes.
 - `pnpm run test:ui` passes.

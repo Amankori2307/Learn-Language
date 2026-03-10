@@ -6,4 +6,3 @@ export class SrsDriftQueryDto {
   @IsEnum(LanguageEnum)
   language?: LanguageEnum;
 }
-

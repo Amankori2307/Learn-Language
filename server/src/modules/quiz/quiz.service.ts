@@ -25,11 +25,23 @@ export class QuizService {
     const mode = parsed.mode ?? QuizModeEnum.DAILY_REVIEW;
     const language = parsed.language ?? parseLanguage(input.language);
 
-    let candidates = await this.repository.getQuizCandidates(input.userId, limit, clusterId, mode, language);
+    let candidates = await this.repository.getQuizCandidates(
+      input.userId,
+      limit,
+      clusterId,
+      mode,
+      language,
+    );
 
     if (candidates.length === 0) {
       await this.repository.seedInitialData();
-      const retry = await this.repository.getQuizCandidates(input.userId, limit, clusterId, mode, language);
+      const retry = await this.repository.getQuizCandidates(
+        input.userId,
+        limit,
+        clusterId,
+        mode,
+        language,
+      );
       if (retry.length === 0) {
         return [];
       }
@@ -54,7 +66,10 @@ export class QuizService {
           count: 3,
         });
 
-        const typePool = [QuizQuestionTypeEnum.SOURCE_TO_TARGET, QuizQuestionTypeEnum.TARGET_TO_SOURCE] as const;
+        const typePool = [
+          QuizQuestionTypeEnum.SOURCE_TO_TARGET,
+          QuizQuestionTypeEnum.TARGET_TO_SOURCE,
+        ] as const;
         const type =
           mode === QuizModeEnum.LISTEN_IDENTIFY
             ? QuizQuestionTypeEnum.SOURCE_TO_TARGET
@@ -67,10 +82,15 @@ export class QuizService {
               ? word.originalScript
               : word.english;
 
-        const options = [word, ...distractors].sort(() => 0.5 - Math.random()).map((optionWord) => ({
-          id: optionWord.id,
-          text: type === QuizQuestionTypeEnum.SOURCE_TO_TARGET ? optionWord.english : formatPronunciationFirst(optionWord),
-        }));
+        const options = [word, ...distractors]
+          .sort(() => 0.5 - Math.random())
+          .map((optionWord) => ({
+            id: optionWord.id,
+            text:
+              type === QuizQuestionTypeEnum.SOURCE_TO_TARGET
+                ? optionWord.english
+                : formatPronunciationFirst(optionWord),
+          }));
 
         return {
           wordId: word.id,
@@ -102,7 +122,10 @@ export class QuizService {
         throw new AppError(404, "NOT_FOUND", "Word not found in selected language");
       }
 
-      const examples = await this.repository.getWordExamples(word.id, parsedInput.language ?? undefined);
+      const examples = await this.repository.getWordExamples(
+        word.id,
+        parsedInput.language ?? undefined,
+      );
       const isCorrect = parsedInput.selectedOptionId === word.id;
       const srsConfig = await this.repository.getActiveSrsConfig();
 
@@ -178,7 +201,12 @@ export class QuizService {
         throw error;
       }
       if (error instanceof z.ZodError) {
-        throw new AppError(400, "VALIDATION_ERROR", error.issues[0]?.message ?? "Invalid request", error.issues);
+        throw new AppError(
+          400,
+          "VALIDATION_ERROR",
+          error.issues[0]?.message ?? "Invalid request",
+          error.issues,
+        );
       }
       throw new AppError(500, "INTERNAL_ERROR", "Internal Server Error");
     }

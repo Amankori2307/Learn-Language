@@ -84,7 +84,8 @@ function assertWord(word: ContentWord, idx: number) {
   if (!word.partOfSpeech) missing.push("partOfSpeech");
   if (!word.difficulty) missing.push("difficulty");
   if (!word.difficultyLevel) missing.push("difficultyLevel");
-  if (word.frequencyScore === undefined || word.frequencyScore === null) missing.push("frequencyScore");
+  if (word.frequencyScore === undefined || word.frequencyScore === null)
+    missing.push("frequencyScore");
   if (!word.tags || word.tags.length === 0) missing.push("tags");
   if (!word.clusters || word.clusters.length === 0) missing.push("clusters");
   if (missing.length > 0) {
@@ -295,7 +296,9 @@ async function main() {
     const item = wordItems[i];
     assertWord(item, i);
     const linkedSentences = sentencesByWordRef.get(item.key) ?? [];
-    const exampleSentences = [...new Set(linkedSentences.map((sentence) => sentence.originalScript))];
+    const exampleSentences = [
+      ...new Set(linkedSentences.map((sentence) => sentence.originalScript)),
+    ];
     const word = await upsertWord(item, exampleSentences);
     wordCount += 1;
     wordIdByKey.set(item.key, { id: word.id, language: assertLanguage(item.language) });

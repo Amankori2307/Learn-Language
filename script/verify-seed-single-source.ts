@@ -52,16 +52,18 @@ function firstLineMatch(content: string, pattern: RegExp): string {
 }
 
 async function main() {
-  const files = (await Promise.all(
-    TARGET_DIRS.map(async (dir) => {
-      const dirPath = path.join(ROOT, dir);
-      try {
-        return await collectFiles(dirPath);
-      } catch {
-        return [];
-      }
-    }),
-  )).flat();
+  const files = (
+    await Promise.all(
+      TARGET_DIRS.map(async (dir) => {
+        const dirPath = path.join(ROOT, dir);
+        try {
+          return await collectFiles(dirPath);
+        } catch {
+          return [];
+        }
+      }),
+    )
+  ).flat();
 
   const violations: Violation[] = [];
 
@@ -80,7 +82,9 @@ async function main() {
       });
     }
 
-    const processedSeedMatches = [...content.matchAll(/assets\/processed\/([a-zA-Z0-9._-]+\.json)/g)];
+    const processedSeedMatches = [
+      ...content.matchAll(/assets\/processed\/([a-zA-Z0-9._-]+\.json)/g),
+    ];
     for (const match of processedSeedMatches) {
       const matchedPath = `assets/processed/${match[1]}`;
       if (!ALLOWED_SEED_PATHS.has(matchedPath)) {

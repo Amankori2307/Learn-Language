@@ -1,4 +1,17 @@
-import { Body, Controller, Get, Inject, Param, ParseIntPipe, Patch, Post, Query, Req, Res, UseGuards } from "@nestjs/common";
+import {
+  Body,
+  Controller,
+  Get,
+  Inject,
+  Param,
+  ParseIntPipe,
+  Patch,
+  Post,
+  Query,
+  Req,
+  Res,
+  UseGuards,
+} from "@nestjs/common";
 import type { Request, Response } from "express";
 import { ReviewService } from "./review.service";
 import { AuthenticatedGuard } from "../../common/guards/authenticated.guard";
@@ -31,7 +44,11 @@ export class ReviewApiController {
 
   @Get("/api/review/conflicts")
   @UseGuards(AuthenticatedGuard, ReviewerGuard)
-  async getConflicts(@Req() req: Request, @Res() res: Response, @Query() query: ReviewConflictsQueryDto) {
+  async getConflicts(
+    @Req() req: Request,
+    @Res() res: Response,
+    @Query() query: ReviewConflictsQueryDto,
+  ) {
     try {
       const result = await this.reviewService.getConflicts(query);
       res.json(result);
@@ -59,7 +76,11 @@ export class ReviewApiController {
 
   @Patch("/api/review/words/bulk")
   @UseGuards(AuthenticatedGuard, ReviewerGuard)
-  async bulkTransition(@Req() req: Request, @Res() res: Response, @Body() body: ReviewBulkTransitionBodyDto) {
+  async bulkTransition(
+    @Req() req: Request,
+    @Res() res: Response,
+    @Body() body: ReviewBulkTransitionBodyDto,
+  ) {
     try {
       const reviewerId = (req.user as { claims: { sub: string } }).claims.sub;
       const result = await this.reviewService.bulkTransition(reviewerId, body);
@@ -88,7 +109,11 @@ export class ReviewApiController {
 
   @Get("/api/review/words/:id/history")
   @UseGuards(AuthenticatedGuard, ReviewerGuard)
-  async getHistory(@Req() req: Request, @Res() res: Response, @Param("id", ParseIntPipe) id: number) {
+  async getHistory(
+    @Req() req: Request,
+    @Res() res: Response,
+    @Param("id", ParseIntPipe) id: number,
+  ) {
     try {
       const result = await this.reviewService.getHistory(id);
       res.json(result);
@@ -99,7 +124,11 @@ export class ReviewApiController {
 
   @Post("/api/review/words")
   @UseGuards(AuthenticatedGuard)
-  async submitDraft(@Req() req: Request, @Res() res: Response, @Body() body: ReviewSubmitDraftBodyDto) {
+  async submitDraft(
+    @Req() req: Request,
+    @Res() res: Response,
+    @Body() body: ReviewSubmitDraftBodyDto,
+  ) {
     try {
       const submittedBy = (req.user as { claims: { sub: string } }).claims.sub;
       const result = await this.reviewService.submitDraft(submittedBy, body);

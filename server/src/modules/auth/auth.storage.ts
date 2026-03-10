@@ -9,7 +9,7 @@ export interface IAuthStorage {
   upsertUser(user: UpsertUser): Promise<User>;
   updateUserProfile(
     id: string,
-    patch: Partial<Pick<User, "firstName" | "lastName" | "profileImageUrl">>
+    patch: Partial<Pick<User, "firstName" | "lastName" | "profileImageUrl">>,
   ): Promise<User | undefined>;
 }
 
@@ -36,7 +36,7 @@ class AuthStorage implements IAuthStorage {
 
   async updateUserProfile(
     id: string,
-    patch: Partial<Pick<User, "firstName" | "lastName" | "profileImageUrl">>
+    patch: Partial<Pick<User, "firstName" | "lastName" | "profileImageUrl">>,
   ): Promise<User | undefined> {
     const [updated] = await db
       .update(users)

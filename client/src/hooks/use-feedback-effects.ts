@@ -8,7 +8,8 @@ function getInitialState(): boolean {
   if (typeof window === "undefined") {
     return true;
   }
-  const raw = window.localStorage.getItem(STORAGE_KEY) ?? window.localStorage.getItem(LEGACY_STORAGE_KEY);
+  const raw =
+    window.localStorage.getItem(STORAGE_KEY) ?? window.localStorage.getItem(LEGACY_STORAGE_KEY);
   if (raw === null) {
     return true;
   }

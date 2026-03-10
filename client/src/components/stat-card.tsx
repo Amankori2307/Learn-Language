@@ -9,7 +9,14 @@ interface StatCardProps {
   className?: string;
 }
 
-export function StatCard({ label, value, icon: Icon, trend, color = "primary", className }: StatCardProps) {
+export function StatCard({
+  label,
+  value,
+  icon: Icon,
+  trend,
+  color = "primary",
+  className,
+}: StatCardProps) {
   const colors = {
     primary: "bg-secondary text-foreground border-border",
     accent: "bg-secondary text-foreground border-border",
@@ -18,10 +25,12 @@ export function StatCard({ label, value, icon: Icon, trend, color = "primary", c
   };
 
   return (
-    <div className={cn(
-      "bg-card rounded-xl p-4 border border-border/60 transition-colors duration-200",
-      className
-    )}>
+    <div
+      className={cn(
+        "bg-card rounded-xl p-4 border border-border/60 transition-colors duration-200",
+        className,
+      )}
+    >
       <div className="flex items-start justify-between">
         <div>
           <p className="text-sm font-medium text-muted-foreground">{label}</p>

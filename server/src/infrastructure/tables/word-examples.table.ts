@@ -5,7 +5,9 @@ import { words } from "./words.table";
 
 export const wordExamples = pgTable(DbTableNameEnum.WORD_EXAMPLES, {
   id: serial("id").primaryKey(),
-  wordId: integer("word_id").references(() => words.id).notNull(),
+  wordId: integer("word_id")
+    .references(() => words.id)
+    .notNull(),
   language: text("language").$type<LanguageEnum>().notNull(),
   originalScript: text("source_sentence").notNull(),
   pronunciation: text("pronunciation").notNull(),

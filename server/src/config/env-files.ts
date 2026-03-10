@@ -9,7 +9,9 @@ export function resolveEnvFile(inputTarget?: string): string {
 }
 
 export function normalizeEnvTarget(inputTarget?: string): EnvTarget {
-  const normalized = String(inputTarget ?? "").trim().toLowerCase();
+  const normalized = String(inputTarget ?? "")
+    .trim()
+    .toLowerCase();
   if (normalized === "production" || normalized === "prod") {
     return "production";
   }

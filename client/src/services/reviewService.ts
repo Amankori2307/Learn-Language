@@ -1,5 +1,10 @@
 import { api } from "@shared/routes";
-import { LanguageEnum, PartOfSpeechEnum, ReviewStatusEnum, VocabularyTagEnum } from "@shared/domain/enums";
+import {
+  LanguageEnum,
+  PartOfSpeechEnum,
+  ReviewStatusEnum,
+  VocabularyTagEnum,
+} from "@shared/domain/enums";
 import { apiClient, buildApiUrl } from "./apiClient";
 
 export type ReviewStatus = ReviewStatusEnum;
@@ -27,7 +32,9 @@ export type CreateReviewDraftPayload = {
 export const reviewService = {
   async getQueue(status: ReviewStatus, limit: number) {
     const params = new URLSearchParams({ status, limit: String(limit) });
-    const response = await apiClient.get(buildApiUrl(`${api.review.queue.path}?${params.toString()}`));
+    const response = await apiClient.get(
+      buildApiUrl(`${api.review.queue.path}?${params.toString()}`),
+    );
     return api.review.queue.responses[200].parse(response.data);
   },
   async getHistory(wordId: number) {
@@ -50,4 +57,3 @@ export const reviewService = {
     return api.review.submitDraft.responses[200].parse(response.data);
   },
 };
-

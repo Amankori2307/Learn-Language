@@ -55,7 +55,9 @@ function isQuizAudioEnabled(): boolean {
 type AudioPlaybackMode = "hybrid" | "url_only" | "tts_only";
 
 function getAudioPlaybackMode(): AudioPlaybackMode {
-  const mode = String(getPublicClientEnv("NEXT_PUBLIC_AUDIO_PLAYBACK_MODE") ?? "hybrid").toLowerCase();
+  const mode = String(
+    getPublicClientEnv("NEXT_PUBLIC_AUDIO_PLAYBACK_MODE") ?? "hybrid",
+  ).toLowerCase();
   if (mode === "url_only" || mode === "tts_only") {
     return mode;
   }
@@ -82,7 +84,15 @@ export function useHybridAudio() {
   }, []);
 
   const play = useCallback(
-    async ({ key, audioUrl, wordId, text, speechText, resolveText, language }: IPlayHybridAudioInput): Promise<void> => {
+    async ({
+      key,
+      audioUrl,
+      wordId,
+      text,
+      speechText,
+      resolveText,
+      language,
+    }: IPlayHybridAudioInput): Promise<void> => {
       if (!isQuizAudioEnabled()) {
         setActiveKey(null);
         return;

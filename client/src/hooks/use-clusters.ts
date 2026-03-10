@@ -10,7 +10,9 @@ export function useClusters() {
     queryKey: [api.clusters.list.path, language],
     queryFn: async () => {
       const params = new URLSearchParams({ language });
-      const res = await apiClient.get(buildApiUrl(`${api.clusters.list.path}?${params.toString()}`));
+      const res = await apiClient.get(
+        buildApiUrl(`${api.clusters.list.path}?${params.toString()}`),
+      );
       return api.clusters.list.responses[200].parse(res.data);
     },
   });

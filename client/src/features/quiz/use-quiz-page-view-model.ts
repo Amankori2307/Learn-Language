@@ -60,9 +60,10 @@ export function useQuizPageViewModel() {
 
     try {
       const responseTimeMs = Math.max(QUIZ_RESPONSE_TIME_MIN_MS, Date.now() - questionStartedAt);
-      const direction = currentQuestion.type === QuizQuestionTypeEnum.TARGET_TO_SOURCE
-        ? QuizDirectionEnum.TARGET_TO_SOURCE
-        : QuizDirectionEnum.SOURCE_TO_TARGET;
+      const direction =
+        currentQuestion.type === QuizQuestionTypeEnum.TARGET_TO_SOURCE
+          ? QuizDirectionEnum.TARGET_TO_SOURCE
+          : QuizDirectionEnum.SOURCE_TO_TARGET;
       const response = await submitAnswer.mutateAsync({
         wordId: currentQuestion.wordId,
         selectedOptionId: optionId,
@@ -105,7 +106,8 @@ export function useQuizPageViewModel() {
       ? "You finished the current new-word queue."
       : "Great job! You've completed all due items for this session.";
 
-  const percentage = sessionStats.total > 0 ? Math.round((sessionStats.correct / sessionStats.total) * 100) : 0;
+  const percentage =
+    sessionStats.total > 0 ? Math.round((sessionStats.correct / sessionStats.total) * 100) : 0;
   const incorrectCount = Math.max(0, sessionStats.total - sessionStats.correct);
   const recommendedMode =
     percentage < QUIZ_WEAK_WORDS_THRESHOLD_PERCENT

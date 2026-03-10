@@ -5,7 +5,13 @@ import { ICreateProgressInput, IQuizAttemptInput } from "./quiz.repository.types
 
 @Injectable()
 export class QuizRepository {
-  getQuizCandidates(userId: string, limit: number, clusterId?: number, mode?: QuizModeEnum, language?: LanguageEnum) {
+  getQuizCandidates(
+    userId: string,
+    limit: number,
+    clusterId?: number,
+    mode?: QuizModeEnum,
+    language?: LanguageEnum,
+  ) {
     return storage.getQuizCandidates(userId, limit, clusterId, mode, language);
   }
 

@@ -81,7 +81,9 @@ describe("QuizPage integration", () => {
     render(<QuizPage />);
 
     expect(screen.getByText("Session Complete")).toBeTruthy();
-    expect(screen.getByText("Great job! You've completed all due items for this session.")).toBeTruthy();
+    expect(
+      screen.getByText("Great job! You've completed all due items for this session."),
+    ).toBeTruthy();
   });
 
   it.each([

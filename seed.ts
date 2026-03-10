@@ -1,4 +1,3 @@
-
 import { storage } from "./server/src/infrastructure/storage";
 
 async function main() {

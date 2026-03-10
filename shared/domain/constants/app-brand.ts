@@ -5,4 +5,3 @@ export const APP_STORAGE_KEYS = {
   selectedLanguage: "learn-lang:selected-language",
   feedbackEffectsEnabled: "learn-lang:feedback-effects-enabled",
 } as const;
-

@@ -1,11 +1,7 @@
 import type { Request, Response } from "express";
 import { appLogger } from "./logger/logger";
 
-export type ErrorCode =
-  | "UNAUTHORIZED"
-  | "VALIDATION_ERROR"
-  | "NOT_FOUND"
-  | "INTERNAL_ERROR";
+export type ErrorCode = "UNAUTHORIZED" | "VALIDATION_ERROR" | "NOT_FOUND" | "INTERNAL_ERROR";
 
 export type ErrorEnvelope = {
   code: ErrorCode;
@@ -40,11 +36,7 @@ export function sendError(
   return res.status(status).json(body);
 }
 
-export function logApiEvent(
-  req: Request,
-  event: string,
-  payload: Record<string, unknown> = {},
-) {
+export function logApiEvent(req: Request, event: string, payload: Record<string, unknown> = {}) {
   const entry = {
     requestId: getRequestId(req),
     event,

@@ -1,7 +1,13 @@
 import { useMemo, useState } from "react";
 import { Check, ChevronsUpDown, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Command, CommandEmpty, CommandInput, CommandItem, CommandList } from "@/components/ui/command";
+import {
+  Command,
+  CommandEmpty,
+  CommandInput,
+  CommandItem,
+  CommandList,
+} from "@/components/ui/command";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { cn } from "@/lib/utils";
 import type { SearchableSelectOption } from "@/components/ui/searchable-select";
@@ -60,7 +66,9 @@ export function SearchableMultiSelect<TValue extends string>({
             disabled={disabled}
             className={cn("h-10 w-full justify-between font-normal", className)}
           >
-            <span className={cn("truncate text-left", values.length === 0 && "text-muted-foreground")}>
+            <span
+              className={cn("truncate text-left", values.length === 0 && "text-muted-foreground")}
+            >
               {values.length > 0 ? `${values.length} selected` : placeholder}
             </span>
             <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
@@ -80,7 +88,12 @@ export function SearchableMultiSelect<TValue extends string>({
                   value={`${option.label} ${option.value}`}
                   onSelect={() => toggleOption(option.value)}
                 >
-                  <Check className={cn("h-4 w-4", selectedSet.has(option.value) ? "opacity-100" : "opacity-0")} />
+                  <Check
+                    className={cn(
+                      "h-4 w-4",
+                      selectedSet.has(option.value) ? "opacity-100" : "opacity-0",
+                    )}
+                  />
                   <span>{option.label}</span>
                 </CommandItem>
               ))}

@@ -23,7 +23,8 @@ export function useReviewHistory(wordId?: number) {
 export function useTransitionReview() {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: (payload: { id: number; toStatus: ReviewStatus; notes?: string }) => reviewService.transition(payload),
+    mutationFn: (payload: { id: number; toStatus: ReviewStatus; notes?: string }) =>
+      reviewService.transition(payload),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: [api.review.queue.path] });
       queryClient.invalidateQueries({ queryKey: [api.review.history.path] });
@@ -34,7 +35,8 @@ export function useTransitionReview() {
 export function useBulkTransitionReview() {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: (payload: { ids: number[]; toStatus: ReviewStatus; notes?: string }) => reviewService.bulkTransition(payload),
+    mutationFn: (payload: { ids: number[]; toStatus: ReviewStatus; notes?: string }) =>
+      reviewService.bulkTransition(payload),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: [api.review.queue.path] });
       queryClient.invalidateQueries({ queryKey: [api.review.history.path] });

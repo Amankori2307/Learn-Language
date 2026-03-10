@@ -35,7 +35,10 @@ export default function TutorPage() {
   const { data: words } = useWords();
   const [input, setInput] = useState("");
   const [chat, setChat] = useState<ChatItem[]>([
-    { role: TutorChatRoleEnum.TUTOR, text: "Welcome. Write a sentence and I will give vocabulary-focused feedback." },
+    {
+      role: TutorChatRoleEnum.TUTOR,
+      text: "Welcome. Write a sentence and I will give vocabulary-focused feedback.",
+    },
   ]);
 
   const knownEnglish = useMemo(() => {
@@ -51,7 +54,11 @@ export default function TutorPage() {
     if (!value) return;
 
     const feedback = buildTutorFeedback(value, knownEnglish);
-    setChat((prev) => [...prev, { role: TutorChatRoleEnum.USER, text: value }, { role: TutorChatRoleEnum.TUTOR, text: feedback }]);
+    setChat((prev) => [
+      ...prev,
+      { role: TutorChatRoleEnum.USER, text: value },
+      { role: TutorChatRoleEnum.TUTOR, text: feedback },
+    ]);
     setInput("");
   };
 
@@ -71,7 +78,9 @@ export default function TutorPage() {
               key={`${msg.role}-${idx}`}
               className={`rounded-xl px-4 py-3 text-sm ${msg.role === TutorChatRoleEnum.USER ? "bg-primary/10" : "bg-secondary"}`}
             >
-              <span className="font-semibold mr-2">{msg.role === TutorChatRoleEnum.USER ? "You" : "Tutor"}:</span>
+              <span className="font-semibold mr-2">
+                {msg.role === TutorChatRoleEnum.USER ? "You" : "Tutor"}:
+              </span>
               {msg.text}
             </div>
           ))}

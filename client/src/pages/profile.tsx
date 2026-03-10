@@ -65,7 +65,9 @@ export default function ProfilePage() {
         </div>
 
         {isLoading ? (
-          <div className="rounded-2xl border border-border/50 bg-card p-8 text-muted-foreground">Loading profile...</div>
+          <div className="rounded-2xl border border-border/50 bg-card p-8 text-muted-foreground">
+            Loading profile...
+          </div>
         ) : isError || !profile ? (
           <div className="rounded-2xl border border-red-200 bg-red-50 p-8">
             <p className="text-red-700 font-medium">Could not load profile.</p>
@@ -78,11 +80,17 @@ export default function ProfilePage() {
             <div className="flex items-center gap-4 pb-2 border-b border-border/40">
               <Avatar className="h-16 w-16 border border-border">
                 <AvatarImage src={avatarPreview} />
-                <AvatarFallback>{initials(firstName || null, lastName || null, profile.email)}</AvatarFallback>
+                <AvatarFallback>
+                  {initials(firstName || null, lastName || null, profile.email)}
+                </AvatarFallback>
               </Avatar>
               <div className="min-w-0">
-                <p className="font-semibold text-lg truncate">{[firstName, lastName].filter(Boolean).join(" ") || "Learner"}</p>
-                <p className="text-sm text-muted-foreground truncate">{profile.email || "No email available"}</p>
+                <p className="font-semibold text-lg truncate">
+                  {[firstName, lastName].filter(Boolean).join(" ") || "Learner"}
+                </p>
+                <p className="text-sm text-muted-foreground truncate">
+                  {profile.email || "No email available"}
+                </p>
               </div>
             </div>
 

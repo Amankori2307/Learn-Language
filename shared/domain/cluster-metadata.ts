@@ -27,7 +27,9 @@ export const CLUSTER_DESCRIPTION_MAP: Record<string, string> = {
 
 export function getClusterDescription(name: string): string {
   const key = name.trim().toLowerCase();
-  return CLUSTER_DESCRIPTION_MAP[key] ?? "Practical vocabulary cluster for focused learning practice.";
+  return (
+    CLUSTER_DESCRIPTION_MAP[key] ?? "Practical vocabulary cluster for focused learning practice."
+  );
 }
 
 export function isGenericClusterDescription(description: string | null | undefined): boolean {

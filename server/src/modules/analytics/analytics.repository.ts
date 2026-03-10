@@ -14,7 +14,12 @@ export class AnalyticsRepository {
 
   getWordBucket(
     userId: string,
-    input: { bucket: "mastered" | "learning" | "needs_review"; page: number; limit: number; language?: LanguageEnum },
+    input: {
+      bucket: "mastered" | "learning" | "needs_review";
+      page: number;
+      limit: number;
+      language?: LanguageEnum;
+    },
   ) {
     return storage.getWordBucket(userId, input);
   }

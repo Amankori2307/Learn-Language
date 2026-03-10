@@ -24,18 +24,18 @@ export function computeLeaderboard(
           LEADERBOARD_RULES.HARD_WORD_DIFFICULTY_THRESHOLD,
     ).length;
     const streak = computeStreak(
-      userAttempts
-        .map((row) => row.createdAt)
-        .filter((date): date is Date => Boolean(date)),
+      userAttempts.map((row) => row.createdAt).filter((date): date is Date => Boolean(date)),
     );
     const xp = computeXp({ correctAttempts, hardCorrectAttempts });
-    const accuracy = userAttempts.length > 0
-      ? Number(
-          ((correctAttempts / userAttempts.length) * LEADERBOARD_RULES.PERCENT_MULTIPLIER).toFixed(
-            LEADERBOARD_RULES.ACCURACY_DECIMAL_PLACES,
-          ),
-        )
-      : 0;
+    const accuracy =
+      userAttempts.length > 0
+        ? Number(
+            (
+              (correctAttempts / userAttempts.length) *
+              LEADERBOARD_RULES.PERCENT_MULTIPLIER
+            ).toFixed(LEADERBOARD_RULES.ACCURACY_DECIMAL_PLACES),
+          )
+        : 0;
 
     return {
       rank: 0,
@@ -58,5 +58,7 @@ export function computeLeaderboard(
     return a.userId.localeCompare(b.userId);
   });
 
-  return rows.slice(0, limit).map((row, idx) => ({ ...row, rank: idx + LEADERBOARD_RULES.RANK_START }));
+  return rows
+    .slice(0, limit)
+    .map((row, idx) => ({ ...row, rank: idx + LEADERBOARD_RULES.RANK_START }));
 }

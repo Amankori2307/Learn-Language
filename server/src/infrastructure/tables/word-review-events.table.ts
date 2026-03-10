@@ -7,10 +7,14 @@ export const wordReviewEvents = pgTable(
   DbTableNameEnum.WORD_REVIEW_EVENTS,
   {
     id: serial("id").primaryKey(),
-    wordId: integer("word_id").references(() => words.id).notNull(),
+    wordId: integer("word_id")
+      .references(() => words.id)
+      .notNull(),
     fromStatus: text("from_status").notNull(),
     toStatus: text("to_status").notNull(),
-    changedBy: varchar("changed_by").references(() => users.id).notNull(),
+    changedBy: varchar("changed_by")
+      .references(() => users.id)
+      .notNull(),
     notes: text("notes"),
     sourceUrl: text("source_url"),
     sourceCapturedAt: timestamp("source_captured_at"),

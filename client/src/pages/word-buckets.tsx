@@ -4,7 +4,8 @@ import { useWordBucketsViewModel } from "@/features/analytics/use-word-buckets-v
 import { QuizModeEnum } from "@shared/domain/enums";
 
 export default function WordBucketsPage() {
-  const { bucket, page, totalPages, setPage, bucketQuery, changeBucket, navigate } = useWordBucketsViewModel();
+  const { bucket, page, totalPages, setPage, bucketQuery, changeBucket, navigate } =
+    useWordBucketsViewModel();
   const data = bucketQuery.data;
   const bucketCta = {
     mastered: {
@@ -39,7 +40,9 @@ export default function WordBucketsPage() {
         <div className="flex flex-wrap items-center justify-between gap-3">
           <div>
             <h1 className="text-3xl font-bold">{data?.title ?? "Word Bucket"}</h1>
-            <p className="text-muted-foreground mt-1">{data?.meaning ?? "Track your progress state by word."}</p>
+            <p className="text-muted-foreground mt-1">
+              {data?.meaning ?? "Track your progress state by word."}
+            </p>
           </div>
           <Button variant="outline" onClick={() => navigate("/")}>
             Back to Dashboard
@@ -48,7 +51,9 @@ export default function WordBucketsPage() {
 
         <div className="rounded-xl border border-border/50 bg-card p-4">
           <p className="text-sm text-muted-foreground">How to improve</p>
-          <p className="font-medium mt-1">{data?.howToImprove ?? "Keep practicing daily with consistent review."}</p>
+          <p className="font-medium mt-1">
+            {data?.howToImprove ?? "Keep practicing daily with consistent review."}
+          </p>
         </div>
 
         <div className="rounded-xl border border-border/50 bg-card p-4 md:p-5">
@@ -59,7 +64,9 @@ export default function WordBucketsPage() {
               <p className="text-sm text-muted-foreground mt-1">{bucketCta.description}</p>
             </div>
             <div className="flex flex-wrap gap-2">
-              <Button onClick={() => navigate(bucketCta.primaryHref)}>{bucketCta.primaryLabel}</Button>
+              <Button onClick={() => navigate(bucketCta.primaryHref)}>
+                {bucketCta.primaryLabel}
+              </Button>
               <Button variant="outline" onClick={() => navigate(bucketCta.secondaryHref)}>
                 {bucketCta.secondaryLabel}
               </Button>
@@ -68,10 +75,16 @@ export default function WordBucketsPage() {
         </div>
 
         <div className="flex flex-wrap gap-2">
-          <Button variant={bucket === "mastered" ? "default" : "outline"} onClick={() => changeBucket("mastered")}>
+          <Button
+            variant={bucket === "mastered" ? "default" : "outline"}
+            onClick={() => changeBucket("mastered")}
+          >
             Mastered
           </Button>
-          <Button variant={bucket === "learning" ? "default" : "outline"} onClick={() => changeBucket("learning")}>
+          <Button
+            variant={bucket === "learning" ? "default" : "outline"}
+            onClick={() => changeBucket("learning")}
+          >
             Learning
           </Button>
           <Button
@@ -83,7 +96,9 @@ export default function WordBucketsPage() {
         </div>
 
         {bucketQuery.isLoading ? (
-          <div className="rounded-2xl border border-border/50 bg-card p-8 text-muted-foreground">Loading words...</div>
+          <div className="rounded-2xl border border-border/50 bg-card p-8 text-muted-foreground">
+            Loading words...
+          </div>
         ) : bucketQuery.isError ? (
           <div className="rounded-2xl border border-red-300 bg-red-50 p-8">
             <p className="font-medium text-red-700">Could not load words.</p>
@@ -106,9 +121,14 @@ export default function WordBucketsPage() {
             </div>
             <div className="divide-y divide-border/50">
               {data?.words.map((word) => (
-                <div key={`${bucket}-${word.wordId}`} className="grid grid-cols-12 gap-3 px-4 py-3 items-center">
+                <div
+                  key={`${bucket}-${word.wordId}`}
+                  className="grid grid-cols-12 gap-3 px-4 py-3 items-center"
+                >
                   <div className="col-span-6 md:col-span-4 min-w-0">
-                    <p className="font-medium truncate">{word.transliteration} ({word.originalScript})</p>
+                    <p className="font-medium truncate">
+                      {word.transliteration} ({word.originalScript})
+                    </p>
                   </div>
                   <div className="col-span-6 md:col-span-3 min-w-0">
                     <p className="text-sm text-muted-foreground truncate">{word.english}</p>
@@ -126,7 +146,12 @@ export default function WordBucketsPage() {
                 Page {page} of {totalPages} • {data?.total ?? 0} words
               </p>
               <div className="flex items-center gap-2">
-                <Button variant="outline" size="sm" onClick={() => setPage((p) => Math.max(1, p - 1))} disabled={page <= 1}>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => setPage((p) => Math.max(1, p - 1))}
+                  disabled={page <= 1}
+                >
                   Prev
                 </Button>
                 <Button

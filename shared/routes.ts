@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import { z } from "zod";
 import type { Word, Cluster } from "../server/src/infrastructure/schema";
 import {
   LanguageEnum,
@@ -10,8 +10,12 @@ import {
   ReviewStatusEnum,
   UserTypeEnum,
   VocabularyTagEnum,
-} from './domain/enums';
-import { API_PAGINATION_DEFAULTS, API_PAGINATION_LIMITS, API_VALIDATION_LIMITS } from "./domain/api-limits";
+} from "./domain/enums";
+import {
+  API_PAGINATION_DEFAULTS,
+  API_PAGINATION_LIMITS,
+  API_VALIDATION_LIMITS,
+} from "./domain/api-limits";
 
 // ============================================
 // SHARED ERROR SCHEMAS
@@ -46,21 +50,23 @@ export const errorSchemas = {
 export const api = {
   words: {
     list: {
-      method: 'GET' as const,
-      path: '/api/words' as const,
-      input: z.object({
-        language: z.nativeEnum(LanguageEnum).optional(),
-        search: z.string().optional(),
-        clusterId: z.coerce.number().optional(),
-        limit: z.coerce.number().optional(),
-      }).optional(),
+      method: "GET" as const,
+      path: "/api/words" as const,
+      input: z
+        .object({
+          language: z.nativeEnum(LanguageEnum).optional(),
+          search: z.string().optional(),
+          clusterId: z.coerce.number().optional(),
+          limit: z.coerce.number().optional(),
+        })
+        .optional(),
       responses: {
         200: z.array(z.custom<Word>()),
       },
     },
     get: {
-      method: 'GET' as const,
-      path: '/api/words/:id' as const,
+      method: "GET" as const,
+      path: "/api/words/:id" as const,
       responses: {
         200: z.custom<Word>(),
         404: errorSchemas.notFound,
@@ -69,27 +75,33 @@ export const api = {
   },
   clusters: {
     list: {
-      method: 'GET' as const,
-      path: '/api/clusters' as const,
-      input: z.object({
-        language: z.nativeEnum(LanguageEnum).optional(),
-      }).optional(),
+      method: "GET" as const,
+      path: "/api/clusters" as const,
+      input: z
+        .object({
+          language: z.nativeEnum(LanguageEnum).optional(),
+        })
+        .optional(),
       responses: {
-        200: z.array(z.object({
-          id: z.number(),
-          name: z.string(),
-          type: z.string(),
-          description: z.string().nullable(),
-          wordCount: z.number(),
-        })),
+        200: z.array(
+          z.object({
+            id: z.number(),
+            name: z.string(),
+            type: z.string(),
+            description: z.string().nullable(),
+            wordCount: z.number(),
+          }),
+        ),
       },
     },
     get: {
-      method: 'GET' as const,
-      path: '/api/clusters/:id' as const,
-      input: z.object({
-        language: z.nativeEnum(LanguageEnum).optional(),
-      }).optional(),
+      method: "GET" as const,
+      path: "/api/clusters/:id" as const,
+      input: z
+        .object({
+          language: z.nativeEnum(LanguageEnum).optional(),
+        })
+        .optional(),
       responses: {
         200: z.custom<Cluster & { words: Word[] }>(),
         404: errorSchemas.notFound,
@@ -98,34 +110,40 @@ export const api = {
   },
   quiz: {
     generate: {
-      method: 'GET' as const,
-      path: '/api/quiz/generate' as const,
-      input: z.object({
-        mode: z.nativeEnum(QuizModeEnum).default(QuizModeEnum.DAILY_REVIEW),
-        clusterId: z.coerce.number().optional(),
-        count: z.coerce.number().default(API_PAGINATION_DEFAULTS.QUIZ_COUNT),
-        language: z.nativeEnum(LanguageEnum).optional(),
-      }).optional(),
+      method: "GET" as const,
+      path: "/api/quiz/generate" as const,
+      input: z
+        .object({
+          mode: z.nativeEnum(QuizModeEnum).default(QuizModeEnum.DAILY_REVIEW),
+          clusterId: z.coerce.number().optional(),
+          count: z.coerce.number().default(API_PAGINATION_DEFAULTS.QUIZ_COUNT),
+          language: z.nativeEnum(LanguageEnum).optional(),
+        })
+        .optional(),
       responses: {
-        200: z.array(z.object({
-          wordId: z.number(),
-          type: z.nativeEnum(QuizQuestionTypeEnum),
-          questionText: z.string(),
-          pronunciation: z.string().optional().nullable(),
-          audioUrl: z.string().optional().nullable(),
-          imageUrl: z.string().optional().nullable(),
-          options: z.array(z.object({
-            id: z.number(),
-            text: z.string(),
-          })),
-          // We don't send correctAnswerId here to prevent cheating!
-        })),
+        200: z.array(
+          z.object({
+            wordId: z.number(),
+            type: z.nativeEnum(QuizQuestionTypeEnum),
+            questionText: z.string(),
+            pronunciation: z.string().optional().nullable(),
+            audioUrl: z.string().optional().nullable(),
+            imageUrl: z.string().optional().nullable(),
+            options: z.array(
+              z.object({
+                id: z.number(),
+                text: z.string(),
+              }),
+            ),
+            // We don't send correctAnswerId here to prevent cheating!
+          }),
+        ),
         401: errorSchemas.unauthorized,
       },
     },
     submit: {
-      method: 'POST' as const,
-      path: '/api/quiz/submit' as const,
+      method: "POST" as const,
+      path: "/api/quiz/submit" as const,
       input: z.object({
         wordId: z.number(),
         selectedOptionId: z.number(), // The ID of the word selected as the answer
@@ -139,11 +157,13 @@ export const api = {
         200: z.object({
           isCorrect: z.boolean(),
           correctAnswer: z.custom<Word>(),
-          examples: z.array(z.object({
-            originalScript: z.string(),
-            pronunciation: z.string(),
-            meaning: z.string(),
-          })),
+          examples: z.array(
+            z.object({
+              originalScript: z.string(),
+              pronunciation: z.string(),
+              meaning: z.string(),
+            }),
+          ),
           progressUpdate: z.object({
             streak: z.number(),
             masteryLevel: z.number(),
@@ -177,11 +197,13 @@ export const api = {
   },
   stats: {
     get: {
-      method: 'GET' as const,
-      path: '/api/stats' as const,
-      input: z.object({
-        language: z.nativeEnum(LanguageEnum).optional(),
-      }).optional(),
+      method: "GET" as const,
+      path: "/api/stats" as const,
+      input: z
+        .object({
+          language: z.nativeEnum(LanguageEnum).optional(),
+        })
+        .optional(),
       responses: {
         200: z.object({
           totalWords: z.number(),
@@ -204,39 +226,49 @@ export const api = {
     learning: {
       method: "GET" as const,
       path: "/api/analytics/learning" as const,
-      input: z.object({
-        language: z.nativeEnum(LanguageEnum).optional(),
-      }).optional(),
+      input: z
+        .object({
+          language: z.nativeEnum(LanguageEnum).optional(),
+        })
+        .optional(),
       responses: {
         200: z.object({
-          clusters: z.array(z.object({
-            clusterId: z.number(),
-            name: z.string(),
-            wordCount: z.number(),
-            attempts: z.number(),
-            accuracy: z.number(),
-          })),
-          categories: z.array(z.object({
-            category: z.string(),
-            attempts: z.number(),
-            accuracy: z.number(),
-          })),
-          weakWords: z.array(z.object({
-            wordId: z.number(),
-            originalScript: z.string(),
-            transliteration: z.string(),
-            english: z.string(),
-            wrongCount: z.number(),
-            masteryLevel: z.number(),
-          })),
-          strongWords: z.array(z.object({
-            wordId: z.number(),
-            originalScript: z.string(),
-            transliteration: z.string(),
-            english: z.string(),
-            masteryLevel: z.number(),
-            averageStrength: z.number(),
-          })),
+          clusters: z.array(
+            z.object({
+              clusterId: z.number(),
+              name: z.string(),
+              wordCount: z.number(),
+              attempts: z.number(),
+              accuracy: z.number(),
+            }),
+          ),
+          categories: z.array(
+            z.object({
+              category: z.string(),
+              attempts: z.number(),
+              accuracy: z.number(),
+            }),
+          ),
+          weakWords: z.array(
+            z.object({
+              wordId: z.number(),
+              originalScript: z.string(),
+              transliteration: z.string(),
+              english: z.string(),
+              wrongCount: z.number(),
+              masteryLevel: z.number(),
+            }),
+          ),
+          strongWords: z.array(
+            z.object({
+              wordId: z.number(),
+              originalScript: z.string(),
+              transliteration: z.string(),
+              english: z.string(),
+              masteryLevel: z.number(),
+              averageStrength: z.number(),
+            }),
+          ),
         }),
         401: errorSchemas.unauthorized,
       },
@@ -264,16 +296,18 @@ export const api = {
           page: z.number(),
           limit: z.number(),
           total: z.number(),
-          words: z.array(z.object({
-            wordId: z.number(),
-            originalScript: z.string(),
-            transliteration: z.string(),
-            english: z.string(),
-            masteryLevel: z.number(),
-            wrongCount: z.number(),
-            nextReview: z.string().nullable(),
-            averageStrength: z.number(),
-          })),
+          words: z.array(
+            z.object({
+              wordId: z.number(),
+              originalScript: z.string(),
+              transliteration: z.string(),
+              english: z.string(),
+              masteryLevel: z.number(),
+              wrongCount: z.number(),
+              nextReview: z.string().nullable(),
+              averageStrength: z.number(),
+            }),
+          ),
         }),
         401: errorSchemas.unauthorized,
       },
@@ -283,32 +317,36 @@ export const api = {
     history: {
       method: "GET" as const,
       path: "/api/attempts/history" as const,
-      input: z.object({
-        limit: z.coerce
-          .number()
-          .int()
-          .positive()
-          .max(API_PAGINATION_LIMITS.GENERIC_MAX)
-          .default(API_PAGINATION_DEFAULTS.ATTEMPT_HISTORY_LIMIT),
-        language: z.nativeEnum(LanguageEnum).optional(),
-      }).optional(),
+      input: z
+        .object({
+          limit: z.coerce
+            .number()
+            .int()
+            .positive()
+            .max(API_PAGINATION_LIMITS.GENERIC_MAX)
+            .default(API_PAGINATION_DEFAULTS.ATTEMPT_HISTORY_LIMIT),
+          language: z.nativeEnum(LanguageEnum).optional(),
+        })
+        .optional(),
       responses: {
-        200: z.array(z.object({
-          id: z.number(),
-          wordId: z.number(),
-          isCorrect: z.boolean(),
-          confidenceLevel: z.number().nullable(),
-          direction: z.nativeEnum(QuizDirectionEnum).nullable(),
-          questionType: z.nativeEnum(QuizQuestionTypeEnum).nullable(),
-          responseTimeMs: z.number().nullable(),
-          createdAt: z.string().nullable(),
-          word: z.object({
-            language: z.nativeEnum(LanguageEnum),
-            originalScript: z.string(),
-            transliteration: z.string(),
-            english: z.string(),
+        200: z.array(
+          z.object({
+            id: z.number(),
+            wordId: z.number(),
+            isCorrect: z.boolean(),
+            confidenceLevel: z.number().nullable(),
+            direction: z.nativeEnum(QuizDirectionEnum).nullable(),
+            questionType: z.nativeEnum(QuizQuestionTypeEnum).nullable(),
+            responseTimeMs: z.number().nullable(),
+            createdAt: z.string().nullable(),
+            word: z.object({
+              language: z.nativeEnum(LanguageEnum),
+              originalScript: z.string(),
+              transliteration: z.string(),
+              english: z.string(),
+            }),
           }),
-        })),
+        ),
         401: errorSchemas.unauthorized,
       },
     },
@@ -317,29 +355,33 @@ export const api = {
     list: {
       method: "GET" as const,
       path: "/api/leaderboard" as const,
-      input: z.object({
-        window: z.enum(["daily", "weekly", "all_time"]).default("weekly"),
-        limit: z.coerce
-          .number()
-          .int()
-          .positive()
-          .max(API_PAGINATION_LIMITS.LEADERBOARD_MAX)
-          .default(API_PAGINATION_DEFAULTS.LEADERBOARD_LIMIT),
-        language: z.nativeEnum(LanguageEnum).optional(),
-      }).optional(),
+      input: z
+        .object({
+          window: z.enum(["daily", "weekly", "all_time"]).default("weekly"),
+          limit: z.coerce
+            .number()
+            .int()
+            .positive()
+            .max(API_PAGINATION_LIMITS.LEADERBOARD_MAX)
+            .default(API_PAGINATION_DEFAULTS.LEADERBOARD_LIMIT),
+          language: z.nativeEnum(LanguageEnum).optional(),
+        })
+        .optional(),
       responses: {
-        200: z.array(z.object({
-          rank: z.number(),
-          userId: z.string(),
-          firstName: z.string().nullable(),
-          lastName: z.string().nullable(),
-          email: z.string().nullable(),
-          profileImageUrl: z.string().nullable(),
-          xp: z.number(),
-          streak: z.number(),
-          attempts: z.number(),
-          accuracy: z.number(),
-        })),
+        200: z.array(
+          z.object({
+            rank: z.number(),
+            userId: z.string(),
+            firstName: z.string().nullable(),
+            lastName: z.string().nullable(),
+            email: z.string().nullable(),
+            profileImageUrl: z.string().nullable(),
+            xp: z.number(),
+            streak: z.number(),
+            attempts: z.number(),
+            accuracy: z.number(),
+          }),
+        ),
         401: errorSchemas.unauthorized,
       },
     },
@@ -392,35 +434,39 @@ export const api = {
     queue: {
       method: "GET" as const,
       path: "/api/review/queue" as const,
-      input: z.object({
-        status: z.nativeEnum(ReviewStatusEnum).default(ReviewStatusEnum.PENDING_REVIEW),
-        limit: z.coerce
-          .number()
-          .int()
-          .positive()
-          .max(API_PAGINATION_LIMITS.GENERIC_MAX)
-          .default(API_PAGINATION_DEFAULTS.REVIEW_LIMIT),
-      }).optional(),
+      input: z
+        .object({
+          status: z.nativeEnum(ReviewStatusEnum).default(ReviewStatusEnum.PENDING_REVIEW),
+          limit: z.coerce
+            .number()
+            .int()
+            .positive()
+            .max(API_PAGINATION_LIMITS.GENERIC_MAX)
+            .default(API_PAGINATION_DEFAULTS.REVIEW_LIMIT),
+        })
+        .optional(),
       responses: {
-        200: z.array(z.object({
-          id: z.number(),
-          language: z.nativeEnum(LanguageEnum),
-          originalScript: z.string(),
-          transliteration: z.string(),
-          english: z.string(),
-          partOfSpeech: z.nativeEnum(PartOfSpeechEnum),
-          reviewStatus: z.nativeEnum(ReviewStatusEnum),
-          sourceUrl: z.string().nullable(),
-          sourceCapturedAt: z.string().nullable(),
-          submittedBy: z.string().nullable(),
-          submittedAt: z.string().nullable(),
-          reviewedBy: z.string().nullable(),
-          reviewedAt: z.string().nullable(),
-          reviewNotes: z.string().nullable(),
-          reviewerConfidenceScore: z.number().int().min(1).max(5).nullable(),
-          requiresSecondaryReview: z.boolean(),
-          disagreementStatus: z.nativeEnum(ReviewDisagreementStatusEnum),
-        })),
+        200: z.array(
+          z.object({
+            id: z.number(),
+            language: z.nativeEnum(LanguageEnum),
+            originalScript: z.string(),
+            transliteration: z.string(),
+            english: z.string(),
+            partOfSpeech: z.nativeEnum(PartOfSpeechEnum),
+            reviewStatus: z.nativeEnum(ReviewStatusEnum),
+            sourceUrl: z.string().nullable(),
+            sourceCapturedAt: z.string().nullable(),
+            submittedBy: z.string().nullable(),
+            submittedAt: z.string().nullable(),
+            reviewedBy: z.string().nullable(),
+            reviewedAt: z.string().nullable(),
+            reviewNotes: z.string().nullable(),
+            reviewerConfidenceScore: z.number().int().min(1).max(5).nullable(),
+            requiresSecondaryReview: z.boolean(),
+            disagreementStatus: z.nativeEnum(ReviewDisagreementStatusEnum),
+          }),
+        ),
         401: errorSchemas.unauthorized,
         403: errorSchemas.unauthorized,
       },
@@ -505,28 +551,34 @@ export const api = {
             requiresSecondaryReview: z.boolean(),
             disagreementStatus: z.nativeEnum(ReviewDisagreementStatusEnum),
           }),
-          clusters: z.array(z.object({
-            id: z.number(),
-            name: z.string(),
-            type: z.string(),
-          })),
-          relatedClusterWords: z.array(z.object({
-            id: z.number(),
-            originalScript: z.string(),
-            transliteration: z.string(),
-            english: z.string(),
-            reviewStatus: z.nativeEnum(ReviewStatusEnum),
-          })),
-          events: z.array(z.object({
-            id: z.number(),
-            fromStatus: z.string(),
-            toStatus: z.string(),
-            changedBy: z.string(),
-            notes: z.string().nullable(),
-            sourceUrl: z.string().nullable(),
-            sourceCapturedAt: z.string().nullable(),
-            createdAt: z.string().nullable(),
-          })),
+          clusters: z.array(
+            z.object({
+              id: z.number(),
+              name: z.string(),
+              type: z.string(),
+            }),
+          ),
+          relatedClusterWords: z.array(
+            z.object({
+              id: z.number(),
+              originalScript: z.string(),
+              transliteration: z.string(),
+              english: z.string(),
+              reviewStatus: z.nativeEnum(ReviewStatusEnum),
+            }),
+          ),
+          events: z.array(
+            z.object({
+              id: z.number(),
+              fromStatus: z.string(),
+              toStatus: z.string(),
+              changedBy: z.string(),
+              notes: z.string().nullable(),
+              sourceUrl: z.string().nullable(),
+              sourceCapturedAt: z.string().nullable(),
+              createdAt: z.string().nullable(),
+            }),
+          ),
         }),
         401: errorSchemas.unauthorized,
         403: errorSchemas.unauthorized,
@@ -536,30 +588,34 @@ export const api = {
     conflicts: {
       method: "GET" as const,
       path: "/api/review/conflicts" as const,
-      input: z.object({
-        limit: z.coerce
-          .number()
-          .int()
-          .positive()
-          .max(API_PAGINATION_LIMITS.GENERIC_MAX)
-          .default(API_PAGINATION_DEFAULTS.REVIEW_LIMIT),
-      }).optional(),
+      input: z
+        .object({
+          limit: z.coerce
+            .number()
+            .int()
+            .positive()
+            .max(API_PAGINATION_LIMITS.GENERIC_MAX)
+            .default(API_PAGINATION_DEFAULTS.REVIEW_LIMIT),
+        })
+        .optional(),
       responses: {
-        200: z.array(z.object({
-          id: z.number(),
-          language: z.nativeEnum(LanguageEnum),
-          originalScript: z.string(),
-          transliteration: z.string(),
-          english: z.string(),
-          partOfSpeech: z.nativeEnum(PartOfSpeechEnum),
-          reviewStatus: z.nativeEnum(ReviewStatusEnum),
-          reviewerConfidenceScore: z.number().int().min(1).max(5).nullable(),
-          requiresSecondaryReview: z.boolean(),
-          disagreementStatus: z.nativeEnum(ReviewDisagreementStatusEnum),
-          reviewNotes: z.string().nullable(),
-          submittedAt: z.string().nullable(),
-          reviewedAt: z.string().nullable(),
-        })),
+        200: z.array(
+          z.object({
+            id: z.number(),
+            language: z.nativeEnum(LanguageEnum),
+            originalScript: z.string(),
+            transliteration: z.string(),
+            english: z.string(),
+            partOfSpeech: z.nativeEnum(PartOfSpeechEnum),
+            reviewStatus: z.nativeEnum(ReviewStatusEnum),
+            reviewerConfidenceScore: z.number().int().min(1).max(5).nullable(),
+            requiresSecondaryReview: z.boolean(),
+            disagreementStatus: z.nativeEnum(ReviewDisagreementStatusEnum),
+            reviewNotes: z.string().nullable(),
+            submittedAt: z.string().nullable(),
+            reviewedAt: z.string().nullable(),
+          }),
+        ),
         401: errorSchemas.unauthorized,
         403: errorSchemas.unauthorized,
       },
@@ -609,18 +665,22 @@ export const api = {
         sourceUrl: z.string().url().optional(),
         tags: z.array(z.nativeEnum(VocabularyTagEnum)).optional(),
         clusterIds: z.array(z.number().int().positive()).max(200).optional(),
-        examples: z.array(z.object({
-          originalScript: z.string().trim().min(1),
-          pronunciation: z.string().trim().min(1),
-          englishSentence: z.string().trim().min(1),
-          contextTag: z.string().trim().min(1).default("general"),
-          difficulty: z
-            .number()
-            .int()
-            .min(API_VALIDATION_LIMITS.EXAMPLE_DIFFICULTY_MIN)
-            .max(API_VALIDATION_LIMITS.EXAMPLE_DIFFICULTY_MAX)
-            .default(API_VALIDATION_LIMITS.EXAMPLE_DIFFICULTY_MIN),
-        })).min(1),
+        examples: z
+          .array(
+            z.object({
+              originalScript: z.string().trim().min(1),
+              pronunciation: z.string().trim().min(1),
+              englishSentence: z.string().trim().min(1),
+              contextTag: z.string().trim().min(1).default("general"),
+              difficulty: z
+                .number()
+                .int()
+                .min(API_VALIDATION_LIMITS.EXAMPLE_DIFFICULTY_MIN)
+                .max(API_VALIDATION_LIMITS.EXAMPLE_DIFFICULTY_MAX)
+                .default(API_VALIDATION_LIMITS.EXAMPLE_DIFFICULTY_MIN),
+            }),
+          )
+          .min(1),
       }),
       responses: {
         200: z.object({
@@ -635,8 +695,8 @@ export const api = {
   },
   admin: {
     seed: {
-      method: 'POST' as const,
-      path: '/api/admin/seed' as const,
+      method: "POST" as const,
+      path: "/api/admin/seed" as const,
       responses: {
         200: z.object({ message: z.string() }),
       },
@@ -644,9 +704,11 @@ export const api = {
     srsDrift: {
       method: "GET" as const,
       path: "/api/admin/srs/drift" as const,
-      input: z.object({
-        language: z.nativeEnum(LanguageEnum).optional(),
-      }).optional(),
+      input: z
+        .object({
+          language: z.nativeEnum(LanguageEnum).optional(),
+        })
+        .optional(),
       responses: {
         200: z.object({
           generatedAt: z.string(),
@@ -656,11 +718,13 @@ export const api = {
           highIntervalCount: z.number(),
           highIntervalRatio: z.number(),
           emptyReviewDays: z.number(),
-          alerts: z.array(z.object({
-            code: z.enum(["overdue_growth", "interval_spike", "empty_review_days"]),
-            severity: z.enum(["warning", "critical"]),
-            message: z.string(),
-          })),
+          alerts: z.array(
+            z.object({
+              code: z.enum(["overdue_growth", "interval_spike", "empty_review_days"]),
+              severity: z.enum(["warning", "critical"]),
+              message: z.string(),
+            }),
+          ),
         }),
         401: errorSchemas.unauthorized,
         403: errorSchemas.unauthorized,
@@ -687,7 +751,7 @@ export function buildUrl(path: string, params?: Record<string, string | number>)
 // ============================================
 // TYPE HELPERS
 // ============================================
-export type QuizGenerateResponse = z.infer<typeof api.quiz.generate.responses[200]>;
+export type QuizGenerateResponse = z.infer<(typeof api.quiz.generate.responses)[200]>;
 export type QuizSubmitInput = z.infer<typeof api.quiz.submit.input>;
-export type QuizSubmitResponse = z.infer<typeof api.quiz.submit.responses[200]>;
-export type StatsResponse = z.infer<typeof api.stats.get.responses[200]>;
+export type QuizSubmitResponse = z.infer<(typeof api.quiz.submit.responses)[200]>;
+export type StatsResponse = z.infer<(typeof api.stats.get.responses)[200]>;

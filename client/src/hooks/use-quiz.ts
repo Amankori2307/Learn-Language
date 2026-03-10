@@ -16,11 +16,13 @@ export function useGenerateQuiz(mode: QuizMode = QuizModeEnum.DAILY_REVIEW, clus
     queryKey: [api.quiz.generate.path, { mode, clusterId, language }],
     queryFn: async () => {
       const params = new URLSearchParams();
-      params.append('mode', mode);
+      params.append("mode", mode);
       params.append("language", language);
-      if (clusterId) params.append('clusterId', clusterId.toString());
-      
-      const res = await apiClient.get(buildApiUrl(`${api.quiz.generate.path}?${params.toString()}`));
+      if (clusterId) params.append("clusterId", clusterId.toString());
+
+      const res = await apiClient.get(
+        buildApiUrl(`${api.quiz.generate.path}?${params.toString()}`),
+      );
       return api.quiz.generate.responses[200].parse(res.data);
     },
     refetchOnWindowFocus: false,
@@ -48,7 +50,7 @@ export function useSubmitAnswer() {
     onSuccess: () => {
       // Invalidate stats to refresh dashboard progress immediately
       queryClient.invalidateQueries({ queryKey: [api.stats.get.path, language] });
-    }
+    },
   });
 }
 
@@ -78,7 +80,9 @@ export function useLearningInsights() {
     queryFn: async () => {
       const params = new URLSearchParams({ language });
       try {
-        const res = await apiClient.get(buildApiUrl(`${api.analytics.learning.path}?${params.toString()}`));
+        const res = await apiClient.get(
+          buildApiUrl(`${api.analytics.learning.path}?${params.toString()}`),
+        );
         return api.analytics.learning.responses[200].parse(res.data);
       } catch (error) {
         if ((error as AxiosError).response?.status === 401) {
@@ -99,6 +103,6 @@ export function useSeedData() {
     },
     onSuccess: () => {
       queryClient.invalidateQueries();
-    }
+    },
   });
 }

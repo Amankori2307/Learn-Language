@@ -55,7 +55,10 @@ export default function QuizPage() {
             <Button onClick={() => startSession(`/quiz?mode=${QuizModeEnum.DAILY_REVIEW}`)}>
               Daily Revision
             </Button>
-            <Button variant="outline" onClick={() => startSession(`/quiz?mode=${QuizModeEnum.WEAK_WORDS}`)}>
+            <Button
+              variant="outline"
+              onClick={() => startSession(`/quiz?mode=${QuizModeEnum.WEAK_WORDS}`)}
+            >
               Weak Words Drill
             </Button>
             <Button variant="outline" onClick={() => setLocation("/clusters")}>
@@ -79,7 +82,7 @@ export default function QuizPage() {
         <div className="text-center py-20">
           <h2 className="text-2xl font-bold text-foreground">No active question</h2>
           <p className="text-muted-foreground mt-2 mb-6">Please restart the session.</p>
-          <Button onClick={() => setLocation('/')}>Return Home</Button>
+          <Button onClick={() => setLocation("/")}>Return Home</Button>
         </div>
       </Layout>
     );
@@ -94,15 +97,19 @@ export default function QuizPage() {
           </div>
           <h2 className="text-3xl font-bold mb-2">Lesson Complete!</h2>
           <p className="text-muted-foreground mb-8">You're making steady progress.</p>
-          
+
           <div className="grid grid-cols-2 gap-4 mb-8">
             <div className="bg-secondary/50 p-4 rounded-2xl">
               <div className="text-2xl font-bold text-primary">{percentage}%</div>
-              <div className="text-xs text-muted-foreground font-medium uppercase tracking-wider">Accuracy</div>
+              <div className="text-xs text-muted-foreground font-medium uppercase tracking-wider">
+                Accuracy
+              </div>
             </div>
             <div className="bg-secondary/50 p-4 rounded-2xl">
               <div className="text-2xl font-bold text-accent">{sessionStats.correct}</div>
-              <div className="text-xs text-muted-foreground font-medium uppercase tracking-wider">Correct Words</div>
+              <div className="text-xs text-muted-foreground font-medium uppercase tracking-wider">
+                Correct Words
+              </div>
             </div>
           </div>
 
@@ -131,12 +138,22 @@ export default function QuizPage() {
             >
               {recommendedLabel}
             </Button>
-            <Button variant="outline" className="w-full h-12 text-lg rounded-xl" onClick={() => setLocation('/')}>
+            <Button
+              variant="outline"
+              className="w-full h-12 text-lg rounded-xl"
+              onClick={() => setLocation("/")}
+            >
               Back to Dashboard
             </Button>
           </div>
           <p className="text-xs text-muted-foreground mt-3">
-            Next recommendation: {recommendedMode === QuizModeEnum.WEAK_WORDS ? "focus on weak words" : recommendedMode === QuizModeEnum.NEW_WORDS ? "continue with new words" : "continue daily review"}.
+            Next recommendation:{" "}
+            {recommendedMode === QuizModeEnum.WEAK_WORDS
+              ? "focus on weak words"
+              : recommendedMode === QuizModeEnum.NEW_WORDS
+                ? "continue with new words"
+                : "continue daily review"}
+            .
           </p>
         </div>
       </div>
@@ -147,17 +164,17 @@ export default function QuizPage() {
     <div className="min-h-screen bg-background flex flex-col">
       {/* Quiz Header */}
       <div className="px-4 py-6 max-w-4xl mx-auto w-full flex items-center gap-4">
-        <Button 
-          variant="ghost" 
-          size="icon" 
+        <Button
+          variant="ghost"
+          size="icon"
           className="rounded-full hover:bg-secondary"
-          onClick={() => setLocation('/')}
+          onClick={() => setLocation("/")}
         >
           <X className="w-6 h-6 text-muted-foreground" />
         </Button>
         <div className="flex-1 h-3 bg-secondary rounded-full overflow-hidden">
-          <div 
-            className="h-full bg-primary transition-all duration-500 ease-out" 
+          <div
+            className="h-full bg-primary transition-all duration-500 ease-out"
             style={{ width: `${progress}%` }}
           />
         </div>

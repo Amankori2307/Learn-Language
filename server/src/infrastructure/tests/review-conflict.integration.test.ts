@@ -3,7 +3,12 @@ import assert from "node:assert/strict";
 import { eq, inArray, sql } from "drizzle-orm";
 import { db } from "../db";
 import { storage } from "../storage";
-import { ReviewDisagreementStatusEnum, ReviewStatusEnum, UserTypeEnum, LanguageEnum } from "@shared/domain/enums";
+import {
+  ReviewDisagreementStatusEnum,
+  ReviewStatusEnum,
+  UserTypeEnum,
+  LanguageEnum,
+} from "@shared/domain/enums";
 import { users, words, wordReviewEvents } from "../schema";
 
 function buildId(prefix: string) {
@@ -107,7 +112,9 @@ test("review conflict workflow resolves disagreement with audit history", async 
     assert.ok(history);
     assert.equal(history?.word.disagreementStatus, ReviewDisagreementStatusEnum.RESOLVED);
     assert.ok((history?.events.length ?? 0) >= 2);
-    assert.ok(history?.events.some((event) => (event.notes ?? "").startsWith("[conflict-resolved]")));
+    assert.ok(
+      history?.events.some((event) => (event.notes ?? "").startsWith("[conflict-resolved]")),
+    );
   } finally {
     if (createdWordId) {
       await db.delete(wordReviewEvents).where(eq(wordReviewEvents.wordId, createdWordId));

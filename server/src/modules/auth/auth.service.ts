@@ -60,9 +60,9 @@ export class AuthService {
         const shouldSyncRole = userId !== "dev-user" && user.role !== resolvedRole;
         const shouldBackfillProfile = Boolean(
           (!user.email && claimEmail) ||
-            (!user.firstName && claimFirstName) ||
-            (!user.lastName && claimLastName) ||
-            (!user.profileImageUrl?.trim() && claimProfileImageUrl),
+          (!user.firstName && claimFirstName) ||
+          (!user.lastName && claimLastName) ||
+          (!user.profileImageUrl?.trim() && claimProfileImageUrl),
         );
 
         if (shouldSyncRole || shouldBackfillProfile) {

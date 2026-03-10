@@ -25,7 +25,9 @@ function ProtectedRoute({ component: Component }: { component: React.ComponentTy
   const { user, isLoading } = useAuth();
 
   if (isLoading) {
-    return <div className="min-h-screen flex items-center justify-center bg-background">Loading...</div>;
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-background">Loading...</div>
+    );
   }
 
   if (!user) {
@@ -39,44 +41,20 @@ function Router() {
   return (
     <Switch>
       <Route path="/auth" component={AuthPage} />
-      
+
       {/* Protected Routes */}
-      <Route path="/">
-        {() => <ProtectedRoute component={Dashboard} />}
-      </Route>
-      <Route path="/quiz">
-        {() => <ProtectedRoute component={QuizPage} />}
-      </Route>
-      <Route path="/clusters">
-        {() => <ProtectedRoute component={ClustersPage} />}
-      </Route>
-      <Route path="/leaderboard">
-        {() => <ProtectedRoute component={LeaderboardPage} />}
-      </Route>
-      <Route path="/profile">
-        {() => <ProtectedRoute component={ProfilePage} />}
-      </Route>
-      <Route path="/history">
-        {() => <ProtectedRoute component={HistoryPage} />}
-      </Route>
-      <Route path="/analytics">
-        {() => <ProtectedRoute component={HistoryPage} />}
-      </Route>
-      <Route path="/analytics/words">
-        {() => <ProtectedRoute component={WordBucketsPage} />}
-      </Route>
-      <Route path="/review">
-        {() => <ProtectedRoute component={ReviewPage} />}
-      </Route>
-      <Route path="/review/add">
-        {() => <ProtectedRoute component={AddVocabularyPage} />}
-      </Route>
-      <Route path="/contextual">
-        {() => <ProtectedRoute component={ContextualPage} />}
-      </Route>
-      <Route path="/tutor">
-        {() => <ProtectedRoute component={TutorPage} />}
-      </Route>
+      <Route path="/">{() => <ProtectedRoute component={Dashboard} />}</Route>
+      <Route path="/quiz">{() => <ProtectedRoute component={QuizPage} />}</Route>
+      <Route path="/clusters">{() => <ProtectedRoute component={ClustersPage} />}</Route>
+      <Route path="/leaderboard">{() => <ProtectedRoute component={LeaderboardPage} />}</Route>
+      <Route path="/profile">{() => <ProtectedRoute component={ProfilePage} />}</Route>
+      <Route path="/history">{() => <ProtectedRoute component={HistoryPage} />}</Route>
+      <Route path="/analytics">{() => <ProtectedRoute component={HistoryPage} />}</Route>
+      <Route path="/analytics/words">{() => <ProtectedRoute component={WordBucketsPage} />}</Route>
+      <Route path="/review">{() => <ProtectedRoute component={ReviewPage} />}</Route>
+      <Route path="/review/add">{() => <ProtectedRoute component={AddVocabularyPage} />}</Route>
+      <Route path="/contextual">{() => <ProtectedRoute component={ContextualPage} />}</Route>
+      <Route path="/tutor">{() => <ProtectedRoute component={TutorPage} />}</Route>
 
       {/* Fallback */}
       <Route component={NotFound} />

@@ -1,10 +1,12 @@
 # Docker Compose Setup (Hot Reload)
 
 This setup brings up:
+
 - PostgreSQL (`db`)
 - App server + UI dev runtime (`app`)
 
 The app container startup sequence:
+
 1. Wait for Postgres readiness
 2. Install dependencies (`pnpm install`)
 3. Run `db:migrate`
@@ -19,9 +21,11 @@ docker compose up --build
 ```
 
 App URL:
+
 - [http://localhost:3000](http://localhost:3000)
 
 Notes:
+
 - Compose mounts the repo into `/app`; backend and frontend changes should auto-refresh without rebuilding image.
 - Polling is enabled (`CHOKIDAR_USEPOLLING`, `WATCHPACK_POLLING`) for stable file watching on Docker Desktop/macOS.
 - `CI=true` is set in compose so `pnpm install` can run non-interactively in container startup.

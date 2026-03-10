@@ -11,4 +11,3 @@ test("buildUrl leaves path unchanged when params are missing", () => {
   const url = buildUrl("/api/clusters/:id");
   assert.equal(url, "/api/clusters/:id");
 });
-

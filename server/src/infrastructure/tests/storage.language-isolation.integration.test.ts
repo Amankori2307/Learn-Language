@@ -189,7 +189,11 @@ test("language isolation: user data reads are scoped by selected language", asyn
       },
     ]);
 
-    const teluguHistory = await storage.getUserAttemptHistory(learnerUserId, 50, LanguageEnum.TELUGU);
+    const teluguHistory = await storage.getUserAttemptHistory(
+      learnerUserId,
+      50,
+      LanguageEnum.TELUGU,
+    );
     const hindiHistory = await storage.getUserAttemptHistory(learnerUserId, 50, LanguageEnum.HINDI);
     assert.equal(teluguHistory.length, 1);
     assert.equal(hindiHistory.length, 1);
@@ -243,7 +247,10 @@ test("language isolation: user data reads are scoped by selected language", asyn
         LanguageEnum.TELUGU,
       );
       assert.ok(rows.length > 0, `expected candidates for mode=${mode}`);
-      assert.ok(rows.every((row) => row.language === LanguageEnum.TELUGU), `expected telugu-only candidates for mode=${mode}`);
+      assert.ok(
+        rows.every((row) => row.language === LanguageEnum.TELUGU),
+        `expected telugu-only candidates for mode=${mode}`,
+      );
     }
 
     const listenRows = await storage.getQuizCandidates(
@@ -278,7 +285,9 @@ test("language isolation: user data reads are scoped by selected language", asyn
     const hindiDailyLeaderboard = await storage.getLeaderboard("daily", 10, LanguageEnum.HINDI);
     const teluguLearner = teluguLeaderboard.find((row) => row.userId === learnerUserId);
     const hindiLeader = hindiLeaderboard.find((row) => row.userId === leaderboardUserId);
-    const hindiWeeklyLeader = hindiWeeklyLeaderboard.find((row) => row.userId === leaderboardUserId);
+    const hindiWeeklyLeader = hindiWeeklyLeaderboard.find(
+      (row) => row.userId === leaderboardUserId,
+    );
     const hindiDailyLeader = hindiDailyLeaderboard.find((row) => row.userId === leaderboardUserId);
     const hindiWeeklyLearner = hindiWeeklyLeaderboard.find((row) => row.userId === learnerUserId);
     const hindiDailyLearner = hindiDailyLeaderboard.find((row) => row.userId === learnerUserId);
@@ -295,8 +304,12 @@ test("language isolation: user data reads are scoped by selected language", asyn
     assert.equal(hindiWeeklyLearner?.attempts, 1);
     assert.equal(hindiDailyLearner?.attempts, 0);
   } finally {
-    await db.delete(quizAttempts).where(inArray(quizAttempts.userId, [learnerUserId, leaderboardUserId]));
-    await db.delete(userWordProgress).where(inArray(userWordProgress.userId, [learnerUserId, leaderboardUserId]));
+    await db
+      .delete(quizAttempts)
+      .where(inArray(quizAttempts.userId, [learnerUserId, leaderboardUserId]));
+    await db
+      .delete(userWordProgress)
+      .where(inArray(userWordProgress.userId, [learnerUserId, leaderboardUserId]));
 
     if (createdWordIds.length > 0) {
       await db.delete(wordClusters).where(inArray(wordClusters.wordId, createdWordIds));

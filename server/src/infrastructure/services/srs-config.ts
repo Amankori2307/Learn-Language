@@ -25,7 +25,11 @@ export function resolveSrsConfig(row?: SrsConfig | null): SrsConfigSnapshot {
   const easeMax = Number(row.config.easeMax);
   const incorrectEasePenalty = Number(row.config.incorrectEasePenalty);
 
-  if (!Number.isFinite(easeMin) || !Number.isFinite(easeMax) || !Number.isFinite(incorrectEasePenalty)) {
+  if (
+    !Number.isFinite(easeMin) ||
+    !Number.isFinite(easeMax) ||
+    !Number.isFinite(incorrectEasePenalty)
+  ) {
     return DEFAULT_SRS_CONFIG;
   }
 

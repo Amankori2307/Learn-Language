@@ -27,7 +27,8 @@ function getInitialLanguage(): LanguageEnum {
     return fallback;
   }
 
-  const stored = window.localStorage.getItem(STORAGE_KEY) ?? window.localStorage.getItem(LEGACY_STORAGE_KEY);
+  const stored =
+    window.localStorage.getItem(STORAGE_KEY) ?? window.localStorage.getItem(LEGACY_STORAGE_KEY);
   const isValid = stored && Object.values(LanguageEnum).includes(stored as LanguageEnum);
   return isValid ? (stored as LanguageEnum) : fallback;
 }

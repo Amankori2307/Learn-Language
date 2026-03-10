@@ -46,7 +46,8 @@ export function computeCandidateScore(input: ScoreCandidateInput): CandidateScor
         QUIZ_CANDIDATE_SCORING.DAYS_SINCE_LAST_SEEN_DIVISOR_MS,
     ),
   );
-  const wrongPenaltyBonus = (input.progress.wrongCount ?? 0) * QUIZ_CANDIDATE_SCORING.WRONG_COUNT_WEIGHT;
+  const wrongPenaltyBonus =
+    (input.progress.wrongCount ?? 0) * QUIZ_CANDIDATE_SCORING.WRONG_COUNT_WEIGHT;
   const streakPenalty = input.progress.correctStreak ?? 0;
   const weakestDirection = Math.min(
     input.progress.sourceToTargetStrength ?? QUIZ_CANDIDATE_SCORING.DEFAULT_DIRECTION_STRENGTH,

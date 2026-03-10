@@ -2,7 +2,12 @@ import { Controller, Get, Inject, Query, Req, Res, UseGuards } from "@nestjs/com
 import type { Request, Response } from "express";
 import { AnalyticsService } from "./analytics.service";
 import { AuthenticatedGuard } from "../../common/guards/authenticated.guard";
-import { AttemptHistoryQueryDto, LanguageQueryDto, LeaderboardQueryDto, WordBucketQueryDto } from "./analytics.dto";
+import {
+  AttemptHistoryQueryDto,
+  LanguageQueryDto,
+  LeaderboardQueryDto,
+  WordBucketQueryDto,
+} from "./analytics.dto";
 import { AppError } from "../../common/errors/app-error";
 import { sendError } from "../../common/http";
 
@@ -23,7 +28,11 @@ export class AnalyticsApiController {
   }
 
   @Get("/api/analytics/learning")
-  async getLearningInsights(@Req() req: Request, @Res() res: Response, @Query() query: LanguageQueryDto) {
+  async getLearningInsights(
+    @Req() req: Request,
+    @Res() res: Response,
+    @Query() query: LanguageQueryDto,
+  ) {
     try {
       const userId = (req.user as { claims: { sub: string } }).claims.sub;
       const insights = await this.analyticsService.getLearningInsights(userId, query.language);
@@ -34,7 +43,11 @@ export class AnalyticsApiController {
   }
 
   @Get("/api/analytics/word-buckets")
-  async getWordBucket(@Req() req: Request, @Res() res: Response, @Query() query: WordBucketQueryDto) {
+  async getWordBucket(
+    @Req() req: Request,
+    @Res() res: Response,
+    @Query() query: WordBucketQueryDto,
+  ) {
     try {
       const userId = (req.user as { claims: { sub: string } }).claims.sub;
       const result = await this.analyticsService.getWordBucket(userId, query);
@@ -45,7 +58,11 @@ export class AnalyticsApiController {
   }
 
   @Get("/api/attempts/history")
-  async getAttemptHistory(@Req() req: Request, @Res() res: Response, @Query() query: AttemptHistoryQueryDto) {
+  async getAttemptHistory(
+    @Req() req: Request,
+    @Res() res: Response,
+    @Query() query: AttemptHistoryQueryDto,
+  ) {
     try {
       const userId = (req.user as { claims: { sub: string } }).claims.sub;
       const history = await this.analyticsService.getAttemptHistory(userId, query);
@@ -56,7 +73,11 @@ export class AnalyticsApiController {
   }
 
   @Get("/api/leaderboard")
-  async getLeaderboard(@Req() req: Request, @Res() res: Response, @Query() query: LeaderboardQueryDto) {
+  async getLeaderboard(
+    @Req() req: Request,
+    @Res() res: Response,
+    @Query() query: LeaderboardQueryDto,
+  ) {
     try {
       const leaderboard = await this.analyticsService.getLeaderboard(query);
       res.json(leaderboard);

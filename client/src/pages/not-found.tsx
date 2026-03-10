@@ -11,7 +11,7 @@ export default function NotFound() {
           <div className="flex justify-center">
             <AlertCircle className="h-20 w-20 text-red-500 opacity-20" />
           </div>
-          
+
           <div className="space-y-2">
             <h1 className="text-2xl font-bold text-gray-900">Page Not Found</h1>
             <p className="text-gray-500">

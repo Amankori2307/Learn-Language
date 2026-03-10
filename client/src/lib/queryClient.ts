@@ -5,10 +5,7 @@ import { apiClient, buildApiUrl } from "@/services/apiClient";
 function toErrorMessage(error: unknown): string {
   const axiosError = error as AxiosError<{ message?: string }>;
   const status = axiosError.response?.status;
-  const message =
-    axiosError.response?.data?.message ??
-    axiosError.message ??
-    "Request failed";
+  const message = axiosError.response?.data?.message ?? axiosError.message ?? "Request failed";
   if (!status) {
     return message;
   }
@@ -29,9 +26,7 @@ export async function apiRequest(
 }
 
 type UnauthorizedBehavior = "returnNull" | "throw";
-export function getQueryFn<T>(options: {
-  on401: UnauthorizedBehavior;
-}): QueryFunction<T> {
+export function getQueryFn<T>(options: { on401: UnauthorizedBehavior }): QueryFunction<T> {
   const { on401: unauthorizedBehavior } = options;
   return async ({ queryKey }) => {
     try {

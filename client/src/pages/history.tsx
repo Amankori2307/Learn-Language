@@ -22,7 +22,10 @@ function formatWhen(value: string | null) {
 }
 
 type ResultFilter = "all" | "correct" | "wrong";
-type DirectionFilter = "all" | QuizDirectionEnum.SOURCE_TO_TARGET | QuizDirectionEnum.TARGET_TO_SOURCE;
+type DirectionFilter =
+  | "all"
+  | QuizDirectionEnum.SOURCE_TO_TARGET
+  | QuizDirectionEnum.TARGET_TO_SOURCE;
 type SortOption = "newest" | "oldest" | "confidence_desc" | "response_time_desc";
 
 export default function HistoryPage() {
@@ -136,7 +139,9 @@ export default function HistoryPage() {
               id="history-result"
               className="h-10 w-full rounded-md border border-input bg-background px-3 text-sm"
               value={resultFilter}
-              onChange={(event) => applyFilterReset(setResultFilter, event.target.value as ResultFilter)}
+              onChange={(event) =>
+                applyFilterReset(setResultFilter, event.target.value as ResultFilter)
+              }
             >
               <option value="all">All</option>
               <option value="correct">Correct</option>
@@ -149,7 +154,9 @@ export default function HistoryPage() {
               id="history-direction"
               className="h-10 w-full rounded-md border border-input bg-background px-3 text-sm"
               value={directionFilter}
-              onChange={(event) => applyFilterReset(setDirectionFilter, event.target.value as DirectionFilter)}
+              onChange={(event) =>
+                applyFilterReset(setDirectionFilter, event.target.value as DirectionFilter)
+              }
             >
               <option value="all">All</option>
               <option value={QuizDirectionEnum.SOURCE_TO_TARGET}>Source -&gt; English</option>
@@ -173,7 +180,9 @@ export default function HistoryPage() {
         </div>
 
         {history.isLoading ? (
-          <div className="rounded-2xl border border-border/50 bg-card p-8 text-muted-foreground">Loading attempts...</div>
+          <div className="rounded-2xl border border-border/50 bg-card p-8 text-muted-foreground">
+            Loading attempts...
+          </div>
         ) : history.isError ? (
           <div className="rounded-2xl border border-red-200 bg-red-50 p-8">
             <p className="text-red-700 font-medium">Could not load attempt history.</p>
@@ -207,7 +216,9 @@ export default function HistoryPage() {
                     </Badge>
                   </div>
                   <div className="col-span-9 md:col-span-4 min-w-0">
-                    <p className="font-medium truncate">{attempt.word.transliteration} ({attempt.word.originalScript})</p>
+                    <p className="font-medium truncate">
+                      {attempt.word.transliteration} ({attempt.word.originalScript})
+                    </p>
                     <p className="text-sm text-muted-foreground truncate">{attempt.word.english}</p>
                   </div>
                   <div className="hidden md:block md:col-span-2 text-sm text-muted-foreground">

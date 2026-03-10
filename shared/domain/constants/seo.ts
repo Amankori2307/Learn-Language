@@ -2,8 +2,7 @@ import { APP_BRAND_NAME } from "./app-brand";
 
 export const APP_SITE_URL = "https://learn-lang.amankori.me";
 
-export const APP_DEFAULT_DESCRIPTION =
-  `${APP_BRAND_NAME} helps you learn languages with spaced repetition, adaptive review, and pronunciation-aware vocabulary practice.`;
+export const APP_DEFAULT_DESCRIPTION = `${APP_BRAND_NAME} helps you learn languages with spaced repetition, adaptive review, and pronunciation-aware vocabulary practice.`;
 
 export const APP_KEYWORDS = [
   "language learning",
@@ -25,4 +24,3 @@ export const APP_PUBLIC_ROUTES = [
   "/review/add",
   "/profile",
 ] as const;
-

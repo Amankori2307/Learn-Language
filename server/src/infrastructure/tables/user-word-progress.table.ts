@@ -1,4 +1,13 @@
-import { index, integer, pgTable, primaryKey, real, text, timestamp, varchar } from "drizzle-orm/pg-core";
+import {
+  index,
+  integer,
+  pgTable,
+  primaryKey,
+  real,
+  text,
+  timestamp,
+  varchar,
+} from "drizzle-orm/pg-core";
 import { DbTableNameEnum } from "../database.enums";
 import { users } from "./users.table";
 import { words } from "./words.table";
@@ -6,8 +15,12 @@ import { words } from "./words.table";
 export const userWordProgress = pgTable(
   DbTableNameEnum.USER_WORD_PROGRESS,
   {
-    userId: varchar("user_id").references(() => users.id).notNull(),
-    wordId: integer("word_id").references(() => words.id).notNull(),
+    userId: varchar("user_id")
+      .references(() => users.id)
+      .notNull(),
+    wordId: integer("word_id")
+      .references(() => words.id)
+      .notNull(),
     correctStreak: integer("correct_streak").default(0),
     wrongCount: integer("wrong_count").default(0),
     easeFactor: real("ease_factor").default(2.5),

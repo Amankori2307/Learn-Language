@@ -9,7 +9,9 @@ export function useAttemptHistory(limit: number = 100) {
     queryKey: [api.attempts.history.path, limit, language],
     queryFn: async () => {
       const params = new URLSearchParams({ limit: String(limit), language });
-      const res = await apiClient.get(buildApiUrl(`${api.attempts.history.path}?${params.toString()}`));
+      const res = await apiClient.get(
+        buildApiUrl(`${api.attempts.history.path}?${params.toString()}`),
+      );
       return api.attempts.history.responses[200].parse(res.data);
     },
   });

@@ -15,7 +15,9 @@ export function useLeaderboard(window: LeaderboardWindow, limit = 25) {
         limit: String(limit),
         language,
       });
-      const res = await apiClient.get(buildApiUrl(`${api.leaderboard.list.path}?${params.toString()}`));
+      const res = await apiClient.get(
+        buildApiUrl(`${api.leaderboard.list.path}?${params.toString()}`),
+      );
       return api.leaderboard.list.responses[200].parse(res.data);
     },
   });

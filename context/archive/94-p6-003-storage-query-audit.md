@@ -4,17 +4,17 @@ Objective: confirm learner-facing reads are consistently language-scoped and no 
 
 ## Audit checklist
 
-| Area | Method/Route path | Language flow | Status |
-|---|---|---|---|
-| Words list | `getWords(limit, language)` + `/api/words` | route parser -> storage method | done |
-| Clusters list | `getClusters(language)` + `/api/clusters` | route parser -> storage method | done |
-| Cluster detail | `getCluster(id, language)` + `/api/clusters/:id` | route parser -> storage method | done |
-| Quiz candidates | `getQuizCandidates(userId, ..., language)` + `/api/quiz/generate` | route parser -> storage method | done |
-| Quiz distractors source | `getWords(500, language)` in quiz generation | route parser -> storage method | done |
-| Stats | `getUserStats(userId, language)` + `/api/stats` | route parser -> storage method | done |
-| Attempt history | `getUserAttemptHistory(userId, limit, language)` + `/api/attempts/history` | route parser -> storage method | done |
-| Leaderboard | `getLeaderboard(window, limit, language)` + `/api/leaderboard` | route parser -> storage method | done |
-| Submit answer edge path | `/api/quiz/submit` word fetch + examples | request now carries `language`; route enforces `word.language === language`; examples fetched with language | done |
+| Area                    | Method/Route path                                                          | Language flow                                                                                               | Status |
+| ----------------------- | -------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- | ------ |
+| Words list              | `getWords(limit, language)` + `/api/words`                                 | route parser -> storage method                                                                              | done   |
+| Clusters list           | `getClusters(language)` + `/api/clusters`                                  | route parser -> storage method                                                                              | done   |
+| Cluster detail          | `getCluster(id, language)` + `/api/clusters/:id`                           | route parser -> storage method                                                                              | done   |
+| Quiz candidates         | `getQuizCandidates(userId, ..., language)` + `/api/quiz/generate`          | route parser -> storage method                                                                              | done   |
+| Quiz distractors source | `getWords(500, language)` in quiz generation                               | route parser -> storage method                                                                              | done   |
+| Stats                   | `getUserStats(userId, language)` + `/api/stats`                            | route parser -> storage method                                                                              | done   |
+| Attempt history         | `getUserAttemptHistory(userId, limit, language)` + `/api/attempts/history` | route parser -> storage method                                                                              | done   |
+| Leaderboard             | `getLeaderboard(window, limit, language)` + `/api/leaderboard`             | route parser -> storage method                                                                              | done   |
+| Submit answer edge path | `/api/quiz/submit` word fetch + examples                                   | request now carries `language`; route enforces `word.language === language`; examples fetched with language | done   |
 
 ## Fallback-path review
 

@@ -11,7 +11,12 @@ import {
   Min,
   ValidateNested,
 } from "class-validator";
-import { LanguageEnum, PartOfSpeechEnum, ReviewDisagreementStatusEnum, ReviewStatusEnum } from "@shared/domain/enums";
+import {
+  LanguageEnum,
+  PartOfSpeechEnum,
+  ReviewDisagreementStatusEnum,
+  ReviewStatusEnum,
+} from "@shared/domain/enums";
 
 export class ReviewQueueQueryDto {
   @IsOptional()
@@ -145,4 +150,3 @@ export class ReviewSubmitDraftBodyDto {
   @Type(() => ReviewDraftExampleDto)
   examples?: ReviewDraftExampleDto[];
 }
-

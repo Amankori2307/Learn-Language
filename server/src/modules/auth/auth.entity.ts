@@ -10,4 +10,3 @@ export class ProfileEntity {
   createdAt!: string | null;
   updatedAt!: string | null;
 }
-

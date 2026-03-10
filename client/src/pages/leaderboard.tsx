@@ -52,7 +52,9 @@ export default function LeaderboardPage() {
               <Trophy className="w-7 h-7 text-amber-500" />
               Leaderboard
             </h1>
-            <p className="text-muted-foreground mt-1">Track top learners by XP, streak, and accuracy.</p>
+            <p className="text-muted-foreground mt-1">
+              Track top learners by XP, streak, and accuracy.
+            </p>
           </div>
           <div className="flex gap-2 flex-wrap">
             {WINDOW_OPTIONS.map((option) => (
@@ -98,18 +100,26 @@ export default function LeaderboardPage() {
                     <div className="flex items-center gap-3 min-w-0">
                       <Avatar className="h-10 w-10">
                         <AvatarImage src={avatarFor(entry)} />
-                        <AvatarFallback>{initials(entry.firstName, entry.lastName, entry.email)}</AvatarFallback>
+                        <AvatarFallback>
+                          {initials(entry.firstName, entry.lastName, entry.email)}
+                        </AvatarFallback>
                       </Avatar>
                       <div className="min-w-0">
                         <p className="font-medium truncate">
-                          {[entry.firstName, entry.lastName].filter(Boolean).join(" ") || entry.email || "Learner"}
+                          {[entry.firstName, entry.lastName].filter(Boolean).join(" ") ||
+                            entry.email ||
+                            "Learner"}
                         </p>
-                        <p className="text-xs text-muted-foreground truncate">#{entry.rank} • {entry.attempts} attempts</p>
+                        <p className="text-xs text-muted-foreground truncate">
+                          #{entry.rank} • {entry.attempts} attempts
+                        </p>
                       </div>
                     </div>
                     <div className="text-right shrink-0">
                       <p className="font-semibold">{entry.xp} XP</p>
-                      <p className="text-xs text-muted-foreground">{entry.streak}d • {entry.accuracy}%</p>
+                      <p className="text-xs text-muted-foreground">
+                        {entry.streak}d • {entry.accuracy}%
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -136,13 +146,19 @@ export default function LeaderboardPage() {
                   <div className="col-span-5 flex items-center gap-3 min-w-0">
                     <Avatar className="h-9 w-9">
                       <AvatarImage src={avatarFor(entry)} />
-                      <AvatarFallback>{initials(entry.firstName, entry.lastName, entry.email)}</AvatarFallback>
+                      <AvatarFallback>
+                        {initials(entry.firstName, entry.lastName, entry.email)}
+                      </AvatarFallback>
                     </Avatar>
                     <div className="min-w-0">
                       <p className="font-medium truncate">
-                        {[entry.firstName, entry.lastName].filter(Boolean).join(" ") || entry.email || "Learner"}
+                        {[entry.firstName, entry.lastName].filter(Boolean).join(" ") ||
+                          entry.email ||
+                          "Learner"}
                       </p>
-                      <p className="text-xs text-muted-foreground truncate">{entry.attempts} attempts</p>
+                      <p className="text-xs text-muted-foreground truncate">
+                        {entry.attempts} attempts
+                      </p>
                     </div>
                   </div>
                   <div className="col-span-2 text-right font-semibold">{entry.xp}</div>

@@ -55,7 +55,10 @@ export async function createNestApiApp(): Promise<{
   const allowedOrigins = resolveAllowedOrigins(process.env.FRONTEND_ORIGINS);
 
   app.enableCors({
-    origin: (origin: string | undefined, callback: (error: Error | null, allow?: boolean) => void) => {
+    origin: (
+      origin: string | undefined,
+      callback: (error: Error | null, allow?: boolean) => void,
+    ) => {
       if (!origin || allowedOrigins.has(origin)) {
         callback(null, true);
         return;
@@ -70,24 +73,24 @@ export async function createNestApiApp(): Promise<{
   const expressApp = app.getHttpAdapter().getInstance() as Express;
   expressApp.use((req, res, next) => {
     const incomingRequestId = req.headers["x-request-id"];
-    const requestId = typeof incomingRequestId === "string" && incomingRequestId.trim().length > 0
-      ? incomingRequestId
-      : randomUUID();
+    const requestId =
+      typeof incomingRequestId === "string" && incomingRequestId.trim().length > 0
+        ? incomingRequestId
+        : randomUUID();
     req.requestId = requestId;
     res.setHeader("x-request-id", requestId);
     next();
   });
   expressApp.use(httpRequestLogger);
-  expressApp.use(
-    "/audio/generated",
-    express.static(path.join(process.cwd(), "assets/audio")),
-  );
+  expressApp.use("/audio/generated", express.static(path.join(process.cwd(), "assets/audio")));
 
   if (!resolvedAuthConfig.jwtSecret) {
     throw new Error("Invalid environment configuration: JWT_SECRET is required for auth setup");
   }
   if (resolvedAuthConfig.provider === "google" && !resolvedAuthConfig.googleClientId) {
-    throw new Error("Invalid environment configuration: GOOGLE_CLIENT_ID is required for google auth");
+    throw new Error(
+      "Invalid environment configuration: GOOGLE_CLIENT_ID is required for google auth",
+    );
   }
 
   await setupAuth(expressApp, {
@@ -105,8 +108,7 @@ export async function createNestApiApp(): Promise<{
 }
 
 const isDirectExecution =
-  Boolean(process.argv[1]) &&
-  pathToFileURL(process.argv[1]).href === import.meta.url;
+  Boolean(process.argv[1]) && pathToFileURL(process.argv[1]).href === import.meta.url;
 
 if (isDirectExecution) {
   process.on("unhandledRejection", (reason: unknown) => {

@@ -6,12 +6,9 @@ export const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default:
-          "bg-primary text-primary-foreground border border-primary-border",
-        destructive:
-          "bg-destructive text-destructive-foreground border border-destructive-border",
-        outline:
-          " border [border-color:var(--button-outline)]  shadow-xs active:shadow-none ",
+        default: "bg-primary text-primary-foreground border border-primary-border",
+        destructive: "bg-destructive text-destructive-foreground border border-destructive-border",
+        outline: " border [border-color:var(--button-outline)]  shadow-xs active:shadow-none ",
         secondary: "border bg-secondary text-secondary-foreground border border-secondary-border ",
         ghost: "border border-transparent",
       },

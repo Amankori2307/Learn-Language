@@ -11,7 +11,9 @@ function createAudioContext(): AudioContext | null {
   if (typeof window === "undefined") {
     return null;
   }
-  const Context = window.AudioContext || (window as typeof window & { webkitAudioContext?: typeof AudioContext }).webkitAudioContext;
+  const Context =
+    window.AudioContext ||
+    (window as typeof window & { webkitAudioContext?: typeof AudioContext }).webkitAudioContext;
   if (!Context) {
     return null;
   }

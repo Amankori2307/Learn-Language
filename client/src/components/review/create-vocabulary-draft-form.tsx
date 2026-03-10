@@ -37,7 +37,9 @@ export function CreateVocabularyDraftForm() {
   const [draftOriginalScript, setDraftOriginalScript] = useState("");
   const [draftPronunciation, setDraftPronunciation] = useState("");
   const [draftEnglish, setDraftEnglish] = useState("");
-  const [draftPartOfSpeech, setDraftPartOfSpeech] = useState<PartOfSpeechEnum>(PartOfSpeechEnum.NOUN);
+  const [draftPartOfSpeech, setDraftPartOfSpeech] = useState<PartOfSpeechEnum>(
+    PartOfSpeechEnum.NOUN,
+  );
   const [draftAudioUrl, setDraftAudioUrl] = useState("");
   const [draftImageUrl, setDraftImageUrl] = useState("");
   const [draftSourceUrl, setDraftSourceUrl] = useState("");
@@ -48,7 +50,9 @@ export function CreateVocabularyDraftForm() {
     queryKey: [api.clusters.list.path, draftLanguage, "draft-form"],
     queryFn: async () => {
       const params = new URLSearchParams({ language: draftLanguage });
-      const res = await apiClient.get(buildApiUrl(`${api.clusters.list.path}?${params.toString()}`));
+      const res = await apiClient.get(
+        buildApiUrl(`${api.clusters.list.path}?${params.toString()}`),
+      );
       return api.clusters.list.responses[200].parse(res.data);
     },
   });
@@ -67,7 +71,10 @@ export function CreateVocabularyDraftForm() {
         if (rowIndex !== index) return row;
         if (key === "difficulty") {
           const parsed = Number.parseInt(value, 10);
-          return { ...row, difficulty: Number.isFinite(parsed) ? Math.min(5, Math.max(1, parsed)) : 1 };
+          return {
+            ...row,
+            difficulty: Number.isFinite(parsed) ? Math.min(5, Math.max(1, parsed)) : 1,
+          };
         }
         return { ...row, [key]: value };
       }),
@@ -248,7 +255,10 @@ export function CreateVocabularyDraftForm() {
           </Button>
         </div>
         {draftExamples.map((example, index) => (
-          <div key={`example-${index}`} className="rounded-xl border border-border/40 p-3 space-y-2">
+          <div
+            key={`example-${index}`}
+            className="rounded-xl border border-border/40 p-3 space-y-2"
+          >
             <div className="grid md:grid-cols-2 gap-2">
               <Input
                 value={example.originalScript}

@@ -39,7 +39,11 @@ test("quiz generate input accepts all supported quiz modes", () => {
   ];
 
   for (const mode of modes) {
-    const parsed = api.quiz.generate.input.parse({ mode, count: 10, language: LanguageEnum.TELUGU });
+    const parsed = api.quiz.generate.input.parse({
+      mode,
+      count: 10,
+      language: LanguageEnum.TELUGU,
+    });
     assert.equal(parsed.mode, mode);
   }
 });
@@ -271,9 +275,7 @@ test("review history contract accepts payload", () => {
       requiresSecondaryReview: true,
       disagreementStatus: ReviewDisagreementStatusEnum.FLAGGED,
     },
-    clusters: [
-      { id: 1, name: "daily-use", type: "semantic" },
-    ],
+    clusters: [{ id: 1, name: "daily-use", type: "semantic" }],
     relatedClusterWords: [
       {
         id: 2,

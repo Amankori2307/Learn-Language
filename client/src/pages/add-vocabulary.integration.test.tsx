@@ -60,8 +60,14 @@ describe("AddVocabularyPage integration", () => {
     await user.type(screen.getByPlaceholderText("Meaning in English"), "hello");
     await user.click(screen.getByRole("combobox", { name: "Part of Speech" }));
     await user.click(await screen.findByText("Phrase"));
-    await user.type(screen.getByPlaceholderText("Example sentence in source script"), "ఆమె నమస్కారం చెప్పింది.");
-    await user.type(screen.getByPlaceholderText("Example pronunciation"), "aame namaskaaram cheppindi");
+    await user.type(
+      screen.getByPlaceholderText("Example sentence in source script"),
+      "ఆమె నమస్కారం చెప్పింది.",
+    );
+    await user.type(
+      screen.getByPlaceholderText("Example pronunciation"),
+      "aame namaskaaram cheppindi",
+    );
     await user.type(screen.getByPlaceholderText("Example meaning in English"), "She said hello.");
 
     await user.click(screen.getByRole("button", { name: "Create Draft" }));

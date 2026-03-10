@@ -1,4 +1,14 @@
-import { Controller, Get, Inject, Param, ParseIntPipe, Query, Req, Res, UseGuards } from "@nestjs/common";
+import {
+  Controller,
+  Get,
+  Inject,
+  Param,
+  ParseIntPipe,
+  Query,
+  Req,
+  Res,
+  UseGuards,
+} from "@nestjs/common";
 import type { Request, Response } from "express";
 import { VocabularyService } from "./vocabulary.service";
 import { AuthenticatedGuard } from "../../common/guards/authenticated.guard";
@@ -32,7 +42,11 @@ export class VocabularyApiController {
   }
 
   @Get("/api/clusters")
-  async listClusters(@Req() req: Request, @Res() res: Response, @Query() query: ListClustersQueryDto) {
+  async listClusters(
+    @Req() req: Request,
+    @Res() res: Response,
+    @Query() query: ListClustersQueryDto,
+  ) {
     try {
       const clusters = await this.vocabularyService.listClusters(query.language);
       res.json(clusters);

@@ -17,7 +17,9 @@ export function useWordBucket(bucket: WordBucketType, page: number, limit: numbe
         limit: String(limit),
         language,
       });
-      const res = await apiClient.get(buildApiUrl(`${api.analytics.wordBuckets.path}?${params.toString()}`));
+      const res = await apiClient.get(
+        buildApiUrl(`${api.analytics.wordBuckets.path}?${params.toString()}`),
+      );
       return api.analytics.wordBuckets.responses[200].parse(res.data);
     },
   });

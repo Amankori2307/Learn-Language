@@ -51,14 +51,6 @@ const AUTH_GOOGLE_ROUTE = "/auth/google";
 const AUTH_GOOGLE_CALLBACK_ROUTE = "/auth/google/callback";
 const AUTH_LOGOUT_ROUTE = "/auth/logout";
 
-function getFrontendRedirectUrl(path = "/"): string {
-  const base = authConfig.frontendBaseUrl?.trim();
-  if (!base) {
-    return path;
-  }
-  return new URL(path, base).toString();
-}
-
 function getFrontendAuthRedirectWithToken(token: string): string {
   const base = authConfig.frontendBaseUrl?.trim();
   if (!base) {
@@ -82,7 +74,7 @@ const getOidcConfig = memoize(
       authConfig.googleClientSecret,
     );
   },
-  { maxAge: AUTH_SESSION_RULES.OIDC_CONFIG_CACHE_MAX_AGE_MS }
+  { maxAge: AUTH_SESSION_RULES.OIDC_CONFIG_CACHE_MAX_AGE_MS },
 );
 
 function buildClaimsFromOidc(input: any): UserClaims {
@@ -197,7 +189,7 @@ export async function setupAuth(app: Express, config: AuthRuntimeConfig) {
 
   const verify: VerifyFunction = async (
     tokens: client.TokenEndpointResponse & client.TokenEndpointResponseHelpers,
-    verified: passport.AuthenticateCallback
+    verified: passport.AuthenticateCallback,
   ) => {
     const claims = buildClaimsFromOidc(tokens.claims());
     await upsertUser(claims);
@@ -221,7 +213,7 @@ export async function setupAuth(app: Express, config: AuthRuntimeConfig) {
           scope,
           callbackURL,
         },
-        verify
+        verify,
       );
       passport.use(strategy);
       registeredStrategies.add(strategyName);
@@ -257,7 +249,10 @@ export async function setupAuth(app: Express, config: AuthRuntimeConfig) {
             error?: string;
           } | null;
 
-          if (oauthError?.code === "OAUTH_RESPONSE_BODY_ERROR" && oauthError?.error === "invalid_client") {
+          if (
+            oauthError?.code === "OAUTH_RESPONSE_BODY_ERROR" &&
+            oauthError?.error === "invalid_client"
+          ) {
             return sendError(
               req,
               res,

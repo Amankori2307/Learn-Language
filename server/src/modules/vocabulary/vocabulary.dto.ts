@@ -30,4 +30,3 @@ export class ListClustersQueryDto {
   @IsEnum(LanguageEnum)
   language?: LanguageEnum;
 }
-

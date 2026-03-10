@@ -1,12 +1,12 @@
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700&family=Outfit:wght@300;400;500;600;700;800&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700&family=Outfit:wght@300;400;500;600;700;800&display=swap");
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  --font-sans: 'Outfit', sans-serif;
-  --font-script: 'Noto Sans', sans-serif;
+  --font-sans: "Outfit", sans-serif;
+  --font-script: "Noto Sans", sans-serif;
 
   /* Minimal neutral + blue */
   --background: 210 33% 98%;
@@ -70,9 +70,18 @@
   }
   body {
     @apply bg-background text-foreground antialiased font-sans selection:bg-primary/20;
-    background-image: radial-gradient(circle at 100% 0%, hsl(var(--primary) / 0.06), transparent 28rem);
+    background-image: radial-gradient(
+      circle at 100% 0%,
+      hsl(var(--primary) / 0.06),
+      transparent 28rem
+    );
   }
-  h1, h2, h3, h4, h5, h6 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     @apply tracking-tight font-bold;
   }
 }
@@ -81,13 +90,13 @@
   .font-script {
     font-family: var(--font-script);
   }
-  
+
   .glass-card {
     @apply bg-white/70 dark:bg-black/40 backdrop-blur-lg border border-white/20 dark:border-white/10 shadow-xl;
   }
-  
+
   .text-shadow-sm {
-    text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
   }
 }
 

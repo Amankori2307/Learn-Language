@@ -1,5 +1,22 @@
-import { boolean, index, integer, jsonb, pgTable, real, serial, text, timestamp, varchar } from "drizzle-orm/pg-core";
-import { LanguageEnum, PartOfSpeechEnum, ReviewDisagreementStatusEnum, ReviewStatusEnum, VocabularyTagEnum } from "@shared/domain/enums";
+import {
+  boolean,
+  index,
+  integer,
+  jsonb,
+  pgTable,
+  real,
+  serial,
+  text,
+  timestamp,
+  varchar,
+} from "drizzle-orm/pg-core";
+import {
+  LanguageEnum,
+  PartOfSpeechEnum,
+  ReviewDisagreementStatusEnum,
+  ReviewStatusEnum,
+  VocabularyTagEnum,
+} from "@shared/domain/enums";
 import { DbTableNameEnum } from "../database.enums";
 
 export const words = pgTable(
@@ -19,7 +36,10 @@ export const words = pgTable(
     imageUrl: text("image_url"),
     exampleSentences: jsonb("example_sentences").$type<string[]>().default([]),
     tags: jsonb("tags").$type<VocabularyTagEnum[]>().default([]),
-    reviewStatus: text("review_status").$type<ReviewStatusEnum>().default(ReviewStatusEnum.APPROVED).notNull(),
+    reviewStatus: text("review_status")
+      .$type<ReviewStatusEnum>()
+      .default(ReviewStatusEnum.APPROVED)
+      .notNull(),
     submittedBy: varchar("submitted_by"),
     submittedAt: timestamp("submitted_at").defaultNow(),
     reviewedBy: varchar("reviewed_by"),

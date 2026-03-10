@@ -28,7 +28,16 @@ export {
   wordReviewEvents,
 };
 
-export type { User, UpsertUser, Word, Cluster, UserWordProgress, QuizAttempt, SrsConfig, WordReviewEvent };
+export type {
+  User,
+  UpsertUser,
+  Word,
+  Cluster,
+  UserWordProgress,
+  QuizAttempt,
+  SrsConfig,
+  WordReviewEvent,
+};
 
 export const usersRelations = relations(users, ({ many }) => ({
   progress: many(userWordProgress),
@@ -76,11 +85,18 @@ export const wordReviewEventsRelations = relations(wordReviewEvents, ({ one }) =
   reviewer: one(users, { fields: [wordReviewEvents.changedBy], references: [users.id] }),
 }));
 
-export const insertUserSchema = createInsertSchema(users).omit({ id: true, createdAt: true, updatedAt: true });
+export const insertUserSchema = createInsertSchema(users).omit({
+  id: true,
+  createdAt: true,
+  updatedAt: true,
+});
 export const insertWordSchema = createInsertSchema(words).omit({ id: true, createdAt: true });
 export const insertClusterSchema = createInsertSchema(clusters).omit({ id: true });
 export const insertUserWordProgressSchema = createInsertSchema(userWordProgress);
-export const insertQuizAttemptSchema = createInsertSchema(quizAttempts).omit({ id: true, createdAt: true });
+export const insertQuizAttemptSchema = createInsertSchema(quizAttempts).omit({
+  id: true,
+  createdAt: true,
+});
 
 export type CreateWordRequest = z.infer<typeof insertWordSchema>;
 export type CreateClusterRequest = z.infer<typeof insertClusterSchema>;

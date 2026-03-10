@@ -16,4 +16,3 @@ export class LimitQueryDto {
   @Max(500)
   limit?: number;
 }
-

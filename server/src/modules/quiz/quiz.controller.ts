@@ -12,7 +12,11 @@ export class QuizApiController {
   constructor(@Inject(QuizService) private readonly quizService: QuizService) {}
 
   @Get("/api/quiz/generate")
-  async generateQuiz(@Req() req: Request, @Res() res: Response, @Query() query: GenerateQuizQueryDto) {
+  async generateQuiz(
+    @Req() req: Request,
+    @Res() res: Response,
+    @Query() query: GenerateQuizQueryDto,
+  ) {
     try {
       const userId = (req.user as { claims: { sub: string } }).claims.sub;
       const result = await this.quizService.generateQuiz({
@@ -36,7 +40,11 @@ export class QuizApiController {
   }
 
   @Post("/api/quiz/submit")
-  async submitQuizAnswer(@Req() req: Request, @Res() res: Response, @Body() body: SubmitQuizBodyDto) {
+  async submitQuizAnswer(
+    @Req() req: Request,
+    @Res() res: Response,
+    @Body() body: SubmitQuizBodyDto,
+  ) {
     try {
       const userId = (req.user as { claims: { sub: string } }).claims.sub;
       const result = await this.quizService.submitQuizAnswer({

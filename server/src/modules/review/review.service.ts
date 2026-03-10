@@ -11,7 +11,10 @@ export class ReviewService {
   constructor(@Inject(ReviewRepository) private readonly repository: ReviewRepository) {}
 
   async getQueue(input: ReviewQueueInput) {
-    const parsed = api.review.queue.input?.parse(input) ?? { status: ReviewStatusEnum.PENDING_REVIEW, limit: 50 };
+    const parsed = api.review.queue.input?.parse(input) ?? {
+      status: ReviewStatusEnum.PENDING_REVIEW,
+      limit: 50,
+    };
     const status = parsed.status ?? ReviewStatusEnum.PENDING_REVIEW;
     const limit = parsed.limit ?? 50;
     const queue = await this.repository.getReviewQueue(status, limit);
@@ -54,12 +57,17 @@ export class ReviewService {
     }
     try {
       const parsed = api.review.transition.input.parse(payload);
-      const updated = await this.repository.transitionWordReview(wordId, reviewerId, parsed.toStatus, {
-        notes: parsed.notes,
-        reviewerConfidenceScore: parsed.reviewerConfidenceScore,
-        requiresSecondaryReview: parsed.requiresSecondaryReview,
-        disagreementStatus: parsed.disagreementStatus,
-      });
+      const updated = await this.repository.transitionWordReview(
+        wordId,
+        reviewerId,
+        parsed.toStatus,
+        {
+          notes: parsed.notes,
+          reviewerConfidenceScore: parsed.reviewerConfidenceScore,
+          requiresSecondaryReview: parsed.requiresSecondaryReview,
+          disagreementStatus: parsed.disagreementStatus,
+        },
+      );
       if (!updated) {
         throw new AppError(404, "NOT_FOUND", "Word not found");
       }

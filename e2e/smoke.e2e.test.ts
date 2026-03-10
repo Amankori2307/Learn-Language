@@ -12,16 +12,18 @@ test("e2e smoke: api is live and all quiz modes return arrays", async (t) => {
 
     if (req.url === "/.well-known/openid-configuration") {
       res.writeHead(200, { "content-type": "application/json" });
-      res.end(JSON.stringify({
-        issuer: `http://127.0.0.1:${port}`,
-        authorization_endpoint: `http://127.0.0.1:${port}/auth`,
-        token_endpoint: `http://127.0.0.1:${port}/token`,
-        jwks_uri: `http://127.0.0.1:${port}/jwks`,
-        userinfo_endpoint: `http://127.0.0.1:${port}/userinfo`,
-        response_types_supported: ["code"],
-        subject_types_supported: ["public"],
-        id_token_signing_alg_values_supported: ["RS256"],
-      }));
+      res.end(
+        JSON.stringify({
+          issuer: `http://127.0.0.1:${port}`,
+          authorization_endpoint: `http://127.0.0.1:${port}/auth`,
+          token_endpoint: `http://127.0.0.1:${port}/token`,
+          jwks_uri: `http://127.0.0.1:${port}/jwks`,
+          userinfo_endpoint: `http://127.0.0.1:${port}/userinfo`,
+          response_types_supported: ["code"],
+          subject_types_supported: ["public"],
+          id_token_signing_alg_values_supported: ["RS256"],
+        }),
+      );
       return;
     }
 
@@ -146,9 +148,12 @@ test("e2e smoke: api is live and all quiz modes return arrays", async (t) => {
   ];
 
   for (const mode of modes) {
-    const response = await fetch(`${baseUrl}/api/quiz/generate?mode=${mode}&count=3&language=telugu`, {
-      headers: authHeaders,
-    });
+    const response = await fetch(
+      `${baseUrl}/api/quiz/generate?mode=${mode}&count=3&language=telugu`,
+      {
+        headers: authHeaders,
+      },
+    );
     assert.equal(response.status, 200, `mode=${mode} should return 200`);
     const payload = await response.json();
     assert.equal(Array.isArray(payload), true, `mode=${mode} should return array payload`);

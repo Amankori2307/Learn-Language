@@ -28,14 +28,14 @@ interface QuizCardProps {
   isSubmitting: boolean;
   result: {
     isCorrect: boolean;
-      correctAnswer: {
-        id?: number;
-        originalScript: string;
-        english: string;
-        transliteration: string;
-        audioUrl?: string | null;
-        exampleSentences: string[];
-      };
+    correctAnswer: {
+      id?: number;
+      originalScript: string;
+      english: string;
+      transliteration: string;
+      audioUrl?: string | null;
+      exampleSentences: string[];
+    };
     examples: Array<{
       originalScript: string;
       pronunciation: string;
@@ -45,21 +45,21 @@ interface QuizCardProps {
   onNext: () => void;
 }
 
-export function QuizCard({ 
+export function QuizCard({
   wordId,
-  question, 
+  question,
   pronunciation,
   audioUrl,
   language,
   imageUrl,
-  type, 
-  options, 
+  type,
+  options,
   confidenceLevel,
   onConfidenceChange,
-  onAnswer, 
-  isSubmitting, 
+  onAnswer,
+  isSubmitting,
   result,
-  onNext 
+  onNext,
 }: QuizCardProps) {
   const [selectedOption, setSelectedOption] = useState<number | null>(null);
   const [negativeVisualNonce, setNegativeVisualNonce] = useState(0);
@@ -126,7 +126,11 @@ export function QuizCard({
                   onClick={toggleEffects}
                   aria-label={effectsEnabled ? "Mute feedback effects" : "Unmute feedback effects"}
                 >
-                  {effectsEnabled ? <Volume2 className="w-4 h-4" /> : <VolumeX className="w-4 h-4" />}
+                  {effectsEnabled ? (
+                    <Volume2 className="w-4 h-4" />
+                  ) : (
+                    <VolumeX className="w-4 h-4" />
+                  )}
                   {effectsEnabled ? "Effects On" : "Effects Off"}
                 </Button>
               </div>
@@ -135,14 +139,17 @@ export function QuizCard({
                 <h2
                   className={cn(
                     "font-bold text-foreground break-words leading-tight",
-                    type === QuizQuestionTypeEnum.SOURCE_TO_TARGET ? "text-4xl md:text-5xl" : "text-3xl md:text-4xl",
+                    type === QuizQuestionTypeEnum.SOURCE_TO_TARGET
+                      ? "text-4xl md:text-5xl"
+                      : "text-3xl md:text-4xl",
                   )}
                 >
                   {question}
                 </h2>
                 {pronunciation && (
                   <p className="text-sm md:text-base text-muted-foreground mt-4 break-words">
-                    Pronunciation: <span className="font-semibold text-foreground">{pronunciation}</span>
+                    Pronunciation:{" "}
+                    <span className="font-semibold text-foreground">{pronunciation}</span>
                   </p>
                 )}
                 <div className="mt-4">
@@ -182,8 +189,14 @@ export function QuizCard({
 
             <section className="min-h-0 p-5 md:p-8 grid grid-rows-[auto_minmax(0,1fr)_auto] gap-4">
               <div>
-                <p className="text-sm font-medium text-muted-foreground mb-2">How confident are you?</p>
-                <div className="flex flex-wrap gap-2" role="radiogroup" aria-label="Answer confidence">
+                <p className="text-sm font-medium text-muted-foreground mb-2">
+                  How confident are you?
+                </p>
+                <div
+                  className="flex flex-wrap gap-2"
+                  role="radiogroup"
+                  aria-label="Answer confidence"
+                >
                   <Button
                     type="button"
                     variant={confidenceLevel === 1 ? "default" : "outline"}
@@ -239,7 +252,9 @@ export function QuizCard({
                           )}
                         >
                           <span className="relative z-10">{option.text}</span>
-                          {isSelected && isSubmitting && <div className="absolute inset-0 bg-white/20 animate-pulse" />}
+                          {isSelected && isSubmitting && (
+                            <div className="absolute inset-0 bg-white/20 animate-pulse" />
+                          )}
                         </button>
                       );
                     })}
@@ -278,13 +293,19 @@ export function QuizCard({
                             : "bg-rose-100 text-rose-700 dark:bg-rose-900/60 dark:text-rose-300",
                         )}
                       >
-                        {result.isCorrect ? <CheckCircle2 className="w-5 h-5" /> : <XCircle className="w-5 h-5" />}
+                        {result.isCorrect ? (
+                          <CheckCircle2 className="w-5 h-5" />
+                        ) : (
+                          <XCircle className="w-5 h-5" />
+                        )}
                       </div>
                       <div className="min-w-0">
                         <h4
                           className={cn(
                             "text-lg font-bold",
-                            result.isCorrect ? "text-emerald-800 dark:text-emerald-300" : "text-rose-800 dark:text-rose-300",
+                            result.isCorrect
+                              ? "text-emerald-800 dark:text-emerald-300"
+                              : "text-rose-800 dark:text-rose-300",
                           )}
                         >
                           {result.isCorrect ? "Excellent!" : "Not quite right"}
@@ -292,7 +313,9 @@ export function QuizCard({
                         <p className="text-sm text-foreground/90 dark:text-foreground mt-1 break-words">
                           <span className="italic">{result.correctAnswer.transliteration}</span>
                           <span className="mx-2">•</span>
-                          <span className="font-semibold">({result.correctAnswer.originalScript})</span>
+                          <span className="font-semibold">
+                            ({result.correctAnswer.originalScript})
+                          </span>
                           <span className="mx-2">•</span>
                           <span>{result.correctAnswer.english}</span>
                         </p>
@@ -302,16 +325,18 @@ export function QuizCard({
                           size="sm"
                           className="mt-2 rounded-full gap-2"
                           onClick={() =>
-                              play({
-                                key: "answer-audio",
-                                audioUrl: result.correctAnswer.audioUrl ?? null,
-                                wordId: result.correctAnswer.id,
-                                text: result.correctAnswer.originalScript,
-                                speechText: result.correctAnswer.transliteration ?? result.correctAnswer.originalScript,
-                                resolveText: result.correctAnswer.originalScript,
-                                language,
-                              })
-                            }
+                            play({
+                              key: "answer-audio",
+                              audioUrl: result.correctAnswer.audioUrl ?? null,
+                              wordId: result.correctAnswer.id,
+                              text: result.correctAnswer.originalScript,
+                              speechText:
+                                result.correctAnswer.transliteration ??
+                                result.correctAnswer.originalScript,
+                              resolveText: result.correctAnswer.originalScript,
+                              language,
+                            })
+                          }
                         >
                           <Volume2 className="h-4 w-4" />
                           {activeKey === "answer-audio" ? "Stop Audio" : "Listen Answer"}
@@ -347,10 +372,12 @@ export function QuizCard({
                               </Button>
                             </div>
                             <p className="break-words">
-                              <span className="font-semibold">Sentence:</span> {example.originalScript}
+                              <span className="font-semibold">Sentence:</span>{" "}
+                              {example.originalScript}
                             </p>
                             <p className="break-words">
-                              <span className="font-semibold">Pronunciation:</span> {example.pronunciation}
+                              <span className="font-semibold">Pronunciation:</span>{" "}
+                              {example.pronunciation}
                             </p>
                             <p className="break-words">
                               <span className="font-semibold">Meaning:</span> {example.meaning}
@@ -359,7 +386,9 @@ export function QuizCard({
                         ))}
                       </div>
                     ) : (
-                      <div className="text-sm text-muted-foreground">No examples available for this item yet.</div>
+                      <div className="text-sm text-muted-foreground">
+                        No examples available for this item yet.
+                      </div>
                     )}
                   </motion.div>
                 </AnimatePresence>
@@ -380,7 +409,9 @@ export function QuizCard({
                     Continue <ArrowRight className="w-4 h-4" />
                   </Button>
                 ) : (
-                  <p className="text-xs text-muted-foreground text-center">Choose an option to view feedback and examples.</p>
+                  <p className="text-xs text-muted-foreground text-center">
+                    Choose an option to view feedback and examples.
+                  </p>
                 )}
               </div>
             </section>

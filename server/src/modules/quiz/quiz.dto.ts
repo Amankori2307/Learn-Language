@@ -1,6 +1,11 @@
 import { Type } from "class-transformer";
 import { IsEnum, IsInt, IsOptional, Max, Min } from "class-validator";
-import { LanguageEnum, QuizDirectionEnum, QuizModeEnum, QuizQuestionTypeEnum } from "@shared/domain/enums";
+import {
+  LanguageEnum,
+  QuizDirectionEnum,
+  QuizModeEnum,
+  QuizQuestionTypeEnum,
+} from "@shared/domain/enums";
 
 export class GenerateQuizQueryDto {
   @IsOptional()
@@ -58,4 +63,3 @@ export class SubmitQuizBodyDto {
   @Min(1)
   responseTimeMs?: number;
 }
-

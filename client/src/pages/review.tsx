@@ -62,7 +62,9 @@ export default function ReviewPage() {
       <Layout>
         <div className="rounded-2xl border border-border/50 bg-card p-8 text-center">
           <h1 className="text-2xl font-bold">Review Access Required</h1>
-          <p className="text-muted-foreground mt-2">Only reviewer/admin roles can access vocabulary review tools.</p>
+          <p className="text-muted-foreground mt-2">
+            Only reviewer/admin roles can access vocabulary review tools.
+          </p>
         </div>
       </Layout>
     );
@@ -74,11 +76,17 @@ export default function ReviewPage() {
         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
           <div>
             <h1 className="text-3xl font-bold">Review Queue</h1>
-            <p className="text-muted-foreground">Approve or reject vocabulary before learner exposure.</p>
+            <p className="text-muted-foreground">
+              Approve or reject vocabulary before learner exposure.
+            </p>
           </div>
           <div className="flex flex-wrap gap-2 items-center">
             {STATUS_OPTIONS.map((s) => (
-              <Button key={s} variant={status === s ? "default" : "outline"} onClick={() => setStatus(s)}>
+              <Button
+                key={s}
+                variant={status === s ? "default" : "outline"}
+                onClick={() => setStatus(s)}
+              >
                 {s}
               </Button>
             ))}
@@ -97,13 +105,24 @@ export default function ReviewPage() {
             placeholder="Optional notes for audit trail"
           />
           <div className="flex flex-wrap gap-2">
-            <Button onClick={() => runBulk(ReviewStatusEnum.APPROVED)} disabled={selectedIds.length === 0 || bulk.isPending}>
+            <Button
+              onClick={() => runBulk(ReviewStatusEnum.APPROVED)}
+              disabled={selectedIds.length === 0 || bulk.isPending}
+            >
               Bulk Approve
             </Button>
-            <Button variant="destructive" onClick={() => runBulk(ReviewStatusEnum.REJECTED)} disabled={selectedIds.length === 0 || bulk.isPending}>
+            <Button
+              variant="destructive"
+              onClick={() => runBulk(ReviewStatusEnum.REJECTED)}
+              disabled={selectedIds.length === 0 || bulk.isPending}
+            >
               Bulk Reject
             </Button>
-            <Button variant="outline" onClick={() => setSelectedIds([])} disabled={selectedIds.length === 0}>
+            <Button
+              variant="outline"
+              onClick={() => setSelectedIds([])}
+              disabled={selectedIds.length === 0}
+            >
               Clear Selection
             </Button>
           </div>
@@ -137,9 +156,15 @@ export default function ReviewPage() {
                         onCheckedChange={() => toggleSelected(word.id)}
                       />
                       <div className="min-w-0 flex-1">
-                        <p className="font-medium">{word.transliteration} ({word.originalScript})</p>
-                        <p className="text-sm text-muted-foreground">{word.english} • {word.partOfSpeech}</p>
-                        <p className="text-xs text-muted-foreground mt-1">status: {word.reviewStatus}</p>
+                        <p className="font-medium">
+                          {word.transliteration} ({word.originalScript})
+                        </p>
+                        <p className="text-sm text-muted-foreground">
+                          {word.english} • {word.partOfSpeech}
+                        </p>
+                        <p className="text-xs text-muted-foreground mt-1">
+                          status: {word.reviewStatus}
+                        </p>
                         <p className="text-xs text-muted-foreground mt-1">
                           submitted: {word.submittedBy || "n/a"} • {formatDate(word.submittedAt)}
                         </p>
@@ -147,12 +172,22 @@ export default function ReviewPage() {
                           reviewed: {word.reviewedBy || "n/a"} • {formatDate(word.reviewedAt)}
                         </p>
                         <div className="flex gap-2 mt-2">
-                          <Button size="sm" variant="outline" onClick={() => setActiveWordId(word.id)}>
+                          <Button
+                            size="sm"
+                            variant="outline"
+                            onClick={() => setActiveWordId(word.id)}
+                          >
                             View History
                           </Button>
                           <Button
                             size="sm"
-                            onClick={() => transition.mutate({ id: word.id, toStatus: ReviewStatusEnum.APPROVED, notes: notes || undefined })}
+                            onClick={() =>
+                              transition.mutate({
+                                id: word.id,
+                                toStatus: ReviewStatusEnum.APPROVED,
+                                notes: notes || undefined,
+                              })
+                            }
                             disabled={transition.isPending}
                           >
                             Approve
@@ -160,7 +195,13 @@ export default function ReviewPage() {
                           <Button
                             size="sm"
                             variant="destructive"
-                            onClick={() => transition.mutate({ id: word.id, toStatus: ReviewStatusEnum.REJECTED, notes: notes || undefined })}
+                            onClick={() =>
+                              transition.mutate({
+                                id: word.id,
+                                toStatus: ReviewStatusEnum.REJECTED,
+                                notes: notes || undefined,
+                              })
+                            }
                             disabled={transition.isPending}
                           >
                             Reject
@@ -177,7 +218,9 @@ export default function ReviewPage() {
           <div className="rounded-2xl border border-border/50 bg-card overflow-hidden">
             <div className="p-4 border-b border-border/50 font-semibold">Review History</div>
             {!activeWordId ? (
-              <div className="p-6 text-muted-foreground">Select an item to inspect source and transition history.</div>
+              <div className="p-6 text-muted-foreground">
+                Select an item to inspect source and transition history.
+              </div>
             ) : history.isLoading ? (
               <div className="p-6 text-muted-foreground">Loading history...</div>
             ) : history.isError || !history.data ? (
@@ -185,26 +228,38 @@ export default function ReviewPage() {
             ) : (
               <div className="p-4 space-y-3 max-h-[560px] overflow-auto">
                 <div className="rounded-xl border border-border/50 p-3">
-                  <p className="font-medium">{history.data.word.transliteration} ({history.data.word.originalScript})</p>
+                  <p className="font-medium">
+                    {history.data.word.transliteration} ({history.data.word.originalScript})
+                  </p>
                   <p className="text-sm text-muted-foreground">{history.data.word.english}</p>
                   <div className="mt-2 flex flex-wrap gap-2">
-                    {history.data.clusters.length > 0 ? history.data.clusters.map((cluster) => (
-                      <span
-                        key={cluster.id}
-                        className="inline-flex items-center rounded-full border border-border/60 bg-secondary px-2 py-1 text-xs"
-                      >
-                        {cluster.name}
-                      </span>
-                    )) : (
+                    {history.data.clusters.length > 0 ? (
+                      history.data.clusters.map((cluster) => (
+                        <span
+                          key={cluster.id}
+                          className="inline-flex items-center rounded-full border border-border/60 bg-secondary px-2 py-1 text-xs"
+                        >
+                          {cluster.name}
+                        </span>
+                      ))
+                    ) : (
                       <span className="text-xs text-muted-foreground">No clusters linked</span>
                     )}
                   </div>
                   <p className="text-xs text-muted-foreground mt-2">
-                    Source: {history.data.word.sourceUrl ? (
-                      <a className="underline" href={history.data.word.sourceUrl} target="_blank" rel="noreferrer">
+                    Source:{" "}
+                    {history.data.word.sourceUrl ? (
+                      <a
+                        className="underline"
+                        href={history.data.word.sourceUrl}
+                        target="_blank"
+                        rel="noreferrer"
+                      >
                         {history.data.word.sourceUrl}
                       </a>
-                    ) : "n/a"}
+                    ) : (
+                      "n/a"
+                    )}
                   </p>
                   <p className="text-xs text-muted-foreground">
                     Source captured: {formatDate(history.data.word.sourceCapturedAt)}
@@ -213,12 +268,15 @@ export default function ReviewPage() {
                 <div className="rounded-xl border border-border/50 p-3">
                   <p className="text-sm font-medium">Related Cluster Words</p>
                   {history.data.relatedClusterWords.length === 0 ? (
-                    <p className="text-xs text-muted-foreground mt-1">No related words found for linked clusters.</p>
+                    <p className="text-xs text-muted-foreground mt-1">
+                      No related words found for linked clusters.
+                    </p>
                   ) : (
                     <div className="mt-2 space-y-1">
                       {history.data.relatedClusterWords.map((item) => (
                         <p key={item.id} className="text-xs text-muted-foreground">
-                          {item.transliteration} ({item.originalScript}) • {item.english} • {item.reviewStatus}
+                          {item.transliteration} ({item.originalScript}) • {item.english} •{" "}
+                          {item.reviewStatus}
                         </p>
                       ))}
                     </div>
@@ -232,13 +290,23 @@ export default function ReviewPage() {
                       <p className="text-sm font-medium">
                         {event.fromStatus} {"->"} {event.toStatus}
                       </p>
-                      <p className="text-xs text-muted-foreground">by {event.changedBy} • {formatDate(event.createdAt)}</p>
                       <p className="text-xs text-muted-foreground">
-                        source: {event.sourceUrl ? (
-                          <a className="underline" href={event.sourceUrl} target="_blank" rel="noreferrer">
+                        by {event.changedBy} • {formatDate(event.createdAt)}
+                      </p>
+                      <p className="text-xs text-muted-foreground">
+                        source:{" "}
+                        {event.sourceUrl ? (
+                          <a
+                            className="underline"
+                            href={event.sourceUrl}
+                            target="_blank"
+                            rel="noreferrer"
+                          >
                             {event.sourceUrl}
                           </a>
-                        ) : "n/a"}
+                        ) : (
+                          "n/a"
+                        )}
                         {" • "}captured: {formatDate(event.sourceCapturedAt)}
                       </p>
                       {event.notes && <p className="text-sm mt-1">{event.notes}</p>}

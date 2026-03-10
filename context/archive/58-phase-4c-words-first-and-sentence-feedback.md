@@ -16,45 +16,56 @@ Build a text-first source language learning flow where:
 5. If example data is missing, server should provide a safe fallback triplet to avoid blank feedback UI.
 
 Out of scope for this phase:
+
 - audio/video/image-first experiences
 - sentence-only quiz modes as primary prompts
 
 ## Task breakdown
 
 ### P4C-001 - Finalize words-first spec
+
 Status: `done`
 
 Acceptance:
+
 - Scope and behavior are clear and testable.
 - Prompt explicitly separates word prompt flow vs sentence feedback flow.
 
 ### P4C-002 - Persist example pronunciation in data model
+
 Status: `done`
 
 Scope:
+
 - Add sentence pronunciation field in `word_examples`.
 - Ensure importer reads `examples[].pronunciation` into DB.
 - If row already exists, keep it updated (idempotent upsert behavior).
 
 Acceptance:
+
 - Each example row can represent sentence + pronunciation + meaning.
 
 ### P4C-003 - Word-only question generation
+
 Status: `done`
 
 Scope:
+
 - Restrict quiz generation to:
   - `source_to_target`
   - `target_to_source`
 - Do not generate sentence/fill-blank prompt types in this phase.
 
 Acceptance:
+
 - Question text is always word/phrase-centered.
 
 ### P4C-004 - Example triplet guarantee in submit response
+
 Status: `done`
 
 Scope:
+
 - Submit response returns example payload with:
   - sentence text
   - sentence pronunciation
@@ -62,12 +73,15 @@ Scope:
 - Add fallback triplet when no DB example exists.
 
 Acceptance:
+
 - Feedback contract never leaves the example section blank.
 
 ### P4C-005 - Feedback UI rendering update
+
 Status: `done`
 
 Scope:
+
 - Show three explicit rows:
   - Sentence
   - Pronunciation
@@ -75,12 +89,15 @@ Scope:
 - Keep readable in light/dark modes.
 
 Acceptance:
+
 - User can always see correct result + full example triplet clearly.
 
 ### P4C-006 - Tests and docs
+
 Status: `done`
 
 Scope:
+
 - Update/add tests for:
   - generation modes
   - submit payload shape with example triplet
@@ -88,4 +105,5 @@ Scope:
 - Update app context docs.
 
 Acceptance:
+
 - Behavior is guarded by automated checks and documented.

@@ -43,7 +43,11 @@ export class AuthApiController {
   }
 
   @Patch("/api/profile")
-  async updateProfile(@Req() req: Request, @Res() res: Response, @Body() body: UpdateProfileBodyDto) {
+  async updateProfile(
+    @Req() req: Request,
+    @Res() res: Response,
+    @Body() body: UpdateProfileBodyDto,
+  ) {
     try {
       const userId = extractUserId(req);
       if (!userId) {

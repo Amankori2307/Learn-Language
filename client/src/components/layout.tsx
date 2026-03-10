@@ -1,12 +1,12 @@
 import { Link, useLocation } from "wouter";
 import { useAuth } from "@/hooks/use-auth";
-import { 
-  LayoutDashboard, 
-  Layers, 
-  Trophy, 
+import {
+  LayoutDashboard,
+  Layers,
+  Trophy,
   ShieldCheck,
   BarChart3,
-  LogOut, 
+  LogOut,
   Menu,
   MessageSquare,
   PlusCircle,
@@ -16,7 +16,7 @@ import {
   PanelLeftClose,
   PanelLeftOpen,
   ExternalLink,
-  UserRound
+  UserRound,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
@@ -27,7 +27,13 @@ import { useTheme } from "next-themes";
 import { buildAvatarUrl } from "@/lib/avatar";
 import { LanguageEnum, UserTypeEnum } from "@shared/domain/enums";
 import { useLearningLanguage } from "@/hooks/use-language";
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 import { APP_BRAND_NAME, APP_BRAND_TAGLINE } from "@shared/domain/constants/app-brand";
 
 function getInitials(firstName?: string | null, lastName?: string | null, email?: string | null) {
@@ -111,7 +117,9 @@ export function Layout({ children }: { children: React.ReactNode }) {
             </div>
             {!compact && (
               <div>
-                <h1 className="text-lg font-semibold text-foreground leading-none">{APP_BRAND_NAME}</h1>
+                <h1 className="text-lg font-semibold text-foreground leading-none">
+                  {APP_BRAND_NAME}
+                </h1>
                 <p className="text-xs text-muted-foreground mt-1">{APP_BRAND_TAGLINE}</p>
               </div>
             )}
@@ -131,7 +139,10 @@ export function Layout({ children }: { children: React.ReactNode }) {
         </div>
         {!compact ? (
           <div className="mt-4">
-            <label htmlFor="language-select" className="block text-xs font-medium text-muted-foreground mb-1">
+            <label
+              htmlFor="language-select"
+              className="block text-xs font-medium text-muted-foreground mb-1"
+            >
               Learning Language
             </label>
             <select
@@ -190,7 +201,9 @@ export function Layout({ children }: { children: React.ReactNode }) {
                       <item.icon
                         className={cn(
                           "w-4 h-4 shrink-0",
-                          isActive ? "text-primary" : "group-hover:text-foreground transition-colors",
+                          isActive
+                            ? "text-primary"
+                            : "group-hover:text-foreground transition-colors",
                         )}
                       />
                       {!compact && <span className="font-medium text-sm">{item.name}</span>}
@@ -231,7 +244,11 @@ export function Layout({ children }: { children: React.ReactNode }) {
             title="Toggle theme"
             onClick={() => setTheme((resolvedTheme ?? "light") === "dark" ? "light" : "dark")}
           >
-            {mounted && resolvedTheme === "dark" ? <Sun className="size-4" /> : <Moon className="size-4" />}
+            {mounted && resolvedTheme === "dark" ? (
+              <Sun className="size-4" />
+            ) : (
+              <Moon className="size-4" />
+            )}
             {!compact && <span className="ml-2">Theme</span>}
           </Button>
         </div>
@@ -247,7 +264,9 @@ export function Layout({ children }: { children: React.ReactNode }) {
         >
           <Avatar className="w-9 h-9 border border-border/70">
             <AvatarImage src={avatarUrl} alt={user?.firstName || "User"} />
-            <AvatarFallback>{getInitials(user?.firstName, user?.lastName, user?.email)}</AvatarFallback>
+            <AvatarFallback>
+              {getInitials(user?.firstName, user?.lastName, user?.email)}
+            </AvatarFallback>
           </Avatar>
           {!compact && (
             <div className="flex-1 overflow-hidden text-left">
@@ -271,7 +290,9 @@ export function Layout({ children }: { children: React.ReactNode }) {
           <div className="flex items-center gap-3">
             <Avatar className="w-12 h-12 border border-border">
               <AvatarImage src={avatarUrl} alt={user?.firstName || "User"} />
-              <AvatarFallback>{getInitials(user?.firstName, user?.lastName, user?.email)}</AvatarFallback>
+              <AvatarFallback>
+                {getInitials(user?.firstName, user?.lastName, user?.email)}
+              </AvatarFallback>
             </Avatar>
             <div className="min-w-0">
               <p className="text-sm font-semibold truncate">
@@ -286,7 +307,11 @@ export function Layout({ children }: { children: React.ReactNode }) {
         </div>
         <div className="grid grid-cols-2 gap-2">
           <Link href="/profile">
-            <Button variant="outline" className="w-full rounded-lg" onClick={() => setIsProfileModalOpen(false)}>
+            <Button
+              variant="outline"
+              className="w-full rounded-lg"
+              onClick={() => setIsProfileModalOpen(false)}
+            >
               <UserRound className="size-4 mr-2" />
               Open Profile
             </Button>
@@ -296,7 +321,11 @@ export function Layout({ children }: { children: React.ReactNode }) {
             className="w-full rounded-lg"
             onClick={() => setTheme((resolvedTheme ?? "light") === "dark" ? "light" : "dark")}
           >
-            {mounted && resolvedTheme === "dark" ? <Sun className="size-4 mr-2" /> : <Moon className="size-4 mr-2" />}
+            {mounted && resolvedTheme === "dark" ? (
+              <Sun className="size-4 mr-2" />
+            ) : (
+              <Moon className="size-4 mr-2" />
+            )}
             Toggle Theme
           </Button>
           <a
@@ -331,7 +360,12 @@ export function Layout({ children }: { children: React.ReactNode }) {
       <ProfileModal />
 
       {/* Desktop Sidebar */}
-      <aside className={cn("hidden md:flex flex-col border-r border-border/50 bg-card fixed h-full z-10 transition-all duration-300", sidebarWidthClass)}>
+      <aside
+        className={cn(
+          "hidden md:flex flex-col border-r border-border/50 bg-card fixed h-full z-10 transition-all duration-300",
+          sidebarWidthClass,
+        )}
+      >
         <NavContent compact={isCollapsed} />
       </aside>
 
@@ -358,7 +392,12 @@ export function Layout({ children }: { children: React.ReactNode }) {
       </div>
 
       {/* Main Content */}
-      <main className={cn("flex-1 pt-16 md:pt-0 min-h-screen transition-all duration-300", mainOffsetClass)}>
+      <main
+        className={cn(
+          "flex-1 pt-16 md:pt-0 min-h-screen transition-all duration-300",
+          mainOffsetClass,
+        )}
+      >
         <div className="container max-w-5xl mx-auto p-4 md:p-8 animate-in fade-in duration-500">
           {children}
         </div>

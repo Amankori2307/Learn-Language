@@ -72,7 +72,9 @@ export class AudioService {
 
       return {
         audioUrl: generatedAudioUrl,
-        source: generatedAudioUrl.includes(`${AUDIO_MODULE_CONSTANTS.GENERATED_AUDIO_PUBLIC_PATH}/`) ? "generated" : "cache",
+        source: generatedAudioUrl.includes(`${AUDIO_MODULE_CONSTANTS.GENERATED_AUDIO_PUBLIC_PATH}/`)
+          ? "generated"
+          : "cache",
         cached: true,
       };
     } catch (error) {
@@ -93,7 +95,11 @@ export class AudioService {
 
     const fileName = createAudioFileName(input);
     const relativePath = path.join(input.language, fileName);
-    const absolutePath = path.join(process.cwd(), AUDIO_MODULE_CONSTANTS.GENERATED_AUDIO_DIR, relativePath);
+    const absolutePath = path.join(
+      process.cwd(),
+      AUDIO_MODULE_CONSTANTS.GENERATED_AUDIO_DIR,
+      relativePath,
+    );
     const publicUrl = `${AUDIO_MODULE_CONSTANTS.GENERATED_AUDIO_PUBLIC_PATH}/${relativePath.replaceAll(path.sep, "/")}`;
 
     if (await fileExists(absolutePath)) {
@@ -115,7 +121,11 @@ export class AudioService {
     }
   }
 
-  private async generateAndPersistAudio(input: TtsRequest, absolutePath: string, publicUrl: string): Promise<string | null> {
+  private async generateAndPersistAudio(
+    input: TtsRequest,
+    absolutePath: string,
+    publicUrl: string,
+  ): Promise<string | null> {
     const audioBuffer = await this.synthesizeWithRetry(input);
     if (!audioBuffer) {
       return null;
@@ -190,7 +200,10 @@ export class AudioService {
 }
 
 function normalizeSynthesisText(value: string): string {
-  return value.replace(/\s+/g, " ").trim().slice(0, AUDIO_MODULE_CONSTANTS.MAX_SYNTHESIS_CHARACTERS);
+  return value
+    .replace(/\s+/g, " ")
+    .trim()
+    .slice(0, AUDIO_MODULE_CONSTANTS.MAX_SYNTHESIS_CHARACTERS);
 }
 
 function isMostlyAscii(value: string): boolean {

@@ -10,8 +10,8 @@ export function useWords(clusterId?: number) {
       const url = buildUrl(api.words.list.path);
       // Append query params manually since buildUrl only handles path params
       const queryParams = new URLSearchParams();
-      if (clusterId) queryParams.append('clusterId', clusterId.toString());
-      
+      if (clusterId) queryParams.append("clusterId", clusterId.toString());
+
       const res = await apiClient.get(buildApiUrl(`${url}?${queryParams.toString()}`));
       return api.words.list.responses[200].parse(res.data);
     },

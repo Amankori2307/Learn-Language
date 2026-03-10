@@ -11,4 +11,3 @@ export class ReviewQueueItemEntity {
   requiresSecondaryReview!: boolean;
   disagreementStatus!: ReviewDisagreementStatusEnum;
 }
-

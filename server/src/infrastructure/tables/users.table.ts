@@ -4,7 +4,9 @@ import { UserTypeEnum } from "@shared/domain/enums";
 import { DbTableNameEnum } from "../database.enums";
 
 export const users = pgTable(DbTableNameEnum.USERS, {
-  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  id: varchar("id")
+    .primaryKey()
+    .default(sql`gen_random_uuid()`),
   email: varchar("email").unique(),
   firstName: varchar("first_name"),
   lastName: varchar("last_name"),

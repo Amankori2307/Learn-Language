@@ -24,7 +24,8 @@ export function useDashboardViewModel() {
   const resolvedStats = stats ?? DEFAULT_STATS;
 
   const primaryMode = resolvedStats.weak > 0 ? QuizModeEnum.WEAK_WORDS : QuizModeEnum.DAILY_REVIEW;
-  const primaryLabel = primaryMode === QuizModeEnum.WEAK_WORDS ? "Resume Weak Words" : "Start Daily Review";
+  const primaryLabel =
+    primaryMode === QuizModeEnum.WEAK_WORDS ? "Resume Weak Words" : "Start Daily Review";
 
   const coreActions = [
     {
@@ -62,8 +63,10 @@ export function useDashboardViewModel() {
       key: "mastered",
       label: "Words Mastered",
       value: resolvedStats.mastered,
-      meaning: "Mastered means you answered this word correctly enough times to reach mastery level 4+.",
-      improve: "To master more words: finish daily review consistently and maintain correct answers in both directions.",
+      meaning:
+        "Mastered means you answered this word correctly enough times to reach mastery level 4+.",
+      improve:
+        "To master more words: finish daily review consistently and maintain correct answers in both directions.",
       icon: Target,
     },
     {
@@ -71,7 +74,8 @@ export function useDashboardViewModel() {
       label: "Learning",
       value: resolvedStats.learning,
       meaning: "Learning means the word is in active progress (mastery level 1-3).",
-      improve: "To move words out of learning: keep practicing daily and answer with higher confidence.",
+      improve:
+        "To move words out of learning: keep practicing daily and answer with higher confidence.",
       icon: BookOpen,
     },
     {
@@ -79,7 +83,8 @@ export function useDashboardViewModel() {
       label: "Needs Review",
       value: resolvedStats.weak,
       meaning: "Needs Review means the word is overdue or has repeated mistakes.",
-      improve: "To reduce this list: run weak words + daily review and clear missed words with repeated correct recall.",
+      improve:
+        "To reduce this list: run weak words + daily review and clear missed words with repeated correct recall.",
       icon: Dumbbell,
     },
   ] as const;

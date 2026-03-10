@@ -1,6 +1,12 @@
 import type { UserWordProgress } from "../schema";
 import { QuizDirectionEnum } from "@shared/domain/enums";
-import { SRS_DEFAULT_CONFIG, SRS_EASE_UPDATE, SRS_MASTERY_RULES, SRS_QUALITY_RULES, SRS_STRENGTH_RULES } from "./srs.constants";
+import {
+  SRS_DEFAULT_CONFIG,
+  SRS_EASE_UPDATE,
+  SRS_MASTERY_RULES,
+  SRS_QUALITY_RULES,
+  SRS_STRENGTH_RULES,
+} from "./srs.constants";
 
 export type SrsInput = {
   progress: UserWordProgress;
@@ -52,7 +58,11 @@ function toMasteryLevel(streak: number) {
   return 0;
 }
 
-function updateStrength(current: number | null | undefined, isCorrect: boolean, confidenceLevel: number) {
+function updateStrength(
+  current: number | null | undefined,
+  isCorrect: boolean,
+  confidenceLevel: number,
+) {
   const base = isCorrect
     ? SRS_STRENGTH_RULES.CORRECT_BASE_ADJUSTMENT
     : SRS_STRENGTH_RULES.INCORRECT_BASE_ADJUSTMENT;
@@ -85,7 +95,11 @@ export function applySrsUpdate(input: SrsInput): UserWordProgress {
     next.correctStreak = 0;
     next.wrongCount = (next.wrongCount ?? 0) + 1;
     next.interval = SRS_DEFAULT_CONFIG.DEFAULT_INTERVAL_DAYS;
-    next.easeFactor = clamp(currentEase - config.incorrectEasePenalty, config.easeMin, config.easeMax);
+    next.easeFactor = clamp(
+      currentEase - config.incorrectEasePenalty,
+      config.easeMin,
+      config.easeMax,
+    );
   } else {
     next.correctStreak = (next.correctStreak ?? 0) + 1;
 
@@ -114,19 +128,37 @@ export function applySrsUpdate(input: SrsInput): UserWordProgress {
   next.srsConfigVersion = config.version;
 
   if (input.direction === QuizDirectionEnum.SOURCE_TO_TARGET) {
-    next.sourceToTargetStrength = updateStrength(next.sourceToTargetStrength, input.isCorrect, input.confidenceLevel);
+    next.sourceToTargetStrength = updateStrength(
+      next.sourceToTargetStrength,
+      input.isCorrect,
+      input.confidenceLevel,
+    );
   } else if (input.direction === QuizDirectionEnum.TARGET_TO_SOURCE) {
-    next.targetToSourceStrength = updateStrength(next.targetToSourceStrength, input.isCorrect, input.confidenceLevel);
+    next.targetToSourceStrength = updateStrength(
+      next.targetToSourceStrength,
+      input.isCorrect,
+      input.confidenceLevel,
+    );
   } else {
     // Fallback for legacy submissions without direction metadata.
-    next.sourceToTargetStrength = updateStrength(next.sourceToTargetStrength, input.isCorrect, input.confidenceLevel);
-    next.targetToSourceStrength = updateStrength(next.targetToSourceStrength, input.isCorrect, input.confidenceLevel);
+    next.sourceToTargetStrength = updateStrength(
+      next.sourceToTargetStrength,
+      input.isCorrect,
+      input.confidenceLevel,
+    );
+    next.targetToSourceStrength = updateStrength(
+      next.targetToSourceStrength,
+      input.isCorrect,
+      input.confidenceLevel,
+    );
   }
 
   next.lastSeen = now;
 
   const nextReview = new Date(now);
-  nextReview.setDate(nextReview.getDate() + (next.interval ?? SRS_DEFAULT_CONFIG.DEFAULT_INTERVAL_DAYS));
+  nextReview.setDate(
+    nextReview.getDate() + (next.interval ?? SRS_DEFAULT_CONFIG.DEFAULT_INTERVAL_DAYS),
+  );
   next.nextReview = nextReview;
 
   return next;

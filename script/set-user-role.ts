@@ -9,7 +9,9 @@ async function main() {
   const role = process.argv[3] as Role | undefined;
 
   if (!identifier || !role || !["learner", "reviewer", "admin"].includes(role)) {
-    console.error("Usage: node --import tsx script/set-user-role.ts <email-or-user-id> <learner|reviewer|admin>");
+    console.error(
+      "Usage: node --import tsx script/set-user-role.ts <email-or-user-id> <learner|reviewer|admin>",
+    );
     process.exit(1);
   }
 
@@ -20,7 +22,9 @@ async function main() {
     .returning();
 
   if (updatedByEmail) {
-    console.log(`Updated role to '${role}' for user ${updatedByEmail.id} (${updatedByEmail.email})`);
+    console.log(
+      `Updated role to '${role}' for user ${updatedByEmail.id} (${updatedByEmail.email})`,
+    );
     return;
   }
 

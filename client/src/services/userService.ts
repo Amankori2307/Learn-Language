@@ -31,4 +31,3 @@ export const userService = {
     return api.profile.update.responses[200].parse(response.data) as IUserProfile;
   },
 };
-

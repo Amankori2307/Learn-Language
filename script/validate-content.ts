@@ -120,7 +120,13 @@ function validateVocabularyTags(values: string[] | undefined, row: number, error
 }
 
 function validateWord(word: ContentWord, row: number, errors: string[]) {
-  if (!word.key || !word.originalScript || !word.english || !word.transliteration || !word.partOfSpeech) {
+  if (
+    !word.key ||
+    !word.originalScript ||
+    !word.english ||
+    !word.transliteration ||
+    !word.partOfSpeech
+  ) {
     errors.push(`[word ${row}] Missing required lexical fields`);
     return;
   }
@@ -149,7 +155,9 @@ function validateWord(word: ContentWord, row: number, errors: string[]) {
       errors.push(`[word ${row}] transliteration must contain latin characters`);
     }
     if (FORBIDDEN_PLACEHOLDER_PATTERNS.some((pattern) => pattern.test(transliteration))) {
-      errors.push(`[word ${row}] transliteration "${transliteration}" looks like placeholder content`);
+      errors.push(
+        `[word ${row}] transliteration "${transliteration}" looks like placeholder content`,
+      );
     }
   }
 
@@ -171,7 +179,12 @@ function validateSentence(
   errors: string[],
   wordKeys: Set<string>,
 ) {
-  if (!sentence.originalScript || !sentence.pronunciation || !sentence.english || !sentence.contextTag) {
+  if (
+    !sentence.originalScript ||
+    !sentence.pronunciation ||
+    !sentence.english ||
+    !sentence.contextTag
+  ) {
     errors.push(`[sentence ${row}] Missing originalScript/pronunciation/english/contextTag`);
   }
 
@@ -191,7 +204,9 @@ function validateSentence(
     errors.push(`[sentence ${row}] pronunciation must contain latin characters`);
   }
   if (FORBIDDEN_PLACEHOLDER_PATTERNS.some((pattern) => pattern.test(pronunciation))) {
-    errors.push(`[sentence ${row}] pronunciation "${pronunciation}" looks like placeholder content`);
+    errors.push(
+      `[sentence ${row}] pronunciation "${pronunciation}" looks like placeholder content`,
+    );
   }
 
   const contextTag = sentence.contextTag?.trim() ?? "";

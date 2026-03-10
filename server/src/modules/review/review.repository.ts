@@ -1,7 +1,11 @@
 import { Injectable } from "@nestjs/common";
 import { storage } from "../../infrastructure/storage";
 import { ReviewStatusEnum } from "@shared/domain/enums";
-import { ICreateWordDraftInput, IResolveConflictOptions, ITransitionOptions } from "./review.repository.types";
+import {
+  ICreateWordDraftInput,
+  IResolveConflictOptions,
+  ITransitionOptions,
+} from "./review.repository.types";
 
 @Injectable()
 export class ReviewRepository {
@@ -13,7 +17,12 @@ export class ReviewRepository {
     return storage.getConflictReviewQueue(limit);
   }
 
-  transitionWordReview(wordId: number, reviewerId: string, toStatus: ReviewStatusEnum, options?: ITransitionOptions) {
+  transitionWordReview(
+    wordId: number,
+    reviewerId: string,
+    toStatus: ReviewStatusEnum,
+    options?: ITransitionOptions,
+  ) {
     return storage.transitionWordReview(wordId, reviewerId, toStatus, options);
   }
 

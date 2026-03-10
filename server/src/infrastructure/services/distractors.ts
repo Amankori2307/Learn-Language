@@ -30,7 +30,10 @@ export function chooseDistractors(params: {
         }
       });
       const samePos = candidate.partOfSpeech === params.word.partOfSpeech ? 1 : 0;
-      const translitScore = transliterationSimilarity(candidate.transliteration, params.word.transliteration);
+      const translitScore = transliterationSimilarity(
+        candidate.transliteration,
+        params.word.transliteration,
+      );
 
       return {
         candidate,

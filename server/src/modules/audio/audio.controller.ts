@@ -14,7 +14,9 @@ export class AudioApiController {
   @Post("/api/audio/resolve")
   async resolveAudio(@Req() req: Request, @Res() res: Response, @Body() body: ResolveAudioBodyDto) {
     try {
-      const userId = String((req.user as { claims?: { sub?: string } } | undefined)?.claims?.sub ?? "unknown");
+      const userId = String(
+        (req.user as { claims?: { sub?: string } } | undefined)?.claims?.sub ?? "unknown",
+      );
       const result = await this.audioService.resolveAudio({ userId, payload: body });
       logApiEvent(req, "audio_resolved", {
         wordId: body.wordId ?? null,
