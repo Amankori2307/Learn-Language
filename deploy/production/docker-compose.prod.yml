@@ -1,0 +1,27 @@
+services:
+  frontend:
+    image: ghcr.io/${GHCR_OWNER}/learn-lang-frontend:${IMAGE_TAG}
+    container_name: learn-lang-frontend
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      NODE_ENV: production
+      FRONTEND_PORT: 3000
+
+  backend:
+    image: ghcr.io/${GHCR_OWNER}/learn-lang-backend:${IMAGE_TAG}
+    container_name: learn-lang-backend
+    restart: unless-stopped
+    env_file:
+      - ./.env.production
+    environment:
+      NODE_ENV: production
+      APP_ENV: production
+      BACKEND_PORT: 5001
+    command:
+      - /bin/sh
+      - -lc
+      - pnpm run db:migrate:production && pnpm run content:import:production && pnpm run start:backend
+    ports:
+      - "5001:5001"
