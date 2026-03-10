@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { useWordBucketsViewModel } from "@/features/analytics/use-word-buckets-view-model";
 import { QuizModeEnum } from "@shared/domain/enums";
 import { SurfaceMessage, TableSurfaceSkeleton } from "@/components/ui/page-states";
+import { WordBucketWordList } from "@/features/analytics/word-bucket-word-list";
 
 export default function WordBucketsPage() {
   const {
@@ -125,99 +126,13 @@ export default function WordBucketsPage() {
             tone="empty"
           />
         ) : (
-          <div className="rounded-2xl border border-border/50 bg-card overflow-hidden">
-            <div className="space-y-3 p-4 md:hidden">
-              {data?.words.map((word) => (
-                <div
-                  key={`${bucket}-${word.wordId}`}
-                  className="rounded-xl border border-border/50 bg-background/70 p-4"
-                >
-                  <div className="flex items-start justify-between gap-3">
-                    <div className="min-w-0">
-                      <p className="font-medium">
-                        {word.transliteration} ({word.originalScript})
-                      </p>
-                      <p className="mt-1 text-sm text-muted-foreground">{word.english}</p>
-                    </div>
-                    <span className="rounded-full border border-border/60 bg-secondary px-2 py-1 text-xs">
-                      {word.masteryLevel}
-                    </span>
-                  </div>
-                  <div className="mt-3 grid grid-cols-2 gap-3 text-sm">
-                    <div>
-                      <p className="text-xs uppercase tracking-wide text-muted-foreground">
-                        Wrong
-                      </p>
-                      <p>{word.wrongCount}</p>
-                    </div>
-                    <div>
-                      <p className="text-xs uppercase tracking-wide text-muted-foreground">
-                        Next Review
-                      </p>
-                      <p className="text-muted-foreground">
-                        {word.nextReview
-                          ? new Date(word.nextReview).toLocaleString()
-                          : "Not scheduled"}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            <div className="hidden grid-cols-12 gap-3 border-b border-border/60 bg-secondary/30 px-4 py-3 text-xs font-semibold text-muted-foreground md:grid">
-              <div className="col-span-6 md:col-span-4">Word</div>
-              <div className="col-span-6 md:col-span-3">Meaning</div>
-              <div className="hidden md:block md:col-span-2">Mastery</div>
-              <div className="hidden md:block md:col-span-1">Wrong</div>
-              <div className="col-span-12 md:col-span-2">Next Review</div>
-            </div>
-            <div className="hidden divide-y divide-border/50 md:block">
-              {data?.words.map((word) => (
-                <div
-                  key={`${bucket}-${word.wordId}`}
-                  className="grid grid-cols-12 gap-3 px-4 py-3 items-center"
-                >
-                  <div className="col-span-6 md:col-span-4 min-w-0">
-                    <p className="font-medium truncate">
-                      {word.transliteration} ({word.originalScript})
-                    </p>
-                  </div>
-                  <div className="col-span-6 md:col-span-3 min-w-0">
-                    <p className="text-sm text-muted-foreground truncate">{word.english}</p>
-                  </div>
-                  <div className="hidden md:block md:col-span-2 text-sm">{word.masteryLevel}</div>
-                  <div className="hidden md:block md:col-span-1 text-sm">{word.wrongCount}</div>
-                  <div className="col-span-12 md:col-span-2 text-sm text-muted-foreground">
-                    {word.nextReview ? new Date(word.nextReview).toLocaleString() : "Not scheduled"}
-                  </div>
-                </div>
-              ))}
-            </div>
-            <div className="flex flex-col gap-3 border-t border-border/50 bg-secondary/20 px-4 py-3 sm:flex-row sm:items-center sm:justify-between">
-              <p className="text-xs text-muted-foreground">
-                Page {page} of {totalPages} • {data?.total ?? 0} words
-              </p>
-              <div className="flex items-center gap-2 self-end sm:self-auto">
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={() => setPage((p) => Math.max(1, p - 1))}
-                  disabled={page <= 1}
-                >
-                  Prev
-                </Button>
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
-                  disabled={page >= totalPages}
-                >
-                  Next
-                </Button>
-              </div>
-            </div>
-          </div>
+          <WordBucketWordList
+            bucket={bucket}
+            data={data}
+            page={page}
+            totalPages={totalPages}
+            setPage={setPage}
+          />
         )}
       </div>
     </Layout>
