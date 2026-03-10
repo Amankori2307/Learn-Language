@@ -1,10 +1,10 @@
-import { Injectable } from "@nestjs/common";
+import { Inject, Injectable } from "@nestjs/common";
 import { api } from "@shared/routes";
 import { InfraRepository } from "./infra.repository";
 
 @Injectable()
 export class InfraService {
-  constructor(private readonly repository: InfraRepository) {}
+  constructor(@Inject(InfraRepository) private readonly repository: InfraRepository) {}
 
   async seed() {
     await this.repository.seedInitialData();
@@ -16,4 +16,3 @@ export class InfraService {
     return this.repository.getSrsDriftSummary(parsed.language);
   }
 }
-

@@ -1,4 +1,4 @@
-import { Injectable } from "@nestjs/common";
+import { Inject, Injectable } from "@nestjs/common";
 import { z } from "zod";
 import { api } from "@shared/routes";
 import { ReviewDisagreementStatusEnum, ReviewStatusEnum } from "@shared/domain/enums";
@@ -8,7 +8,7 @@ import { ReviewConflictInput, ReviewQueueInput } from "./review.types";
 
 @Injectable()
 export class ReviewService {
-  constructor(private readonly repository: ReviewRepository) {}
+  constructor(@Inject(ReviewRepository) private readonly repository: ReviewRepository) {}
 
   async getQueue(input: ReviewQueueInput) {
     const parsed = api.review.queue.input?.parse(input) ?? { status: ReviewStatusEnum.PENDING_REVIEW, limit: 50 };

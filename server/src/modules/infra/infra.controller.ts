@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Query, Req, Res, UseGuards } from "@nestjs/common";
+import { Controller, Get, Inject, Post, Query, Req, Res, UseGuards } from "@nestjs/common";
 import type { Request, Response } from "express";
 import { InfraService } from "./infra.service";
 import { AuthenticatedGuard } from "../../common/guards/authenticated.guard";
@@ -9,7 +9,7 @@ import { sendError } from "../../common/http";
 
 @Controller()
 export class InfraApiController {
-  constructor(private readonly infraService: InfraService) {}
+  constructor(@Inject(InfraService) private readonly infraService: InfraService) {}
 
   @Post("/api/admin/seed")
   @UseGuards(AuthenticatedGuard)

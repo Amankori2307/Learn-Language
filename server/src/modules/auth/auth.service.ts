@@ -1,4 +1,4 @@
-import { Injectable } from "@nestjs/common";
+import { Inject, Injectable } from "@nestjs/common";
 import { ConfigService, type ConfigType } from "@nestjs/config";
 import { z } from "zod";
 import { api } from "@shared/routes";
@@ -13,8 +13,8 @@ import { appLogger } from "../../common/logger/logger";
 @Injectable()
 export class AuthService {
   constructor(
-    private readonly repository: AuthRepository,
-    private readonly configService: ConfigService,
+    @Inject(AuthRepository) private readonly repository: AuthRepository,
+    @Inject(ConfigService) private readonly configService: ConfigService,
   ) {}
 
   async getAuthUser(claims: UserClaims) {

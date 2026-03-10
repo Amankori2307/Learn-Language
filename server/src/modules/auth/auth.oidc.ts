@@ -14,7 +14,7 @@ import { UserClaims } from "./auth.types";
 import { appLogger } from "../../common/logger/logger";
 
 export type AuthRuntimeConfig = {
-  provider: "google" | "dev";
+  provider: "google";
   googleClientId?: string;
   googleClientSecret?: string;
   googleIssuerUrl: string;
@@ -25,10 +25,10 @@ export type AuthRuntimeConfig = {
 };
 
 let authConfig: AuthRuntimeConfig = {
-  provider: "dev",
+  provider: "google",
   googleIssuerUrl: "https://accounts.google.com",
   frontendBaseUrl: undefined,
-  jwtSecret: "dev-jwt-secret-min-16",
+  jwtSecret: "google-auth-secret-min-16",
   reviewerEmails: new Set<string>(),
   adminEmails: new Set<string>(),
 };
@@ -195,34 +195,6 @@ export async function setupAuth(app: Express, config: AuthRuntimeConfig) {
   );
   app.use(passport.initialize());
 
-  if (authConfig.provider === "dev") {
-    app.get(AUTH_GOOGLE_ROUTE, async (_req, res) => {
-      const claims: UserClaims = {
-        sub: "dev-user",
-        email: "dev@example.com",
-        first_name: "Dev",
-        last_name: "User",
-        given_name: "Dev",
-        family_name: "User",
-        profile_image_url: null,
-        picture: null,
-      };
-      await upsertUser(claims);
-      const signedToken = signAuthToken(claims);
-      setAuthCookie(res, signedToken);
-      res.redirect(getFrontendAuthRedirectWithToken(signedToken));
-    });
-    app.get(AUTH_GOOGLE_CALLBACK_ROUTE, (_req, res) => res.redirect(getFrontendRedirectUrl("/")));
-    app.post(AUTH_LOGOUT_ROUTE, (_req, res) => {
-      clearAuthCookie(res);
-      res.status(204).send();
-    });
-    appLogger.debug("setupAuth.end", { provider: authConfig.provider });
-    return;
-  }
-
-  const oidcConfig = await getOidcConfig();
-
   const verify: VerifyFunction = async (
     tokens: client.TokenEndpointResponse & client.TokenEndpointResponseHelpers,
     verified: passport.AuthenticateCallback
@@ -235,9 +207,10 @@ export async function setupAuth(app: Express, config: AuthRuntimeConfig) {
 
   const registeredStrategies = new Set<string>();
 
-  const ensureStrategy = (req: any) => {
+  const ensureStrategy = async (req: any) => {
     const strategyName = `google:${req.hostname}`;
     if (!registeredStrategies.has(strategyName)) {
+      const oidcConfig = await getOidcConfig();
       const callbackURL = `${req.protocol}://${req.get("host")}${AUTH_GOOGLE_CALLBACK_ROUTE}`;
       const scope = "openid email profile";
 
@@ -253,55 +226,63 @@ export async function setupAuth(app: Express, config: AuthRuntimeConfig) {
       passport.use(strategy);
       registeredStrategies.add(strategyName);
     }
+
+    return strategyName;
   };
 
-  app.get(AUTH_GOOGLE_ROUTE, (req, res, next) => {
-    ensureStrategy(req);
-    const strategyName = `google:${req.hostname}`;
-    const authOptions = {
-      prompt: "consent",
-      access_type: "offline",
-      scope: ["openid", "email", "profile"],
-    };
+  app.get(AUTH_GOOGLE_ROUTE, async (req, res, next) => {
+    try {
+      const strategyName = await ensureStrategy(req);
+      const authOptions = {
+        prompt: "consent",
+        access_type: "offline",
+        scope: ["openid", "email", "profile"],
+      };
 
-    passport.authenticate(strategyName, { ...authOptions, session: false })(req, res, next);
+      passport.authenticate(strategyName, { ...authOptions, session: false })(req, res, next);
+    } catch (error) {
+      next(error);
+    }
   });
 
-  app.get(AUTH_GOOGLE_CALLBACK_ROUTE, (req, res, next) => {
-    ensureStrategy(req);
-    const strategyName = `google:${req.hostname}`;
-    passport.authenticate(
-      strategyName,
-      { session: false },
-      (error: unknown, user: PassportUser | false) => {
-      const oauthError = error as {
-        code?: string;
-        error?: string;
-      } | null;
+  app.get(AUTH_GOOGLE_CALLBACK_ROUTE, async (req, res, next) => {
+    try {
+      const strategyName = await ensureStrategy(req);
+      passport.authenticate(
+        strategyName,
+        { session: false },
+        (error: unknown, user: PassportUser | false) => {
+          const oauthError = error as {
+            code?: string;
+            error?: string;
+          } | null;
 
-      if (oauthError?.code === "OAUTH_RESPONSE_BODY_ERROR" && oauthError?.error === "invalid_client") {
-        return sendError(
-          req,
-          res,
-          500,
-          "INTERNAL_ERROR",
-          "Google OAuth client credentials are invalid. Verify GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, and callback URI configuration.",
-        );
-      }
+          if (oauthError?.code === "OAUTH_RESPONSE_BODY_ERROR" && oauthError?.error === "invalid_client") {
+            return sendError(
+              req,
+              res,
+              500,
+              "INTERNAL_ERROR",
+              "Google OAuth client credentials are invalid. Verify GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, and callback URI configuration.",
+            );
+          }
 
-      if (error) {
-        return next(error);
-      }
+          if (error) {
+            return next(error);
+          }
 
-      if (!user) {
-        return res.redirect(AUTH_GOOGLE_ROUTE);
-      }
+          if (!user) {
+            return res.redirect(AUTH_GOOGLE_ROUTE);
+          }
 
-      const signedToken = signAuthToken(user.claims);
-      setAuthCookie(res, signedToken);
-      return res.redirect(getFrontendAuthRedirectWithToken(signedToken));
-    },
-    )(req, res, next);
+          const signedToken = signAuthToken(user.claims);
+          setAuthCookie(res, signedToken);
+          return res.redirect(getFrontendAuthRedirectWithToken(signedToken));
+        },
+      )(req, res, next);
+    } catch (error) {
+      next(error);
+    }
   });
 
   app.post(AUTH_LOGOUT_ROUTE, (_req, res) => {
@@ -317,24 +298,6 @@ export const isAuthenticated: RequestHandler = async (req, res, next) => {
     path: req.path,
     method: req.method,
   });
-  if (authConfig.provider === "dev") {
-    (req as any).user = {
-      claims: {
-        sub: "dev-user",
-        email: "dev@example.com",
-        first_name: "Dev",
-        last_name: "User",
-      },
-      expires_at: Math.floor(Date.now() / 1000) + 3600,
-    };
-    appLogger.debug("isAuthenticated.end", {
-      requestId: req.requestId ?? "unknown",
-      provider: authConfig.provider,
-      authenticated: true,
-    });
-    return next();
-  }
-
   const token = getAuthTokenFromRequest(req);
   if (!token) {
     appLogger.warn("isAuthenticated.reject.missing_token", {

@@ -1,4 +1,4 @@
-import { Injectable } from "@nestjs/common";
+import { Inject, Injectable } from "@nestjs/common";
 import { z } from "zod";
 import { api } from "@shared/routes";
 import { QuizModeEnum, QuizQuestionTypeEnum } from "@shared/domain/enums";
@@ -11,7 +11,7 @@ import { GenerateQuizInput, SubmitQuizInput } from "./quiz.types";
 
 @Injectable()
 export class QuizService {
-  constructor(private readonly repository: QuizRepository) {}
+  constructor(@Inject(QuizRepository) private readonly repository: QuizRepository) {}
 
   async generateQuiz(input: GenerateQuizInput) {
     const parsed = api.quiz.generate.input?.parse({

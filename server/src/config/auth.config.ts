@@ -11,7 +11,7 @@ function parseEmailList(value?: string): Set<string> {
 }
 
 export const authConfig = registerAs("auth", () => ({
-  provider: (process.env.AUTH_PROVIDER === "dev" ? "dev" : "google") as "dev" | "google",
+  provider: "google" as const,
   googleClientId: process.env.GOOGLE_CLIENT_ID,
   googleClientSecret: process.env.GOOGLE_CLIENT_SECRET,
   googleIssuerUrl: process.env.GOOGLE_ISSUER_URL ?? "https://accounts.google.com",

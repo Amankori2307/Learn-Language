@@ -1,4 +1,4 @@
-import { Injectable } from "@nestjs/common";
+import { Inject, Injectable } from "@nestjs/common";
 import { LanguageEnum } from "@shared/domain/enums";
 import { api } from "@shared/routes";
 import { parseLanguage } from "../../common/utils/language";
@@ -7,7 +7,7 @@ import { AttemptHistoryInput, LeaderboardInput, WordBucketInput } from "./analyt
 
 @Injectable()
 export class AnalyticsService {
-  constructor(private readonly repository: AnalyticsRepository) {}
+  constructor(@Inject(AnalyticsRepository) private readonly repository: AnalyticsRepository) {}
 
   async getStats(userId: string, language?: LanguageEnum) {
     const parsed = api.stats.get.input?.parse({ language }) ?? {};

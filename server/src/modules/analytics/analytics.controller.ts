@@ -1,4 +1,4 @@
-import { Controller, Get, Query, Req, Res, UseGuards } from "@nestjs/common";
+import { Controller, Get, Inject, Query, Req, Res, UseGuards } from "@nestjs/common";
 import type { Request, Response } from "express";
 import { AnalyticsService } from "./analytics.service";
 import { AuthenticatedGuard } from "../../common/guards/authenticated.guard";
@@ -9,7 +9,7 @@ import { sendError } from "../../common/http";
 @Controller()
 @UseGuards(AuthenticatedGuard)
 export class AnalyticsApiController {
-  constructor(private readonly analyticsService: AnalyticsService) {}
+  constructor(@Inject(AnalyticsService) private readonly analyticsService: AnalyticsService) {}
 
   @Get("/api/stats")
   async getStats(@Req() req: Request, @Res() res: Response, @Query() query: LanguageQueryDto) {

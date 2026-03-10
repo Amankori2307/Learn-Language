@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post, Query, Req, Res, UseGuards } from "@nestjs/common";
+import { Body, Controller, Get, Inject, Post, Query, Req, Res, UseGuards } from "@nestjs/common";
 import type { Request, Response } from "express";
 import { QuizService } from "./quiz.service";
 import { AuthenticatedGuard } from "../../common/guards/authenticated.guard";
@@ -9,7 +9,7 @@ import { logApiEvent, sendError } from "../../common/http";
 @Controller()
 @UseGuards(AuthenticatedGuard)
 export class QuizApiController {
-  constructor(private readonly quizService: QuizService) {}
+  constructor(@Inject(QuizService) private readonly quizService: QuizService) {}
 
   @Get("/api/quiz/generate")
   async generateQuiz(@Req() req: Request, @Res() res: Response, @Query() query: GenerateQuizQueryDto) {

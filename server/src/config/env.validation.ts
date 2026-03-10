@@ -5,7 +5,7 @@ export const envSchema = z
     NODE_ENV: z.enum(["development", "test", "production"]).default("development"),
     PORT: z.coerce.number().int().positive().default(3000),
     DATABASE_URL: z.string().min(1, "DATABASE_URL is required"),
-    AUTH_PROVIDER: z.enum(["google", "dev"]).default("google"),
+    AUTH_PROVIDER: z.literal("google").default("google"),
     GOOGLE_CLIENT_ID: z.string().optional(),
     GOOGLE_CLIENT_SECRET: z.string().optional(),
     JWT_SECRET: z.string().min(16).optional(),
@@ -21,10 +21,6 @@ export const envSchema = z
     GOOGLE_TTS_API_KEY: z.string().optional(),
   })
   .superRefine((data, ctx) => {
-    if (data.AUTH_PROVIDER !== "google") {
-      return;
-    }
-
     if (!data.GOOGLE_CLIENT_ID?.trim()) {
       ctx.addIssue({
         code: z.ZodIssueCode.custom,

@@ -1,4 +1,4 @@
-import { Body, Controller, Post, Req, Res, UseGuards } from "@nestjs/common";
+import { Body, Controller, Inject, Post, Req, Res, UseGuards } from "@nestjs/common";
 import type { Request, Response } from "express";
 import { AuthenticatedGuard } from "../../common/guards/authenticated.guard";
 import { AppError } from "../../common/errors/app-error";
@@ -9,7 +9,7 @@ import { AudioService } from "./audio.service";
 @Controller()
 @UseGuards(AuthenticatedGuard)
 export class AudioApiController {
-  constructor(private readonly audioService: AudioService) {}
+  constructor(@Inject(AudioService) private readonly audioService: AudioService) {}
 
   @Post("/api/audio/resolve")
   async resolveAudio(@Req() req: Request, @Res() res: Response, @Body() body: ResolveAudioBodyDto) {

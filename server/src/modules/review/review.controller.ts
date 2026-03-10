@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, ParseIntPipe, Patch, Post, Query, Req, Res, UseGuards } from "@nestjs/common";
+import { Body, Controller, Get, Inject, Param, ParseIntPipe, Patch, Post, Query, Req, Res, UseGuards } from "@nestjs/common";
 import type { Request, Response } from "express";
 import { ReviewService } from "./review.service";
 import { AuthenticatedGuard } from "../../common/guards/authenticated.guard";
@@ -16,7 +16,7 @@ import { sendError } from "../../common/http";
 
 @Controller()
 export class ReviewApiController {
-  constructor(private readonly reviewService: ReviewService) {}
+  constructor(@Inject(ReviewService) private readonly reviewService: ReviewService) {}
 
   @Get("/api/review/queue")
   @UseGuards(AuthenticatedGuard, ReviewerGuard)

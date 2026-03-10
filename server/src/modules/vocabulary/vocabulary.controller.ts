@@ -1,4 +1,4 @@
-import { Controller, Get, Param, ParseIntPipe, Query, Req, Res, UseGuards } from "@nestjs/common";
+import { Controller, Get, Inject, Param, ParseIntPipe, Query, Req, Res, UseGuards } from "@nestjs/common";
 import type { Request, Response } from "express";
 import { VocabularyService } from "./vocabulary.service";
 import { AuthenticatedGuard } from "../../common/guards/authenticated.guard";
@@ -9,7 +9,7 @@ import { sendError } from "../../common/http";
 @Controller()
 @UseGuards(AuthenticatedGuard)
 export class VocabularyApiController {
-  constructor(private readonly vocabularyService: VocabularyService) {}
+  constructor(@Inject(VocabularyService) private readonly vocabularyService: VocabularyService) {}
 
   @Get("/api/words")
   async listWords(@Req() req: Request, @Res() res: Response, @Query() query: ListWordsQueryDto) {

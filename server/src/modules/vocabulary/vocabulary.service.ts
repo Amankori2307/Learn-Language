@@ -1,4 +1,4 @@
-import { Injectable } from "@nestjs/common";
+import { Inject, Injectable } from "@nestjs/common";
 import { api } from "@shared/routes";
 import { LanguageEnum } from "@shared/domain/enums";
 import { VocabularyRepository } from "./vocabulary.repository";
@@ -7,7 +7,7 @@ import { ListWordsInput } from "./vocabulary.types";
 
 @Injectable()
 export class VocabularyService {
-  constructor(private readonly repository: VocabularyRepository) {}
+  constructor(@Inject(VocabularyRepository) private readonly repository: VocabularyRepository) {}
 
   async listWords(input: ListWordsInput) {
     const parsed = api.words.list.input?.parse(input) ?? {};
