@@ -9,7 +9,8 @@ Build a text-first language learning app with high data correctness, strong memo
 - Phase 4 complete.
 - Phase 6 core hardening complete (`P6-001` to `P6-011`).
 - Phase 8 feature hardening complete through `P8-008`.
-- Active priority mode: functionality-first delivery (feature correctness and reliability over visual-only work).
+- Phase 9 planning is now active for frontend architecture, async UX standardization, responsive UI hardening, and post-refactor test expansion.
+- Active priority mode: functionality-first delivery with dependency-safe frontend hardening before broad test expansion.
 
 ## Core capabilities live
 
@@ -105,3 +106,6 @@ Build a text-first language learning app with high data correctness, strong memo
 - Execute in order from `context/plan/01-master-task-registry.md` (latest active section: Phase 8).
 - Remaining Phase 8 execution:
   - deployment/CI-CD last (`P8-006`) is currently on hold
+- Next planned execution track:
+  - Phase 9 in [context/plan/70-phase-9-frontend-architecture-and-quality.md](/Users/aman/Projects/personal-projects/Learn-Language/context/plan/70-phase-9-frontend-architecture-and-quality.md)
+  - start with `P9-001`

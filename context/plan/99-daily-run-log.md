@@ -1,5 +1,35 @@
 # Daily Run Log (Compact)
 
+Date: 2026-03-10  
+Session owner: Codex  
+Last completed task ID: P8-008  
+Current in-progress task ID: -  
+Next task ID: P9-001
+
+## Current state
+
+- Production deploy flow now uploads local `.env.production` to the server on every deploy and force-recreates containers so runtime env changes apply.
+- Production server notes were moved to [documentation/server.md](/Users/aman/Projects/personal-projects/Learn-Language/documentation/server.md).
+- Implementation-backed core feature documentation now exists in [documentation/core-features.md](/Users/aman/Projects/personal-projects/Learn-Language/documentation/core-features.md).
+- A new detailed Phase 9 execution plan now exists in [context/plan/70-phase-9-frontend-architecture-and-quality.md](/Users/aman/Projects/personal-projects/Learn-Language/context/plan/70-phase-9-frontend-architecture-and-quality.md).
+- Phase 9 is ordered to avoid wasted work:
+  - architecture boundary first
+  - React Query and async UX standardization second
+  - shared loading/skeleton states third
+  - responsive/mobile hardening fourth
+  - comprehensive backend/frontend/E2E/smoke coverage after refactor surfaces stabilize
+
+## Current blockers
+
+- No implementation blocker identified for planning.
+- `P7-004` remains historically blocked by network/package constraints for Next.js migration, but it is not the current execution track.
+
+## Immediate next actions
+
+- Start `P9-001` and create the frontend architecture baseline with a concrete page/feature/service/presentational boundary inventory.
+
+---
+
 Date: 2026-02-21  
 Session owner: Codex  
 Last completed task ID: P7-003  
