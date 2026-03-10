@@ -25,7 +25,7 @@ else
 fi
 
 docker compose --env-file .deploy.env -f docker-compose.prod.yml pull
-docker compose --env-file .deploy.env -f docker-compose.prod.yml up -d --remove-orphans
+docker compose --env-file .deploy.env -f docker-compose.prod.yml up -d --force-recreate --remove-orphans
 
 docker image prune -f >/dev/null 2>&1 || true
 

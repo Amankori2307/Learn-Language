@@ -48,6 +48,10 @@ require_cmd git
 require_cmd ssh
 require_cmd scp
 
+if [ ! -f .env.production ]; then
+  fail "Missing local .env.production"
+fi
+
 IMAGE_TAG="${IMAGE_TAG:-sha-$(git rev-parse HEAD)}"
 GHCR_OWNER="${GHCR_OWNER:-$(git config --get remote.origin.url | sed -E 's#(git@github.com:|https://github.com/)##; s#\.git$##' | cut -d/ -f1 | tr '[:upper:]' '[:lower:]')}"
 
@@ -90,15 +94,18 @@ log "INFO" "Ensuring remote directory exists"
 run_ssh "$PROD_SSH_USER@$PROD_SSH_HOST" "mkdir -p '$PROD_APP_DIR'"
 
 CURRENT_STEP="upload deploy bundle"
-log "INFO" "Uploading deploy bundle to remote server"
+log "INFO" "Uploading deploy bundle and production env to remote server"
 run_scp \
   deploy/production/docker-compose.prod.yml \
   deploy/production/deploy.sh \
+  .env.production \
   "$PROD_SSH_USER@$PROD_SSH_HOST:$PROD_APP_DIR/"
 
 CURRENT_STEP="set remote script permissions"
-log "INFO" "Marking remote deploy script as executable"
-run_ssh "$PROD_SSH_USER@$PROD_SSH_HOST" "chmod +x '$PROD_APP_DIR/deploy.sh'"
+log "INFO" "Marking remote deploy script as executable and locking env permissions"
+run_ssh \
+  "$PROD_SSH_USER@$PROD_SSH_HOST" \
+  "chmod +x '$PROD_APP_DIR/deploy.sh' && chmod 600 '$PROD_APP_DIR/.env.production'"
 
 CURRENT_STEP="run remote deployment"
 log "INFO" "Triggering remote deployment"

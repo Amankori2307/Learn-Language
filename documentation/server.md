@@ -110,6 +110,7 @@ Uploaded these files into `/opt/learn-language`:
 
 - `docker-compose.prod.yml`
 - `deploy.sh`
+- `.env.production` (now uploaded from local on every deploy)
 
 ## Runtime env files created on server
 
@@ -121,6 +122,7 @@ IMAGE_TAG=latest
 ```
 
 Production now uses `/opt/learn-language/.env.production`.
+The local deploy script uploads the repository's `.env.production` to that path on every deploy, then force-recreates the containers so runtime env changes are applied.
 
 Originally the server was bootstrapped with `/opt/learn-language/.env.backend`, but the setup was later normalized to `.env.production` so the Docker runtime matches the app's production env naming.
 
@@ -376,18 +378,17 @@ This `401` is correct because the endpoint is protected and the backend is reach
 
 These still need manual completion:
 
-1. Replace placeholder Google OAuth values in `/opt/learn-language/.env.production`.
-2. Replace `JWT_SECRET` with a strong production secret.
-3. Rotate the exposed server and database passwords.
-4. Consider closing direct public access to `3000` and `5001` after confirming Nginx-only access is sufficient:
+1. Replace `JWT_SECRET` with a strong production secret.
+2. Rotate the exposed server and database passwords.
+3. Consider closing direct public access to `3000` and `5001` after confirming Nginx-only access is sufficient:
 
 ```sh
 ufw delete allow 3000/tcp
 ufw delete allow 5001/tcp
 ```
 
-5. Consider changing deployment to SSH key auth instead of root password auth.
-6. Consider pinning deploys to `sha-<commit>` instead of `latest` in `/opt/learn-language/.deploy.env` if you want deterministic rollbacks.
+4. Consider changing deployment to SSH key auth instead of root password auth.
+5. Consider pinning deploys to `sha-<commit>` instead of `latest` in `/opt/learn-language/.deploy.env` if you want deterministic rollbacks.
 
 ## Manual deploy procedure for future use
 
@@ -422,7 +423,7 @@ Because GHCR images were verified as public, `GHCR_USERNAME` and `GHCR_TOKEN` ar
 5. Install Certbot and `python3-certbot-nginx`.
 6. Create `/opt/learn-language`.
 7. Copy production deploy files into `/opt/learn-language`.
-8. Create `.env.production` and `.deploy.env`.
+8. Create local `.env.production` and remote `.deploy.env`.
 9. Open firewall ports `22`, `80`, `443`.
 10. Optionally open `3000` and `5001` temporarily for debugging.
 11. Start Docker stack.

@@ -14,14 +14,17 @@ The local deploy script copies these files into that directory:
 
 - `docker-compose.prod.yml`
 - `deploy.sh`
+- `.env.production`
 
-You must create the production env file on the server once:
+Keep the real production values in your local `.env.production`. The deploy script uploads that file to the server on every deploy and resets its permissions to `600`.
+
+You should still create the remote app directory once:
 
 ```sh
-touch /opt/learn-language/.env.production
+mkdir -p /opt/learn-language
 ```
 
-Then fill in the real values, especially:
+The local `.env.production` should include the real values, especially:
 
 - `DATABASE_URL`
 - `GOOGLE_CLIENT_ID`
@@ -69,4 +72,4 @@ Install these on the server:
 - Docker
 - Docker Compose v2 (`docker compose`)
 
-The deploy script logs into `ghcr.io`, pulls the exact image tag built from the current commit, and restarts the frontend and backend containers.
+The deploy script logs into `ghcr.io`, uploads the latest local `.env.production`, pulls the exact image tag built from the current commit, and force-recreates the containers so env changes take effect immediately.
