@@ -13,7 +13,7 @@ type QuizSubmitInput = z.infer<typeof api.quiz.submit.input>;
 export function useGenerateQuiz(mode: QuizMode = QuizModeEnum.DAILY_REVIEW, clusterId?: number) {
   const { language } = useLearningLanguage();
   return useQuery({
-    queryKey: [api.quiz.generate.path, { mode, clusterId, language }],
+    queryKey: [api.quiz.generate.path, mode, clusterId ?? null, language],
     queryFn: async () => {
       const params = new URLSearchParams();
       params.append("mode", mode);

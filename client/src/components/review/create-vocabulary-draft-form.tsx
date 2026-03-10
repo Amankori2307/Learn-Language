@@ -1,134 +1,48 @@
-import { useState } from "react";
-import { useQuery } from "@tanstack/react-query";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { SearchableMultiSelect } from "@/components/ui/searchable-multi-select";
 import { SearchableSelect } from "@/components/ui/searchable-select";
-import { useCreateReviewDraft } from "@/hooks/use-review";
-import { LanguageEnum, PartOfSpeechEnum, VocabularyTagEnum } from "@shared/domain/enums";
+import { LanguageEnum } from "@shared/domain/enums";
 import { PART_OF_SPEECH_OPTIONS } from "@shared/domain/part-of-speech";
 import { VOCABULARY_TAG_OPTIONS } from "@shared/domain/vocabulary-tags";
-import { api } from "@shared/routes";
-import { apiClient, buildApiUrl } from "@/services/apiClient";
-
-type DraftExample = {
-  originalScript: string;
-  pronunciation: string;
-  englishSentence: string;
-  contextTag: string;
-  difficulty: number;
-};
-
-const DEFAULT_EXAMPLE: DraftExample = {
-  originalScript: "",
-  pronunciation: "",
-  englishSentence: "",
-  contextTag: "general",
-  difficulty: 1,
-};
+import { useCreateVocabularyDraftForm } from "@/features/review/use-create-vocabulary-draft-form";
+import { PendingButton } from "@/components/ui/pending-button";
+import { InlineLoading } from "@/components/ui/page-states";
 
 export function CreateVocabularyDraftForm() {
-  const createDraft = useCreateReviewDraft();
-
-  const [createError, setCreateError] = useState<string | null>(null);
-  const [createSuccess, setCreateSuccess] = useState<string | null>(null);
-  const [draftLanguage, setDraftLanguage] = useState<LanguageEnum>(LanguageEnum.TELUGU);
-  const [draftOriginalScript, setDraftOriginalScript] = useState("");
-  const [draftPronunciation, setDraftPronunciation] = useState("");
-  const [draftEnglish, setDraftEnglish] = useState("");
-  const [draftPartOfSpeech, setDraftPartOfSpeech] = useState<PartOfSpeechEnum>(
-    PartOfSpeechEnum.NOUN,
-  );
-  const [draftAudioUrl, setDraftAudioUrl] = useState("");
-  const [draftImageUrl, setDraftImageUrl] = useState("");
-  const [draftSourceUrl, setDraftSourceUrl] = useState("");
-  const [draftTags, setDraftTags] = useState<VocabularyTagEnum[]>([VocabularyTagEnum.MANUAL_DRAFT]);
-  const [draftClusterIds, setDraftClusterIds] = useState<string[]>([]);
-  const [draftExamples, setDraftExamples] = useState<DraftExample[]>([{ ...DEFAULT_EXAMPLE }]);
-  const { data: availableClusters = [] } = useQuery({
-    queryKey: [api.clusters.list.path, draftLanguage, "draft-form"],
-    queryFn: async () => {
-      const params = new URLSearchParams({ language: draftLanguage });
-      const res = await apiClient.get(
-        buildApiUrl(`${api.clusters.list.path}?${params.toString()}`),
-      );
-      return api.clusters.list.responses[200].parse(res.data);
-    },
-  });
-  const clusterOptions = availableClusters.map((cluster) => ({
-    value: String(cluster.id),
-    label: `${cluster.name} (${cluster.wordCount})`,
-  }));
-
-  const updateExample = (
-    index: number,
-    key: "originalScript" | "pronunciation" | "englishSentence" | "contextTag" | "difficulty",
-    value: string,
-  ) => {
-    setDraftExamples((prev) =>
-      prev.map((row, rowIndex) => {
-        if (rowIndex !== index) return row;
-        if (key === "difficulty") {
-          const parsed = Number.parseInt(value, 10);
-          return {
-            ...row,
-            difficulty: Number.isFinite(parsed) ? Math.min(5, Math.max(1, parsed)) : 1,
-          };
-        }
-        return { ...row, [key]: value };
-      }),
-    );
-  };
-
-  const addExample = () => {
-    setDraftExamples((prev) => [...prev, { ...DEFAULT_EXAMPLE }]);
-  };
-
-  const removeExample = (index: number) => {
-    setDraftExamples((prev) => (prev.length > 1 ? prev.filter((_, i) => i !== index) : prev));
-  };
-
-  const submitDraft = async () => {
-    setCreateError(null);
-    setCreateSuccess(null);
-    try {
-      const payload = {
-        language: draftLanguage,
-        originalScript: draftOriginalScript.trim(),
-        pronunciation: draftPronunciation.trim(),
-        english: draftEnglish.trim(),
-        partOfSpeech: draftPartOfSpeech,
-        audioUrl: draftAudioUrl.trim() || undefined,
-        imageUrl: draftImageUrl.trim() || undefined,
-        sourceUrl: draftSourceUrl.trim() || undefined,
-        tags: draftTags,
-        clusterIds: draftClusterIds.map((id) => Number.parseInt(id, 10)).filter(Number.isFinite),
-        examples: draftExamples.map((example) => ({
-          originalScript: example.originalScript.trim(),
-          pronunciation: example.pronunciation.trim(),
-          englishSentence: example.englishSentence.trim(),
-          contextTag: example.contextTag.trim() || "general",
-          difficulty: example.difficulty,
-        })),
-      };
-
-      const result = await createDraft.mutateAsync(payload);
-      setCreateSuccess(`Draft #${result.id} created (${result.examplesCreated} example(s)).`);
-      setDraftOriginalScript("");
-      setDraftPronunciation("");
-      setDraftEnglish("");
-      setDraftPartOfSpeech(PartOfSpeechEnum.NOUN);
-      setDraftAudioUrl("");
-      setDraftImageUrl("");
-      setDraftSourceUrl("");
-      setDraftTags([VocabularyTagEnum.MANUAL_DRAFT]);
-      setDraftClusterIds([]);
-      setDraftExamples([{ ...DEFAULT_EXAMPLE }]);
-    } catch (error) {
-      setCreateError(error instanceof Error ? error.message : "Failed to create draft");
-    }
-  };
+  const {
+    createError,
+    createSuccess,
+    draftLanguage,
+    setDraftLanguage,
+    draftOriginalScript,
+    setDraftOriginalScript,
+    draftPronunciation,
+    setDraftPronunciation,
+    draftEnglish,
+    setDraftEnglish,
+    draftPartOfSpeech,
+    setDraftPartOfSpeech,
+    draftAudioUrl,
+    setDraftAudioUrl,
+    draftImageUrl,
+    setDraftImageUrl,
+    draftSourceUrl,
+    setDraftSourceUrl,
+    draftTags,
+    setDraftTags,
+    draftClusterIds,
+    setDraftClusterIds,
+    draftExamples,
+    clusterOptions,
+    availableClustersQuery,
+    updateExample,
+    addExample,
+    removeExample,
+    submitDraft,
+    isSubmitting,
+  } = useCreateVocabularyDraftForm();
 
   return (
     <div className="rounded-2xl border border-border/50 bg-card p-4 md:p-6 space-y-4">
@@ -235,6 +149,12 @@ export function CreateVocabularyDraftForm() {
         </div>
         <div className="space-y-1 md:col-span-2">
           <Label htmlFor="draft-clusters">Clusters (Optional)</Label>
+          {availableClustersQuery.isLoading ? (
+            <InlineLoading label="Loading clusters..." />
+          ) : null}
+          {availableClustersQuery.isError ? (
+            <p className="text-sm text-red-600">Failed to load clusters.</p>
+          ) : null}
           <SearchableMultiSelect
             id="draft-clusters"
             values={draftClusterIds}
@@ -306,9 +226,9 @@ export function CreateVocabularyDraftForm() {
       {createError ? <p className="text-sm text-red-600">{createError}</p> : null}
       {createSuccess ? <p className="text-sm text-emerald-600">{createSuccess}</p> : null}
 
-      <Button onClick={submitDraft} disabled={createDraft.isPending}>
-        {createDraft.isPending ? "Creating..." : "Create Draft"}
-      </Button>
+      <PendingButton onClick={submitDraft} pending={isSubmitting} pendingLabel="Creating...">
+        Create Draft
+      </PendingButton>
     </div>
   );
 }

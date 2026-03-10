@@ -362,7 +362,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
       {/* Desktop Sidebar */}
       <aside
         className={cn(
-          "hidden md:flex flex-col border-r border-border/50 bg-card fixed h-full z-10 transition-all duration-300",
+          "hidden md:flex flex-col border-r border-border/50 bg-card fixed h-full z-30 transition-all duration-300",
           sidebarWidthClass,
         )}
       >
@@ -370,7 +370,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
       </aside>
 
       {/* Mobile Header */}
-      <div className="md:hidden fixed top-0 left-0 right-0 h-16 bg-card/90 backdrop-blur-md border-b border-border/60 z-20 flex items-center justify-between px-4">
+      <div className="md:hidden fixed top-0 left-0 right-0 h-16 bg-card/90 backdrop-blur-md border-b border-border/60 z-30 flex items-center justify-between px-3 sm:px-4">
         <div className="flex items-center gap-2">
           <div className="size-8 rounded-lg bg-gradient-to-br from-primary/90 to-emerald-500/80 text-primary-foreground flex items-center justify-center">
             <Languages className="size-4" />
@@ -384,7 +384,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
                 <Menu className="w-6 h-6" />
               </Button>
             </SheetTrigger>
-            <SheetContent side="left" className="p-0 w-72">
+            <SheetContent side="left" className="w-[86vw] max-w-80 p-0">
               <NavContent />
             </SheetContent>
           </Sheet>
@@ -394,11 +394,11 @@ export function Layout({ children }: { children: React.ReactNode }) {
       {/* Main Content */}
       <main
         className={cn(
-          "flex-1 pt-16 md:pt-0 min-h-screen transition-all duration-300",
+          "flex-1 min-h-screen overflow-x-hidden pt-16 md:pt-0 transition-all duration-300",
           mainOffsetClass,
         )}
       >
-        <div className="container max-w-5xl mx-auto p-4 md:p-8 animate-in fade-in duration-500">
+        <div className="mx-auto w-full max-w-6xl animate-in fade-in px-4 pb-24 pt-4 duration-500 sm:px-6 md:p-8 md:pb-8">
           {children}
         </div>
       </main>

@@ -30,6 +30,54 @@ Next task ID: P9-001
 
 ---
 
+Date: 2026-03-11  
+Session owner: Codex  
+Last completed task ID: P9-002  
+Current in-progress task ID: P9-003  
+Next task ID: P9-004
+
+## Current state
+
+- `P9-001` and `P9-002` are complete.
+- Frontend architecture baseline created in [documentation/frontend-architecture-baseline.md](/Users/aman/Projects/personal-projects/Learn-Language/documentation/frontend-architecture-baseline.md).
+- Core feature documentation remains available in [documentation/core-features.md](/Users/aman/Projects/personal-projects/Learn-Language/documentation/core-features.md).
+- Planning baselines for the next implementation tasks are now documented:
+  - React Query ownership baseline in [documentation/react-query-ownership-baseline.md](/Users/aman/Projects/personal-projects/Learn-Language/documentation/react-query-ownership-baseline.md)
+  - Async UX contract in [documentation/async-ux-contract.md](/Users/aman/Projects/personal-projects/Learn-Language/documentation/async-ux-contract.md)
+  - UI state primitive baseline in [documentation/ui-state-primitives-baseline.md](/Users/aman/Projects/personal-projects/Learn-Language/documentation/ui-state-primitives-baseline.md)
+  - Responsive UI baseline in [documentation/responsive-ui-baseline.md](/Users/aman/Projects/personal-projects/Learn-Language/documentation/responsive-ui-baseline.md)
+- Active implementation order is now moving through async UX and shared-state adoption:
+  - `P9-003` is in progress with shared async visibility now implemented
+  - `P9-004` is in progress with shared state primitives introduced and adopted on high-traffic pages
+  - `P9-005` remains next after current shared-state rollout settles
+- `P9-002` implementation completed with these slices:
+  - add-vocabulary cluster query moved out of [create-vocabulary-draft-form.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/components/review/create-vocabulary-draft-form.tsx) into [use-create-vocabulary-draft-form.ts](/Users/aman/Projects/personal-projects/Learn-Language/client/src/features/review/use-create-vocabulary-draft-form.ts)
+  - cluster query loading/error is now visibly surfaced in the add-vocabulary form
+  - audio resolve transport moved out of [use-hybrid-audio.ts](/Users/aman/Projects/personal-projects/Learn-Language/client/src/hooks/use-hybrid-audio.ts) into [audioService.ts](/Users/aman/Projects/personal-projects/Learn-Language/client/src/services/audioService.ts)
+  - high-traffic query key cleanup started in [use-quiz.ts](/Users/aman/Projects/personal-projects/Learn-Language/client/src/hooks/use-quiz.ts) and [use-words.ts](/Users/aman/Projects/personal-projects/Learn-Language/client/src/hooks/use-words.ts)
+  - cluster page orchestration moved into [use-clusters-page-view-model.ts](/Users/aman/Projects/personal-projects/Learn-Language/client/src/features/clusters/use-clusters-page-view-model.ts)
+  - history page orchestration moved into [use-history-page-view-model.ts](/Users/aman/Projects/personal-projects/Learn-Language/client/src/features/history/use-history-page-view-model.ts)
+  - review page orchestration moved into [use-review-page-view-model.ts](/Users/aman/Projects/personal-projects/Learn-Language/client/src/features/review/use-review-page-view-model.ts)
+  - remaining page-level request ownership was removed from `leaderboard`, `profile`, `word-buckets`, `clusters`, and `contextual`
+- `P9-003` / `P9-004` code work now includes:
+  - global async request visibility in [app-async-indicator.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/components/app-async-indicator.tsx)
+  - reusable pending action control in [pending-button.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/components/ui/pending-button.tsx)
+  - shared loading/error/empty state primitives in [page-states.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/components/ui/page-states.tsx)
+  - adoption of those primitives on dashboard, clusters, contextual, history, profile, review, word buckets, and leaderboard
+
+## Current blockers
+
+- No hard blocker found for `P9-003` / `P9-004`.
+
+## Immediate next actions
+
+- Continue `P9-003` / `P9-004`:
+  - finish async-feedback adoption on remaining flows with inconsistent pending treatment
+  - extend shared state primitives to quiz/auth-adjacent surfaces where still missing
+  - start `P9-005` shell/mobile hardening after the current loading-state rollout is stable
+
+---
+
 Date: 2026-02-21  
 Session owner: Codex  
 Last completed task ID: P7-003  

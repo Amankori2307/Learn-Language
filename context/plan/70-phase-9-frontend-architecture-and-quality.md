@@ -54,10 +54,10 @@ Out of scope for this phase:
 
 | ID     | Status | Task | Depends On | Effort | Done When |
 | ------ | ------ | ---- | ---------- | ------ | --------- |
-| P9-001 | todo | Produce a frontend architecture baseline and enforce a feature boundary contract for pages, feature view-models, service adapters, and presentational UI | - | M | page-level responsibilities are documented, boundary rules are codified, and target files for migration are identified before refactor work starts |
-| P9-002 | todo | Standardize UI-facing data access on React Query patterns and eliminate ad hoc/raw request handling from page components | P9-001 | L | all page-level API interactions flow through query/mutation hooks or feature adapters with consistent query keys, invalidation, retries, and error handling |
-| P9-003 | todo | Define and implement a shared async UX contract for queries and mutations | P9-002 | L | every API-backed interaction exposes visible loading or pending feedback, mutation progress is surfaced in UI, and async components follow one consistent contract |
-| P9-004 | todo | Introduce shared loading, skeleton, empty, and error state primitives for the main app surfaces | P9-003 | M | reusable state primitives exist and are used by dashboard, quiz, clusters, analytics, review, profile, and auth-adjacent flows |
+| P9-001 | done | Produce a frontend architecture baseline and enforce a feature boundary contract for pages, feature view-models, service adapters, and presentational UI | - | M | page-level responsibilities are documented, boundary rules are codified, and target files for migration are identified before refactor work starts |
+| P9-002 | done | Standardize UI-facing data access on React Query patterns and eliminate ad hoc/raw request handling from page components | P9-001 | L | all page-level API interactions flow through query/mutation hooks or feature adapters with consistent query keys, invalidation, retries, and error handling |
+| P9-003 | doing | Define and implement a shared async UX contract for queries and mutations | P9-002 | L | every API-backed interaction exposes visible loading or pending feedback, mutation progress is surfaced in UI, and async components follow one consistent contract |
+| P9-004 | doing | Introduce shared loading, skeleton, empty, and error state primitives for the main app surfaces | P9-003 | M | reusable state primitives exist and are used by dashboard, quiz, clusters, analytics, review, profile, and auth-adjacent flows |
 | P9-005 | todo | Harden layout shell, navigation, and page composition for mobile-first responsive behavior | P9-001,P9-003,P9-004 | L | layout, sidebar/navigation, top-level spacing, and page containers adapt cleanly across mobile, tablet, and desktop widths |
 | P9-006 | todo | Refactor core learner pages to keep logic in feature/view-model layers and rendering in replaceable UI components | P9-002,P9-004,P9-005 | XL | dashboard, quiz, clusters, contextual, history, word buckets, leaderboard, profile, and auth flows follow the target separation pattern |
 | P9-007 | todo | Refactor reviewer/admin flows to the same architecture and async UX standards | P9-002,P9-004,P9-005 | L | review queue, add vocabulary, review history, and conflict-related surfaces use the same separation and loading conventions |
@@ -73,51 +73,51 @@ The top-level tasks above are the phase gates. Actual execution should happen in
 
 | ID | Status | Task | Depends On | Done When |
 | -- | ------ | ---- | ---------- | --------- |
-| P9-001A | todo | Inventory every route/page and map its current data, state, side-effect, and rendering responsibilities | - | each route has a documented responsibility profile and current anti-pattern list |
-| P9-001B | todo | Inventory all feature hooks, service files, and shared UI components against the desired layering model | P9-001A | current layer ownership is documented and violations are listed by file |
-| P9-001C | todo | Define the target frontend layering contract: route shell, feature container/view-model, service/data adapter, presentational component, UI primitive | P9-001B | target layering rules are explicit and reusable |
-| P9-001D | todo | Produce migration buckets for learner flows, reviewer flows, layout shell, and shared state/UI primitives | P9-001C | refactor work is grouped into execution-safe buckets with dependency notes |
-| P9-001E | todo | Define acceptance checks for future refactors so pages do not regress into owning business logic again | P9-001D | the phase doc includes concrete pass/fail checks for page thinness and UI replaceability |
+| P9-001A | done | Inventory every route/page and map its current data, state, side-effect, and rendering responsibilities | - | each route has a documented responsibility profile and current anti-pattern list |
+| P9-001B | done | Inventory all feature hooks, service files, and shared UI components against the desired layering model | P9-001A | current layer ownership is documented and violations are listed by file |
+| P9-001C | done | Define the target frontend layering contract: route shell, feature container/view-model, service/data adapter, presentational component, UI primitive | P9-001B | target layering rules are explicit and reusable |
+| P9-001D | done | Produce migration buckets for learner flows, reviewer flows, layout shell, and shared state/UI primitives | P9-001C | refactor work is grouped into execution-safe buckets with dependency notes |
+| P9-001E | done | Define acceptance checks for future refactors so pages do not regress into owning business logic again | P9-001D | the phase doc includes concrete pass/fail checks for page thinness and UI replaceability |
 
 ### P9-002 - React Query standardization
 
 | ID | Status | Task | Depends On | Done When |
 | -- | ------ | ---- | ---------- | --------- |
-| P9-002A | todo | Audit every UI-facing API interaction and classify it as query, mutation, bootstrap fetch, refetch, or local-only state | P9-001E | a complete request inventory exists |
-| P9-002B | todo | Define query-key ownership, invalidation rules, stale-time rules, and retry defaults by feature area | P9-002A | shared React Query conventions are documented |
-| P9-002C | todo | Identify pages/components still coupling request orchestration directly to rendering and rank them by migration risk | P9-002B | highest-risk files are prioritized |
-| P9-002D | todo | Standardize transport boundaries so Axios remains an adapter, not the lifecycle owner in page code | P9-002C | direct lifecycle handling is removed from page components conceptually and documented for implementation |
-| P9-002E | todo | Define migration sequence for learner surfaces before reviewer surfaces to minimize invalidation churn | P9-002D | implementation order is locked and justified |
+| P9-002A | done | Audit every UI-facing API interaction and classify it as query, mutation, bootstrap fetch, refetch, or local-only state | P9-001E | a complete request inventory exists |
+| P9-002B | done | Define query-key ownership, invalidation rules, stale-time rules, and retry defaults by feature area | P9-002A | shared React Query conventions are documented |
+| P9-002C | done | Identify pages/components still coupling request orchestration directly to rendering and rank them by migration risk | P9-002B | highest-risk files are prioritized |
+| P9-002D | done | Standardize transport boundaries so Axios remains an adapter, not the lifecycle owner in page code | P9-002C | direct lifecycle handling is removed from page components conceptually and documented for implementation |
+| P9-002E | done | Define migration sequence for learner surfaces before reviewer surfaces to minimize invalidation churn | P9-002D | implementation order is locked and justified |
 
 ### P9-003 - Async UX contract
 
 | ID | Status | Task | Depends On | Done When |
 | -- | ------ | ---- | ---------- | --------- |
-| P9-003A | todo | Define the visual semantics for initial load, background refetch, mutation pending, destructive pending, and pagination/filter pending | P9-002E | each async state has a clear UX treatment |
-| P9-003B | todo | Create a rule set for when controls disable, when content remains visible, and when overlays/spinners are appropriate | P9-003A | interaction rules are explicit and consistent |
-| P9-003C | todo | Define where global async feedback is allowed versus where local inline feedback is required | P9-003B | global vs local feedback rules are documented |
-| P9-003D | todo | Create an async feedback checklist to apply to every API-backed user action | P9-003C | a reusable checklist exists for implementation and review |
-| P9-003E | todo | Map current async UX gaps page by page so implementation work can be done without rediscovery | P9-003D | each core surface has a gap list |
+| P9-003A | done | Define the visual semantics for initial load, background refetch, mutation pending, destructive pending, and pagination/filter pending | P9-002E | each async state has a clear UX treatment |
+| P9-003B | done | Create a rule set for when controls disable, when content remains visible, and when overlays/spinners are appropriate | P9-003A | interaction rules are explicit and consistent |
+| P9-003C | done | Define where global async feedback is allowed versus where local inline feedback is required | P9-003B | global vs local feedback rules are documented |
+| P9-003D | done | Create an async feedback checklist to apply to every API-backed user action | P9-003C | a reusable checklist exists for implementation and review |
+| P9-003E | done | Map current async UX gaps page by page so implementation work can be done without rediscovery | P9-003D | each core surface has a gap list |
 
 ### P9-004 - Shared loading and state primitives
 
 | ID | Status | Task | Depends On | Done When |
 | -- | ------ | ---- | ---------- | --------- |
-| P9-004A | todo | Define the primitive set: page skeleton, card skeleton, table skeleton, inline loader, pending button, empty state, retryable error state | P9-003E | primitive inventory is finalized |
-| P9-004B | todo | Define where each primitive is allowed and where product-specific compositions are preferred | P9-004A | usage boundaries are documented |
-| P9-004C | todo | Map each core page to its required loading/empty/error/skeleton states | P9-004B | page-state matrix exists for all core pages |
-| P9-004D | todo | Define accessibility and motion constraints for loading primitives | P9-004C | reduced-motion and accessible-state rules are documented |
-| P9-004E | todo | Lock adoption order so shared primitives are introduced before page-level responsive cleanup | P9-004D | implementation sequence prevents duplicate local state UIs |
+| P9-004A | done | Define the primitive set: page skeleton, card skeleton, table skeleton, inline loader, pending button, empty state, retryable error state | P9-003E | primitive inventory is finalized |
+| P9-004B | done | Define where each primitive is allowed and where product-specific compositions are preferred | P9-004A | usage boundaries are documented |
+| P9-004C | done | Map each core page to its required loading/empty/error/skeleton states | P9-004B | page-state matrix exists for all core pages |
+| P9-004D | done | Define accessibility and motion constraints for loading primitives | P9-004C | reduced-motion and accessible-state rules are documented |
+| P9-004E | done | Lock adoption order so shared primitives are introduced before page-level responsive cleanup | P9-004D | implementation sequence prevents duplicate local state UIs |
 
 ### P9-005 - Responsive and adaptive layout hardening
 
 | ID | Status | Task | Depends On | Done When |
 | -- | ------ | ---- | ---------- | --------- |
-| P9-005A | todo | Define responsive breakpoints and layout expectations for phone, large phone, tablet, laptop, and desktop | P9-001E,P9-003E,P9-004E | target responsive behavior is explicit |
-| P9-005B | todo | Audit app shell, navigation, and persistent layout affordances for mobile failure modes | P9-005A | shell-level issues are cataloged |
-| P9-005C | todo | Audit data-heavy surfaces for overflow, dense controls, and poor tap ergonomics | P9-005B | page-level responsive issues are cataloged |
-| P9-005D | todo | Define remediation patterns for tables, split panes, filter bars, action rows, and sticky controls | P9-005C | standard responsive adaptations are documented |
-| P9-005E | todo | Create a page-by-page responsive priority order based on user criticality and implementation coupling | P9-005D | responsive implementation order is locked |
+| P9-005A | done | Define responsive breakpoints and layout expectations for phone, large phone, tablet, laptop, and desktop | P9-001E,P9-003E,P9-004E | target responsive behavior is explicit |
+| P9-005B | done | Audit app shell, navigation, and persistent layout affordances for mobile failure modes | P9-005A | shell-level issues are cataloged |
+| P9-005C | done | Audit data-heavy surfaces for overflow, dense controls, and poor tap ergonomics | P9-005B | page-level responsive issues are cataloged |
+| P9-005D | done | Define remediation patterns for tables, split panes, filter bars, action rows, and sticky controls | P9-005C | standard responsive adaptations are documented |
+| P9-005E | done | Create a page-by-page responsive priority order based on user criticality and implementation coupling | P9-005D | responsive implementation order is locked |
 
 ### P9-006 - Learner flow refactor
 

@@ -4,6 +4,7 @@ import { X } from "lucide-react";
 import { Layout } from "@/components/layout";
 import { QuizModeEnum } from "@shared/domain/enums";
 import { useQuizPageViewModel } from "@/features/quiz/use-quiz-page-view-model";
+import { InlineLoading } from "@/components/ui/page-states";
 
 export default function QuizPage() {
   const {
@@ -33,10 +34,12 @@ export default function QuizPage() {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-background">
-        <div className="flex flex-col items-center gap-4">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
-          <p className="text-muted-foreground animate-pulse">Generating your lesson...</p>
+      <div className="min-h-screen bg-background p-4">
+        <div className="mx-auto flex min-h-[60vh] w-full max-w-2xl items-center justify-center rounded-3xl border border-border/50 bg-card p-8 text-center shadow-sm">
+          <div className="space-y-3">
+            <h2 className="text-2xl font-semibold">Preparing your session</h2>
+            <InlineLoading label="Generating your lesson..." className="justify-center" />
+          </div>
         </div>
       </div>
     );
@@ -163,7 +166,7 @@ export default function QuizPage() {
   return (
     <div className="min-h-screen bg-background flex flex-col">
       {/* Quiz Header */}
-      <div className="px-4 py-6 max-w-4xl mx-auto w-full flex items-center gap-4">
+      <div className="mx-auto flex w-full max-w-4xl items-center gap-3 px-3 py-4 sm:gap-4 sm:px-4 sm:py-6">
         <Button
           variant="ghost"
           size="icon"
@@ -181,7 +184,7 @@ export default function QuizPage() {
       </div>
 
       {/* Quiz Content */}
-      <div className="flex-1 flex items-center justify-center p-4">
+      <div className="flex flex-1 items-center justify-center p-3 sm:p-4">
         <QuizCard
           wordId={currentQuestion.wordId}
           question={currentQuestion.questionText}

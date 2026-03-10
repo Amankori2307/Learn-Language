@@ -1,12 +1,17 @@
-import { useMemo, useState } from "react";
 import { Layout } from "@/components/layout";
-import { useAttemptHistory } from "@/hooks/use-attempt-history";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { PendingButton } from "@/components/ui/pending-button";
 import { QuizDirectionEnum } from "@shared/domain/enums";
-import { HISTORY_PAGE_SIZE } from "@/features/history/history.constants";
+import {
+  useHistoryPageViewModel,
+  type HistoryDirectionFilter,
+  type HistoryResultFilter,
+  type HistorySortOption,
+} from "@/features/history/use-history-page-view-model";
+import { SurfaceMessage, TableSurfaceSkeleton } from "@/components/ui/page-states";
 
 function toLabel(direction: QuizDirectionEnum | null) {
   if (direction === QuizDirectionEnum.SOURCE_TO_TARGET) return "Source Language -> English";
@@ -21,77 +26,29 @@ function formatWhen(value: string | null) {
   return date.toLocaleString();
 }
 
-type ResultFilter = "all" | "correct" | "wrong";
-type DirectionFilter =
-  | "all"
-  | QuizDirectionEnum.SOURCE_TO_TARGET
-  | QuizDirectionEnum.TARGET_TO_SOURCE;
-type SortOption = "newest" | "oldest" | "confidence_desc" | "response_time_desc";
-
 export default function HistoryPage() {
-  const history = useAttemptHistory(200);
-  const [search, setSearch] = useState("");
-  const [resultFilter, setResultFilter] = useState<ResultFilter>("all");
-  const [directionFilter, setDirectionFilter] = useState<DirectionFilter>("all");
-  const [sortBy, setSortBy] = useState<SortOption>("newest");
-  const [page, setPage] = useState(1);
-
-  const filteredAttempts = useMemo(() => {
-    const raw = history.data ?? [];
-    const searchTerm = search.trim().toLowerCase();
-    const filtered = raw.filter((attempt) => {
-      if (resultFilter === "correct" && !attempt.isCorrect) return false;
-      if (resultFilter === "wrong" && attempt.isCorrect) return false;
-      if (directionFilter !== "all" && attempt.direction !== directionFilter) return false;
-      if (!searchTerm) return true;
-      const haystack = [
-        attempt.word.transliteration,
-        attempt.word.originalScript,
-        attempt.word.english,
-      ]
-        .join(" ")
-        .toLowerCase();
-      return haystack.includes(searchTerm);
-    });
-
-    filtered.sort((a, b) => {
-      if (sortBy === "newest") {
-        const at = a.createdAt ? new Date(a.createdAt).getTime() : 0;
-        const bt = b.createdAt ? new Date(b.createdAt).getTime() : 0;
-        return bt - at;
-      }
-      if (sortBy === "oldest") {
-        const at = a.createdAt ? new Date(a.createdAt).getTime() : 0;
-        const bt = b.createdAt ? new Date(b.createdAt).getTime() : 0;
-        return at - bt;
-      }
-      if (sortBy === "confidence_desc") {
-        return (b.confidenceLevel ?? 0) - (a.confidenceLevel ?? 0);
-      }
-      return (b.responseTimeMs ?? 0) - (a.responseTimeMs ?? 0);
-    });
-
-    return filtered;
-  }, [directionFilter, history.data, resultFilter, search, sortBy]);
-
-  const totalPages = Math.max(1, Math.ceil(filteredAttempts.length / HISTORY_PAGE_SIZE));
-  const currentPage = Math.min(page, totalPages);
-  const pageAttempts = filteredAttempts.slice(
-    (currentPage - 1) * HISTORY_PAGE_SIZE,
-    currentPage * HISTORY_PAGE_SIZE,
-  );
-
-  const summary = useMemo(() => {
-    const total = filteredAttempts.length;
-    const correct = filteredAttempts.filter((attempt) => attempt.isCorrect).length;
-    const accuracy = total > 0 ? Math.round((correct / total) * 100) : 0;
-    return { total, correct, accuracy };
-  }, [filteredAttempts]);
-
-  const applyFilterReset = <T,>(setter: (value: T) => void, value: T) => {
-    setter(value);
-    setPage(1);
-  };
+  const {
+    search,
+    setSearch,
+    resultFilter,
+    setResultFilter,
+    directionFilter,
+    setDirectionFilter,
+    sortBy,
+    setSortBy,
+    setPage,
+    filteredAttempts,
+    currentPage,
+    totalPages,
+    pageAttempts,
+    summary,
+    applyFilterReset,
+    isLoading,
+    isError,
+    isFetching,
+    refresh,
+    retry,
+  } = useHistoryPageViewModel();
 
   return (
     <Layout>
@@ -103,9 +60,14 @@ export default function HistoryPage() {
               Attempt history with filters, trends, and paginated drill-down.
             </p>
           </div>
-          <Button variant="outline" onClick={() => history.refetch()} disabled={history.isFetching}>
-            {history.isFetching ? "Refreshing..." : "Refresh"}
-          </Button>
+          <PendingButton
+            variant="outline"
+            onClick={refresh}
+            pending={isFetching}
+            pendingLabel="Refreshing..."
+          >
+            Refresh
+          </PendingButton>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
@@ -140,7 +102,7 @@ export default function HistoryPage() {
               className="h-10 w-full rounded-md border border-input bg-background px-3 text-sm"
               value={resultFilter}
               onChange={(event) =>
-                applyFilterReset(setResultFilter, event.target.value as ResultFilter)
+                applyFilterReset(setResultFilter, event.target.value as HistoryResultFilter)
               }
             >
               <option value="all">All</option>
@@ -155,7 +117,7 @@ export default function HistoryPage() {
               className="h-10 w-full rounded-md border border-input bg-background px-3 text-sm"
               value={directionFilter}
               onChange={(event) =>
-                applyFilterReset(setDirectionFilter, event.target.value as DirectionFilter)
+                applyFilterReset(setDirectionFilter, event.target.value as HistoryDirectionFilter)
               }
             >
               <option value="all">All</option>
@@ -169,7 +131,7 @@ export default function HistoryPage() {
               id="history-sort"
               className="h-10 w-full rounded-md border border-input bg-background px-3 text-sm"
               value={sortBy}
-              onChange={(event) => applyFilterReset(setSortBy, event.target.value as SortOption)}
+              onChange={(event) => applyFilterReset(setSortBy, event.target.value as HistorySortOption)}
             >
               <option value="newest">Newest</option>
               <option value="oldest">Oldest</option>
@@ -179,21 +141,25 @@ export default function HistoryPage() {
           </div>
         </div>
 
-        {history.isLoading ? (
-          <div className="rounded-2xl border border-border/50 bg-card p-8 text-muted-foreground">
-            Loading attempts...
-          </div>
-        ) : history.isError ? (
-          <div className="rounded-2xl border border-red-200 bg-red-50 p-8">
-            <p className="text-red-700 font-medium">Could not load attempt history.</p>
-            <Button variant="outline" className="mt-3" onClick={() => history.refetch()}>
-              Retry
-            </Button>
-          </div>
+        {isLoading ? (
+          <TableSurfaceSkeleton rows={8} columns={6} />
+        ) : isError ? (
+          <SurfaceMessage
+            title="Could not load attempt history"
+            description="The analytics history request failed. Try the request again."
+            tone="error"
+            action={
+              <Button variant="outline" onClick={retry}>
+                Retry
+              </Button>
+            }
+          />
         ) : filteredAttempts.length === 0 ? (
-          <div className="rounded-2xl border border-border/50 bg-card p-8 text-muted-foreground">
-            No attempts match the selected filters.
-          </div>
+          <SurfaceMessage
+            title="No attempts match these filters"
+            description="Adjust the search term or filters to widen the result set."
+            tone="empty"
+          />
         ) : (
           <div className="rounded-2xl border border-border/50 bg-card overflow-hidden">
             <div className="grid grid-cols-12 gap-3 px-4 py-3 text-xs font-semibold text-muted-foreground border-b border-border/60 bg-secondary/30">

@@ -5,7 +5,7 @@ import { apiClient, buildApiUrl } from "@/services/apiClient";
 
 export function useWords(clusterId?: number) {
   return useQuery({
-    queryKey: [api.words.list.path, { clusterId }],
+    queryKey: [api.words.list.path, clusterId ?? null],
     queryFn: async () => {
       const url = buildUrl(api.words.list.path);
       // Append query params manually since buildUrl only handles path params

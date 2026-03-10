@@ -1,98 +1,31 @@
 import { Layout } from "@/components/layout";
-import { useClusters } from "@/hooks/use-clusters";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Link, useLocation, useSearch } from "wouter";
+import { Link } from "wouter";
 import { ArrowRight, BookOpen, Hash, Sparkles } from "lucide-react";
-import { useMemo } from "react";
-import { CLUSTERS_PAGE_SIZE } from "@/features/clusters/clusters.constants";
-
-type SortBy = "name_asc" | "name_desc" | "type_asc" | "words_desc" | "words_asc";
+import {
+  useClustersPageViewModel,
+  type ClusterSortBy,
+} from "@/features/clusters/use-clusters-page-view-model";
+import { SurfaceMessage, TableSurfaceSkeleton } from "@/components/ui/page-states";
 
 export default function ClustersPage() {
-  const [, setLocation] = useLocation();
-  const searchText = useSearch();
-  const params = new URLSearchParams(searchText);
-  const query = params.get("q") ?? "";
-  const typeFilter = params.get("type") ?? "all";
-  const sortBy = (params.get("sort") as SortBy) || "words_desc";
-  const pageParam = Number.parseInt(params.get("page") ?? "1", 10);
-  const page = Number.isFinite(pageParam) && pageParam > 0 ? pageParam : 1;
-  const { data: clusters, isLoading } = useClusters();
-  const allClusters = useMemo(() => clusters ?? [], [clusters]);
-
-  const clusterTypes = useMemo(
-    () => [
-      "all",
-      ...Array.from(new Set(allClusters.map((cluster) => cluster.type).filter(Boolean))).sort(),
-    ],
-    [allClusters],
-  );
-
-  const updateQuery = (next: Partial<{ q: string; type: string; sort: SortBy; page: number }>) => {
-    const nextParams = new URLSearchParams(searchText);
-    const setOrDelete = (key: string, value: string | undefined) => {
-      if (!value || value === "all" || value === "") {
-        nextParams.delete(key);
-      } else {
-        nextParams.set(key, value);
-      }
-    };
-
-    if (Object.prototype.hasOwnProperty.call(next, "q")) {
-      setOrDelete("q", next.q?.trim());
-    }
-    if (Object.prototype.hasOwnProperty.call(next, "type")) {
-      setOrDelete("type", next.type);
-    }
-    if (Object.prototype.hasOwnProperty.call(next, "sort")) {
-      setOrDelete("sort", next.sort);
-    }
-    if (Object.prototype.hasOwnProperty.call(next, "page")) {
-      const value = next.page && next.page > 1 ? String(next.page) : "";
-      setOrDelete("page", value);
-    }
-
-    const qs = nextParams.toString();
-    setLocation(`/clusters${qs ? `?${qs}` : ""}`);
-  };
-
-  const filteredAndSorted = useMemo(() => {
-    const term = query.trim().toLowerCase();
-    const filtered = allClusters.filter((cluster) => {
-      if (typeFilter !== "all" && cluster.type !== typeFilter) {
-        return false;
-      }
-      if (!term) {
-        return true;
-      }
-      return [cluster.name, cluster.description ?? "", cluster.type]
-        .join(" ")
-        .toLowerCase()
-        .includes(term);
-    });
-
-    filtered.sort((a, b) => {
-      if (sortBy === "name_asc") return a.name.localeCompare(b.name);
-      if (sortBy === "name_desc") return b.name.localeCompare(a.name);
-      if (sortBy === "type_asc") return a.type.localeCompare(b.type);
-      if (sortBy === "words_asc") return a.wordCount - b.wordCount;
-      return b.wordCount - a.wordCount;
-    });
-
-    return filtered;
-  }, [allClusters, query, sortBy, typeFilter]);
-
-  const totalWords = allClusters.reduce((sum, cluster) => sum + cluster.wordCount, 0);
-  const nonEmptyClusters = allClusters.filter((cluster) => cluster.wordCount > 0).length;
-  const totalResults = filteredAndSorted.length;
-  const totalPages = Math.max(1, Math.ceil(totalResults / CLUSTERS_PAGE_SIZE));
-  const currentPage = Math.min(page, totalPages);
-  const pageRows = filteredAndSorted.slice(
-    (currentPage - 1) * CLUSTERS_PAGE_SIZE,
-    currentPage * CLUSTERS_PAGE_SIZE,
-  );
+  const {
+    query,
+    typeFilter,
+    sortBy,
+    clusterTypes,
+    updateQuery,
+    topCluster,
+    totalWords,
+    nonEmptyClusters,
+    totalResults,
+    totalPages,
+    currentPage,
+    pageRows,
+    isLoading,
+  } = useClustersPageViewModel();
 
   return (
     <Layout>
@@ -104,17 +37,13 @@ export default function ClustersPage() {
               Pick a focused topic and practice tightly related vocabulary.
             </p>
           </div>
-          {!isLoading && allClusters.length > 0 && (
+          {!isLoading && topCluster && (
             <div className="rounded-xl border border-border/60 bg-secondary/40 px-4 py-3">
               <p className="text-xs uppercase tracking-wider text-muted-foreground font-semibold">
                 Top Cluster
               </p>
               <p className="text-sm font-semibold mt-1">
-                {[...allClusters].sort((left, right) => right.wordCount - left.wordCount)[0]?.name}{" "}
-                ·{" "}
-                {[...allClusters].sort((left, right) => right.wordCount - left.wordCount)[0]
-                  ?.wordCount ?? 0}{" "}
-                words
+                {topCluster.name} · {topCluster.wordCount} words
               </p>
             </div>
           )}
@@ -138,9 +67,7 @@ export default function ClustersPage() {
       </section>
 
       {isLoading ? (
-        <div className="rounded-2xl border border-border/50 bg-card p-8 text-muted-foreground">
-          Loading clusters...
-        </div>
+        <TableSurfaceSkeleton rows={6} columns={4} />
       ) : (
         <div className="space-y-4">
           <div className="rounded-2xl border border-border/50 bg-card p-4 md:p-6 grid grid-cols-1 md:grid-cols-4 gap-3">
@@ -174,7 +101,9 @@ export default function ClustersPage() {
                 id="cluster-sort"
                 className="h-10 w-full rounded-md border border-input bg-background px-3 text-sm"
                 value={sortBy}
-                onChange={(event) => updateQuery({ sort: event.target.value as SortBy, page: 1 })}
+                onChange={(event) =>
+                  updateQuery({ sort: event.target.value as ClusterSortBy, page: 1 })
+                }
               >
                 <option value="words_desc">Word Count (High to Low)</option>
                 <option value="words_asc">Word Count (Low to High)</option>
@@ -195,8 +124,13 @@ export default function ClustersPage() {
             </div>
 
             {pageRows.length === 0 ? (
-              <div className="px-4 py-8 text-muted-foreground text-sm">
-                No clusters match current filters.
+              <div className="px-4 py-6">
+                <SurfaceMessage
+                  title="No clusters found"
+                  description="No clusters match the current search and filter combination."
+                  tone="empty"
+                  className="p-6"
+                />
               </div>
             ) : (
               <div className="divide-y divide-border/50">

@@ -1,11 +1,14 @@
 import { Layout } from "@/components/layout";
-import { useLeaderboard, type LeaderboardWindow } from "@/hooks/use-leaderboard";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { cn } from "@/lib/utils";
 import { buildAvatarUrl } from "@/lib/avatar";
 import { Trophy } from "lucide-react";
-import { useState } from "react";
+import {
+  LEADERBOARD_WINDOW_OPTIONS,
+  useLeaderboardPageViewModel,
+} from "@/features/analytics/use-leaderboard-page-view-model";
+import { SurfaceMessage, TableSurfaceSkeleton } from "@/components/ui/page-states";
 
 function initials(firstName: string | null, lastName: string | null, email: string | null) {
   const name = `${firstName ?? ""} ${lastName ?? ""}`.trim();
@@ -33,15 +36,9 @@ function avatarFor(entry: {
   });
 }
 
-const WINDOW_OPTIONS: Array<{ key: LeaderboardWindow; label: string }> = [
-  { key: "daily", label: "Daily" },
-  { key: "weekly", label: "Weekly" },
-  { key: "all_time", label: "All Time" },
-];
-
 export default function LeaderboardPage() {
-  const [window, setWindow] = useState<LeaderboardWindow>("weekly");
-  const { data, isLoading, isError, refetch, isFetching } = useLeaderboard(window, 25);
+  const { window, setWindow, entries, isLoading, isError, isFetching, retry } =
+    useLeaderboardPageViewModel();
 
   return (
     <Layout>
@@ -57,7 +54,7 @@ export default function LeaderboardPage() {
             </p>
           </div>
           <div className="flex gap-2 flex-wrap">
-            {WINDOW_OPTIONS.map((option) => (
+            {LEADERBOARD_WINDOW_OPTIONS.map((option) => (
               <Button
                 key={option.key}
                 variant={option.key === window ? "default" : "outline"}
@@ -71,24 +68,28 @@ export default function LeaderboardPage() {
         </div>
 
         {isLoading ? (
-          <div className="rounded-2xl border border-border/50 bg-card p-8 text-center text-muted-foreground">
-            Loading leaderboard...
-          </div>
+          <TableSurfaceSkeleton rows={8} columns={5} />
         ) : isError ? (
-          <div className="rounded-2xl border border-red-200 bg-red-50 p-8 text-center">
-            <p className="text-red-700 font-medium">Failed to load leaderboard.</p>
-            <Button variant="outline" className="mt-3" onClick={() => refetch()}>
-              Retry
-            </Button>
-          </div>
-        ) : !data || data.length === 0 ? (
-          <div className="rounded-2xl border border-border/50 bg-card p-8 text-center text-muted-foreground">
-            No leaderboard data yet. Complete quiz attempts to appear here.
-          </div>
+          <SurfaceMessage
+            title="Failed to load leaderboard"
+            description="The leaderboard request failed before rankings could be displayed."
+            tone="error"
+            action={
+              <Button variant="outline" onClick={retry}>
+                Retry
+              </Button>
+            }
+          />
+        ) : entries.length === 0 ? (
+          <SurfaceMessage
+            title="No leaderboard data yet"
+            description="Complete quiz attempts to appear in the leaderboard."
+            tone="empty"
+          />
         ) : (
           <>
             <div className="md:hidden space-y-3">
-              {data.map((entry) => (
+              {entries.map((entry) => (
                 <div
                   key={entry.userId}
                   className={cn(
@@ -134,7 +135,7 @@ export default function LeaderboardPage() {
                 <div className="col-span-2 text-right">Streak</div>
                 <div className="col-span-2 text-right">Accuracy</div>
               </div>
-              {data.map((entry) => (
+              {entries.map((entry) => (
                 <div
                   key={entry.userId}
                   className={cn(

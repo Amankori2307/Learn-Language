@@ -5,6 +5,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { useAuth } from "@/hooks/use-auth";
 import { ThemeProvider } from "next-themes";
+import { AppAsyncIndicator } from "@/components/app-async-indicator";
 
 import Dashboard from "@/pages/dashboard";
 import QuizPage from "@/pages/quiz";
@@ -19,6 +20,7 @@ import HistoryPage from "@/pages/history";
 import WordBucketsPage from "@/pages/word-buckets";
 import AuthPage from "@/pages/auth";
 import NotFound from "@/pages/not-found";
+import { DashboardPageSkeleton } from "@/components/ui/page-states";
 
 // Protected Route Wrapper
 function ProtectedRoute({ component: Component }: { component: React.ComponentType }) {
@@ -26,7 +28,9 @@ function ProtectedRoute({ component: Component }: { component: React.ComponentTy
 
   if (isLoading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-background">Loading...</div>
+      <div className="min-h-screen bg-background p-4 md:p-8">
+        <DashboardPageSkeleton />
+      </div>
     );
   }
 
@@ -67,6 +71,7 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
         <TooltipProvider>
+          <AppAsyncIndicator />
           <Toaster />
           <Router />
         </TooltipProvider>

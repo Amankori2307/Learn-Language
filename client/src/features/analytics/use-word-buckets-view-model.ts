@@ -32,7 +32,10 @@ export function useWordBucketsViewModel() {
     page: safePage,
     totalPages,
     setPage,
-    bucketQuery,
+    data: bucketQuery.data ?? null,
+    isLoading: bucketQuery.isLoading,
+    isError: bucketQuery.isError,
+    retry: () => bucketQuery.refetch(),
     changeBucket,
     navigate,
   };

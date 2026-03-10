@@ -1,46 +1,18 @@
-import { useMemo, useState } from "react";
 import { Link } from "wouter";
 import { Layout } from "@/components/layout";
-import { useClusters, useCluster } from "@/hooks/use-clusters";
 import { Button } from "@/components/ui/button";
 import { BookText, ArrowRight } from "lucide-react";
-
-type StoryLine = {
-  originalScript: string;
-  pronunciation: string;
-  english: string;
-};
-
-function buildStoryLines(
-  words: Array<{
-    originalScript: string;
-    transliteration?: string | null;
-    english: string;
-    exampleSentences?: string[];
-  }>,
-): StoryLine[] {
-  return words.slice(0, 6).map((word) => ({
-    originalScript: word.exampleSentences?.[0] || `Use ${word.originalScript} in context.`,
-    pronunciation: word.transliteration?.trim()
-      ? `${word.transliteration} (${word.originalScript})`
-      : word.originalScript,
-    english: `Context hint: ${word.english}`,
-  }));
-}
+import { useContextualPageViewModel } from "@/features/contextual/use-contextual-page-view-model";
+import { CardGridSkeleton, SurfaceMessage } from "@/components/ui/page-states";
 
 export default function ContextualPage() {
-  const { data: clusters, isLoading: clustersLoading } = useClusters();
-  const [selectedClusterId, setSelectedClusterId] = useState<number | null>(null);
-
-  const activeClusterId = selectedClusterId ?? clusters?.[0]?.id ?? null;
-  const { data: clusterData, isLoading: clusterLoading } = useCluster(activeClusterId ?? 0);
-
-  const storyLines = useMemo(() => {
-    if (!clusterData?.words || clusterData.words.length === 0) return [];
-    return buildStoryLines(clusterData.words as any);
-  }, [clusterData]);
-
-  const loading = clustersLoading || (activeClusterId !== null && clusterLoading);
+  const {
+    setSelectedClusterId,
+    activeClusterId,
+    clusters,
+    storyLines,
+    isLoading,
+  } = useContextualPageViewModel();
 
   return (
     <Layout>
@@ -71,7 +43,7 @@ export default function ContextualPage() {
             value={activeClusterId ?? ""}
             onChange={(e) => setSelectedClusterId(Number(e.target.value))}
           >
-            {(clusters ?? []).map((cluster) => (
+            {clusters.map((cluster) => (
               <option key={cluster.id} value={cluster.id}>
                 {cluster.name}
               </option>
@@ -79,12 +51,14 @@ export default function ContextualPage() {
           </select>
         </div>
 
-        {loading ? (
-          <div className="text-muted-foreground">Loading contextual lines...</div>
+        {isLoading ? (
+          <CardGridSkeleton cards={4} className="md:grid-cols-2 xl:grid-cols-2" />
         ) : storyLines.length === 0 ? (
-          <div className="text-muted-foreground">
-            No contextual lines available for this cluster yet.
-          </div>
+          <SurfaceMessage
+            title="No contextual lines yet"
+            description="This cluster does not have enough example-backed context lines yet."
+            tone="empty"
+          />
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {storyLines.map((line, idx) => (

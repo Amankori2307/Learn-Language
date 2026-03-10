@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
 import { PlayCircle, Zap } from "lucide-react";
 import { useDashboardViewModel } from "@/features/dashboard/use-dashboard-view-model";
+import { DashboardPageSkeleton } from "@/components/ui/page-states";
 
 export default function Dashboard() {
   const { isLoading, userName, stats, primaryMode, primaryLabel, coreActions, bucketCards } =
@@ -12,9 +13,7 @@ export default function Dashboard() {
   if (isLoading) {
     return (
       <Layout>
-        <div className="flex items-center justify-center h-96">
-          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary" />
-        </div>
+        <DashboardPageSkeleton />
       </Layout>
     );
   }

@@ -1,11 +1,11 @@
 import { Layout } from "@/components/layout";
-import { useProfile, useUpdateProfile } from "@/hooks/use-profile";
-import { useEffect, useMemo, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { buildAvatarUrl } from "@/lib/avatar";
+import { useProfilePageViewModel } from "@/features/profile/use-profile-page-view-model";
+import { PendingButton } from "@/components/ui/pending-button";
+import { SurfaceMessage } from "@/components/ui/page-states";
 
 function initials(firstName: string | null, lastName: string | null, email: string | null) {
   const name = `${firstName ?? ""} ${lastName ?? ""}`.trim();
@@ -20,41 +20,24 @@ function initials(firstName: string | null, lastName: string | null, email: stri
 }
 
 export default function ProfilePage() {
-  const { data: profile, isLoading, isError, refetch } = useProfile();
-  const updateProfile = useUpdateProfile();
-
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [avatarUrl, setAvatarUrl] = useState("");
-
-  useEffect(() => {
-    if (!profile) return;
-    setFirstName(profile.firstName ?? "");
-    setLastName(profile.lastName ?? "");
-    setAvatarUrl(profile.profileImageUrl ?? "");
-  }, [profile]);
-
-  const avatarPreview = useMemo(() => {
-    return buildAvatarUrl({
-      profileImageUrl: avatarUrl.trim(),
-      firstName: firstName || profile?.firstName,
-      lastName: lastName || profile?.lastName,
-      email: profile?.email,
-    });
-  }, [avatarUrl, firstName, lastName, profile]);
-  const isDirty = profile
-    ? firstName !== (profile.firstName ?? "") ||
-      lastName !== (profile.lastName ?? "") ||
-      avatarUrl !== (profile.profileImageUrl ?? "")
-    : false;
-
-  const onSave = async () => {
-    await updateProfile.mutateAsync({
-      firstName: firstName.trim() || undefined,
-      lastName: lastName.trim() || undefined,
-      profileImageUrl: avatarUrl.trim(),
-    });
-  };
+  const {
+    profile,
+    firstName,
+    setFirstName,
+    lastName,
+    setLastName,
+    avatarUrl,
+    setAvatarUrl,
+    avatarPreview,
+    isDirty,
+    saveProfile,
+    isLoading,
+    isError,
+    retry,
+    isSaving,
+    saveError,
+    saveSuccess,
+  } = useProfilePageViewModel();
 
   return (
     <Layout>
@@ -65,16 +48,32 @@ export default function ProfilePage() {
         </div>
 
         {isLoading ? (
-          <div className="rounded-2xl border border-border/50 bg-card p-8 text-muted-foreground">
-            Loading profile...
+          <div className="rounded-2xl border border-border/50 bg-card p-6 space-y-6">
+            <div className="flex items-center gap-4 pb-2 border-b border-border/40">
+              <div className="h-16 w-16 rounded-full bg-muted animate-pulse" />
+              <div className="space-y-2 flex-1">
+                <div className="h-5 w-40 rounded bg-muted animate-pulse" />
+                <div className="h-4 w-52 rounded bg-muted animate-pulse" />
+              </div>
+            </div>
+            <div className="grid md:grid-cols-2 gap-4">
+              <div className="h-24 rounded-xl bg-muted animate-pulse" />
+              <div className="h-24 rounded-xl bg-muted animate-pulse" />
+            </div>
+            <div className="h-24 rounded-xl bg-muted animate-pulse" />
+            <div className="h-10 w-36 rounded bg-muted animate-pulse" />
           </div>
         ) : isError || !profile ? (
-          <div className="rounded-2xl border border-red-200 bg-red-50 p-8">
-            <p className="text-red-700 font-medium">Could not load profile.</p>
-            <Button variant="outline" className="mt-3" onClick={() => refetch()}>
-              Retry
-            </Button>
-          </div>
+          <SurfaceMessage
+            title="Could not load profile"
+            description="The profile request failed before the form could be populated."
+            tone="error"
+            action={
+              <Button variant="outline" onClick={retry}>
+                Retry
+              </Button>
+            }
+          />
         ) : (
           <div className="rounded-2xl border border-border/50 bg-card p-6 md:p-8 space-y-6">
             <div className="flex items-center gap-4 pb-2 border-b border-border/40">
@@ -129,13 +128,18 @@ export default function ProfilePage() {
             </div>
 
             <div className="flex flex-col sm:flex-row sm:items-center gap-3">
-              <Button onClick={onSave} disabled={!isDirty || updateProfile.isPending}>
-                {updateProfile.isPending ? "Saving..." : "Save Profile"}
-              </Button>
-              {updateProfile.isError && (
+              <PendingButton
+                onClick={saveProfile}
+                disabled={!isDirty}
+                pending={isSaving}
+                pendingLabel="Saving..."
+              >
+                Save Profile
+              </PendingButton>
+              {saveError && (
                 <span className="text-sm text-red-600">Failed to save changes.</span>
               )}
-              {updateProfile.isSuccess && !updateProfile.isPending && (
+              {saveSuccess && (
                 <span className="text-sm text-green-600">Saved.</span>
               )}
             </div>
