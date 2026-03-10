@@ -139,3 +139,89 @@ test("AuthApiController.getAuthUser maps AppError from service", async () => {
     requestId: "req-3",
   });
 });
+
+test("AuthApiController.getProfile returns 401 when session user id is missing", async () => {
+  let getProfileCalls = 0;
+  const authService = {
+    async getAuthUser() {
+      return null;
+    },
+    async getProfile() {
+      getProfileCalls += 1;
+      return null;
+    },
+    async updateProfile() {
+      return null;
+    },
+  };
+
+  const controller = new AuthApiController(authService as any);
+  const { response, state } = createMockResponse();
+  const request = {
+    requestId: "req-4",
+    path: "/api/profile",
+    method: "GET",
+  } as unknown as Request;
+
+  await controller.getProfile(request, response);
+
+  assert.equal(getProfileCalls, 0);
+  assert.equal(state.statusCode, 401);
+  assert.deepEqual(state.body, {
+    code: "UNAUTHORIZED",
+    message: "Unauthorized",
+    requestId: "req-4",
+  });
+});
+
+test("AuthApiController.updateProfile forwards sanitized body to service", async () => {
+  const expected = {
+    id: "u-7",
+    email: "learner@example.com",
+    firstName: "Aman",
+    lastName: "Kori",
+    profileImageUrl: "https://example.com/a.png",
+  };
+
+  let receivedUserId: string | null = null;
+  let receivedBody: unknown = null;
+  const authService = {
+    async getAuthUser() {
+      return null;
+    },
+    async getProfile() {
+      return null;
+    },
+    async updateProfile(userId: string, body: unknown) {
+      receivedUserId = userId;
+      receivedBody = body;
+      return expected;
+    },
+  };
+
+  const controller = new AuthApiController(authService as any);
+  const { response, state } = createMockResponse();
+  const request = {
+    requestId: "req-5",
+    path: "/api/profile",
+    method: "PATCH",
+    user: {
+      claims: {
+        sub: "u-7",
+      },
+    },
+  } as unknown as Request;
+
+  const body = {
+    firstName: "Aman",
+    lastName: "Kori",
+    profileImageUrl: "https://example.com/a.png",
+  };
+
+  await controller.updateProfile(request, response, body);
+
+  assert.equal(receivedUserId, "u-7");
+  assert.deepEqual(receivedBody, body);
+  assert.equal(state.statusCode, 200);
+  assert.deepEqual(state.body, expected);
+});

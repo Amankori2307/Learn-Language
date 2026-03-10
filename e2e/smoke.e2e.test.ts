@@ -5,7 +5,7 @@ import { sql } from "drizzle-orm";
 import { createServer } from "http";
 import { QuizModeEnum } from "../shared/domain/enums";
 
-test("e2e smoke: api is live and all quiz modes return arrays", async (t) => {
+test("e2e smoke: auth, analytics, and quiz critical paths are live", async (t) => {
   const issuerServer = createServer((req, res) => {
     const address = issuerServer.address();
     const port = address && typeof address !== "string" ? address.port : 0;
@@ -137,6 +137,40 @@ test("e2e smoke: api is live and all quiz modes return arrays", async (t) => {
   const authMePayload = await authMeResponse.json();
   assert.equal(authMePayload.id, "smoke-user");
   assert.equal(authMePayload.email, "smoke@example.com");
+
+  const profileResponse = await fetch(`${baseUrl}/api/profile`, {
+    headers: authHeaders,
+  });
+  assert.equal(profileResponse.status, 200, "/api/profile should return 200");
+  const profilePayload = await profileResponse.json();
+  assert.equal(profilePayload.id, "smoke-user");
+
+  const statsResponse = await fetch(`${baseUrl}/api/stats?language=telugu`, {
+    headers: authHeaders,
+  });
+  assert.equal(statsResponse.status, 200, "/api/stats should return 200");
+  const statsPayload = await statsResponse.json();
+  assert.equal(typeof statsPayload.totalWords, "number");
+
+  const wordBucketsResponse = await fetch(
+    `${baseUrl}/api/analytics/word-buckets?bucket=learning&page=1&limit=5&language=telugu`,
+    {
+      headers: authHeaders,
+    },
+  );
+  assert.equal(wordBucketsResponse.status, 200, "/api/analytics/word-buckets should return 200");
+  const wordBucketsPayload = await wordBucketsResponse.json();
+  assert.equal(Array.isArray(wordBucketsPayload.words), true);
+
+  const leaderboardResponse = await fetch(
+    `${baseUrl}/api/leaderboard?window=weekly&limit=5&language=telugu`,
+    {
+      headers: authHeaders,
+    },
+  );
+  assert.equal(leaderboardResponse.status, 200, "/api/leaderboard should return 200");
+  const leaderboardPayload = await leaderboardResponse.json();
+  assert.equal(Array.isArray(leaderboardPayload), true);
 
   const modes = [
     QuizModeEnum.DAILY_REVIEW,
