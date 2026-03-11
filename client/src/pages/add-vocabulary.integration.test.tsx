@@ -7,6 +7,24 @@ import { LanguageEnum, PartOfSpeechEnum, UserTypeEnum } from "@shared/domain/enu
 import AddVocabularyPage from "./add-vocabulary";
 import { apiClient } from "@/services/apiClient";
 
+function buildClusterListResponse() {
+  return {
+    success: true,
+    error: false,
+    message: "ok",
+    requestId: "test-request-id",
+    data: [
+      {
+        id: 1,
+        name: "Greetings",
+        type: "topic",
+        description: null,
+        wordCount: 10,
+      },
+    ],
+  };
+}
+
 const createDraftMutateAsync = vi
   .fn()
   .mockResolvedValue({ id: 99, reviewStatus: "draft", examplesCreated: 1 });
@@ -39,7 +57,7 @@ afterEach(() => {
 
 vi.mock("@/services/apiClient", () => ({
   apiClient: {
-    get: vi.fn().mockResolvedValue({ data: [] }),
+    get: vi.fn().mockResolvedValue({ data: buildClusterListResponse() }),
   },
   buildApiUrl: (path: string) => path,
 }));
@@ -52,7 +70,7 @@ describe("AddVocabularyPage integration", () => {
   it("creates a draft with example payload", async () => {
     const user = userEvent.setup();
     const queryClient = new QueryClient();
-    vi.mocked(apiClient.get).mockResolvedValue({ data: [] });
+    vi.mocked(apiClient.get).mockResolvedValue({ data: buildClusterListResponse() });
 
     render(
       <QueryClientProvider client={queryClient}>
@@ -60,7 +78,7 @@ describe("AddVocabularyPage integration", () => {
       </QueryClientProvider>,
     );
 
-    await user.type(screen.getByPlaceholderText("Original script word/phrase"), "నమస్కారం");
+    await user.type(await screen.findByPlaceholderText("Original script word/phrase"), "నమస్కారం");
     await user.type(screen.getByPlaceholderText("Romanized pronunciation"), "namaskaaram");
     await user.type(screen.getByPlaceholderText("Meaning in English"), "hello");
     await user.click(screen.getByRole("combobox", { name: "Part of Speech" }));
@@ -92,7 +110,7 @@ describe("AddVocabularyPage integration", () => {
     const user = userEvent.setup();
     const queryClient = new QueryClient();
     createDraftMutateAsync.mockRejectedValueOnce(new Error("Draft creation failed"));
-    vi.mocked(apiClient.get).mockResolvedValue({ data: [] });
+    vi.mocked(apiClient.get).mockResolvedValue({ data: buildClusterListResponse() });
 
     render(
       <QueryClientProvider client={queryClient}>
@@ -100,7 +118,7 @@ describe("AddVocabularyPage integration", () => {
       </QueryClientProvider>,
     );
 
-    await user.type(screen.getByPlaceholderText("Original script word/phrase"), "నమస్కారం");
+    await user.type(await screen.findByPlaceholderText("Original script word/phrase"), "నమస్కారం");
     await user.type(screen.getByPlaceholderText("Romanized pronunciation"), "namaskaaram");
     await user.type(screen.getByPlaceholderText("Meaning in English"), "hello");
     await user.type(
@@ -137,9 +155,11 @@ describe("AddVocabularyPage integration", () => {
     expect(screen.queryByText("Create Vocabulary Draft")).toBeNull();
   });
 
-  it("keeps the add-vocabulary form responsive with stacked mobile CTA and two-column upgrades", () => {
+  it("renders a route-level loading surface while cluster options bootstrap", () => {
     const queryClient = new QueryClient();
-    vi.mocked(apiClient.get).mockResolvedValue({ data: [] });
+    vi.mocked(apiClient.get).mockImplementation(
+      () => new Promise(() => undefined) as ReturnType<typeof apiClient.get>,
+    );
 
     const { container } = render(
       <QueryClientProvider client={queryClient}>
@@ -147,7 +167,28 @@ describe("AddVocabularyPage integration", () => {
       </QueryClientProvider>,
     );
 
-    expect(screen.getByRole("button", { name: "Create Draft" }).className).toContain("sm:w-auto");
+    expect(screen.getByText("Loading draft form")).toBeTruthy();
+    expect(
+      screen.getByText(
+        "Fetching clusters so new vocabulary can be linked into the right review groups.",
+      ),
+    ).toBeTruthy();
+    expect(container.querySelector(".rounded-2xl.border.p-8.text-center")).toBeTruthy();
+  });
+
+  it("keeps the add-vocabulary form responsive with stacked mobile CTA and two-column upgrades", async () => {
+    const queryClient = new QueryClient();
+    vi.mocked(apiClient.get).mockResolvedValue({ data: buildClusterListResponse() });
+
+    const { container } = render(
+      <QueryClientProvider client={queryClient}>
+        <AddVocabularyPage />
+      </QueryClientProvider>,
+    );
+
+    expect((await screen.findByRole("button", { name: "Create Draft" })).className).toContain(
+      "sm:w-auto",
+    );
     expect(container.querySelector(".grid.gap-3.md\\:grid-cols-2")).toBeTruthy();
   });
 });

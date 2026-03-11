@@ -3,7 +3,29 @@ import { useAuth } from "@/hooks/use-auth";
 import { UserTypeEnum } from "@shared/domain/enums";
 import { ReviewAccessState } from "@/features/review/review-access-state";
 import { AddVocabularyPageHeader } from "@/features/review/add-vocabulary-page-header";
-import { CreateVocabularyDraftForm } from "@/features/review/create-vocabulary-draft-form";
+import {
+  CreateVocabularyDraftFormContent,
+} from "@/features/review/create-vocabulary-draft-form";
+import { useCreateVocabularyDraftForm } from "@/features/review/use-create-vocabulary-draft-form";
+import { SurfaceMessage } from "@/components/ui/page-states";
+
+function AddVocabularyPageContent() {
+  const draftForm = useCreateVocabularyDraftForm();
+
+  return (
+    <div className="space-y-6">
+      <AddVocabularyPageHeader />
+      {draftForm.availableClustersQuery.isLoading ? (
+        <SurfaceMessage
+          title="Loading draft form"
+          description="Fetching clusters so new vocabulary can be linked into the right review groups."
+        />
+      ) : (
+        <CreateVocabularyDraftFormContent viewModel={draftForm} />
+      )}
+    </div>
+  );
+}
 
 export default function AddVocabularyPage() {
   const { user } = useAuth();
@@ -19,10 +41,7 @@ export default function AddVocabularyPage() {
 
   return (
     <Layout>
-      <div className="space-y-6">
-        <AddVocabularyPageHeader />
-        <CreateVocabularyDraftForm />
-      </div>
+      <AddVocabularyPageContent />
     </Layout>
   );
 }

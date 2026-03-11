@@ -10,7 +10,13 @@ import { LanguageEnum } from "@shared/domain/enums";
 import { PART_OF_SPEECH_OPTIONS } from "@shared/domain/part-of-speech";
 import { VOCABULARY_TAG_OPTIONS } from "@shared/domain/vocabulary-tags";
 
-export function CreateVocabularyDraftForm() {
+export type CreateVocabularyDraftFormViewModel = ReturnType<typeof useCreateVocabularyDraftForm>;
+
+export function CreateVocabularyDraftFormContent({
+  viewModel,
+}: {
+  viewModel: CreateVocabularyDraftFormViewModel;
+}) {
   const {
     createError,
     createSuccess,
@@ -42,7 +48,7 @@ export function CreateVocabularyDraftForm() {
     removeExample,
     submitDraft,
     isSubmitting,
-  } = useCreateVocabularyDraftForm();
+  } = viewModel;
 
   return (
     <div className="space-y-4 rounded-2xl border border-border/50 bg-card p-4 md:p-6">
@@ -185,4 +191,10 @@ export function CreateVocabularyDraftForm() {
       </PendingButton>
     </div>
   );
+}
+
+export function CreateVocabularyDraftForm() {
+  const viewModel = useCreateVocabularyDraftForm();
+
+  return <CreateVocabularyDraftFormContent viewModel={viewModel} />;
 }

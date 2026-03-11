@@ -28,7 +28,7 @@ Status legend:
 | Surface | Loading | Error | Empty | Success / normal render | Pending / interaction | Role-gated | Responsive | Notes |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | `review` | `covered` | `covered` | `covered` | `covered` | `covered` | `covered` | `covered` | queue/history loading, error, empty, actions, role denial, and responsive bulk-action layout are covered |
-| `add-vocabulary` | `partial` | `covered` | `n/a` | `covered` | `covered` | `covered` | `covered` | create flow, access gating, cluster-loading, submit pending, draft-creation failure composition, and responsive form/CTA behavior are covered; route-level loading remains thinner than other stabilized pages |
+| `add-vocabulary` | `covered` | `covered` | `n/a` | `covered` | `covered` | `covered` | `covered` | route-owned cluster bootstrap loading, create flow, access gating, submit pending, draft-creation failure composition, and responsive form/CTA behavior are covered |
 
 ## Shared presentation / async primitives
 
@@ -42,7 +42,7 @@ Status legend:
 
 ## Highest-priority remaining gaps
 
-1. core learner-route coverage is now broadly in place; remaining work is mostly lower-priority long-tail polish rather than obvious uncovered route states.
+1. route-level frontend coverage is broadly in place across core learner and reviewer surfaces; remaining work is now mostly long-tail polish rather than visible state-ownership gaps.
 
 ## Explicit Phase 9 deferrals
 
