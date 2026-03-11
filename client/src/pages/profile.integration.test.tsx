@@ -1,10 +1,11 @@
 import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import type { ReactNode } from "react";
-import { describe, expect, it, vi } from "vitest";
+import { beforeEach, describe, expect, it, vi } from "vitest";
 import ProfilePage from "./profile";
 
 const mutateAsync = vi.fn().mockResolvedValue(undefined);
+const refetch = vi.fn();
 const profileData = {
   id: "u-1",
   email: "learner@example.com",
@@ -14,6 +15,9 @@ const profileData = {
   createdAt: null,
   updatedAt: null,
 };
+let mockProfile = profileData;
+let mockProfileLoading = false;
+let mockProfileError = false;
 
 vi.mock("@/components/layout", () => ({
   Layout: ({ children }: { children: ReactNode }) => <div>{children}</div>,
@@ -21,10 +25,10 @@ vi.mock("@/components/layout", () => ({
 
 vi.mock("@/hooks/use-profile", () => ({
   useProfile: () => ({
-    data: profileData,
-    isLoading: false,
-    isError: false,
-    refetch: vi.fn(),
+    data: mockProfile,
+    isLoading: mockProfileLoading,
+    isError: mockProfileError,
+    refetch,
   }),
   useUpdateProfile: () => ({
     mutateAsync,
@@ -35,6 +39,14 @@ vi.mock("@/hooks/use-profile", () => ({
 }));
 
 describe("ProfilePage integration", () => {
+  beforeEach(() => {
+    mockProfile = profileData;
+    mockProfileLoading = false;
+    mockProfileError = false;
+    mutateAsync.mockClear();
+    refetch.mockClear();
+  });
+
   it("submits updated profile fields from UI controls", async () => {
     const user = userEvent.setup();
     render(<ProfilePage />);
@@ -57,5 +69,18 @@ describe("ProfilePage integration", () => {
       lastName: "K",
       profileImageUrl: "https://example.com/a.png",
     });
+  });
+
+  it("shows a retryable error surface when the profile request fails", async () => {
+    const user = userEvent.setup();
+    mockProfile = null as unknown as typeof profileData;
+    mockProfileError = true;
+
+    render(<ProfilePage />);
+
+    expect(screen.getByText("Could not load profile")).toBeTruthy();
+
+    await user.click(screen.getByRole("button", { name: "Retry" }));
+    expect(refetch).toHaveBeenCalledTimes(1);
   });
 });
