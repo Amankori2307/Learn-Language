@@ -71,9 +71,10 @@ Next task ID: P9-007
   - draft example rendering extracted into [vocabulary-draft-examples.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/components/review/vocabulary-draft-examples.tsx)
   - new frontend tests added for pending button, page states, leaderboard, and word buckets
   - direct component tests now cover extracted presentation surfaces in [dashboard-overview.test.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/features/dashboard/dashboard-overview.test.tsx), [profile-form-card.test.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/features/profile/profile-form-card.test.tsx), [auth-sign-in-panel.test.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/features/auth/auth-sign-in-panel.test.tsx), [review-queue-panel.test.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/features/review/review-queue-panel.test.tsx), and [history-results-table.test.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/features/history/history-results-table.test.tsx)
+  - second-slice direct component tests now cover [review-history-panel.test.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/features/review/review-history-panel.test.tsx), [clusters-results-panel.test.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/features/clusters/clusters-results-panel.test.tsx), [contextual-story-grid.test.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/features/contextual/contextual-story-grid.test.tsx), [quiz-page-states.test.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/features/quiz/quiz-page-states.test.tsx), and [vocabulary-draft-examples.test.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/components/review/vocabulary-draft-examples.test.tsx)
   - backend test coverage expanded for auth/profile controller behavior and audio language mismatch handling
   - smoke coverage expanded to include auth, profile, stats, leaderboard, and word buckets critical paths
-  - full `pnpm run lint` and `pnpm run test:ui` now pass on the current branch state
+  - full `pnpm run lint` and `pnpm run test:ui` now pass on the current branch state, with the UI suite now at 22 files / 47 tests
 
 ## Current blockers
 
