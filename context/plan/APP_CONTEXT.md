@@ -36,6 +36,7 @@ Build a text-first language learning app with high data correctness, strong memo
 - `P13-020` shared query-behavior override formalization is complete.
 - `P13-021` React Query ownership baseline refresh is complete.
 - `P13-022` React Query governance policy promotion is complete.
+- `P13-023` deployment doc link normalization is complete.
 
 ## Core capabilities live
 
@@ -137,6 +138,6 @@ Build a text-first language learning app with high data correctness, strong memo
 
 - Execute in order from [01-master-task-registry.md](/Users/aman/Projects/personal-projects/Learn-Language/context/plan/01-master-task-registry.md).
 - Current execution track:
-  - last completed implementation slice is `P13-022` React Query governance policy promotion
+  - last completed implementation slice is `P13-023` deployment doc link normalization
   - current in-progress implementation slice is `-`
   - Phase 12 outcome: named theme ownership, current/minimal shipped themes, semantic tokenized primitives, and chart theme support are now in place

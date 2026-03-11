@@ -127,6 +127,9 @@ Next task ID: -
 - `P13-022` is now complete:
   - the repo-wide coding guidance and governance contract now explicitly cover React Query ownership boundaries, stable query-key ownership, narrow-by-default invalidation, and centralized query-behavior overrides
   - the ownership baseline now records that this governance follow-up is complete, leaving only future alignment and periodic re-inventory work
+- `P13-023` is now complete:
+  - deployment runbook links in [server.md](/Users/aman/Projects/personal-projects/Learn-Language/documentation/server.md) now point at the actual repository paths instead of an old Codex worktree path
+  - the production server documentation is once again navigable from the current workspace
 - Phase 12 planning is now active in [81-phase-12-theme-system-and-design-token-extraction.md](/Users/aman/Projects/personal-projects/Learn-Language/context/plan/81-phase-12-theme-system-and-design-token-extraction.md).
 - Active backlog was reprioritized to start with theming-system readiness before UI theme selection work:
   - `P12-001` is now complete via [theme-system-baseline.md](/Users/aman/Projects/personal-projects/Learn-Language/documentation/theme-system-baseline.md)
