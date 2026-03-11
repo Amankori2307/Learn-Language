@@ -2,6 +2,7 @@ import {
   Body,
   Controller,
   Get,
+  HttpCode,
   Inject,
   Param,
   ParseIntPipe,
@@ -123,6 +124,7 @@ export class ReviewApiController {
   }
 
   @Post("/review/words")
+  @HttpCode(201)
   @UseGuards(AuthenticatedGuard)
   async submitDraft(
     @Req() req: Request,
@@ -132,6 +134,7 @@ export class ReviewApiController {
     try {
       const submittedBy = (req.user as { claims: { sub: string } }).claims.sub;
       const result = await this.reviewService.submitDraft(submittedBy, body);
+      res.status(201);
       sendSuccess(req, res, result);
     } catch (error) {
       this.handleError(req, res, error);

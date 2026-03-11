@@ -747,7 +747,7 @@ export const api = {
           .min(1),
       }),
       responses: {
-        200: successResponseSchema(
+        201: successResponseSchema(
           z.object({
             id: z.number(),
             reviewStatus: z.literal(ReviewStatusEnum.DRAFT),

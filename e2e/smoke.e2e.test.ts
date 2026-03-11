@@ -261,7 +261,7 @@ test("e2e smoke: auth, analytics, cluster, review, and quiz critical paths are l
       ],
     }),
   });
-  assert.equal(reviewDraftResponse.status, 200, "/api/review/words should return 200");
+  assert.equal(reviewDraftResponse.status, 201, "/api/review/words should return 201");
   const reviewDraftPayload = await reviewDraftResponse.json();
   assert.equal(typeof reviewDraftPayload.data.id, "number");
   assert.equal(reviewDraftPayload.data.reviewStatus, "draft");

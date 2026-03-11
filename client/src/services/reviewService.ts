@@ -54,6 +54,6 @@ export const reviewService = {
   },
   async createDraft(payload: CreateReviewDraftPayload) {
     const response = await apiClient.post(buildApiUrl(api.review.submitDraft.path), payload);
-    return parseSuccessResponse(api.review.submitDraft.responses[200], response.data);
+    return parseSuccessResponse(api.review.submitDraft.responses[201], response.data);
   },
 };

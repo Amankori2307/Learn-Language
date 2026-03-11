@@ -188,7 +188,7 @@ test("ReviewApiController.submitDraft forwards submitter id and body", async () 
 
   assert.equal(receivedSubmittedBy, "u-5");
   assert.deepEqual(receivedBody, body);
-  assert.equal(state.statusCode, 200);
+  assert.equal(state.statusCode, 201);
   assert.deepEqual(
     state.body,
     success("req-draft", { id: 55, reviewStatus: ReviewStatusEnum.DRAFT, examplesCreated: 1 }),
