@@ -26,6 +26,8 @@ describe("ContextualPage integration", () => {
       clusters: [{ id: 2, name: "Travel" }],
       storyLines: [],
       isLoading: false,
+      isError: false,
+      retry: vi.fn(),
     });
 
     render(<ContextualPage />);
@@ -39,6 +41,8 @@ describe("ContextualPage integration", () => {
       clusters: [{ id: 2, name: "Travel" }],
       storyLines: [],
       isLoading: true,
+      isError: false,
+      retry: vi.fn(),
     });
 
     const { container } = render(<ContextualPage />);
@@ -64,6 +68,8 @@ describe("ContextualPage integration", () => {
         },
       ],
       isLoading: false,
+      isError: false,
+      retry: vi.fn(),
     });
 
     render(<ContextualPage />);
@@ -73,5 +79,26 @@ describe("ContextualPage integration", () => {
 
     await user.selectOptions(screen.getByRole("combobox"), "5");
     expect(setSelectedClusterId).toHaveBeenCalledWith(5);
+  });
+
+  it("renders retryable error state when contextual content fails to load", async () => {
+    const user = userEvent.setup();
+    const retry = vi.fn();
+
+    viewModel.mockReturnValue({
+      setSelectedClusterId: vi.fn(),
+      activeClusterId: 2,
+      clusters: [{ id: 2, name: "Travel" }],
+      storyLines: [],
+      isLoading: false,
+      isError: true,
+      retry,
+    });
+
+    render(<ContextualPage />);
+
+    expect(screen.getByText("Failed to load contextual lines")).toBeTruthy();
+    await user.click(screen.getByRole("button", { name: "Retry" }));
+    expect(retry).toHaveBeenCalledTimes(1);
   });
 });

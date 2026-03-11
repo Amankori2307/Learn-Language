@@ -215,4 +215,32 @@ describe("ReviewPage integration", () => {
     expect(screen.getByText("Queue is empty")).toBeTruthy();
     expect(screen.getByText("There are no items in this review state right now.")).toBeTruthy();
   });
+
+  it("renders review-history loading state after selecting an item", async () => {
+    const user = userEvent.setup();
+    reviewHistoryState = {
+      data: null,
+      isLoading: true,
+      isError: false,
+    };
+
+    const { container } = render(<ReviewPage />);
+
+    await user.click(screen.getByRole("button", { name: "View History" }));
+    expect(container.querySelectorAll(".animate-pulse").length).toBeGreaterThan(0);
+  });
+
+  it("renders review-history error state after selecting an item", async () => {
+    const user = userEvent.setup();
+    reviewHistoryState = {
+      data: null,
+      isLoading: false,
+      isError: true,
+    };
+
+    render(<ReviewPage />);
+
+    await user.click(screen.getByRole("button", { name: "View History" }));
+    expect(screen.getByText("Failed to load history")).toBeTruthy();
+  });
 });

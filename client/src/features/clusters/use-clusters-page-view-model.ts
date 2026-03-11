@@ -119,5 +119,7 @@ export function useClustersPageViewModel() {
     currentPage,
     pageRows,
     isLoading: clustersQuery.isLoading,
+    isError: clustersQuery.isError,
+    retry: () => clustersQuery.refetch(),
   };
 }

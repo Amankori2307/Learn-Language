@@ -34,6 +34,8 @@ describe("ClustersPage integration", () => {
       currentPage: 1,
       pageRows: [],
       isLoading: true,
+      isError: false,
+      retry: vi.fn(),
     });
 
     const { container } = render(<ClustersPage />);
@@ -66,6 +68,8 @@ describe("ClustersPage integration", () => {
         },
       ],
       isLoading: false,
+      isError: false,
+      retry: vi.fn(),
     });
 
     render(<ClustersPage />);
@@ -92,6 +96,8 @@ describe("ClustersPage integration", () => {
       currentPage: 1,
       pageRows: [],
       isLoading: false,
+      isError: false,
+      retry: vi.fn(),
     });
 
     render(<ClustersPage />);
@@ -100,5 +106,34 @@ describe("ClustersPage integration", () => {
     expect(
       screen.getByText("No clusters match the current search and filter combination."),
     ).toBeTruthy();
+  });
+
+  it("renders retryable error state when clusters request fails", async () => {
+    const user = userEvent.setup();
+    const retry = vi.fn();
+
+    viewModel.mockReturnValue({
+      query: "",
+      typeFilter: "all",
+      sortBy: "words_desc",
+      clusterTypes: ["all"],
+      updateQuery: vi.fn(),
+      topCluster: null,
+      totalWords: 0,
+      nonEmptyClusters: 0,
+      totalResults: 0,
+      totalPages: 1,
+      currentPage: 1,
+      pageRows: [],
+      isLoading: false,
+      isError: true,
+      retry,
+    });
+
+    render(<ClustersPage />);
+
+    expect(screen.getByText("Failed to load clusters")).toBeTruthy();
+    await user.click(screen.getByRole("button", { name: "Retry" }));
+    expect(retry).toHaveBeenCalledTimes(1);
   });
 });

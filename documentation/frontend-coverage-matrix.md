@@ -14,8 +14,8 @@ Status legend:
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | `dashboard` | `partial` | `gap` | `gap` | `covered` | `gap` | `partial` | page integration currently protects the populated dashboard shell only |
 | `quiz` | `covered` | `partial` | `covered` | `covered` | `covered` | `partial` | quiz completion and active-session shell are covered; explicit route-level error fallback remains thin |
-| `clusters` | `covered` | `gap` | `covered` | `covered` | `partial` | `partial` | search/filter interaction is covered, but a request-failure branch is still not protected at page level |
-| `contextual` | `covered` | `gap` | `covered` | `covered` | `partial` | `partial` | cluster selection is covered; explicit failure treatment is not |
+| `clusters` | `covered` | `covered` | `covered` | `covered` | `partial` | `partial` | search/filter interaction and request-failure handling are covered; responsive assertions are still absent |
+| `contextual` | `covered` | `covered` | `covered` | `covered` | `partial` | `partial` | cluster selection and request-failure handling are covered; responsive assertions are still absent |
 | `history` | `covered` | `covered` | `covered` | `covered` | `covered` | `partial` | strongest learner-page state coverage so far |
 | `leaderboard` | `partial` | `covered` | `covered` | `covered` | `partial` | `partial` | window-switch interaction is covered indirectly through header tests, but loading-state page composition is still thin |
 | `word-buckets` | `covered` | `covered` | `covered` | `covered` | `covered` | `partial` | bucket switching is covered, but responsive assertions are still absent |
@@ -27,7 +27,7 @@ Status legend:
 
 | Surface | Loading | Error | Empty | Success / normal render | Pending / interaction | Role-gated | Responsive | Notes |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| `review` | `partial` | `partial` | `gap` | `covered` | `covered` | `covered` | `partial` | bulk/per-item actions and learner denial are covered; queue/history failure composition is still thin |
+| `review` | `covered` | `covered` | `partial` | `covered` | `covered` | `covered` | `partial` | queue and history loading/error plus role denial are covered; an explicit empty-history branch is still only indirectly protected |
 | `add-vocabulary` | `partial` | `partial` | `n/a` | `covered` | `covered` | `covered` | `partial` | create flow, access gating, cluster-loading, and submit pending are covered; explicit create-failure page composition is still thin |
 
 ## Shared presentation / async primitives
@@ -44,9 +44,8 @@ Status legend:
 
 1. `dashboard`: add loading/error integration coverage and confirm the page still composes correctly when stats or insights are missing.
 2. `auth`: add route-level bootstrap/redirect coverage so `/auth` no longer depends only on the sign-in panel tests.
-3. `clusters` and `contextual`: add request-failure integration coverage.
-4. `review`: add explicit queue/history loading-error-empty integration branches.
-5. responsive regression checks: add high-signal assertions for the main action rows and mobile stacking behavior already refactored in leaderboard, history, review, and word-buckets.
+3. `review`: add explicit empty-history integration coverage once the selected-item branch is stabilized further.
+4. responsive regression checks: add high-signal assertions for the main action rows and mobile stacking behavior already refactored in leaderboard, history, review, and word-buckets.
 
 ## Exit criteria for `P9-009`
 

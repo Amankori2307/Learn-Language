@@ -1,4 +1,5 @@
 import { Layout } from "@/components/layout";
+import { Button } from "@/components/ui/button";
 import { useContextualPageViewModel } from "@/features/contextual/use-contextual-page-view-model";
 import { CardGridSkeleton, SurfaceMessage } from "@/components/ui/page-states";
 import { ContextualStoryGrid } from "@/features/contextual/contextual-story-grid";
@@ -14,6 +15,8 @@ export default function ContextualPage() {
     clusters,
     storyLines,
     isLoading,
+    isError,
+    retry,
   } = useContextualPageViewModel();
 
   return (
@@ -29,6 +32,17 @@ export default function ContextualPage() {
 
         {isLoading ? (
           <CardGridSkeleton cards={4} className="md:grid-cols-2 xl:grid-cols-2" />
+        ) : isError ? (
+          <SurfaceMessage
+            title="Failed to load contextual lines"
+            description="The contextual learning request failed before examples could be shown."
+            tone="error"
+            action={
+              <Button variant="outline" onClick={() => void retry()}>
+                Retry
+              </Button>
+            }
+          />
         ) : storyLines.length === 0 ? (
           <SurfaceMessage
             title="No contextual lines yet"

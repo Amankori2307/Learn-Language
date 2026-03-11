@@ -1,8 +1,9 @@
 import { Layout } from "@/components/layout";
+import { Button } from "@/components/ui/button";
 import {
   useClustersPageViewModel,
 } from "@/features/clusters/use-clusters-page-view-model";
-import { TableSurfaceSkeleton } from "@/components/ui/page-states";
+import { SurfaceMessage, TableSurfaceSkeleton } from "@/components/ui/page-states";
 import { ClustersFilterPanel } from "@/features/clusters/clusters-filter-panel";
 import { ClustersHeader } from "@/features/clusters/clusters-header";
 import { ClustersResultsPanel } from "@/features/clusters/clusters-results-panel";
@@ -22,6 +23,8 @@ export default function ClustersPage() {
     currentPage,
     pageRows,
     isLoading,
+    isError,
+    retry,
   } = useClustersPageViewModel();
 
   return (
@@ -36,6 +39,17 @@ export default function ClustersPage() {
 
       {isLoading ? (
         <TableSurfaceSkeleton rows={6} columns={4} />
+      ) : isError ? (
+        <SurfaceMessage
+          title="Failed to load clusters"
+          description="The cluster list request failed before results could be shown."
+          tone="error"
+          action={
+            <Button variant="outline" onClick={retry}>
+              Retry
+            </Button>
+          }
+        />
       ) : (
         <div className="space-y-4">
           <ClustersFilterPanel

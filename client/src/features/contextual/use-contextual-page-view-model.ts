@@ -37,6 +37,8 @@ export function useContextualPageViewModel() {
   }, [clusterQuery.data]);
 
   const loading = clustersQuery.isLoading || (activeClusterId !== null && clusterQuery.isLoading);
+  const isError =
+    clustersQuery.isError || (activeClusterId !== null && clusterQuery.isError && !clusterQuery.data);
 
   return {
     selectedClusterId,
@@ -45,5 +47,9 @@ export function useContextualPageViewModel() {
     clusters: clustersQuery.data ?? [],
     storyLines,
     isLoading: loading,
+    isError,
+    retry: async () => {
+      await Promise.all([clustersQuery.refetch(), activeClusterId !== null ? clusterQuery.refetch() : null]);
+    },
   };
 }
