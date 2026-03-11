@@ -1,7 +1,7 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { api } from "@shared/routes";
 import type { User } from "@shared/models/auth";
-import { AUTH_QUERY_RULES } from "./auth.constants";
+import { QUERY_BEHAVIOR_RULES } from "./query-behavior";
 import { authService } from "@/services/authService";
 
 export function authMeQueryKey() {
@@ -23,7 +23,7 @@ export function useAuth() {
     queryKey: authMeQueryKey(),
     queryFn: fetchUser,
     retry: false,
-    staleTime: AUTH_QUERY_RULES.USER_STALE_TIME_MS,
+    staleTime: QUERY_BEHAVIOR_RULES.auth.userStaleTimeMs,
   });
 
   const logoutMutation = useMutation({

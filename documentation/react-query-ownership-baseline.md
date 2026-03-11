@@ -270,15 +270,15 @@ This is currently aligned with the app’s behavior and avoids noisy retries on 
 ### Stale-time rules
 
 - auth/user identity:
-  - finite stale time is acceptable
+  - finite stale time is acceptable and now formalized in `QUERY_BEHAVIOR_RULES.auth`
 - quiz generation:
-  - `staleTime: 0` because quiz content must be freshly generated per session intent
+  - `staleTime: 0` because quiz content must be freshly generated per session intent, and this is now formalized in `QUERY_BEHAVIOR_RULES.quiz`
 - static-ish reference data such as clusters:
   - can be longer-lived once conventions are documented
 - profile/review/analytics:
   - use explicit reasoning per feature rather than inheriting `Infinity` accidentally
 
-The main requirement is not one exact value. It is that each override must be intentional and documented.
+The main requirement is not one exact value. It is that each override must be intentional, documented, and preferably owned from one explicit rule seam rather than repeated as ad hoc literals.
 
 ## Migration order for `P9-002`
 

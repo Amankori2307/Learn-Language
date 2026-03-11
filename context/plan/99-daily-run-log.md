@@ -32,7 +32,7 @@ Next task ID: -
 
 Date: 2026-03-12  
 Session owner: Codex  
-Last completed task ID: P13-019  
+Last completed task ID: P13-020  
 Current in-progress task ID: -  
 Next task ID: -
 
@@ -118,6 +118,9 @@ Next task ID: -
 - `P13-019` is now complete:
   - the remaining shared auth and word hooks now export explicit query-key builders, and profile now reuses the auth-owned `authMe` key instead of duplicating it
   - the shared key-contract test now protects the auth and word key shapes too
+- `P13-020` is now complete:
+  - the remaining auth and quiz query-behavior overrides now live behind an explicit shared `QUERY_BEHAVIOR_RULES` seam instead of inline literals and one-off constants
+  - focused tests now protect the shared override contract directly
 - Phase 12 planning is now active in [81-phase-12-theme-system-and-design-token-extraction.md](/Users/aman/Projects/personal-projects/Learn-Language/context/plan/81-phase-12-theme-system-and-design-token-extraction.md).
 - Active backlog was reprioritized to start with theming-system readiness before UI theme selection work:
   - `P12-001` is now complete via [theme-system-baseline.md](/Users/aman/Projects/personal-projects/Learn-Language/documentation/theme-system-baseline.md)

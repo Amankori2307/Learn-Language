@@ -5,6 +5,7 @@ import { QuizModeEnum } from "@shared/domain/enums";
 import { useLearningLanguage } from "@/hooks/use-language";
 import { AxiosError } from "axios";
 import { apiClient, buildApiUrl } from "@/services/apiClient";
+import { QUERY_BEHAVIOR_RULES } from "@/hooks/query-behavior";
 
 // Types derived from API definition
 export type QuizModeValue = QuizModeEnum;
@@ -68,8 +69,8 @@ export function useGenerateQuiz(
       );
       return parseSuccessResponse(api.quiz.generate.responses[200], res.data);
     },
-    refetchOnWindowFocus: false,
-    staleTime: 0, // Always fetch fresh quiz
+    refetchOnWindowFocus: QUERY_BEHAVIOR_RULES.quiz.refetchOnWindowFocus,
+    staleTime: QUERY_BEHAVIOR_RULES.quiz.generateStaleTimeMs,
   });
 }
 
