@@ -30,9 +30,9 @@ Next task ID: -
 
 ---
 
-Date: 2026-03-11  
+Date: 2026-03-12  
 Session owner: Codex  
-Last completed task ID: P13-004  
+Last completed task ID: P13-005  
 Current in-progress task ID: -  
 Next task ID: -
 
@@ -71,6 +71,9 @@ Next task ID: -
 - `P13-004` is now complete:
   - page-level responsive assertions now protect the existing responsive filter, pagination, header, selector, and story-grid classes for `clusters` and `contextual`
   - the previously documented low-priority responsive backlog for core learner pages is now closed
+- `P13-005` is now complete:
+  - leaderboard page integration coverage now protects route-level window switching and fetch-pending disable behavior
+  - the learner-route coverage matrix now marks leaderboard interaction coverage as fully covered
 - Phase 12 planning is now active in [81-phase-12-theme-system-and-design-token-extraction.md](/Users/aman/Projects/personal-projects/Learn-Language/context/plan/81-phase-12-theme-system-and-design-token-extraction.md).
 - Active backlog was reprioritized to start with theming-system readiness before UI theme selection work:
   - `P12-001` is now complete via [theme-system-baseline.md](/Users/aman/Projects/personal-projects/Learn-Language/documentation/theme-system-baseline.md)

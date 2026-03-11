@@ -17,7 +17,7 @@ Status legend:
 | `clusters` | `covered` | `covered` | `covered` | `covered` | `partial` | `covered` | search/filter interaction, request-failure handling, and responsive filter/pagination classes are covered |
 | `contextual` | `covered` | `covered` | `covered` | `covered` | `partial` | `covered` | cluster selection, request-failure handling, and responsive header/story-grid classes are covered |
 | `history` | `covered` | `covered` | `covered` | `covered` | `covered` | `covered` | page-level refresh and responsive CTA composition are covered |
-| `leaderboard` | `covered` | `covered` | `covered` | `covered` | `partial` | `covered` | loading-state page composition and responsive window-switch layout are now covered |
+| `leaderboard` | `covered` | `covered` | `covered` | `covered` | `covered` | `covered` | loading-state page composition, route-level window switching, pending disable-state, and responsive window-switch layout are covered |
 | `word-buckets` | `covered` | `covered` | `covered` | `covered` | `covered` | `covered` | bucket switching and responsive bucket-switch layout are covered |
 | `profile` | `covered` | `covered` | `n/a` | `covered` | `covered` | `covered` | save flow, retryable error, loading composition, and responsive stacked-to-two-column form behavior are covered |
 | `auth` | `covered` | `covered` | `n/a` | `covered` | `covered` | `covered` | sign-in CTA, pending button, bootstrap/redirect handshake, retryable failure messaging, and responsive auth shell classes are covered |
@@ -42,7 +42,7 @@ Status legend:
 
 ## Highest-priority remaining gaps
 
-1. pending/interaction coverage remains thinner than ideal on some learner routes, but the previously documented low-priority responsive backlog for core learner pages is now closed.
+1. pending/interaction coverage remains thinner than ideal on some learner routes, with `dashboard`, `clusters`, and `contextual` still the clearest remaining learner follow-ups.
 
 ## Explicit Phase 9 deferrals
 
