@@ -89,14 +89,20 @@ Existing allowed ports:
 - `443`
 - `10102`
 
-Added app ports during setup:
+Added app ports during initial setup:
 
 ```sh
 ufw allow 3000/tcp
 ufw allow 5001/tcp
 ```
 
-These were left open so the containers could be reached directly if needed. Public traffic is intended to go through Nginx on `80/443`.
+These were initially left open so the containers could be reached directly if needed.
+
+Current recommended steady-state posture:
+
+- keep public traffic on `80/443` only
+- proxy from Nginx to loopback-bound container ports
+- do not leave `3000` and `5001` publicly open unless temporarily debugging
 
 ## App directory creation
 
@@ -169,11 +175,11 @@ The production compose file uses:
 
 Frontend:
 
-- binds `3000:3000`
+- binds loopback-only host port `${FRONTEND_HOST_BIND:-127.0.0.1}:${FRONTEND_HOST_PORT:-3000}` to container `${FRONTEND_PORT:-3000}`
 
 Backend:
 
-- binds `5001:5001`
+- binds loopback-only host port `${BACKEND_HOST_BIND:-127.0.0.1}:${BACKEND_HOST_PORT:-5001}` to container `${BACKEND_PORT:-5001}`
 - loads env from `.env.production`
 - runs:
 
@@ -208,7 +214,7 @@ Observed backend startup behavior:
 - protected API endpoints return `401` without auth
 - this is expected
 
-## Direct IP verification that was done
+## Direct IP verification that was done during initial setup
 
 Verified direct access before Nginx:
 

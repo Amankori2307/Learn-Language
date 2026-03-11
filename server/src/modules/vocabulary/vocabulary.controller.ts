@@ -14,34 +14,34 @@ import { VocabularyService } from "./vocabulary.service";
 import { AuthenticatedGuard } from "../../common/guards/authenticated.guard";
 import { ListClustersQueryDto, ListWordsQueryDto } from "./vocabulary.dto";
 import { AppError } from "../../common/errors/app-error";
-import { sendError } from "../../common/http";
+import { sendError, sendSuccess } from "../../common/http";
 
 @Controller()
 @UseGuards(AuthenticatedGuard)
 export class VocabularyApiController {
   constructor(@Inject(VocabularyService) private readonly vocabularyService: VocabularyService) {}
 
-  @Get("/api/words")
+  @Get("/words")
   async listWords(@Req() req: Request, @Res() res: Response, @Query() query: ListWordsQueryDto) {
     try {
       const words = await this.vocabularyService.listWords(query);
-      res.json(words);
+      sendSuccess(req, res, words);
     } catch (error) {
       this.handleError(req, res, error);
     }
   }
 
-  @Get("/api/words/:id")
+  @Get("/words/:id")
   async getWord(@Req() req: Request, @Res() res: Response, @Param("id", ParseIntPipe) id: number) {
     try {
       const word = await this.vocabularyService.getWord(id);
-      res.json(word);
+      sendSuccess(req, res, word);
     } catch (error) {
       this.handleError(req, res, error);
     }
   }
 
-  @Get("/api/clusters")
+  @Get("/clusters")
   async listClusters(
     @Req() req: Request,
     @Res() res: Response,
@@ -49,13 +49,13 @@ export class VocabularyApiController {
   ) {
     try {
       const clusters = await this.vocabularyService.listClusters(query.language);
-      res.json(clusters);
+      sendSuccess(req, res, clusters);
     } catch (error) {
       this.handleError(req, res, error);
     }
   }
 
-  @Get("/api/clusters/:id")
+  @Get("/clusters/:id")
   async getCluster(
     @Req() req: Request,
     @Res() res: Response,
@@ -64,7 +64,7 @@ export class VocabularyApiController {
   ) {
     try {
       const cluster = await this.vocabularyService.getCluster(id, query.language);
-      res.json(cluster);
+      sendSuccess(req, res, cluster);
     } catch (error) {
       this.handleError(req, res, error);
     }

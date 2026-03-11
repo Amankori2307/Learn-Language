@@ -4,7 +4,7 @@ import { beforeEach, describe, expect, it, vi } from "vitest";
 import { useAuthPageViewModel } from "./use-auth-page-view-model";
 
 const setLocation = vi.fn();
-const getLoginUrl = vi.fn(() => "http://localhost/auth/google");
+const getLoginUrl = vi.fn(() => "http://localhost/api/auth/google");
 const setToken = vi.fn();
 const readAuthTokenFromUrl = vi.fn(() => null);
 const clearAuthTokenFromUrl = vi.fn();
@@ -53,7 +53,7 @@ describe("useAuthPageViewModel", () => {
     authState = { user: null, isLoading: false };
     setLocation.mockReset();
     getLoginUrl.mockReset();
-    getLoginUrl.mockReturnValue("http://localhost/auth/google");
+    getLoginUrl.mockReturnValue("http://localhost/api/auth/google");
     setToken.mockReset();
     readAuthTokenFromUrl.mockReset();
     readAuthTokenFromUrl.mockReturnValue(null);
@@ -106,7 +106,7 @@ describe("useAuthPageViewModel", () => {
     await user.click(screen.getByRole("button", { name: "trigger login" }));
 
     expect(screen.getByText("pending")).toBeTruthy();
-    expect(window.location.href).toBe("http://localhost/auth/google");
+    expect(window.location.href).toBe("http://localhost/api/auth/google");
 
     Object.defineProperty(window, "location", {
       configurable: true,

@@ -34,6 +34,27 @@ function createMockResponse() {
   return { response, state };
 }
 
+function success<T>(requestId: string, data: T) {
+  return {
+    success: true,
+    error: false,
+    data,
+    message: "OK",
+    requestId,
+  };
+}
+
+function error(requestId: string, code: string, message: string) {
+  return {
+    success: false,
+    error: true,
+    data: null,
+    code,
+    message,
+    requestId,
+  };
+}
+
 test("QuizApiController.generateQuiz forwards user id and query to service", async () => {
   let receivedInput: unknown = null;
   const expected = [
@@ -80,7 +101,7 @@ test("QuizApiController.generateQuiz forwards user id and query to service", asy
     language: LanguageEnum.TELUGU,
   });
   assert.equal(state.statusCode, 200);
-  assert.deepEqual(state.body, expected);
+  assert.deepEqual(state.body, success("req-generate", expected));
 });
 
 test("QuizApiController.submitQuizAnswer forwards payload and user id", async () => {
@@ -124,7 +145,7 @@ test("QuizApiController.submitQuizAnswer forwards payload and user id", async ()
     payload: body,
   });
   assert.equal(state.statusCode, 200);
-  assert.deepEqual(state.body, expected);
+  assert.deepEqual(state.body, success("req-submit", expected));
 });
 
 test("QuizApiController.generateQuiz maps AppError from service", async () => {
@@ -149,9 +170,5 @@ test("QuizApiController.generateQuiz maps AppError from service", async () => {
   await controller.generateQuiz(request, response, {} as any);
 
   assert.equal(state.statusCode, 400);
-  assert.deepEqual(state.body, {
-    code: "VALIDATION_ERROR",
-    message: "Bad quiz request",
-    requestId: "req-error",
-  });
+  assert.deepEqual(state.body, error("req-error", "VALIDATION_ERROR", "Bad quiz request"));
 });

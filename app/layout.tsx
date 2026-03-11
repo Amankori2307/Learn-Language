@@ -1,5 +1,5 @@
 /* eslint-disable react-refresh/only-export-components */
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import "../client/src/index.css";
 import { APP_BRAND_NAME } from "@shared/domain/constants/app-brand";
 import { APP_DEFAULT_DESCRIPTION, APP_KEYWORDS, APP_SITE_URL } from "@shared/domain/constants/seo";
@@ -13,9 +13,6 @@ export const metadata: Metadata = {
   description: APP_DEFAULT_DESCRIPTION,
   keywords: APP_KEYWORDS,
   applicationName: APP_BRAND_NAME,
-  alternates: {
-    canonical: "/",
-  },
   manifest: "/site.webmanifest",
   icons: {
     icon: [
@@ -39,7 +36,6 @@ export const metadata: Metadata = {
       },
     ],
   },
-  themeColor: "#0ea5e9",
   openGraph: {
     type: "website",
     url: APP_SITE_URL,
@@ -81,6 +77,10 @@ export const metadata: Metadata = {
   category: "education",
 };
 
+export const viewport: Viewport = {
+  themeColor: "#0ea5e9",
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -93,11 +93,6 @@ export default function RootLayout({
     url: APP_SITE_URL,
     description: APP_DEFAULT_DESCRIPTION,
     inLanguage: "en",
-    potentialAction: {
-      "@type": "SearchAction",
-      target: `${APP_SITE_URL}/clusters?query={search_term_string}`,
-      "query-input": "required name=search_term_string",
-    },
   };
 
   const softwareStructuredData = {

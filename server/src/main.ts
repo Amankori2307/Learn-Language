@@ -12,6 +12,13 @@ import { authConfig } from "./config/auth.config";
 import { randomUUID } from "crypto";
 import { appLogger, httpRequestLogger } from "./common/logger/logger";
 import { NestAppLogger } from "./common/logger/nest-app-logger";
+import {
+  createRateLimitMiddleware,
+  expressErrorHandler,
+  noStoreMiddleware,
+  securityHeadersMiddleware,
+  setStaticAssetSecurityHeaders,
+} from "./common/security/security";
 
 const DEFAULT_ALLOWED_FRONTEND_ORIGINS = [
   "http://localhost:3000",
@@ -39,6 +46,7 @@ export async function createNestApiApp(): Promise<{
 }> {
   const app = await NestFactory.create(AppModule, { logger: false });
   app.useLogger(new NestAppLogger());
+  app.setGlobalPrefix("api");
   app.useGlobalPipes(
     new ValidationPipe({
       transform: true,
@@ -71,6 +79,8 @@ export async function createNestApiApp(): Promise<{
   });
 
   const expressApp = app.getHttpAdapter().getInstance() as Express;
+  expressApp.disable("x-powered-by");
+  expressApp.use(securityHeadersMiddleware);
   expressApp.use((req, res, next) => {
     const incomingRequestId = req.headers["x-request-id"];
     const requestId =
@@ -82,7 +92,50 @@ export async function createNestApiApp(): Promise<{
     next();
   });
   expressApp.use(httpRequestLogger);
-  expressApp.use("/audio/generated", express.static(path.join(process.cwd(), "assets/audio")));
+  expressApp.use("/api/auth", noStoreMiddleware);
+  expressApp.use(
+    "/api/auth",
+    createRateLimitMiddleware({
+      key: "auth",
+      windowMs: 15 * 60 * 1000,
+      maxRequests: 60,
+      message: "Too many authentication requests. Please try again later.",
+    }),
+  );
+  expressApp.use(
+    "/api/quiz",
+    createRateLimitMiddleware({
+      key: "quiz",
+      windowMs: 60 * 1000,
+      maxRequests: 120,
+    }),
+  );
+  expressApp.use(
+    "/api/audio/resolve",
+    createRateLimitMiddleware({
+      key: "audio-resolve",
+      windowMs: 5 * 60 * 1000,
+      maxRequests: 60,
+    }),
+  );
+  expressApp.use(
+    "/api/review",
+    createRateLimitMiddleware({
+      key: "review",
+      windowMs: 5 * 60 * 1000,
+      maxRequests: 120,
+    }),
+  );
+  expressApp.use(
+    "/audio/generated",
+    express.static(path.join(process.cwd(), "assets/audio"), {
+      dotfiles: "deny",
+      fallthrough: false,
+      index: false,
+      redirect: false,
+      setHeaders: setStaticAssetSecurityHeaders,
+    }),
+  );
 
   if (!resolvedAuthConfig.jwtSecret) {
     throw new Error("Invalid environment configuration: JWT_SECRET is required for auth setup");
@@ -103,6 +156,8 @@ export async function createNestApiApp(): Promise<{
     reviewerEmails: resolvedAuthConfig.reviewerEmails,
     adminEmails: resolvedAuthConfig.adminEmails,
   });
+
+  expressApp.use(expressErrorHandler);
 
   return { app, expressApp };
 }

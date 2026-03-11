@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { api } from "@shared/routes";
+import { api, parseSuccessResponse } from "@shared/routes";
 import { useLearningLanguage } from "@/hooks/use-language";
 import { apiClient, buildApiUrl } from "@/services/apiClient";
 
@@ -18,7 +18,7 @@ export function useLeaderboard(window: LeaderboardWindow, limit = 25) {
       const res = await apiClient.get(
         buildApiUrl(`${api.leaderboard.list.path}?${params.toString()}`),
       );
-      return api.leaderboard.list.responses[200].parse(res.data);
+      return parseSuccessResponse(api.leaderboard.list.responses[200], res.data);
     },
   });
 }

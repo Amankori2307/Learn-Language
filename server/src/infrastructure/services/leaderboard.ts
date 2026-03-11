@@ -16,15 +16,29 @@ export function computeLeaderboard(
 
   const rows: ILeaderboardEntry[] = users.map((user) => {
     const userAttempts = byUser.get(user.id) ?? [];
-    const correctAttempts = userAttempts.filter((a) => a.isCorrect).length;
-    const hardCorrectAttempts = userAttempts.filter(
-      (a) =>
-        a.isCorrect &&
-        (a.difficulty ?? LEADERBOARD_RULES.DEFAULT_WORD_DIFFICULTY) >=
-          LEADERBOARD_RULES.HARD_WORD_DIFFICULTY_THRESHOLD,
-    ).length;
+    let correctAttempts = 0;
+    let hardCorrectAttempts = 0;
+    const streakDates: Date[] = [];
+
+    for (const attempt of userAttempts) {
+      if (attempt.createdAt) {
+        streakDates.push(attempt.createdAt);
+      }
+      if (!attempt.isCorrect) {
+        continue;
+      }
+
+      correctAttempts += 1;
+      if (
+        (attempt.difficulty ?? LEADERBOARD_RULES.DEFAULT_WORD_DIFFICULTY) >=
+        LEADERBOARD_RULES.HARD_WORD_DIFFICULTY_THRESHOLD
+      ) {
+        hardCorrectAttempts += 1;
+      }
+    }
+
     const streak = computeStreak(
-      userAttempts.map((row) => row.createdAt).filter((date): date is Date => Boolean(date)),
+      streakDates,
     );
     const xp = computeXp({ correctAttempts, hardCorrectAttempts });
     const accuracy =

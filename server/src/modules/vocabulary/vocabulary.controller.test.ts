@@ -30,6 +30,27 @@ function createMockResponse() {
   return { response, state };
 }
 
+function success<T>(requestId: string, data: T) {
+  return {
+    success: true,
+    error: false,
+    data,
+    message: "OK",
+    requestId,
+  };
+}
+
+function error(requestId: string, code: string, message: string) {
+  return {
+    success: false,
+    error: true,
+    data: null,
+    code,
+    message,
+    requestId,
+  };
+}
+
 test("VocabularyApiController.listClusters forwards language query", async () => {
   let receivedLanguage: LanguageEnum | undefined;
   const expected = [{ id: 1, name: "Travel", wordCount: 14 }];
@@ -58,7 +79,7 @@ test("VocabularyApiController.listClusters forwards language query", async () =>
 
   assert.equal(receivedLanguage, LanguageEnum.TELUGU);
   assert.equal(state.statusCode, 200);
-  assert.deepEqual(state.body, expected);
+  assert.deepEqual(state.body, success("req-clusters", expected));
 });
 
 test("VocabularyApiController.getCluster maps not found errors", async () => {
@@ -88,9 +109,5 @@ test("VocabularyApiController.getCluster maps not found errors", async () => {
   await controller.getCluster(request, response, 99, { language: LanguageEnum.TELUGU });
 
   assert.equal(state.statusCode, 404);
-  assert.deepEqual(state.body, {
-    code: "NOT_FOUND",
-    message: "Cluster not found",
-    requestId: "req-cluster-detail",
-  });
+  assert.deepEqual(state.body, error("req-cluster-detail", "NOT_FOUND", "Cluster not found"));
 });

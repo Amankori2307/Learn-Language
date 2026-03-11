@@ -30,6 +30,27 @@ function createMockResponse() {
   return { response, state };
 }
 
+function success<T>(requestId: string, data: T) {
+  return {
+    success: true,
+    error: false,
+    data,
+    message: "OK",
+    requestId,
+  };
+}
+
+function error(requestId: string, code: string, message: string) {
+  return {
+    success: false,
+    error: true,
+    data: null,
+    code,
+    message,
+    requestId,
+  };
+}
+
 test("AnalyticsApiController.getLearningInsights forwards user id and language", async () => {
   let receivedUserId: string | null = null;
   let receivedLanguage: LanguageEnum | undefined;
@@ -67,7 +88,7 @@ test("AnalyticsApiController.getLearningInsights forwards user id and language",
   assert.equal(receivedUserId, "u-1");
   assert.equal(receivedLanguage, LanguageEnum.TELUGU);
   assert.equal(state.statusCode, 200);
-  assert.deepEqual(state.body, expected);
+  assert.deepEqual(state.body, success("req-learning", expected));
 });
 
 test("AnalyticsApiController.getAttemptHistory maps AppError from service", async () => {
@@ -101,9 +122,5 @@ test("AnalyticsApiController.getAttemptHistory maps AppError from service", asyn
   await controller.getAttemptHistory(request, response, { limit: 10, language: LanguageEnum.TELUGU });
 
   assert.equal(state.statusCode, 400);
-  assert.deepEqual(state.body, {
-    code: "VALIDATION_ERROR",
-    message: "Bad query",
-    requestId: "req-history",
-  });
+  assert.deepEqual(state.body, error("req-history", "VALIDATION_ERROR", "Bad query"));
 });

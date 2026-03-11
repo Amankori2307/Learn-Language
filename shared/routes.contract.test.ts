@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { api } from "./routes";
+import { api, errorSchemas } from "./routes";
 import {
   LanguageEnum,
   QuizDirectionEnum,
@@ -9,6 +9,16 @@ import {
   ReviewDisagreementStatusEnum,
   ReviewStatusEnum,
 } from "./domain/enums";
+
+function success<T>(data: T) {
+  return {
+    success: true as const,
+    error: false as const,
+    data,
+    message: "OK",
+    requestId: "req-contract",
+  };
+}
 
 test("quiz generate contract accepts expected payload", () => {
   const payload = [
@@ -24,8 +34,8 @@ test("quiz generate contract accepts expected payload", () => {
     },
   ];
 
-  const parsed = api.quiz.generate.responses[200].parse(payload);
-  assert.equal(parsed[0].wordId, 1);
+  const parsed = api.quiz.generate.responses[200].parse(success(payload));
+  assert.equal(parsed.data[0].wordId, 1);
 });
 
 test("quiz generate input accepts all supported quiz modes", () => {
@@ -109,8 +119,8 @@ test("quiz submit response contract requires examples array with triplet fields"
     },
   };
 
-  const parsed = api.quiz.submit.responses[200].parse(payload);
-  assert.equal(parsed.examples[0].meaning, "I drank water.");
+  const parsed = api.quiz.submit.responses[200].parse(success(payload));
+  assert.equal(parsed.data.examples[0].meaning, "I drank water.");
 });
 
 test("stats contract accepts direction metrics", () => {
@@ -128,8 +138,8 @@ test("stats contract accepts direction metrics", () => {
     recommendedDirection: QuizDirectionEnum.SOURCE_TO_TARGET,
   };
 
-  const parsed = api.stats.get.responses[200].parse(payload);
-  assert.equal(parsed.recommendedDirection, QuizDirectionEnum.SOURCE_TO_TARGET);
+  const parsed = api.stats.get.responses[200].parse(success(payload));
+  assert.equal(parsed.data.recommendedDirection, QuizDirectionEnum.SOURCE_TO_TARGET);
 });
 
 test("leaderboard contract accepts ranked entries", () => {
@@ -148,8 +158,8 @@ test("leaderboard contract accepts ranked entries", () => {
     },
   ];
 
-  const parsed = api.leaderboard.list.responses[200].parse(payload);
-  assert.equal(parsed[0].rank, 1);
+  const parsed = api.leaderboard.list.responses[200].parse(success(payload));
+  assert.equal(parsed.data[0].rank, 1);
 });
 
 test("attempt history contract accepts payload", () => {
@@ -172,17 +182,30 @@ test("attempt history contract accepts payload", () => {
     },
   ];
 
-  const parsed = api.attempts.history.responses[200].parse(payload);
-  assert.equal(parsed[0].wordId, 1);
+  const parsed = api.attempts.history.responses[200].parse(success(payload));
+  assert.equal(parsed.data[0].wordId, 1);
 });
 
 test("profile update contract rejects invalid avatar URL", () => {
   assert.throws(() => {
-    api.profile.update.input.parse({
+    api.auth.profile.update.input.parse({
       firstName: "Aman",
       profileImageUrl: "not-a-url",
     });
   });
+});
+
+test("shared error schemas accept rate-limited payloads", () => {
+  const parsed = errorSchemas.rateLimited.parse({
+    success: false,
+    error: true,
+    data: null,
+    code: "RATE_LIMITED",
+    message: "Too many requests",
+    requestId: "req-rate-limited",
+  });
+
+  assert.equal(parsed.code, "RATE_LIMITED");
 });
 
 test("audio resolve contract validates and accepts cached miss payload", () => {
@@ -192,12 +215,12 @@ test("audio resolve contract validates and accepts cached miss payload", () => {
   });
   assert.equal(input.language, LanguageEnum.TELUGU);
 
-  const output = api.audio.resolve.responses[200].parse({
+  const output = api.audio.resolve.responses[200].parse(success({
     audioUrl: null,
     source: "unavailable",
     cached: false,
-  });
-  assert.equal(output.cached, false);
+  }));
+  assert.equal(output.data.cached, false);
 });
 
 test("review queue contract accepts pending review payload", () => {
@@ -223,8 +246,8 @@ test("review queue contract accepts pending review payload", () => {
     },
   ];
 
-  const parsed = api.review.queue.responses[200].parse(payload);
-  assert.equal(parsed[0].reviewStatus, ReviewStatusEnum.PENDING_REVIEW);
+  const parsed = api.review.queue.responses[200].parse(success(payload));
+  assert.equal(parsed.data[0].reviewStatus, ReviewStatusEnum.PENDING_REVIEW);
 });
 
 test("review transition contract rejects invalid status", () => {
@@ -299,9 +322,9 @@ test("review history contract accepts payload", () => {
     ],
   };
 
-  const parsed = api.review.history.responses[200].parse(payload);
-  assert.equal(parsed.word.id, 1);
-  assert.equal(parsed.events.length, 1);
+  const parsed = api.review.history.responses[200].parse(success(payload));
+  assert.equal(parsed.data.word.id, 1);
+  assert.equal(parsed.data.events.length, 1);
 });
 
 test("review conflicts contract accepts flagged queue payload", () => {
@@ -322,8 +345,8 @@ test("review conflicts contract accepts flagged queue payload", () => {
       reviewedAt: "2026-02-21T12:00:00.000Z",
     },
   ];
-  const parsed = api.review.conflicts.responses[200].parse(payload);
-  assert.equal(parsed[0].disagreementStatus, ReviewDisagreementStatusEnum.FLAGGED);
+  const parsed = api.review.conflicts.responses[200].parse(success(payload));
+  assert.equal(parsed.data[0].disagreementStatus, ReviewDisagreementStatusEnum.FLAGGED);
 });
 
 test("review resolve conflict contract accepts payload", () => {
@@ -375,6 +398,6 @@ test("admin srs drift contract accepts alert summary payload", () => {
       },
     ],
   };
-  const parsed = api.admin.srsDrift.responses[200].parse(payload);
-  assert.equal(parsed.alerts[0].code, "overdue_growth");
+  const parsed = api.admin.srsDrift.responses[200].parse(success(payload));
+  assert.equal(parsed.data.alerts[0].code, "overdue_growth");
 });

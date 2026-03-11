@@ -1,10 +1,11 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { api } from "@shared/routes";
 import { userService, type IProfileUpdateInput } from "@/services/userService";
+import { trackAnalyticsEvent } from "@/lib/analytics";
 
 export function useProfile() {
   return useQuery({
-    queryKey: [api.profile.get.path],
+    queryKey: [api.auth.profile.get.path],
     queryFn: userService.getProfile,
   });
 }
@@ -16,9 +17,15 @@ export function useUpdateProfile() {
     mutationFn: async (payload: IProfileUpdateInput) => {
       return userService.updateProfile(payload);
     },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: [api.profile.get.path] });
-      queryClient.invalidateQueries({ queryKey: ["/auth/me"] });
+    onSuccess: (_result, payload) => {
+      queryClient.invalidateQueries({ queryKey: [api.auth.profile.get.path] });
+      queryClient.invalidateQueries({ queryKey: [api.auth.me.path] });
+      trackAnalyticsEvent("profile_updated", {
+        route: "/profile",
+        hasFirstName: Boolean(payload.firstName?.trim()),
+        hasLastName: Boolean(payload.lastName?.trim()),
+        hasAvatar: Boolean(payload.profileImageUrl?.trim()),
+      });
     },
   });
 }

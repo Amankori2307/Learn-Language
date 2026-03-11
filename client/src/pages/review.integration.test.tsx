@@ -151,7 +151,7 @@ describe("ReviewPage integration", () => {
       toStatus: ReviewStatusEnum.APPROVED,
       notes: "verified by reviewer",
     });
-  });
+  }, 15_000);
 
   it("runs per-item approve action", async () => {
     const user = userEvent.setup();

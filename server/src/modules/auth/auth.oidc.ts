@@ -47,9 +47,9 @@ const AUTH_TOKEN_TTL_MS = AUTH_SESSION_RULES.SESSION_TTL_MS;
 const AUTH_TOKEN_TTL_SEC = Math.floor(AUTH_TOKEN_TTL_MS / 1000);
 const OAUTH_SESSION_COOKIE = "learn_lang_oauth";
 const OAUTH_SESSION_TTL_MS = 10 * 60 * 1000;
-const AUTH_GOOGLE_ROUTE = "/auth/google";
-const AUTH_GOOGLE_CALLBACK_ROUTE = "/auth/google/callback";
-const AUTH_LOGOUT_ROUTE = "/auth/logout";
+const AUTH_GOOGLE_ROUTE = "/api/auth/google";
+const AUTH_GOOGLE_CALLBACK_ROUTE = "/api/auth/google/callback";
+const AUTH_LOGOUT_ROUTE = "/api/auth/logout";
 
 function getFrontendAuthRedirectWithToken(token: string): string {
   const base = authConfig.frontendBaseUrl?.trim();

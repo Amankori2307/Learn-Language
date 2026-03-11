@@ -3,6 +3,7 @@ import { useLocation } from "wouter";
 import { useAuth } from "@/hooks/use-auth";
 import { authService } from "@/services/authService";
 import { clearAuthTokenFromUrl, readAuthTokenFromUrl } from "@/services/authTokenStorage";
+import { trackAnalyticsEvent } from "@/lib/analytics";
 
 export function useAuthPageViewModel() {
   const { user, isLoading } = useAuth();
@@ -19,6 +20,10 @@ export function useAuthPageViewModel() {
 
     authService.setToken(tokenFromUrl);
     clearAuthTokenFromUrl();
+    trackAnalyticsEvent("auth_login_completed", {
+      route: "/auth",
+      source: "token_handoff",
+    });
     setLocation("/");
   }, [setLocation]);
 
@@ -30,6 +35,10 @@ export function useAuthPageViewModel() {
 
   const handleLogin = () => {
     setIsLoginPending(true);
+    trackAnalyticsEvent("auth_login_started", {
+      route: "/auth",
+      source: "google_oauth",
+    });
     window.location.href = authService.getLoginUrl();
   };
 

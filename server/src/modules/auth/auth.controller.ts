@@ -4,7 +4,8 @@ import { AuthService } from "./auth.service";
 import { AuthenticatedGuard } from "../../common/guards/authenticated.guard";
 import { UpdateProfileBodyDto } from "./auth.dto";
 import { AppError } from "../../common/errors/app-error";
-import { sendError } from "../../common/http";
+import { sendError, sendSuccess } from "../../common/http";
+import { appLogger } from "../../common/logger/logger";
 import { extractUserClaims, extractUserId } from "./auth.request-user";
 
 @Controller()
@@ -21,13 +22,13 @@ export class AuthApiController {
         return;
       }
       const user = await this.authService.getAuthUser(claims);
-      res.json(user);
+      sendSuccess(req, res, user);
     } catch (error) {
       this.handleError(req, res, error);
     }
   }
 
-  @Get("/api/profile")
+  @Get("/auth/profile")
   async getProfile(@Req() req: Request, @Res() res: Response) {
     try {
       const userId = extractUserId(req);
@@ -36,13 +37,13 @@ export class AuthApiController {
         return;
       }
       const profile = await this.authService.getProfile(userId);
-      res.json(profile);
+      sendSuccess(req, res, profile);
     } catch (error) {
       this.handleError(req, res, error);
     }
   }
 
-  @Patch("/api/profile")
+  @Patch("/auth/profile")
   async updateProfile(
     @Req() req: Request,
     @Res() res: Response,
@@ -55,7 +56,7 @@ export class AuthApiController {
         return;
       }
       const profile = await this.authService.updateProfile(userId, body);
-      res.json(profile);
+      sendSuccess(req, res, profile);
     } catch (error) {
       this.handleError(req, res, error);
     }
@@ -66,7 +67,12 @@ export class AuthApiController {
       sendError(req, res, error.status, error.code, error.message, error.details);
       return;
     }
-    console.error("[AuthApiController.handleError]", error);
+    appLogger.error("AuthApiController.handleError", {
+      requestId: req.requestId ?? "unknown",
+      path: req.path,
+      method: req.method,
+      error,
+    });
     sendError(req, res, 500, "INTERNAL_ERROR", "Internal Server Error");
   }
 }

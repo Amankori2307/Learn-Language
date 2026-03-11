@@ -1,9 +1,27 @@
 import type { Request, Response } from "express";
 import { appLogger } from "./logger/logger";
 
-export type ErrorCode = "UNAUTHORIZED" | "VALIDATION_ERROR" | "NOT_FOUND" | "INTERNAL_ERROR";
+export type ErrorCode =
+  | "UNAUTHORIZED"
+  | "FORBIDDEN"
+  | "VALIDATION_ERROR"
+  | "NOT_FOUND"
+  | "RATE_LIMITED"
+  | "INTERNAL_ERROR";
+
+export type SuccessEnvelope<T> = {
+  success: true;
+  error: false;
+  data: T;
+  message: string;
+  requestId: string;
+  meta?: Record<string, unknown>;
+};
 
 export type ErrorEnvelope = {
+  success: false;
+  error: true;
+  data: null;
   code: ErrorCode;
   message: string;
   details?: unknown;
@@ -24,6 +42,9 @@ export function sendError(
   details?: unknown,
 ) {
   const body: ErrorEnvelope = {
+    success: false,
+    error: true,
+    data: null,
     code,
     message,
     requestId: getRequestId(req),
@@ -34,6 +55,28 @@ export function sendError(
   }
 
   return res.status(status).json(body);
+}
+
+export function sendSuccess<T>(
+  req: Request,
+  res: Response,
+  data: T,
+  message: string = "OK",
+  meta?: Record<string, unknown>,
+) {
+  const body: SuccessEnvelope<T> = {
+    success: true,
+    error: false,
+    data,
+    message,
+    requestId: getRequestId(req),
+  };
+
+  if (meta) {
+    body.meta = meta;
+  }
+
+  return res.json(body);
 }
 
 export function logApiEvent(req: Request, event: string, payload: Record<string, unknown> = {}) {

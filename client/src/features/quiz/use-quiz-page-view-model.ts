@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useLocation, useSearch } from "wouter";
 import { QuizDirectionEnum, QuizModeEnum, QuizQuestionTypeEnum } from "@shared/domain/enums";
 import { useLearningLanguage } from "@/hooks/use-language";
@@ -9,6 +9,7 @@ import {
   QUIZ_RESPONSE_TIME_MIN_MS,
   QUIZ_WEAK_WORDS_THRESHOLD_PERCENT,
 } from "@/features/quiz/quiz.constants";
+import { trackAnalyticsEvent } from "@/lib/analytics";
 
 function parseMode(raw: string | null): QuizMode {
   const mode = raw as QuizMode | null;
@@ -38,6 +39,8 @@ export function useQuizPageViewModel() {
   const [isFinished, setIsFinished] = useState(false);
   const [questionStartedAt, setQuestionStartedAt] = useState<number>(Date.now());
   const [confidenceLevel, setConfidenceLevel] = useState<1 | 2 | 3>(QUIZ_DEFAULT_CONFIDENCE_LEVEL);
+  const trackedSessionKeyRef = useRef<string | null>(null);
+  const trackedCompletionKeyRef = useRef<string | null>(null);
 
   const currentQuestion = questions?.[currentIndex];
   const progress = questions ? (currentIndex / questions.length) * 100 : 0;
@@ -78,6 +81,17 @@ export function useQuizPageViewModel() {
         correct: prev.correct + (response.isCorrect ? 1 : 0),
         total: prev.total + 1,
       }));
+      trackAnalyticsEvent("quiz_answer_submitted", {
+        route: "/quiz",
+        language,
+        mode,
+        clusterId: clusterId ?? null,
+        wordId: currentQuestion.wordId,
+        questionType: currentQuestion.type,
+        direction,
+        responseTimeMs,
+        isCorrect: response.isCorrect,
+      });
     } catch (error) {
       console.error("Failed to submit answer:", error);
     }
@@ -99,7 +113,53 @@ export function useQuizPageViewModel() {
 
   useEffect(() => {
     resetSession();
+    trackedSessionKeyRef.current = null;
+    trackedCompletionKeyRef.current = null;
   }, [mode, clusterId, resetSession]);
+
+  useEffect(() => {
+    if (!questions || questions.length === 0 || isLoading) {
+      return;
+    }
+
+    const sessionKey = `${mode}:${clusterId ?? "none"}:${language}:${questions.length}`;
+    if (trackedSessionKeyRef.current === sessionKey) {
+      return;
+    }
+
+    trackedSessionKeyRef.current = sessionKey;
+    trackAnalyticsEvent("quiz_session_started", {
+      route: "/quiz",
+      language,
+      mode,
+      clusterId: clusterId ?? null,
+      total: questions.length,
+    });
+  }, [clusterId, isLoading, language, mode, questions]);
+
+  useEffect(() => {
+    if (!isFinished) {
+      return;
+    }
+
+    const completionKey = `${mode}:${clusterId ?? "none"}:${language}:${sessionStats.total}:${sessionStats.correct}`;
+    if (trackedCompletionKeyRef.current === completionKey) {
+      return;
+    }
+
+    trackedCompletionKeyRef.current = completionKey;
+    trackAnalyticsEvent("quiz_session_completed", {
+      route: "/quiz",
+      language,
+      mode,
+      clusterId: clusterId ?? null,
+      total: sessionStats.total,
+      correct: sessionStats.correct,
+      incorrect: Math.max(0, sessionStats.total - sessionStats.correct),
+      accuracyPercent:
+        sessionStats.total > 0 ? Math.round((sessionStats.correct / sessionStats.total) * 100) : 0,
+    });
+  }, [clusterId, isFinished, language, mode, sessionStats]);
 
   const completionMessage =
     mode === QuizModeEnum.NEW_WORDS

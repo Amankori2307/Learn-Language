@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { api, buildUrl } from "@shared/routes";
+import { api, buildUrl, parseSuccessResponse } from "@shared/routes";
 import { AxiosError } from "axios";
 import { apiClient, buildApiUrl } from "@/services/apiClient";
 
@@ -13,7 +13,7 @@ export function useWords(clusterId?: number) {
       if (clusterId) queryParams.append("clusterId", clusterId.toString());
 
       const res = await apiClient.get(buildApiUrl(`${url}?${queryParams.toString()}`));
-      return api.words.list.responses[200].parse(res.data);
+      return parseSuccessResponse(api.words.list.responses[200], res.data);
     },
   });
 }
@@ -25,7 +25,7 @@ export function useWord(id: number) {
       const url = buildUrl(api.words.get.path, { id });
       try {
         const res = await apiClient.get(buildApiUrl(url));
-        return api.words.get.responses[200].parse(res.data);
+        return parseSuccessResponse(api.words.get.responses[200], res.data);
       } catch (error) {
         if ((error as AxiosError).response?.status === 404) {
           return null;

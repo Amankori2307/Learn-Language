@@ -6,7 +6,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   return APP_PUBLIC_ROUTES.map((route) => ({
     url: `${APP_SITE_URL}${route}`,
     lastModified: now,
-    changeFrequency: route === "/" ? "daily" : "weekly",
-    priority: route === "/" ? 1 : 0.7,
+    changeFrequency: route === "/auth" ? "monthly" : "weekly",
+    priority: route === "/auth" ? 0.6 : 0.7,
   }));
 }

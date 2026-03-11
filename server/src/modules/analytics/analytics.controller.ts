@@ -9,25 +9,25 @@ import {
   WordBucketQueryDto,
 } from "./analytics.dto";
 import { AppError } from "../../common/errors/app-error";
-import { sendError } from "../../common/http";
+import { sendError, sendSuccess } from "../../common/http";
 
 @Controller()
 @UseGuards(AuthenticatedGuard)
 export class AnalyticsApiController {
   constructor(@Inject(AnalyticsService) private readonly analyticsService: AnalyticsService) {}
 
-  @Get("/api/stats")
+  @Get("/stats")
   async getStats(@Req() req: Request, @Res() res: Response, @Query() query: LanguageQueryDto) {
     try {
       const userId = (req.user as { claims: { sub: string } }).claims.sub;
       const stats = await this.analyticsService.getStats(userId, query.language);
-      res.json(stats);
+      sendSuccess(req, res, stats);
     } catch (error) {
       this.handleError(req, res, error);
     }
   }
 
-  @Get("/api/analytics/learning")
+  @Get("/analytics/learning")
   async getLearningInsights(
     @Req() req: Request,
     @Res() res: Response,
@@ -36,13 +36,13 @@ export class AnalyticsApiController {
     try {
       const userId = (req.user as { claims: { sub: string } }).claims.sub;
       const insights = await this.analyticsService.getLearningInsights(userId, query.language);
-      res.json(insights);
+      sendSuccess(req, res, insights);
     } catch (error) {
       this.handleError(req, res, error);
     }
   }
 
-  @Get("/api/analytics/word-buckets")
+  @Get("/analytics/word-buckets")
   async getWordBucket(
     @Req() req: Request,
     @Res() res: Response,
@@ -51,13 +51,13 @@ export class AnalyticsApiController {
     try {
       const userId = (req.user as { claims: { sub: string } }).claims.sub;
       const result = await this.analyticsService.getWordBucket(userId, query);
-      res.json(result);
+      sendSuccess(req, res, result);
     } catch (error) {
       this.handleError(req, res, error);
     }
   }
 
-  @Get("/api/attempts/history")
+  @Get("/attempts/history")
   async getAttemptHistory(
     @Req() req: Request,
     @Res() res: Response,
@@ -66,21 +66,21 @@ export class AnalyticsApiController {
     try {
       const userId = (req.user as { claims: { sub: string } }).claims.sub;
       const history = await this.analyticsService.getAttemptHistory(userId, query);
-      res.json(history);
+      sendSuccess(req, res, history);
     } catch (error) {
       this.handleError(req, res, error);
     }
   }
 
-  @Get("/api/leaderboard")
+  @Get("/leaderboard")
   async getLeaderboard(
     @Req() req: Request,
     @Res() res: Response,
     @Query() query: LeaderboardQueryDto,
-  ) {
+    ) {
     try {
       const leaderboard = await this.analyticsService.getLeaderboard(query);
-      res.json(leaderboard);
+      sendSuccess(req, res, leaderboard);
     } catch (error) {
       this.handleError(req, res, error);
     }

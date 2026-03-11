@@ -49,7 +49,7 @@ export const requireReviewer: RequestHandler = async (req, res, next) => {
       requestId: req.requestId ?? "unknown",
       role: role ?? null,
     });
-    return sendError(req, res, 403, "UNAUTHORIZED", "Reviewer access required");
+    return sendError(req, res, 403, "FORBIDDEN", "Reviewer access required");
   }
   appLogger.debug("auth.permissions.requireReviewer.end", {
     requestId: req.requestId ?? "unknown",

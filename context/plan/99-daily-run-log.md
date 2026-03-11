@@ -144,6 +144,95 @@ Next task ID: -
 
 ---
 
+Date: 2026-03-11  
+Session owner: Codex  
+Last completed task ID: P10-009  
+Current in-progress task ID: P10-010  
+Next task ID: P10-010
+
+## Current state
+
+- Phase 9 remains complete and closed.
+- Phase 10 execution plan now exists in [80-phase-10-platform-hardening-and-product-intelligence.md](/Users/aman/Projects/personal-projects/Learn-Language/context/plan/80-phase-10-platform-hardening-and-product-intelligence.md).
+- `P10-001` is complete via the current-state inventory in [platform-hardening-baseline.md](/Users/aman/Projects/personal-projects/Learn-Language/documentation/platform-hardening-baseline.md).
+- `P10-002` is complete:
+  - shared route contracts now express success/error envelopes
+  - backend success responses now emit a canonical envelope through `sendSuccess(...)`
+  - shared error responses now include `success`, `error`, and `data: null`
+  - frontend services and hooks now unwrap the envelope through the shared route helper instead of parsing raw payloads directly
+  - controller and route-contract tests now assert the envelope shape
+  - full `pnpm run lint` passes on the current branch state after the migration
+- The baseline records the current platform seams before implementation:
+  - success responses are raw payloads while errors use a shared error envelope
+  - most API routes hardcode `/api/...` in controller decorators, but auth still exposes `/auth/*` routes outside the API convention
+  - Winston, Morgan, Nest logging, and request IDs already exist, but the log schema is inconsistent and redaction is not centralized
+  - no product analytics SDK or shared event taxonomy is currently implemented
+  - security has CORS, auth cookies, validation, and guards in place, but lacks Helmet, rate limiting, and a centralized production-safe exception strategy
+  - production currently publishes both frontend `3000` and backend `5001` directly in [docker-compose.prod.yml](/Users/aman/Projects/personal-projects/Learn-Language/deploy/production/docker-compose.prod.yml)
+  - SEO has base metadata, sitemap, robots, and structured data, but current sitemap/robots/public-route assumptions are inconsistent
+- `P10-003` is complete:
+  - Nest now owns a real global `/api` prefix in [main.ts](/Users/aman/Projects/personal-projects/Learn-Language/server/src/main.ts) instead of hardcoding `/api` in every controller decorator
+  - controller route decorators were normalized to domain-relative paths under the global prefix
+  - auth endpoints now live under `/api/auth/*`, including `me`, `profile`, `google`, `google/callback`, and `logout`
+  - shared route contracts, frontend services/hooks, smoke coverage, and auth tests now use the canonical `/api/auth/*` taxonomy
+  - full `pnpm run lint` passes on the current branch state after the route migration
+- `P10-004` is complete:
+  - backend logs now serialize as structured JSON lines through [logger.ts](/Users/aman/Projects/personal-projects/Learn-Language/server/src/common/logger/logger.ts)
+  - request logging now emits structured `http.request.completed` and `http.request.aborted` events with `requestId`, method, path, status, duration, and optional `userId`
+  - recursive redaction now masks auth headers, cookies, tokens, secrets, passwords, and API keys before logs are emitted
+  - the last `console.error` fallback was removed from auth controller error handling
+  - observability guidance now exists in [observability-contract.md](/Users/aman/Projects/personal-projects/Learn-Language/documentation/observability-contract.md)
+  - focused logger tests now protect redaction, circular-safe serialization, and request log metadata extraction
+  - full `pnpm run lint` passes on the current branch state after the observability work
+- `P10-005` is complete:
+  - analytics provider abstraction now exists in [analytics.ts](/Users/aman/Projects/personal-projects/Learn-Language/client/src/lib/analytics.ts)
+  - analytics taxonomy and ownership guidance now exist in [analytics-event-taxonomy.md](/Users/aman/Projects/personal-projects/Learn-Language/documentation/analytics-event-taxonomy.md)
+  - auth, quiz, clusters, review, and profile flows now emit controlled client analytics events through the shared adapter
+- `P10-006` is complete:
+  - backend now applies baseline security headers, no-store auth caching, targeted rate limits, hardened static file serving, and production-safe Express error normalization
+  - reviewer authorization now returns `403 FORBIDDEN` consistently
+  - the current hardening baseline is documented in [security-hardening-contract.md](/Users/aman/Projects/personal-projects/Learn-Language/documentation/security-hardening-contract.md)
+  - full `pnpm run lint` passes after the security slice
+- `P10-007` is complete:
+  - production compose now binds frontend/backend ports to loopback by default instead of publishing them on all interfaces
+  - runtime port ownership is now env-driven through host/container bind variables
+  - backend app config now resolves `BACKEND_PORT` consistently with bootstrap
+  - the current topology is documented in [runtime-topology-contract.md](/Users/aman/Projects/personal-projects/Learn-Language/documentation/runtime-topology-contract.md)
+  - full `pnpm run lint` passes after the runtime hardening slice
+- `P10-008` is now in progress:
+  - initial performance findings are documented in [performance-baseline.md](/Users/aman/Projects/personal-projects/Learn-Language/documentation/performance-baseline.md)
+  - production frontend build completed successfully and exposed a metadata warning to fold into later SEO work
+  - backend hotspot review identified quiz generation, leaderboard aggregation, and learning-insights aggregation as the highest-value candidates
+  - the first optimization slice is complete: quiz generation now narrows word-cluster link loading to the active distractor pool instead of scanning all links per request
+  - the second optimization slice is complete: independent analytics storage reads now run concurrently where possible, and leaderboard computation now reduces repeated per-user filtering work
+  - the third optimization slice is complete: aggregate analytics reads now use a short-lived service-level cache
+  - the fourth optimization slice is complete: learning-insights category and cluster aggregation now use grouped SQL queries instead of row-by-row in-memory accumulation
+  - full `pnpm run lint` passes after the completed performance work
+- `P10-008` is now complete.
+- `P10-009` is now complete:
+  - public route classification now distinguishes the single crawlable auth surface from the authenticated SPA routes
+  - route-aware metadata now lives in the app catch-all route and emits `noindex` for protected pages
+  - sitemap and robots now align with the actual public route map
+  - the misleading protected-route `SearchAction` was removed from structured data
+  - the Next metadata `themeColor` warning was fixed by moving it into viewport export
+  - the crawlability and submission runbook now exists in [seo-crawlability-contract.md](/Users/aman/Projects/personal-projects/Learn-Language/documentation/seo-crawlability-contract.md)
+  - the full `pnpm run lint` gate passes after the SEO slice
+  - two unrelated slow UI integration tests now carry explicit 15s per-test timeouts so the gate reflects real regressions instead of runner slowness
+- The active implementation task is now `P10-010`.
+
+## Current blockers
+
+- No hard blocker found for `P10-010`.
+- The main execution risk is making the anti-duplication guidance enforceable enough to matter without creating noisy or brittle checks.
+
+## Immediate next actions
+
+- extend the code guidelines with explicit ownership rules for shared types, enums, and constants
+- decide the lightest-weight enforcement mechanism that is useful in this repo
+- identify the highest-value existing duplication hotspots without mixing broad cleanup into unrelated work
+
+---
+
 Date: 2026-02-21  
 Session owner: Codex  
 Last completed task ID: P7-003  

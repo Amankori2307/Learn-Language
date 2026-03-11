@@ -1,38 +1,127 @@
 import { createLogger, format, transports } from "winston";
-import morgan from "morgan";
-import type { Request, Response } from "express";
+import type { NextFunction, Request, Response } from "express";
 
 const isProduction = process.env.NODE_ENV === "production";
+const REDACTED = "[redacted]";
+const SENSITIVE_KEY_PATTERN =
+  /authorization|cookie|set-cookie|token|secret|password|api[-_]?key/i;
+
+export function redactLogValue(value: unknown, key?: string): unknown {
+  if (key && SENSITIVE_KEY_PATTERN.test(key)) {
+    return REDACTED;
+  }
+
+  if (Array.isArray(value)) {
+    return value.map((entry) => redactLogValue(entry));
+  }
+
+  if (value && typeof value === "object") {
+    if (value instanceof Error) {
+      return {
+        name: value.name,
+        message: value.message,
+        stack: value.stack,
+      };
+    }
+
+    return Object.fromEntries(
+      Object.entries(value).map(([entryKey, entryValue]) => [
+        entryKey,
+        redactLogValue(entryValue, entryKey),
+      ]),
+    );
+  }
+
+  return value;
+}
+
+export function safeJsonStringify(value: unknown): string {
+  const seen = new WeakSet<object>();
+
+  return JSON.stringify(value, (_key, currentValue: unknown) => {
+    if (currentValue && typeof currentValue === "object") {
+      if (seen.has(currentValue as object)) {
+        return "[circular]";
+      }
+      seen.add(currentValue as object);
+    }
+    return currentValue;
+  });
+}
+
+const sanitizeLogFormat = format((info) => {
+  Object.entries(info).forEach(([key, value]) => {
+    info[key] = redactLogValue(value, key);
+  });
+  return info;
+});
 
 export const appLogger = createLogger({
   level: isProduction ? "info" : "debug",
   format: format.combine(
     format.timestamp(),
     format.errors({ stack: true }),
+    sanitizeLogFormat(),
     format.printf(({ level, message, timestamp, stack, ...meta }) => {
-      const details = Object.keys(meta).length > 0 ? ` ${JSON.stringify(meta)}` : "";
-      const errorStack = stack ? `\n${stack}` : "";
-      return `${timestamp} [${level}] ${message}${details}${errorStack}`;
+      return safeJsonStringify({
+        timestamp,
+        level,
+        message,
+        ...(stack ? { stack } : {}),
+        ...meta,
+      });
     }),
   ),
   transports: [new transports.Console()],
 });
 
-export const httpRequestLogger = morgan(
-  (tokens, req: Request, res: Response) => {
-    return [
-      tokens.method(req, res),
-      tokens.url(req, res),
-      tokens.status(req, res),
-      tokens.res(req, res, "content-length") ?? "-",
-      "-",
-      `${tokens["response-time"](req, res)} ms`,
-      `reqId=${(req as Request & { requestId?: string }).requestId ?? "unknown"}`,
-    ].join(" ");
-  },
-  {
-    stream: {
-      write: (message: string) => appLogger.info(message.trim()),
-    },
-  },
-);
+function getUserId(req: Request): string | null {
+  const user = req.user as { claims?: { sub?: string } } | undefined;
+  return user?.claims?.sub ?? null;
+}
+
+export function buildHttpRequestLogEntry(req: Request, res: Response, durationMs: number) {
+  const requestId = (req as Request & { requestId?: string }).requestId ?? "unknown";
+  return {
+    event: "http.request.completed",
+    requestId,
+    method: req.method,
+    path: req.path,
+    url: req.originalUrl,
+    statusCode: res.statusCode,
+    durationMs: Number(durationMs.toFixed(2)),
+    contentLength: res.getHeader("content-length") ?? null,
+    userId: getUserId(req),
+    ip: req.ip,
+  };
+}
+
+export function httpRequestLogger(req: Request, res: Response, next: NextFunction) {
+  const startedAt = process.hrtime.bigint();
+  const requestId = (req as Request & { requestId?: string }).requestId ?? "unknown";
+
+  res.on("finish", () => {
+    const durationMs = Number(process.hrtime.bigint() - startedAt) / 1_000_000;
+    appLogger.info("http.request.completed", buildHttpRequestLogEntry(req, res, durationMs));
+  });
+
+  res.on("close", () => {
+    if (res.writableEnded) {
+      return;
+    }
+
+    const durationMs = Number(process.hrtime.bigint() - startedAt) / 1_000_000;
+    appLogger.warn("http.request.aborted", {
+      event: "http.request.aborted",
+      requestId,
+      method: req.method,
+      path: req.path,
+      url: req.originalUrl,
+      durationMs: Number(durationMs.toFixed(2)),
+      userId: getUserId(req),
+      ip: req.ip,
+    });
+  });
+
+  next();
+}

@@ -25,24 +25,24 @@ import {
   ReviewTransitionBodyDto,
 } from "./review.dto";
 import { AppError } from "../../common/errors/app-error";
-import { sendError } from "../../common/http";
+import { sendError, sendSuccess } from "../../common/http";
 
 @Controller()
 export class ReviewApiController {
   constructor(@Inject(ReviewService) private readonly reviewService: ReviewService) {}
 
-  @Get("/api/review/queue")
+  @Get("/review/queue")
   @UseGuards(AuthenticatedGuard, ReviewerGuard)
   async getQueue(@Req() req: Request, @Res() res: Response, @Query() query: ReviewQueueQueryDto) {
     try {
       const result = await this.reviewService.getQueue(query);
-      res.json(result);
+      sendSuccess(req, res, result);
     } catch (error) {
       this.handleError(req, res, error);
     }
   }
 
-  @Get("/api/review/conflicts")
+  @Get("/review/conflicts")
   @UseGuards(AuthenticatedGuard, ReviewerGuard)
   async getConflicts(
     @Req() req: Request,
@@ -51,30 +51,30 @@ export class ReviewApiController {
   ) {
     try {
       const result = await this.reviewService.getConflicts(query);
-      res.json(result);
+      sendSuccess(req, res, result);
     } catch (error) {
       this.handleError(req, res, error);
     }
   }
 
-  @Patch("/api/review/words/:id")
+  @Patch("/review/words/:id")
   @UseGuards(AuthenticatedGuard, ReviewerGuard)
   async transition(
     @Req() req: Request,
     @Res() res: Response,
     @Param("id", ParseIntPipe) id: number,
     @Body() body: ReviewTransitionBodyDto,
-  ) {
+    ) {
     try {
       const reviewerId = (req.user as { claims: { sub: string } }).claims.sub;
       const result = await this.reviewService.transition(id, reviewerId, body);
-      res.json(result);
+      sendSuccess(req, res, result);
     } catch (error) {
       this.handleError(req, res, error);
     }
   }
 
-  @Patch("/api/review/words/bulk")
+  @Patch("/review/words/bulk")
   @UseGuards(AuthenticatedGuard, ReviewerGuard)
   async bulkTransition(
     @Req() req: Request,
@@ -84,13 +84,13 @@ export class ReviewApiController {
     try {
       const reviewerId = (req.user as { claims: { sub: string } }).claims.sub;
       const result = await this.reviewService.bulkTransition(reviewerId, body);
-      res.json(result);
+      sendSuccess(req, res, result);
     } catch (error) {
       this.handleError(req, res, error);
     }
   }
 
-  @Patch("/api/review/words/:id/resolve-conflict")
+  @Patch("/review/words/:id/resolve-conflict")
   @UseGuards(AuthenticatedGuard, ReviewerGuard)
   async resolveConflict(
     @Req() req: Request,
@@ -101,13 +101,13 @@ export class ReviewApiController {
     try {
       const reviewerId = (req.user as { claims: { sub: string } }).claims.sub;
       const result = await this.reviewService.resolveConflict(id, reviewerId, body);
-      res.json(result);
+      sendSuccess(req, res, result);
     } catch (error) {
       this.handleError(req, res, error);
     }
   }
 
-  @Get("/api/review/words/:id/history")
+  @Get("/review/words/:id/history")
   @UseGuards(AuthenticatedGuard, ReviewerGuard)
   async getHistory(
     @Req() req: Request,
@@ -116,13 +116,13 @@ export class ReviewApiController {
   ) {
     try {
       const result = await this.reviewService.getHistory(id);
-      res.json(result);
+      sendSuccess(req, res, result);
     } catch (error) {
       this.handleError(req, res, error);
     }
   }
 
-  @Post("/api/review/words")
+  @Post("/review/words")
   @UseGuards(AuthenticatedGuard)
   async submitDraft(
     @Req() req: Request,
@@ -132,7 +132,7 @@ export class ReviewApiController {
     try {
       const submittedBy = (req.user as { claims: { sub: string } }).claims.sub;
       const result = await this.reviewService.submitDraft(submittedBy, body);
-      res.json(result);
+      sendSuccess(req, res, result);
     } catch (error) {
       this.handleError(req, res, error);
     }

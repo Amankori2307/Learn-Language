@@ -2,6 +2,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { api } from "@shared/routes";
 import { LanguageEnum, PartOfSpeechEnum, VocabularyTagEnum } from "@shared/domain/enums";
 import { reviewService, type ReviewStatus } from "@/services/reviewService";
+import { trackAnalyticsEvent } from "@/lib/analytics";
 
 export type { ReviewStatus };
 
@@ -25,9 +26,14 @@ export function useTransitionReview() {
   return useMutation({
     mutationFn: (payload: { id: number; toStatus: ReviewStatus; notes?: string }) =>
       reviewService.transition(payload),
-    onSuccess: () => {
+    onSuccess: (_result, payload) => {
       queryClient.invalidateQueries({ queryKey: [api.review.queue.path] });
       queryClient.invalidateQueries({ queryKey: [api.review.history.path] });
+      trackAnalyticsEvent("review_transition_completed", {
+        route: "/review",
+        wordId: payload.id,
+        toStatus: payload.toStatus,
+      });
     },
   });
 }
@@ -37,9 +43,14 @@ export function useBulkTransitionReview() {
   return useMutation({
     mutationFn: (payload: { ids: number[]; toStatus: ReviewStatus; notes?: string }) =>
       reviewService.bulkTransition(payload),
-    onSuccess: () => {
+    onSuccess: (_result, payload) => {
       queryClient.invalidateQueries({ queryKey: [api.review.queue.path] });
       queryClient.invalidateQueries({ queryKey: [api.review.history.path] });
+      trackAnalyticsEvent("review_bulk_transition_completed", {
+        route: "/review",
+        count: payload.ids.length,
+        toStatus: payload.toStatus,
+      });
     },
   });
 }
@@ -66,8 +77,14 @@ export function useCreateReviewDraft() {
         difficulty: number;
       }>;
     }) => reviewService.createDraft(payload),
-    onSuccess: () => {
+    onSuccess: (result, payload) => {
       queryClient.invalidateQueries({ queryKey: [api.review.queue.path] });
+      trackAnalyticsEvent("review_draft_created", {
+        route: "/review/add",
+        language: payload.language,
+        examplesCreated: result.examplesCreated,
+        clusterCount: payload.clusterIds?.length ?? 0,
+      });
     },
   });
 }

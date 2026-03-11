@@ -1,9 +1,10 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { api } from "@shared/routes";
 import type { User } from "@shared/models/auth";
 import { AUTH_QUERY_RULES } from "./auth.constants";
 import { authService } from "@/services/authService";
 
-const AUTH_ME_QUERY_KEY = ["/auth/me"] as const;
+const AUTH_ME_QUERY_KEY = [api.auth.me.path] as const;
 
 async function fetchUser(): Promise<User | null> {
   return authService.getCurrentUser();

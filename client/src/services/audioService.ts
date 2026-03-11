@@ -1,5 +1,5 @@
 import { LanguageEnum } from "@shared/domain/enums";
-import { api } from "@shared/routes";
+import { api, parseSuccessResponse } from "@shared/routes";
 import { apiClient, buildApiUrl } from "./apiClient";
 
 export async function resolveAudio(input: {
@@ -17,6 +17,6 @@ export async function resolveAudio(input: {
     },
   });
 
-  const parsed = api.audio.resolve.responses[200].parse(response.data);
+  const parsed = parseSuccessResponse(api.audio.resolve.responses[200], response.data);
   return parsed.audioUrl;
 }

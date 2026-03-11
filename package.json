@@ -9,7 +9,7 @@
   },
   "scripts": {
     "dev": "pnpm run dev:frontend",
-    "dev:frontend": "NEXT_PUBLIC_API_BASE_URL=${NEXT_PUBLIC_API_BASE_URL:-http://localhost:5001} next dev --webpack -p 3000",
+    "dev:frontend": "NEXT_PUBLIC_API_BASE_URL=${NEXT_PUBLIC_API_BASE_URL:-http://localhost:5001} next dev --webpack -p ${FRONTEND_PORT:-3000}",
     "dev:backend": "APP_ENV=${APP_ENV:-development} BACKEND_PORT=${BACKEND_PORT:-5001} pnpm run db:wait && APP_ENV=${APP_ENV:-development} BACKEND_PORT=${BACKEND_PORT:-5001} node --import tsx server/src/main.ts",
     "dev:backend:debug": "APP_ENV=${APP_ENV:-development} BACKEND_PORT=${BACKEND_PORT:-5001} pnpm run db:wait && APP_ENV=${APP_ENV:-development} BACKEND_PORT=${BACKEND_PORT:-5001} node --inspect=0.0.0.0:${DEBUG_PORT:-9229} --import tsx server/src/main.ts",
     "dev:backend:debug:break": "APP_ENV=${APP_ENV:-development} BACKEND_PORT=${BACKEND_PORT:-5001} pnpm run db:wait && APP_ENV=${APP_ENV:-development} BACKEND_PORT=${BACKEND_PORT:-5001} node --inspect-brk=0.0.0.0:${DEBUG_PORT:-9229} --import tsx server/src/main.ts",

@@ -80,7 +80,7 @@ export interface IStorage {
   ): Promise<(Cluster & { words: Word[] }) | undefined>;
   createCluster(cluster: CreateClusterRequest): Promise<Cluster>;
   addWordToCluster(wordId: number, clusterId: number): Promise<void>;
-  getWordClusterLinks(): Promise<Array<{ wordId: number; clusterId: number }>>;
+  getWordClusterLinks(wordIds?: number[]): Promise<Array<{ wordId: number; clusterId: number }>>;
   getWordExamples(
     wordId: number,
     language?: LanguageEnum,
@@ -379,20 +379,22 @@ export class DatabaseStorage implements IStorage {
   }
 
   async getClusters(language?: LanguageEnum): Promise<Array<Cluster & { wordCount: number }>> {
-    const allClusters = await db.select().from(clusters);
     const countWhere = language
       ? and(eq(words.language, language), eq(words.reviewStatus, ReviewStatusEnum.APPROVED))
       : eq(words.reviewStatus, ReviewStatusEnum.APPROVED);
 
-    const counts = await db
-      .select({
-        clusterId: wordClusters.clusterId,
-        count: sql<number>`count(*)`,
-      })
-      .from(wordClusters)
-      .innerJoin(words, eq(wordClusters.wordId, words.id))
-      .where(countWhere)
-      .groupBy(wordClusters.clusterId);
+    const [allClusters, counts] = await Promise.all([
+      db.select().from(clusters),
+      db
+        .select({
+          clusterId: wordClusters.clusterId,
+          count: sql<number>`count(*)`,
+        })
+        .from(wordClusters)
+        .innerJoin(words, eq(wordClusters.wordId, words.id))
+        .where(countWhere)
+        .groupBy(wordClusters.clusterId),
+    ]);
 
     const countByClusterId = new Map(counts.map((row) => [row.clusterId, Number(row.count)]));
     const enriched = allClusters.map((cluster) => ({
@@ -445,10 +447,20 @@ export class DatabaseStorage implements IStorage {
     await db.insert(wordClusters).values({ wordId, clusterId }).onConflictDoNothing();
   }
 
-  async getWordClusterLinks(): Promise<Array<{ wordId: number; clusterId: number }>> {
-    return db
+  async getWordClusterLinks(wordIds?: number[]): Promise<Array<{ wordId: number; clusterId: number }>> {
+    if (wordIds && wordIds.length === 0) {
+      return [];
+    }
+
+    const baseQuery = db
       .select({ wordId: wordClusters.wordId, clusterId: wordClusters.clusterId })
       .from(wordClusters);
+
+    if (!wordIds) {
+      return baseQuery;
+    }
+
+    return baseQuery.where(inArray(wordClusters.wordId, wordIds));
   }
 
   async getWordExamples(
@@ -689,7 +701,6 @@ export class DatabaseStorage implements IStorage {
       from.setDate(from.getDate() - 7);
     }
 
-    const allUsers = await db.select().from(users);
     const attemptsQuery = db
       .select({
         userId: quizAttempts.userId,
@@ -700,14 +711,18 @@ export class DatabaseStorage implements IStorage {
       .from(quizAttempts)
       .leftJoin(words, eq(quizAttempts.wordId, words.id));
 
-    const attempts =
+    const attemptsPromise =
       window === "all_time"
-        ? await (language ? attemptsQuery.where(eq(words.language, language)) : attemptsQuery)
-        : await (language
-            ? attemptsQuery.where(
-                and(sql`${quizAttempts.createdAt} >= ${from}`, eq(words.language, language)),
-              )
-            : attemptsQuery.where(sql`${quizAttempts.createdAt} >= ${from}`));
+        ? language
+          ? attemptsQuery.where(eq(words.language, language))
+          : attemptsQuery
+        : language
+          ? attemptsQuery.where(
+              and(sql`${quizAttempts.createdAt} >= ${from}`, eq(words.language, language)),
+            )
+          : attemptsQuery.where(sql`${quizAttempts.createdAt} >= ${from}`);
+
+    const [allUsers, attempts] = await Promise.all([db.select().from(users), attemptsPromise]);
 
     return computeLeaderboard(
       allUsers.map((u) => ({
@@ -1125,47 +1140,34 @@ export class DatabaseStorage implements IStorage {
       averageStrength: number;
     }>;
   }> {
-    const attemptRows = language
-      ? await db
+    const categoryStatsRowsPromise = language
+      ? db
           .select({
-            wordId: quizAttempts.wordId,
-            isCorrect: quizAttempts.isCorrect,
-            partOfSpeech: words.partOfSpeech,
+            category: words.partOfSpeech,
+            attempts: sql<number>`count(*)`,
+            correct: sql<number>`sum(case when ${quizAttempts.isCorrect} then 1 else 0 end)`,
           })
           .from(quizAttempts)
           .innerJoin(words, eq(quizAttempts.wordId, words.id))
           .where(and(eq(quizAttempts.userId, userId), eq(words.language, language)))
-      : await db
+          .groupBy(words.partOfSpeech)
+      : db
           .select({
-            wordId: quizAttempts.wordId,
-            isCorrect: quizAttempts.isCorrect,
-            partOfSpeech: words.partOfSpeech,
+            category: words.partOfSpeech,
+            attempts: sql<number>`count(*)`,
+            correct: sql<number>`sum(case when ${quizAttempts.isCorrect} then 1 else 0 end)`,
           })
           .from(quizAttempts)
           .innerJoin(words, eq(quizAttempts.wordId, words.id))
-          .where(eq(quizAttempts.userId, userId));
+          .where(eq(quizAttempts.userId, userId))
+          .groupBy(words.partOfSpeech);
 
-    const wordAttemptMap = new Map<number, { attempts: number; correct: number }>();
-    const categoryMap = new Map<string, { attempts: number; correct: number }>();
-    for (const row of attemptRows) {
-      const existingWord = wordAttemptMap.get(row.wordId) ?? { attempts: 0, correct: 0 };
-      existingWord.attempts += 1;
-      existingWord.correct += row.isCorrect ? 1 : 0;
-      wordAttemptMap.set(row.wordId, existingWord);
-
-      const category = row.partOfSpeech || "unknown";
-      const existingCategory = categoryMap.get(category) ?? { attempts: 0, correct: 0 };
-      existingCategory.attempts += 1;
-      existingCategory.correct += row.isCorrect ? 1 : 0;
-      categoryMap.set(category, existingCategory);
-    }
-
-    const clusterRows = language
-      ? await db
+    const clusterCountRowsPromise = language
+      ? db
           .select({
             clusterId: clusters.id,
             name: clusters.name,
-            wordId: wordClusters.wordId,
+            wordCount: sql<number>`count(distinct ${wordClusters.wordId})`,
           })
           .from(wordClusters)
           .innerJoin(clusters, eq(wordClusters.clusterId, clusters.id))
@@ -1173,44 +1175,53 @@ export class DatabaseStorage implements IStorage {
           .where(
             and(eq(words.language, language), eq(words.reviewStatus, ReviewStatusEnum.APPROVED)),
           )
-      : await db
+          .groupBy(clusters.id, clusters.name)
+      : db
           .select({
             clusterId: clusters.id,
             name: clusters.name,
-            wordId: wordClusters.wordId,
+            wordCount: sql<number>`count(distinct ${wordClusters.wordId})`,
           })
           .from(wordClusters)
           .innerJoin(clusters, eq(wordClusters.clusterId, clusters.id))
           .innerJoin(words, eq(wordClusters.wordId, words.id))
-          .where(eq(words.reviewStatus, ReviewStatusEnum.APPROVED));
+          .where(eq(words.reviewStatus, ReviewStatusEnum.APPROVED))
+          .groupBy(clusters.id, clusters.name);
 
-    const clusterMap = new Map<
-      number,
-      {
-        name: string;
-        wordIds: Set<number>;
-        attempts: number;
-        correct: number;
-      }
-    >();
-    for (const row of clusterRows) {
-      const cluster = clusterMap.get(row.clusterId) ?? {
-        name: row.name,
-        wordIds: new Set<number>(),
-        attempts: 0,
-        correct: 0,
-      };
-      cluster.wordIds.add(row.wordId);
-      const attemptStats = wordAttemptMap.get(row.wordId);
-      if (attemptStats) {
-        cluster.attempts += attemptStats.attempts;
-        cluster.correct += attemptStats.correct;
-      }
-      clusterMap.set(row.clusterId, cluster);
-    }
+    const clusterAttemptRowsPromise = language
+      ? db
+          .select({
+            clusterId: clusters.id,
+            attempts: sql<number>`count(*)`,
+            correct: sql<number>`sum(case when ${quizAttempts.isCorrect} then 1 else 0 end)`,
+          })
+          .from(quizAttempts)
+          .innerJoin(words, eq(quizAttempts.wordId, words.id))
+          .innerJoin(wordClusters, eq(wordClusters.wordId, words.id))
+          .innerJoin(clusters, eq(wordClusters.clusterId, clusters.id))
+          .where(
+            and(
+              eq(quizAttempts.userId, userId),
+              eq(words.language, language),
+              eq(words.reviewStatus, ReviewStatusEnum.APPROVED),
+            ),
+          )
+          .groupBy(clusters.id)
+      : db
+          .select({
+            clusterId: clusters.id,
+            attempts: sql<number>`count(*)`,
+            correct: sql<number>`sum(case when ${quizAttempts.isCorrect} then 1 else 0 end)`,
+          })
+          .from(quizAttempts)
+          .innerJoin(words, eq(quizAttempts.wordId, words.id))
+          .innerJoin(wordClusters, eq(wordClusters.wordId, words.id))
+          .innerJoin(clusters, eq(wordClusters.clusterId, clusters.id))
+          .where(and(eq(quizAttempts.userId, userId), eq(words.reviewStatus, ReviewStatusEnum.APPROVED)))
+          .groupBy(clusters.id);
 
-    const progressRows = language
-      ? await db
+    const progressRowsPromise = language
+      ? db
           .select({
             wordId: userWordProgress.wordId,
             wrongCount: userWordProgress.wrongCount,
@@ -1224,7 +1235,7 @@ export class DatabaseStorage implements IStorage {
           .from(userWordProgress)
           .innerJoin(words, eq(userWordProgress.wordId, words.id))
           .where(and(eq(userWordProgress.userId, userId), eq(words.language, language)))
-      : await db
+      : db
           .select({
             wordId: userWordProgress.wordId,
             wrongCount: userWordProgress.wrongCount,
@@ -1239,31 +1250,55 @@ export class DatabaseStorage implements IStorage {
           .innerJoin(words, eq(userWordProgress.wordId, words.id))
           .where(eq(userWordProgress.userId, userId));
 
-    const clustersInsight = Array.from(clusterMap.entries())
-      .map(([clusterId, cluster]) => ({
-        clusterId,
-        name: cluster.name,
-        wordCount: cluster.wordIds.size,
-        attempts: cluster.attempts,
-        accuracy:
-          cluster.attempts > 0
-            ? Number(
-                ((cluster.correct / cluster.attempts) * STORAGE_RULES.PERCENT_MULTIPLIER).toFixed(
-                  STORAGE_RULES.ONE_DECIMAL_PLACE,
-                ),
-              )
-            : 0,
-      }))
+    const [categoryStatsRows, clusterCountRows, clusterAttemptRows, progressRows] = await Promise.all([
+      categoryStatsRowsPromise,
+      clusterCountRowsPromise,
+      clusterAttemptRowsPromise,
+      progressRowsPromise,
+    ]);
+
+    const clusterAttemptsById = new Map(
+      clusterAttemptRows.map((row) => [
+        row.clusterId,
+        {
+          attempts: Number(row.attempts),
+          correct: Number(row.correct),
+        },
+      ]),
+    );
+
+    const clustersInsight = clusterCountRows
+      .map((row) => {
+        const attemptStats = clusterAttemptsById.get(row.clusterId) ?? { attempts: 0, correct: 0 };
+        return {
+          clusterId: row.clusterId,
+          name: row.name,
+          wordCount: Number(row.wordCount),
+          attempts: attemptStats.attempts,
+          accuracy:
+            attemptStats.attempts > 0
+              ? Number(
+                  (
+                    (attemptStats.correct / attemptStats.attempts) *
+                    STORAGE_RULES.PERCENT_MULTIPLIER
+                  ).toFixed(STORAGE_RULES.ONE_DECIMAL_PLACE),
+                )
+              : 0,
+        };
+      })
       .sort((left, right) => right.attempts - left.attempts);
 
-    const categoriesInsight = Array.from(categoryMap.entries())
-      .map(([category, stats]) => ({
-        category,
-        attempts: stats.attempts,
+    const categoriesInsight = categoryStatsRows
+      .map((row) => ({
+        category: row.category || "unknown",
+        attempts: Number(row.attempts),
         accuracy:
-          stats.attempts > 0
+          Number(row.attempts) > 0
             ? Number(
-                ((stats.correct / stats.attempts) * STORAGE_RULES.PERCENT_MULTIPLIER).toFixed(
+                (
+                  (Number(row.correct) / Number(row.attempts)) *
+                  STORAGE_RULES.PERCENT_MULTIPLIER
+                ).toFixed(
                   STORAGE_RULES.ONE_DECIMAL_PLACE,
                 ),
               )

@@ -18,36 +18,114 @@ import {
 } from "./domain/api-limits";
 
 // ============================================
-// SHARED ERROR SCHEMAS
+// SHARED ENVELOPE SCHEMAS
 // ============================================
-export const errorSchemas = {
-  validation: z.object({
-    code: z.literal("VALIDATION_ERROR"),
+export function successResponseSchema<T extends z.ZodTypeAny>(dataSchema: T) {
+  return z.object({
+    success: z.literal(true),
+    error: z.literal(false),
+    data: dataSchema,
     message: z.string(),
+    requestId: z.string(),
+    meta: z.record(z.string(), z.unknown()).optional(),
+  });
+}
+
+function errorResponseSchema<
+  TCode extends
+    | "VALIDATION_ERROR"
+    | "NOT_FOUND"
+    | "INTERNAL_ERROR"
+    | "UNAUTHORIZED"
+    | "FORBIDDEN"
+    | "RATE_LIMITED",
+>(code: TCode) {
+  return z.object({
+    success: z.literal(false),
+    error: z.literal(true),
+    data: z.null(),
+    message: z.string(),
+    code: z.literal(code),
+    requestId: z.string(),
     details: z.unknown().optional(),
-    requestId: z.string(),
-  }),
-  notFound: z.object({
-    code: z.literal("NOT_FOUND"),
-    message: z.string(),
-    requestId: z.string(),
-  }),
-  internal: z.object({
-    code: z.literal("INTERNAL_ERROR"),
-    message: z.string(),
-    requestId: z.string(),
-  }),
-  unauthorized: z.object({
-    code: z.literal("UNAUTHORIZED"),
-    message: z.string(),
-    requestId: z.string(),
-  }),
+  });
+}
+
+export const errorSchemas = {
+  validation: errorResponseSchema("VALIDATION_ERROR"),
+  notFound: errorResponseSchema("NOT_FOUND"),
+  internal: errorResponseSchema("INTERNAL_ERROR"),
+  unauthorized: errorResponseSchema("UNAUTHORIZED"),
+  forbidden: errorResponseSchema("FORBIDDEN"),
+  rateLimited: errorResponseSchema("RATE_LIMITED"),
 };
 
 // ============================================
 // API CONTRACT
 // ============================================
 export const api = {
+  auth: {
+    me: {
+      method: "GET" as const,
+      path: "/api/auth/me" as const,
+    },
+    googleLogin: {
+      method: "GET" as const,
+      path: "/api/auth/google" as const,
+    },
+    logout: {
+      method: "POST" as const,
+      path: "/api/auth/logout" as const,
+    },
+    profile: {
+      get: {
+        method: "GET" as const,
+        path: "/api/auth/profile" as const,
+        responses: {
+          200: successResponseSchema(
+            z.object({
+              id: z.string(),
+              email: z.string().nullable(),
+              firstName: z.string().nullable(),
+              lastName: z.string().nullable(),
+              profileImageUrl: z.string().nullable(),
+              role: z.nativeEnum(UserTypeEnum).optional(),
+              createdAt: z.string().nullable(),
+              updatedAt: z.string().nullable(),
+            }),
+          ),
+          401: errorSchemas.unauthorized,
+          404: errorSchemas.notFound,
+        },
+      },
+      update: {
+        method: "PATCH" as const,
+        path: "/api/auth/profile" as const,
+        input: z.object({
+          firstName: z.string().trim().min(1).max(80).optional(),
+          lastName: z.string().trim().min(1).max(80).optional(),
+          profileImageUrl: z.string().url().or(z.literal("")).optional(),
+        }),
+        responses: {
+          200: successResponseSchema(
+            z.object({
+              id: z.string(),
+              email: z.string().nullable(),
+              firstName: z.string().nullable(),
+              lastName: z.string().nullable(),
+              profileImageUrl: z.string().nullable(),
+              role: z.nativeEnum(UserTypeEnum).optional(),
+              createdAt: z.string().nullable(),
+              updatedAt: z.string().nullable(),
+            }),
+          ),
+          401: errorSchemas.unauthorized,
+          404: errorSchemas.notFound,
+          400: errorSchemas.validation,
+        },
+      },
+    },
+  },
   words: {
     list: {
       method: "GET" as const,
@@ -61,14 +139,14 @@ export const api = {
         })
         .optional(),
       responses: {
-        200: z.array(z.custom<Word>()),
+        200: successResponseSchema(z.array(z.custom<Word>())),
       },
     },
     get: {
       method: "GET" as const,
       path: "/api/words/:id" as const,
       responses: {
-        200: z.custom<Word>(),
+        200: successResponseSchema(z.custom<Word>()),
         404: errorSchemas.notFound,
       },
     },
@@ -83,14 +161,16 @@ export const api = {
         })
         .optional(),
       responses: {
-        200: z.array(
-          z.object({
-            id: z.number(),
-            name: z.string(),
-            type: z.string(),
-            description: z.string().nullable(),
-            wordCount: z.number(),
-          }),
+        200: successResponseSchema(
+          z.array(
+            z.object({
+              id: z.number(),
+              name: z.string(),
+              type: z.string(),
+              description: z.string().nullable(),
+              wordCount: z.number(),
+            }),
+          ),
         ),
       },
     },
@@ -103,7 +183,7 @@ export const api = {
         })
         .optional(),
       responses: {
-        200: z.custom<Cluster & { words: Word[] }>(),
+        200: successResponseSchema(z.custom<Cluster & { words: Word[] }>()),
         404: errorSchemas.notFound,
       },
     },
@@ -121,22 +201,24 @@ export const api = {
         })
         .optional(),
       responses: {
-        200: z.array(
-          z.object({
-            wordId: z.number(),
-            type: z.nativeEnum(QuizQuestionTypeEnum),
-            questionText: z.string(),
-            pronunciation: z.string().optional().nullable(),
-            audioUrl: z.string().optional().nullable(),
-            imageUrl: z.string().optional().nullable(),
-            options: z.array(
-              z.object({
-                id: z.number(),
-                text: z.string(),
-              }),
-            ),
-            // We don't send correctAnswerId here to prevent cheating!
-          }),
+        200: successResponseSchema(
+          z.array(
+            z.object({
+              wordId: z.number(),
+              type: z.nativeEnum(QuizQuestionTypeEnum),
+              questionText: z.string(),
+              pronunciation: z.string().optional().nullable(),
+              audioUrl: z.string().optional().nullable(),
+              imageUrl: z.string().optional().nullable(),
+              options: z.array(
+                z.object({
+                  id: z.number(),
+                  text: z.string(),
+                }),
+              ),
+              // We don't send correctAnswerId here to prevent cheating!
+            }),
+          ),
         ),
         401: errorSchemas.unauthorized,
       },
@@ -154,22 +236,24 @@ export const api = {
         responseTimeMs: z.number().int().positive().optional(),
       }),
       responses: {
-        200: z.object({
-          isCorrect: z.boolean(),
-          correctAnswer: z.custom<Word>(),
-          examples: z.array(
-            z.object({
-              originalScript: z.string(),
-              pronunciation: z.string(),
-              meaning: z.string(),
+        200: successResponseSchema(
+          z.object({
+            isCorrect: z.boolean(),
+            correctAnswer: z.custom<Word>(),
+            examples: z.array(
+              z.object({
+                originalScript: z.string(),
+                pronunciation: z.string(),
+                meaning: z.string(),
+              }),
+            ),
+            progressUpdate: z.object({
+              streak: z.number(),
+              masteryLevel: z.number(),
+              nextReview: z.string(),
             }),
-          ),
-          progressUpdate: z.object({
-            streak: z.number(),
-            masteryLevel: z.number(),
-            nextReview: z.string(),
           }),
-        }),
+        ),
         401: errorSchemas.unauthorized,
         404: errorSchemas.notFound,
       },
@@ -186,11 +270,13 @@ export const api = {
         audioUrl: z.string().url().optional(),
       }),
       responses: {
-        200: z.object({
-          audioUrl: z.string().url().nullable(),
-          source: z.enum(["existing", "cache", "generated", "unavailable"]),
-          cached: z.boolean(),
-        }),
+        200: successResponseSchema(
+          z.object({
+            audioUrl: z.string().url().nullable(),
+            source: z.enum(["existing", "cache", "generated", "unavailable"]),
+            cached: z.boolean(),
+          }),
+        ),
         401: errorSchemas.unauthorized,
       },
     },
@@ -205,19 +291,21 @@ export const api = {
         })
         .optional(),
       responses: {
-        200: z.object({
-          totalWords: z.number(),
-          mastered: z.number(),
-          learning: z.number(),
-          weak: z.number(),
-          streak: z.number(),
-          xp: z.number(),
-          recognitionAccuracy: z.number(),
-          recallAccuracy: z.number(),
-          sourceToTargetStrength: z.number(),
-          targetToSourceStrength: z.number(),
-          recommendedDirection: z.nativeEnum(QuizDirectionEnum),
-        }),
+        200: successResponseSchema(
+          z.object({
+            totalWords: z.number(),
+            mastered: z.number(),
+            learning: z.number(),
+            weak: z.number(),
+            streak: z.number(),
+            xp: z.number(),
+            recognitionAccuracy: z.number(),
+            recallAccuracy: z.number(),
+            sourceToTargetStrength: z.number(),
+            targetToSourceStrength: z.number(),
+            recommendedDirection: z.nativeEnum(QuizDirectionEnum),
+          }),
+        ),
         401: errorSchemas.unauthorized,
       },
     },
@@ -232,44 +320,46 @@ export const api = {
         })
         .optional(),
       responses: {
-        200: z.object({
-          clusters: z.array(
-            z.object({
-              clusterId: z.number(),
-              name: z.string(),
-              wordCount: z.number(),
-              attempts: z.number(),
-              accuracy: z.number(),
-            }),
-          ),
-          categories: z.array(
-            z.object({
-              category: z.string(),
-              attempts: z.number(),
-              accuracy: z.number(),
-            }),
-          ),
-          weakWords: z.array(
-            z.object({
-              wordId: z.number(),
-              originalScript: z.string(),
-              transliteration: z.string(),
-              english: z.string(),
-              wrongCount: z.number(),
-              masteryLevel: z.number(),
-            }),
-          ),
-          strongWords: z.array(
-            z.object({
-              wordId: z.number(),
-              originalScript: z.string(),
-              transliteration: z.string(),
-              english: z.string(),
-              masteryLevel: z.number(),
-              averageStrength: z.number(),
-            }),
-          ),
-        }),
+        200: successResponseSchema(
+          z.object({
+            clusters: z.array(
+              z.object({
+                clusterId: z.number(),
+                name: z.string(),
+                wordCount: z.number(),
+                attempts: z.number(),
+                accuracy: z.number(),
+              }),
+            ),
+            categories: z.array(
+              z.object({
+                category: z.string(),
+                attempts: z.number(),
+                accuracy: z.number(),
+              }),
+            ),
+            weakWords: z.array(
+              z.object({
+                wordId: z.number(),
+                originalScript: z.string(),
+                transliteration: z.string(),
+                english: z.string(),
+                wrongCount: z.number(),
+                masteryLevel: z.number(),
+              }),
+            ),
+            strongWords: z.array(
+              z.object({
+                wordId: z.number(),
+                originalScript: z.string(),
+                transliteration: z.string(),
+                english: z.string(),
+                masteryLevel: z.number(),
+                averageStrength: z.number(),
+              }),
+            ),
+          }),
+        ),
         401: errorSchemas.unauthorized,
       },
     },
@@ -288,27 +378,29 @@ export const api = {
         language: z.nativeEnum(LanguageEnum).optional(),
       }),
       responses: {
-        200: z.object({
-          bucket: z.enum(["mastered", "learning", "needs_review"]),
-          title: z.string(),
-          meaning: z.string(),
-          howToImprove: z.string(),
-          page: z.number(),
-          limit: z.number(),
-          total: z.number(),
-          words: z.array(
-            z.object({
-              wordId: z.number(),
-              originalScript: z.string(),
-              transliteration: z.string(),
-              english: z.string(),
-              masteryLevel: z.number(),
-              wrongCount: z.number(),
-              nextReview: z.string().nullable(),
-              averageStrength: z.number(),
-            }),
-          ),
-        }),
+        200: successResponseSchema(
+          z.object({
+            bucket: z.enum(["mastered", "learning", "needs_review"]),
+            title: z.string(),
+            meaning: z.string(),
+            howToImprove: z.string(),
+            page: z.number(),
+            limit: z.number(),
+            total: z.number(),
+            words: z.array(
+              z.object({
+                wordId: z.number(),
+                originalScript: z.string(),
+                transliteration: z.string(),
+                english: z.string(),
+                masteryLevel: z.number(),
+                wrongCount: z.number(),
+                nextReview: z.string().nullable(),
+                averageStrength: z.number(),
+              }),
+            ),
+          }),
+        ),
         401: errorSchemas.unauthorized,
       },
     },
@@ -329,23 +421,25 @@ export const api = {
         })
         .optional(),
       responses: {
-        200: z.array(
-          z.object({
-            id: z.number(),
-            wordId: z.number(),
-            isCorrect: z.boolean(),
-            confidenceLevel: z.number().nullable(),
-            direction: z.nativeEnum(QuizDirectionEnum).nullable(),
-            questionType: z.nativeEnum(QuizQuestionTypeEnum).nullable(),
-            responseTimeMs: z.number().nullable(),
-            createdAt: z.string().nullable(),
-            word: z.object({
-              language: z.nativeEnum(LanguageEnum),
-              originalScript: z.string(),
-              transliteration: z.string(),
-              english: z.string(),
+        200: successResponseSchema(
+          z.array(
+            z.object({
+              id: z.number(),
+              wordId: z.number(),
+              isCorrect: z.boolean(),
+              confidenceLevel: z.number().nullable(),
+              direction: z.nativeEnum(QuizDirectionEnum).nullable(),
+              questionType: z.nativeEnum(QuizQuestionTypeEnum).nullable(),
+              responseTimeMs: z.number().nullable(),
+              createdAt: z.string().nullable(),
+              word: z.object({
+                language: z.nativeEnum(LanguageEnum),
+                originalScript: z.string(),
+                transliteration: z.string(),
+                english: z.string(),
+              }),
             }),
-          }),
+          ),
         ),
         401: errorSchemas.unauthorized,
       },
@@ -359,74 +453,32 @@ export const api = {
         .object({
           window: z.enum(["daily", "weekly", "all_time"]).default("weekly"),
           limit: z.coerce
-            .number()
-            .int()
-            .positive()
-            .max(API_PAGINATION_LIMITS.LEADERBOARD_MAX)
-            .default(API_PAGINATION_DEFAULTS.LEADERBOARD_LIMIT),
-          language: z.nativeEnum(LanguageEnum).optional(),
-        })
+          .number()
+          .int()
+          .positive()
+          .max(API_PAGINATION_LIMITS.LEADERBOARD_MAX)
+          .default(API_PAGINATION_DEFAULTS.LEADERBOARD_LIMIT),
+        language: z.nativeEnum(LanguageEnum).optional(),
+      })
         .optional(),
       responses: {
-        200: z.array(
-          z.object({
-            rank: z.number(),
-            userId: z.string(),
-            firstName: z.string().nullable(),
-            lastName: z.string().nullable(),
-            email: z.string().nullable(),
-            profileImageUrl: z.string().nullable(),
-            xp: z.number(),
-            streak: z.number(),
-            attempts: z.number(),
-            accuracy: z.number(),
-          }),
+        200: successResponseSchema(
+          z.array(
+            z.object({
+              rank: z.number(),
+              userId: z.string(),
+              firstName: z.string().nullable(),
+              lastName: z.string().nullable(),
+              email: z.string().nullable(),
+              profileImageUrl: z.string().nullable(),
+              xp: z.number(),
+              streak: z.number(),
+              attempts: z.number(),
+              accuracy: z.number(),
+            }),
+          ),
         ),
         401: errorSchemas.unauthorized,
-      },
-    },
-  },
-  profile: {
-    get: {
-      method: "GET" as const,
-      path: "/api/profile" as const,
-      responses: {
-        200: z.object({
-          id: z.string(),
-          email: z.string().nullable(),
-          firstName: z.string().nullable(),
-          lastName: z.string().nullable(),
-          profileImageUrl: z.string().nullable(),
-          role: z.nativeEnum(UserTypeEnum).optional(),
-          createdAt: z.string().nullable(),
-          updatedAt: z.string().nullable(),
-        }),
-        401: errorSchemas.unauthorized,
-        404: errorSchemas.notFound,
-      },
-    },
-    update: {
-      method: "PATCH" as const,
-      path: "/api/profile" as const,
-      input: z.object({
-        firstName: z.string().trim().min(1).max(80).optional(),
-        lastName: z.string().trim().min(1).max(80).optional(),
-        profileImageUrl: z.string().url().or(z.literal("")).optional(),
-      }),
-      responses: {
-        200: z.object({
-          id: z.string(),
-          email: z.string().nullable(),
-          firstName: z.string().nullable(),
-          lastName: z.string().nullable(),
-          profileImageUrl: z.string().nullable(),
-          role: z.nativeEnum(UserTypeEnum).optional(),
-          createdAt: z.string().nullable(),
-          updatedAt: z.string().nullable(),
-        }),
-        401: errorSchemas.unauthorized,
-        404: errorSchemas.notFound,
-        400: errorSchemas.validation,
       },
     },
   },
@@ -446,29 +498,31 @@ export const api = {
         })
         .optional(),
       responses: {
-        200: z.array(
-          z.object({
-            id: z.number(),
-            language: z.nativeEnum(LanguageEnum),
-            originalScript: z.string(),
-            transliteration: z.string(),
-            english: z.string(),
-            partOfSpeech: z.nativeEnum(PartOfSpeechEnum),
-            reviewStatus: z.nativeEnum(ReviewStatusEnum),
-            sourceUrl: z.string().nullable(),
-            sourceCapturedAt: z.string().nullable(),
-            submittedBy: z.string().nullable(),
-            submittedAt: z.string().nullable(),
-            reviewedBy: z.string().nullable(),
-            reviewedAt: z.string().nullable(),
-            reviewNotes: z.string().nullable(),
-            reviewerConfidenceScore: z.number().int().min(1).max(5).nullable(),
-            requiresSecondaryReview: z.boolean(),
-            disagreementStatus: z.nativeEnum(ReviewDisagreementStatusEnum),
-          }),
+        200: successResponseSchema(
+          z.array(
+            z.object({
+              id: z.number(),
+              language: z.nativeEnum(LanguageEnum),
+              originalScript: z.string(),
+              transliteration: z.string(),
+              english: z.string(),
+              partOfSpeech: z.nativeEnum(PartOfSpeechEnum),
+              reviewStatus: z.nativeEnum(ReviewStatusEnum),
+              sourceUrl: z.string().nullable(),
+              sourceCapturedAt: z.string().nullable(),
+              submittedBy: z.string().nullable(),
+              submittedAt: z.string().nullable(),
+              reviewedBy: z.string().nullable(),
+              reviewedAt: z.string().nullable(),
+              reviewNotes: z.string().nullable(),
+              reviewerConfidenceScore: z.number().int().min(1).max(5).nullable(),
+              requiresSecondaryReview: z.boolean(),
+              disagreementStatus: z.nativeEnum(ReviewDisagreementStatusEnum),
+            }),
+          ),
         ),
         401: errorSchemas.unauthorized,
-        403: errorSchemas.unauthorized,
+        403: errorSchemas.forbidden,
       },
     },
     transition: {
@@ -487,19 +541,21 @@ export const api = {
         disagreementStatus: z.nativeEnum(ReviewDisagreementStatusEnum).optional(),
       }),
       responses: {
-        200: z.object({
-          id: z.number(),
-          reviewStatus: z.nativeEnum(ReviewStatusEnum),
-          reviewedBy: z.string().nullable(),
-          reviewedAt: z.string().nullable(),
-          reviewNotes: z.string().nullable(),
-          reviewerConfidenceScore: z.number().int().min(1).max(5).nullable(),
-          requiresSecondaryReview: z.boolean(),
-          disagreementStatus: z.nativeEnum(ReviewDisagreementStatusEnum),
-        }),
+        200: successResponseSchema(
+          z.object({
+            id: z.number(),
+            reviewStatus: z.nativeEnum(ReviewStatusEnum),
+            reviewedBy: z.string().nullable(),
+            reviewedAt: z.string().nullable(),
+            reviewNotes: z.string().nullable(),
+            reviewerConfidenceScore: z.number().int().min(1).max(5).nullable(),
+            requiresSecondaryReview: z.boolean(),
+            disagreementStatus: z.nativeEnum(ReviewDisagreementStatusEnum),
+          }),
+        ),
         400: errorSchemas.validation,
         401: errorSchemas.unauthorized,
-        403: errorSchemas.unauthorized,
+        403: errorSchemas.forbidden,
         404: errorSchemas.notFound,
       },
     },
@@ -523,65 +579,69 @@ export const api = {
         disagreementStatus: z.nativeEnum(ReviewDisagreementStatusEnum).optional(),
       }),
       responses: {
-        200: z.object({
-          updated: z.number(),
-          skipped: z.number(),
-        }),
+        200: successResponseSchema(
+          z.object({
+            updated: z.number(),
+            skipped: z.number(),
+          }),
+        ),
         400: errorSchemas.validation,
         401: errorSchemas.unauthorized,
-        403: errorSchemas.unauthorized,
+        403: errorSchemas.forbidden,
       },
     },
     history: {
       method: "GET" as const,
       path: "/api/review/words/:id/history" as const,
       responses: {
-        200: z.object({
-          word: z.object({
-            id: z.number(),
-            language: z.nativeEnum(LanguageEnum),
-            originalScript: z.string(),
-            transliteration: z.string(),
-            english: z.string(),
-            reviewStatus: z.nativeEnum(ReviewStatusEnum),
-            sourceUrl: z.string().nullable(),
-            sourceCapturedAt: z.string().nullable(),
-            reviewNotes: z.string().nullable(),
-            reviewerConfidenceScore: z.number().int().min(1).max(5).nullable(),
-            requiresSecondaryReview: z.boolean(),
-            disagreementStatus: z.nativeEnum(ReviewDisagreementStatusEnum),
-          }),
-          clusters: z.array(
-            z.object({
+        200: successResponseSchema(
+          z.object({
+            word: z.object({
               id: z.number(),
-              name: z.string(),
-              type: z.string(),
-            }),
-          ),
-          relatedClusterWords: z.array(
-            z.object({
-              id: z.number(),
+              language: z.nativeEnum(LanguageEnum),
               originalScript: z.string(),
               transliteration: z.string(),
               english: z.string(),
               reviewStatus: z.nativeEnum(ReviewStatusEnum),
-            }),
-          ),
-          events: z.array(
-            z.object({
-              id: z.number(),
-              fromStatus: z.string(),
-              toStatus: z.string(),
-              changedBy: z.string(),
-              notes: z.string().nullable(),
               sourceUrl: z.string().nullable(),
               sourceCapturedAt: z.string().nullable(),
-              createdAt: z.string().nullable(),
+              reviewNotes: z.string().nullable(),
+              reviewerConfidenceScore: z.number().int().min(1).max(5).nullable(),
+              requiresSecondaryReview: z.boolean(),
+              disagreementStatus: z.nativeEnum(ReviewDisagreementStatusEnum),
             }),
-          ),
-        }),
+            clusters: z.array(
+              z.object({
+                id: z.number(),
+                name: z.string(),
+                type: z.string(),
+              }),
+            ),
+            relatedClusterWords: z.array(
+              z.object({
+                id: z.number(),
+                originalScript: z.string(),
+                transliteration: z.string(),
+                english: z.string(),
+                reviewStatus: z.nativeEnum(ReviewStatusEnum),
+              }),
+            ),
+            events: z.array(
+              z.object({
+                id: z.number(),
+                fromStatus: z.string(),
+                toStatus: z.string(),
+                changedBy: z.string(),
+                notes: z.string().nullable(),
+                sourceUrl: z.string().nullable(),
+                sourceCapturedAt: z.string().nullable(),
+                createdAt: z.string().nullable(),
+              }),
+            ),
+          }),
+        ),
         401: errorSchemas.unauthorized,
-        403: errorSchemas.unauthorized,
+        403: errorSchemas.forbidden,
         404: errorSchemas.notFound,
       },
     },
@@ -599,25 +659,27 @@ export const api = {
         })
         .optional(),
       responses: {
-        200: z.array(
-          z.object({
-            id: z.number(),
-            language: z.nativeEnum(LanguageEnum),
-            originalScript: z.string(),
-            transliteration: z.string(),
-            english: z.string(),
-            partOfSpeech: z.nativeEnum(PartOfSpeechEnum),
-            reviewStatus: z.nativeEnum(ReviewStatusEnum),
-            reviewerConfidenceScore: z.number().int().min(1).max(5).nullable(),
-            requiresSecondaryReview: z.boolean(),
-            disagreementStatus: z.nativeEnum(ReviewDisagreementStatusEnum),
-            reviewNotes: z.string().nullable(),
-            submittedAt: z.string().nullable(),
-            reviewedAt: z.string().nullable(),
-          }),
+        200: successResponseSchema(
+          z.array(
+            z.object({
+              id: z.number(),
+              language: z.nativeEnum(LanguageEnum),
+              originalScript: z.string(),
+              transliteration: z.string(),
+              english: z.string(),
+              partOfSpeech: z.nativeEnum(PartOfSpeechEnum),
+              reviewStatus: z.nativeEnum(ReviewStatusEnum),
+              reviewerConfidenceScore: z.number().int().min(1).max(5).nullable(),
+              requiresSecondaryReview: z.boolean(),
+              disagreementStatus: z.nativeEnum(ReviewDisagreementStatusEnum),
+              reviewNotes: z.string().nullable(),
+              submittedAt: z.string().nullable(),
+              reviewedAt: z.string().nullable(),
+            }),
+          ),
         ),
         401: errorSchemas.unauthorized,
-        403: errorSchemas.unauthorized,
+        403: errorSchemas.forbidden,
       },
     },
     resolveConflict: {
@@ -634,19 +696,21 @@ export const api = {
           .optional(),
       }),
       responses: {
-        200: z.object({
-          id: z.number(),
-          reviewStatus: z.nativeEnum(ReviewStatusEnum),
-          reviewerConfidenceScore: z.number().int().min(1).max(5).nullable(),
-          requiresSecondaryReview: z.boolean(),
-          disagreementStatus: z.nativeEnum(ReviewDisagreementStatusEnum),
-          reviewNotes: z.string().nullable(),
-          reviewedBy: z.string().nullable(),
-          reviewedAt: z.string().nullable(),
-        }),
+        200: successResponseSchema(
+          z.object({
+            id: z.number(),
+            reviewStatus: z.nativeEnum(ReviewStatusEnum),
+            reviewerConfidenceScore: z.number().int().min(1).max(5).nullable(),
+            requiresSecondaryReview: z.boolean(),
+            disagreementStatus: z.nativeEnum(ReviewDisagreementStatusEnum),
+            reviewNotes: z.string().nullable(),
+            reviewedBy: z.string().nullable(),
+            reviewedAt: z.string().nullable(),
+          }),
+        ),
         400: errorSchemas.validation,
         401: errorSchemas.unauthorized,
-        403: errorSchemas.unauthorized,
+        403: errorSchemas.forbidden,
         404: errorSchemas.notFound,
       },
     },
@@ -683,11 +747,13 @@ export const api = {
           .min(1),
       }),
       responses: {
-        200: z.object({
-          id: z.number(),
-          reviewStatus: z.literal(ReviewStatusEnum.DRAFT),
-          examplesCreated: z.number().int().nonnegative(),
-        }),
+        200: successResponseSchema(
+          z.object({
+            id: z.number(),
+            reviewStatus: z.literal(ReviewStatusEnum.DRAFT),
+            examplesCreated: z.number().int().nonnegative(),
+          }),
+        ),
         400: errorSchemas.validation,
         401: errorSchemas.unauthorized,
       },
@@ -698,7 +764,7 @@ export const api = {
       method: "POST" as const,
       path: "/api/admin/seed" as const,
       responses: {
-        200: z.object({ message: z.string() }),
+        200: successResponseSchema(z.object({ message: z.string() })),
       },
     },
     srsDrift: {
@@ -710,24 +776,26 @@ export const api = {
         })
         .optional(),
       responses: {
-        200: z.object({
-          generatedAt: z.string(),
-          overdueCount: z.number(),
-          totalTracked: z.number(),
-          overdueRatio: z.number(),
-          highIntervalCount: z.number(),
-          highIntervalRatio: z.number(),
-          emptyReviewDays: z.number(),
-          alerts: z.array(
-            z.object({
-              code: z.enum(["overdue_growth", "interval_spike", "empty_review_days"]),
-              severity: z.enum(["warning", "critical"]),
-              message: z.string(),
-            }),
-          ),
-        }),
+        200: successResponseSchema(
+          z.object({
+            generatedAt: z.string(),
+            overdueCount: z.number(),
+            totalTracked: z.number(),
+            overdueRatio: z.number(),
+            highIntervalCount: z.number(),
+            highIntervalRatio: z.number(),
+            emptyReviewDays: z.number(),
+            alerts: z.array(
+              z.object({
+                code: z.enum(["overdue_growth", "interval_spike", "empty_review_days"]),
+                severity: z.enum(["warning", "critical"]),
+                message: z.string(),
+              }),
+            ),
+          }),
+        ),
         401: errorSchemas.unauthorized,
-        403: errorSchemas.unauthorized,
+        403: errorSchemas.forbidden,
       },
     },
   },
@@ -751,7 +819,17 @@ export function buildUrl(path: string, params?: Record<string, string | number>)
 // ============================================
 // TYPE HELPERS
 // ============================================
-export type QuizGenerateResponse = z.infer<(typeof api.quiz.generate.responses)[200]>;
+export function parseSuccessResponse<T extends z.ZodTypeAny>(
+  schema: T,
+  payload: unknown,
+): z.infer<T> extends { data: infer U } ? U : never {
+  const parsed = schema.parse(payload) as { data: unknown };
+  return parsed.data as z.infer<T> extends { data: infer U } ? U : never;
+}
+
+type SuccessData<T extends z.ZodTypeAny> = z.infer<T> extends { data: infer U } ? U : never;
+
+export type QuizGenerateResponse = SuccessData<(typeof api.quiz.generate.responses)[200]>;
 export type QuizSubmitInput = z.infer<typeof api.quiz.submit.input>;
-export type QuizSubmitResponse = z.infer<(typeof api.quiz.submit.responses)[200]>;
-export type StatsResponse = z.infer<(typeof api.stats.get.responses)[200]>;
+export type QuizSubmitResponse = SuccessData<(typeof api.quiz.submit.responses)[200]>;
+export type StatsResponse = SuccessData<(typeof api.stats.get.responses)[200]>;

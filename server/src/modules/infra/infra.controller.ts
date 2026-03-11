@@ -5,29 +5,29 @@ import { AuthenticatedGuard } from "../../common/guards/authenticated.guard";
 import { ReviewerGuard } from "../../common/guards/reviewer.guard";
 import { SrsDriftQueryDto } from "./infra.dto";
 import { AppError } from "../../common/errors/app-error";
-import { sendError } from "../../common/http";
+import { sendError, sendSuccess } from "../../common/http";
 
 @Controller()
 export class InfraApiController {
   constructor(@Inject(InfraService) private readonly infraService: InfraService) {}
 
-  @Post("/api/admin/seed")
+  @Post("/admin/seed")
   @UseGuards(AuthenticatedGuard)
   async seed(@Req() req: Request, @Res() res: Response) {
     try {
       const result = await this.infraService.seed();
-      res.json(result);
+      sendSuccess(req, res, result);
     } catch (error) {
       this.handleError(req, res, error);
     }
   }
 
-  @Get("/api/admin/srs/drift")
+  @Get("/admin/srs/drift")
   @UseGuards(AuthenticatedGuard, ReviewerGuard)
   async getSrsDrift(@Req() req: Request, @Res() res: Response, @Query() query: SrsDriftQueryDto) {
     try {
       const result = await this.infraService.getSrsDrift(query.language);
-      res.json(result);
+      sendSuccess(req, res, result);
     } catch (error) {
       this.handleError(req, res, error);
     }

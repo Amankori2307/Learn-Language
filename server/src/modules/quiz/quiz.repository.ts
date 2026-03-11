@@ -23,8 +23,8 @@ export class QuizRepository {
     return storage.getWords(limit, language);
   }
 
-  getWordClusterLinks() {
-    return storage.getWordClusterLinks();
+  getWordClusterLinks(wordIds?: number[]) {
+    return storage.getWordClusterLinks(wordIds);
   }
 
   getWord(wordId: number) {

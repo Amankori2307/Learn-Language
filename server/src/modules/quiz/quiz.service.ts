@@ -49,7 +49,7 @@ export class QuizService {
     }
 
     const allWords = await this.repository.getWords(500, language);
-    const links = await this.repository.getWordClusterLinks();
+    const links = await this.repository.getWordClusterLinks(allWords.map((word) => word.id));
     const clusterByWord = new Map<number, Set<number>>();
     for (const link of links) {
       const set = clusterByWord.get(link.wordId) ?? new Set<number>();

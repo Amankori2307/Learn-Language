@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { api } from "@shared/routes";
+import { api, parseSuccessResponse } from "@shared/routes";
 import { useLearningLanguage } from "@/hooks/use-language";
 import { apiClient, buildApiUrl } from "@/services/apiClient";
 
@@ -12,7 +12,7 @@ export function useAttemptHistory(limit: number = 100) {
       const res = await apiClient.get(
         buildApiUrl(`${api.attempts.history.path}?${params.toString()}`),
       );
-      return api.attempts.history.responses[200].parse(res.data);
+      return parseSuccessResponse(api.attempts.history.responses[200], res.data);
     },
   });
 }

@@ -122,3 +122,63 @@ test("AnalyticsService.getWordBucket forwards parsed payload", async () => {
     language: LanguageEnum.HINDI,
   });
 });
+
+test("AnalyticsService caches repeated leaderboard reads by normalized key", async () => {
+  let leaderboardCalls = 0;
+
+  const repository = {
+    async getUserStats() {
+      return null;
+    },
+    async getLearningInsights() {
+      return null;
+    },
+    async getWordBucket() {
+      return null;
+    },
+    async getUserAttemptHistory() {
+      return [];
+    },
+    async getLeaderboard() {
+      leaderboardCalls += 1;
+      return [{ rank: 1, userId: "u-1" }];
+    },
+  };
+
+  const service = new AnalyticsService(repository as any);
+  const first = await service.getLeaderboard({});
+  const second = await service.getLeaderboard({ window: "weekly", limit: 25 });
+
+  assert.equal(leaderboardCalls, 1);
+  assert.deepEqual(first, second);
+});
+
+test("AnalyticsService caches learning insights per user and language", async () => {
+  let learningCalls = 0;
+
+  const repository = {
+    async getUserStats() {
+      return null;
+    },
+    async getLearningInsights() {
+      learningCalls += 1;
+      return { clusters: [], categories: [], weakWords: [], strongWords: [] };
+    },
+    async getWordBucket() {
+      return null;
+    },
+    async getUserAttemptHistory() {
+      return [];
+    },
+    async getLeaderboard() {
+      return [];
+    },
+  };
+
+  const service = new AnalyticsService(repository as any);
+  await service.getLearningInsights("u-1", LanguageEnum.TELUGU);
+  await service.getLearningInsights("u-1", LanguageEnum.TELUGU);
+  await service.getLearningInsights("u-1", LanguageEnum.HINDI);
+
+  assert.equal(learningCalls, 2);
+});

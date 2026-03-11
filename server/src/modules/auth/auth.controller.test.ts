@@ -29,6 +29,27 @@ function createMockResponse() {
   return { response, state };
 }
 
+function success<T>(requestId: string, data: T) {
+  return {
+    success: true,
+    error: false,
+    data,
+    message: "OK",
+    requestId,
+  };
+}
+
+function error(requestId: string, code: string, message: string) {
+  return {
+    success: false,
+    error: true,
+    data: null,
+    code,
+    message,
+    requestId,
+  };
+}
+
 test("AuthApiController.getAuthUser returns user when claims exist", async () => {
   const expected = {
     id: "u-1",
@@ -67,7 +88,7 @@ test("AuthApiController.getAuthUser returns user when claims exist", async () =>
   await controller.getAuthUser(request, response);
 
   assert.equal(state.statusCode, 200);
-  assert.deepEqual(state.body, expected);
+  assert.deepEqual(state.body, success("req-1", expected));
 });
 
 test("AuthApiController.getAuthUser returns 401 when auth claims are missing", async () => {
@@ -89,7 +110,7 @@ test("AuthApiController.getAuthUser returns 401 when auth claims are missing", a
   const { response, state } = createMockResponse();
   const request = {
     requestId: "req-2",
-    path: "/auth/me",
+    path: "/api/auth/me",
     method: "GET",
   } as unknown as Request;
 
@@ -97,11 +118,7 @@ test("AuthApiController.getAuthUser returns 401 when auth claims are missing", a
 
   assert.equal(getAuthUserCalls, 0);
   assert.equal(state.statusCode, 401);
-  assert.deepEqual(state.body, {
-    code: "UNAUTHORIZED",
-    message: "Unauthorized",
-    requestId: "req-2",
-  });
+  assert.deepEqual(state.body, error("req-2", "UNAUTHORIZED", "Unauthorized"));
 });
 
 test("AuthApiController.getAuthUser maps AppError from service", async () => {
@@ -121,7 +138,7 @@ test("AuthApiController.getAuthUser maps AppError from service", async () => {
   const { response, state } = createMockResponse();
   const request = {
     requestId: "req-3",
-    path: "/auth/me",
+    path: "/api/auth/me",
     method: "GET",
     user: {
       claims: {
@@ -133,11 +150,7 @@ test("AuthApiController.getAuthUser maps AppError from service", async () => {
   await controller.getAuthUser(request, response);
 
   assert.equal(state.statusCode, 401);
-  assert.deepEqual(state.body, {
-    code: "UNAUTHORIZED",
-    message: "Unauthorized",
-    requestId: "req-3",
-  });
+  assert.deepEqual(state.body, error("req-3", "UNAUTHORIZED", "Unauthorized"));
 });
 
 test("AuthApiController.getProfile returns 401 when session user id is missing", async () => {
@@ -159,7 +172,7 @@ test("AuthApiController.getProfile returns 401 when session user id is missing",
   const { response, state } = createMockResponse();
   const request = {
     requestId: "req-4",
-    path: "/api/profile",
+    path: "/api/auth/profile",
     method: "GET",
   } as unknown as Request;
 
@@ -167,11 +180,7 @@ test("AuthApiController.getProfile returns 401 when session user id is missing",
 
   assert.equal(getProfileCalls, 0);
   assert.equal(state.statusCode, 401);
-  assert.deepEqual(state.body, {
-    code: "UNAUTHORIZED",
-    message: "Unauthorized",
-    requestId: "req-4",
-  });
+  assert.deepEqual(state.body, error("req-4", "UNAUTHORIZED", "Unauthorized"));
 });
 
 test("AuthApiController.updateProfile forwards sanitized body to service", async () => {
@@ -203,7 +212,7 @@ test("AuthApiController.updateProfile forwards sanitized body to service", async
   const { response, state } = createMockResponse();
   const request = {
     requestId: "req-5",
-    path: "/api/profile",
+    path: "/api/auth/profile",
     method: "PATCH",
     user: {
       claims: {
@@ -223,5 +232,5 @@ test("AuthApiController.updateProfile forwards sanitized body to service", async
   assert.equal(receivedUserId, "u-7");
   assert.deepEqual(receivedBody, body);
   assert.equal(state.statusCode, 200);
-  assert.deepEqual(state.body, expected);
+  assert.deepEqual(state.body, success("req-5", expected));
 });

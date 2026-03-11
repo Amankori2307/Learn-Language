@@ -237,9 +237,9 @@ Use this shape consistently:
 Examples:
 
 - auth user:
-  - `["/auth/me"]`
+  - `["/api/auth/me"]`
 - profile:
-  - `["/api/profile"]`
+  - `["/api/auth/profile"]`
 - clusters by language:
   - `["/api/clusters", language]`
 - cluster detail:
@@ -379,4 +379,3 @@ The first code migrations under `P9-002` should target:
 - invalidation behavior is intentional and narrow by default
 - Axios remains behind service/hook boundaries
 - React Query lifecycle ownership is consistent across learner and reviewer flows
-

@@ -129,7 +129,7 @@ export class AuthService {
   async updateProfile(userId: string, payload: unknown) {
     appLogger.debug("AuthService.updateProfile.start", { userId });
     try {
-      const parsed = api.profile.update.input.parse(payload);
+      const parsed = api.auth.profile.update.input.parse(payload);
       const updated = await this.repository.updateUserProfile(userId, {
         firstName: parsed.firstName,
         lastName: parsed.lastName,

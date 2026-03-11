@@ -1,7 +1,8 @@
-import { useMemo } from "react";
+import { useEffect, useMemo, useRef } from "react";
 import { useLocation, useSearch } from "wouter";
 import { useClusters } from "@/hooks/use-clusters";
 import { CLUSTERS_PAGE_SIZE } from "./clusters.constants";
+import { trackAnalyticsEvent } from "@/lib/analytics";
 
 export type ClusterSortBy = "name_asc" | "name_desc" | "type_asc" | "words_desc" | "words_asc";
 
@@ -17,6 +18,7 @@ export function useClustersPageViewModel() {
 
   const clustersQuery = useClusters();
   const allClusters = useMemo(() => clustersQuery.data ?? [], [clustersQuery.data]);
+  const trackedCatalogKeyRef = useRef<string | null>(null);
 
   const clusterTypes = useMemo(
     () => [
@@ -104,6 +106,25 @@ export function useClustersPageViewModel() {
     (currentPage - 1) * CLUSTERS_PAGE_SIZE,
     currentPage * CLUSTERS_PAGE_SIZE,
   );
+
+  useEffect(() => {
+    if (clustersQuery.isLoading || clustersQuery.isError || !clustersQuery.data) {
+      return;
+    }
+
+    const analyticsKey = `${query}:${typeFilter}:${sortBy}:${filteredAndSorted.length}`;
+    if (trackedCatalogKeyRef.current === analyticsKey) {
+      return;
+    }
+
+    trackedCatalogKeyRef.current = analyticsKey;
+    trackAnalyticsEvent("clusters_catalog_viewed", {
+      route: "/clusters",
+      totalResults: filteredAndSorted.length,
+      typeFilter,
+      sortBy,
+    });
+  }, [clustersQuery.data, clustersQuery.isError, clustersQuery.isLoading, filteredAndSorted.length, query, sortBy, typeFilter]);
 
   return {
     query,

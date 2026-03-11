@@ -4,14 +4,14 @@ import { QuizService } from "./quiz.service";
 import { AuthenticatedGuard } from "../../common/guards/authenticated.guard";
 import { GenerateQuizQueryDto, SubmitQuizBodyDto } from "./quiz.dto";
 import { AppError } from "../../common/errors/app-error";
-import { logApiEvent, sendError } from "../../common/http";
+import { logApiEvent, sendError, sendSuccess } from "../../common/http";
 
 @Controller()
 @UseGuards(AuthenticatedGuard)
 export class QuizApiController {
   constructor(@Inject(QuizService) private readonly quizService: QuizService) {}
 
-  @Get("/api/quiz/generate")
+  @Get("/quiz/generate")
   async generateQuiz(
     @Req() req: Request,
     @Res() res: Response,
@@ -33,13 +33,13 @@ export class QuizApiController {
         countGenerated: result.length,
         clusterId: query.clusterId ?? null,
       });
-      res.json(result);
+      sendSuccess(req, res, result);
     } catch (error) {
       this.handleError(req, res, error);
     }
   }
 
-  @Post("/api/quiz/submit")
+  @Post("/quiz/submit")
   async submitQuizAnswer(
     @Req() req: Request,
     @Res() res: Response,
@@ -58,7 +58,7 @@ export class QuizApiController {
         direction: body.direction ?? null,
         responseTimeMs: body.responseTimeMs ?? null,
       });
-      res.json(result);
+      sendSuccess(req, res, result);
     } catch (error) {
       this.handleError(req, res, error);
     }

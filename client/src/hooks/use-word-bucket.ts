@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { api } from "@shared/routes";
+import { api, parseSuccessResponse } from "@shared/routes";
 import { useLearningLanguage } from "@/hooks/use-language";
 import { apiClient, buildApiUrl } from "@/services/apiClient";
 
@@ -20,7 +20,7 @@ export function useWordBucket(bucket: WordBucketType, page: number, limit: numbe
       const res = await apiClient.get(
         buildApiUrl(`${api.analytics.wordBuckets.path}?${params.toString()}`),
       );
-      return api.analytics.wordBuckets.responses[200].parse(res.data);
+      return parseSuccessResponse(api.analytics.wordBuckets.responses[200], res.data);
     },
   });
 }

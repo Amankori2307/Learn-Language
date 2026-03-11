@@ -67,11 +67,11 @@ The repository now enforces the release gate in [ci-cd.yml](/Users/aman/Projects
 
 The current smoke suite is API-level integrated verification. It currently proves that:
 
-- auth bootstrap via signed bearer token works against `/auth/me`
-- authenticated profile fetch works against `/api/profile`
+- auth bootstrap via signed bearer token works against `/api/auth/me`
+- authenticated profile fetch works against `/api/auth/profile`
 - learner analytics endpoints respond for stats, learning insights, word buckets, attempt history, and leaderboard
 - cluster list and cluster detail endpoints respond
-- reviewer bootstrap resolves reviewer role through `/auth/me`, reviewer queue access responds, and draft creation succeeds
+- reviewer bootstrap resolves reviewer role through `/api/auth/me`, reviewer queue access responds, and draft creation succeeds
 - quiz generation works across all supported modes
 - quiz submission persists and returns a valid result payload
 - the same smoke entrypoint can run in development or production env modes through dedicated scripts

@@ -32,6 +32,7 @@ function makeWord(id: number) {
 test("QuizService.generateQuiz reseeds when initial candidate lookup is empty", async () => {
   let candidateCallCount = 0;
   let seeded = false;
+  let receivedLinkWordIds: number[] | null = null;
 
   const repository = {
     async getQuizCandidates() {
@@ -44,7 +45,8 @@ test("QuizService.generateQuiz reseeds when initial candidate lookup is empty", 
     async getWords() {
       return [makeWord(1), makeWord(2), makeWord(3), makeWord(4)];
     },
-    async getWordClusterLinks() {
+    async getWordClusterLinks(wordIds?: number[]) {
+      receivedLinkWordIds = wordIds ?? null;
       return [];
     },
     async getWord() {
@@ -76,6 +78,7 @@ test("QuizService.generateQuiz reseeds when initial candidate lookup is empty", 
 
   assert.equal(seeded, true);
   assert.equal(candidateCallCount, 2);
+  assert.deepEqual(receivedLinkWordIds, [1, 2, 3, 4]);
   assert.equal(result.length, 1);
   assert.equal(result[0]?.wordId, 1);
 });

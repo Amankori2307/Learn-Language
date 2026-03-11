@@ -144,44 +144,44 @@ test("e2e smoke: auth, analytics, cluster, review, and quiz critical paths are l
     Authorization: `Bearer ${reviewerToken}`,
   };
 
-  const authMeResponse = await fetch(`${baseUrl}/auth/me`, {
+  const authMeResponse = await fetch(`${baseUrl}/api/auth/me`, {
     headers: authHeaders,
   });
-  assert.equal(authMeResponse.status, 200, "/auth/me should return 200");
+  assert.equal(authMeResponse.status, 200, "/api/auth/me should return 200");
   const authMePayload = await authMeResponse.json();
-  assert.equal(authMePayload.id, "smoke-user");
-  assert.equal(authMePayload.email, "smoke@example.com");
-  assert.equal(authMePayload.role, UserTypeEnum.LEARNER);
+  assert.equal(authMePayload.data.id, "smoke-user");
+  assert.equal(authMePayload.data.email, "smoke@example.com");
+  assert.equal(authMePayload.data.role, UserTypeEnum.LEARNER);
 
-  const reviewerAuthMeResponse = await fetch(`${baseUrl}/auth/me`, {
+  const reviewerAuthMeResponse = await fetch(`${baseUrl}/api/auth/me`, {
     headers: reviewerHeaders,
   });
-  assert.equal(reviewerAuthMeResponse.status, 200, "/auth/me reviewer bootstrap should return 200");
+  assert.equal(reviewerAuthMeResponse.status, 200, "/api/auth/me reviewer bootstrap should return 200");
   const reviewerAuthMePayload = await reviewerAuthMeResponse.json();
-  assert.equal(reviewerAuthMePayload.id, "smoke-reviewer");
-  assert.equal(reviewerAuthMePayload.email, "reviewer@example.com");
-  assert.equal(reviewerAuthMePayload.role, UserTypeEnum.REVIEWER);
+  assert.equal(reviewerAuthMePayload.data.id, "smoke-reviewer");
+  assert.equal(reviewerAuthMePayload.data.email, "reviewer@example.com");
+  assert.equal(reviewerAuthMePayload.data.role, UserTypeEnum.REVIEWER);
 
-  const profileResponse = await fetch(`${baseUrl}/api/profile`, {
+  const profileResponse = await fetch(`${baseUrl}/api/auth/profile`, {
     headers: authHeaders,
   });
-  assert.equal(profileResponse.status, 200, "/api/profile should return 200");
+  assert.equal(profileResponse.status, 200, "/api/auth/profile should return 200");
   const profilePayload = await profileResponse.json();
-  assert.equal(profilePayload.id, "smoke-user");
+  assert.equal(profilePayload.data.id, "smoke-user");
 
   const statsResponse = await fetch(`${baseUrl}/api/stats?language=telugu`, {
     headers: authHeaders,
   });
   assert.equal(statsResponse.status, 200, "/api/stats should return 200");
   const statsPayload = await statsResponse.json();
-  assert.equal(typeof statsPayload.totalWords, "number");
+  assert.equal(typeof statsPayload.data.totalWords, "number");
 
   const learningResponse = await fetch(`${baseUrl}/api/analytics/learning?language=telugu`, {
     headers: authHeaders,
   });
   assert.equal(learningResponse.status, 200, "/api/analytics/learning should return 200");
   const learningPayload = await learningResponse.json();
-  assert.equal(Array.isArray(learningPayload.clusters), true);
+  assert.equal(Array.isArray(learningPayload.data.clusters), true);
 
   const wordBucketsResponse = await fetch(
     `${baseUrl}/api/analytics/word-buckets?bucket=learning&page=1&limit=5&language=telugu`,
@@ -191,7 +191,7 @@ test("e2e smoke: auth, analytics, cluster, review, and quiz critical paths are l
   );
   assert.equal(wordBucketsResponse.status, 200, "/api/analytics/word-buckets should return 200");
   const wordBucketsPayload = await wordBucketsResponse.json();
-  assert.equal(Array.isArray(wordBucketsPayload.words), true);
+  assert.equal(Array.isArray(wordBucketsPayload.data.words), true);
 
   const attemptHistoryResponse = await fetch(
     `${baseUrl}/api/attempts/history?limit=5&language=telugu`,
@@ -201,7 +201,7 @@ test("e2e smoke: auth, analytics, cluster, review, and quiz critical paths are l
   );
   assert.equal(attemptHistoryResponse.status, 200, "/api/attempts/history should return 200");
   const attemptHistoryPayload = await attemptHistoryResponse.json();
-  assert.equal(Array.isArray(attemptHistoryPayload), true);
+  assert.equal(Array.isArray(attemptHistoryPayload.data), true);
 
   const leaderboardResponse = await fetch(
     `${baseUrl}/api/leaderboard?window=weekly&limit=5&language=telugu`,
@@ -211,16 +211,16 @@ test("e2e smoke: auth, analytics, cluster, review, and quiz critical paths are l
   );
   assert.equal(leaderboardResponse.status, 200, "/api/leaderboard should return 200");
   const leaderboardPayload = await leaderboardResponse.json();
-  assert.equal(Array.isArray(leaderboardPayload), true);
+  assert.equal(Array.isArray(leaderboardPayload.data), true);
 
   const clustersResponse = await fetch(`${baseUrl}/api/clusters?language=telugu`, {
     headers: authHeaders,
   });
   assert.equal(clustersResponse.status, 200, "/api/clusters should return 200");
   const clustersPayload = await clustersResponse.json();
-  assert.equal(Array.isArray(clustersPayload), true, "/api/clusters should return array payload");
+  assert.equal(Array.isArray(clustersPayload.data), true, "/api/clusters should return array payload");
 
-  const firstCluster = clustersPayload[0];
+  const firstCluster = clustersPayload.data[0];
   if (firstCluster?.id) {
     const clusterDetailResponse = await fetch(
       `${baseUrl}/api/clusters/${firstCluster.id}?language=telugu`,
@@ -230,7 +230,7 @@ test("e2e smoke: auth, analytics, cluster, review, and quiz critical paths are l
     );
     assert.equal(clusterDetailResponse.status, 200, "/api/clusters/:id should return 200");
     const clusterDetailPayload = await clusterDetailResponse.json();
-    assert.equal(clusterDetailPayload.id, firstCluster.id);
+    assert.equal(clusterDetailPayload.data.id, firstCluster.id);
   }
 
   const reviewQueueResponse = await fetch(`${baseUrl}/api/review/queue?limit=5`, {
@@ -238,7 +238,7 @@ test("e2e smoke: auth, analytics, cluster, review, and quiz critical paths are l
   });
   assert.equal(reviewQueueResponse.status, 200, "/api/review/queue should return 200");
   const reviewQueuePayload = await reviewQueueResponse.json();
-  assert.equal(Array.isArray(reviewQueuePayload), true, "/api/review/queue should return array payload");
+  assert.equal(Array.isArray(reviewQueuePayload.data), true, "/api/review/queue should return array payload");
 
   const reviewDraftResponse = await fetch(`${baseUrl}/api/review/words`, {
     method: "POST",
@@ -263,9 +263,9 @@ test("e2e smoke: auth, analytics, cluster, review, and quiz critical paths are l
   });
   assert.equal(reviewDraftResponse.status, 200, "/api/review/words should return 200");
   const reviewDraftPayload = await reviewDraftResponse.json();
-  assert.equal(typeof reviewDraftPayload.id, "number");
-  assert.equal(reviewDraftPayload.reviewStatus, "draft");
-  assert.equal(reviewDraftPayload.examplesCreated, 1);
+  assert.equal(typeof reviewDraftPayload.data.id, "number");
+  assert.equal(reviewDraftPayload.data.reviewStatus, "draft");
+  assert.equal(reviewDraftPayload.data.examplesCreated, 1);
 
   const modes = [
     QuizModeEnum.DAILY_REVIEW,

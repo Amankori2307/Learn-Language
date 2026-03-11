@@ -2,7 +2,7 @@ import { Body, Controller, Inject, Post, Req, Res, UseGuards } from "@nestjs/com
 import type { Request, Response } from "express";
 import { AuthenticatedGuard } from "../../common/guards/authenticated.guard";
 import { AppError } from "../../common/errors/app-error";
-import { logApiEvent, sendError } from "../../common/http";
+import { logApiEvent, sendError, sendSuccess } from "../../common/http";
 import { ResolveAudioBodyDto } from "./audio.dto";
 import { AudioService } from "./audio.service";
 
@@ -11,7 +11,7 @@ import { AudioService } from "./audio.service";
 export class AudioApiController {
   constructor(@Inject(AudioService) private readonly audioService: AudioService) {}
 
-  @Post("/api/audio/resolve")
+  @Post("/audio/resolve")
   async resolveAudio(@Req() req: Request, @Res() res: Response, @Body() body: ResolveAudioBodyDto) {
     try {
       const userId = String(
@@ -23,7 +23,7 @@ export class AudioApiController {
         source: result.source,
         cached: result.cached,
       });
-      res.json(result);
+      sendSuccess(req, res, result);
     } catch (error) {
       this.handleError(req, res, error);
     }

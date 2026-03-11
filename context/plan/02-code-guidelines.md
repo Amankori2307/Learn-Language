@@ -7,6 +7,7 @@
 - Standardize interface naming for API/domain contracts.
 - Keep logic separate from UI rendering so visual layer swaps are low-risk.
 - Eliminate magic numbers via named constants/enums.
+- Keep delivery flow disciplined so phase work lands on isolated branches and production automation stays tied to `main`.
 
 ## Rules
 
@@ -66,6 +67,24 @@
 - When a phase or task is complete, mark it done once, migrate durable outcomes into feature documentation or `APP_CONTEXT.md`, and remove its detailed execution tracking from active planning files.
 - Do not keep completed phase breakdowns in `context/plan` just for history; keep only unfinished phases or genuinely active strategy docs there.
 - If a completed phase still contains information worth retaining, fold that information into implementation-backed docs such as feature docs, server/deploy docs, or architecture baselines before removing the phase plan from active context.
+
+10. Branch workflow:
+
+- Start each new phase on a new git branch.
+- Use one branch per phase; do not stack multiple active phases on the same long-lived branch.
+- Recommended naming: `phase-<number>-<short-scope>` or equivalent team-approved phase naming.
+- Keep `main` as the integration and deployment branch.
+- Merge a phase branch into `main` only after its scoped work is verified and ready for integration.
+- CI/CD should be treated as `main`-driven only; do not assume non-`main` branches deploy automatically.
+- If a phase is large, use short-lived sub-branches off the phase branch only when necessary, then merge them back into the phase branch before merging to `main`.
+- Before starting the next phase, branch from the latest `main` unless there is an explicit reason to branch from another approved integration branch.
+
+11. Commit hygiene:
+
+- Commit once you have a sizable, coherent set of changes.
+- Commit when you complete a major logical task, not only at the very end of a long phase.
+- Prefer commits that represent one meaningful unit of progress and can be understood or reverted independently.
+- Do not mix unrelated fixes, refactors, and feature work into the same commit unless they are inseparable for correctness.
 
 ## Adoption plan
 

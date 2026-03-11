@@ -69,10 +69,26 @@ test("reviewer middleware blocks unauthenticated and learner users", async () =>
       const unauthenticated = await runRequireReviewer();
       assert.equal(unauthenticated.nextCalled, false);
       assert.equal(unauthenticated.response.statusCode, 403);
+      assert.deepEqual(unauthenticated.response.payload, {
+        success: false,
+        error: true,
+        data: null,
+        code: "FORBIDDEN",
+        message: "Reviewer access required",
+        requestId: "test-req-id",
+      });
 
       const learner = await runRequireReviewer("learner-1");
       assert.equal(learner.nextCalled, false);
       assert.equal(learner.response.statusCode, 403);
+      assert.deepEqual(learner.response.payload, {
+        success: false,
+        error: true,
+        data: null,
+        code: "FORBIDDEN",
+        message: "Reviewer access required",
+        requestId: "test-req-id",
+      });
     },
   );
 });

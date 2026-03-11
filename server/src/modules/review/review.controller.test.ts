@@ -30,6 +30,27 @@ function createMockResponse() {
   return { response, state };
 }
 
+function success<T>(requestId: string, data: T) {
+  return {
+    success: true,
+    error: false,
+    data,
+    message: "OK",
+    requestId,
+  };
+}
+
+function error(requestId: string, code: string, message: string) {
+  return {
+    success: false,
+    error: true,
+    data: null,
+    code,
+    message,
+    requestId,
+  };
+}
+
 test("ReviewApiController.bulkTransition forwards reviewer id and payload", async () => {
   let receivedReviewerId: string | null = null;
   let receivedBody: unknown = null;
@@ -77,7 +98,7 @@ test("ReviewApiController.bulkTransition forwards reviewer id and payload", asyn
   assert.equal(receivedReviewerId, "reviewer-1");
   assert.deepEqual(receivedBody, body);
   assert.equal(state.statusCode, 200);
-  assert.deepEqual(state.body, { updated: 2, skipped: 0 });
+  assert.deepEqual(state.body, success("req-bulk", { updated: 2, skipped: 0 }));
 });
 
 test("ReviewApiController.getHistory maps AppError from service", async () => {
@@ -116,11 +137,7 @@ test("ReviewApiController.getHistory maps AppError from service", async () => {
   await controller.getHistory(request, response, 99);
 
   assert.equal(state.statusCode, 404);
-  assert.deepEqual(state.body, {
-    code: "NOT_FOUND",
-    message: "Word not found",
-    requestId: "req-history",
-  });
+  assert.deepEqual(state.body, error("req-history", "NOT_FOUND", "Word not found"));
 });
 
 test("ReviewApiController.submitDraft forwards submitter id and body", async () => {
@@ -172,5 +189,8 @@ test("ReviewApiController.submitDraft forwards submitter id and body", async () 
   assert.equal(receivedSubmittedBy, "u-5");
   assert.deepEqual(receivedBody, body);
   assert.equal(state.statusCode, 200);
-  assert.deepEqual(state.body, { id: 55, reviewStatus: ReviewStatusEnum.DRAFT, examplesCreated: 1 });
+  assert.deepEqual(
+    state.body,
+    success("req-draft", { id: 55, reviewStatus: ReviewStatusEnum.DRAFT, examplesCreated: 1 }),
+  );
 });

@@ -1,5 +1,5 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { api } from "@shared/routes";
+import { api, parseSuccessResponse } from "@shared/routes";
 import { z } from "zod";
 import { QuizModeEnum } from "@shared/domain/enums";
 import { useLearningLanguage } from "@/hooks/use-language";
@@ -23,7 +23,7 @@ export function useGenerateQuiz(mode: QuizMode = QuizModeEnum.DAILY_REVIEW, clus
       const res = await apiClient.get(
         buildApiUrl(`${api.quiz.generate.path}?${params.toString()}`),
       );
-      return api.quiz.generate.responses[200].parse(res.data);
+      return parseSuccessResponse(api.quiz.generate.responses[200], res.data);
     },
     refetchOnWindowFocus: false,
     staleTime: 0, // Always fetch fresh quiz
@@ -45,7 +45,7 @@ export function useSubmitAnswer() {
         data: payload,
       });
 
-      return api.quiz.submit.responses[200].parse(res.data);
+      return parseSuccessResponse(api.quiz.submit.responses[200], res.data);
     },
     onSuccess: () => {
       // Invalidate stats to refresh dashboard progress immediately
@@ -62,7 +62,7 @@ export function useStats() {
       const params = new URLSearchParams({ language });
       try {
         const res = await apiClient.get(buildApiUrl(`${api.stats.get.path}?${params.toString()}`));
-        return api.stats.get.responses[200].parse(res.data);
+        return parseSuccessResponse(api.stats.get.responses[200], res.data);
       } catch (error) {
         if ((error as AxiosError).response?.status === 401) {
           return null;
@@ -83,7 +83,7 @@ export function useLearningInsights() {
         const res = await apiClient.get(
           buildApiUrl(`${api.analytics.learning.path}?${params.toString()}`),
         );
-        return api.analytics.learning.responses[200].parse(res.data);
+        return parseSuccessResponse(api.analytics.learning.responses[200], res.data);
       } catch (error) {
         if ((error as AxiosError).response?.status === 401) {
           return null;
@@ -99,7 +99,7 @@ export function useSeedData() {
   return useMutation({
     mutationFn: async () => {
       const res = await apiClient.post(buildApiUrl(api.admin.seed.path));
-      return res.data;
+      return parseSuccessResponse(api.admin.seed.responses[200], res.data);
     },
     onSuccess: () => {
       queryClient.invalidateQueries();
