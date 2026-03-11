@@ -121,6 +121,9 @@ Next task ID: -
 - `P13-020` is now complete:
   - the remaining auth and quiz query-behavior overrides now live behind an explicit shared `QUERY_BEHAVIOR_RULES` seam instead of inline literals and one-off constants
   - focused tests now protect the shared override contract directly
+- `P13-021` is now complete:
+  - the React Query ownership baseline now reflects the current state of shared query-key ownership, invalidation narrowing, query-behavior overrides, and audio resolution ownership
+  - stale migration/prioritization text was removed so the document now describes the remaining convention debt rather than already-finished implementation slices
 - Phase 12 planning is now active in [81-phase-12-theme-system-and-design-token-extraction.md](/Users/aman/Projects/personal-projects/Learn-Language/context/plan/81-phase-12-theme-system-and-design-token-extraction.md).
 - Active backlog was reprioritized to start with theming-system readiness before UI theme selection work:
   - `P12-001` is now complete via [theme-system-baseline.md](/Users/aman/Projects/personal-projects/Learn-Language/documentation/theme-system-baseline.md)

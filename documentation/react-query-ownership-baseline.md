@@ -52,7 +52,7 @@ Current reality:
 | cluster detail | `useCluster` | query | healthy |
 | word list | `useWords` | query | healthy |
 | word detail | `useWord` | query | healthy |
-| cluster list for add-vocabulary form | `useCreateVocabularyDraftForm` | query | healthy; feature hook owns cluster-fetch lifecycle for the draft form |
+| cluster list for add-vocabulary form | `useCreateVocabularyDraftForm` via `useClustersForLanguage` | query | healthy; transport/query ownership is delegated to the shared clusters hook |
 
 ### Analytics
 
@@ -87,7 +87,7 @@ Current reality:
 
 ## Current request ownership problems
 
-### 1. Query key conventions exist but are implicit
+### 1. Query key conventions are mostly implemented but not yet promoted to a repo-wide policy
 
 Current patterns:
 
@@ -96,13 +96,13 @@ Current patterns:
 - route-path plus object
 - route-path plus page/filter variables
 
-Problems:
+Remaining gap:
 
 - most shared hooks now own and export their key builders, but the repo still lacks one centralized convention policy
 - invalidation partials are used without a formal contract
-- future refactors could easily break cache behavior
+- future refactors could still drift if new hooks do not follow the same ownership pattern
 
-### 2. Invalidation strategy is inconsistent
+### 2. Invalidation strategy is narrower now, but the policy is still implicit
 
 Examples:
 
@@ -111,11 +111,11 @@ Examples:
 - review mutations invalidate queue/history
 - `useSeedData` now invalidates a fixed list of seed-affected resource prefixes, but the repo still has no shared invalidation policy
 
-Problem:
+Remaining gap:
 
-- there is no shared rule for narrow versus broad invalidation
+- there is no shared rule for narrow versus broad invalidation beyond this baseline
 
-### 3. Query defaults are global but feature-specific overrides are undocumented
+### 3. Query defaults are now centralized, but the exception policy still needs to stay explicit
 
 Global defaults in [client/src/lib/queryClient.ts](/Users/aman/Projects/personal-projects/Learn-Language/client/src/lib/queryClient.ts):
 
@@ -128,9 +128,9 @@ Feature overrides:
 - auth sets finite stale time
 - quiz generation sets `staleTime: 0`
 
-Problem:
+Remaining gap:
 
-- the reasons for these exceptions are not formalized
+- the reasons for these exceptions are now formalized in code, but future overrides still need to follow the same shared seam
 
 ## Ownership rules to enforce
 
@@ -280,59 +280,24 @@ This is currently aligned with the app’s behavior and avoids noisy retries on 
 
 The main requirement is not one exact value. It is that each override must be intentional, documented, and preferably owned from one explicit rule seam rather than repeated as ad hoc literals.
 
-## Migration order for `P9-002`
+## Outcome after `P9-002` follow-up work
 
-### Step 1
+The originally identified migration slices are now complete:
 
-Move all component-level queries into hooks or feature view-models.
+- component-level transport-backed query ownership was moved out of learner-facing presentational surfaces
+- shared learner hooks now broadly export explicit query-key builders
+- auth and quiz query-behavior overrides now live behind a shared rule seam
+- add-vocabulary cluster lookup now reuses the shared clusters hook
+- audio resolution request ownership is separated from browser playback behavior
+- high-impact learner invalidation paths are now narrowed and explicit
 
-Immediate target:
+## Remaining follow-up work
 
-- `CreateVocabularyDraftForm`
+The remaining work is smaller and more policy-oriented than migration-oriented:
 
-### Step 2
-
-Normalize key structure and invalidation expectations in shared hooks.
-
-Highest-priority hooks:
-
-- `use-quiz`
-- `use-review`
-- `use-profile`
-- `use-clusters`
-- `use-leaderboard`
-- `use-attempt-history`
-
-### Step 3
-
-Refactor page-specific orchestration into feature view-models where pages currently combine:
-
-- URL-state synchronization
-- filtering/sorting/pagination
-- request consumption
-- summary derivation
-
-Highest-priority pages:
-
-- clusters
-- history
-- review
-
-### Step 4
-
-Separate audio resolution request logic from browser playback ownership.
-
-### Step 5
-
-Re-run inventory after learner surfaces stabilize, then align reviewer/admin surfaces.
-
-## Immediate implementation priorities
-
-The first code migrations under `P9-002` should target:
-
-1. cluster query ownership in add-vocabulary
-2. query key normalization for high-traffic learner hooks
-3. page-level orchestration extraction for clusters/history/review
+1. document the query-key and invalidation conventions in the repo-wide governance docs so new hooks follow the same ownership model by default
+2. keep reviewer/admin surfaces aligned when future mutations or shared hooks are added
+3. periodically re-run the inventory if new feature areas introduce direct transport access or ad hoc cache rules
 
 ## Acceptance checks for `P9-002`
 
@@ -344,3 +309,5 @@ The first code migrations under `P9-002` should target:
 - invalidation behavior is intentional and narrow by default
 - Axios remains behind service/hook boundaries
 - React Query lifecycle ownership is consistent across learner and reviewer flows
+
+That acceptance bar is now met for the current codebase. The remaining debt is about keeping the conventions explicit and enforced as new features are added.
