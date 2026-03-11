@@ -1,0 +1,39 @@
+import { Button } from "@/components/ui/button";
+import { X } from "lucide-react";
+import type { ReactNode } from "react";
+
+export function QuizSessionHeader({
+  progress,
+  onExit,
+}: {
+  progress: number;
+  onExit: () => void;
+}) {
+  return (
+    <div className="mx-auto flex w-full max-w-4xl items-center gap-3 px-3 py-4 sm:gap-4 sm:px-4 sm:py-6">
+      <Button
+        variant="ghost"
+        size="icon"
+        className="rounded-full hover:bg-secondary"
+        onClick={onExit}
+      >
+        <X className="h-6 w-6 text-muted-foreground" />
+      </Button>
+      <div className="h-3 flex-1 overflow-hidden rounded-full bg-secondary">
+        <div
+          className="h-full bg-primary transition-all duration-500 ease-out"
+          style={{ width: `${progress}%` }}
+        />
+      </div>
+    </div>
+  );
+}
+
+export function QuizSessionFrame({ header, children }: { header: ReactNode; children: ReactNode }) {
+  return (
+    <div className="flex min-h-screen flex-col bg-background">
+      {header}
+      <div className="flex flex-1 items-center justify-center p-3 sm:p-4">{children}</div>
+    </div>
+  );
+}

@@ -1,6 +1,4 @@
 import { QuizCard } from "@/components/quiz-card";
-import { Button } from "@/components/ui/button";
-import { X } from "lucide-react";
 import { useQuizPageViewModel } from "@/features/quiz/use-quiz-page-view-model";
 import {
   QuizEmptyState,
@@ -8,6 +6,7 @@ import {
   QuizLoadingState,
   QuizMissingQuestionState,
 } from "@/features/quiz/quiz-page-states";
+import { QuizSessionFrame, QuizSessionHeader } from "@/features/quiz/quiz-session-shell";
 
 export default function QuizPage() {
   const {
@@ -69,27 +68,9 @@ export default function QuizPage() {
   }
 
   return (
-    <div className="min-h-screen bg-background flex flex-col">
-      {/* Quiz Header */}
-      <div className="mx-auto flex w-full max-w-4xl items-center gap-3 px-3 py-4 sm:gap-4 sm:px-4 sm:py-6">
-        <Button
-          variant="ghost"
-          size="icon"
-          className="rounded-full hover:bg-secondary"
-          onClick={() => setLocation("/")}
-        >
-          <X className="w-6 h-6 text-muted-foreground" />
-        </Button>
-        <div className="flex-1 h-3 bg-secondary rounded-full overflow-hidden">
-          <div
-            className="h-full bg-primary transition-all duration-500 ease-out"
-            style={{ width: `${progress}%` }}
-          />
-        </div>
-      </div>
-
-      {/* Quiz Content */}
-      <div className="flex flex-1 items-center justify-center p-3 sm:p-4">
+    <QuizSessionFrame
+      header={<QuizSessionHeader progress={progress} onExit={() => setLocation("/")} />}
+    >
         <QuizCard
           wordId={currentQuestion.wordId}
           question={currentQuestion.questionText}
@@ -106,7 +87,6 @@ export default function QuizPage() {
           result={result}
           onNext={handleNext}
         />
-      </div>
-    </div>
+    </QuizSessionFrame>
   );
 }
