@@ -299,6 +299,8 @@ The remaining work is smaller and more policy-oriented than migration-oriented:
 2. keep reviewer/admin surfaces aligned when future mutations or shared hooks are added
 3. periodically re-run the inventory if new feature areas introduce direct transport access or ad hoc cache rules
 
+The first follow-up item is now complete through the repo-wide coding guidance and governance docs.
+
 ## Acceptance checks for `P9-002`
 
 `P9-002` is complete only when:
