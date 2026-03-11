@@ -4,6 +4,10 @@ import { useWordBucketsViewModel } from "@/features/analytics/use-word-buckets-v
 import { QuizModeEnum } from "@shared/domain/enums";
 import { SurfaceMessage, TableSurfaceSkeleton } from "@/components/ui/page-states";
 import { WordBucketWordList } from "@/features/analytics/word-bucket-word-list";
+import {
+  WordBucketHeader,
+  WordBucketNextAction,
+} from "@/features/analytics/word-bucket-header";
 
 export default function WordBucketsPage() {
   const {
@@ -48,17 +52,11 @@ export default function WordBucketsPage() {
   return (
     <Layout>
       <div className="space-y-6">
-        <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-          <div>
-            <h1 className="text-3xl font-bold">{data?.title ?? "Word Bucket"}</h1>
-            <p className="text-muted-foreground mt-1">
-              {data?.meaning ?? "Track your progress state by word."}
-            </p>
-          </div>
-          <Button variant="outline" onClick={() => navigate("/")}>
-            Back to Dashboard
-          </Button>
-        </div>
+        <WordBucketHeader
+          title={data?.title ?? "Word Bucket"}
+          meaning={data?.meaning ?? "Track your progress state by word."}
+          onBack={() => navigate("/")}
+        />
 
         <div className="rounded-xl border border-border/50 bg-card p-4">
           <p className="text-sm text-muted-foreground">How to improve</p>
@@ -67,23 +65,14 @@ export default function WordBucketsPage() {
           </p>
         </div>
 
-        <div className="rounded-xl border border-border/50 bg-card p-4 md:p-5">
-          <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
-            <div>
-              <p className="text-sm text-muted-foreground">Next action</p>
-              <h2 className="text-lg font-semibold mt-1">{bucketCta.title}</h2>
-              <p className="text-sm text-muted-foreground mt-1">{bucketCta.description}</p>
-            </div>
-            <div className="flex flex-wrap gap-2">
-              <Button onClick={() => navigate(bucketCta.primaryHref)}>
-                {bucketCta.primaryLabel}
-              </Button>
-              <Button variant="outline" onClick={() => navigate(bucketCta.secondaryHref)}>
-                {bucketCta.secondaryLabel}
-              </Button>
-            </div>
-          </div>
-        </div>
+        <WordBucketNextAction
+          title={bucketCta.title}
+          description={bucketCta.description}
+          primaryLabel={bucketCta.primaryLabel}
+          secondaryLabel={bucketCta.secondaryLabel}
+          onPrimary={() => navigate(bucketCta.primaryHref)}
+          onSecondary={() => navigate(bucketCta.secondaryHref)}
+        />
 
         <div className="grid grid-cols-1 gap-2 sm:flex sm:flex-wrap">
           <Button

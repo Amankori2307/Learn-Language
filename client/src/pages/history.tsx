@@ -1,17 +1,13 @@
 import { Layout } from "@/components/layout";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { PendingButton } from "@/components/ui/pending-button";
-import { QuizDirectionEnum } from "@shared/domain/enums";
 import {
   useHistoryPageViewModel,
-  type HistoryDirectionFilter,
-  type HistoryResultFilter,
-  type HistorySortOption,
 } from "@/features/history/use-history-page-view-model";
 import { SurfaceMessage, TableSurfaceSkeleton } from "@/components/ui/page-states";
 import { HistoryResultsTable } from "@/features/history/history-results-table";
+import { HistorySummaryCards } from "@/features/history/history-summary-cards";
+import { HistoryFilterPanel } from "@/features/history/history-filter-panel";
 
 export default function HistoryPage() {
   const {
@@ -57,76 +53,23 @@ export default function HistoryPage() {
           </PendingButton>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-          <div className="rounded-xl border border-border/50 bg-card p-4">
-            <p className="text-xs text-muted-foreground">Filtered Attempts</p>
-            <p className="text-2xl font-semibold">{summary.total}</p>
-          </div>
-          <div className="rounded-xl border border-border/50 bg-card p-4">
-            <p className="text-xs text-muted-foreground">Correct</p>
-            <p className="text-2xl font-semibold">{summary.correct}</p>
-          </div>
-          <div className="rounded-xl border border-border/50 bg-card p-4">
-            <p className="text-xs text-muted-foreground">Accuracy</p>
-            <p className="text-2xl font-semibold">{summary.accuracy}%</p>
-          </div>
-        </div>
+        <HistorySummaryCards
+          total={summary.total}
+          correct={summary.correct}
+          accuracy={summary.accuracy}
+        />
 
-        <div className="rounded-2xl border border-border/50 bg-card p-4 md:p-6 grid grid-cols-1 md:grid-cols-4 gap-3">
-          <div className="space-y-1 md:col-span-2">
-            <Label htmlFor="history-search">Search</Label>
-            <Input
-              id="history-search"
-              value={search}
-              onChange={(event) => applyFilterReset(setSearch, event.target.value)}
-              placeholder="Search by word, transliteration, meaning"
-            />
-          </div>
-          <div className="space-y-1">
-            <Label htmlFor="history-result">Result</Label>
-            <select
-              id="history-result"
-              className="h-10 w-full rounded-md border border-input bg-background px-3 text-sm"
-              value={resultFilter}
-              onChange={(event) =>
-                applyFilterReset(setResultFilter, event.target.value as HistoryResultFilter)
-              }
-            >
-              <option value="all">All</option>
-              <option value="correct">Correct</option>
-              <option value="wrong">Wrong</option>
-            </select>
-          </div>
-          <div className="space-y-1">
-            <Label htmlFor="history-direction">Direction</Label>
-            <select
-              id="history-direction"
-              className="h-10 w-full rounded-md border border-input bg-background px-3 text-sm"
-              value={directionFilter}
-              onChange={(event) =>
-                applyFilterReset(setDirectionFilter, event.target.value as HistoryDirectionFilter)
-              }
-            >
-              <option value="all">All</option>
-              <option value={QuizDirectionEnum.SOURCE_TO_TARGET}>Source -&gt; English</option>
-              <option value={QuizDirectionEnum.TARGET_TO_SOURCE}>English -&gt; Source</option>
-            </select>
-          </div>
-          <div className="space-y-1">
-            <Label htmlFor="history-sort">Sort</Label>
-            <select
-              id="history-sort"
-              className="h-10 w-full rounded-md border border-input bg-background px-3 text-sm"
-              value={sortBy}
-              onChange={(event) => applyFilterReset(setSortBy, event.target.value as HistorySortOption)}
-            >
-              <option value="newest">Newest</option>
-              <option value="oldest">Oldest</option>
-              <option value="confidence_desc">Confidence (High first)</option>
-              <option value="response_time_desc">Slowest first</option>
-            </select>
-          </div>
-        </div>
+        <HistoryFilterPanel
+          search={search}
+          setSearch={setSearch}
+          resultFilter={resultFilter}
+          setResultFilter={setResultFilter}
+          directionFilter={directionFilter}
+          setDirectionFilter={setDirectionFilter}
+          sortBy={sortBy}
+          setSortBy={setSortBy}
+          applyFilterReset={applyFilterReset}
+        />
 
         {isLoading ? (
           <TableSurfaceSkeleton rows={8} columns={6} />

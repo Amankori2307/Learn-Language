@@ -1,8 +1,6 @@
 import { Layout } from "@/components/layout";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { TutorChatRoleEnum } from "@shared/domain/enums";
 import { useTutorPageViewModel } from "@/features/tutor/use-tutor-page-view-model";
+import { TutorChatPanel } from "@/features/tutor/tutor-chat-panel";
 
 export default function TutorPage() {
   const { input, setInput, chat, sendMessage } = useTutorPageViewModel();
@@ -17,31 +15,7 @@ export default function TutorPage() {
           </p>
         </div>
 
-        <div className="bg-card border border-border/50 rounded-2xl p-4 h-[420px] overflow-y-auto space-y-3">
-          {chat.map((msg, idx) => (
-            <div
-              key={`${msg.role}-${idx}`}
-              className={`rounded-xl px-4 py-3 text-sm ${msg.role === TutorChatRoleEnum.USER ? "bg-primary/10" : "bg-secondary"}`}
-            >
-              <span className="font-semibold mr-2">
-                {msg.role === TutorChatRoleEnum.USER ? "You" : "Tutor"}:
-              </span>
-              {msg.text}
-            </div>
-          ))}
-        </div>
-
-        <div className="flex gap-2">
-          <Input
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-            placeholder="Write a sentence..."
-            onKeyDown={(e) => {
-              if (e.key === "Enter") sendMessage();
-            }}
-          />
-          <Button onClick={sendMessage}>Send</Button>
-        </div>
+        <TutorChatPanel input={input} setInput={setInput} chat={chat} sendMessage={sendMessage} />
       </div>
     </Layout>
   );

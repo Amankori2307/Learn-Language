@@ -1,0 +1,50 @@
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { TutorChatRoleEnum } from "@shared/domain/enums";
+
+type TutorMessage = {
+  role: TutorChatRoleEnum;
+  text: string;
+};
+
+export function TutorChatPanel({
+  input,
+  setInput,
+  chat,
+  sendMessage,
+}: {
+  input: string;
+  setInput: (value: string) => void;
+  chat: TutorMessage[];
+  sendMessage: () => void;
+}) {
+  return (
+    <>
+      <div className="h-[420px] space-y-3 overflow-y-auto rounded-2xl border border-border/50 bg-card p-4">
+        {chat.map((msg, idx) => (
+          <div
+            key={`${msg.role}-${idx}`}
+            className={`rounded-xl px-4 py-3 text-sm ${msg.role === TutorChatRoleEnum.USER ? "bg-primary/10" : "bg-secondary"}`}
+          >
+            <span className="mr-2 font-semibold">
+              {msg.role === TutorChatRoleEnum.USER ? "You" : "Tutor"}:
+            </span>
+            {msg.text}
+          </div>
+        ))}
+      </div>
+
+      <div className="flex gap-2">
+        <Input
+          value={input}
+          onChange={(e) => setInput(e.target.value)}
+          placeholder="Write a sentence..."
+          onKeyDown={(e) => {
+            if (e.key === "Enter") sendMessage();
+          }}
+        />
+        <Button onClick={sendMessage}>Send</Button>
+      </div>
+    </>
+  );
+}
