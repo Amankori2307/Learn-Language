@@ -28,6 +28,8 @@ Manual deployment is done from local machine with:
 
 - [`script/deploy-production.sh`](/Users/aman/.codex/worktrees/063e/Learn-Language/script/deploy-production.sh)
 
+The deploy script defaults to the `latest` image tag, so deployment is not tied to the local checked-out branch. Set `IMAGE_TAG` explicitly only when you want to deploy a specific published image.
+
 Server-side runtime files are:
 
 - [`deploy/production/docker-compose.prod.yml`](/Users/aman/.codex/worktrees/063e/Learn-Language/deploy/production/docker-compose.prod.yml)
