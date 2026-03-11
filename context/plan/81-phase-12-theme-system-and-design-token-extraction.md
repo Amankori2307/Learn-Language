@@ -14,7 +14,7 @@ Make the client app ready for named multi-theme support by finishing design-toke
 | P12-004 | done | Convert the current shipped visual style into an explicit named theme and add a new minimal theme | P12-003 | M | the current look is preserved as a named theme and a complete `minimal` theme exists beside it |
 | P12-005 | done | Refactor shared UI primitives to depend only on semantic tokens rather than hardcoded colors or dark-mode-only branches | P12-004 | L | buttons, cards, inputs, overlays, states, and shared surfaces inherit theme changes consistently |
 | P12-006 | done | Standardize semantic status styling for success, warning, error, and info states across shared and feature components | P12-005 | M | no reusable state surface relies on raw green/red/rose/emerald classes directly |
-| P12-007 | todo | Remove remaining page and feature styling outliers that bypass the design system and migrate them to shared theme-safe primitives | P12-006 | L | representative pages/features no longer hardcode product styling outside approved tokens/variants |
+| P12-007 | done | Remove remaining page and feature styling outliers that bypass the design system and migrate them to shared theme-safe primitives | P12-006 | L | representative pages/features no longer hardcode product styling outside approved tokens/variants |
 | P12-008 | todo | Extend chart theming and theme-aware utilities to support named themes beyond light and dark | P12-005 | M | charts and theme-dependent helpers work with the new named theme model |
 | P12-009 | todo | Add regression coverage and verification for theme-safe primitives, the default theme seam, and the new minimal theme | P12-007,P12-008 | M | tests and smoke checks protect the theme system against drift and missing-token regressions |
 
@@ -83,10 +83,10 @@ The top-level tasks above are the phase gates. Actual execution should happen in
 
 | ID | Status | Task | Depends On | Done When |
 | -- | ------ | ---- | ---------- | --------- |
-| P12-007A | todo | Migrate obvious outlier screens such as not-found and any remaining one-off empty/error states to shared surfaces and semantic tokens | P12-006D | app-level outliers stop bypassing the design system |
-| P12-007B | todo | Migrate feature components with raw product styling, starting with quiz feedback and profile save status messaging | P12-007A | known high-visibility feature outliers are theme-safe |
-| P12-007C | todo | Extract repeated page-level surface patterns into shared variants or feature primitives where the same styling repeats materially | P12-007B | repeated styling is centralized rather than copied |
-| P12-007D | todo | Run a final search pass for hardcoded color/style violations and clear or explicitly defer the remainder | P12-007C | remaining debt is either removed or documented |
+| P12-007A | done | Migrate obvious outlier screens such as not-found and any remaining one-off empty/error states to shared surfaces and semantic tokens | P12-006D | app-level outliers stop bypassing the design system |
+| P12-007B | done | Migrate feature components with raw product styling, starting with quiz feedback and profile save status messaging | P12-007A | known high-visibility feature outliers are theme-safe |
+| P12-007C | done | Extract repeated page-level surface patterns into shared variants or feature primitives where the same styling repeats materially | P12-007B | repeated styling is centralized rather than copied |
+| P12-007D | done | Run a final search pass for hardcoded color/style violations and clear or explicitly defer the remainder | P12-007C | remaining debt is either removed or documented |
 
 ### P12-008 - Chart and utility theme support
 

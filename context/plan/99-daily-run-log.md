@@ -32,9 +32,9 @@ Next task ID: -
 
 Date: 2026-03-11  
 Session owner: Codex  
-Last completed task ID: P12-006  
+Last completed task ID: P12-007  
 Current in-progress task ID: -  
-Next task ID: P12-007
+Next task ID: P12-008
 
 ## Current state
 
@@ -79,7 +79,12 @@ Next task ID: P12-007
     - status text utility classes now exist in [client/src/index.css](/Users/aman/Projects/personal-projects/Learn-Language/client/src/index.css)
     - targeted verification passed with `pnpm exec vitest run client/src/features/profile/profile-form-card.test.tsx client/src/features/review/create-vocabulary-draft-form.test.tsx client/src/features/history/history-results-table.test.tsx client/src/components/quiz-card.test.tsx client/src/pages/history.integration.test.tsx client/src/pages/add-vocabulary.integration.test.tsx client/src/theme/app-theme.test.tsx` and `pnpm run check`
     - remaining raw status-color outlier is now limited to [client/src/pages/not-found.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/pages/not-found.tsx), which moves into `P12-007`
-  - `P12-007` is queued next to clean up remaining page/feature styling outliers
+  - `P12-007` is now complete:
+    - the not-found route now uses shared theme-safe surface/status styling in [client/src/pages/not-found.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/pages/not-found.tsx)
+    - quiz feedback examples no longer rely on `dark:` branching in [client/src/components/quiz/quiz-feedback-examples.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/components/quiz/quiz-feedback-examples.tsx)
+    - the final page/feature outlier scan now leaves only [client/src/components/ui/chart.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/components/ui/chart.tsx), which is the intended scope of `P12-008`
+    - targeted verification passed with `pnpm exec vitest run client/src/components/quiz-card.test.tsx client/src/pages/auth.integration.test.tsx client/src/theme/app-theme.test.tsx` and `pnpm run check`
+  - `P12-008` is queued next to remove the remaining chart/theme utility light-dark coupling
 - Planning baselines for the next implementation tasks are now documented:
   - React Query ownership baseline in [documentation/react-query-ownership-baseline.md](/Users/aman/Projects/personal-projects/Learn-Language/documentation/react-query-ownership-baseline.md)
   - Async UX contract in [documentation/async-ux-contract.md](/Users/aman/Projects/personal-projects/Learn-Language/documentation/async-ux-contract.md)

@@ -112,6 +112,6 @@ Build a text-first language learning app with high data correctness, strong memo
 
 - Execute in order from [01-master-task-registry.md](/Users/aman/Projects/personal-projects/Learn-Language/context/plan/01-master-task-registry.md).
 - Current execution track:
-  - last completed implementation slice is `P12-006` semantic status styling migration
-  - next planned implementation slice is `P12-007` page and feature outlier cleanup
+  - last completed implementation slice is `P12-007` page and feature outlier cleanup
+  - next planned implementation slice is `P12-008` chart and theme-aware utility migration
   - deferred but still active product gap: `P11-002` confidence-input follow-up for quiz UX
