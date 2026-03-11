@@ -12,7 +12,7 @@ Status legend:
 
 | Surface | Loading | Error | Empty | Success / normal render | Pending / interaction | Responsive | Notes |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| `dashboard` | `covered` | `covered` | `covered` | `covered` | `partial` | `partial` | loading, retryable error, default primary-action behavior, and zero-data/default-stat rendering are now covered |
+| `dashboard` | `covered` | `covered` | `covered` | `covered` | `covered` | `partial` | loading, retryable error, zero-data/default-stat rendering, and route-level learner action wiring are now covered |
 | `quiz` | `covered` | `partial` | `covered` | `covered` | `covered` | `partial` | quiz completion and active-session shell are covered; explicit route-level error fallback remains thin |
 | `clusters` | `covered` | `covered` | `covered` | `covered` | `partial` | `covered` | search/filter interaction, request-failure handling, and responsive filter/pagination classes are covered |
 | `contextual` | `covered` | `covered` | `covered` | `covered` | `partial` | `covered` | cluster selection, request-failure handling, and responsive header/story-grid classes are covered |
@@ -42,7 +42,7 @@ Status legend:
 
 ## Highest-priority remaining gaps
 
-1. pending/interaction coverage remains thinner than ideal on some learner routes, with `dashboard`, `clusters`, and `contextual` still the clearest remaining learner follow-ups.
+1. pending/interaction coverage remains thinner than ideal on some learner routes, with `clusters` and `contextual` now the clearest remaining learner follow-ups.
 
 ## Explicit Phase 9 deferrals
 
