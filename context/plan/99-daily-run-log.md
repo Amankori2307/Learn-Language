@@ -32,7 +32,7 @@ Next task ID: -
 
 Date: 2026-03-12  
 Session owner: Codex  
-Last completed task ID: P13-011  
+Last completed task ID: P13-012  
 Current in-progress task ID: -  
 Next task ID: -
 
@@ -94,6 +94,9 @@ Next task ID: -
 - `P13-011` is now complete:
   - add-vocabulary page now owns the initial cluster-bootstrap loading branch instead of leaving it entirely inside the draft form
   - route-level integration coverage now protects that loading surface alongside the existing create/error/responsive checks
+- `P13-012` is now complete:
+  - tutor composer now uses an explicit stacked-on-mobile and row-on-desktop layout instead of an implicit single flex row
+  - tutor route integration coverage now protects that responsive seam, closing the last explicit partial entry in the frontend coverage matrix
 - Phase 12 planning is now active in [81-phase-12-theme-system-and-design-token-extraction.md](/Users/aman/Projects/personal-projects/Learn-Language/context/plan/81-phase-12-theme-system-and-design-token-extraction.md).
 - Active backlog was reprioritized to start with theming-system readiness before UI theme selection work:
   - `P12-001` is now complete via [theme-system-baseline.md](/Users/aman/Projects/personal-projects/Learn-Language/documentation/theme-system-baseline.md)

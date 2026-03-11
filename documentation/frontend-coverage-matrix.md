@@ -21,7 +21,7 @@ Status legend:
 | `word-buckets` | `covered` | `covered` | `covered` | `covered` | `covered` | `covered` | bucket switching and responsive bucket-switch layout are covered |
 | `profile` | `covered` | `covered` | `n/a` | `covered` | `covered` | `covered` | save flow, retryable error, loading composition, and responsive stacked-to-two-column form behavior are covered |
 | `auth` | `covered` | `covered` | `n/a` | `covered` | `covered` | `covered` | sign-in CTA, pending button, bootstrap/redirect handshake, retryable failure messaging, and responsive auth shell classes are covered |
-| `tutor` | `covered` | `covered` | `covered` | `covered` | `covered` | `partial` | route-owned loading/error/empty states now exist and are covered, but tutor remains lower priority until retention is finalized |
+| `tutor` | `covered` | `covered` | `covered` | `covered` | `covered` | `covered` | route-owned loading/error/empty states and responsive stacked-to-row tutor composer layout are covered, but tutor remains lower priority until retention is finalized |
 
 ## Reviewer/admin surfaces
 

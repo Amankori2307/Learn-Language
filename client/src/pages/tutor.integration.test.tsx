@@ -44,6 +44,24 @@ describe("TutorPage integration", () => {
     expect(screen.getByText("Welcome. Write a sentence and I will give vocabulary-focused feedback.")).toBeTruthy();
   });
 
+  it("keeps the tutor composer responsive with stacked mobile controls and desktop row layout", () => {
+    viewModel.mockReturnValue({
+      isLoading: false,
+      isError: false,
+      hasWords: true,
+      retry: vi.fn(),
+      input: "",
+      setInput: vi.fn(),
+      sendMessage: vi.fn(),
+      chat: [{ role: TutorChatRoleEnum.TUTOR, text: "Start writing." }],
+    });
+
+    const { container } = render(<TutorPage />);
+
+    expect(container.querySelector(".flex.flex-col.gap-2.sm\\:flex-row")).toBeTruthy();
+    expect(screen.getByRole("button", { name: "Send" }).className).toContain("sm:w-auto");
+  });
+
   it("forwards send actions through the tutor chat panel", async () => {
     const user = userEvent.setup();
     const setInput = vi.fn();
