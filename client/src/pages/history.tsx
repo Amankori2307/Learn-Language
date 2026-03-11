@@ -1,6 +1,5 @@
 import { Layout } from "@/components/layout";
 import { Button } from "@/components/ui/button";
-import { PendingButton } from "@/components/ui/pending-button";
 import {
   useHistoryPageViewModel,
 } from "@/features/history/use-history-page-view-model";
@@ -8,6 +7,7 @@ import { SurfaceMessage, TableSurfaceSkeleton } from "@/components/ui/page-state
 import { HistoryResultsTable } from "@/features/history/history-results-table";
 import { HistorySummaryCards } from "@/features/history/history-summary-cards";
 import { HistoryFilterPanel } from "@/features/history/history-filter-panel";
+import { HistoryPageHeader } from "@/features/history/history-page-header";
 
 export default function HistoryPage() {
   const {
@@ -36,22 +36,7 @@ export default function HistoryPage() {
   return (
     <Layout>
       <div className="space-y-6">
-        <div className="flex items-start justify-between gap-4">
-          <div>
-            <h1 className="text-3xl font-bold">Analytics</h1>
-            <p className="text-muted-foreground mt-1">
-              Attempt history with filters, trends, and paginated drill-down.
-            </p>
-          </div>
-          <PendingButton
-            variant="outline"
-            onClick={refresh}
-            pending={isFetching}
-            pendingLabel="Refreshing..."
-          >
-            Refresh
-          </PendingButton>
-        </div>
+        <HistoryPageHeader isFetching={isFetching} refresh={refresh} />
 
         <HistorySummaryCards
           total={summary.total}
