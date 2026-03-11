@@ -169,4 +169,14 @@ describe("Dashboard integration", () => {
     expect(bucketHrefs).toContain("/analytics/words?bucket=learning");
     expect(bucketHrefs).toContain("/analytics/words?bucket=needs_review");
   });
+
+  it("keeps the dashboard route responsive with stacked hero actions and upgraded grids", () => {
+    const { container } = render(<Dashboard />);
+
+    expect(screen.getByRole("button", { name: "Resume Weak Words" }).className).toContain("w-full");
+    expect(screen.getByRole("button", { name: "Resume Weak Words" }).className).toContain("sm:w-auto");
+    expect(screen.getByRole("button", { name: "Open Analytics" }).className).toContain("w-full");
+    expect(container.querySelector(".grid.grid-cols-1.gap-4.md\\:grid-cols-2.lg\\:grid-cols-4")).toBeTruthy();
+    expect(container.querySelector(".grid.grid-cols-1.gap-4.md\\:grid-cols-2.xl\\:grid-cols-4")).toBeTruthy();
+  });
 });

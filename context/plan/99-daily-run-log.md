@@ -32,7 +32,7 @@ Next task ID: -
 
 Date: 2026-03-12  
 Session owner: Codex  
-Last completed task ID: P13-008  
+Last completed task ID: P13-009  
 Current in-progress task ID: -  
 Next task ID: -
 
@@ -84,6 +84,10 @@ Next task ID: -
 - `P13-008` is now complete:
   - quiz route request failures now render a dedicated retryable error surface instead of collapsing into the completion empty state
   - quiz page state and route integration coverage now protect the retry and return-home behavior
+- `P13-009` is now complete:
+  - route-level responsive assertions now protect the existing mobile-first CTA/grid layout on `dashboard`
+  - route-level responsive assertions now protect the session-shell and split-card layout on `quiz`
+  - the learner-route coverage matrix now marks `dashboard` and `quiz` responsiveness as fully covered
 - Phase 12 planning is now active in [81-phase-12-theme-system-and-design-token-extraction.md](/Users/aman/Projects/personal-projects/Learn-Language/context/plan/81-phase-12-theme-system-and-design-token-extraction.md).
 - Active backlog was reprioritized to start with theming-system readiness before UI theme selection work:
   - `P12-001` is now complete via [theme-system-baseline.md](/Users/aman/Projects/personal-projects/Learn-Language/documentation/theme-system-baseline.md)

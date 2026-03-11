@@ -12,8 +12,8 @@ Status legend:
 
 | Surface | Loading | Error | Empty | Success / normal render | Pending / interaction | Responsive | Notes |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| `dashboard` | `covered` | `covered` | `covered` | `covered` | `covered` | `partial` | loading, retryable error, zero-data/default-stat rendering, and route-level learner action wiring are now covered |
-| `quiz` | `covered` | `covered` | `covered` | `covered` | `covered` | `partial` | quiz completion, active-session shell, and dedicated route-level error fallback are covered |
+| `dashboard` | `covered` | `covered` | `covered` | `covered` | `covered` | `covered` | loading, retryable error, zero-data/default-stat rendering, route-level learner action wiring, and responsive hero/grid classes are covered |
+| `quiz` | `covered` | `covered` | `covered` | `covered` | `covered` | `covered` | quiz completion, active-session shell, dedicated route-level error fallback, and responsive session/card layout classes are covered |
 | `clusters` | `covered` | `covered` | `covered` | `covered` | `covered` | `covered` | search/filter interaction, pagination forwarding, practice-link wiring, request-failure handling, and responsive filter/pagination classes are covered |
 | `contextual` | `covered` | `covered` | `covered` | `covered` | `covered` | `covered` | cluster selection, workout-CTA wiring, request-failure handling, and responsive header/story-grid classes are covered |
 | `history` | `covered` | `covered` | `covered` | `covered` | `covered` | `covered` | page-level refresh and responsive CTA composition are covered |
@@ -42,7 +42,7 @@ Status legend:
 
 ## Highest-priority remaining gaps
 
-1. learner-route coverage is now broadly in place; the remaining notable gaps are mostly lower-priority route-specific thin spots such as partial responsive assertions on `dashboard` and `quiz`, plus explicitly deferred non-core surfaces such as tutor.
+1. learner-route coverage is now broadly in place; the remaining notable gaps are mostly explicitly deferred non-core surfaces such as tutor, plus lower-priority long-tail polish outside the core learner routes.
 
 ## Explicit Phase 9 deferrals
 

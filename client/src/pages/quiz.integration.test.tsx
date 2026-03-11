@@ -193,4 +193,28 @@ describe("QuizPage integration", () => {
     expect(screen.getByLabelText("Answer confidence")).toBeTruthy();
     expect(screen.getByText("Used to grade recall quality")).toBeTruthy();
   });
+
+  it("keeps the quiz route responsive with mobile-first session shell and desktop split card", () => {
+    quizDataState.data = [
+      {
+        wordId: 11,
+        type: QuizQuestionTypeEnum.SOURCE_TO_TARGET,
+        questionText: "నమస్తే",
+        pronunciation: "namaste",
+        audioUrl: null,
+        imageUrl: null,
+        options: [
+          { id: 11, text: "hello" },
+          { id: 12, text: "thank you" },
+        ],
+      },
+    ];
+
+    const { container } = render(<QuizPage />);
+
+    expect(container.querySelector(".flex.h-screen.overflow-hidden.flex-col.bg-background")).toBeTruthy();
+    expect(container.querySelector(".flex.min-h-0.flex-1.items-center.justify-center.overflow-hidden.p-3.sm\\:p-4.md\\:px-6.md\\:pt-4.md\\:pb-8")).toBeTruthy();
+    expect(container.querySelector(".relative.flex.h-\\[calc\\(100vh-5\\.5rem\\)\\].min-h-\\[calc\\(100vh-5\\.5rem\\)\\].flex-col.overflow-hidden.rounded-\\[1\\.75rem\\].md\\:h-\\[min\\(88vh\\,820px\\)\\].md\\:min-h-0")).toBeTruthy();
+    expect(container.querySelector(".grid.min-h-0.flex-1.grid-cols-1.grid-rows-\\[auto_minmax\\(0\\,1fr\\)\\].lg\\:grid-cols-\\[1\\.05fr_1fr\\].lg\\:grid-rows-1")).toBeTruthy();
+  });
 });
