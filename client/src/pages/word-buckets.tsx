@@ -5,6 +5,10 @@ import { QuizModeEnum } from "@shared/domain/enums";
 import { SurfaceMessage, TableSurfaceSkeleton } from "@/components/ui/page-states";
 import { WordBucketWordList } from "@/features/analytics/word-bucket-word-list";
 import {
+  WordBucketImprovementCard,
+  WordBucketSwitch,
+} from "@/features/analytics/word-bucket-controls";
+import {
   WordBucketHeader,
   WordBucketNextAction,
 } from "@/features/analytics/word-bucket-header";
@@ -58,12 +62,9 @@ export default function WordBucketsPage() {
           onBack={() => navigate("/")}
         />
 
-        <div className="rounded-xl border border-border/50 bg-card p-4">
-          <p className="text-sm text-muted-foreground">How to improve</p>
-          <p className="font-medium mt-1">
-            {data?.howToImprove ?? "Keep practicing daily with consistent review."}
-          </p>
-        </div>
+        <WordBucketImprovementCard
+          howToImprove={data?.howToImprove ?? "Keep practicing daily with consistent review."}
+        />
 
         <WordBucketNextAction
           title={bucketCta.title}
@@ -74,26 +75,7 @@ export default function WordBucketsPage() {
           onSecondary={() => navigate(bucketCta.secondaryHref)}
         />
 
-        <div className="grid grid-cols-1 gap-2 sm:flex sm:flex-wrap">
-          <Button
-            variant={bucket === "mastered" ? "default" : "outline"}
-            onClick={() => changeBucket("mastered")}
-          >
-            Mastered
-          </Button>
-          <Button
-            variant={bucket === "learning" ? "default" : "outline"}
-            onClick={() => changeBucket("learning")}
-          >
-            Learning
-          </Button>
-          <Button
-            variant={bucket === "needs_review" ? "default" : "outline"}
-            onClick={() => changeBucket("needs_review")}
-          >
-            Needs Review
-          </Button>
-        </div>
+        <WordBucketSwitch bucket={bucket} changeBucket={changeBucket} />
 
         {isLoading ? (
           <TableSurfaceSkeleton rows={8} columns={5} />
