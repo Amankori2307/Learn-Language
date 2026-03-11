@@ -22,6 +22,6 @@ services:
     command:
       - /bin/sh
       - -lc
-      - pnpm run db:migrate:production && pnpm run content:import:production && pnpm run start:backend
+      - pnpm run db:wait && pnpm run db:migrate:production && pnpm run content:import:production && pnpm run start:backend
     ports:
       - "5001:5001"
