@@ -128,7 +128,7 @@ export default function WordBucketsPage() {
         ) : (
           <WordBucketWordList
             bucket={bucket}
-            data={data}
+            data={data!}
             page={page}
             totalPages={totalPages}
             setPage={setPage}
