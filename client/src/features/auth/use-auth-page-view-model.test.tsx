@@ -35,7 +35,7 @@ vi.mock("@/services/authTokenStorage", () => ({
 }));
 
 function Harness() {
-  const { isLoginPending, handleLogin } = useAuthPageViewModel();
+  const { isLoginPending, isBootstrapping, handleLogin } = useAuthPageViewModel();
 
   return (
     <div>
@@ -43,6 +43,7 @@ function Harness() {
         trigger login
       </button>
       <span>{isLoginPending ? "pending" : "idle"}</span>
+      <span>{isBootstrapping ? "bootstrapping" : "ready"}</span>
     </div>
   );
 }
@@ -64,6 +65,8 @@ describe("useAuthPageViewModel", () => {
 
     render(<Harness />);
 
+    expect(screen.getByText("bootstrapping")).toBeTruthy();
+
     await waitFor(() => {
       expect(setToken).toHaveBeenCalledWith("jwt-token");
       expect(clearAuthTokenFromUrl).toHaveBeenCalledTimes(1);
@@ -79,6 +82,14 @@ describe("useAuthPageViewModel", () => {
     await waitFor(() => {
       expect(setLocation).toHaveBeenCalledWith("/");
     });
+  });
+
+  it("stays in bootstrapping state while auth is still loading", () => {
+    authState = { user: null, isLoading: true };
+
+    render(<Harness />);
+
+    expect(screen.getByText("bootstrapping")).toBeTruthy();
   });
 
   it("marks login pending and navigates to the login URL", async () => {

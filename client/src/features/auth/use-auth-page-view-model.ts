@@ -8,10 +8,12 @@ export function useAuthPageViewModel() {
   const { user, isLoading } = useAuth();
   const [, setLocation] = useLocation();
   const [isLoginPending, setIsLoginPending] = useState(false);
+  const [isBootstrapping, setIsBootstrapping] = useState(() => Boolean(readAuthTokenFromUrl()));
 
   useEffect(() => {
     const tokenFromUrl = readAuthTokenFromUrl();
     if (!tokenFromUrl) {
+      setIsBootstrapping(false);
       return;
     }
 
@@ -33,6 +35,7 @@ export function useAuthPageViewModel() {
 
   return {
     isLoading,
+    isBootstrapping: isBootstrapping || isLoading,
     user,
     isLoginPending,
     handleLogin,

@@ -20,7 +20,7 @@ Status legend:
 | `leaderboard` | `partial` | `covered` | `covered` | `covered` | `partial` | `partial` | window-switch interaction is covered indirectly through header tests, but loading-state page composition is still thin |
 | `word-buckets` | `covered` | `covered` | `covered` | `covered` | `covered` | `partial` | bucket switching is covered, but responsive assertions are still absent |
 | `profile` | `partial` | `covered` | `gap` | `covered` | `covered` | `partial` | save flow and retryable error are covered; route-level loading composition is only indirectly protected |
-| `auth` | `partial` | `gap` | `n/a` | `covered` | `covered` | `partial` | sign-in CTA, pending button, and bootstrap/redirect handshake are covered; explicit auth-route failure handling is still absent |
+| `auth` | `covered` | `gap` | `n/a` | `covered` | `covered` | `partial` | sign-in CTA, pending button, and bootstrap/redirect handshake now have direct route and hook coverage; explicit auth-route failure handling is still absent |
 | `tutor` | `gap` | `gap` | `gap` | `covered` | `covered` | `partial` | intentionally lower priority until tutor retention is finalized |
 
 ## Reviewer/admin surfaces

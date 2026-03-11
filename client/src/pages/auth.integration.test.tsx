@@ -5,10 +5,12 @@ import AuthPage from "./auth";
 
 const handleLogin = vi.fn();
 let isLoginPending = false;
+let isBootstrapping = false;
 
 vi.mock("@/features/auth/use-auth-page-view-model", () => ({
   useAuthPageViewModel: () => ({
     isLoginPending,
+    isBootstrapping,
     handleLogin,
   }),
 }));
@@ -16,6 +18,7 @@ vi.mock("@/features/auth/use-auth-page-view-model", () => ({
 describe("AuthPage integration", () => {
   beforeEach(() => {
     isLoginPending = false;
+    isBootstrapping = false;
     handleLogin.mockClear();
   });
 
@@ -35,5 +38,14 @@ describe("AuthPage integration", () => {
 
     const button = screen.getByRole("button", { name: "Redirecting..." });
     expect((button as HTMLButtonElement).disabled).toBe(true);
+  });
+
+  it("renders the bootstrap panel while auth state is restoring", () => {
+    isBootstrapping = true;
+
+    render(<AuthPage />);
+
+    expect(screen.getByText("Restoring your session")).toBeTruthy();
+    expect(screen.queryByRole("button", { name: "Continue to Sign In" })).toBeNull();
   });
 });
