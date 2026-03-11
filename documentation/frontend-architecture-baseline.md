@@ -496,7 +496,6 @@ A page fails the contract if it introduces:
 
 before the shared primitives are defined and adopted.
 
-## Immediate next implementation target
+## Phase follow-up status
 
-After `P9-001` completes, the next correct execution step is `P9-002`, starting with a UI-facing request inventory and React Query ownership rules.
-
+The historical next implementation target from this baseline is complete: `P9-002` established the UI-facing request inventory and React Query ownership rules.
