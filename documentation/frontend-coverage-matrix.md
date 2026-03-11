@@ -20,14 +20,14 @@ Status legend:
 | `leaderboard` | `partial` | `covered` | `covered` | `covered` | `partial` | `partial` | window-switch interaction is covered indirectly through header tests, but loading-state page composition is still thin |
 | `word-buckets` | `covered` | `covered` | `covered` | `covered` | `covered` | `partial` | bucket switching is covered, but responsive assertions are still absent |
 | `profile` | `partial` | `covered` | `gap` | `covered` | `covered` | `partial` | save flow and retryable error are covered; route-level loading composition is only indirectly protected |
-| `auth` | `gap` | `gap` | `n/a` | `covered` | `covered` | `partial` | sign-in CTA and pending button are covered; bootstrap/redirect handshake should still get direct route-level protection |
+| `auth` | `partial` | `gap` | `n/a` | `covered` | `covered` | `partial` | sign-in CTA, pending button, and bootstrap/redirect handshake are covered; explicit auth-route failure handling is still absent |
 | `tutor` | `gap` | `gap` | `gap` | `covered` | `covered` | `partial` | intentionally lower priority until tutor retention is finalized |
 
 ## Reviewer/admin surfaces
 
 | Surface | Loading | Error | Empty | Success / normal render | Pending / interaction | Role-gated | Responsive | Notes |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| `review` | `covered` | `covered` | `partial` | `covered` | `covered` | `covered` | `partial` | queue and history loading/error plus role denial are covered; an explicit empty-history branch is still only indirectly protected |
+| `review` | `covered` | `covered` | `covered` | `covered` | `covered` | `covered` | `partial` | queue/history loading, error, empty, actions, and role denial are now covered; responsive assertions remain the main gap |
 | `add-vocabulary` | `partial` | `partial` | `n/a` | `covered` | `covered` | `covered` | `partial` | create flow, access gating, cluster-loading, and submit pending are covered; explicit create-failure page composition is still thin |
 
 ## Shared presentation / async primitives
@@ -43,9 +43,8 @@ Status legend:
 ## Highest-priority remaining gaps
 
 1. `dashboard`: add loading/error integration coverage and confirm the page still composes correctly when stats or insights are missing.
-2. `auth`: add route-level bootstrap/redirect coverage so `/auth` no longer depends only on the sign-in panel tests.
-3. `review`: add explicit empty-history integration coverage once the selected-item branch is stabilized further.
-4. responsive regression checks: add high-signal assertions for the main action rows and mobile stacking behavior already refactored in leaderboard, history, review, and word-buckets.
+2. `auth`: decide whether `/auth` needs an explicit failure surface beyond the current bootstrap/redirect behavior.
+3. responsive regression checks: add high-signal assertions for the main action rows and mobile stacking behavior already refactored in leaderboard, history, review, and word-buckets.
 
 ## Exit criteria for `P9-009`
 

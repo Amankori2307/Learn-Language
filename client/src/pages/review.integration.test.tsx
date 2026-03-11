@@ -43,6 +43,8 @@ let reviewHistoryState = {
       sourceCapturedAt: "2026-02-20T11:00:00.000Z",
       reviewNotes: null,
     },
+    clusters: [],
+    relatedClusterWords: [],
     events: [],
   },
   isLoading: false,
@@ -118,6 +120,8 @@ describe("ReviewPage integration", () => {
           sourceCapturedAt: "2026-02-20T11:00:00.000Z",
           reviewNotes: null,
         },
+        clusters: [],
+        relatedClusterWords: [],
         events: [],
       },
       isLoading: false,
@@ -242,5 +246,14 @@ describe("ReviewPage integration", () => {
 
     await user.click(screen.getByRole("button", { name: "View History" }));
     expect(screen.getByText("Failed to load history")).toBeTruthy();
+  });
+
+  it("renders empty review-history events after selecting an item", async () => {
+    const user = userEvent.setup();
+
+    render(<ReviewPage />);
+
+    await user.click(screen.getByRole("button", { name: "View History" }));
+    expect(screen.getByText("No review events yet.")).toBeTruthy();
   });
 });
