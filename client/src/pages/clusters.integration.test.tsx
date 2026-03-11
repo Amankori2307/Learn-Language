@@ -136,4 +136,39 @@ describe("ClustersPage integration", () => {
     await user.click(screen.getByRole("button", { name: "Retry" }));
     expect(retry).toHaveBeenCalledTimes(1);
   });
+
+  it("keeps the clusters route responsive with stacked filters and mobile-safe pagination", () => {
+    viewModel.mockReturnValue({
+      query: "",
+      typeFilter: "all",
+      sortBy: "words_desc",
+      clusterTypes: ["all", "topic"],
+      updateQuery: vi.fn(),
+      topCluster: { id: 1, name: "Travel", wordCount: 14 },
+      totalWords: 120,
+      nonEmptyClusters: 18,
+      totalResults: 2,
+      totalPages: 2,
+      currentPage: 1,
+      pageRows: [
+        {
+          id: 1,
+          name: "Travel",
+          type: "topic",
+          wordCount: 14,
+          description: "Common travel words",
+        },
+      ],
+      isLoading: false,
+      isError: false,
+      retry: vi.fn(),
+    });
+
+    const { container } = render(<ClustersPage />);
+
+    expect(container.querySelector(".grid.grid-cols-1.gap-3.rounded-2xl.border.border-border\\/50.bg-card.p-4.md\\:grid-cols-4.md\\:p-6")).toBeTruthy();
+    expect(screen.getByRole("button", { name: "Prev" }).className).toContain("sm:w-auto");
+    expect(screen.getByRole("button", { name: "Next" }).className).toContain("sm:w-auto");
+    expect(container.querySelector(".space-y-3.p-4.md\\:hidden")).toBeTruthy();
+  });
 });

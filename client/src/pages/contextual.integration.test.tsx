@@ -101,4 +101,31 @@ describe("ContextualPage integration", () => {
     await user.click(screen.getByRole("button", { name: "Retry" }));
     expect(retry).toHaveBeenCalledTimes(1);
   });
+
+  it("keeps the contextual route responsive with mobile-safe header CTA and two-column story upgrade", () => {
+    viewModel.mockReturnValue({
+      setSelectedClusterId: vi.fn(),
+      activeClusterId: 2,
+      clusters: [
+        { id: 2, name: "Travel" },
+        { id: 5, name: "Food" },
+      ],
+      storyLines: [
+        {
+          originalScript: "నాకు నీళ్లు కావాలి",
+          pronunciation: "naaku neellu kaavaali",
+          english: "Context hint: I need water",
+        },
+      ],
+      isLoading: false,
+      isError: false,
+      retry: vi.fn(),
+    });
+
+    const { container } = render(<ContextualPage />);
+
+    expect(screen.getByRole("button", { name: /Start Context Workout/i }).className).toContain("w-full");
+    expect(container.querySelector(".rounded-2xl.border.border-border\\/50.bg-card.p-4.md\\:p-5")).toBeTruthy();
+    expect(container.querySelector(".grid.grid-cols-1.gap-4.md\\:grid-cols-2")).toBeTruthy();
+  });
 });

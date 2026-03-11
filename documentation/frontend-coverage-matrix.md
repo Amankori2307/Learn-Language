@@ -14,8 +14,8 @@ Status legend:
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | `dashboard` | `covered` | `covered` | `covered` | `covered` | `partial` | `partial` | loading, retryable error, default primary-action behavior, and zero-data/default-stat rendering are now covered |
 | `quiz` | `covered` | `partial` | `covered` | `covered` | `covered` | `partial` | quiz completion and active-session shell are covered; explicit route-level error fallback remains thin |
-| `clusters` | `covered` | `covered` | `covered` | `covered` | `partial` | `partial` | search/filter interaction and request-failure handling are covered; responsive assertions are still absent |
-| `contextual` | `covered` | `covered` | `covered` | `covered` | `partial` | `partial` | cluster selection and request-failure handling are covered; responsive assertions are still absent |
+| `clusters` | `covered` | `covered` | `covered` | `covered` | `partial` | `covered` | search/filter interaction, request-failure handling, and responsive filter/pagination classes are covered |
+| `contextual` | `covered` | `covered` | `covered` | `covered` | `partial` | `covered` | cluster selection, request-failure handling, and responsive header/story-grid classes are covered |
 | `history` | `covered` | `covered` | `covered` | `covered` | `covered` | `covered` | page-level refresh and responsive CTA composition are covered |
 | `leaderboard` | `covered` | `covered` | `covered` | `covered` | `partial` | `covered` | loading-state page composition and responsive window-switch layout are now covered |
 | `word-buckets` | `covered` | `covered` | `covered` | `covered` | `covered` | `covered` | bucket switching and responsive bucket-switch layout are covered |
@@ -42,7 +42,7 @@ Status legend:
 
 ## Highest-priority remaining gaps
 
-1. lower-priority responsive assertions remain thin for `clusters` and `contextual`, but the highest-risk analytics/review/auth/profile layouts now have direct page-level protection.
+1. pending/interaction coverage remains thinner than ideal on some learner routes, but the previously documented low-priority responsive backlog for core learner pages is now closed.
 
 ## Explicit Phase 9 deferrals
 
