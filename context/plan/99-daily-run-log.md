@@ -32,9 +32,9 @@ Next task ID: -
 
 Date: 2026-03-11  
 Session owner: Codex  
-Last completed task ID: P12-004  
+Last completed task ID: P12-005  
 Current in-progress task ID: -  
-Next task ID: P12-005
+Next task ID: P12-006
 
 ## Current state
 
@@ -69,7 +69,12 @@ Next task ID: P12-005
     - implemented theme rotation now switches between `dark` and `minimal` through [client/src/components/layout.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/components/layout.tsx)
     - theme config coverage now verifies both implemented themes in [client/src/theme/app-theme.test.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/theme/app-theme.test.tsx)
     - verification passed with `pnpm exec vitest run client/src/theme/app-theme.test.tsx` and `pnpm run check`
-  - `P12-005` is queued next to migrate shared primitives to semantic token usage
+  - `P12-005` is now complete:
+    - shared token utilities now own reusable motion/status-surface behavior in [client/src/index.css](/Users/aman/Projects/personal-projects/Learn-Language/client/src/index.css)
+    - core primitives now use semantic radius/shadow/status tokens across [button-variants.ts](/Users/aman/Projects/personal-projects/Learn-Language/client/src/components/ui/button-variants.ts), [card.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/components/ui/card.tsx), [alert.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/components/ui/alert.tsx), [toast.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/components/ui/toast.tsx), [avatar.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/components/ui/avatar.tsx), and [page-states.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/components/ui/page-states.tsx)
+    - form and overlay primitives now use theme-safe token surfaces in [input.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/components/ui/input.tsx), [textarea.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/components/ui/textarea.tsx), [select.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/components/ui/select.tsx), [dialog.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/components/ui/dialog.tsx), [popover.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/components/ui/popover.tsx), and [sheet.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/components/ui/sheet.tsx)
+    - verification passed with `pnpm run test:ui` and `pnpm run check`
+  - `P12-006` is queued next to migrate feature/shared status styling to the semantic state tokens
 - Planning baselines for the next implementation tasks are now documented:
   - React Query ownership baseline in [documentation/react-query-ownership-baseline.md](/Users/aman/Projects/personal-projects/Learn-Language/documentation/react-query-ownership-baseline.md)
   - Async UX contract in [documentation/async-ux-contract.md](/Users/aman/Projects/personal-projects/Learn-Language/documentation/async-ux-contract.md)

@@ -12,7 +12,7 @@ Make the client app ready for named multi-theme support by finishing design-toke
 | P12-002 | done | Define the canonical theme contract for colors, status semantics, typography, radius, shadows, gradients, and motion | P12-001 | M | every reusable surface can read from one agreed token interface rather than ad hoc classes |
 | P12-003 | done | Introduce named theme ownership in code with a supported-theme enum, metadata, and one-line default theme selection | P12-002 | S | theme support is explicit in code and the app default can be changed from one seam |
 | P12-004 | done | Convert the current shipped visual style into an explicit named theme and add a new minimal theme | P12-003 | M | the current look is preserved as a named theme and a complete `minimal` theme exists beside it |
-| P12-005 | todo | Refactor shared UI primitives to depend only on semantic tokens rather than hardcoded colors or dark-mode-only branches | P12-004 | L | buttons, cards, inputs, overlays, states, and shared surfaces inherit theme changes consistently |
+| P12-005 | done | Refactor shared UI primitives to depend only on semantic tokens rather than hardcoded colors or dark-mode-only branches | P12-004 | L | buttons, cards, inputs, overlays, states, and shared surfaces inherit theme changes consistently |
 | P12-006 | todo | Standardize semantic status styling for success, warning, error, and info states across shared and feature components | P12-005 | M | no reusable state surface relies on raw green/red/rose/emerald classes directly |
 | P12-007 | todo | Remove remaining page and feature styling outliers that bypass the design system and migrate them to shared theme-safe primitives | P12-006 | L | representative pages/features no longer hardcode product styling outside approved tokens/variants |
 | P12-008 | todo | Extend chart theming and theme-aware utilities to support named themes beyond light and dark | P12-005 | M | charts and theme-dependent helpers work with the new named theme model |
@@ -64,11 +64,11 @@ The top-level tasks above are the phase gates. Actual execution should happen in
 
 | ID | Status | Task | Depends On | Done When |
 | -- | ------ | ---- | ---------- | --------- |
-| P12-005A | todo | Refactor button variants to rely only on semantic theme tokens and shared state variants | P12-004D | buttons no longer embed raw theme assumptions |
-| P12-005B | todo | Refactor card, alert, badge, input, textarea, select, and table primitives to consume the canonical token contract | P12-005A | core content surfaces inherit theme changes consistently |
-| P12-005C | todo | Refactor dialog, sheet, popover, tooltip, toast, and overlay primitives to use theme-safe surface and backdrop tokens | P12-005B | overlay components behave consistently across themes |
-| P12-005D | todo | Refactor shared utility classes in global CSS that currently hardcode white/black or dark-specific behavior | P12-005C | global utilities are theme-safe |
-| P12-005E | todo | Remove primitive-level `dark:` branches where semantic tokens can express the same intent | P12-005D | primitives are no longer locked to two-theme logic |
+| P12-005A | done | Refactor button variants to rely only on semantic theme tokens and shared state variants | P12-004D | buttons no longer embed raw theme assumptions |
+| P12-005B | done | Refactor card, alert, badge, input, textarea, select, and table primitives to consume the canonical token contract | P12-005A | core content surfaces inherit theme changes consistently |
+| P12-005C | done | Refactor dialog, sheet, popover, tooltip, toast, and overlay primitives to use theme-safe surface and backdrop tokens | P12-005B | overlay components behave consistently across themes |
+| P12-005D | done | Refactor shared utility classes in global CSS that currently hardcode white/black or dark-specific behavior | P12-005C | global utilities are theme-safe |
+| P12-005E | done | Remove primitive-level `dark:` branches where semantic tokens can express the same intent | P12-005D | primitives are no longer locked to two-theme logic |
 
 ### P12-006 - Semantic status styling
 

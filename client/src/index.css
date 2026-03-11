@@ -262,6 +262,53 @@
     font-family: var(--font-script);
   }
 
+  .hover-elevate {
+    transition:
+      transform var(--motion-fast) var(--ease-standard),
+      box-shadow var(--motion-fast) var(--ease-standard),
+      background-color var(--motion-fast) var(--ease-standard),
+      border-color var(--motion-fast) var(--ease-standard),
+      color var(--motion-fast) var(--ease-standard);
+  }
+
+  .hover-elevate:hover {
+    transform: translateY(-1px);
+  }
+
+  .active-elevate-2 {
+    transition:
+      transform var(--motion-fast) var(--ease-standard),
+      box-shadow var(--motion-fast) var(--ease-standard);
+  }
+
+  .active-elevate-2:active {
+    transform: translateY(0);
+  }
+
+  .surface-status-info {
+    background: hsl(var(--status-info));
+    border-color: hsl(var(--status-info-border));
+    color: hsl(var(--status-info-foreground));
+  }
+
+  .surface-status-success {
+    background: hsl(var(--status-success));
+    border-color: hsl(var(--status-success-border));
+    color: hsl(var(--status-success-foreground));
+  }
+
+  .surface-status-error {
+    background: hsl(var(--status-error));
+    border-color: hsl(var(--status-error-border));
+    color: hsl(var(--status-error-foreground));
+  }
+
+  .surface-status-warning {
+    background: hsl(var(--status-warning));
+    border-color: hsl(var(--status-warning-border));
+    color: hsl(var(--status-warning-foreground));
+  }
+
   .glass-card {
     background: var(--surface-glass);
     border-color: var(--surface-glass-border);
