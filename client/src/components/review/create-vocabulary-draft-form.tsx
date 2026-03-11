@@ -1,4 +1,3 @@
-import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { SearchableMultiSelect } from "@/components/ui/searchable-multi-select";
@@ -9,6 +8,7 @@ import { VOCABULARY_TAG_OPTIONS } from "@shared/domain/vocabulary-tags";
 import { useCreateVocabularyDraftForm } from "@/features/review/use-create-vocabulary-draft-form";
 import { PendingButton } from "@/components/ui/pending-button";
 import { InlineLoading } from "@/components/ui/page-states";
+import { VocabularyDraftExamples } from "@/components/review/vocabulary-draft-examples";
 
 export function CreateVocabularyDraftForm() {
   const {
@@ -167,61 +167,12 @@ export function CreateVocabularyDraftForm() {
         </div>
       </div>
 
-      <div className="space-y-3">
-        <div className="flex items-center justify-between">
-          <h3 className="text-sm font-semibold">Examples</h3>
-          <Button variant="outline" size="sm" onClick={addExample}>
-            Add Example
-          </Button>
-        </div>
-        {draftExamples.map((example, index) => (
-          <div
-            key={`example-${index}`}
-            className="rounded-xl border border-border/40 p-3 space-y-2"
-          >
-            <div className="grid md:grid-cols-2 gap-2">
-              <Input
-                value={example.originalScript}
-                onChange={(event) => updateExample(index, "originalScript", event.target.value)}
-                placeholder="Example sentence in source script"
-              />
-              <Input
-                value={example.pronunciation}
-                onChange={(event) => updateExample(index, "pronunciation", event.target.value)}
-                placeholder="Example pronunciation"
-              />
-              <Input
-                value={example.englishSentence}
-                onChange={(event) => updateExample(index, "englishSentence", event.target.value)}
-                placeholder="Example meaning in English"
-              />
-              <Input
-                value={example.contextTag}
-                onChange={(event) => updateExample(index, "contextTag", event.target.value)}
-                placeholder="Context tag (general, travel, greetings...)"
-              />
-              <Input
-                type="number"
-                min={1}
-                max={5}
-                value={String(example.difficulty)}
-                onChange={(event) => updateExample(index, "difficulty", event.target.value)}
-                placeholder="Difficulty (1-5)"
-              />
-            </div>
-            <div className="flex justify-end">
-              <Button
-                variant="destructive"
-                size="sm"
-                onClick={() => removeExample(index)}
-                disabled={draftExamples.length <= 1}
-              >
-                Remove
-              </Button>
-            </div>
-          </div>
-        ))}
-      </div>
+      <VocabularyDraftExamples
+        draftExamples={draftExamples}
+        updateExample={updateExample}
+        addExample={addExample}
+        removeExample={removeExample}
+      />
 
       {createError ? <p className="text-sm text-red-600">{createError}</p> : null}
       {createSuccess ? <p className="text-sm text-emerald-600">{createSuccess}</p> : null}
