@@ -2,7 +2,7 @@ import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import type { ReactNode } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { afterEach, describe, expect, it, vi } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { LanguageEnum, PartOfSpeechEnum, UserTypeEnum } from "@shared/domain/enums";
 import AddVocabularyPage from "./add-vocabulary";
 import { apiClient } from "@/services/apiClient";
@@ -10,6 +10,7 @@ import { apiClient } from "@/services/apiClient";
 const createDraftMutateAsync = vi
   .fn()
   .mockResolvedValue({ id: 99, reviewStatus: "draft", examplesCreated: 1 });
+let currentUserRole = UserTypeEnum.REVIEWER;
 
 vi.mock("@/components/layout", () => ({
   Layout: ({ children }: { children: ReactNode }) => <div>{children}</div>,
@@ -19,7 +20,7 @@ vi.mock("@/hooks/use-auth", () => ({
   useAuth: () => ({
     user: {
       id: "reviewer-1",
-      role: UserTypeEnum.REVIEWER,
+      role: currentUserRole,
       email: "reviewer@example.com",
     },
   }),
@@ -44,6 +45,10 @@ vi.mock("@/services/apiClient", () => ({
 }));
 
 describe("AddVocabularyPage integration", () => {
+  beforeEach(() => {
+    currentUserRole = UserTypeEnum.REVIEWER;
+  });
+
   it("creates a draft with example payload", async () => {
     const user = userEvent.setup();
     const queryClient = new QueryClient();
@@ -81,5 +86,20 @@ describe("AddVocabularyPage integration", () => {
         partOfSpeech: PartOfSpeechEnum.PHRASE,
       }),
     );
+  });
+
+  it("renders reviewer-only access state for learner users", () => {
+    currentUserRole = UserTypeEnum.LEARNER;
+    const queryClient = new QueryClient();
+
+    render(
+      <QueryClientProvider client={queryClient}>
+        <AddVocabularyPage />
+      </QueryClientProvider>,
+    );
+
+    expect(screen.getByText("Review Access Required")).toBeTruthy();
+    expect(screen.getByText("Only reviewer/admin roles can add vocabulary drafts.")).toBeTruthy();
+    expect(screen.queryByText("Create Vocabulary Draft")).toBeNull();
   });
 });
