@@ -23,7 +23,7 @@ Current reality:
 - query key conventions are not explicitly documented
 - invalidation strategy is uneven
 - one component still defines its own query
-- one browser capability hook still performs direct API resolution work
+- query ownership is now broadly aligned; the remaining issues are more about conventions than obvious boundary leaks
 
 ## UI-facing request inventory
 
@@ -84,28 +84,11 @@ Current reality:
 
 | Flow | Current owner | Classification | Assessment |
 | ---- | ------------- | -------------- | ---------- |
-| audio resolve | `useHybridAudio` private helper `resolveServerAudioUrl` | mutation-like async side effect | architecture leak; request lifecycle is hidden inside a browser-playback hook |
+| audio resolve | `useAudioResolution` | mutation-like async side effect | healthy enough; request ownership is separated from browser playback behavior |
 
 ## Current request ownership problems
 
-### 1. Browser capability hook owns API resolution logic
-
-Problem file:
-
-- [client/src/hooks/use-hybrid-audio.ts](/Users/aman/Projects/personal-projects/Learn-Language/client/src/hooks/use-hybrid-audio.ts)
-
-Why this is a problem:
-
-- playback behavior and API resolution are coupled
-- not expressed through a normal feature-owned async state contract
-- makes later async UX and loading semantics harder to standardize
-
-Required future state:
-
-- audio resolution should move behind a clearer adapter/hook boundary
-- playback hook should focus on browser/media behavior
-
-### 2. Query key conventions exist but are implicit
+### 1. Query key conventions exist but are implicit
 
 Current patterns:
 
@@ -120,7 +103,7 @@ Problems:
 - invalidation partials are used without a formal contract
 - future refactors could easily break cache behavior
 
-### 3. Invalidation strategy is inconsistent
+### 2. Invalidation strategy is inconsistent
 
 Examples:
 
@@ -133,7 +116,7 @@ Problem:
 
 - there is no shared rule for narrow versus broad invalidation
 
-### 4. Query defaults are global but feature-specific overrides are undocumented
+### 3. Query defaults are global but feature-specific overrides are undocumented
 
 Global defaults in [client/src/lib/queryClient.ts](/Users/aman/Projects/personal-projects/Learn-Language/client/src/lib/queryClient.ts):
 
