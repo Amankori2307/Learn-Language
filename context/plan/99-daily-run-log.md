@@ -32,9 +32,9 @@ Next task ID: -
 
 Date: 2026-03-11  
 Session owner: Codex  
-Last completed task ID: P12-008  
+Last completed task ID: P12-009  
 Current in-progress task ID: -  
-Next task ID: P12-009
+Next task ID: P11-002
 
 ## Current state
 
@@ -89,7 +89,15 @@ Next task ID: P12-009
     - chart tooltip surfaces now use tokenized shadow/radius styling in [client/src/components/ui/chart.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/components/ui/chart.tsx)
     - focused chart coverage now exists in [client/src/components/ui/chart.test.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/components/ui/chart.test.tsx)
     - verification passed with `pnpm exec vitest run client/src/components/ui/chart.test.tsx client/src/theme/app-theme.test.tsx` and `pnpm run check`
-  - `P12-009` is queued next to consolidate final regression coverage and verification for the theme-system migration
+  - `P12-009` is now complete:
+    - provider boot coverage now exists in [client/src/theme/app-theme-provider.test.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/theme/app-theme-provider.test.tsx)
+    - outlier page regression coverage now exists in [client/src/pages/not-found.test.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/pages/not-found.test.tsx)
+    - shared error-state class coverage was tightened in [client/src/components/ui/page-states.test.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/components/ui/page-states.test.tsx)
+    - verification passed with:
+      - `pnpm exec vitest run client/src/theme/app-theme-provider.test.tsx client/src/pages/not-found.test.tsx client/src/components/ui/page-states.test.tsx client/src/components/ui/chart.test.tsx client/src/theme/app-theme.test.tsx`
+      - `pnpm run test:ui`
+      - `pnpm run check`
+  - Phase 12 is now complete and the active backlog returns to `P11-002`
 - Planning baselines for the next implementation tasks are now documented:
   - React Query ownership baseline in [documentation/react-query-ownership-baseline.md](/Users/aman/Projects/personal-projects/Learn-Language/documentation/react-query-ownership-baseline.md)
   - Async UX contract in [documentation/async-ux-contract.md](/Users/aman/Projects/personal-projects/Learn-Language/documentation/async-ux-contract.md)

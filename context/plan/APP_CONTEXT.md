@@ -12,6 +12,7 @@ Build a text-first language learning app with high data correctness, strong memo
 - Phase 8 functionality-first product hardening is complete.
 - Phase 9 frontend architecture, async UX, responsive UI, and test hardening is complete.
 - Phase 10 platform hardening, API normalization, observability, security, performance, SEO, and product intelligence is complete.
+- Phase 12 theme system and design token extraction is complete.
 
 ## Core capabilities live
 
@@ -112,6 +113,6 @@ Build a text-first language learning app with high data correctness, strong memo
 
 - Execute in order from [01-master-task-registry.md](/Users/aman/Projects/personal-projects/Learn-Language/context/plan/01-master-task-registry.md).
 - Current execution track:
-  - last completed implementation slice is `P12-008` chart and theme-aware utility migration
-  - next planned implementation slice is `P12-009` final regression coverage and verification
-  - deferred but still active product gap: `P11-002` confidence-input follow-up for quiz UX
+  - last completed implementation slice is `P12-009` final regression coverage and verification
+  - next planned implementation slice is `P11-002` confidence-input follow-up for quiz UX
+  - Phase 12 outcome: named theme ownership, current/minimal shipped themes, semantic tokenized primitives, and chart theme support are now in place

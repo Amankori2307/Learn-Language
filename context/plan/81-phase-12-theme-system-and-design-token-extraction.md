@@ -16,7 +16,7 @@ Make the client app ready for named multi-theme support by finishing design-toke
 | P12-006 | done | Standardize semantic status styling for success, warning, error, and info states across shared and feature components | P12-005 | M | no reusable state surface relies on raw green/red/rose/emerald classes directly |
 | P12-007 | done | Remove remaining page and feature styling outliers that bypass the design system and migrate them to shared theme-safe primitives | P12-006 | L | representative pages/features no longer hardcode product styling outside approved tokens/variants |
 | P12-008 | done | Extend chart theming and theme-aware utilities to support named themes beyond light and dark | P12-005 | M | charts and theme-dependent helpers work with the new named theme model |
-| P12-009 | todo | Add regression coverage and verification for theme-safe primitives, the default theme seam, and the new minimal theme | P12-007,P12-008 | M | tests and smoke checks protect the theme system against drift and missing-token regressions |
+| P12-009 | done | Add regression coverage and verification for theme-safe primitives, the default theme seam, and the new minimal theme | P12-007,P12-008 | M | tests and smoke checks protect the theme system against drift and missing-token regressions |
 
 ## Micro-task execution map
 
@@ -100,10 +100,10 @@ The top-level tasks above are the phase gates. Actual execution should happen in
 
 | ID | Status | Task | Depends On | Done When |
 | -- | ------ | ---- | ---------- | --------- |
-| P12-009A | todo | Add tests for the theme enum/config/default-theme seam | P12-007D,P12-008C | theme ownership is covered by tests |
-| P12-009B | todo | Add or update shared primitive tests for representative theme-safe class output and state variants | P12-009A | primitive regressions are easier to catch |
-| P12-009C | todo | Add targeted feature tests for migrated outliers such as quiz feedback, page states, and profile feedback surfaces | P12-009B | high-risk migrated surfaces are covered |
-| P12-009D | todo | Run the impacted frontend test suites and document verification results and any deferred debt | P12-009C | the phase has explicit verification evidence |
+| P12-009A | done | Add tests for the theme enum/config/default-theme seam | P12-007D,P12-008C | theme ownership is covered by tests |
+| P12-009B | done | Add or update shared primitive tests for representative theme-safe class output and state variants | P12-009A | primitive regressions are easier to catch |
+| P12-009C | done | Add targeted feature tests for migrated outliers such as quiz feedback, page states, and profile feedback surfaces | P12-009B | high-risk migrated surfaces are covered |
+| P12-009D | done | Run the impacted frontend test suites and document verification results and any deferred debt | P12-009C | the phase has explicit verification evidence |
 
 ## Sequencing guardrails
 
