@@ -19,6 +19,7 @@ import {
   securityHeadersMiddleware,
   setStaticAssetSecurityHeaders,
 } from "./common/security/security";
+import { ensureDatabaseConnection } from "./infrastructure/db";
 
 const DEFAULT_ALLOWED_FRONTEND_ORIGINS = [
   "http://localhost:3000",
@@ -35,6 +36,7 @@ function resolveAllowedOrigins(rawOrigins?: string): Set<string> {
 
 async function bootstrap() {
   const { app } = await createNestApiApp();
+  await ensureDatabaseConnection();
   const port = Number(process.env.BACKEND_PORT ?? process.env.PORT ?? 5001);
   await app.listen(port);
   appLogger.info(`[nest-api] Backend API listening on http://localhost:${port}`);
