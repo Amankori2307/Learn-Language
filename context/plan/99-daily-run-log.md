@@ -70,9 +70,10 @@ Next task ID: P9-007
   - quiz terminal/loading states extracted into [quiz-page-states.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/features/quiz/quiz-page-states.tsx)
   - draft example rendering extracted into [vocabulary-draft-examples.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/components/review/vocabulary-draft-examples.tsx)
   - new frontend tests added for pending button, page states, leaderboard, and word buckets
+  - direct component tests now cover extracted presentation surfaces in [dashboard-overview.test.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/features/dashboard/dashboard-overview.test.tsx), [profile-form-card.test.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/features/profile/profile-form-card.test.tsx), [auth-sign-in-panel.test.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/features/auth/auth-sign-in-panel.test.tsx), [review-queue-panel.test.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/features/review/review-queue-panel.test.tsx), and [history-results-table.test.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/features/history/history-results-table.test.tsx)
   - backend test coverage expanded for auth/profile controller behavior and audio language mismatch handling
   - smoke coverage expanded to include auth, profile, stats, leaderboard, and word buckets critical paths
-  - full `pnpm run lint` now passes on the current branch state
+  - full `pnpm run lint` and `pnpm run test:ui` now pass on the current branch state
 
 ## Current blockers
 
@@ -84,6 +85,7 @@ Next task ID: P9-007
 - Continue `P9-006` / `P9-007`:
   - extract remaining bulky learner/reviewer rendering into replaceable presentation components
   - continue mobile/responsive cleanup on the remaining long-tail pages
+  - deepen `P9-009` around the remaining extracted surfaces and responsive-state assertions
   - only mark the remaining Phase 9 tasks `done` once the full surface area has been migrated, not just the highest-traffic paths
 
 ---
