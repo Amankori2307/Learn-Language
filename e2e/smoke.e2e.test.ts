@@ -293,9 +293,9 @@ test("e2e smoke: auth, analytics, cluster, review, and quiz critical paths are l
     );
     assert.equal(response.status, 200, `mode=${mode} should return 200`);
     const payload = await response.json();
-    assert.equal(Array.isArray(payload), true, `mode=${mode} should return array payload`);
-    if (!firstGeneratedQuestion && Array.isArray(payload) && payload.length > 0) {
-      firstGeneratedQuestion = payload[0];
+    assert.equal(Array.isArray(payload.data), true, `mode=${mode} should return array payload`);
+    if (!firstGeneratedQuestion && Array.isArray(payload.data) && payload.data.length > 0) {
+      firstGeneratedQuestion = payload.data[0];
     }
   }
 
@@ -318,8 +318,8 @@ test("e2e smoke: auth, analytics, cluster, review, and quiz critical paths are l
   });
   assert.equal(submitResponse.status, 201, "/api/quiz/submit should return 201");
   const submitPayload = await submitResponse.json();
-  assert.equal(typeof submitPayload.isCorrect, "boolean");
-  assert.equal(typeof submitPayload.correctAnswer?.id, "number");
-  assert.equal(Array.isArray(submitPayload.examples), true);
-  assert.equal(typeof submitPayload.progressUpdate?.masteryLevel, "number");
+  assert.equal(typeof submitPayload.data?.isCorrect, "boolean");
+  assert.equal(typeof submitPayload.data?.correctAnswer?.id, "number");
+  assert.equal(Array.isArray(submitPayload.data?.examples), true);
+  assert.equal(typeof submitPayload.data?.progressUpdate?.masteryLevel, "number");
 });
