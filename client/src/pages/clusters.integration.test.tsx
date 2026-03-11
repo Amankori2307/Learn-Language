@@ -76,4 +76,29 @@ describe("ClustersPage integration", () => {
     await user.type(screen.getByLabelText("Search"), "go");
     expect(updateQuery).toHaveBeenCalled();
   });
+
+  it("renders empty-state messaging when filters return no clusters", () => {
+    viewModel.mockReturnValue({
+      query: "missing",
+      typeFilter: "all",
+      sortBy: "words_desc",
+      clusterTypes: ["all", "topic"],
+      updateQuery: vi.fn(),
+      topCluster: null,
+      totalWords: 120,
+      nonEmptyClusters: 18,
+      totalResults: 0,
+      totalPages: 1,
+      currentPage: 1,
+      pageRows: [],
+      isLoading: false,
+    });
+
+    render(<ClustersPage />);
+
+    expect(screen.getByText("No clusters found")).toBeTruthy();
+    expect(
+      screen.getByText("No clusters match the current search and filter combination."),
+    ).toBeTruthy();
+  });
 });

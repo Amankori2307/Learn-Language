@@ -49,6 +49,68 @@ describe("HistoryPage integration", () => {
     expect(screen.getByText("No attempts match these filters")).toBeTruthy();
   });
 
+  it("shows loading skeleton while history is loading", () => {
+    viewModel.mockReturnValue({
+      search: "",
+      setSearch: vi.fn(),
+      resultFilter: "all",
+      setResultFilter: vi.fn(),
+      directionFilter: "all",
+      setDirectionFilter: vi.fn(),
+      sortBy: "newest",
+      setSortBy: vi.fn(),
+      setPage: vi.fn(),
+      filteredAttempts: [],
+      currentPage: 1,
+      totalPages: 1,
+      pageAttempts: [],
+      summary: { total: 0, correct: 0, accuracy: 0 },
+      applyFilterReset: vi.fn(),
+      isLoading: true,
+      isError: false,
+      isFetching: false,
+      refresh: vi.fn(),
+      retry: vi.fn(),
+    });
+
+    const { container } = render(<HistoryPage />);
+    expect(container.querySelectorAll(".animate-pulse").length).toBeGreaterThan(0);
+  });
+
+  it("shows retryable error state when history loading fails", async () => {
+    const user = userEvent.setup();
+    const retry = vi.fn();
+
+    viewModel.mockReturnValue({
+      search: "",
+      setSearch: vi.fn(),
+      resultFilter: "all",
+      setResultFilter: vi.fn(),
+      directionFilter: "all",
+      setDirectionFilter: vi.fn(),
+      sortBy: "newest",
+      setSortBy: vi.fn(),
+      setPage: vi.fn(),
+      filteredAttempts: [],
+      currentPage: 1,
+      totalPages: 1,
+      pageAttempts: [],
+      summary: { total: 0, correct: 0, accuracy: 0 },
+      applyFilterReset: vi.fn(),
+      isLoading: false,
+      isError: true,
+      isFetching: false,
+      refresh: vi.fn(),
+      retry,
+    });
+
+    render(<HistoryPage />);
+
+    expect(screen.getByText("Could not load attempt history")).toBeTruthy();
+    await user.click(screen.getByRole("button", { name: "Retry" }));
+    expect(retry).toHaveBeenCalledTimes(1);
+  });
+
   it("refreshes and renders attempt rows when data is present", async () => {
     const user = userEvent.setup();
     const refresh = vi.fn();
