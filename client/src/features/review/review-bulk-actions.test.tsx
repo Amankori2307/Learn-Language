@@ -52,4 +52,27 @@ describe("ReviewBulkActions", () => {
       true,
     );
   });
+
+  it("keeps bulk actions full width on mobile and auto width on larger screens", () => {
+    render(
+      <ReviewBulkActions
+        notes=""
+        setNotes={vi.fn()}
+        selectedCount={1}
+        runBulk={vi.fn()}
+        clearSelection={vi.fn()}
+        isBulkPending={false}
+      />,
+    );
+
+    expect((screen.getByRole("button", { name: "Bulk Approve" }) as HTMLButtonElement).className.includes("w-full")).toBe(
+      true,
+    );
+    expect((screen.getByRole("button", { name: "Bulk Reject" }) as HTMLButtonElement).className.includes("sm:w-auto")).toBe(
+      true,
+    );
+    expect((screen.getByRole("button", { name: "Clear Selection" }) as HTMLButtonElement).className.includes("w-full")).toBe(
+      true,
+    );
+  });
 });

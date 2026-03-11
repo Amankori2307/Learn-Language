@@ -8,7 +8,7 @@ export function HistoryPageHeader({
   refresh: () => void;
 }) {
   return (
-    <div className="flex items-start justify-between gap-4">
+    <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
       <div>
         <h1 className="text-3xl font-bold">Analytics</h1>
         <p className="mt-1 text-muted-foreground">
@@ -20,6 +20,7 @@ export function HistoryPageHeader({
         onClick={refresh}
         pending={isFetching}
         pendingLabel="Refreshing..."
+        className="w-full sm:w-auto"
       >
         Refresh
       </PendingButton>

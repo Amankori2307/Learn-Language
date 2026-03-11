@@ -44,7 +44,7 @@ Status legend:
 
 1. `dashboard`: decide whether zero-data/default-stat composition deserves its own explicit empty-state assertions beyond the current loading/error/success coverage.
 2. `auth`: decide whether `/auth` needs an explicit failure surface beyond the current bootstrap/redirect behavior.
-3. responsive regression checks: add high-signal assertions for the main action rows and mobile stacking behavior already refactored in leaderboard, history, review, and word-buckets.
+3. responsive regression checks: extend the current action-row responsive assertions into page-level layout regressions for history, leaderboard, review, and word-buckets.
 
 ## Exit criteria for `P9-009`
 

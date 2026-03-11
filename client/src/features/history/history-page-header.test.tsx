@@ -24,4 +24,14 @@ describe("HistoryPageHeader", () => {
     const button = screen.getByRole("button", { name: "Refreshing..." });
     expect((button as HTMLButtonElement).disabled).toBe(true);
   });
+
+  it("keeps the refresh action mobile-safe with stacked responsive classes", () => {
+    const { container } = render(<HistoryPageHeader isFetching={false} refresh={vi.fn()} />);
+
+    expect(container.firstElementChild?.className.includes("flex-col")).toBe(true);
+    expect(container.firstElementChild?.className.includes("sm:flex-row")).toBe(true);
+    expect((screen.getByRole("button", { name: "Refresh" }) as HTMLButtonElement).className.includes("w-full")).toBe(
+      true,
+    );
+  });
 });

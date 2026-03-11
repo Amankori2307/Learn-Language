@@ -25,4 +25,24 @@ describe("LeaderboardHeader", () => {
     expect(screen.getByText("Leaderboard")).toBeTruthy();
     expect(setWindow).toHaveBeenCalledWith("weekly");
   });
+
+  it("keeps leaderboard window controls responsive", () => {
+    const { container } = render(
+      <LeaderboardHeader
+        window="daily"
+        setWindow={vi.fn()}
+        isFetching={false}
+        options={[
+          { key: "daily", label: "Daily" },
+          { key: "weekly", label: "Weekly" },
+        ]}
+      />,
+    );
+
+    expect(container.firstElementChild?.className.includes("flex-col")).toBe(true);
+    expect(container.firstElementChild?.className.includes("md:flex-row")).toBe(true);
+    expect((screen.getByRole("button", { name: "Daily" }) as HTMLButtonElement).className.includes("w-full")).toBe(
+      true,
+    );
+  });
 });

@@ -23,4 +23,11 @@ describe("word bucket controls", () => {
     expect(changeBucket).toHaveBeenCalledWith("mastered");
     expect(changeBucket).toHaveBeenCalledWith("needs_review");
   });
+
+  it("keeps bucket controls stacked-first for small screens", () => {
+    const { container } = render(<WordBucketSwitch bucket="learning" changeBucket={vi.fn()} />);
+
+    expect(container.firstElementChild?.className.includes("grid-cols-1")).toBe(true);
+    expect(container.firstElementChild?.className.includes("sm:flex")).toBe(true);
+  });
 });
