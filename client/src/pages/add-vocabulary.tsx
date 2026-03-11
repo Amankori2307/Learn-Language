@@ -1,7 +1,8 @@
 import { Layout } from "@/components/layout";
 import { useAuth } from "@/hooks/use-auth";
 import { UserTypeEnum } from "@shared/domain/enums";
-import { CreateVocabularyDraftForm } from "@/components/review/create-vocabulary-draft-form";
+import { ReviewAccessState } from "@/features/review/review-access-state";
+import { CreateVocabularyDraftForm } from "@/features/review/create-vocabulary-draft-form";
 
 export default function AddVocabularyPage() {
   const { user } = useAuth();
@@ -10,12 +11,7 @@ export default function AddVocabularyPage() {
   if (!canReview) {
     return (
       <Layout>
-        <div className="rounded-2xl border border-border/50 bg-card p-8 text-center">
-          <h1 className="text-2xl font-bold">Review Access Required</h1>
-          <p className="text-muted-foreground mt-2">
-            Only reviewer/admin roles can add vocabulary drafts.
-          </p>
-        </div>
+        <ReviewAccessState description="Only reviewer/admin roles can add vocabulary drafts." />
       </Layout>
     );
   }
