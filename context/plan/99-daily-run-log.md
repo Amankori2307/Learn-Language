@@ -32,7 +32,7 @@ Next task ID: -
 
 Date: 2026-03-11  
 Session owner: Codex  
-Last completed task ID: P13-002  
+Last completed task ID: P13-003  
 Current in-progress task ID: -  
 Next task ID: -
 
@@ -65,6 +65,9 @@ Next task ID: -
 - `P13-002` is now complete:
   - add-vocabulary route-level failure coverage now protects draft-creation errors in page composition tests
   - the frontend coverage matrix now reflects that the explicit create-failure gap is closed
+- `P13-003` is now complete:
+  - page-level responsive assertions now protect the existing mobile-safe and desktop-upgrade classes for `profile`, `auth`, and `add-vocabulary`
+  - the remaining lower-priority responsive backlog is now limited to `clusters` and `contextual`
 - Phase 12 planning is now active in [81-phase-12-theme-system-and-design-token-extraction.md](/Users/aman/Projects/personal-projects/Learn-Language/context/plan/81-phase-12-theme-system-and-design-token-extraction.md).
 - Active backlog was reprioritized to start with theming-system readiness before UI theme selection work:
   - `P12-001` is now complete via [theme-system-baseline.md](/Users/aman/Projects/personal-projects/Learn-Language/documentation/theme-system-baseline.md)

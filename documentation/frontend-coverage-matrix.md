@@ -19,8 +19,8 @@ Status legend:
 | `history` | `covered` | `covered` | `covered` | `covered` | `covered` | `covered` | page-level refresh and responsive CTA composition are covered |
 | `leaderboard` | `covered` | `covered` | `covered` | `covered` | `partial` | `covered` | loading-state page composition and responsive window-switch layout are now covered |
 | `word-buckets` | `covered` | `covered` | `covered` | `covered` | `covered` | `covered` | bucket switching and responsive bucket-switch layout are covered |
-| `profile` | `covered` | `covered` | `n/a` | `covered` | `covered` | `partial` | save flow, retryable error, and route-level loading composition are covered |
-| `auth` | `covered` | `covered` | `n/a` | `covered` | `covered` | `partial` | sign-in CTA, pending button, bootstrap/redirect handshake, and retryable auth-route failure messaging now have direct route and hook coverage |
+| `profile` | `covered` | `covered` | `n/a` | `covered` | `covered` | `covered` | save flow, retryable error, loading composition, and responsive stacked-to-two-column form behavior are covered |
+| `auth` | `covered` | `covered` | `n/a` | `covered` | `covered` | `covered` | sign-in CTA, pending button, bootstrap/redirect handshake, retryable failure messaging, and responsive auth shell classes are covered |
 | `tutor` | `gap` | `gap` | `gap` | `covered` | `covered` | `partial` | intentionally lower priority until tutor retention is finalized |
 
 ## Reviewer/admin surfaces
@@ -28,7 +28,7 @@ Status legend:
 | Surface | Loading | Error | Empty | Success / normal render | Pending / interaction | Role-gated | Responsive | Notes |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | `review` | `covered` | `covered` | `covered` | `covered` | `covered` | `covered` | `covered` | queue/history loading, error, empty, actions, role denial, and responsive bulk-action layout are covered |
-| `add-vocabulary` | `partial` | `covered` | `n/a` | `covered` | `covered` | `covered` | `partial` | create flow, access gating, cluster-loading, submit pending, and draft-creation failure composition are covered; route-level loading remains thinner than other stabilized pages |
+| `add-vocabulary` | `partial` | `covered` | `n/a` | `covered` | `covered` | `covered` | `covered` | create flow, access gating, cluster-loading, submit pending, draft-creation failure composition, and responsive form/CTA behavior are covered; route-level loading remains thinner than other stabilized pages |
 
 ## Shared presentation / async primitives
 
@@ -42,7 +42,7 @@ Status legend:
 
 ## Highest-priority remaining gaps
 
-1. lower-priority responsive assertions remain thin for `profile`, `auth`, `clusters`, `contextual`, and `add-vocabulary`, but the highest-risk analytics/review layouts now have direct page-level protection.
+1. lower-priority responsive assertions remain thin for `clusters` and `contextual`, but the highest-risk analytics/review/auth/profile layouts now have direct page-level protection.
 
 ## Explicit Phase 9 deferrals
 

@@ -136,4 +136,18 @@ describe("AddVocabularyPage integration", () => {
     expect(screen.getByText("Only reviewer/admin roles can add vocabulary drafts.")).toBeTruthy();
     expect(screen.queryByText("Create Vocabulary Draft")).toBeNull();
   });
+
+  it("keeps the add-vocabulary form responsive with stacked mobile CTA and two-column upgrades", () => {
+    const queryClient = new QueryClient();
+    vi.mocked(apiClient.get).mockResolvedValue({ data: [] });
+
+    const { container } = render(
+      <QueryClientProvider client={queryClient}>
+        <AddVocabularyPage />
+      </QueryClientProvider>,
+    );
+
+    expect(screen.getByRole("button", { name: "Create Draft" }).className).toContain("sm:w-auto");
+    expect(container.querySelector(".grid.gap-3.md\\:grid-cols-2")).toBeTruthy();
+  });
 });

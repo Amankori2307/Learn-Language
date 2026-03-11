@@ -104,4 +104,14 @@ describe("ProfilePage integration", () => {
 
     expect(window.localStorage.getItem(APP_STORAGE_KEYS.quizConfidenceEnabled)).toBe("true");
   });
+
+  it("keeps the profile form mobile-safe with stacked actions and two-column upgrade classes", () => {
+    const { container } = render(<ProfilePage />);
+
+    expect(screen.getByRole("button", { name: "Save Profile" }).className).toContain("sm:w-auto");
+
+    const formCard = container.querySelector(".rounded-2xl.border.border-border\\/50.bg-card");
+    expect(formCard?.querySelector(".grid.gap-4.md\\:grid-cols-2")).toBeTruthy();
+    expect(formCard?.querySelector(".flex.flex-col.gap-4.border-b.border-border\\/40.pb-3.sm\\:flex-row.sm\\:items-center")).toBeTruthy();
+  });
 });

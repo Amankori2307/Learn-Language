@@ -66,4 +66,12 @@ describe("AuthPage integration", () => {
     ).toBeTruthy();
     expect(screen.getByRole("button", { name: "Continue to Sign In" })).toBeTruthy();
   });
+
+  it("keeps the auth route responsive with single-column mobile and split desktop shell", () => {
+    const { container } = render(<AuthPage />);
+
+    expect(container.firstElementChild?.className).toContain("grid-cols-1");
+    expect(container.firstElementChild?.className).toContain("lg:grid-cols-2");
+    expect(screen.getByRole("button", { name: "Continue to Sign In" }).className).toContain("w-full");
+  });
 });
