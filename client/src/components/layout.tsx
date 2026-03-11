@@ -12,7 +12,6 @@ import {
   PlusCircle,
   Moon,
   Sun,
-  Languages,
   PanelLeftClose,
   PanelLeftOpen,
   ExternalLink,
@@ -46,6 +45,18 @@ function getInitials(firstName?: string | null, lastName?: string | null, email?
       .join("");
   }
   return (email?.[0] ?? "U").toUpperCase();
+}
+
+function BrandMark({ compact = false }: { compact?: boolean }) {
+  return (
+    <div className={cn("flex items-center justify-center", compact ? "size-10" : "size-12")} aria-hidden="true">
+      <img
+        src="/brand-logo.png"
+        alt=""
+        className={cn("block object-contain", compact ? "size-10" : "size-12")}
+      />
+    </div>
+  );
 }
 
 export function Layout({ children }: { children: React.ReactNode }) {
@@ -112,9 +123,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
       <div className={cn("p-4 border-b border-border/60", compact ? "pb-4" : "pb-5")}>
         <div className={cn("flex items-center", compact ? "justify-center" : "justify-between")}>
           <div className={cn("flex items-center gap-3", compact && "justify-center")}>
-            <div className="size-10 rounded-xl bg-gradient-to-br from-primary/90 to-emerald-500/80 text-primary-foreground flex items-center justify-center shadow-lg">
-              <Languages className="size-5" />
-            </div>
+            <BrandMark />
             {!compact && (
               <div>
                 <h1 className="text-lg font-semibold text-foreground leading-none">
@@ -372,9 +381,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
       {/* Mobile Header */}
       <div className="md:hidden fixed top-0 left-0 right-0 h-16 bg-card/90 backdrop-blur-md border-b border-border/60 z-30 flex items-center justify-between px-3 sm:px-4">
         <div className="flex items-center gap-2">
-          <div className="size-8 rounded-lg bg-gradient-to-br from-primary/90 to-emerald-500/80 text-primary-foreground flex items-center justify-center">
-            <Languages className="size-4" />
-          </div>
+          <BrandMark compact />
           <h1 className="text-lg font-semibold text-foreground">{APP_BRAND_NAME}</h1>
         </div>
         <div className="flex items-center gap-2">

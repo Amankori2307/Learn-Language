@@ -26,6 +26,19 @@ require_cmd() {
   command -v "$1" >/dev/null 2>&1 || fail "Required command not found: $1"
 }
 
+derive_ghcr_owner() {
+  remote_url="$(git config --get remote.origin.url || true)"
+  [ -n "$remote_url" ] || return 1
+
+  owner="$(printf "%s" "$remote_url" \
+    | sed -E 's#^[^@]+@[^:]+:##; s#^https?://[^/]+/##; s#\.git$##' \
+    | cut -d/ -f1 \
+    | tr '[:upper:]' '[:lower:]')"
+
+  [ -n "$owner" ] || return 1
+  printf "%s" "$owner"
+}
+
 CURRENT_STEP="initialization"
 
 on_exit() {
@@ -53,7 +66,7 @@ if [ ! -f .env.production ]; then
 fi
 
 IMAGE_TAG="${IMAGE_TAG:-sha-$(git rev-parse HEAD)}"
-GHCR_OWNER="${GHCR_OWNER:-$(git config --get remote.origin.url | sed -E 's#(git@github.com:|https://github.com/)##; s#\.git$##' | cut -d/ -f1 | tr '[:upper:]' '[:lower:]')}"
+GHCR_OWNER="${GHCR_OWNER:-$(derive_ghcr_owner)}"
 
 if [ -z "${GHCR_OWNER}" ]; then
   fail "Could not determine GHCR_OWNER from git remote. Set GHCR_OWNER explicitly."
