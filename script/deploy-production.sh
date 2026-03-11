@@ -57,7 +57,6 @@ require_env PROD_SSH_HOST
 require_env PROD_SSH_USER
 require_env PROD_APP_DIR
 
-require_cmd git
 require_cmd ssh
 require_cmd scp
 
@@ -65,8 +64,14 @@ if [ ! -f .env.production ]; then
   fail "Missing local .env.production"
 fi
 
-IMAGE_TAG="${IMAGE_TAG:-sha-$(git rev-parse HEAD)}"
-GHCR_OWNER="${GHCR_OWNER:-$(derive_ghcr_owner)}"
+IMAGE_TAG="${IMAGE_TAG:-latest}"
+
+if [ -n "${GHCR_OWNER:-}" ]; then
+  GHCR_OWNER="$GHCR_OWNER"
+else
+  require_cmd git
+  GHCR_OWNER="$(derive_ghcr_owner)"
+fi
 
 if [ -z "${GHCR_OWNER}" ]; then
   fail "Could not determine GHCR_OWNER from git remote. Set GHCR_OWNER explicitly."

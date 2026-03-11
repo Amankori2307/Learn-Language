@@ -52,7 +52,9 @@ Optional environment variables:
 - `GHCR_OWNER`
   - defaults to the GitHub repo owner inferred from `origin`
 - `IMAGE_TAG`
-  - defaults to `sha-$(git rev-parse HEAD)`
+  - defaults to `latest`
+
+Default behavior is branch-agnostic: the deploy script pulls the latest published GHCR images unless you explicitly set `IMAGE_TAG` to a specific version.
 
 Example:
 
