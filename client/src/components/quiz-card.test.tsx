@@ -29,6 +29,7 @@ describe("QuizCard", () => {
       onConfidenceChange: vi.fn(),
       onAnswer,
       isSubmitting: false,
+      submitError: null,
       result: null,
       onNext: vi.fn(),
     };
@@ -89,6 +90,7 @@ describe("QuizCard", () => {
         onConfidenceChange={vi.fn()}
         onAnswer={onAnswer}
         isSubmitting={false}
+        submitError={null}
         result={null}
         onNext={vi.fn()}
       />,
@@ -120,6 +122,7 @@ describe("QuizCard", () => {
         onConfidenceChange={vi.fn()}
         onAnswer={vi.fn()}
         isSubmitting={false}
+        submitError={null}
         result={null}
         onNext={vi.fn()}
       />,
@@ -166,6 +169,7 @@ describe("QuizCard", () => {
         onConfidenceChange={vi.fn()}
         onAnswer={vi.fn()}
         isSubmitting={false}
+        submitError={null}
         result={{
           isCorrect: true,
           correctAnswer: {
@@ -202,6 +206,7 @@ describe("QuizCard", () => {
         onConfidenceChange={vi.fn()}
         onAnswer={vi.fn()}
         isSubmitting={false}
+        submitError={null}
         result={{
           isCorrect: true,
           correctAnswer: {
@@ -261,6 +266,7 @@ describe("QuizCard", () => {
         onConfidenceChange={onConfidenceChange}
         onAnswer={onAnswer}
         isSubmitting={false}
+        submitError={null}
         result={null}
         onNext={vi.fn()}
       />,
@@ -283,6 +289,7 @@ describe("QuizCard", () => {
         onConfidenceChange={onConfidenceChange}
         onAnswer={onAnswer}
         isSubmitting={false}
+        submitError={null}
         result={null}
         onNext={vi.fn()}
       />,
@@ -296,5 +303,30 @@ describe("QuizCard", () => {
     await user.click(screen.getByRole("button", { name: "Option namaste" }));
     await user.click(screen.getByRole("button", { name: "Check Answer" }));
     expect(onAnswer).toHaveBeenCalledWith(1, 3);
+  });
+
+  it("shows inline submit error messaging when answer submission fails", () => {
+    render(
+      <QuizCard
+        question="hello"
+        pronunciation={null}
+        imageUrl={null}
+        type={QuizQuestionTypeEnum.TARGET_TO_SOURCE}
+        options={[
+          { id: 1, text: "namaste" },
+          { id: 2, text: "dhanyavaadalu" },
+        ]}
+        showConfidenceControl={false}
+        confidenceLevel={2}
+        onConfidenceChange={vi.fn()}
+        onAnswer={vi.fn()}
+        isSubmitting={false}
+        submitError="Could not submit your answer. Please try again."
+        result={null}
+        onNext={vi.fn()}
+      />,
+    );
+
+    expect(screen.getByText("Could not submit your answer. Please try again.")).toBeTruthy();
   });
 });

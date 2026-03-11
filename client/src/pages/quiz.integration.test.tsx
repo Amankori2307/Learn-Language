@@ -171,6 +171,33 @@ describe("QuizPage integration", () => {
     expect(setLocation).toHaveBeenCalledWith(`/quiz?mode=${QuizModeEnum.WEAK_WORDS}`);
   });
 
+  it("shows inline submit error messaging when answer submission fails", async () => {
+    quizDataState.data = [
+      {
+        wordId: 11,
+        type: QuizQuestionTypeEnum.SOURCE_TO_TARGET,
+        questionText: "నమస్తే",
+        pronunciation: "namaste",
+        audioUrl: null,
+        imageUrl: null,
+        options: [
+          { id: 11, text: "hello" },
+          { id: 12, text: "thank you" },
+        ],
+      },
+    ];
+    submitAnswerMock.mockRejectedValueOnce(new Error("Could not submit your answer right now."));
+
+    const user = userEvent.setup();
+    render(<QuizPage />);
+
+    await user.click(screen.getByRole("button", { name: "Option hello" }));
+    await user.click(screen.getByRole("button", { name: "Check Answer" }));
+
+    expect(screen.getByText("Could not submit your answer right now.")).toBeTruthy();
+    expect(screen.getByRole("button", { name: "Check Answer" })).toBeTruthy();
+  });
+
   it("shows confidence controls when the learner preference is enabled", () => {
     window.localStorage.setItem(APP_STORAGE_KEYS.quizConfidenceEnabled, "true");
     quizDataState.data = [

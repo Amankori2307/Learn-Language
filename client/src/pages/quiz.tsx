@@ -19,6 +19,7 @@ export default function QuizPage() {
     currentQuestion,
     progress,
     result,
+    submitError,
     sessionStats,
     isFinished,
     confidenceLevel,
@@ -92,6 +93,7 @@ export default function QuizPage() {
           onConfidenceChange={setConfidenceLevel}
           onAnswer={handleAnswer}
           isSubmitting={submitPending}
+          submitError={submitError}
           result={result}
           onNext={handleNext}
         />

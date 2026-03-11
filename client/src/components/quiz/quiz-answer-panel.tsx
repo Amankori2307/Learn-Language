@@ -10,6 +10,7 @@ export function QuizAnswerPanel({
   options,
   selectedOption,
   isSubmitting,
+  submitError,
   showConfidenceControl,
   confidenceLevel,
   onConfidenceChange,
@@ -111,6 +112,11 @@ export function QuizAnswerPanel({
       </div>
 
       <div className="space-y-3 border-t border-border/60 pt-2">
+        {submitError ? (
+          <p className="rounded-xl border border-status-error/35 bg-status-error-surface px-3 py-2 text-sm text-status-error">
+            {submitError}
+          </p>
+        ) : null}
         {showConfidenceControl ? (
           <div className="rounded-2xl border border-border/50 bg-background/40 p-3">
             <div className="mb-2 flex items-center justify-between gap-3">

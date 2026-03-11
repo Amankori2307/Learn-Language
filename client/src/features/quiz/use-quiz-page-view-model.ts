@@ -37,6 +37,7 @@ export function useQuizPageViewModel() {
 
   const [currentIndex, setCurrentIndex] = useState(0);
   const [result, setResult] = useState<any>(null);
+  const [submitError, setSubmitError] = useState<string | null>(null);
   const [sessionStats, setSessionStats] = useState({ correct: 0, total: 0 });
   const [isFinished, setIsFinished] = useState(false);
   const [questionStartedAt, setQuestionStartedAt] = useState<number>(Date.now());
@@ -50,6 +51,7 @@ export function useQuizPageViewModel() {
   const resetSession = useCallback(() => {
     setCurrentIndex(0);
     setResult(null);
+    setSubmitError(null);
     setSessionStats({ correct: 0, total: 0 });
     setIsFinished(false);
     setQuestionStartedAt(Date.now());
@@ -64,6 +66,7 @@ export function useQuizPageViewModel() {
     if (!currentQuestion) return;
 
     try {
+      setSubmitError(null);
       const responseTimeMs = Math.max(QUIZ_RESPONSE_TIME_MIN_MS, Date.now() - questionStartedAt);
       const direction =
         currentQuestion.type === QuizQuestionTypeEnum.TARGET_TO_SOURCE
@@ -95,12 +98,15 @@ export function useQuizPageViewModel() {
         isCorrect: response.isCorrect,
       });
     } catch (error) {
-      console.error("Failed to submit answer:", error);
+      setSubmitError(
+        error instanceof Error ? error.message : "Could not submit your answer. Please try again.",
+      );
     }
   };
 
   const handleNext = () => {
     setResult(null);
+    setSubmitError(null);
     setQuestionStartedAt(Date.now());
     if (questions && currentIndex < questions.length - 1) {
       setCurrentIndex((prev) => prev + 1);
@@ -195,6 +201,7 @@ export function useQuizPageViewModel() {
     currentIndex,
     progress,
     result,
+    submitError,
     sessionStats,
     isFinished,
     confidenceLevel,
