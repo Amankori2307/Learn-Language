@@ -82,12 +82,14 @@ Next task ID: P9-007
   - backend test coverage expanded for auth/profile controller behavior and audio language mismatch handling
   - backend review-service coverage now exists in [review.service.test.ts](/Users/aman/Projects/personal-projects/Learn-Language/server/src/modules/review/review.service.test.ts) for queue normalization, bulk transition counts, validation-error mapping, and invalid conflict identifiers
   - backend analytics-service coverage now exists in [analytics.service.test.ts](/Users/aman/Projects/personal-projects/Learn-Language/server/src/modules/analytics/analytics.service.test.ts) for history normalization, leaderboard defaults, and bucket input forwarding
+  - backend analytics-controller coverage now exists in [analytics.controller.test.ts](/Users/aman/Projects/personal-projects/Learn-Language/server/src/modules/analytics/analytics.controller.test.ts) for learning-insights forwarding and attempt-history error mapping
+  - backend vocabulary-controller coverage now exists in [vocabulary.controller.test.ts](/Users/aman/Projects/personal-projects/Learn-Language/server/src/modules/vocabulary/vocabulary.controller.test.ts) for cluster-list forwarding and cluster-detail not-found mapping
   - backend vocabulary-service coverage now exists in [vocabulary.service.test.ts](/Users/aman/Projects/personal-projects/Learn-Language/server/src/modules/vocabulary/vocabulary.service.test.ts) for cluster language forwarding and not-found behavior on word/cluster lookups
-  - smoke coverage expanded to include auth, profile, stats, leaderboard, word buckets, cluster list, and cluster detail critical paths
+  - smoke coverage expanded to include auth, profile, stats, learning insights, attempt history, leaderboard, word buckets, cluster list, and cluster detail critical paths
   - responsive/mobile hardening continued across extracted action rows and pagination surfaces in leaderboard, contextual, dashboard, review, history, clusters, and word buckets so primary actions stack cleanly and footer controls expand to full-width buttons on small screens
   - page-level integration coverage now also includes [clusters.integration.test.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/pages/clusters.integration.test.tsx) and [contextual.integration.test.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/pages/contextual.integration.test.tsx)
   - page-level integration coverage now also includes [tutor.integration.test.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/pages/tutor.integration.test.tsx)
-  - full `pnpm run lint`, `pnpm run test:ui`, `pnpm test`, and `pnpm run test:e2e:smoke:development` now pass on the current branch state, with the UI suite now at 35 files / 67 tests
+  - full `pnpm run lint`, `pnpm run test:ui`, `pnpm test`, and `pnpm run test:e2e:smoke:development` now pass on the current branch state, with the UI suite now at 35 files / 67 tests and the backend suite now at 56 tests with 54 passing and 2 DB-dependent skips
 
 ## Current blockers
 

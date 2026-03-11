@@ -152,6 +152,13 @@ test("e2e smoke: auth, analytics, cluster, and quiz critical paths are live", as
   const statsPayload = await statsResponse.json();
   assert.equal(typeof statsPayload.totalWords, "number");
 
+  const learningResponse = await fetch(`${baseUrl}/api/analytics/learning?language=telugu`, {
+    headers: authHeaders,
+  });
+  assert.equal(learningResponse.status, 200, "/api/analytics/learning should return 200");
+  const learningPayload = await learningResponse.json();
+  assert.equal(Array.isArray(learningPayload.clusters), true);
+
   const wordBucketsResponse = await fetch(
     `${baseUrl}/api/analytics/word-buckets?bucket=learning&page=1&limit=5&language=telugu`,
     {
@@ -161,6 +168,16 @@ test("e2e smoke: auth, analytics, cluster, and quiz critical paths are live", as
   assert.equal(wordBucketsResponse.status, 200, "/api/analytics/word-buckets should return 200");
   const wordBucketsPayload = await wordBucketsResponse.json();
   assert.equal(Array.isArray(wordBucketsPayload.words), true);
+
+  const attemptHistoryResponse = await fetch(
+    `${baseUrl}/api/attempts/history?limit=5&language=telugu`,
+    {
+      headers: authHeaders,
+    },
+  );
+  assert.equal(attemptHistoryResponse.status, 200, "/api/attempts/history should return 200");
+  const attemptHistoryPayload = await attemptHistoryResponse.json();
+  assert.equal(Array.isArray(attemptHistoryPayload), true);
 
   const leaderboardResponse = await fetch(
     `${baseUrl}/api/leaderboard?window=weekly&limit=5&language=telugu`,
