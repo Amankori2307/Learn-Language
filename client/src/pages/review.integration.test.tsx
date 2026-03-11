@@ -1,12 +1,13 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import type { ReactNode } from "react";
-import { describe, expect, it, vi } from "vitest";
+import { beforeEach, describe, expect, it, vi } from "vitest";
 import { LanguageEnum, ReviewStatusEnum, UserTypeEnum } from "@shared/domain/enums";
 import ReviewPage from "./review";
 
 const transitionMutate = vi.fn();
 const bulkMutateAsync = vi.fn().mockResolvedValue({ updated: 1, skipped: 0 });
+let currentUserRole = UserTypeEnum.REVIEWER;
 
 vi.mock("@/components/layout", () => ({
   Layout: ({ children }: { children: ReactNode }) => <div>{children}</div>,
@@ -16,7 +17,7 @@ vi.mock("@/hooks/use-auth", () => ({
   useAuth: () => ({
     user: {
       id: "reviewer-1",
-      role: UserTypeEnum.REVIEWER,
+      role: currentUserRole,
       email: "reviewer@example.com",
     },
   }),
@@ -78,6 +79,10 @@ vi.mock("@/hooks/use-review", () => ({
 }));
 
 describe("ReviewPage integration", () => {
+  beforeEach(() => {
+    currentUserRole = UserTypeEnum.REVIEWER;
+  });
+
   it("runs bulk approve from selected queue items", async () => {
     const user = userEvent.setup();
     render(<ReviewPage />);
@@ -114,5 +119,15 @@ describe("ReviewPage integration", () => {
       toStatus: ReviewStatusEnum.APPROVED,
       notes: undefined,
     });
+  });
+
+  it("renders reviewer-only access state for learner users", () => {
+    currentUserRole = UserTypeEnum.LEARNER;
+
+    render(<ReviewPage />);
+
+    expect(screen.getByText("Review Access Required")).toBeTruthy();
+    expect(screen.getByText("Only reviewer/admin roles can access vocabulary review tools.")).toBeTruthy();
+    expect(screen.queryByText("Review Queue")).toBeNull();
   });
 });
