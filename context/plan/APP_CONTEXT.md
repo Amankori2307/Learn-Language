@@ -23,6 +23,7 @@ Build a text-first language learning app with high data correctness, strong memo
 - `P13-007` clusters/contextual interaction coverage is complete.
 - `P13-008` quiz route error handling is complete.
 - `P13-009` dashboard/quiz responsive coverage is complete.
+- `P13-010` tutor route-state coverage is complete.
 
 ## Core capabilities live
 
@@ -124,6 +125,6 @@ Build a text-first language learning app with high data correctness, strong memo
 
 - Execute in order from [01-master-task-registry.md](/Users/aman/Projects/personal-projects/Learn-Language/context/plan/01-master-task-registry.md).
 - Current execution track:
-  - last completed implementation slice is `P13-009` dashboard/quiz responsive coverage
+  - last completed implementation slice is `P13-010` tutor route-state coverage
   - current in-progress implementation slice is `-`
   - Phase 12 outcome: named theme ownership, current/minimal shipped themes, semantic tokenized primitives, and chart theme support are now in place

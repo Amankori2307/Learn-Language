@@ -21,7 +21,7 @@ Status legend:
 | `word-buckets` | `covered` | `covered` | `covered` | `covered` | `covered` | `covered` | bucket switching and responsive bucket-switch layout are covered |
 | `profile` | `covered` | `covered` | `n/a` | `covered` | `covered` | `covered` | save flow, retryable error, loading composition, and responsive stacked-to-two-column form behavior are covered |
 | `auth` | `covered` | `covered` | `n/a` | `covered` | `covered` | `covered` | sign-in CTA, pending button, bootstrap/redirect handshake, retryable failure messaging, and responsive auth shell classes are covered |
-| `tutor` | `gap` | `gap` | `gap` | `covered` | `covered` | `partial` | intentionally lower priority until tutor retention is finalized |
+| `tutor` | `covered` | `covered` | `covered` | `covered` | `covered` | `partial` | route-owned loading/error/empty states now exist and are covered, but tutor remains lower priority until retention is finalized |
 
 ## Reviewer/admin surfaces
 
@@ -42,11 +42,11 @@ Status legend:
 
 ## Highest-priority remaining gaps
 
-1. learner-route coverage is now broadly in place; the remaining notable gaps are mostly explicitly deferred non-core surfaces such as tutor, plus lower-priority long-tail polish outside the core learner routes.
+1. core learner-route coverage is now broadly in place; remaining work is mostly lower-priority long-tail polish rather than obvious uncovered route states.
 
 ## Explicit Phase 9 deferrals
 
-- `tutor` remains non-core for Phase 9 closeout and does not block completion of the stabilized learner/reviewer flow coverage.
+- `tutor` remains non-core for prioritization purposes even though basic route-state coverage now exists.
 
 ## Exit criteria for `P9-009`
 

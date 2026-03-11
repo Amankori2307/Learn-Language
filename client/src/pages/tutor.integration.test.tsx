@@ -22,6 +22,10 @@ describe("TutorPage integration", () => {
 
   it("renders tutor guidance and existing chat history", () => {
     viewModel.mockReturnValue({
+      isLoading: false,
+      isError: false,
+      hasWords: true,
+      retry: vi.fn(),
       input: "",
       setInput: vi.fn(),
       sendMessage: vi.fn(),
@@ -46,6 +50,10 @@ describe("TutorPage integration", () => {
     const sendMessage = vi.fn();
 
     viewModel.mockReturnValue({
+      isLoading: false,
+      isError: false,
+      hasWords: true,
+      retry: vi.fn(),
       input: "",
       setInput,
       sendMessage,
@@ -62,5 +70,67 @@ describe("TutorPage integration", () => {
 
     expect(setInput).toHaveBeenCalled();
     expect(sendMessage).toHaveBeenCalledTimes(2);
+  });
+
+  it("renders a loading surface while tutor context is being prepared", () => {
+    viewModel.mockReturnValue({
+      isLoading: true,
+      isError: false,
+      hasWords: false,
+      retry: vi.fn(),
+      input: "",
+      setInput: vi.fn(),
+      sendMessage: vi.fn(),
+      chat: [],
+    });
+
+    render(<TutorPage />);
+
+    expect(screen.getByText("Preparing tutor context")).toBeTruthy();
+    expect(
+      screen.getByText("Loading your learned vocabulary so the tutor can give grounded feedback."),
+    ).toBeTruthy();
+  });
+
+  it("renders a retryable error surface when tutor context loading fails", async () => {
+    const user = userEvent.setup();
+    const retry = vi.fn();
+
+    viewModel.mockReturnValue({
+      isLoading: false,
+      isError: true,
+      hasWords: false,
+      retry,
+      input: "",
+      setInput: vi.fn(),
+      sendMessage: vi.fn(),
+      chat: [],
+    });
+
+    render(<TutorPage />);
+
+    expect(screen.getByText("Could not load tutor context")).toBeTruthy();
+    await user.click(screen.getByRole("button", { name: "Retry" }));
+    expect(retry).toHaveBeenCalledTimes(1);
+  });
+
+  it("renders an empty-state surface when no learned words exist yet", () => {
+    viewModel.mockReturnValue({
+      isLoading: false,
+      isError: false,
+      hasWords: false,
+      retry: vi.fn(),
+      input: "",
+      setInput: vi.fn(),
+      sendMessage: vi.fn(),
+      chat: [],
+    });
+
+    render(<TutorPage />);
+
+    expect(screen.getByText("No tutor context yet")).toBeTruthy();
+    expect(
+      screen.getByText("Learn a few words first so the tutor can coach you against your saved vocabulary."),
+    ).toBeTruthy();
   });
 });
