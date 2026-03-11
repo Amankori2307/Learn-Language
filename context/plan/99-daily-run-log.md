@@ -32,9 +32,9 @@ Next task ID: -
 
 Date: 2026-03-11  
 Session owner: Codex  
-Last completed task ID: P12-001  
+Last completed task ID: P12-002  
 Current in-progress task ID: -  
-Next task ID: P12-002
+Next task ID: P12-003
 
 ## Current state
 
@@ -57,7 +57,8 @@ Next task ID: P12-002
 - Phase 12 planning is now active in [81-phase-12-theme-system-and-design-token-extraction.md](/Users/aman/Projects/personal-projects/Learn-Language/context/plan/81-phase-12-theme-system-and-design-token-extraction.md).
 - Active backlog was reprioritized to start with theming-system readiness before UI theme selection work:
   - `P12-001` is now complete via [theme-system-baseline.md](/Users/aman/Projects/personal-projects/Learn-Language/documentation/theme-system-baseline.md)
-  - `P12-002` is queued next to define the canonical theme contract
+  - `P12-002` is now complete via [theme-contract.md](/Users/aman/Projects/personal-projects/Learn-Language/documentation/theme-contract.md)
+  - `P12-003` is queued next to add named theme ownership in code
 - Planning baselines for the next implementation tasks are now documented:
   - React Query ownership baseline in [documentation/react-query-ownership-baseline.md](/Users/aman/Projects/personal-projects/Learn-Language/documentation/react-query-ownership-baseline.md)
   - Async UX contract in [documentation/async-ux-contract.md](/Users/aman/Projects/personal-projects/Learn-Language/documentation/async-ux-contract.md)

@@ -9,7 +9,7 @@ Make the client app ready for named multi-theme support by finishing design-toke
 | ID | Status | Task | Depends On | Effort | Done When |
 | -- | ------ | ---- | ---------- | ------ | --------- |
 | P12-001 | done | Produce a frontend theming baseline covering current token usage, shared primitive coverage, hardcoded style violations, and light/dark coupling points | - | M | the repo has a concrete inventory of what already follows the design system and what blocks named themes |
-| P12-002 | todo | Define the canonical theme contract for colors, status semantics, typography, radius, shadows, gradients, and motion | P12-001 | M | every reusable surface can read from one agreed token interface rather than ad hoc classes |
+| P12-002 | done | Define the canonical theme contract for colors, status semantics, typography, radius, shadows, gradients, and motion | P12-001 | M | every reusable surface can read from one agreed token interface rather than ad hoc classes |
 | P12-003 | todo | Introduce named theme ownership in code with a supported-theme enum, metadata, and one-line default theme selection | P12-002 | S | theme support is explicit in code and the app default can be changed from one seam |
 | P12-004 | todo | Convert the current shipped visual style into an explicit named theme and add a new minimal theme | P12-003 | M | the current look is preserved as a named theme and a complete `minimal` theme exists beside it |
 | P12-005 | todo | Refactor shared UI primitives to depend only on semantic tokens rather than hardcoded colors or dark-mode-only branches | P12-004 | L | buttons, cards, inputs, overlays, states, and shared surfaces inherit theme changes consistently |
@@ -36,11 +36,11 @@ The top-level tasks above are the phase gates. Actual execution should happen in
 
 | ID | Status | Task | Depends On | Done When |
 | -- | ------ | ---- | ---------- | --------- |
-| P12-002A | todo | Define the required base semantic color tokens for app chrome, surfaces, text, borders, inputs, rings, and interactive accents | P12-001E | one approved base token contract exists |
-| P12-002B | todo | Define semantic status tokens for success, warning, error, and info surfaces, text, borders, and emphasis accents | P12-002A | feedback states no longer need raw color choices |
-| P12-002C | todo | Define non-color tokens for radius, border weight, shadows, gradients, and overlay/backdrop treatment | P12-002B | non-color styling can vary by theme without component rewrites |
-| P12-002D | todo | Define motion tokens covering transition duration, easing, and emphasis levels for hover/focus/surface motion | P12-002C | themes can tune motion consistently from shared values |
-| P12-002E | todo | Define typography ownership for theme-sensitive fonts or heading treatments and decide whether fonts are part of phase one or deferred | P12-002D | typography expectations are explicit and scoped |
+| P12-002A | done | Define the required base semantic color tokens for app chrome, surfaces, text, borders, inputs, rings, and interactive accents | P12-001E | one approved base token contract exists |
+| P12-002B | done | Define semantic status tokens for success, warning, error, and info surfaces, text, borders, and emphasis accents | P12-002A | feedback states no longer need raw color choices |
+| P12-002C | done | Define non-color tokens for radius, border weight, shadows, gradients, and overlay/backdrop treatment | P12-002B | non-color styling can vary by theme without component rewrites |
+| P12-002D | done | Define motion tokens covering transition duration, easing, and emphasis levels for hover/focus/surface motion | P12-002C | themes can tune motion consistently from shared values |
+| P12-002E | done | Define typography ownership for theme-sensitive fonts or heading treatments and decide whether fonts are part of phase one or deferred | P12-002D | typography expectations are explicit and scoped |
 
 ### P12-003 - Named theme ownership in code
 
