@@ -107,6 +107,13 @@
 - Never put non-deterministic AI behavior directly into grading, reviewer approval, or other correctness-critical paths.
 - Prefer reviewer-assist and recommendation use cases over autonomous learner-scoring flows.
 
+14. Responsive implementation bar:
+
+- Treat mobile-first as a layering strategy, not permission to degrade tablet/laptop/desktop UX.
+- When changing a surface for phone layouts, explicitly preserve or improve the corresponding desktop layout.
+- Do not remove desktop structure, hierarchy, spacing, or affordances just to simplify the mobile version.
+- Responsive refactors must be reviewed in at least one phone width and one desktop width before they are considered complete.
+
 ## Adoption plan
 
 - Phase 4D:
