@@ -32,9 +32,9 @@ Next task ID: P9-001
 
 Date: 2026-03-11  
 Session owner: Codex  
-Last completed task ID: P9-002  
-Current in-progress task ID: P9-003  
-Next task ID: P9-004
+Last completed task ID: P9-010  
+Current in-progress task ID: P9-006  
+Next task ID: P9-007
 
 ## Current state
 
@@ -46,10 +46,11 @@ Next task ID: P9-004
   - Async UX contract in [documentation/async-ux-contract.md](/Users/aman/Projects/personal-projects/Learn-Language/documentation/async-ux-contract.md)
   - UI state primitive baseline in [documentation/ui-state-primitives-baseline.md](/Users/aman/Projects/personal-projects/Learn-Language/documentation/ui-state-primitives-baseline.md)
   - Responsive UI baseline in [documentation/responsive-ui-baseline.md](/Users/aman/Projects/personal-projects/Learn-Language/documentation/responsive-ui-baseline.md)
-- Active implementation order is now moving through async UX and shared-state adoption:
-  - `P9-003` is in progress with shared async visibility now implemented
+- Active implementation order is now moving through async UX, responsive hardening, and surface extraction:
+  - `P9-003` is in progress with shared async visibility implemented and adopted on main mutation paths
   - `P9-004` is in progress with shared state primitives introduced and adopted on high-traffic pages
-  - `P9-005` remains next after current shared-state rollout settles
+  - `P9-005` is in progress with shell/mobile hardening started on layout, auth, review, quiz, and word buckets
+  - `P9-006` / `P9-007` are in progress with learner/reviewer presentation extracted from several page shells
 - `P9-002` implementation completed with these slices:
   - add-vocabulary cluster query moved out of [create-vocabulary-draft-form.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/components/review/create-vocabulary-draft-form.tsx) into [use-create-vocabulary-draft-form.ts](/Users/aman/Projects/personal-projects/Learn-Language/client/src/features/review/use-create-vocabulary-draft-form.ts)
   - cluster query loading/error is now visibly surfaced in the add-vocabulary form
@@ -64,17 +65,26 @@ Next task ID: P9-004
   - reusable pending action control in [pending-button.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/components/ui/pending-button.tsx)
   - shared loading/error/empty state primitives in [page-states.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/components/ui/page-states.tsx)
   - adoption of those primitives on dashboard, clusters, contextual, history, profile, review, word buckets, and leaderboard
+- Additional implementation completed after the initial rollout:
+  - analytics display extracted into [leaderboard-panel.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/features/analytics/leaderboard-panel.tsx) and [word-bucket-word-list.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/features/analytics/word-bucket-word-list.tsx)
+  - quiz terminal/loading states extracted into [quiz-page-states.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/features/quiz/quiz-page-states.tsx)
+  - draft example rendering extracted into [vocabulary-draft-examples.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/components/review/vocabulary-draft-examples.tsx)
+  - new frontend tests added for pending button, page states, leaderboard, and word buckets
+  - backend test coverage expanded for auth/profile controller behavior and audio language mismatch handling
+  - smoke coverage expanded to include auth, profile, stats, leaderboard, and word buckets critical paths
+  - full `pnpm run lint` now passes on the current branch state
 
 ## Current blockers
 
-- No hard blocker found for `P9-003` / `P9-004`.
+- No hard blocker found for current Phase 9 work.
+- DB-backed integration tests still skip when Postgres is unavailable locally; this is expected in the current environment.
 
 ## Immediate next actions
 
-- Continue `P9-003` / `P9-004`:
-  - finish async-feedback adoption on remaining flows with inconsistent pending treatment
-  - extend shared state primitives to quiz/auth-adjacent surfaces where still missing
-  - start `P9-005` shell/mobile hardening after the current loading-state rollout is stable
+- Continue `P9-006` / `P9-007`:
+  - extract remaining bulky learner/reviewer rendering into replaceable presentation components
+  - continue mobile/responsive cleanup on the remaining long-tail pages
+  - only mark the remaining Phase 9 tasks `done` once the full surface area has been migrated, not just the highest-traffic paths
 
 ---
 
