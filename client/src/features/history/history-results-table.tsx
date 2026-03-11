@@ -1,6 +1,7 @@
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { QuizDirectionEnum } from "@shared/domain/enums";
+import { useLearningLanguage } from "@/hooks/use-language";
 
 type AttemptRow = {
   id: number;
@@ -16,9 +17,9 @@ type AttemptRow = {
   };
 };
 
-function toLabel(direction: QuizDirectionEnum | null) {
-  if (direction === QuizDirectionEnum.SOURCE_TO_TARGET) return "Source Language -> English";
-  if (direction === QuizDirectionEnum.TARGET_TO_SOURCE) return "English -> Source Language";
+function toLabel(direction: QuizDirectionEnum | null, languageLabel: string) {
+  if (direction === QuizDirectionEnum.SOURCE_TO_TARGET) return `${languageLabel} -> English`;
+  if (direction === QuizDirectionEnum.TARGET_TO_SOURCE) return `English -> ${languageLabel}`;
   return "Mixed";
 }
 
@@ -42,6 +43,8 @@ export function HistoryResultsTable({
   totalResults: number;
   setPage: React.Dispatch<React.SetStateAction<number>>;
 }) {
+  const { languageLabel } = useLearningLanguage();
+
   return (
     <div className="overflow-hidden rounded-2xl border border-border/50 bg-card">
       <div className="hidden grid-cols-12 gap-3 border-b border-border/60 bg-secondary/30 px-4 py-3 text-xs font-semibold text-muted-foreground md:grid">
@@ -71,7 +74,7 @@ export function HistoryResultsTable({
             <div className="mt-3 grid grid-cols-1 gap-2 text-sm sm:grid-cols-2">
               <p className="text-muted-foreground">
                 <span className="font-medium text-foreground">Direction:</span>{" "}
-                {toLabel(attempt.direction)}
+                {toLabel(attempt.direction, languageLabel)}
               </p>
               <p className="text-muted-foreground">
                 <span className="font-medium text-foreground">Confidence:</span>{" "}
@@ -107,7 +110,7 @@ export function HistoryResultsTable({
               <p className="truncate text-sm text-muted-foreground">{attempt.word.english}</p>
             </div>
             <div className="hidden text-sm text-muted-foreground md:col-span-2 md:block">
-              {toLabel(attempt.direction)}
+              {toLabel(attempt.direction, languageLabel)}
             </div>
             <div className="hidden text-sm md:col-span-1 md:block">
               {attempt.confidenceLevel ?? "-"}

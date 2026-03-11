@@ -33,9 +33,10 @@ describe("HistoryResultsTable", () => {
       />,
     );
 
-    expect(screen.getByText("Correct")).toBeTruthy();
-    expect(screen.getByText("namaste (నమస్తే)")).toBeTruthy();
-    expect(screen.getByText("Source Language -> English")).toBeTruthy();
+    expect(screen.getAllByText("Correct").length).toBeGreaterThan(0);
+    expect(screen.getByText("namaste")).toBeTruthy();
+    expect(screen.getByText("నమస్తే")).toBeTruthy();
+    expect(screen.getAllByText("Telugu -> English").length).toBeGreaterThan(0);
     expect(screen.getByText("Page 2 of 4 • 17 results")).toBeTruthy();
 
     await user.click(screen.getByRole("button", { name: "Prev" }));

@@ -7,6 +7,7 @@ import { LanguageEnum, QuizQuestionTypeEnum } from "@shared/domain/enums";
 import { useFeedbackEffects } from "@/hooks/use-feedback-effects";
 import { runErrorEffects, runSuccessEffects } from "@/lib/feedback-effects";
 import { useHybridAudio } from "@/hooks/use-hybrid-audio";
+import { getLanguageLabel } from "@/hooks/use-language";
 
 interface QuizOption {
   id: number;
@@ -96,10 +97,11 @@ export function QuizCard({
     onAnswer(id, confidenceLevel);
   };
 
+  const languageLabel = getLanguageLabel(language);
   const promptLabel =
     type === QuizQuestionTypeEnum.SOURCE_TO_TARGET
-      ? "Translate to English"
-      : "Translate to Source Language";
+      ? `${languageLabel} to English`
+      : `Translate to ${languageLabel}`;
 
   return (
     <div className="mx-auto w-full max-w-6xl px-1 sm:px-2 md:px-4">

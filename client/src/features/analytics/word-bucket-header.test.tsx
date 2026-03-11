@@ -8,7 +8,7 @@ describe("word bucket presentation", () => {
     const user = userEvent.setup();
     const onBack = vi.fn();
 
-    render(
+    const { container } = render(
       <WordBucketHeader
         title="Learning"
         meaning="Track words in progress."
@@ -20,6 +20,10 @@ describe("word bucket presentation", () => {
 
     expect(screen.getByText("Learning")).toBeTruthy();
     expect(onBack).toHaveBeenCalledTimes(1);
+    expect(container.firstElementChild?.className.includes("flex-col")).toBe(true);
+    expect(
+      (screen.getByRole("button", { name: "Back to Dashboard" }) as HTMLButtonElement).className.includes("w-full"),
+    ).toBe(true);
   });
 
   it("forwards next-action CTAs", async () => {

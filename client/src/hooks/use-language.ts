@@ -21,6 +21,14 @@ export const LANGUAGE_OPTIONS: IUserLanguageOption[] = [
   { value: LanguageEnum.GERMAN, label: "German" },
 ];
 
+export function getLanguageLabel(language: LanguageEnum | null | undefined) {
+  if (!language) {
+    return "Your Language";
+  }
+
+  return LANGUAGE_OPTIONS.find((option) => option.value === language)?.label ?? "Your Language";
+}
+
 function getInitialLanguage(): LanguageEnum {
   const fallback = LANGUAGE_OPTIONS[0].value;
   if (typeof window === "undefined") {
@@ -48,6 +56,7 @@ export function useLearningLanguage() {
   return {
     language,
     setLanguage,
+    languageLabel: getLanguageLabel(language),
     options: LANGUAGE_OPTIONS,
   };
 }

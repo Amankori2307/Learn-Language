@@ -1,7 +1,7 @@
 import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, expect, it, vi } from "vitest";
-import { QuizQuestionTypeEnum } from "@shared/domain/enums";
+import { LanguageEnum, QuizQuestionTypeEnum } from "@shared/domain/enums";
 import { QuizCard } from "./quiz-card";
 
 vi.mock("@/hooks/use-feedback-effects", () => ({
@@ -34,6 +34,7 @@ describe("QuizCard", () => {
     const { rerender } = render(
       <QuizCard
         {...baseProps}
+        language={LanguageEnum.TELUGU}
         question="hello"
         options={[
           { id: 1, text: "namaste" },
@@ -49,6 +50,7 @@ describe("QuizCard", () => {
     rerender(
       <QuizCard
         {...baseProps}
+        language={LanguageEnum.TELUGU}
         question="good night"
         options={[
           { id: 1, text: "shubharaatri" },
@@ -60,6 +62,7 @@ describe("QuizCard", () => {
     await waitFor(() => {
       expect(screen.getByText("good night")).toBeTruthy();
     });
+    expect(screen.getByText("Translate to Telugu")).toBeTruthy();
     const firstNewOption = screen.getByRole("button", { name: "Option shubharaatri" });
     expect(firstNewOption.className.includes("ring-primary")).toBe(false);
   });
