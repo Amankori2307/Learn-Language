@@ -9,6 +9,7 @@ Make the app reliably usable on phones, tablets, laptops, and desktops without r
 This baseline exists to ensure:
 
 - mobile behavior is designed deliberately
+- desktop behavior remains intentional and does not regress during mobile-first refactors
 - async/loading states fit into the responsive model
 - shell-level behavior is stabilized before page-level rewrites
 
@@ -79,6 +80,16 @@ Tables, split panes, and long filter bars should adapt into:
 - collapsible filters
 - horizontally segmented but non-overflowing action groups
 - drawer/sheet-based secondary controls when needed
+
+### Rule 6: Mobile-first changes must preserve desktop quality
+
+Responsive work must not flatten desktop UI into a mobile compromise.
+
+Required review bar:
+
+- phone layout is intentional
+- desktop layout remains usable, readable, and visually coherent
+- desktop-specific structure can be restored or enhanced at larger breakpoints when mobile constraints are removed
 
 ## Shell-level assessment
 
@@ -290,4 +301,3 @@ Responsive implementation should proceed in this order:
 ## Immediate next dependency
 
 After `P9-005`, the next correct work is page-level refactor execution under `P9-006` and `P9-007`.
-

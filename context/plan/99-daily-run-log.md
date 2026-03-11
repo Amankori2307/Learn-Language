@@ -32,9 +32,9 @@ Next task ID: -
 
 Date: 2026-03-11  
 Session owner: Codex  
-Last completed task ID: P9-009  
+Last completed task ID: P11-001  
 Current in-progress task ID: -  
-Next task ID: P11-001
+Next task ID: P11-002
 
 ## Current state
 
@@ -47,7 +47,13 @@ Next task ID: P11-001
 - `P9-003`, `P9-004`, and `P9-005` are now complete: the shared async UX contract, shared state primitives, and responsive/mobile hardening work have all been implemented and adopted broadly enough that only explicitly deferred low-priority long-tail gaps remain.
 - `P9-009` is now complete: learner/reviewer integration coverage, shared primitive coverage, high-risk responsive regressions, and explicit deferrals are all documented in [frontend-coverage-matrix.md](/Users/aman/Projects/personal-projects/Learn-Language/documentation/frontend-coverage-matrix.md).
 - Phase 9 is now complete.
-- A detailed mobile-first execution plan is now available in [context/plan/81-mobile-first-ui-execution-plan.md](/Users/aman/Projects/personal-projects/Learn-Language/context/plan/81-mobile-first-ui-execution-plan.md) for review before implementation starts.
+- `P11-001` is now complete:
+  - app shell, dense data surfaces, forms, and learner flows were reworked for stronger phone-first behavior
+  - quiz mobile UX was tightened further with explicit answer confirmation, reduced control chrome, and less noisy async UI
+  - full `pnpm run lint` passed after the responsive hardening pass
+- Follow-up noted for `P11-002`:
+  - the visible quiz confidence UI was removed for UX reasons during mobile hardening
+  - product still needs to decide whether confidence returns behind a learner preference or is replaced by a lower-friction input model
 - Planning baselines for the next implementation tasks are now documented:
   - React Query ownership baseline in [documentation/react-query-ownership-baseline.md](/Users/aman/Projects/personal-projects/Learn-Language/documentation/react-query-ownership-baseline.md)
   - Async UX contract in [documentation/async-ux-contract.md](/Users/aman/Projects/personal-projects/Learn-Language/documentation/async-ux-contract.md)
@@ -239,7 +245,7 @@ Next task ID: -
 
 ## Immediate next actions
 
-- Review and approve `P11-001` in [context/plan/81-mobile-first-ui-execution-plan.md](/Users/aman/Projects/personal-projects/Learn-Language/context/plan/81-mobile-first-ui-execution-plan.md) before starting implementation.
+- Decide the confidence-input direction captured in `P11-002` before the next quiz UX pass.
 
 ---
 

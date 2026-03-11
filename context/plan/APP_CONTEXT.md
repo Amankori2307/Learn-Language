@@ -112,5 +112,5 @@ Build a text-first language learning app with high data correctness, strong memo
 
 - Execute in order from [01-master-task-registry.md](/Users/aman/Projects/personal-projects/Learn-Language/context/plan/01-master-task-registry.md).
 - Current execution track:
-  - next planned implementation slice is `P11-001` mobile-first UI hardening
-  - execution plan lives in [context/plan/81-mobile-first-ui-execution-plan.md](/Users/aman/Projects/personal-projects/Learn-Language/context/plan/81-mobile-first-ui-execution-plan.md)
+  - next planned implementation slice is `P11-002` confidence-input follow-up for quiz UX
+  - current product gap: visible confidence controls were removed from the quiz UI for mobile UX, but the long-term interaction model is still undecided

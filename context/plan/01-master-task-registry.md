@@ -6,4 +6,4 @@ Completed work is intentionally removed from this file and should live in featur
 
 ## Active tasks
 
-- `todo` `P11-001` Execute the mobile-first UI hardening plan in [context/plan/81-mobile-first-ui-execution-plan.md](/Users/aman/Projects/personal-projects/Learn-Language/context/plan/81-mobile-first-ui-execution-plan.md), starting with shell/layout primitives and then route-by-route responsive remediation.
+- `todo` `P11-002` Decide and implement the future of quiz confidence input: either restore it behind an explicit learner preference (for example in profile) or replace it with a lower-friction interaction that preserves useful grading signal without crowding the mobile quiz UI.

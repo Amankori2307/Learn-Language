@@ -142,7 +142,8 @@ describe("QuizPage integration", () => {
     render(<QuizPage />);
 
     await user.click(screen.getByRole("button", { name: "Option thank you" }));
-    await user.click(screen.getByRole("button", { name: "Continue" }));
+    await user.click(screen.getByRole("button", { name: "Check Answer" }));
+    await user.keyboard("{Enter}");
     await user.click(screen.getByRole("button", { name: /Start Reinforcement Loop/ }));
 
     expect(setLocation).toHaveBeenCalledWith(`/quiz?mode=${QuizModeEnum.WEAK_WORDS}`);
