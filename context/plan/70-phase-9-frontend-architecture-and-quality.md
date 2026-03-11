@@ -143,10 +143,10 @@ The top-level tasks above are the phase gates. Actual execution should happen in
 
 | ID | Status | Task | Depends On | Done When |
 | -- | ------ | ---- | ---------- | --------- |
-| P9-008A | doing | Identify backend invariants most likely to be stressed by frontend contract refactors | P9-006F,P9-007D | refactor-sensitive backend invariants are explicitly listed |
+| P9-008A | done | Identify backend invariants most likely to be stressed by frontend contract refactors | P9-006F,P9-007D | refactor-sensitive backend invariants are explicitly listed |
 | P9-008B | doing | Expand unit coverage for service-level logic in quiz, analytics, review, vocabulary, auth, and audio where gaps remain | P9-008A | service logic risk areas have targeted unit coverage |
 | P9-008C | doing | Expand integration coverage for request/response contract stability and authorization boundaries | P9-008B | backend integration tests guard critical contracts |
-| P9-008D | doing | Consolidate backend test commands and target suites for reliable local/CI execution | P9-008C | backend coverage additions run predictably |
+| P9-008D | done | Consolidate backend test commands and target suites for reliable local/CI execution | P9-008C | backend coverage additions run predictably |
 
 ### P9-009 - Frontend test expansion
 
