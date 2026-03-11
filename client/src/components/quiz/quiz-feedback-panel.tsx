@@ -61,10 +61,8 @@ export function QuizFeedbackPanel({
       >
         <div
           className={cn(
-            "relative overflow-hidden rounded-[1rem] px-3 py-3 sm:px-4 md:px-5 md:py-5",
-            result.isCorrect
-              ? "bg-emerald-500/8 dark:bg-emerald-500/10"
-              : "bg-rose-500/8 dark:bg-rose-500/10",
+            "relative overflow-hidden rounded-[1rem] border px-3 py-3 sm:px-4 md:px-5 md:py-5",
+            result.isCorrect ? "surface-status-success" : "surface-status-error",
           )}
         >
           {!result.isCorrect ? (
@@ -73,7 +71,7 @@ export function QuizFeedbackPanel({
               initial={{ opacity: 0.2, scale: 0.98 }}
               animate={{ opacity: 0, scale: 1 }}
               transition={{ duration: 0.35, ease: "easeOut" }}
-              className="pointer-events-none absolute inset-x-0 top-0 h-24 rounded-[1.5rem] bg-rose-500/12 blur-xl"
+              className="pointer-events-none absolute inset-x-0 top-0 h-24 rounded-[1.5rem] bg-[hsl(var(--status-error-emphasis)/0.16)] blur-xl"
             />
           ) : null}
 
@@ -82,8 +80,8 @@ export function QuizFeedbackPanel({
               className={cn(
                 "mt-0.5 shrink-0 rounded-full p-2",
                 result.isCorrect
-                  ? "bg-emerald-100 text-emerald-700 dark:bg-emerald-900/60 dark:text-emerald-300"
-                  : "bg-rose-100 text-rose-700 dark:bg-rose-900/60 dark:text-rose-300",
+                  ? "bg-[hsl(var(--status-success-emphasis)/0.14)] text-status-success"
+                  : "bg-[hsl(var(--status-error-emphasis)/0.14)] text-status-error",
               )}
             >
               {result.isCorrect ? <CheckCircle2 className="w-5 h-5" /> : <XCircle className="w-5 h-5" />}
@@ -92,14 +90,12 @@ export function QuizFeedbackPanel({
               <h4
                 className={cn(
                   "text-lg font-bold",
-                  result.isCorrect
-                    ? "text-emerald-800 dark:text-emerald-300"
-                    : "text-rose-800 dark:text-rose-300",
+                  result.isCorrect ? "text-status-success" : "text-status-error",
                 )}
               >
                 {result.isCorrect ? "Excellent!" : "Not quite right"}
               </h4>
-              <p className="mt-0.5 text-sm text-foreground/90 dark:text-foreground">
+              <p className="mt-0.5 text-sm text-current/90">
                 {result.isCorrect
                   ? "That answer fits the current prompt."
                   : "Correct answer below."}
@@ -166,7 +162,7 @@ export function QuizFeedbackPanel({
           className={cn(
             "w-full gap-2 shadow-sm transition-all hover:shadow-md",
             result.isCorrect
-              ? "bg-green-600 text-white shadow-green-200/40 hover:bg-green-700"
+              ? "border border-[hsl(var(--status-success-border))] bg-[hsl(var(--status-success-emphasis))] text-[hsl(var(--primary-foreground))] [box-shadow:var(--shadow-sm)] hover:[box-shadow:var(--shadow-md)]"
               : "bg-primary shadow-primary/20 hover:bg-primary/90",
           )}
         >

@@ -151,7 +151,7 @@ export function CreateVocabularyDraftForm() {
           <Label htmlFor="draft-clusters">Clusters (Optional)</Label>
           {availableClustersQuery.isLoading ? <InlineLoading label="Loading clusters..." /> : null}
           {availableClustersQuery.isError ? (
-            <p className="text-sm text-red-600">Failed to load clusters.</p>
+            <p className="text-sm text-status-error">Failed to load clusters.</p>
           ) : null}
           <SearchableMultiSelect
             id="draft-clusters"
@@ -172,8 +172,8 @@ export function CreateVocabularyDraftForm() {
         removeExample={removeExample}
       />
 
-      {createError ? <p className="text-sm text-red-600">{createError}</p> : null}
-      {createSuccess ? <p className="text-sm text-emerald-600">{createSuccess}</p> : null}
+      {createError ? <p className="text-sm text-status-error">{createError}</p> : null}
+      {createSuccess ? <p className="text-sm text-status-success">{createSuccess}</p> : null}
 
       <PendingButton
         onClick={submitDraft}

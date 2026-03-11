@@ -13,7 +13,7 @@ Make the client app ready for named multi-theme support by finishing design-toke
 | P12-003 | done | Introduce named theme ownership in code with a supported-theme enum, metadata, and one-line default theme selection | P12-002 | S | theme support is explicit in code and the app default can be changed from one seam |
 | P12-004 | done | Convert the current shipped visual style into an explicit named theme and add a new minimal theme | P12-003 | M | the current look is preserved as a named theme and a complete `minimal` theme exists beside it |
 | P12-005 | done | Refactor shared UI primitives to depend only on semantic tokens rather than hardcoded colors or dark-mode-only branches | P12-004 | L | buttons, cards, inputs, overlays, states, and shared surfaces inherit theme changes consistently |
-| P12-006 | todo | Standardize semantic status styling for success, warning, error, and info states across shared and feature components | P12-005 | M | no reusable state surface relies on raw green/red/rose/emerald classes directly |
+| P12-006 | done | Standardize semantic status styling for success, warning, error, and info states across shared and feature components | P12-005 | M | no reusable state surface relies on raw green/red/rose/emerald classes directly |
 | P12-007 | todo | Remove remaining page and feature styling outliers that bypass the design system and migrate them to shared theme-safe primitives | P12-006 | L | representative pages/features no longer hardcode product styling outside approved tokens/variants |
 | P12-008 | todo | Extend chart theming and theme-aware utilities to support named themes beyond light and dark | P12-005 | M | charts and theme-dependent helpers work with the new named theme model |
 | P12-009 | todo | Add regression coverage and verification for theme-safe primitives, the default theme seam, and the new minimal theme | P12-007,P12-008 | M | tests and smoke checks protect the theme system against drift and missing-token regressions |
@@ -74,10 +74,10 @@ The top-level tasks above are the phase gates. Actual execution should happen in
 
 | ID | Status | Task | Depends On | Done When |
 | -- | ------ | ---- | ---------- | --------- |
-| P12-006A | todo | Add status token usage to shared page-state primitives and any reusable alert/message surfaces | P12-005E | shared state surfaces are theme-safe |
-| P12-006B | todo | Update toast and alert destructive/error handling to consume semantic status tokens instead of raw red values | P12-006A | destructive state styling is centralized |
-| P12-006C | todo | Update quiz/review/profile/shared feedback surfaces that currently use raw success/error colors to use semantic status variants | P12-006B | feature feedback no longer hardcodes state colors |
-| P12-006D | todo | Verify semantic status styling remains readable in both the current theme and `minimal` theme | P12-006C | state surfaces remain legible after migration |
+| P12-006A | done | Add status token usage to shared page-state primitives and any reusable alert/message surfaces | P12-005E | shared state surfaces are theme-safe |
+| P12-006B | done | Update toast and alert destructive/error handling to consume semantic status tokens instead of raw red values | P12-006A | destructive state styling is centralized |
+| P12-006C | done | Update quiz/review/profile/shared feedback surfaces that currently use raw success/error colors to use semantic status variants | P12-006B | feature feedback no longer hardcodes state colors |
+| P12-006D | done | Verify semantic status styling remains readable in both the current theme and `minimal` theme | P12-006C | state surfaces remain legible after migration |
 
 ### P12-007 - Page and feature outlier cleanup
 

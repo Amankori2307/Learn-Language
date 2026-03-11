@@ -115,8 +115,8 @@ export function ProfileFormCard({
         >
           Save Profile
         </PendingButton>
-        {saveError ? <span className="text-sm text-red-600">Failed to save changes.</span> : null}
-        {saveSuccess ? <span className="text-sm text-green-600">Saved.</span> : null}
+        {saveError ? <span className="text-sm text-status-error">Failed to save changes.</span> : null}
+        {saveSuccess ? <span className="text-sm text-status-success">Saved.</span> : null}
       </div>
     </div>
   );

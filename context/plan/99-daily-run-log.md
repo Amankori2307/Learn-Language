@@ -32,9 +32,9 @@ Next task ID: -
 
 Date: 2026-03-11  
 Session owner: Codex  
-Last completed task ID: P12-005  
+Last completed task ID: P12-006  
 Current in-progress task ID: -  
-Next task ID: P12-006
+Next task ID: P12-007
 
 ## Current state
 
@@ -74,7 +74,12 @@ Next task ID: P12-006
     - core primitives now use semantic radius/shadow/status tokens across [button-variants.ts](/Users/aman/Projects/personal-projects/Learn-Language/client/src/components/ui/button-variants.ts), [card.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/components/ui/card.tsx), [alert.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/components/ui/alert.tsx), [toast.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/components/ui/toast.tsx), [avatar.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/components/ui/avatar.tsx), and [page-states.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/components/ui/page-states.tsx)
     - form and overlay primitives now use theme-safe token surfaces in [input.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/components/ui/input.tsx), [textarea.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/components/ui/textarea.tsx), [select.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/components/ui/select.tsx), [dialog.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/components/ui/dialog.tsx), [popover.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/components/ui/popover.tsx), and [sheet.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/components/ui/sheet.tsx)
     - verification passed with `pnpm run test:ui` and `pnpm run check`
-  - `P12-006` is queued next to migrate feature/shared status styling to the semantic state tokens
+  - `P12-006` is now complete:
+    - quiz feedback, profile save messaging, review draft feedback, and history result badges now consume semantic status tokens in [quiz-feedback-panel.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/components/quiz/quiz-feedback-panel.tsx), [profile-form-card.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/features/profile/profile-form-card.tsx), [create-vocabulary-draft-form.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/features/review/create-vocabulary-draft-form.tsx), and [history-results-table.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/features/history/history-results-table.tsx)
+    - status text utility classes now exist in [client/src/index.css](/Users/aman/Projects/personal-projects/Learn-Language/client/src/index.css)
+    - targeted verification passed with `pnpm exec vitest run client/src/features/profile/profile-form-card.test.tsx client/src/features/review/create-vocabulary-draft-form.test.tsx client/src/features/history/history-results-table.test.tsx client/src/components/quiz-card.test.tsx client/src/pages/history.integration.test.tsx client/src/pages/add-vocabulary.integration.test.tsx client/src/theme/app-theme.test.tsx` and `pnpm run check`
+    - remaining raw status-color outlier is now limited to [client/src/pages/not-found.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/pages/not-found.tsx), which moves into `P12-007`
+  - `P12-007` is queued next to clean up remaining page/feature styling outliers
 - Planning baselines for the next implementation tasks are now documented:
   - React Query ownership baseline in [documentation/react-query-ownership-baseline.md](/Users/aman/Projects/personal-projects/Learn-Language/documentation/react-query-ownership-baseline.md)
   - Async UX contract in [documentation/async-ux-contract.md](/Users/aman/Projects/personal-projects/Learn-Language/documentation/async-ux-contract.md)

@@ -309,6 +309,22 @@
     color: hsl(var(--status-warning-foreground));
   }
 
+  .text-status-success {
+    color: hsl(var(--status-success-emphasis));
+  }
+
+  .text-status-warning {
+    color: hsl(var(--status-warning-emphasis));
+  }
+
+  .text-status-error {
+    color: hsl(var(--status-error-emphasis));
+  }
+
+  .text-status-info {
+    color: hsl(var(--status-info-emphasis));
+  }
+
   .glass-card {
     background: var(--surface-glass);
     border-color: var(--surface-glass-border);
