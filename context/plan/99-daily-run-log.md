@@ -82,7 +82,7 @@ Next task ID: P9-007
   - backend test coverage expanded for auth/profile controller behavior and audio language mismatch handling
   - backend review-service coverage now exists in [review.service.test.ts](/Users/aman/Projects/personal-projects/Learn-Language/server/src/modules/review/review.service.test.ts) for queue normalization, bulk transition counts, validation-error mapping, and invalid conflict identifiers
   - backend analytics-service coverage now exists in [analytics.service.test.ts](/Users/aman/Projects/personal-projects/Learn-Language/server/src/modules/analytics/analytics.service.test.ts) for history normalization, leaderboard defaults, and bucket input forwarding
-  - smoke coverage expanded to include auth, profile, stats, leaderboard, and word buckets critical paths
+  - smoke coverage expanded to include auth, profile, stats, leaderboard, word buckets, cluster list, and cluster detail critical paths
   - responsive/mobile hardening continued across extracted action rows and pagination surfaces in leaderboard, contextual, dashboard, review, history, clusters, and word buckets so primary actions stack cleanly and footer controls expand to full-width buttons on small screens
   - page-level integration coverage now also includes [clusters.integration.test.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/pages/clusters.integration.test.tsx) and [contextual.integration.test.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/pages/contextual.integration.test.tsx)
   - page-level integration coverage now also includes [tutor.integration.test.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/pages/tutor.integration.test.tsx)

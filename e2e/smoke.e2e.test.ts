@@ -5,7 +5,7 @@ import { sql } from "drizzle-orm";
 import { createServer } from "http";
 import { QuizModeEnum } from "../shared/domain/enums";
 
-test("e2e smoke: auth, analytics, and quiz critical paths are live", async (t) => {
+test("e2e smoke: auth, analytics, cluster, and quiz critical paths are live", async (t) => {
   const issuerServer = createServer((req, res) => {
     const address = issuerServer.address();
     const port = address && typeof address !== "string" ? address.port : 0;
@@ -171,6 +171,26 @@ test("e2e smoke: auth, analytics, and quiz critical paths are live", async (t) =
   assert.equal(leaderboardResponse.status, 200, "/api/leaderboard should return 200");
   const leaderboardPayload = await leaderboardResponse.json();
   assert.equal(Array.isArray(leaderboardPayload), true);
+
+  const clustersResponse = await fetch(`${baseUrl}/api/clusters?language=telugu`, {
+    headers: authHeaders,
+  });
+  assert.equal(clustersResponse.status, 200, "/api/clusters should return 200");
+  const clustersPayload = await clustersResponse.json();
+  assert.equal(Array.isArray(clustersPayload), true, "/api/clusters should return array payload");
+
+  const firstCluster = clustersPayload[0];
+  if (firstCluster?.id) {
+    const clusterDetailResponse = await fetch(
+      `${baseUrl}/api/clusters/${firstCluster.id}?language=telugu`,
+      {
+        headers: authHeaders,
+      },
+    );
+    assert.equal(clusterDetailResponse.status, 200, "/api/clusters/:id should return 200");
+    const clusterDetailPayload = await clusterDetailResponse.json();
+    assert.equal(clusterDetailPayload.id, firstCluster.id);
+  }
 
   const modes = [
     QuizModeEnum.DAILY_REVIEW,
