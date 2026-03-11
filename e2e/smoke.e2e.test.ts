@@ -3,9 +3,9 @@ import assert from "node:assert/strict";
 import jwt from "jsonwebtoken";
 import { sql } from "drizzle-orm";
 import { createServer } from "http";
-import { QuizModeEnum } from "../shared/domain/enums";
+import { LanguageEnum, PartOfSpeechEnum, QuizModeEnum, UserTypeEnum } from "../shared/domain/enums";
 
-test("e2e smoke: auth, analytics, cluster, and quiz critical paths are live", async (t) => {
+test("e2e smoke: auth, analytics, cluster, review, and quiz critical paths are live", async (t) => {
   const issuerServer = createServer((req, res) => {
     const address = issuerServer.address();
     const port = address && typeof address !== "string" ? address.port : 0;
@@ -63,6 +63,7 @@ test("e2e smoke: auth, analytics, cluster, and quiz critical paths are live", as
   process.env.GOOGLE_CLIENT_SECRET = "smoke-test-secret";
   process.env.GOOGLE_ISSUER_URL = `http://127.0.0.1:${issuerAddress.port}`;
   process.env.JWT_SECRET = process.env.JWT_SECRET ?? "ci-jwt-secret-min-16";
+  process.env.REVIEWER_EMAILS = "reviewer@example.com";
 
   const [{ db }, { createNestApiApp }] = await Promise.all([
     import("../server/src/infrastructure/db"),
@@ -129,6 +130,19 @@ test("e2e smoke: auth, analytics, cluster, and quiz critical paths are live", as
   const authHeaders = {
     Authorization: `Bearer ${authToken}`,
   };
+  const reviewerToken = jwt.sign(
+    {
+      sub: "smoke-reviewer",
+      email: "reviewer@example.com",
+      given_name: "Reviewer",
+      family_name: "Smoke",
+    },
+    process.env.JWT_SECRET as string,
+    { algorithm: "HS256", expiresIn: "1h" },
+  );
+  const reviewerHeaders = {
+    Authorization: `Bearer ${reviewerToken}`,
+  };
 
   const authMeResponse = await fetch(`${baseUrl}/auth/me`, {
     headers: authHeaders,
@@ -137,6 +151,16 @@ test("e2e smoke: auth, analytics, cluster, and quiz critical paths are live", as
   const authMePayload = await authMeResponse.json();
   assert.equal(authMePayload.id, "smoke-user");
   assert.equal(authMePayload.email, "smoke@example.com");
+  assert.equal(authMePayload.role, UserTypeEnum.LEARNER);
+
+  const reviewerAuthMeResponse = await fetch(`${baseUrl}/auth/me`, {
+    headers: reviewerHeaders,
+  });
+  assert.equal(reviewerAuthMeResponse.status, 200, "/auth/me reviewer bootstrap should return 200");
+  const reviewerAuthMePayload = await reviewerAuthMeResponse.json();
+  assert.equal(reviewerAuthMePayload.id, "smoke-reviewer");
+  assert.equal(reviewerAuthMePayload.email, "reviewer@example.com");
+  assert.equal(reviewerAuthMePayload.role, UserTypeEnum.REVIEWER);
 
   const profileResponse = await fetch(`${baseUrl}/api/profile`, {
     headers: authHeaders,
@@ -208,6 +232,40 @@ test("e2e smoke: auth, analytics, cluster, and quiz critical paths are live", as
     const clusterDetailPayload = await clusterDetailResponse.json();
     assert.equal(clusterDetailPayload.id, firstCluster.id);
   }
+
+  const reviewQueueResponse = await fetch(`${baseUrl}/api/review/queue?limit=5`, {
+    headers: reviewerHeaders,
+  });
+  assert.equal(reviewQueueResponse.status, 200, "/api/review/queue should return 200");
+  const reviewQueuePayload = await reviewQueueResponse.json();
+  assert.equal(Array.isArray(reviewQueuePayload), true, "/api/review/queue should return array payload");
+
+  const reviewDraftResponse = await fetch(`${baseUrl}/api/review/words`, {
+    method: "POST",
+    headers: {
+      ...reviewerHeaders,
+      "content-type": "application/json",
+    },
+    body: JSON.stringify({
+      language: LanguageEnum.TELUGU,
+      originalScript: "స్మోక్ పదం",
+      pronunciation: "smoke padam",
+      english: "smoke draft term",
+      partOfSpeech: PartOfSpeechEnum.PHRASE,
+      examples: [
+        {
+          originalScript: "ఇది స్మోక్ డ్రాఫ్ట్ ఉదాహరణ.",
+          pronunciation: "idi smoke draft udaharanam",
+          englishSentence: "This is a smoke draft example.",
+        },
+      ],
+    }),
+  });
+  assert.equal(reviewDraftResponse.status, 200, "/api/review/words should return 200");
+  const reviewDraftPayload = await reviewDraftResponse.json();
+  assert.equal(typeof reviewDraftPayload.id, "number");
+  assert.equal(reviewDraftPayload.reviewStatus, "draft");
+  assert.equal(reviewDraftPayload.examplesCreated, 1);
 
   const modes = [
     QuizModeEnum.DAILY_REVIEW,

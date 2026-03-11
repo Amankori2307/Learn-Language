@@ -32,15 +32,16 @@ Next task ID: P9-001
 
 Date: 2026-03-11  
 Session owner: Codex  
-Last completed task ID: P9-010  
-Current in-progress task ID: P9-006  
-Next task ID: P9-007
+Last completed task ID: P9-010A  
+Current in-progress task ID: P9-010  
+Next task ID: P9-010B
 
 ## Current state
 
 - `P9-001` and `P9-002` are complete.
 - Frontend architecture baseline created in [documentation/frontend-architecture-baseline.md](/Users/aman/Projects/personal-projects/Learn-Language/documentation/frontend-architecture-baseline.md).
 - Core feature documentation remains available in [documentation/core-features.md](/Users/aman/Projects/personal-projects/Learn-Language/documentation/core-features.md).
+- The final Phase 9 smoke/E2E scope is now explicit in [documentation/e2e-smoke-scope.md](/Users/aman/Projects/personal-projects/Learn-Language/documentation/e2e-smoke-scope.md), including the minimum production-critical path set, suite ownership, and the remaining automation gaps before `P9-010` can close.
 - Planning baselines for the next implementation tasks are now documented:
   - React Query ownership baseline in [documentation/react-query-ownership-baseline.md](/Users/aman/Projects/personal-projects/Learn-Language/documentation/react-query-ownership-baseline.md)
   - Async UX contract in [documentation/async-ux-contract.md](/Users/aman/Projects/personal-projects/Learn-Language/documentation/async-ux-contract.md)
@@ -112,6 +113,8 @@ Next task ID: P9-007
   - backend vocabulary-controller coverage now exists in [vocabulary.controller.test.ts](/Users/aman/Projects/personal-projects/Learn-Language/server/src/modules/vocabulary/vocabulary.controller.test.ts) for cluster-list forwarding and cluster-detail not-found mapping
   - backend vocabulary-service coverage now exists in [vocabulary.service.test.ts](/Users/aman/Projects/personal-projects/Learn-Language/server/src/modules/vocabulary/vocabulary.service.test.ts) for cluster language forwarding and not-found behavior on word/cluster lookups
   - smoke coverage expanded to include auth, profile, stats, learning insights, attempt history, leaderboard, word buckets, cluster list, cluster detail, quiz generation, and quiz submission critical paths
+  - `P9-010A` is now complete: [e2e-smoke-scope.md](/Users/aman/Projects/personal-projects/Learn-Language/documentation/e2e-smoke-scope.md) names the minimum production-critical path set, maps each path to its current automated owner, and keeps the remaining learner/reviewer smoke gaps explicit
+  - the integrated smoke suite now also bootstraps a reviewer user via `/auth/me`, verifies live reviewer queue access at `/api/review/queue`, and submits a vocabulary draft through `/api/review/words`
   - responsive/mobile hardening continued across extracted action rows and pagination surfaces in leaderboard, contextual, dashboard, review, history, clusters, and word buckets so primary actions stack cleanly and footer controls expand to full-width buttons on small screens
   - page-level integration coverage now also includes [clusters.integration.test.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/pages/clusters.integration.test.tsx) and [contextual.integration.test.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/pages/contextual.integration.test.tsx)
   - page-level integration coverage now also includes [tutor.integration.test.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/pages/tutor.integration.test.tsx)
@@ -125,11 +128,9 @@ Next task ID: P9-007
 
 ## Immediate next actions
 
-- Continue `P9-006` / `P9-007`:
-  - extract remaining bulky learner/reviewer rendering into replaceable presentation components
-  - continue mobile/responsive cleanup on the remaining long-tail pages
-  - deepen `P9-009` around the remaining extracted surfaces and responsive-state assertions
-  - only mark the remaining Phase 9 tasks `done` once the full surface area has been migrated, not just the highest-traffic paths
+- Continue `P9-010`:
+  - implement learner-critical integrated ownership for dashboard load if smoke-level coverage is still required
+  - decide whether the current API-level smoke suite is sufficient long-term or whether a browser-driven boot path is still required
 
 ---
 
