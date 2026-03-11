@@ -32,6 +32,19 @@ describe("ContextualPage integration", () => {
     expect(screen.getByText("No contextual lines yet")).toBeTruthy();
   });
 
+  it("renders loading skeleton while contextual content is fetching", () => {
+    viewModel.mockReturnValue({
+      setSelectedClusterId: vi.fn(),
+      activeClusterId: 2,
+      clusters: [{ id: 2, name: "Travel" }],
+      storyLines: [],
+      isLoading: true,
+    });
+
+    const { container } = render(<ContextualPage />);
+    expect(container.querySelectorAll(".animate-pulse").length).toBeGreaterThan(0);
+  });
+
   it("renders story lines and forwards cluster changes", async () => {
     const user = userEvent.setup();
     const setSelectedClusterId = vi.fn();

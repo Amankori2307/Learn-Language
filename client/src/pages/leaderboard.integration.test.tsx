@@ -1,4 +1,5 @@
 import { render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import type { ReactNode } from "react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import LeaderboardPage from "./leaderboard";
@@ -37,6 +38,27 @@ describe("LeaderboardPage integration", () => {
     render(<LeaderboardPage />);
 
     expect(screen.getByText("No leaderboard data yet")).toBeTruthy();
+  });
+
+  it("renders a retryable error surface when leaderboard loading fails", async () => {
+    const user = userEvent.setup();
+    const retry = vi.fn();
+
+    viewModel.mockReturnValue({
+      window: "weekly",
+      setWindow: vi.fn(),
+      entries: [],
+      isLoading: false,
+      isError: true,
+      isFetching: false,
+      retry,
+    });
+
+    render(<LeaderboardPage />);
+
+    expect(screen.getByText("Failed to load leaderboard")).toBeTruthy();
+    await user.click(screen.getByRole("button", { name: "Retry" }));
+    expect(retry).toHaveBeenCalledTimes(1);
   });
 
   it("renders leaderboard entries when data is available", () => {
