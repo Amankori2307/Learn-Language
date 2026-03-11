@@ -1,14 +1,13 @@
 import { Layout } from "@/components/layout";
-import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Link } from "wouter";
-import { ArrowRight, BookOpen, Hash, Sparkles } from "lucide-react";
+import { BookOpen, Hash, Sparkles } from "lucide-react";
 import {
   useClustersPageViewModel,
   type ClusterSortBy,
 } from "@/features/clusters/use-clusters-page-view-model";
-import { SurfaceMessage, TableSurfaceSkeleton } from "@/components/ui/page-states";
+import { TableSurfaceSkeleton } from "@/components/ui/page-states";
+import { ClustersResultsPanel } from "@/features/clusters/clusters-results-panel";
 
 export default function ClustersPage() {
   const {
@@ -114,75 +113,13 @@ export default function ClustersPage() {
             </div>
           </div>
 
-          <div className="rounded-2xl border border-border/50 bg-card overflow-hidden">
-            <div className="grid grid-cols-12 gap-3 px-4 py-3 text-xs font-semibold text-muted-foreground border-b border-border/60 bg-secondary/30">
-              <div className="col-span-4 md:col-span-3">Cluster</div>
-              <div className="col-span-3 md:col-span-2">Type</div>
-              <div className="col-span-3 md:col-span-2 text-right">Word Count</div>
-              <div className="hidden md:block md:col-span-3">Description</div>
-              <div className="col-span-2 md:col-span-2 text-right">Action</div>
-            </div>
-
-            {pageRows.length === 0 ? (
-              <div className="px-4 py-6">
-                <SurfaceMessage
-                  title="No clusters found"
-                  description="No clusters match the current search and filter combination."
-                  tone="empty"
-                  className="p-6"
-                />
-              </div>
-            ) : (
-              <div className="divide-y divide-border/50">
-                {pageRows.map((cluster) => (
-                  <div key={cluster.id} className="grid grid-cols-12 gap-3 px-4 py-3 items-center">
-                    <div className="col-span-4 md:col-span-3 min-w-0">
-                      <p className="font-medium truncate">{cluster.name}</p>
-                    </div>
-                    <div className="col-span-3 md:col-span-2 text-sm text-muted-foreground truncate">
-                      {cluster.type}
-                    </div>
-                    <div className="col-span-3 md:col-span-2 text-sm text-right">
-                      {cluster.wordCount}
-                    </div>
-                    <div className="hidden md:block md:col-span-3 text-sm text-muted-foreground truncate">
-                      {cluster.description || "No description"}
-                    </div>
-                    <div className="col-span-2 md:col-span-2 text-right">
-                      <Link href={`/quiz?mode=cluster&clusterId=${cluster.id}`}>
-                        <Button variant="outline" size="sm" className="gap-1">
-                          Practice <ArrowRight className="w-3 h-3" />
-                        </Button>
-                      </Link>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            )}
-            <div className="flex items-center justify-between px-4 py-3 border-t border-border/50 bg-secondary/20">
-              <p className="text-xs text-muted-foreground">
-                Page {currentPage} of {totalPages} • {totalResults} results
-              </p>
-              <div className="flex items-center gap-2">
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={() => updateQuery({ page: Math.max(1, currentPage - 1) })}
-                  disabled={currentPage <= 1}
-                >
-                  Prev
-                </Button>
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={() => updateQuery({ page: Math.min(totalPages, currentPage + 1) })}
-                  disabled={currentPage >= totalPages}
-                >
-                  Next
-                </Button>
-              </div>
-            </div>
-          </div>
+          <ClustersResultsPanel
+            pageRows={pageRows}
+            currentPage={currentPage}
+            totalPages={totalPages}
+            totalResults={totalResults}
+            updateQuery={updateQuery}
+          />
         </div>
       )}
     </Layout>

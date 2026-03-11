@@ -1,9 +1,10 @@
 import { Link } from "wouter";
 import { Layout } from "@/components/layout";
 import { Button } from "@/components/ui/button";
-import { BookText, ArrowRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { useContextualPageViewModel } from "@/features/contextual/use-contextual-page-view-model";
 import { CardGridSkeleton, SurfaceMessage } from "@/components/ui/page-states";
+import { ContextualStoryGrid } from "@/features/contextual/contextual-story-grid";
 
 export default function ContextualPage() {
   const {
@@ -60,26 +61,7 @@ export default function ContextualPage() {
             tone="empty"
           />
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {storyLines.map((line, idx) => (
-              <div
-                key={`${line.originalScript}-${idx}`}
-                className="bg-card border border-border/50 rounded-2xl p-5 shadow-sm"
-              >
-                <div className="flex items-center gap-2 text-primary mb-2">
-                  <BookText className="w-4 h-4" />
-                  <span className="text-xs font-semibold uppercase tracking-wide">
-                    Context {idx + 1}
-                  </span>
-                </div>
-                <p className="text-lg font-originalScript leading-relaxed">{line.originalScript}</p>
-                <p className="text-sm text-foreground/80 mt-2">
-                  Pronunciation: <span className="font-medium">{line.pronunciation}</span>
-                </p>
-                <p className="text-sm text-muted-foreground mt-2">{line.english}</p>
-              </div>
-            ))}
-          </div>
+          <ContextualStoryGrid storyLines={storyLines} />
         )}
       </div>
     </Layout>
