@@ -85,13 +85,14 @@ Next task ID: P9-007
   - backend analytics-controller coverage now exists in [analytics.controller.test.ts](/Users/aman/Projects/personal-projects/Learn-Language/server/src/modules/analytics/analytics.controller.test.ts) for learning-insights forwarding and attempt-history error mapping
   - backend review-controller coverage now exists in [review.controller.test.ts](/Users/aman/Projects/personal-projects/Learn-Language/server/src/modules/review/review.controller.test.ts) for reviewer-id forwarding, history error mapping, and draft submission forwarding
   - backend quiz-controller coverage now exists in [quiz.controller.test.ts](/Users/aman/Projects/personal-projects/Learn-Language/server/src/modules/quiz/quiz.controller.test.ts) for generate forwarding, submit forwarding, and AppError mapping
+  - backend quiz-service coverage now exists in [quiz.service.test.ts](/Users/aman/Projects/personal-projects/Learn-Language/server/src/modules/quiz/quiz.service.test.ts) for seed fallback, selected-language enforcement, and progress/attempt persistence on answer submission
   - backend vocabulary-controller coverage now exists in [vocabulary.controller.test.ts](/Users/aman/Projects/personal-projects/Learn-Language/server/src/modules/vocabulary/vocabulary.controller.test.ts) for cluster-list forwarding and cluster-detail not-found mapping
   - backend vocabulary-service coverage now exists in [vocabulary.service.test.ts](/Users/aman/Projects/personal-projects/Learn-Language/server/src/modules/vocabulary/vocabulary.service.test.ts) for cluster language forwarding and not-found behavior on word/cluster lookups
   - smoke coverage expanded to include auth, profile, stats, learning insights, attempt history, leaderboard, word buckets, cluster list, cluster detail, quiz generation, and quiz submission critical paths
   - responsive/mobile hardening continued across extracted action rows and pagination surfaces in leaderboard, contextual, dashboard, review, history, clusters, and word buckets so primary actions stack cleanly and footer controls expand to full-width buttons on small screens
   - page-level integration coverage now also includes [clusters.integration.test.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/pages/clusters.integration.test.tsx) and [contextual.integration.test.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/pages/contextual.integration.test.tsx)
   - page-level integration coverage now also includes [tutor.integration.test.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/pages/tutor.integration.test.tsx)
-  - full `pnpm run lint`, `pnpm run test:ui`, `pnpm test`, and `pnpm run test:e2e:smoke:development` now pass on the current branch state, with the UI suite now at 35 files / 67 tests and the backend suite now at 62 tests with 60 passing and 2 DB-dependent skips
+  - full `pnpm run lint`, `pnpm run test:ui`, `pnpm test`, and `pnpm run test:e2e:smoke:development` now pass on the current branch state, with the UI suite now at 35 files / 67 tests and the backend suite now at 65 tests with 63 passing and 2 DB-dependent skips
 
 ## Current blockers
 
