@@ -15,7 +15,7 @@ Make the client app ready for named multi-theme support by finishing design-toke
 | P12-005 | done | Refactor shared UI primitives to depend only on semantic tokens rather than hardcoded colors or dark-mode-only branches | P12-004 | L | buttons, cards, inputs, overlays, states, and shared surfaces inherit theme changes consistently |
 | P12-006 | done | Standardize semantic status styling for success, warning, error, and info states across shared and feature components | P12-005 | M | no reusable state surface relies on raw green/red/rose/emerald classes directly |
 | P12-007 | done | Remove remaining page and feature styling outliers that bypass the design system and migrate them to shared theme-safe primitives | P12-006 | L | representative pages/features no longer hardcode product styling outside approved tokens/variants |
-| P12-008 | todo | Extend chart theming and theme-aware utilities to support named themes beyond light and dark | P12-005 | M | charts and theme-dependent helpers work with the new named theme model |
+| P12-008 | done | Extend chart theming and theme-aware utilities to support named themes beyond light and dark | P12-005 | M | charts and theme-dependent helpers work with the new named theme model |
 | P12-009 | todo | Add regression coverage and verification for theme-safe primitives, the default theme seam, and the new minimal theme | P12-007,P12-008 | M | tests and smoke checks protect the theme system against drift and missing-token regressions |
 
 ## Micro-task execution map
@@ -92,9 +92,9 @@ The top-level tasks above are the phase gates. Actual execution should happen in
 
 | ID | Status | Task | Depends On | Done When |
 | -- | ------ | ---- | ---------- | --------- |
-| P12-008A | todo | Refactor chart theme selector ownership so chart color mappings can target named themes rather than only `light` and `dark` | P12-005E | chart theming is compatible with the new theme model |
-| P12-008B | todo | Update chart config types and any helper callers to align with the named theme contract | P12-008A | chart caller APIs are coherent |
-| P12-008C | todo | Verify chart rendering remains stable under the current theme and `minimal` theme | P12-008B | chart visuals do not regress |
+| P12-008A | done | Refactor chart theme selector ownership so chart color mappings can target named themes rather than only `light` and `dark` | P12-005E | chart theming is compatible with the new theme model |
+| P12-008B | done | Update chart config types and any helper callers to align with the named theme contract | P12-008A | chart caller APIs are coherent |
+| P12-008C | done | Verify chart rendering remains stable under the current theme and `minimal` theme | P12-008B | chart visuals do not regress |
 
 ### P12-009 - Regression coverage and verification
 

@@ -4,9 +4,7 @@ import * as React from "react";
 import * as RechartsPrimitive from "recharts";
 
 import { cn } from "@/lib/utils";
-
-// Format: { THEME_NAME: CSS_SELECTOR }
-const THEMES = { light: "", dark: ".dark" } as const;
+import { IMPLEMENTED_PROVIDER_THEMES, IMPLEMENTED_THEME_SELECTORS } from "@/theme/app-theme";
 
 export type ChartConfig = {
   [k in string]: {
@@ -14,7 +12,7 @@ export type ChartConfig = {
     icon?: React.ComponentType;
   } & (
     | { color?: string; theme?: never }
-    | { color?: never; theme: Record<keyof typeof THEMES, string> }
+    | { color?: never; theme: Partial<Record<(typeof IMPLEMENTED_PROVIDER_THEMES)[number], string>> }
   );
 };
 
@@ -73,13 +71,13 @@ const ChartStyle = ({ id, config }: { id: string; config: ChartConfig }) => {
   return (
     <style
       dangerouslySetInnerHTML={{
-        __html: Object.entries(THEMES)
+        __html: IMPLEMENTED_THEME_SELECTORS
           .map(
-            ([theme, prefix]) => `
-${prefix} [data-chart=${id}] {
+            ({ providerTheme, selector }) => `
+${selector} [data-chart=${id}] {
 ${colorConfig
   .map(([key, itemConfig]) => {
-    const color = itemConfig.theme?.[theme as keyof typeof itemConfig.theme] || itemConfig.color;
+    const color = itemConfig.theme?.[providerTheme] || itemConfig.color;
     return color ? `  --color-${key}: ${color};` : null;
   })
   .join("\n")}
@@ -161,7 +159,7 @@ const ChartTooltipContent = React.forwardRef<
       <div
         ref={ref}
         className={cn(
-          "grid min-w-[8rem] items-start gap-1.5 rounded-lg border border-border/50 bg-background px-2.5 py-1.5 text-xs shadow-xl",
+          "grid min-w-[8rem] items-start gap-1.5 rounded-[var(--radius-md)] border border-border/50 bg-background px-2.5 py-1.5 text-xs [box-shadow:var(--shadow-lg)]",
           className,
         )}
       >

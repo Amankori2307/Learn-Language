@@ -15,6 +15,7 @@ export type AppThemeDefinition = {
   label: string;
   availability: AppThemeAvailability;
   providerTheme: string;
+  selector: string;
 };
 
 export const APP_THEME_DEFINITIONS: readonly AppThemeDefinition[] = [
@@ -23,42 +24,49 @@ export const APP_THEME_DEFINITIONS: readonly AppThemeDefinition[] = [
     label: "Current",
     availability: "implemented",
     providerTheme: "dark",
+    selector: ".dark",
   },
   {
     id: AppThemeId.MINIMAL,
     label: "Minimal",
     availability: "implemented",
     providerTheme: "minimal",
+    selector: ".minimal",
   },
   {
     id: AppThemeId.WARM,
     label: "Warm",
     availability: "planned",
     providerTheme: "warm",
+    selector: ".warm",
   },
   {
     id: AppThemeId.MIDNIGHT,
     label: "Midnight",
     availability: "planned",
     providerTheme: "midnight",
+    selector: ".midnight",
   },
   {
     id: AppThemeId.EDITORIAL,
     label: "Editorial",
     availability: "planned",
     providerTheme: "editorial",
+    selector: ".editorial",
   },
   {
     id: AppThemeId.PLAYFUL,
     label: "Playful",
     availability: "planned",
     providerTheme: "playful",
+    selector: ".playful",
   },
   {
     id: AppThemeId.HIGH_CONTRAST,
     label: "High Contrast",
     availability: "planned",
     providerTheme: "high-contrast",
+    selector: ".high-contrast",
   },
 ] as const;
 
@@ -70,6 +78,10 @@ export const IMPLEMENTED_APP_THEMES = APP_THEME_DEFINITIONS.filter(
 
 export const IMPLEMENTED_PROVIDER_THEMES = IMPLEMENTED_APP_THEMES.map((theme) => theme.providerTheme);
 export const IMPLEMENTED_APP_THEME_IDS = IMPLEMENTED_APP_THEMES.map((theme) => theme.id);
+export const IMPLEMENTED_THEME_SELECTORS = IMPLEMENTED_APP_THEMES.map((theme) => ({
+  providerTheme: theme.providerTheme,
+  selector: theme.selector,
+}));
 
 export function getAppThemeDefinition(themeId: AppThemeId): AppThemeDefinition {
   const definition = APP_THEME_DEFINITIONS.find((theme) => theme.id === themeId);

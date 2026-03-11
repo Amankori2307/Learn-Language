@@ -32,9 +32,9 @@ Next task ID: -
 
 Date: 2026-03-11  
 Session owner: Codex  
-Last completed task ID: P12-007  
+Last completed task ID: P12-008  
 Current in-progress task ID: -  
-Next task ID: P12-008
+Next task ID: P12-009
 
 ## Current state
 
@@ -84,7 +84,12 @@ Next task ID: P12-008
     - quiz feedback examples no longer rely on `dark:` branching in [client/src/components/quiz/quiz-feedback-examples.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/components/quiz/quiz-feedback-examples.tsx)
     - the final page/feature outlier scan now leaves only [client/src/components/ui/chart.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/components/ui/chart.tsx), which is the intended scope of `P12-008`
     - targeted verification passed with `pnpm exec vitest run client/src/components/quiz-card.test.tsx client/src/pages/auth.integration.test.tsx client/src/theme/app-theme.test.tsx` and `pnpm run check`
-  - `P12-008` is queued next to remove the remaining chart/theme utility light-dark coupling
+  - `P12-008` is now complete:
+    - chart theme selector ownership now derives from the named theme registry in [client/src/components/ui/chart.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/components/ui/chart.tsx) and [client/src/theme/app-theme.ts](/Users/aman/Projects/personal-projects/Learn-Language/client/src/theme/app-theme.ts)
+    - chart tooltip surfaces now use tokenized shadow/radius styling in [client/src/components/ui/chart.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/components/ui/chart.tsx)
+    - focused chart coverage now exists in [client/src/components/ui/chart.test.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/components/ui/chart.test.tsx)
+    - verification passed with `pnpm exec vitest run client/src/components/ui/chart.test.tsx client/src/theme/app-theme.test.tsx` and `pnpm run check`
+  - `P12-009` is queued next to consolidate final regression coverage and verification for the theme-system migration
 - Planning baselines for the next implementation tasks are now documented:
   - React Query ownership baseline in [documentation/react-query-ownership-baseline.md](/Users/aman/Projects/personal-projects/Learn-Language/documentation/react-query-ownership-baseline.md)
   - Async UX contract in [documentation/async-ux-contract.md](/Users/aman/Projects/personal-projects/Learn-Language/documentation/async-ux-contract.md)

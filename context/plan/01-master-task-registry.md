@@ -6,5 +6,5 @@ Completed work is intentionally removed from this file and should live in featur
 
 ## Active tasks
 
-- `todo` `P12-008` Extend chart theming and theme-aware utilities to support named themes beyond light and dark.
+- `todo` `P12-009` Add regression coverage and verification for theme-safe primitives, the default theme seam, and the new minimal theme.
 - `todo` `P11-002` Decide and implement the future of quiz confidence input: either restore it behind an explicit learner preference (for example in profile) or replace it with a lower-friction interaction that preserves useful grading signal without crowding the mobile quiz UI.
