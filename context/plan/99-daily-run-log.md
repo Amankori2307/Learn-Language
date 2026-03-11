@@ -32,9 +32,9 @@ Next task ID: -
 
 Date: 2026-03-11  
 Session owner: Codex  
-Last completed task ID: P12-003  
+Last completed task ID: P12-004  
 Current in-progress task ID: -  
-Next task ID: P12-004
+Next task ID: P12-005
 
 ## Current state
 
@@ -63,7 +63,13 @@ Next task ID: P12-004
     - app-level provider wiring now flows through [app-theme-provider.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/theme/app-theme-provider.tsx)
     - the frontend boot path now reads the default theme from one seam in [client/src/App.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/App.tsx)
     - focused UI config coverage now exists in [app-theme.test.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/theme/app-theme.test.tsx)
-  - `P12-004` is queued next to formalize the current theme and add `minimal`
+  - `P12-004` is now complete:
+    - the current shipped visual style now lives in the named current-theme token set in [client/src/index.css](/Users/aman/Projects/personal-projects/Learn-Language/client/src/index.css)
+    - a complete `minimal` token set now exists in [client/src/index.css](/Users/aman/Projects/personal-projects/Learn-Language/client/src/index.css)
+    - implemented theme rotation now switches between `dark` and `minimal` through [client/src/components/layout.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/components/layout.tsx)
+    - theme config coverage now verifies both implemented themes in [client/src/theme/app-theme.test.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/theme/app-theme.test.tsx)
+    - verification passed with `pnpm exec vitest run client/src/theme/app-theme.test.tsx` and `pnpm run check`
+  - `P12-005` is queued next to migrate shared primitives to semantic token usage
 - Planning baselines for the next implementation tasks are now documented:
   - React Query ownership baseline in [documentation/react-query-ownership-baseline.md](/Users/aman/Projects/personal-projects/Learn-Language/documentation/react-query-ownership-baseline.md)
   - Async UX contract in [documentation/async-ux-contract.md](/Users/aman/Projects/personal-projects/Learn-Language/documentation/async-ux-contract.md)

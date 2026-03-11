@@ -27,7 +27,7 @@ export const APP_THEME_DEFINITIONS: readonly AppThemeDefinition[] = [
   {
     id: AppThemeId.MINIMAL,
     label: "Minimal",
-    availability: "planned",
+    availability: "implemented",
     providerTheme: "minimal",
   },
   {
@@ -69,6 +69,7 @@ export const IMPLEMENTED_APP_THEMES = APP_THEME_DEFINITIONS.filter(
 );
 
 export const IMPLEMENTED_PROVIDER_THEMES = IMPLEMENTED_APP_THEMES.map((theme) => theme.providerTheme);
+export const IMPLEMENTED_APP_THEME_IDS = IMPLEMENTED_APP_THEMES.map((theme) => theme.id);
 
 export function getAppThemeDefinition(themeId: AppThemeId): AppThemeDefinition {
   const definition = APP_THEME_DEFINITIONS.find((theme) => theme.id === themeId);
@@ -90,4 +91,26 @@ export function isImplementedAppTheme(themeId: AppThemeId): boolean {
 
 export function getDefaultProviderTheme(): string {
   return getProviderThemeForAppTheme(DEFAULT_APP_THEME);
+}
+
+export function getAppThemeIdForProviderTheme(providerTheme?: string | null): AppThemeId {
+  const definition = APP_THEME_DEFINITIONS.find((theme) => theme.providerTheme === providerTheme);
+
+  return definition?.id ?? DEFAULT_APP_THEME;
+}
+
+export function getNextImplementedAppTheme(themeId: AppThemeId): AppThemeId {
+  const currentIndex = IMPLEMENTED_APP_THEME_IDS.indexOf(themeId);
+
+  if (currentIndex === -1) {
+    return DEFAULT_APP_THEME;
+  }
+
+  const nextIndex = (currentIndex + 1) % IMPLEMENTED_APP_THEME_IDS.length;
+  return IMPLEMENTED_APP_THEME_IDS[nextIndex] ?? DEFAULT_APP_THEME;
+}
+
+export function getNextImplementedProviderTheme(providerTheme?: string | null): string {
+  const activeThemeId = getAppThemeIdForProviderTheme(providerTheme);
+  return getProviderThemeForAppTheme(getNextImplementedAppTheme(activeThemeId));
 }
