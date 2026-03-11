@@ -136,6 +136,9 @@ Next task ID: -
 - `P13-025` is now complete:
   - the performance baseline now matches the completed Phase 10 task state instead of marking `P10-008A` through `P10-008D` as in progress
   - the document now distinguishes future optimization candidates from active incomplete performance-phase work
+- `P13-026` is now complete:
+  - the observability contract now reads as a completed Phase 10 record instead of an active execution slice
+  - implementation wording now distinguishes shipped logging behavior from optional follow-up considerations
 - Phase 12 planning is now active in [81-phase-12-theme-system-and-design-token-extraction.md](/Users/aman/Projects/personal-projects/Learn-Language/context/plan/81-phase-12-theme-system-and-design-token-extraction.md).
 - Active backlog was reprioritized to start with theming-system readiness before UI theme selection work:
   - `P12-001` is now complete via [theme-system-baseline.md](/Users/aman/Projects/personal-projects/Learn-Language/documentation/theme-system-baseline.md)

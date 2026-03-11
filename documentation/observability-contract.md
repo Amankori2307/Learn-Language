@@ -1,6 +1,6 @@
 # Observability Contract
 
-This document is the execution contract for `P10-004`. It defines the current logging shape, request correlation behavior, and redaction rules for backend observability.
+This document is the completed execution record for `P10-004`. It defines the current logging shape, request correlation behavior, and redaction rules for backend observability.
 
 ## Goals
 
@@ -96,7 +96,7 @@ Redacted values are replaced with:
 
 ## Current scope and remaining work
 
-Implemented in the current slice:
+Implemented in the completed Phase 10 slice:
 
 - shared JSON log formatting
 - shared recursive redaction
