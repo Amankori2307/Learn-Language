@@ -11,7 +11,7 @@ export default function AuthPage() {
   }
 
   return (
-    <div className="min-h-screen grid lg:grid-cols-2">
+    <div className="grid min-h-screen grid-cols-1 lg:grid-cols-2">
       <AuthBrandPanel />
       <AuthSignInPanel isLoginPending={isLoginPending} handleLogin={handleLogin} />
     </div>

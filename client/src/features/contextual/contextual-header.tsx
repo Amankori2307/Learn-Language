@@ -1,14 +1,17 @@
 import { Button } from "@/components/ui/button";
+import { useLearningLanguage } from "@/hooks/use-language";
 import { ArrowRight } from "lucide-react";
 import { Link } from "wouter";
 
 export function ContextualHeader({ activeClusterId }: { activeClusterId: number | null }) {
+  const { languageLabel } = useLearningLanguage();
+
   return (
     <div className="flex flex-col gap-4 sm:flex-row sm:flex-wrap sm:items-center sm:justify-between">
       <div>
-        <h2 className="text-3xl font-bold">Contextual Learning Mode</h2>
+        <h2 className="text-2xl font-bold sm:text-3xl">Contextual Learning Mode</h2>
         <p className="mt-1 text-muted-foreground">
-          Learn words inside short Source Language context lines, then jump into a focused
+          Learn words inside short {languageLabel} context lines, then jump into a focused
           workout.
         </p>
       </div>
@@ -33,7 +36,7 @@ export function ContextualClusterSelector({
   setSelectedClusterId: (id: number) => void;
 }) {
   return (
-    <div className="rounded-2xl border border-border/50 bg-card p-4">
+    <div className="rounded-2xl border border-border/50 bg-card p-4 md:p-5">
       <label className="text-sm font-medium text-muted-foreground">Choose Context Cluster</label>
       <select
         className="mt-2 h-10 w-full rounded-md border border-input bg-background px-3 text-sm"

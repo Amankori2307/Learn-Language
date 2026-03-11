@@ -61,12 +61,12 @@ export function ReviewHistoryPanel({
           />
         </div>
       ) : (
-        <div className="max-h-[560px] space-y-3 overflow-auto p-4">
+        <div className="space-y-3 overflow-auto p-4 md:max-h-[560px]">
           <div className="rounded-xl border border-border/50 p-3">
-            <p className="font-medium">
+            <p className="break-words font-medium">
               {history.word.transliteration} ({history.word.originalScript})
             </p>
-            <p className="text-sm text-muted-foreground">{history.word.english}</p>
+            <p className="break-words text-sm text-muted-foreground">{history.word.english}</p>
             <div className="mt-2 flex flex-wrap gap-2">
               {history.clusters.length > 0 ? (
                 history.clusters.map((cluster) => (
@@ -81,7 +81,7 @@ export function ReviewHistoryPanel({
                 <span className="text-xs text-muted-foreground">No clusters linked</span>
               )}
             </div>
-            <p className="mt-2 text-xs text-muted-foreground">
+            <p className="mt-2 break-all text-xs text-muted-foreground">
               Source:{" "}
               {history.word.sourceUrl ? (
                 <a
@@ -128,7 +128,7 @@ export function ReviewHistoryPanel({
                 <p className="text-xs text-muted-foreground">
                   by {event.changedBy} • {formatReviewDate(event.createdAt)}
                 </p>
-                <p className="text-xs text-muted-foreground">
+                <p className="break-all text-xs text-muted-foreground">
                   source:{" "}
                   {event.sourceUrl ? (
                     <a

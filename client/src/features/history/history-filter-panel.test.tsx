@@ -27,6 +27,9 @@ describe("HistoryFilterPanel", () => {
       />,
     );
 
+    expect(screen.getByRole("option", { name: "Telugu -> English" })).toBeTruthy();
+    expect(screen.getByRole("option", { name: "English -> Telugu" })).toBeTruthy();
+
     await user.type(screen.getByLabelText("Search"), "hello");
     await user.selectOptions(screen.getByLabelText("Result"), "wrong");
     await user.selectOptions(

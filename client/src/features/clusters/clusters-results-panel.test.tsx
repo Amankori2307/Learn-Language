@@ -40,7 +40,7 @@ describe("ClustersResultsPanel", () => {
       />,
     );
 
-    expect(screen.getByText("Travel Basics")).toBeTruthy();
+    expect(screen.getAllByText("Travel Basics").length).toBeGreaterThan(0);
     expect(screen.getByText(/21 results/)).toBeTruthy();
 
     await user.click(screen.getByRole("button", { name: "Prev" }));

@@ -12,10 +12,10 @@ export function WordBucketHeader({
   return (
     <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
       <div>
-        <h1 className="text-3xl font-bold">{title}</h1>
+        <h1 className="text-2xl font-bold sm:text-3xl">{title}</h1>
         <p className="mt-1 text-muted-foreground">{meaning}</p>
       </div>
-      <Button variant="outline" onClick={onBack}>
+      <Button variant="outline" onClick={onBack} className="w-full sm:w-auto">
         Back to Dashboard
       </Button>
     </div>

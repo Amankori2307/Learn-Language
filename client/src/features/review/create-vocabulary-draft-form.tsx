@@ -45,7 +45,7 @@ export function CreateVocabularyDraftForm() {
   } = useCreateVocabularyDraftForm();
 
   return (
-    <div className="rounded-2xl border border-border/50 bg-card p-4 md:p-6 space-y-4">
+    <div className="space-y-4 rounded-2xl border border-border/50 bg-card p-4 md:p-6">
       <div>
         <h2 className="text-xl font-semibold">Create Vocabulary Draft</h2>
         <p className="text-sm text-muted-foreground">
@@ -53,7 +53,7 @@ export function CreateVocabularyDraftForm() {
         </p>
       </div>
 
-      <div className="grid md:grid-cols-2 gap-3">
+      <div className="grid gap-3 md:grid-cols-2">
         <div className="space-y-1">
           <Label htmlFor="draft-language">Language</Label>
           <select
@@ -175,7 +175,12 @@ export function CreateVocabularyDraftForm() {
       {createError ? <p className="text-sm text-red-600">{createError}</p> : null}
       {createSuccess ? <p className="text-sm text-emerald-600">{createSuccess}</p> : null}
 
-      <PendingButton onClick={submitDraft} pending={isSubmitting} pendingLabel="Creating...">
+      <PendingButton
+        onClick={submitDraft}
+        pending={isSubmitting}
+        pendingLabel="Creating..."
+        className="w-full sm:w-auto"
+      >
         Create Draft
       </PendingButton>
     </div>

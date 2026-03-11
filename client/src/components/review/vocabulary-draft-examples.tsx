@@ -19,9 +19,9 @@ export function VocabularyDraftExamples({
 }) {
   return (
     <div className="space-y-3">
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
         <h3 className="text-sm font-semibold">Examples</h3>
-        <Button variant="outline" size="sm" onClick={addExample}>
+        <Button variant="outline" size="sm" onClick={addExample} className="w-full sm:w-auto">
           Add Example
         </Button>
       </div>
@@ -63,6 +63,7 @@ export function VocabularyDraftExamples({
               size="sm"
               onClick={() => removeExample(index)}
               disabled={draftExamples.length <= 1}
+              className="w-full sm:w-auto"
             >
               Remove
             </Button>

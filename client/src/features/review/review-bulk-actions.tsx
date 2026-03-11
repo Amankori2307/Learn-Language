@@ -28,7 +28,7 @@ export function ReviewBulkActions({
         onChange={(e) => setNotes(e.target.value)}
         placeholder="Optional notes for audit trail"
       />
-      <div className="flex flex-col gap-2 sm:flex-row sm:flex-wrap">
+      <div className="grid grid-cols-1 gap-2 sm:flex sm:flex-row sm:flex-wrap">
         <PendingButton
           onClick={() => runBulk(ReviewStatusEnum.APPROVED)}
           disabled={selectedCount === 0}

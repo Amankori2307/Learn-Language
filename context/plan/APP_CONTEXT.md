@@ -112,5 +112,5 @@ Build a text-first language learning app with high data correctness, strong memo
 
 - Execute in order from [01-master-task-registry.md](/Users/aman/Projects/personal-projects/Learn-Language/context/plan/01-master-task-registry.md).
 - Current execution track:
-  - no active backlog item is currently in progress
-  - re-prioritize from [01-master-task-registry.md](/Users/aman/Projects/personal-projects/Learn-Language/context/plan/01-master-task-registry.md) before starting the next phase
+  - next planned implementation slice is `P11-001` mobile-first UI hardening
+  - execution plan lives in [context/plan/81-mobile-first-ui-execution-plan.md](/Users/aman/Projects/personal-projects/Learn-Language/context/plan/81-mobile-first-ui-execution-plan.md)

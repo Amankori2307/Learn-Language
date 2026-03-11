@@ -75,7 +75,7 @@ describe("ClustersPage integration", () => {
     render(<ClustersPage />);
 
     expect(screen.getByText("Cluster Practice")).toBeTruthy();
-    expect(screen.getByText("Travel")).toBeTruthy();
+    expect(screen.getAllByText("Travel").length).toBeGreaterThan(0);
 
     await user.type(screen.getByLabelText("Search"), "go");
     expect(updateQuery).toHaveBeenCalled();

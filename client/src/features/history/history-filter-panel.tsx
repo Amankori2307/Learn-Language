@@ -1,6 +1,7 @@
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { QuizDirectionEnum } from "@shared/domain/enums";
+import { useLearningLanguage } from "@/hooks/use-language";
 import type {
   HistoryDirectionFilter,
   HistoryResultFilter,
@@ -28,6 +29,8 @@ export function HistoryFilterPanel({
   setSortBy: React.Dispatch<React.SetStateAction<HistorySortOption>>;
   applyFilterReset: <T>(setter: React.Dispatch<React.SetStateAction<T>>, value: T) => void;
 }) {
+  const { languageLabel } = useLearningLanguage();
+
   return (
     <div className="grid grid-cols-1 gap-3 rounded-2xl border border-border/50 bg-card p-4 md:grid-cols-4 md:p-6">
       <div className="space-y-1 md:col-span-2">
@@ -65,8 +68,12 @@ export function HistoryFilterPanel({
           }
         >
           <option value="all">All</option>
-          <option value={QuizDirectionEnum.SOURCE_TO_TARGET}>Source -&gt; English</option>
-          <option value={QuizDirectionEnum.TARGET_TO_SOURCE}>English -&gt; Source</option>
+          <option value={QuizDirectionEnum.SOURCE_TO_TARGET}>
+            {languageLabel} -&gt; English
+          </option>
+          <option value={QuizDirectionEnum.TARGET_TO_SOURCE}>
+            English -&gt; {languageLabel}
+          </option>
         </select>
       </div>
       <div className="space-y-1">

@@ -19,13 +19,13 @@ export function DashboardOverview({
 >) {
   return (
     <div className="space-y-6">
-      <section className="rounded-2xl border border-border/60 bg-card p-5 md:p-6">
+      <section className="rounded-2xl border border-border/60 bg-card p-4 sm:p-5 md:p-6">
         <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
           <div>
             <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
               Primary Action
             </p>
-            <h1 className="mt-1 text-3xl font-semibold">Start Learning</h1>
+            <h1 className="mt-1 text-2xl font-semibold sm:text-3xl">Start Learning</h1>
             <p className="mt-2 text-muted-foreground">
               Welcome back, {userName}. Continue with the next recommended session.
             </p>
@@ -33,15 +33,15 @@ export function DashboardOverview({
               {stats.streak} day streak • {stats.mastered} mastered words
             </p>
           </div>
-          <div className="flex flex-col gap-3 sm:flex-row">
+          <div className="grid w-full grid-cols-1 gap-3 sm:flex sm:w-auto sm:flex-row">
             <Link href={`/quiz?mode=${primaryMode}`}>
-              <Button size="lg" className="w-full min-w-[220px] gap-2 sm:w-auto">
+              <Button size="lg" className="w-full gap-2 sm:min-w-[220px] sm:w-auto">
                 <PlayCircle className="h-5 w-5" />
                 {primaryLabel}
               </Button>
             </Link>
             <Link href="/analytics">
-              <Button size="lg" variant="outline" className="w-full min-w-[220px] sm:w-auto">
+              <Button size="lg" variant="outline" className="w-full sm:min-w-[220px] sm:w-auto">
                 Open Analytics
               </Button>
             </Link>
@@ -73,7 +73,7 @@ export function DashboardOverview({
         ))}
       </div>
 
-      <section className="rounded-2xl border border-border/60 bg-card p-5 md:p-6">
+      <section className="rounded-2xl border border-border/60 bg-card p-4 sm:p-5 md:p-6">
         <div className="mb-4">
           <h2 className="text-xl font-semibold">Core Modes</h2>
           <p className="mt-1 text-sm text-muted-foreground">
@@ -93,7 +93,7 @@ export function DashboardOverview({
                 <h3 className="text-lg font-semibold">{action.title}</h3>
                 <p className="mt-1 text-sm text-muted-foreground">{action.description}</p>
               </div>
-              <div className="mt-4 flex items-center justify-between">
+              <div className="mt-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
                 <span className="rounded-md bg-secondary px-2 py-1 text-xs font-medium text-muted-foreground">
                   {action.count} items
                 </span>

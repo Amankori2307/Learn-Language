@@ -12,7 +12,7 @@ export function ContextualStoryGrid({ storyLines }: { storyLines: StoryLine[] })
       {storyLines.map((line, index) => (
         <div
           key={`${line.originalScript}-${index}`}
-          className="rounded-2xl border border-border/50 bg-card p-5 shadow-sm"
+          className="rounded-2xl border border-border/50 bg-card p-4 shadow-sm sm:p-5"
         >
           <div className="mb-2 flex items-center gap-2 text-primary">
             <BookText className="h-4 w-4" />
@@ -20,11 +20,13 @@ export function ContextualStoryGrid({ storyLines }: { storyLines: StoryLine[] })
               Context {index + 1}
             </span>
           </div>
-          <p className="font-originalScript text-lg leading-relaxed">{line.originalScript}</p>
-          <p className="mt-2 text-sm text-foreground/80">
+          <p className="break-words font-originalScript text-lg leading-relaxed">
+            {line.originalScript}
+          </p>
+          <p className="mt-2 break-words text-sm text-foreground/80">
             Pronunciation: <span className="font-medium">{line.pronunciation}</span>
           </p>
-          <p className="mt-2 text-sm text-muted-foreground">{line.english}</p>
+          <p className="mt-2 break-words text-sm text-muted-foreground">{line.english}</p>
         </div>
       ))}
     </div>
