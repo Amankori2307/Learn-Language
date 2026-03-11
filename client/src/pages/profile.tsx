@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { useProfilePageViewModel } from "@/features/profile/use-profile-page-view-model";
 import { SurfaceMessage } from "@/components/ui/page-states";
 import { ProfileFormCard } from "@/features/profile/profile-form-card";
+import { ProfileLoadingCard } from "@/features/profile/profile-loading-card";
 
 export default function ProfilePage() {
   const {
@@ -33,21 +34,7 @@ export default function ProfilePage() {
         </div>
 
         {isLoading ? (
-          <div className="rounded-2xl border border-border/50 bg-card p-6 space-y-6">
-            <div className="flex items-center gap-4 pb-2 border-b border-border/40">
-              <div className="h-16 w-16 rounded-full bg-muted animate-pulse" />
-              <div className="space-y-2 flex-1">
-                <div className="h-5 w-40 rounded bg-muted animate-pulse" />
-                <div className="h-4 w-52 rounded bg-muted animate-pulse" />
-              </div>
-            </div>
-            <div className="grid md:grid-cols-2 gap-4">
-              <div className="h-24 rounded-xl bg-muted animate-pulse" />
-              <div className="h-24 rounded-xl bg-muted animate-pulse" />
-            </div>
-            <div className="h-24 rounded-xl bg-muted animate-pulse" />
-            <div className="h-10 w-36 rounded bg-muted animate-pulse" />
-          </div>
+          <ProfileLoadingCard />
         ) : isError || !profile ? (
           <SurfaceMessage
             title="Could not load profile"
