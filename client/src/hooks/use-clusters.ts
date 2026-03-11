@@ -12,8 +12,7 @@ export function clusterQueryKey(id: number, language: string) {
   return [api.clusters.get.path, id, language] as const;
 }
 
-export function useClusters() {
-  const { language } = useLearningLanguage();
+export function useClustersForLanguage(language: string) {
   return useQuery({
     queryKey: clustersQueryKey(language),
     queryFn: async () => {
@@ -24,6 +23,11 @@ export function useClusters() {
       return parseSuccessResponse(api.clusters.list.responses[200], res.data);
     },
   });
+}
+
+export function useClusters() {
+  const { language } = useLearningLanguage();
+  return useClustersForLanguage(language);
 }
 
 export function useCluster(id: number) {

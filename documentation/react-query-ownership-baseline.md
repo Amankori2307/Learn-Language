@@ -22,7 +22,6 @@ Current reality:
 - request ownership is still inconsistent
 - high-traffic shared hooks now export explicit query-key builders, but the repo-wide convention is still not fully documented
 - invalidation strategy is uneven
-- one component still defines its own query
 - query ownership is now broadly aligned; the remaining issues are more about conventions than obvious boundary leaks
 
 ## UI-facing request inventory

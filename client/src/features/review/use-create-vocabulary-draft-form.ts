@@ -1,8 +1,6 @@
 import { useState } from "react";
-import { useQuery } from "@tanstack/react-query";
 import { LanguageEnum, PartOfSpeechEnum, VocabularyTagEnum } from "@shared/domain/enums";
-import { api, parseSuccessResponse } from "@shared/routes";
-import { apiClient, buildApiUrl } from "@/services/apiClient";
+import { useClustersForLanguage } from "@/hooks/use-clusters";
 import { useCreateReviewDraft } from "@/hooks/use-review";
 
 export type DraftExample = {
@@ -40,14 +38,7 @@ export function useCreateVocabularyDraftForm() {
   const [draftClusterIds, setDraftClusterIds] = useState<string[]>([]);
   const [draftExamples, setDraftExamples] = useState<DraftExample[]>([{ ...DEFAULT_DRAFT_EXAMPLE }]);
 
-  const availableClustersQuery = useQuery({
-    queryKey: [api.clusters.list.path, draftLanguage, "review-draft-form"],
-    queryFn: async () => {
-      const params = new URLSearchParams({ language: draftLanguage });
-      const res = await apiClient.get(buildApiUrl(`${api.clusters.list.path}?${params.toString()}`));
-      return parseSuccessResponse(api.clusters.list.responses[200], res.data);
-    },
-  });
+  const availableClustersQuery = useClustersForLanguage(draftLanguage);
 
   const clusterOptions = (availableClustersQuery.data ?? []).map((cluster) => ({
     value: String(cluster.id),
