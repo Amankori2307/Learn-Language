@@ -84,16 +84,17 @@ export function HistoryResultsTable({
           </div>
         ))}
       </div>
-      <div className="flex items-center justify-between border-t border-border/50 bg-secondary/20 px-4 py-3">
+      <div className="flex flex-col gap-3 border-t border-border/50 bg-secondary/20 px-4 py-3 sm:flex-row sm:items-center sm:justify-between">
         <p className="text-xs text-muted-foreground">
           Page {currentPage} of {totalPages} • {totalResults} results
         </p>
-        <div className="flex items-center gap-2">
+        <div className="grid w-full grid-cols-2 gap-2 sm:flex sm:w-auto sm:items-center">
           <Button
             variant="outline"
             size="sm"
             onClick={() => setPage((prev) => Math.max(1, prev - 1))}
             disabled={currentPage <= 1}
+            className="w-full sm:w-auto"
           >
             Prev
           </Button>
@@ -102,6 +103,7 @@ export function HistoryResultsTable({
             size="sm"
             onClick={() => setPage((prev) => Math.min(totalPages, prev + 1))}
             disabled={currentPage >= totalPages}
+            className="w-full sm:w-auto"
           >
             Next
           </Button>

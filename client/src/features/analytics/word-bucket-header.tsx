@@ -45,9 +45,11 @@ export function WordBucketNextAction({
           <h2 className="mt-1 text-lg font-semibold">{title}</h2>
           <p className="mt-1 text-sm text-muted-foreground">{description}</p>
         </div>
-        <div className="flex flex-wrap gap-2">
-          <Button onClick={onPrimary}>{primaryLabel}</Button>
-          <Button variant="outline" onClick={onSecondary}>
+        <div className="flex w-full flex-col gap-2 sm:w-auto sm:flex-row sm:flex-wrap">
+          <Button onClick={onPrimary} className="w-full sm:w-auto">
+            {primaryLabel}
+          </Button>
+          <Button variant="outline" onClick={onSecondary} className="w-full sm:w-auto">
             {secondaryLabel}
           </Button>
         </div>

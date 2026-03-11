@@ -35,13 +35,13 @@ export function DashboardOverview({
           </div>
           <div className="flex flex-col gap-3 sm:flex-row">
             <Link href={`/quiz?mode=${primaryMode}`}>
-              <Button size="lg" className="min-w-[220px] gap-2">
+              <Button size="lg" className="w-full min-w-[220px] gap-2 sm:w-auto">
                 <PlayCircle className="h-5 w-5" />
                 {primaryLabel}
               </Button>
             </Link>
             <Link href="/analytics">
-              <Button size="lg" variant="outline" className="min-w-[220px]">
+              <Button size="lg" variant="outline" className="w-full min-w-[220px] sm:w-auto">
                 Open Analytics
               </Button>
             </Link>
@@ -98,7 +98,7 @@ export function DashboardOverview({
                   {action.count} items
                 </span>
                 <Link href={action.href}>
-                  <Button variant="outline" size="sm">
+                  <Button variant="outline" size="sm" className="w-full sm:w-auto">
                     Open
                   </Button>
                 </Link>

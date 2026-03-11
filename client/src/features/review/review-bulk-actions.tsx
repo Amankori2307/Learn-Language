@@ -34,6 +34,7 @@ export function ReviewBulkActions({
           disabled={selectedCount === 0}
           pending={isBulkPending}
           pendingLabel="Approving..."
+          className="w-full sm:w-auto"
         >
           Bulk Approve
         </PendingButton>
@@ -43,10 +44,16 @@ export function ReviewBulkActions({
           disabled={selectedCount === 0}
           pending={isBulkPending}
           pendingLabel="Rejecting..."
+          className="w-full sm:w-auto"
         >
           Bulk Reject
         </PendingButton>
-        <Button variant="outline" onClick={clearSelection} disabled={selectedCount === 0}>
+        <Button
+          variant="outline"
+          onClick={clearSelection}
+          disabled={selectedCount === 0}
+          className="w-full sm:w-auto"
+        >
           Clear Selection
         </Button>
       </div>

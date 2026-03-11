@@ -18,18 +18,21 @@ export function ReviewPageHeader({
           Approve or reject vocabulary before learner exposure.
         </p>
       </div>
-      <div className="flex flex-wrap items-center gap-2">
+      <div className="grid w-full grid-cols-1 gap-2 sm:flex sm:w-auto sm:flex-wrap sm:items-center">
         {statusOptions.map((option) => (
           <Button
             key={option}
             variant={status === option ? "default" : "outline"}
             onClick={() => setStatus(option)}
+            className="w-full sm:w-auto"
           >
             {option}
           </Button>
         ))}
         <Link href="/review/add">
-          <Button variant="secondary">Go to Add Vocabulary</Button>
+          <Button variant="secondary" className="w-full sm:w-auto">
+            Go to Add Vocabulary
+          </Button>
         </Link>
       </div>
     </div>

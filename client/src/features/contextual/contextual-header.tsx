@@ -4,7 +4,7 @@ import { Link } from "wouter";
 
 export function ContextualHeader({ activeClusterId }: { activeClusterId?: number }) {
   return (
-    <div className="flex flex-wrap items-center justify-between gap-4">
+    <div className="flex flex-col gap-4 sm:flex-row sm:flex-wrap sm:items-center sm:justify-between">
       <div>
         <h2 className="text-3xl font-bold">Contextual Learning Mode</h2>
         <p className="mt-1 text-muted-foreground">
@@ -14,7 +14,7 @@ export function ContextualHeader({ activeClusterId }: { activeClusterId?: number
       </div>
       {activeClusterId ? (
         <Link href={`/quiz?mode=complex_workout&clusterId=${activeClusterId}`}>
-          <Button className="gap-2">
+          <Button className="w-full gap-2 sm:w-auto">
             Start Context Workout <ArrowRight className="h-4 w-4" />
           </Button>
         </Link>

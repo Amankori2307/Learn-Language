@@ -86,12 +86,13 @@ export function WordBucketWordList({
         <p className="text-xs text-muted-foreground">
           Page {page} of {totalPages} • {data.total} words
         </p>
-        <div className="flex items-center gap-2 self-end sm:self-auto">
+        <div className="grid w-full grid-cols-2 gap-2 sm:flex sm:w-auto sm:items-center">
           <Button
             variant="outline"
             size="sm"
             onClick={() => setPage((current) => Math.max(1, current - 1))}
             disabled={page <= 1}
+            className="w-full sm:w-auto"
           >
             Prev
           </Button>
@@ -100,6 +101,7 @@ export function WordBucketWordList({
             size="sm"
             onClick={() => setPage((current) => Math.min(totalPages, current + 1))}
             disabled={page >= totalPages}
+            className="w-full sm:w-auto"
           >
             Next
           </Button>

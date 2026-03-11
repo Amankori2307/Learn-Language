@@ -28,13 +28,14 @@ export function LeaderboardHeader({
           Track top learners by XP, streak, and accuracy.
         </p>
       </div>
-      <div className="flex flex-wrap gap-2">
+      <div className="grid w-full grid-cols-2 gap-2 sm:flex sm:w-auto sm:flex-wrap">
         {options.map((option) => (
           <Button
             key={option.key}
             variant={option.key === window ? "default" : "outline"}
             onClick={() => setWindow(option.key)}
             disabled={isFetching}
+            className="w-full sm:w-auto"
           >
             {option.label}
           </Button>
