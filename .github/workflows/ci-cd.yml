@@ -26,6 +26,26 @@ jobs:
     name: Quality Gate
     runs-on: ubuntu-latest
     timeout-minutes: 30
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_USER: ci
+          POSTGRES_PASSWORD: ci
+          POSTGRES_DB: ci_db
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd="pg_isready -U ci -d ci_db"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=5
+    env:
+      AUTH_PROVIDER: dev
+      DATABASE_URL: postgresql://ci:ci@localhost:5432/ci_db
+      DRIZZLE_ENV: development
+      JWT_SECRET: ci-jwt-secret-min-16
+      SESSION_SECRET: ci-session-secret-min-16
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -53,11 +73,16 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
+      - name: Prepare database and content
+        run: pnpm run db:migrate && pnpm run content:import
+
+      - name: Run automated quality gate
+        run: pnpm run ci
+
+      - name: Run production-like smoke gate
+        run: pnpm run test:e2e:smoke:production
+
       - name: Build
-        env:
-          AUTH_PROVIDER: dev
-          SESSION_SECRET: ci-session-secret-min-16
-          DATABASE_URL: postgresql://ci:ci@localhost:5432/ci_db
         run: pnpm run build:frontend && pnpm run build:backend
 
   docker-publish:

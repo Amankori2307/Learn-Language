@@ -32,9 +32,9 @@ Next task ID: P9-001
 
 Date: 2026-03-11  
 Session owner: Codex  
-Last completed task ID: P9-010A  
-Current in-progress task ID: P9-010  
-Next task ID: P9-010B
+Last completed task ID: P9-010  
+Current in-progress task ID: P9-005  
+Next task ID: P9-008
 
 ## Current state
 
@@ -42,6 +42,7 @@ Next task ID: P9-010B
 - Frontend architecture baseline created in [documentation/frontend-architecture-baseline.md](/Users/aman/Projects/personal-projects/Learn-Language/documentation/frontend-architecture-baseline.md).
 - Core feature documentation remains available in [documentation/core-features.md](/Users/aman/Projects/personal-projects/Learn-Language/documentation/core-features.md).
 - The final Phase 9 smoke/E2E scope is now explicit in [documentation/e2e-smoke-scope.md](/Users/aman/Projects/personal-projects/Learn-Language/documentation/e2e-smoke-scope.md), including the minimum production-critical path set, suite ownership, and the remaining automation gaps before `P9-010` can close.
+- `P9-010` is now complete: the smoke suite covers learner and reviewer critical paths, the release-gate split between frontend integration and API-level smoke is explicit, and CI now provisions Postgres, migrates/imports content, runs `pnpm run ci`, runs production-like smoke, and then builds.
 - Planning baselines for the next implementation tasks are now documented:
   - React Query ownership baseline in [documentation/react-query-ownership-baseline.md](/Users/aman/Projects/personal-projects/Learn-Language/documentation/react-query-ownership-baseline.md)
   - Async UX contract in [documentation/async-ux-contract.md](/Users/aman/Projects/personal-projects/Learn-Language/documentation/async-ux-contract.md)
@@ -115,6 +116,7 @@ Next task ID: P9-010B
   - smoke coverage expanded to include auth, profile, stats, learning insights, attempt history, leaderboard, word buckets, cluster list, cluster detail, quiz generation, and quiz submission critical paths
   - `P9-010A` is now complete: [e2e-smoke-scope.md](/Users/aman/Projects/personal-projects/Learn-Language/documentation/e2e-smoke-scope.md) names the minimum production-critical path set, maps each path to its current automated owner, and keeps the remaining learner/reviewer smoke gaps explicit
   - the integrated smoke suite now also bootstraps a reviewer user via `/auth/me`, verifies live reviewer queue access at `/api/review/queue`, and submits a vocabulary draft through `/api/review/words`
+  - the GitHub Actions quality workflow now provisions Postgres, applies migrations, imports content, runs `pnpm run ci`, runs `pnpm run test:e2e:smoke:production`, and only then proceeds to build verification
   - responsive/mobile hardening continued across extracted action rows and pagination surfaces in leaderboard, contextual, dashboard, review, history, clusters, and word buckets so primary actions stack cleanly and footer controls expand to full-width buttons on small screens
   - page-level integration coverage now also includes [clusters.integration.test.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/pages/clusters.integration.test.tsx) and [contextual.integration.test.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/pages/contextual.integration.test.tsx)
   - page-level integration coverage now also includes [tutor.integration.test.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/pages/tutor.integration.test.tsx)
@@ -128,9 +130,10 @@ Next task ID: P9-010B
 
 ## Immediate next actions
 
-- Continue `P9-010`:
-  - implement learner-critical integrated ownership for dashboard load if smoke-level coverage is still required
-  - decide whether the current API-level smoke suite is sufficient long-term or whether a browser-driven boot path is still required
+- Continue `P9-005`, `P9-008`, and `P9-009`:
+  - finish the remaining responsive shell/layout cleanup and decide whether any top-level page containers still need mobile hardening before Phase 9 can close
+  - reconcile whether any backend contract coverage gaps still remain after the current invariants map and smoke expansion
+  - do one final pass over long-tail frontend responsive and state coverage gaps before marking the remaining Phase 9 tasks done
 
 ---
 

@@ -63,7 +63,7 @@ Out of scope for this phase:
 | P9-007 | done | Refactor reviewer/admin flows to the same architecture and async UX standards | P9-002,P9-004,P9-005 | L | review queue, add vocabulary, review history, and conflict-related surfaces use the same separation and loading conventions |
 | P9-008 | doing | Expand backend automated coverage for refactor-sensitive contracts and behavior invariants | P9-006,P9-007 | L | backend unit/integration coverage protects auth, quiz, review, analytics, vocabulary, and audio contracts touched by frontend-driven refactors |
 | P9-009 | doing | Expand frontend component/integration coverage for stabilized user flows and state handling | P9-006,P9-007 | XL | frontend tests cover loading, error, empty, success, responsive, and role-gated paths for core learner and reviewer flows |
-| P9-010 | doing | Add end-to-end and smoke coverage for the complete production-critical path | P9-008,P9-009 | XL | smoke and E2E suites cover auth, dashboard load, quiz session start/submit, analytics access, review access, and production-like boot flows |
+| P9-010 | done | Add end-to-end and smoke coverage for the complete production-critical path | P9-008,P9-009 | XL | smoke and E2E suites cover auth, dashboard load, quiz session start/submit, analytics access, review access, and production-like boot flows |
 
 ## Micro-task execution map
 
@@ -163,10 +163,10 @@ The top-level tasks above are the phase gates. Actual execution should happen in
 | ID | Status | Task | Depends On | Done When |
 | -- | ------ | ---- | ---------- | --------- |
 | P9-010A | done | Define the minimum production-critical end-to-end path set and assign ownership of each path | P9-008D,P9-009E | the final E2E/smoke scope is explicit |
-| P9-010B | todo | Implement learner-critical E2E paths: auth bootstrap, dashboard, quiz start, quiz submit, analytics access | P9-010A | learner-critical E2E paths are automated |
-| P9-010C | todo | Implement reviewer/admin E2E paths: review access and draft creation | P9-010B | reviewer/admin critical paths are automated |
-| P9-010D | todo | Harden smoke suites for development and production-like verification | P9-010C | smoke commands cover boot and critical API/UI availability |
-| P9-010E | todo | Document the final test pyramid, commands, and release gating expectations | P9-010D | phase documentation explains how the stabilized test stack is used |
+| P9-010B | done | Implement learner-critical E2E paths: auth bootstrap, dashboard, quiz start, quiz submit, analytics access | P9-010A | learner-critical E2E paths are automated |
+| P9-010C | done | Implement reviewer/admin E2E paths: review access and draft creation | P9-010B | reviewer/admin critical paths are automated |
+| P9-010D | done | Harden smoke suites for development and production-like verification | P9-010C | smoke commands cover boot and critical API/UI availability |
+| P9-010E | done | Document the final test pyramid, commands, and release gating expectations | P9-010D | phase documentation explains how the stabilized test stack is used |
 
 ## Sequencing guardrails
 
