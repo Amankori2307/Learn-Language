@@ -6,13 +6,15 @@ import {
 import { leaderboardQueryKey } from "./use-leaderboard";
 import { wordBucketQueryKey } from "./use-word-bucket";
 import { clusterQueryKey, clustersQueryKey } from "./use-clusters";
-import { authMeQueryKey, profileQueryKey } from "./use-profile";
+import { authMeQueryKey } from "./use-auth";
+import { profileQueryKey } from "./use-profile";
 import { reviewHistoryQueryKey, reviewQueueQueryKey } from "./use-review";
 import {
   learningInsightsQueryKey,
   quizGenerateQueryKey,
   statsQueryKey,
 } from "./use-quiz";
+import { wordQueryKey, wordsQueryKey } from "./use-words";
 
 describe("shared query key builders", () => {
   it("builds stable learner analytics and quiz query keys", () => {
@@ -50,6 +52,9 @@ describe("shared query key builders", () => {
   it("builds stable vocabulary, profile, and review query keys", () => {
     expect(clustersQueryKey("telugu")).toEqual(["/api/clusters", "telugu"]);
     expect(clusterQueryKey(42, "telugu")).toEqual(["/api/clusters/:id", 42, "telugu"]);
+    expect(wordsQueryKey()).toEqual(["/api/words", null]);
+    expect(wordsQueryKey(42)).toEqual(["/api/words", 42]);
+    expect(wordQueryKey(42)).toEqual(["/api/words/:id", 42]);
     expect(profileQueryKey()).toEqual(["/api/auth/profile"]);
     expect(authMeQueryKey()).toEqual(["/api/auth/me"]);
     expect(reviewQueueQueryKey(ReviewStatusEnum.PENDING_REVIEW, 50)).toEqual([

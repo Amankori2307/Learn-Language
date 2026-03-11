@@ -32,6 +32,7 @@ Build a text-first language learning app with high data correctness, strong memo
 - `P13-016` quiz submit invalidation widening is complete.
 - `P13-017` shared query-key normalization is complete.
 - `P13-018` add-vocabulary cluster query ownership cleanup is complete.
+- `P13-019` auth and word query-key normalization is complete.
 
 ## Core capabilities live
 
@@ -133,6 +134,6 @@ Build a text-first language learning app with high data correctness, strong memo
 
 - Execute in order from [01-master-task-registry.md](/Users/aman/Projects/personal-projects/Learn-Language/context/plan/01-master-task-registry.md).
 - Current execution track:
-  - last completed implementation slice is `P13-018` add-vocabulary cluster query ownership cleanup
+  - last completed implementation slice is `P13-019` auth and word query-key normalization
   - current in-progress implementation slice is `-`
   - Phase 12 outcome: named theme ownership, current/minimal shipped themes, semantic tokenized primitives, and chart theme support are now in place

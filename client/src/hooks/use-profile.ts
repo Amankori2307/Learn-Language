@@ -2,13 +2,10 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { api } from "@shared/routes";
 import { userService, type IProfileUpdateInput } from "@/services/userService";
 import { trackAnalyticsEvent } from "@/lib/analytics";
+import { authMeQueryKey } from "@/hooks/use-auth";
 
 export function profileQueryKey() {
   return [api.auth.profile.get.path] as const;
-}
-
-export function authMeQueryKey() {
-  return [api.auth.me.path] as const;
 }
 
 export function useProfile() {

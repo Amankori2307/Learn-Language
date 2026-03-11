@@ -3,9 +3,17 @@ import { api, buildUrl, parseSuccessResponse } from "@shared/routes";
 import { AxiosError } from "axios";
 import { apiClient, buildApiUrl } from "@/services/apiClient";
 
+export function wordsQueryKey(clusterId?: number) {
+  return [api.words.list.path, clusterId ?? null] as const;
+}
+
+export function wordQueryKey(id: number) {
+  return [api.words.get.path, id] as const;
+}
+
 export function useWords(clusterId?: number) {
   return useQuery({
-    queryKey: [api.words.list.path, clusterId ?? null],
+    queryKey: wordsQueryKey(clusterId),
     queryFn: async () => {
       const url = buildUrl(api.words.list.path);
       // Append query params manually since buildUrl only handles path params
@@ -20,7 +28,7 @@ export function useWords(clusterId?: number) {
 
 export function useWord(id: number) {
   return useQuery({
-    queryKey: [api.words.get.path, id],
+    queryKey: wordQueryKey(id),
     queryFn: async () => {
       const url = buildUrl(api.words.get.path, { id });
       try {
