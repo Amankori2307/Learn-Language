@@ -4,14 +4,14 @@ Date: 2026-03-10
 Session owner: Codex  
 Last completed task ID: P8-008  
 Current in-progress task ID: -  
-Next task ID: P9-001
+Next task ID: -
 
 ## Current state
 
 - Production deploy flow now uploads local `.env.production` to the server on every deploy and force-recreates containers so runtime env changes apply.
 - Production server notes were moved to [documentation/server.md](/Users/aman/Projects/personal-projects/Learn-Language/documentation/server.md).
 - Implementation-backed core feature documentation now exists in [documentation/core-features.md](/Users/aman/Projects/personal-projects/Learn-Language/documentation/core-features.md).
-- A new detailed Phase 9 execution plan now exists in [context/plan/70-phase-9-frontend-architecture-and-quality.md](/Users/aman/Projects/personal-projects/Learn-Language/context/plan/70-phase-9-frontend-architecture-and-quality.md).
+- Completed phase plans have since been folded into implementation-backed documentation and removed from active context.
 - Phase 9 is ordered to avoid wasted work:
   - architecture boundary first
   - React Query and async UX standardization second

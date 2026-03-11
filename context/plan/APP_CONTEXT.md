@@ -7,10 +7,11 @@ Build a text-first language learning app with high data correctness, strong memo
 ## Product state
 
 - Phase 4 complete.
-- Phase 6 core hardening complete (`P6-001` to `P6-011`).
-- Phase 8 feature hardening complete through `P8-008`.
-- Phase 9 planning is now active for frontend architecture, async UX standardization, responsive UI hardening, and post-refactor test expansion.
-- Active priority mode: functionality-first delivery with dependency-safe frontend hardening before broad test expansion.
+- Phase 6 extension work is complete.
+- Phase 7 runtime reliability and test expansion is complete.
+- Phase 8 functionality-first product hardening is complete.
+- Phase 9 frontend architecture, async UX, responsive UI, and test hardening is complete.
+- No active execution phase is currently open.
 
 ## Core capabilities live
 
@@ -100,12 +101,9 @@ Build a text-first language learning app with high data correctness, strong memo
   - `GOOGLE_TTS_API_KEY=<your_google_cloud_api_key>`
 - CI:
   - pnpm-based workflow parity with local/docker checks
+  - GitHub Actions quality gate now provisions Postgres, runs migrations/content import, runs `pnpm run ci`, runs production-like smoke, and then builds
 
 ## Immediate next implementation
 
-- Execute in order from `context/plan/01-master-task-registry.md` (latest active section: Phase 8).
-- Remaining Phase 8 execution:
-  - deployment/CI-CD last (`P8-006`) is currently on hold
-- Next planned execution track:
-  - Phase 9 in [context/plan/70-phase-9-frontend-architecture-and-quality.md](/Users/aman/Projects/personal-projects/Learn-Language/context/plan/70-phase-9-frontend-architecture-and-quality.md)
-  - start with `P9-001`
+- There is no active backlog item in `context/plan/01-master-task-registry.md`.
+- Start the next implementation phase only after new unfinished work is explicitly added to the active registry.

@@ -60,6 +60,13 @@
 - Do not merge code with ESLint warnings.
 - Treat `react-refresh/only-export-components` and `@typescript-eslint/no-unused-vars` as errors.
 
+9. Planning hygiene:
+
+- Treat `context/plan/01-master-task-registry.md` as active backlog only.
+- When a phase or task is complete, mark it done once, migrate durable outcomes into feature documentation or `APP_CONTEXT.md`, and remove its detailed execution tracking from active planning files.
+- Do not keep completed phase breakdowns in `context/plan` just for history; keep only unfinished phases or genuinely active strategy docs there.
+- If a completed phase still contains information worth retaining, fold that information into implementation-backed docs such as feature docs, server/deploy docs, or architecture baselines before removing the phase plan from active context.
+
 ## Adoption plan
 
 - Phase 4D:
