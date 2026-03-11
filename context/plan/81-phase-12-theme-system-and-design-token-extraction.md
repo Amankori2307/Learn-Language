@@ -10,7 +10,7 @@ Make the client app ready for named multi-theme support by finishing design-toke
 | -- | ------ | ---- | ---------- | ------ | --------- |
 | P12-001 | done | Produce a frontend theming baseline covering current token usage, shared primitive coverage, hardcoded style violations, and light/dark coupling points | - | M | the repo has a concrete inventory of what already follows the design system and what blocks named themes |
 | P12-002 | done | Define the canonical theme contract for colors, status semantics, typography, radius, shadows, gradients, and motion | P12-001 | M | every reusable surface can read from one agreed token interface rather than ad hoc classes |
-| P12-003 | todo | Introduce named theme ownership in code with a supported-theme enum, metadata, and one-line default theme selection | P12-002 | S | theme support is explicit in code and the app default can be changed from one seam |
+| P12-003 | done | Introduce named theme ownership in code with a supported-theme enum, metadata, and one-line default theme selection | P12-002 | S | theme support is explicit in code and the app default can be changed from one seam |
 | P12-004 | todo | Convert the current shipped visual style into an explicit named theme and add a new minimal theme | P12-003 | M | the current look is preserved as a named theme and a complete `minimal` theme exists beside it |
 | P12-005 | todo | Refactor shared UI primitives to depend only on semantic tokens rather than hardcoded colors or dark-mode-only branches | P12-004 | L | buttons, cards, inputs, overlays, states, and shared surfaces inherit theme changes consistently |
 | P12-006 | todo | Standardize semantic status styling for success, warning, error, and info states across shared and feature components | P12-005 | M | no reusable state surface relies on raw green/red/rose/emerald classes directly |
@@ -46,10 +46,10 @@ The top-level tasks above are the phase gates. Actual execution should happen in
 
 | ID | Status | Task | Depends On | Done When |
 | -- | ------ | ---- | ---------- | --------- |
-| P12-003A | todo | Create a canonical supported-theme enum including the current theme, `minimal`, and placeholder values for future themes | P12-002E | supported theme names exist in one owned location |
-| P12-003B | todo | Create a theme metadata/config module that maps enum values to theme keys, labels, and implementation availability | P12-003A | the app can distinguish shipped themes from future placeholders cleanly |
-| P12-003C | todo | Add a single app-level default theme constant/config seam that controls the active default theme | P12-003B | changing one line changes the default app theme |
-| P12-003D | todo | Refactor the theme-provider setup to accept the named theme model without breaking current app boot behavior | P12-003C | provider wiring is ready for named themes |
+| P12-003A | done | Create a canonical supported-theme enum including the current theme, `minimal`, and placeholder values for future themes | P12-002E | supported theme names exist in one owned location |
+| P12-003B | done | Create a theme metadata/config module that maps enum values to theme keys, labels, and implementation availability | P12-003A | the app can distinguish shipped themes from future placeholders cleanly |
+| P12-003C | done | Add a single app-level default theme constant/config seam that controls the active default theme | P12-003B | changing one line changes the default app theme |
+| P12-003D | done | Refactor the theme-provider setup to accept the named theme model without breaking current app boot behavior | P12-003C | provider wiring is ready for named themes |
 
 ### P12-004 - Existing theme formalization and minimal theme
 

@@ -32,9 +32,9 @@ Next task ID: -
 
 Date: 2026-03-11  
 Session owner: Codex  
-Last completed task ID: P12-002  
+Last completed task ID: P12-003  
 Current in-progress task ID: -  
-Next task ID: P12-003
+Next task ID: P12-004
 
 ## Current state
 
@@ -58,7 +58,12 @@ Next task ID: P12-003
 - Active backlog was reprioritized to start with theming-system readiness before UI theme selection work:
   - `P12-001` is now complete via [theme-system-baseline.md](/Users/aman/Projects/personal-projects/Learn-Language/documentation/theme-system-baseline.md)
   - `P12-002` is now complete via [theme-contract.md](/Users/aman/Projects/personal-projects/Learn-Language/documentation/theme-contract.md)
-  - `P12-003` is queued next to add named theme ownership in code
+  - `P12-003` is now complete:
+    - supported theme ownership now lives in [app-theme.ts](/Users/aman/Projects/personal-projects/Learn-Language/client/src/theme/app-theme.ts)
+    - app-level provider wiring now flows through [app-theme-provider.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/theme/app-theme-provider.tsx)
+    - the frontend boot path now reads the default theme from one seam in [client/src/App.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/App.tsx)
+    - focused UI config coverage now exists in [app-theme.test.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/theme/app-theme.test.tsx)
+  - `P12-004` is queued next to formalize the current theme and add `minimal`
 - Planning baselines for the next implementation tasks are now documented:
   - React Query ownership baseline in [documentation/react-query-ownership-baseline.md](/Users/aman/Projects/personal-projects/Learn-Language/documentation/react-query-ownership-baseline.md)
   - Async UX contract in [documentation/async-ux-contract.md](/Users/aman/Projects/personal-projects/Learn-Language/documentation/async-ux-contract.md)
