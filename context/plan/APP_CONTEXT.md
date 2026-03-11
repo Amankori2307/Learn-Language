@@ -112,5 +112,6 @@ Build a text-first language learning app with high data correctness, strong memo
 
 - Execute in order from [01-master-task-registry.md](/Users/aman/Projects/personal-projects/Learn-Language/context/plan/01-master-task-registry.md).
 - Current execution track:
-  - next planned implementation slice is `P11-002` confidence-input follow-up for quiz UX
-  - current product gap: visible confidence controls were removed from the quiz UI for mobile UX, but the long-term interaction model is still undecided
+  - last completed implementation slice is `P12-001` theming baseline audit for named multi-theme support
+  - next planned implementation slice is `P12-002` canonical theme-contract definition
+  - deferred but still active product gap: `P11-002` confidence-input follow-up for quiz UX
