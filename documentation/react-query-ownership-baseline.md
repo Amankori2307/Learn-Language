@@ -43,7 +43,7 @@ Current reality:
 | answer submit | `useSubmitAnswer` | mutation | healthy, but invalidation only refreshes stats |
 | stats | `useStats` | query | healthy |
 | learning insights | `useLearningInsights` | query | healthy |
-| admin seed | `useSeedData` | mutation | weak invalidation strategy; currently invalidates everything |
+| admin seed | `useSeedData` | mutation | healthy enough; invalidation is now scoped to seed-affected learner/reviewer/admin resources |
 
 ### Vocabulary and clusters
 
@@ -53,7 +53,7 @@ Current reality:
 | cluster detail | `useCluster` | query | healthy |
 | word list | `useWords` | query | healthy |
 | word detail | `useWord` | query | healthy |
-| cluster list for add-vocabulary form | `CreateVocabularyDraftForm` local `useQuery` | query | boundary violation; should move to hook/feature layer |
+| cluster list for add-vocabulary form | `useCreateVocabularyDraftForm` | query | healthy; feature hook owns cluster-fetch lifecycle for the draft form |
 
 ### Analytics
 
@@ -88,24 +88,7 @@ Current reality:
 
 ## Current request ownership problems
 
-### 1. A component still owns a query definition
-
-Problem file:
-
-- [client/src/components/review/create-vocabulary-draft-form.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/components/review/create-vocabulary-draft-form.tsx)
-
-Why this is a problem:
-
-- component owns request construction
-- component owns transport calls
-- cluster-fetch concern is mixed with a large form view
-- the component becomes harder to replace or test in isolation
-
-Required future state:
-
-- cluster options for the form come from a hook or feature view-model
-
-### 2. Browser capability hook owns API resolution logic
+### 1. Browser capability hook owns API resolution logic
 
 Problem file:
 
@@ -122,7 +105,7 @@ Required future state:
 - audio resolution should move behind a clearer adapter/hook boundary
 - playback hook should focus on browser/media behavior
 
-### 3. Query key conventions exist but are implicit
+### 2. Query key conventions exist but are implicit
 
 Current patterns:
 
@@ -137,20 +120,20 @@ Problems:
 - invalidation partials are used without a formal contract
 - future refactors could easily break cache behavior
 
-### 4. Invalidation strategy is inconsistent
+### 3. Invalidation strategy is inconsistent
 
 Examples:
 
 - `useSubmitAnswer` invalidates stats only
 - `useProfile` invalidates profile and auth user
 - review mutations invalidate queue/history
-- `useSeedData` invalidates everything with `invalidateQueries()`
+- `useSeedData` now invalidates a fixed list of seed-affected resource prefixes, but the repo still has no shared invalidation policy
 
 Problem:
 
 - there is no shared rule for narrow versus broad invalidation
 
-### 5. Query defaults are global but feature-specific overrides are undocumented
+### 4. Query defaults are global but feature-specific overrides are undocumented
 
 Global defaults in [client/src/lib/queryClient.ts](/Users/aman/Projects/personal-projects/Learn-Language/client/src/lib/queryClient.ts):
 

@@ -27,6 +27,7 @@ Build a text-first language learning app with high data correctness, strong memo
 - `P13-011` add-vocabulary route loading coverage is complete.
 - `P13-012` tutor responsive coverage is complete.
 - `P13-013` quiz submit failure handling is complete.
+- `P13-014` admin seed invalidation narrowing is complete.
 
 ## Core capabilities live
 
@@ -128,6 +129,6 @@ Build a text-first language learning app with high data correctness, strong memo
 
 - Execute in order from [01-master-task-registry.md](/Users/aman/Projects/personal-projects/Learn-Language/context/plan/01-master-task-registry.md).
 - Current execution track:
-  - last completed implementation slice is `P13-013` quiz submit failure handling
+  - last completed implementation slice is `P13-014` admin seed invalidation narrowing
   - current in-progress implementation slice is `-`
   - Phase 12 outcome: named theme ownership, current/minimal shipped themes, semantic tokenized primitives, and chart theme support are now in place

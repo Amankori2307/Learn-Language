@@ -32,7 +32,7 @@ Next task ID: -
 
 Date: 2026-03-12  
 Session owner: Codex  
-Last completed task ID: P13-013  
+Last completed task ID: P13-014  
 Current in-progress task ID: -  
 Next task ID: -
 
@@ -100,6 +100,9 @@ Next task ID: -
 - `P13-013` is now complete:
   - quiz answer submission now surfaces inline retryable failure messaging instead of falling back to a raw `console.error`
   - focused quiz card and route integration coverage now protects the submit-failure branch
+- `P13-014` is now complete:
+  - `useSeedData` now invalidates only seed-affected query resources instead of calling blanket `invalidateQueries()`
+  - focused hook coverage now locks the invalidation list and the React Query baseline reflects the narrowed mutation behavior
 - Phase 12 planning is now active in [81-phase-12-theme-system-and-design-token-extraction.md](/Users/aman/Projects/personal-projects/Learn-Language/context/plan/81-phase-12-theme-system-and-design-token-extraction.md).
 - Active backlog was reprioritized to start with theming-system readiness before UI theme selection work:
   - `P12-001` is now complete via [theme-system-baseline.md](/Users/aman/Projects/personal-projects/Learn-Language/documentation/theme-system-baseline.md)

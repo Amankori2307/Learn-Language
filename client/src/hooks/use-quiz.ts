@@ -10,6 +10,22 @@ import { apiClient, buildApiUrl } from "@/services/apiClient";
 export type QuizModeValue = QuizModeEnum;
 type QuizSubmitInput = z.infer<typeof api.quiz.submit.input>;
 
+const SEED_INVALIDATION_QUERY_KEYS = [
+  [api.stats.get.path],
+  [api.analytics.learning.path],
+  [api.analytics.wordBuckets.path],
+  [api.attempts.history.path],
+  [api.leaderboard.list.path],
+  [api.words.list.path],
+  [api.words.get.path],
+  [api.clusters.list.path],
+  [api.clusters.get.path],
+  [api.quiz.generate.path],
+  [api.review.queue.path],
+  [api.review.history.path],
+  [api.admin.srsDrift.path],
+] as const;
+
 export function useGenerateQuiz(
   mode: QuizModeValue = QuizModeEnum.DAILY_REVIEW,
   clusterId?: number,
@@ -105,7 +121,9 @@ export function useSeedData() {
       return parseSuccessResponse(api.admin.seed.responses[200], res.data);
     },
     onSuccess: () => {
-      queryClient.invalidateQueries();
+      SEED_INVALIDATION_QUERY_KEYS.forEach((queryKey) => {
+        queryClient.invalidateQueries({ queryKey: [...queryKey] });
+      });
     },
   });
 }
