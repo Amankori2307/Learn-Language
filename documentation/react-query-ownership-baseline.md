@@ -40,7 +40,7 @@ Current reality:
 | Flow | Current owner | Classification | Assessment |
 | ---- | ------------- | -------------- | ---------- |
 | quiz generation | `useGenerateQuiz` | query | healthy |
-| answer submit | `useSubmitAnswer` | mutation | healthy, but invalidation only refreshes stats |
+| answer submit | `useSubmitAnswer` | mutation | healthy enough; invalidation now refreshes learner progress summaries, history, buckets, and leaderboard data touched by answer submission |
 | stats | `useStats` | query | healthy |
 | learning insights | `useLearningInsights` | query | healthy |
 | admin seed | `useSeedData` | mutation | healthy enough; invalidation is now scoped to seed-affected learner/reviewer/admin resources |
@@ -107,7 +107,7 @@ Problems:
 
 Examples:
 
-- `useSubmitAnswer` invalidates stats only
+- `useSubmitAnswer` invalidates the main learner progress surfaces, but the repo still has no shared policy for how wide learner mutation invalidation should be
 - `useProfile` invalidates profile and auth user
 - review mutations invalidate queue/history
 - `useSeedData` now invalidates a fixed list of seed-affected resource prefixes, but the repo still has no shared invalidation policy
@@ -244,7 +244,7 @@ Examples:
   - invalidate review history for affected item if visible
 - quiz answer submit:
   - invalidate stats
-  - consider invalidating any current learning-insight summaries impacted by attempt results if those views are expected to stay fresh
+  - invalidate any learner summaries/history views expected to stay fresh immediately after an answer submit
 
 ### Broad invalidation is allowed only for exceptional admin/global mutations
 

@@ -26,6 +26,14 @@ const SEED_INVALIDATION_QUERY_KEYS = [
   [api.admin.srsDrift.path],
 ] as const;
 
+const QUIZ_SUBMIT_INVALIDATION_QUERY_KEYS = [
+  [api.stats.get.path],
+  [api.analytics.learning.path],
+  [api.analytics.wordBuckets.path],
+  [api.attempts.history.path],
+  [api.leaderboard.list.path],
+] as const;
+
 export function useGenerateQuiz(
   mode: QuizModeValue = QuizModeEnum.DAILY_REVIEW,
   clusterId?: number,
@@ -67,8 +75,9 @@ export function useSubmitAnswer() {
       return parseSuccessResponse(api.quiz.submit.responses[200], res.data);
     },
     onSuccess: () => {
-      // Invalidate stats to refresh dashboard progress immediately
-      queryClient.invalidateQueries({ queryKey: [api.stats.get.path, language] });
+      QUIZ_SUBMIT_INVALIDATION_QUERY_KEYS.forEach((queryKey) => {
+        queryClient.invalidateQueries({ queryKey: [...queryKey, language] });
+      });
     },
   });
 }
