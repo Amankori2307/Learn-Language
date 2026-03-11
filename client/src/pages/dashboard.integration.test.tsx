@@ -1,8 +1,23 @@
 import { render, screen } from "@testing-library/react";
 import type { ReactNode } from "react";
-import { describe, expect, it, vi } from "vitest";
+import { beforeEach, describe, expect, it, vi } from "vitest";
 import { QuizDirectionEnum } from "@shared/domain/enums";
 import Dashboard from "./dashboard";
+
+let statsData = {
+  totalWords: 120,
+  mastered: 24,
+  learning: 40,
+  weak: 8,
+  streak: 5,
+  xp: 230,
+  recognitionAccuracy: 72,
+  recallAccuracy: 64,
+  sourceToTargetStrength: 0.51,
+  targetToSourceStrength: 0.58,
+  recommendedDirection: QuizDirectionEnum.SOURCE_TO_TARGET,
+};
+let statsLoading = false;
 
 vi.mock("@/components/layout", () => ({
   Layout: ({ children }: { children: ReactNode }) => <div>{children}</div>,
@@ -16,20 +31,8 @@ vi.mock("@/hooks/use-auth", () => ({
 
 vi.mock("@/hooks/use-quiz", () => ({
   useStats: () => ({
-    data: {
-      totalWords: 120,
-      mastered: 24,
-      learning: 40,
-      weak: 8,
-      streak: 5,
-      xp: 230,
-      recognitionAccuracy: 72,
-      recallAccuracy: 64,
-      sourceToTargetStrength: 0.51,
-      targetToSourceStrength: 0.58,
-      recommendedDirection: QuizDirectionEnum.SOURCE_TO_TARGET,
-    },
-    isLoading: false,
+    data: statsData,
+    isLoading: statsLoading,
   }),
   useLearningInsights: () => ({
     data: {
@@ -54,6 +57,30 @@ vi.mock("@/hooks/use-quiz", () => ({
 }));
 
 describe("Dashboard integration", () => {
+  beforeEach(() => {
+    statsLoading = false;
+    statsData = {
+      totalWords: 120,
+      mastered: 24,
+      learning: 40,
+      weak: 8,
+      streak: 5,
+      xp: 230,
+      recognitionAccuracy: 72,
+      recallAccuracy: 64,
+      sourceToTargetStrength: 0.51,
+      targetToSourceStrength: 0.58,
+      recommendedDirection: QuizDirectionEnum.SOURCE_TO_TARGET,
+    };
+  });
+
+  it("renders loading skeleton while dashboard stats are loading", () => {
+    statsLoading = true;
+
+    const { container } = render(<Dashboard />);
+    expect(container.querySelectorAll(".animate-pulse").length).toBeGreaterThan(0);
+  });
+
   it("shows primary dashboard actions and core mode cards", () => {
     render(<Dashboard />);
     expect(screen.getByText("Start Learning")).toBeTruthy();
@@ -62,5 +89,16 @@ describe("Dashboard integration", () => {
     expect(screen.getByText("Core Modes")).toBeTruthy();
     expect(screen.getByText("Daily Review")).toBeTruthy();
     expect(screen.getByText("Practice by Cluster")).toBeTruthy();
+  });
+
+  it("defaults the primary action to daily review when there are no weak words", () => {
+    statsData = {
+      ...statsData,
+      weak: 0,
+    };
+
+    render(<Dashboard />);
+
+    expect(screen.getByRole("button", { name: "Start Daily Review" })).toBeTruthy();
   });
 });

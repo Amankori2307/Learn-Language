@@ -8,6 +8,46 @@ import ReviewPage from "./review";
 const transitionMutate = vi.fn();
 const bulkMutateAsync = vi.fn().mockResolvedValue({ updated: 1, skipped: 0 });
 let currentUserRole = UserTypeEnum.REVIEWER;
+let reviewQueueState = {
+  data: [
+    {
+      id: 11,
+      language: LanguageEnum.TELUGU,
+      originalScript: "namaste",
+      transliteration: "namaste",
+      english: "hello",
+      partOfSpeech: "phrase",
+      reviewStatus: ReviewStatusEnum.PENDING_REVIEW,
+      sourceUrl: "https://example.com/source",
+      sourceCapturedAt: "2026-02-20T11:00:00.000Z",
+      submittedBy: "u-1",
+      submittedAt: "2026-02-20T11:00:00.000Z",
+      reviewedBy: null,
+      reviewedAt: null,
+      reviewNotes: null,
+    },
+  ],
+  isLoading: false,
+  isError: false,
+  refetch: vi.fn(),
+};
+let reviewHistoryState = {
+  data: {
+    word: {
+      id: 11,
+      originalScript: "namaste",
+      transliteration: "namaste",
+      english: "hello",
+      reviewStatus: ReviewStatusEnum.PENDING_REVIEW,
+      sourceUrl: "https://example.com/source",
+      sourceCapturedAt: "2026-02-20T11:00:00.000Z",
+      reviewNotes: null,
+    },
+    events: [],
+  },
+  isLoading: false,
+  isError: false,
+};
 
 vi.mock("@/components/layout", () => ({
   Layout: ({ children }: { children: ReactNode }) => <div>{children}</div>,
@@ -24,46 +64,8 @@ vi.mock("@/hooks/use-auth", () => ({
 }));
 
 vi.mock("@/hooks/use-review", () => ({
-  useReviewQueue: () => ({
-    data: [
-      {
-        id: 11,
-        language: LanguageEnum.TELUGU,
-        originalScript: "namaste",
-        transliteration: "namaste",
-        english: "hello",
-        partOfSpeech: "phrase",
-        reviewStatus: ReviewStatusEnum.PENDING_REVIEW,
-        sourceUrl: "https://example.com/source",
-        sourceCapturedAt: "2026-02-20T11:00:00.000Z",
-        submittedBy: "u-1",
-        submittedAt: "2026-02-20T11:00:00.000Z",
-        reviewedBy: null,
-        reviewedAt: null,
-        reviewNotes: null,
-      },
-    ],
-    isLoading: false,
-    isError: false,
-    refetch: vi.fn(),
-  }),
-  useReviewHistory: () => ({
-    data: {
-      word: {
-        id: 11,
-        originalScript: "namaste",
-        transliteration: "namaste",
-        english: "hello",
-        reviewStatus: ReviewStatusEnum.PENDING_REVIEW,
-        sourceUrl: "https://example.com/source",
-        sourceCapturedAt: "2026-02-20T11:00:00.000Z",
-        reviewNotes: null,
-      },
-      events: [],
-    },
-    isLoading: false,
-    isError: false,
-  }),
+  useReviewQueue: () => reviewQueueState,
+  useReviewHistory: () => reviewHistoryState,
   useTransitionReview: () => ({
     mutate: transitionMutate,
     isPending: false,
@@ -81,6 +83,46 @@ vi.mock("@/hooks/use-review", () => ({
 describe("ReviewPage integration", () => {
   beforeEach(() => {
     currentUserRole = UserTypeEnum.REVIEWER;
+    reviewQueueState = {
+      data: [
+        {
+          id: 11,
+          language: LanguageEnum.TELUGU,
+          originalScript: "namaste",
+          transliteration: "namaste",
+          english: "hello",
+          partOfSpeech: "phrase",
+          reviewStatus: ReviewStatusEnum.PENDING_REVIEW,
+          sourceUrl: "https://example.com/source",
+          sourceCapturedAt: "2026-02-20T11:00:00.000Z",
+          submittedBy: "u-1",
+          submittedAt: "2026-02-20T11:00:00.000Z",
+          reviewedBy: null,
+          reviewedAt: null,
+          reviewNotes: null,
+        },
+      ],
+      isLoading: false,
+      isError: false,
+      refetch: vi.fn(),
+    };
+    reviewHistoryState = {
+      data: {
+        word: {
+          id: 11,
+          originalScript: "namaste",
+          transliteration: "namaste",
+          english: "hello",
+          reviewStatus: ReviewStatusEnum.PENDING_REVIEW,
+          sourceUrl: "https://example.com/source",
+          sourceCapturedAt: "2026-02-20T11:00:00.000Z",
+          reviewNotes: null,
+        },
+        events: [],
+      },
+      isLoading: false,
+      isError: false,
+    };
   });
 
   it("runs bulk approve from selected queue items", async () => {
@@ -129,5 +171,48 @@ describe("ReviewPage integration", () => {
     expect(screen.getByText("Review Access Required")).toBeTruthy();
     expect(screen.getByText("Only reviewer/admin roles can access vocabulary review tools.")).toBeTruthy();
     expect(screen.queryByText("Review Queue")).toBeNull();
+  });
+
+  it("renders queue loading state for reviewer users", () => {
+    reviewQueueState = {
+      data: [],
+      isLoading: true,
+      isError: false,
+      refetch: vi.fn(),
+    };
+
+    const { container } = render(<ReviewPage />);
+    expect(container.querySelectorAll(".animate-pulse").length).toBeGreaterThan(0);
+  });
+
+  it("renders queue error state and retry action for reviewer users", async () => {
+    const user = userEvent.setup();
+    const refetch = vi.fn();
+    reviewQueueState = {
+      data: [],
+      isLoading: false,
+      isError: true,
+      refetch,
+    };
+
+    render(<ReviewPage />);
+
+    expect(screen.getByText("Failed to load queue")).toBeTruthy();
+    await user.click(screen.getByRole("button", { name: "Retry" }));
+    expect(refetch).toHaveBeenCalledTimes(1);
+  });
+
+  it("renders empty queue messaging when no items are available", () => {
+    reviewQueueState = {
+      data: [],
+      isLoading: false,
+      isError: false,
+      refetch: vi.fn(),
+    };
+
+    render(<ReviewPage />);
+
+    expect(screen.getByText("Queue is empty")).toBeTruthy();
+    expect(screen.getByText("There are no items in this review state right now.")).toBeTruthy();
   });
 });

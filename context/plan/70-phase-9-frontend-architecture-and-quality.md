@@ -152,7 +152,7 @@ The top-level tasks above are the phase gates. Actual execution should happen in
 
 | ID | Status | Task | Depends On | Done When |
 | -- | ------ | ---- | ---------- | --------- |
-| P9-009A | todo | Create a frontend coverage matrix by page and state type: loading, error, empty, success, pending, responsive | P9-006F,P9-007D | a stabilized page-state coverage map exists |
+| P9-009A | done | Create a frontend coverage matrix by page and state type: loading, error, empty, success, pending, responsive | P9-006F,P9-007D | a stabilized page-state coverage map exists |
 | P9-009B | todo | Add focused tests for shared state primitives and async feedback behaviors | P9-009A | shared primitive behavior is directly protected |
 | P9-009C | todo | Add learner-flow integration coverage for standardized pages | P9-009B | dashboard/quiz/clusters/analytics/auth/profile key states are covered |
 | P9-009D | todo | Add reviewer/admin integration coverage for queue, history, and draft creation flows | P9-009C | reviewer/admin stabilized flows are covered |
