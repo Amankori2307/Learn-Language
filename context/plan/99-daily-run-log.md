@@ -32,7 +32,7 @@ Next task ID: -
 
 Date: 2026-03-12  
 Session owner: Codex  
-Last completed task ID: P13-006  
+Last completed task ID: P13-007  
 Current in-progress task ID: -  
 Next task ID: -
 
@@ -77,6 +77,10 @@ Next task ID: -
 - `P13-006` is now complete:
   - dashboard page integration coverage now protects route-level learner action wiring across the primary CTA, analytics CTA, core modes, and bucket-card links
   - the learner-route coverage matrix now marks dashboard interaction coverage as fully covered
+- `P13-007` is now complete:
+  - clusters page integration coverage now protects route-level pagination forwarding and practice-link wiring
+  - contextual page integration coverage now protects route-level workout-CTA wiring
+  - the learner-route coverage matrix now marks `clusters` and `contextual` interaction coverage as fully covered
 - Phase 12 planning is now active in [81-phase-12-theme-system-and-design-token-extraction.md](/Users/aman/Projects/personal-projects/Learn-Language/context/plan/81-phase-12-theme-system-and-design-token-extraction.md).
 - Active backlog was reprioritized to start with theming-system readiness before UI theme selection work:
   - `P12-001` is now complete via [theme-system-baseline.md](/Users/aman/Projects/personal-projects/Learn-Language/documentation/theme-system-baseline.md)

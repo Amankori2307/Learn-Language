@@ -14,8 +14,8 @@ Status legend:
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | `dashboard` | `covered` | `covered` | `covered` | `covered` | `covered` | `partial` | loading, retryable error, zero-data/default-stat rendering, and route-level learner action wiring are now covered |
 | `quiz` | `covered` | `partial` | `covered` | `covered` | `covered` | `partial` | quiz completion and active-session shell are covered; explicit route-level error fallback remains thin |
-| `clusters` | `covered` | `covered` | `covered` | `covered` | `partial` | `covered` | search/filter interaction, request-failure handling, and responsive filter/pagination classes are covered |
-| `contextual` | `covered` | `covered` | `covered` | `covered` | `partial` | `covered` | cluster selection, request-failure handling, and responsive header/story-grid classes are covered |
+| `clusters` | `covered` | `covered` | `covered` | `covered` | `covered` | `covered` | search/filter interaction, pagination forwarding, practice-link wiring, request-failure handling, and responsive filter/pagination classes are covered |
+| `contextual` | `covered` | `covered` | `covered` | `covered` | `covered` | `covered` | cluster selection, workout-CTA wiring, request-failure handling, and responsive header/story-grid classes are covered |
 | `history` | `covered` | `covered` | `covered` | `covered` | `covered` | `covered` | page-level refresh and responsive CTA composition are covered |
 | `leaderboard` | `covered` | `covered` | `covered` | `covered` | `covered` | `covered` | loading-state page composition, route-level window switching, pending disable-state, and responsive window-switch layout are covered |
 | `word-buckets` | `covered` | `covered` | `covered` | `covered` | `covered` | `covered` | bucket switching and responsive bucket-switch layout are covered |
@@ -42,7 +42,7 @@ Status legend:
 
 ## Highest-priority remaining gaps
 
-1. pending/interaction coverage remains thinner than ideal on some learner routes, with `clusters` and `contextual` now the clearest remaining learner follow-ups.
+1. learner-route interaction coverage is now broadly in place; the remaining gaps are either route-specific thin spots like quiz route-level error handling or explicitly deferred non-core surfaces such as tutor.
 
 ## Explicit Phase 9 deferrals
 

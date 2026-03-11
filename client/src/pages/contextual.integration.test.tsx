@@ -128,4 +128,31 @@ describe("ContextualPage integration", () => {
     expect(container.querySelector(".rounded-2xl.border.border-border\\/50.bg-card.p-4.md\\:p-5")).toBeTruthy();
     expect(container.querySelector(".grid.grid-cols-1.gap-4.md\\:grid-cols-2")).toBeTruthy();
   });
+
+  it("wires the contextual workout CTA to the active cluster", () => {
+    viewModel.mockReturnValue({
+      setSelectedClusterId: vi.fn(),
+      activeClusterId: 5,
+      clusters: [
+        { id: 2, name: "Travel" },
+        { id: 5, name: "Food" },
+      ],
+      storyLines: [
+        {
+          originalScript: "నాకు నీళ్లు కావాలి",
+          pronunciation: "naaku neellu kaavaali",
+          english: "Context hint: I need water",
+        },
+      ],
+      isLoading: false,
+      isError: false,
+      retry: vi.fn(),
+    });
+
+    render(<ContextualPage />);
+
+    expect(
+      screen.getByRole("link", { name: /Start Context Workout/i }).getAttribute("href"),
+    ).toBe("/quiz?mode=complex_workout&clusterId=5");
+  });
 });
