@@ -218,6 +218,14 @@ test("e2e smoke: auth, analytics, cluster, and quiz critical paths are live", as
     QuizModeEnum.COMPLEX_WORKOUT,
   ];
 
+  let firstGeneratedQuestion:
+    | {
+        wordId: number;
+        type: string;
+        options: Array<{ id: number; text: string }>;
+      }
+    | undefined;
+
   for (const mode of modes) {
     const response = await fetch(
       `${baseUrl}/api/quiz/generate?mode=${mode}&count=3&language=telugu`,
@@ -228,5 +236,32 @@ test("e2e smoke: auth, analytics, cluster, and quiz critical paths are live", as
     assert.equal(response.status, 200, `mode=${mode} should return 200`);
     const payload = await response.json();
     assert.equal(Array.isArray(payload), true, `mode=${mode} should return array payload`);
+    if (!firstGeneratedQuestion && Array.isArray(payload) && payload.length > 0) {
+      firstGeneratedQuestion = payload[0];
+    }
   }
+
+  assert.ok(firstGeneratedQuestion, "smoke run should generate at least one quiz question");
+
+  const submitResponse = await fetch(`${baseUrl}/api/quiz/submit`, {
+    method: "POST",
+    headers: {
+      ...authHeaders,
+      "content-type": "application/json",
+    },
+    body: JSON.stringify({
+      wordId: firstGeneratedQuestion.wordId,
+      selectedOptionId: firstGeneratedQuestion.options[0]?.id,
+      language: "telugu",
+      questionType: firstGeneratedQuestion.type,
+      confidenceLevel: 2,
+      responseTimeMs: 1200,
+    }),
+  });
+  assert.equal(submitResponse.status, 201, "/api/quiz/submit should return 201");
+  const submitPayload = await submitResponse.json();
+  assert.equal(typeof submitPayload.isCorrect, "boolean");
+  assert.equal(typeof submitPayload.correctAnswer?.id, "number");
+  assert.equal(Array.isArray(submitPayload.examples), true);
+  assert.equal(typeof submitPayload.progressUpdate?.masteryLevel, "number");
 });
