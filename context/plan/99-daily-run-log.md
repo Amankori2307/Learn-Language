@@ -32,7 +32,7 @@ Next task ID: -
 
 Date: 2026-03-11  
 Session owner: Codex  
-Last completed task ID: P13-001  
+Last completed task ID: P13-002  
 Current in-progress task ID: -  
 Next task ID: -
 
@@ -62,6 +62,9 @@ Next task ID: -
   - auth-route failure handling now returns OAuth cancellation/provider/configuration failures to `/auth`
   - the auth page renders retryable learner-facing failure messaging instead of silently dropping the redirect outcome
   - focused auth route and redirect helper tests now protect the failure-state behavior
+- `P13-002` is now complete:
+  - add-vocabulary route-level failure coverage now protects draft-creation errors in page composition tests
+  - the frontend coverage matrix now reflects that the explicit create-failure gap is closed
 - Phase 12 planning is now active in [81-phase-12-theme-system-and-design-token-extraction.md](/Users/aman/Projects/personal-projects/Learn-Language/context/plan/81-phase-12-theme-system-and-design-token-extraction.md).
 - Active backlog was reprioritized to start with theming-system readiness before UI theme selection work:
   - `P12-001` is now complete via [theme-system-baseline.md](/Users/aman/Projects/personal-projects/Learn-Language/documentation/theme-system-baseline.md)

@@ -28,7 +28,7 @@ Status legend:
 | Surface | Loading | Error | Empty | Success / normal render | Pending / interaction | Role-gated | Responsive | Notes |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | `review` | `covered` | `covered` | `covered` | `covered` | `covered` | `covered` | `covered` | queue/history loading, error, empty, actions, role denial, and responsive bulk-action layout are covered |
-| `add-vocabulary` | `partial` | `partial` | `n/a` | `covered` | `covered` | `covered` | `partial` | create flow, access gating, cluster-loading, and submit pending are covered; explicit create-failure page composition is still thin |
+| `add-vocabulary` | `partial` | `covered` | `n/a` | `covered` | `covered` | `covered` | `partial` | create flow, access gating, cluster-loading, submit pending, and draft-creation failure composition are covered; route-level loading remains thinner than other stabilized pages |
 
 ## Shared presentation / async primitives
 
@@ -42,8 +42,7 @@ Status legend:
 
 ## Highest-priority remaining gaps
 
-1. `add-vocabulary`: decide whether draft-creation failure needs a stronger route-level composition test beyond the current mutation and access-gating coverage.
-2. lower-priority responsive assertions remain thin for `profile`, `auth`, `clusters`, and `contextual`, but the highest-risk analytics/review layouts now have direct page-level protection.
+1. lower-priority responsive assertions remain thin for `profile`, `auth`, `clusters`, `contextual`, and `add-vocabulary`, but the highest-risk analytics/review layouts now have direct page-level protection.
 
 ## Explicit Phase 9 deferrals
 

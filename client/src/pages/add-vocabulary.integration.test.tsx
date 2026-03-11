@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import type { ReactNode } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
@@ -86,6 +86,40 @@ describe("AddVocabularyPage integration", () => {
         partOfSpeech: PartOfSpeechEnum.PHRASE,
       }),
     );
+  });
+
+  it("renders draft creation failure messaging in the page composition", async () => {
+    const user = userEvent.setup();
+    const queryClient = new QueryClient();
+    createDraftMutateAsync.mockRejectedValueOnce(new Error("Draft creation failed"));
+    vi.mocked(apiClient.get).mockResolvedValue({ data: [] });
+
+    render(
+      <QueryClientProvider client={queryClient}>
+        <AddVocabularyPage />
+      </QueryClientProvider>,
+    );
+
+    await user.type(screen.getByPlaceholderText("Original script word/phrase"), "నమస్కారం");
+    await user.type(screen.getByPlaceholderText("Romanized pronunciation"), "namaskaaram");
+    await user.type(screen.getByPlaceholderText("Meaning in English"), "hello");
+    await user.type(
+      screen.getByPlaceholderText("Example sentence in source script"),
+      "ఆమె నమస్కారం చెప్పింది.",
+    );
+    await user.type(
+      screen.getByPlaceholderText("Example pronunciation"),
+      "aame namaskaaram cheppindi",
+    );
+    await user.type(screen.getByPlaceholderText("Example meaning in English"), "She said hello.");
+
+    await user.click(screen.getByRole("button", { name: "Create Draft" }));
+
+    await waitFor(() => {
+      expect(screen.getByText("Draft creation failed")).toBeTruthy();
+    });
+    expect(screen.getByText("Add Vocabulary")).toBeTruthy();
+    expect(screen.getByText("Create Vocabulary Draft")).toBeTruthy();
   });
 
   it("renders reviewer-only access state for learner users", () => {
