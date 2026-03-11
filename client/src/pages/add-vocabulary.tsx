@@ -2,6 +2,7 @@ import { Layout } from "@/components/layout";
 import { useAuth } from "@/hooks/use-auth";
 import { UserTypeEnum } from "@shared/domain/enums";
 import { ReviewAccessState } from "@/features/review/review-access-state";
+import { AddVocabularyPageHeader } from "@/features/review/add-vocabulary-page-header";
 import { CreateVocabularyDraftForm } from "@/features/review/create-vocabulary-draft-form";
 
 export default function AddVocabularyPage() {
@@ -19,12 +20,7 @@ export default function AddVocabularyPage() {
   return (
     <Layout>
       <div className="space-y-6">
-        <div>
-          <h1 className="text-3xl font-bold">Add Vocabulary</h1>
-          <p className="text-muted-foreground">
-            Add new entries with examples. Items enter the review lifecycle as drafts.
-          </p>
-        </div>
+        <AddVocabularyPageHeader />
         <CreateVocabularyDraftForm />
       </div>
     </Layout>
