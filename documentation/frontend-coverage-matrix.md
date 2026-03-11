@@ -20,7 +20,7 @@ Status legend:
 | `leaderboard` | `covered` | `covered` | `covered` | `covered` | `partial` | `covered` | loading-state page composition and responsive window-switch layout are now covered |
 | `word-buckets` | `covered` | `covered` | `covered` | `covered` | `covered` | `covered` | bucket switching and responsive bucket-switch layout are covered |
 | `profile` | `covered` | `covered` | `n/a` | `covered` | `covered` | `partial` | save flow, retryable error, and route-level loading composition are covered |
-| `auth` | `covered` | `gap` | `n/a` | `covered` | `covered` | `partial` | sign-in CTA, pending button, and bootstrap/redirect handshake now have direct route and hook coverage; explicit auth-route failure handling is still absent |
+| `auth` | `covered` | `covered` | `n/a` | `covered` | `covered` | `partial` | sign-in CTA, pending button, bootstrap/redirect handshake, and retryable auth-route failure messaging now have direct route and hook coverage |
 | `tutor` | `gap` | `gap` | `gap` | `covered` | `covered` | `partial` | intentionally lower priority until tutor retention is finalized |
 
 ## Reviewer/admin surfaces
@@ -42,13 +42,11 @@ Status legend:
 
 ## Highest-priority remaining gaps
 
-1. `auth`: decide whether `/auth` needs an explicit failure surface beyond the current bootstrap/redirect behavior, or document that provider failure remains intentionally outside route-owned UI state.
-2. `add-vocabulary`: decide whether draft-creation failure needs a stronger route-level composition test beyond the current mutation and access-gating coverage.
-3. lower-priority responsive assertions remain thin for `profile`, `auth`, `clusters`, and `contextual`, but the highest-risk analytics/review layouts now have direct page-level protection.
+1. `add-vocabulary`: decide whether draft-creation failure needs a stronger route-level composition test beyond the current mutation and access-gating coverage.
+2. lower-priority responsive assertions remain thin for `profile`, `auth`, `clusters`, and `contextual`, but the highest-risk analytics/review layouts now have direct page-level protection.
 
 ## Explicit Phase 9 deferrals
 
-- `auth` failure UI is currently deferred: the route only owns bootstrap, redirect, and sign-in initiation, while provider-login failure still resolves outside local route state.
 - `tutor` remains non-core for Phase 9 closeout and does not block completion of the stabilized learner/reviewer flow coverage.
 
 ## Exit criteria for `P9-009`

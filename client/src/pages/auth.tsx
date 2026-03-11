@@ -4,7 +4,7 @@ import { AuthBootstrapPanel } from "@/features/auth/auth-bootstrap-panel";
 import { AuthSignInPanel } from "@/features/auth/auth-sign-in-panel";
 
 export default function AuthPage() {
-  const { isLoginPending, isBootstrapping, handleLogin } = useAuthPageViewModel();
+  const { isLoginPending, isBootstrapping, authError, handleLogin } = useAuthPageViewModel();
 
   if (isBootstrapping) {
     return <AuthBootstrapPanel />;
@@ -13,7 +13,11 @@ export default function AuthPage() {
   return (
     <div className="grid min-h-screen grid-cols-1 lg:grid-cols-2">
       <AuthBrandPanel />
-      <AuthSignInPanel isLoginPending={isLoginPending} handleLogin={handleLogin} />
+      <AuthSignInPanel
+        isLoginPending={isLoginPending}
+        authError={authError}
+        handleLogin={handleLogin}
+      />
     </div>
   );
 }

@@ -24,6 +24,8 @@ export type AuthRuntimeConfig = {
   adminEmails: Set<string>;
 };
 
+export type FrontendAuthRedirectErrorCode = "cancelled" | "provider" | "configuration";
+
 let authConfig: AuthRuntimeConfig = {
   provider: "google",
   googleIssuerUrl: "https://accounts.google.com",
@@ -51,7 +53,7 @@ const AUTH_GOOGLE_ROUTE = "/api/auth/google";
 const AUTH_GOOGLE_CALLBACK_ROUTE = "/api/auth/google/callback";
 const AUTH_LOGOUT_ROUTE = "/api/auth/logout";
 
-function getFrontendAuthRedirectWithToken(token: string): string {
+export function getFrontendAuthRedirectWithToken(token: string): string {
   const base = authConfig.frontendBaseUrl?.trim();
   if (!base) {
     return `/auth#token=${encodeURIComponent(token)}`;
@@ -59,6 +61,17 @@ function getFrontendAuthRedirectWithToken(token: string): string {
 
   const url = new URL("/auth", base);
   url.hash = `token=${encodeURIComponent(token)}`;
+  return url.toString();
+}
+
+export function getFrontendAuthRedirectWithError(code: FrontendAuthRedirectErrorCode): string {
+  const base = authConfig.frontendBaseUrl?.trim();
+  if (!base) {
+    return `/auth?authError=${encodeURIComponent(code)}`;
+  }
+
+  const url = new URL("/auth", base);
+  url.searchParams.set("authError", code);
   return url.toString();
 }
 
@@ -253,21 +266,15 @@ export async function setupAuth(app: Express, config: AuthRuntimeConfig) {
             oauthError?.code === "OAUTH_RESPONSE_BODY_ERROR" &&
             oauthError?.error === "invalid_client"
           ) {
-            return sendError(
-              req,
-              res,
-              500,
-              "INTERNAL_ERROR",
-              "Google OAuth client credentials are invalid. Verify GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, and callback URI configuration.",
-            );
+            return res.redirect(getFrontendAuthRedirectWithError("configuration"));
           }
 
           if (error) {
-            return next(error);
+            return res.redirect(getFrontendAuthRedirectWithError("provider"));
           }
 
           if (!user) {
-            return res.redirect(AUTH_GOOGLE_ROUTE);
+            return res.redirect(getFrontendAuthRedirectWithError("cancelled"));
           }
 
           const signedToken = signAuthToken(user.claims);

@@ -7,7 +7,9 @@ const setLocation = vi.fn();
 const getLoginUrl = vi.fn(() => "http://localhost/api/auth/google");
 const setToken = vi.fn();
 const readAuthTokenFromUrl = vi.fn(() => null);
+const readAuthErrorFromUrl = vi.fn(() => null);
 const clearAuthTokenFromUrl = vi.fn();
+const clearAuthErrorFromUrl = vi.fn();
 
 let authState = {
   user: null as null | { id: string },
@@ -31,11 +33,13 @@ vi.mock("@/services/authService", () => ({
 
 vi.mock("@/services/authTokenStorage", () => ({
   readAuthTokenFromUrl: () => readAuthTokenFromUrl(),
+  readAuthErrorFromUrl: () => readAuthErrorFromUrl(),
   clearAuthTokenFromUrl: () => clearAuthTokenFromUrl(),
+  clearAuthErrorFromUrl: () => clearAuthErrorFromUrl(),
 }));
 
 function Harness() {
-  const { isLoginPending, isBootstrapping, handleLogin } = useAuthPageViewModel();
+  const { isLoginPending, isBootstrapping, authError, handleLogin } = useAuthPageViewModel();
 
   return (
     <div>
@@ -44,6 +48,7 @@ function Harness() {
       </button>
       <span>{isLoginPending ? "pending" : "idle"}</span>
       <span>{isBootstrapping ? "bootstrapping" : "ready"}</span>
+      <span>{authError?.title ?? "no-error"}</span>
     </div>
   );
 }
@@ -57,7 +62,10 @@ describe("useAuthPageViewModel", () => {
     setToken.mockReset();
     readAuthTokenFromUrl.mockReset();
     readAuthTokenFromUrl.mockReturnValue(null);
+    readAuthErrorFromUrl.mockReset();
+    readAuthErrorFromUrl.mockReturnValue(null);
     clearAuthTokenFromUrl.mockReset();
+    clearAuthErrorFromUrl.mockReset();
   });
 
   it("boots from a token in the URL and redirects home", async () => {
@@ -106,11 +114,23 @@ describe("useAuthPageViewModel", () => {
     await user.click(screen.getByRole("button", { name: "trigger login" }));
 
     expect(screen.getByText("pending")).toBeTruthy();
+    expect(clearAuthErrorFromUrl).toHaveBeenCalledTimes(1);
     expect(window.location.href).toBe("http://localhost/api/auth/google");
 
     Object.defineProperty(window, "location", {
       configurable: true,
       value: originalLocation,
+    });
+  });
+
+  it("surfaces redirect auth errors and clears them from the URL", async () => {
+    readAuthErrorFromUrl.mockReturnValue("provider");
+
+    render(<Harness />);
+
+    await waitFor(() => {
+      expect(screen.getByText("Sign-in failed")).toBeTruthy();
+      expect(clearAuthErrorFromUrl).toHaveBeenCalledTimes(1);
     });
   });
 });
