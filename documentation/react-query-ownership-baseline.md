@@ -20,7 +20,7 @@ Current reality:
 - most shared data access hooks already use React Query
 - some feature surfaces are already reasonably structured
 - request ownership is still inconsistent
-- query key conventions are not explicitly documented
+- high-traffic shared hooks now export explicit query-key builders, but the repo-wide convention is still not fully documented
 - invalidation strategy is uneven
 - one component still defines its own query
 - query ownership is now broadly aligned; the remaining issues are more about conventions than obvious boundary leaks
@@ -99,7 +99,7 @@ Current patterns:
 
 Problems:
 
-- no documented ownership of key structure
+- the highest-traffic shared hooks now own and export their key builders, but the repo still lacks one centralized convention policy
 - invalidation partials are used without a formal contract
 - future refactors could easily break cache behavior
 

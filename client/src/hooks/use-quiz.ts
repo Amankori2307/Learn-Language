@@ -10,6 +10,22 @@ import { apiClient, buildApiUrl } from "@/services/apiClient";
 export type QuizModeValue = QuizModeEnum;
 type QuizSubmitInput = z.infer<typeof api.quiz.submit.input>;
 
+export function quizGenerateQueryKey(
+  mode: QuizModeValue,
+  clusterId: number | null,
+  language: string,
+) {
+  return [api.quiz.generate.path, mode, clusterId, language] as const;
+}
+
+export function statsQueryKey(language: string) {
+  return [api.stats.get.path, language] as const;
+}
+
+export function learningInsightsQueryKey(language: string) {
+  return [api.analytics.learning.path, language] as const;
+}
+
 const SEED_INVALIDATION_QUERY_KEYS = [
   [api.stats.get.path],
   [api.analytics.learning.path],
@@ -40,7 +56,7 @@ export function useGenerateQuiz(
 ) {
   const { language } = useLearningLanguage();
   return useQuery({
-    queryKey: [api.quiz.generate.path, mode, clusterId ?? null, language],
+    queryKey: quizGenerateQueryKey(mode, clusterId ?? null, language),
     queryFn: async () => {
       const params = new URLSearchParams();
       params.append("mode", mode);
@@ -85,7 +101,7 @@ export function useSubmitAnswer() {
 export function useStats() {
   const { language } = useLearningLanguage();
   return useQuery({
-    queryKey: [api.stats.get.path, language],
+    queryKey: statsQueryKey(language),
     queryFn: async () => {
       const params = new URLSearchParams({ language });
       try {
@@ -104,7 +120,7 @@ export function useStats() {
 export function useLearningInsights() {
   const { language } = useLearningLanguage();
   return useQuery({
-    queryKey: [api.analytics.learning.path, language],
+    queryKey: learningInsightsQueryKey(language),
     queryFn: async () => {
       const params = new URLSearchParams({ language });
       try {

@@ -5,11 +5,20 @@ import { apiClient, buildApiUrl } from "@/services/apiClient";
 
 export type WordBucketType = "mastered" | "learning" | "needs_review";
 
+export function wordBucketQueryKey(
+  bucket: WordBucketType,
+  page: number,
+  limit: number,
+  language: string,
+) {
+  return [api.analytics.wordBuckets.path, bucket, page, limit, language] as const;
+}
+
 export function useWordBucket(bucket: WordBucketType, page: number, limit: number = 20) {
   const { language } = useLearningLanguage();
 
   return useQuery({
-    queryKey: [api.analytics.wordBuckets.path, bucket, page, limit, language],
+    queryKey: wordBucketQueryKey(bucket, page, limit, language),
     queryFn: async () => {
       const params = new URLSearchParams({
         bucket,

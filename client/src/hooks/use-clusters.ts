@@ -4,10 +4,18 @@ import { useLearningLanguage } from "@/hooks/use-language";
 import { AxiosError } from "axios";
 import { apiClient, buildApiUrl } from "@/services/apiClient";
 
+export function clustersQueryKey(language: string) {
+  return [api.clusters.list.path, language] as const;
+}
+
+export function clusterQueryKey(id: number, language: string) {
+  return [api.clusters.get.path, id, language] as const;
+}
+
 export function useClusters() {
   const { language } = useLearningLanguage();
   return useQuery({
-    queryKey: [api.clusters.list.path, language],
+    queryKey: clustersQueryKey(language),
     queryFn: async () => {
       const params = new URLSearchParams({ language });
       const res = await apiClient.get(
@@ -21,7 +29,7 @@ export function useClusters() {
 export function useCluster(id: number) {
   const { language } = useLearningLanguage();
   return useQuery({
-    queryKey: [api.clusters.get.path, id, language],
+    queryKey: clusterQueryKey(id, language),
     queryFn: async () => {
       const url = buildUrl(api.clusters.get.path, { id });
       const params = new URLSearchParams({ language });

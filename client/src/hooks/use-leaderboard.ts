@@ -5,10 +5,14 @@ import { apiClient, buildApiUrl } from "@/services/apiClient";
 
 export type LeaderboardWindow = "daily" | "weekly" | "all_time";
 
+export function leaderboardQueryKey(window: LeaderboardWindow, limit: number, language: string) {
+  return [api.leaderboard.list.path, window, limit, language] as const;
+}
+
 export function useLeaderboard(window: LeaderboardWindow, limit = 25) {
   const { language } = useLearningLanguage();
   return useQuery({
-    queryKey: [api.leaderboard.list.path, window, limit, language],
+    queryKey: leaderboardQueryKey(window, limit, language),
     queryFn: async () => {
       const params = new URLSearchParams({
         window,

@@ -3,9 +3,17 @@ import { api } from "@shared/routes";
 import { userService, type IProfileUpdateInput } from "@/services/userService";
 import { trackAnalyticsEvent } from "@/lib/analytics";
 
+export function profileQueryKey() {
+  return [api.auth.profile.get.path] as const;
+}
+
+export function authMeQueryKey() {
+  return [api.auth.me.path] as const;
+}
+
 export function useProfile() {
   return useQuery({
-    queryKey: [api.auth.profile.get.path],
+    queryKey: profileQueryKey(),
     queryFn: userService.getProfile,
   });
 }
@@ -18,8 +26,8 @@ export function useUpdateProfile() {
       return userService.updateProfile(payload);
     },
     onSuccess: (_result, payload) => {
-      queryClient.invalidateQueries({ queryKey: [api.auth.profile.get.path] });
-      queryClient.invalidateQueries({ queryKey: [api.auth.me.path] });
+      queryClient.invalidateQueries({ queryKey: profileQueryKey() });
+      queryClient.invalidateQueries({ queryKey: authMeQueryKey() });
       trackAnalyticsEvent("profile_updated", {
         route: "/profile",
         hasFirstName: Boolean(payload.firstName?.trim()),

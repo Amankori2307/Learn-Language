@@ -32,7 +32,7 @@ Next task ID: -
 
 Date: 2026-03-12  
 Session owner: Codex  
-Last completed task ID: P13-016  
+Last completed task ID: P13-017  
 Current in-progress task ID: -  
 Next task ID: -
 
@@ -109,6 +109,9 @@ Next task ID: -
 - `P13-016` is now complete:
   - quiz answer submission now invalidates the learner-facing progress surfaces it actually affects instead of refreshing only stats
   - focused hook coverage now locks the quiz-submit invalidation list alongside the existing seed invalidation contract
+- `P13-017` is now complete:
+  - high-traffic shared hooks now export explicit query-key builders and consume those builders in query/invalidation sites instead of relying on scattered tuple literals
+  - focused hook coverage now protects both the shared key shapes and the narrowed review-history invalidation behavior
 - Phase 12 planning is now active in [81-phase-12-theme-system-and-design-token-extraction.md](/Users/aman/Projects/personal-projects/Learn-Language/context/plan/81-phase-12-theme-system-and-design-token-extraction.md).
 - Active backlog was reprioritized to start with theming-system readiness before UI theme selection work:
   - `P12-001` is now complete via [theme-system-baseline.md](/Users/aman/Projects/personal-projects/Learn-Language/documentation/theme-system-baseline.md)
