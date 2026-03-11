@@ -2,7 +2,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useLocation, useSearch } from "wouter";
 import { QuizDirectionEnum, QuizModeEnum, QuizQuestionTypeEnum } from "@shared/domain/enums";
 import { useLearningLanguage } from "@/hooks/use-language";
-import { useGenerateQuiz, useSubmitAnswer, type QuizMode } from "@/hooks/use-quiz";
+import { useGenerateQuiz, useSubmitAnswer, type QuizModeValue } from "@/hooks/use-quiz";
 import {
   QUIZ_DEFAULT_CONFIDENCE_LEVEL,
   QUIZ_NEXT_RECOMMENDATION_MODE,
@@ -11,8 +11,8 @@ import {
 } from "@/features/quiz/quiz.constants";
 import { trackAnalyticsEvent } from "@/lib/analytics";
 
-function parseMode(raw: string | null): QuizMode {
-  const mode = raw as QuizMode | null;
+function parseMode(raw: string | null): QuizModeValue {
+  const mode = raw as QuizModeValue | null;
   return mode ?? QuizModeEnum.DAILY_REVIEW;
 }
 

@@ -146,9 +146,9 @@ Next task ID: -
 
 Date: 2026-03-11  
 Session owner: Codex  
-Last completed task ID: P10-009  
-Current in-progress task ID: P10-010  
-Next task ID: P10-010
+Last completed task ID: P10-012  
+Current in-progress task ID: -  
+Next task ID: -
 
 ## Current state
 
@@ -218,18 +218,27 @@ Next task ID: P10-010
   - the crawlability and submission runbook now exists in [seo-crawlability-contract.md](/Users/aman/Projects/personal-projects/Learn-Language/documentation/seo-crawlability-contract.md)
   - the full `pnpm run lint` gate passes after the SEO slice
   - two unrelated slow UI integration tests now carry explicit 15s per-test timeouts so the gate reflects real regressions instead of runner slowness
-- The active implementation task is now `P10-010`.
+- `P10-010` is now complete:
+  - code-governance ownership and enforcement guidance now lives in [code-governance-contract.md](/Users/aman/Projects/personal-projects/Learn-Language/documentation/code-governance-contract.md)
+  - the repo now enforces symbol ownership in the lint gate through [check-symbol-governance.ts](/Users/aman/Projects/personal-projects/Learn-Language/script/check-symbol-governance.ts)
+  - exported enums are now restricted to the approved enum modules and duplicate exported symbol names fail CI
+  - the duplicate exported `QuizMode` alias was removed so the new check starts green without a permanent allowlist
+- `P10-011` is now complete:
+  - DI guidance now lives in [dependency-injection-policy.md](/Users/aman/Projects/personal-projects/Learn-Language/documentation/dependency-injection-policy.md)
+  - the code guidelines now explicitly state when plain constructor injection is preferred and when `@Inject(...)` is actually required
+- `P10-012` is now complete:
+  - AI prioritization and rollout constraints now live in [ai-product-roadmap.md](/Users/aman/Projects/personal-projects/Learn-Language/documentation/ai-product-roadmap.md)
+  - the recommended MVP is reviewer-assist for draft/example generation, with adaptive study recommendations deferred as the next higher-upside experiment
+- Phase 10 is now complete.
+- the full `pnpm run lint` gate should be treated as the final verification step for the governance closeout once run on the current branch state
 
 ## Current blockers
 
-- No hard blocker found for `P10-010`.
-- The main execution risk is making the anti-duplication guidance enforceable enough to matter without creating noisy or brittle checks.
+- No current implementation blocker.
 
 ## Immediate next actions
 
-- extend the code guidelines with explicit ownership rules for shared types, enums, and constants
-- decide the lightest-weight enforcement mechanism that is useful in this repo
-- identify the highest-value existing duplication hotspots without mixing broad cleanup into unrelated work
+- Re-prioritize the next active phase before starting new implementation work.
 
 ---
 

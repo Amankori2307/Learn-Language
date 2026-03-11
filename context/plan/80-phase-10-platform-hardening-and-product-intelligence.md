@@ -77,9 +77,9 @@ Out of scope for this phase:
 | P10-007 | done | Reduce unnecessary public runtime exposure and normalize service topology/port strategy | P10-003,P10-006 | M | production exposes only necessary public entry points and app code no longer depends on fixed internal host ports |
 | P10-008 | done | Measure and significantly improve frontend/backend performance using a prioritized optimization plan | P10-004,P10-007 | L | baseline metrics exist, bottlenecks are ranked by impact, and the highest-value optimizations are implemented and verified |
 | P10-009 | done | Harden technical SEO, route metadata, crawl controls, structured data, and search engine submission readiness | P10-003,P10-007 | M | public pages have intentional metadata/canonical behavior, private pages are not overshared, and crawler submission steps are ready |
-| P10-010 | doing | Extend coding guidelines and enforcement to prevent duplicate shared types, enums, and magic-number constants | P10-001 | S | the repo has explicit anti-duplication rules, ownership rules, and enforcement checks or review gates |
-| P10-011 | todo | Document dependency injection rules and clarify when `@Inject` is required versus unnecessary | P10-001 | S | Nest DI usage is consistent and the repo has a clear, reusable policy with examples |
-| P10-012 | todo | Define a product-safe AI enhancement roadmap with one low-risk MVP recommendation | P10-001,P10-006,P10-008 | M | AI opportunities are ranked by user value, risk, cost, latency, and control boundaries, with one recommended MVP and one deferred experiment |
+| P10-010 | done | Extend coding guidelines and enforcement to prevent duplicate shared types, enums, and magic-number constants | P10-001 | S | the repo has explicit anti-duplication rules, ownership rules, and enforcement checks or review gates |
+| P10-011 | done | Document dependency injection rules and clarify when `@Inject` is required versus unnecessary | P10-001 | S | Nest DI usage is consistent and the repo has a clear, reusable policy with examples |
+| P10-012 | done | Define a product-safe AI enhancement roadmap with one low-risk MVP recommendation | P10-001,P10-006,P10-008 | M | AI opportunities are ranked by user value, risk, cost, latency, and control boundaries, with one recommended MVP and one deferred experiment |
 
 ## Micro-task execution map
 
@@ -179,28 +179,28 @@ The top-level tasks above are the phase gates. Actual execution should happen in
 
 | ID | Status | Task | Depends On | Done When |
 | -- | ------ | ---- | ---------- | --------- |
-| P10-010A | todo | Extend code guidelines with explicit bans on duplicate reusable shared types, duplicate enums, and duplicate magic-number constants | P10-001E | governance rules are explicit rather than implied |
-| P10-010B | todo | Define canonical ownership locations for shared contracts, domain enums, constants, and feature-local exceptions | P10-010A | contributors know where reusable types/constants are allowed to live |
-| P10-010C | todo | Define or implement enforcement mechanisms through lint rules, scripts, review checklists, or targeted CI gates | P10-010B | duplication rules are enforceable rather than aspirational |
-| P10-010D | todo | Produce a cleanup backlog for existing violations without mixing broad cleanup into unrelated implementation slices | P10-010C | existing debt is visible and future debt creation is constrained |
+| P10-010A | done | Extend code guidelines with explicit bans on duplicate reusable shared types, duplicate enums, and duplicate magic-number constants | P10-001E | governance rules are explicit rather than implied |
+| P10-010B | done | Define canonical ownership locations for shared contracts, domain enums, constants, and feature-local exceptions | P10-010A | contributors know where reusable types/constants are allowed to live |
+| P10-010C | done | Define or implement enforcement mechanisms through lint rules, scripts, review checklists, or targeted CI gates | P10-010B | duplication rules are enforceable rather than aspirational |
+| P10-010D | done | Produce a cleanup backlog for existing violations without mixing broad cleanup into unrelated implementation slices | P10-010C | existing debt is visible and future debt creation is constrained |
 
 ### P10-011 - Dependency injection policy
 
 | ID | Status | Task | Depends On | Done When |
 | -- | ------ | ---- | ---------- | --------- |
-| P10-011A | todo | Audit current Nest DI patterns and identify where constructor type-based injection is used versus explicit injection tokens | P10-001E | the repo's current DI patterns are understood concretely |
-| P10-011B | todo | Define the house rule for when plain constructor injection is preferred and when `@Inject` is required | P10-011A | DI rules are explicit and technically correct |
-| P10-011C | todo | Document examples for class providers, custom tokens, interfaces, factories, and ambiguous/multi-provider scenarios | P10-011B | future contributors can apply DI rules without guesswork |
-| P10-011D | todo | Integrate the DI policy into coding guidance and review expectations | P10-011C | DI consistency is part of normal engineering governance |
+| P10-011A | done | Audit current Nest DI patterns and identify where constructor type-based injection is used versus explicit injection tokens | P10-001E | the repo's current DI patterns are understood concretely |
+| P10-011B | done | Define the house rule for when plain constructor injection is preferred and when `@Inject` is required | P10-011A | DI rules are explicit and technically correct |
+| P10-011C | done | Document examples for class providers, custom tokens, interfaces, factories, and ambiguous/multi-provider scenarios | P10-011B | future contributors can apply DI rules without guesswork |
+| P10-011D | done | Integrate the DI policy into coding guidance and review expectations | P10-011C | DI consistency is part of normal engineering governance |
 
 ### P10-012 - AI enhancement roadmap
 
 | ID | Status | Task | Depends On | Done When |
 | -- | ------ | ---- | ---------- | --------- |
-| P10-012A | todo | Identify product problems where AI could materially improve learning quality, reviewer throughput, or discovery experience | P10-008E | the AI discussion starts from product value rather than technology-first ideas |
-| P10-012B | todo | Score each candidate use case by value, cost, latency, moderation risk, data dependency, control, and fallback path | P10-012A | candidate AI ideas are ranked objectively |
-| P10-012C | todo | Define hard constraints for deterministic grading, reviewer governance, privacy, and secure deployment of any AI-assisted feature | P10-012B | AI boundaries are explicit before any implementation proposal |
-| P10-012D | todo | Select one low-risk MVP and one higher-upside deferred experiment with implementation prerequisites and risk notes | P10-012C | the repo has an actionable AI roadmap instead of vague ideas |
+| P10-012A | done | Identify product problems where AI could materially improve learning quality, reviewer throughput, or discovery experience | P10-008E | the AI discussion starts from product value rather than technology-first ideas |
+| P10-012B | done | Score each candidate use case by value, cost, latency, moderation risk, data dependency, control, and fallback path | P10-012A | candidate AI ideas are ranked objectively |
+| P10-012C | done | Define hard constraints for deterministic grading, reviewer governance, privacy, and secure deployment of any AI-assisted feature | P10-012B | AI boundaries are explicit before any implementation proposal |
+| P10-012D | done | Select one low-risk MVP and one higher-upside deferred experiment with implementation prerequisites and risk notes | P10-012C | the repo has an actionable AI roadmap instead of vague ideas |
 
 ## Sequencing guardrails
 

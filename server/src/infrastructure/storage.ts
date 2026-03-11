@@ -38,7 +38,7 @@ import {
 } from "./schema";
 import { STORAGE_RULES } from "./storage.constants";
 import { rankQuizCandidates } from "./services/quiz-candidate-scoring";
-import { generateSessionWords, type QuizMode } from "./services/session-generator";
+import { generateSessionWords } from "./services/session-generator";
 import { computeStreak, computeXp } from "./services/stats";
 import { computeLeaderboard } from "./services/leaderboard";
 import { type SrsConfigSnapshot, resolveSrsConfig } from "./services/srs-config";
@@ -129,7 +129,7 @@ export interface IStorage {
     userId: string,
     limit?: number,
     clusterId?: number,
-    mode?: QuizMode,
+    mode?: QuizModeEnum,
     language?: LanguageEnum,
   ): Promise<Word[]>;
 
@@ -618,7 +618,7 @@ export class DatabaseStorage implements IStorage {
     userId: string,
     limit: number = 10,
     clusterId?: number,
-    mode: QuizMode = QuizModeEnum.DAILY_REVIEW,
+    mode: QuizModeEnum = QuizModeEnum.DAILY_REVIEW,
     language?: LanguageEnum,
   ): Promise<Word[]> {
     let candidateWords: Word[] = clusterId

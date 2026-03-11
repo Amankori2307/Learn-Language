@@ -86,7 +86,7 @@ describe("AddVocabularyPage integration", () => {
         partOfSpeech: PartOfSpeechEnum.PHRASE,
       }),
     );
-  }, 15_000);
+  });
 
   it("renders reviewer-only access state for learner users", () => {
     currentUserRole = UserTypeEnum.LEARNER;

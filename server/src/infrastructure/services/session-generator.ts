@@ -2,8 +2,6 @@ import type { UserWordProgress, Word } from "../schema";
 import { QuizModeEnum } from "@shared/domain/enums";
 import { rankQuizCandidates } from "./quiz-candidate-scoring";
 
-export type QuizMode = QuizModeEnum;
-
 function isDue(progress?: UserWordProgress, now = new Date()): boolean {
   if (!progress?.nextReview) return false;
   return new Date(progress.nextReview) <= now;
@@ -33,7 +31,7 @@ function take(words: Word[], n: number): Word[] {
 }
 
 export function generateSessionWords(params: {
-  mode: QuizMode;
+  mode: QuizModeEnum;
   count: number;
   words: Word[];
   progressMap: Map<number, UserWordProgress>;

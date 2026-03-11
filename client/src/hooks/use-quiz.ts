@@ -7,10 +7,13 @@ import { AxiosError } from "axios";
 import { apiClient, buildApiUrl } from "@/services/apiClient";
 
 // Types derived from API definition
-export type QuizMode = QuizModeEnum;
+export type QuizModeValue = QuizModeEnum;
 type QuizSubmitInput = z.infer<typeof api.quiz.submit.input>;
 
-export function useGenerateQuiz(mode: QuizMode = QuizModeEnum.DAILY_REVIEW, clusterId?: number) {
+export function useGenerateQuiz(
+  mode: QuizModeValue = QuizModeEnum.DAILY_REVIEW,
+  clusterId?: number,
+) {
   const { language } = useLearningLanguage();
   return useQuery({
     queryKey: [api.quiz.generate.path, mode, clusterId ?? null, language],

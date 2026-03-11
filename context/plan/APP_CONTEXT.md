@@ -11,7 +11,7 @@ Build a text-first language learning app with high data correctness, strong memo
 - Phase 7 runtime reliability and test expansion is complete.
 - Phase 8 functionality-first product hardening is complete.
 - Phase 9 frontend architecture, async UX, responsive UI, and test hardening is complete.
-- Phase 10 platform hardening, API normalization, observability, security, performance, SEO, and product intelligence is active.
+- Phase 10 platform hardening, API normalization, observability, security, performance, SEO, and product intelligence is complete.
 
 ## Core capabilities live
 
@@ -102,16 +102,15 @@ Build a text-first language learning app with high data correctness, strong memo
 - CI:
   - pnpm-based workflow parity with local/docker checks
   - GitHub Actions quality gate now provisions Postgres, runs migrations/content import, runs `pnpm run ci`, runs production-like smoke, and then builds
+  - lint now also enforces symbol ownership through `script/check-symbol-governance.ts`
+- Governance/documentation:
+  - code governance contract in [documentation/code-governance-contract.md](/Users/aman/Projects/personal-projects/Learn-Language/documentation/code-governance-contract.md)
+  - DI policy in [documentation/dependency-injection-policy.md](/Users/aman/Projects/personal-projects/Learn-Language/documentation/dependency-injection-policy.md)
+  - AI roadmap in [documentation/ai-product-roadmap.md](/Users/aman/Projects/personal-projects/Learn-Language/documentation/ai-product-roadmap.md)
 
 ## Immediate next implementation
 
 - Execute in order from [01-master-task-registry.md](/Users/aman/Projects/personal-projects/Learn-Language/context/plan/01-master-task-registry.md).
 - Current execution track:
-  - Phase 10 in [80-phase-10-platform-hardening-and-product-intelligence.md](/Users/aman/Projects/personal-projects/Learn-Language/context/plan/80-phase-10-platform-hardening-and-product-intelligence.md)
-  - completed baseline in [platform-hardening-baseline.md](/Users/aman/Projects/personal-projects/Learn-Language/documentation/platform-hardening-baseline.md)
-  - analytics contract in [analytics-event-taxonomy.md](/Users/aman/Projects/personal-projects/Learn-Language/documentation/analytics-event-taxonomy.md)
-  - security hardening contract in [security-hardening-contract.md](/Users/aman/Projects/personal-projects/Learn-Language/documentation/security-hardening-contract.md)
-  - runtime topology contract in [runtime-topology-contract.md](/Users/aman/Projects/personal-projects/Learn-Language/documentation/runtime-topology-contract.md)
-  - performance baseline in [performance-baseline.md](/Users/aman/Projects/personal-projects/Learn-Language/documentation/performance-baseline.md)
-  - SEO crawlability contract in [seo-crawlability-contract.md](/Users/aman/Projects/personal-projects/Learn-Language/documentation/seo-crawlability-contract.md)
-  - next task: `P10-010`
+  - no active backlog item is currently in progress
+  - re-prioritize from [01-master-task-registry.md](/Users/aman/Projects/personal-projects/Learn-Language/context/plan/01-master-task-registry.md) before starting the next phase

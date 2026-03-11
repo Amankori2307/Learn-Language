@@ -36,6 +36,11 @@
 - Avoid creating duplicate union literals in feature files.
 - Do not define reusable interfaces/enums/constants inside controller/service/repository files.
 - Place them in domain-owned modules (shared domain or feature `types/constants` files).
+- Shared enums belong in `shared/domain/enums.ts` unless they are strictly database-only.
+- Database-only enums belong in `server/src/infrastructure/database.enums.ts`.
+- Cross-layer reusable shapes belong in `shared/*`; do not restate them as parallel exported aliases in feature files without a real semantic reason.
+- Module-level reusable server types belong in `*.types.ts` or `*.repository.types.ts`, not in controller/service/repository implementations.
+- Feature-local client types may stay in hook/service/lib files only while they remain local to that feature; once reused across domains, promote them into `shared/*`.
 
 5. UI/logic separation:
 
@@ -48,6 +53,7 @@
 - Do not hardcode unexplained numeric literals in business logic.
 - Use named constants/enums for thresholds, limits, scoring weights, retries, timeouts, and page sizes.
 - Local numeric literals are acceptable only when self-evident and domain-neutral (e.g., array index `0`/`1` in trivial loops).
+- If introducing a new behavior-shaping number, either name it immediately or document why it is intentionally local and obvious.
 
 7. Backward-compatible migration approach:
 
@@ -60,6 +66,8 @@
 - `pnpm run lint` must pass with `--max-warnings=0`.
 - Do not merge code with ESLint warnings.
 - Treat `react-refresh/only-export-components` and `@typescript-eslint/no-unused-vars` as errors.
+- `pnpm run lint` also enforces symbol ownership through `script/check-symbol-governance.ts`.
+- Exported enums outside approved enum modules and duplicate exported reusable symbol names are CI failures.
 
 9. Planning hygiene:
 
@@ -85,6 +93,19 @@
 - Commit when you complete a major logical task, not only at the very end of a long phase.
 - Prefer commits that represent one meaningful unit of progress and can be understood or reverted independently.
 - Do not mix unrelated fixes, refactors, and feature work into the same commit unless they are inseparable for correctness.
+
+12. Dependency injection:
+
+- Prefer plain constructor injection for concrete Nest class providers.
+- Use `@Inject(...)` only when the runtime token cannot be inferred safely from the parameter type.
+- Typical valid cases: custom tokens, interfaces, `useFactory`, `useValue`, or multiple provider implementations behind one abstraction.
+- Avoid `@Inject(ClassName)` by default when plain constructor injection is equivalent.
+
+13. AI feature bar:
+
+- Do not add AI features without an explicit product problem, rollout gate, privacy check, and deterministic fallback where needed.
+- Never put non-deterministic AI behavior directly into grading, reviewer approval, or other correctness-critical paths.
+- Prefer reviewer-assist and recommendation use cases over autonomous learner-scoring flows.
 
 ## Adoption plan
 
