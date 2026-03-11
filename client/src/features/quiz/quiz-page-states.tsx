@@ -1,3 +1,4 @@
+import { useEffect, useMemo, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Layout } from "@/components/layout";
 import { InlineLoading } from "@/components/ui/page-states";
@@ -89,6 +90,70 @@ export function QuizFinishedState({
   startSession: (target: string) => void;
   navigate: (target: string) => void;
 }) {
+  const actionRefs = useRef<Array<HTMLButtonElement | null>>([]);
+  const actions = useMemo(
+    () => [
+      ...(incorrectCount > 0
+        ? [
+            {
+              key: "weak-words",
+              run: () => startSession(`/quiz?mode=${QuizModeEnum.WEAK_WORDS}`),
+            },
+          ]
+        : []),
+      ...(clusterId
+        ? [
+            {
+              key: "cluster",
+              run: () => navigate(`/quiz?mode=cluster&clusterId=${clusterId}`),
+            },
+          ]
+        : []),
+      {
+        key: "recommended",
+        run: () => startSession(`/quiz?mode=${recommendedMode}`),
+      },
+      {
+        key: "dashboard",
+        run: () => navigate("/"),
+      },
+    ],
+    [clusterId, incorrectCount, navigate, recommendedMode, startSession],
+  );
+
+  useEffect(() => {
+    actionRefs.current[0]?.focus();
+  }, [actions]);
+
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      const activeIndex = actionRefs.current.findIndex((button) => button === document.activeElement);
+
+      if (event.key === "ArrowDown") {
+        event.preventDefault();
+        const nextIndex = activeIndex >= 0 ? (activeIndex + 1) % actions.length : 0;
+        actionRefs.current[nextIndex]?.focus();
+        return;
+      }
+
+      if (event.key === "ArrowUp") {
+        event.preventDefault();
+        const nextIndex = activeIndex >= 0 ? (activeIndex - 1 + actions.length) % actions.length : actions.length - 1;
+        actionRefs.current[nextIndex]?.focus();
+        return;
+      }
+
+      if (event.key === "Enter") {
+        event.preventDefault();
+        const nextIndex = activeIndex >= 0 ? activeIndex : 0;
+        actions[nextIndex]?.run();
+      }
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, [actions]);
+
   return (
     <div className="flex min-h-screen items-center justify-center bg-background p-4">
       <div className="w-full max-w-md rounded-3xl border border-border/50 bg-card p-8 text-center shadow-2xl">
@@ -116,6 +181,9 @@ export function QuizFinishedState({
         <div className="space-y-3">
           {incorrectCount > 0 ? (
             <Button
+              ref={(node) => {
+                actionRefs.current[0] = node;
+              }}
               variant="secondary"
               className="h-12 w-full rounded-xl text-lg"
               onClick={() => startSession(`/quiz?mode=${QuizModeEnum.WEAK_WORDS}`)}
@@ -125,6 +193,9 @@ export function QuizFinishedState({
           ) : null}
           {clusterId ? (
             <Button
+              ref={(node) => {
+                actionRefs.current[incorrectCount > 0 ? 1 : 0] = node;
+              }}
               variant="outline"
               className="h-12 w-full rounded-xl text-lg"
               onClick={() => navigate(`/quiz?mode=cluster&clusterId=${clusterId}`)}
@@ -133,12 +204,18 @@ export function QuizFinishedState({
             </Button>
           ) : null}
           <Button
+            ref={(node) => {
+              actionRefs.current[(incorrectCount > 0 ? 1 : 0) + (clusterId ? 1 : 0)] = node;
+            }}
             className="h-12 w-full rounded-xl text-lg shadow-lg shadow-primary/20"
             onClick={() => startSession(`/quiz?mode=${recommendedMode}`)}
           >
             {recommendedLabel}
           </Button>
           <Button
+            ref={(node) => {
+              actionRefs.current[(incorrectCount > 0 ? 1 : 0) + (clusterId ? 1 : 0) + 1] = node;
+            }}
             variant="outline"
             className="h-12 w-full rounded-xl text-lg"
             onClick={() => navigate("/")}

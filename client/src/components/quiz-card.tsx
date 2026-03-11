@@ -1,18 +1,14 @@
 import { motion, AnimatePresence } from "framer-motion";
-import { Button } from "@/components/ui/button";
-import { CheckCircle2, XCircle, Volume2, VolumeX, ArrowRight } from "lucide-react";
-import { cn } from "@/lib/utils";
 import { useEffect, useState } from "react";
 import { LanguageEnum, QuizQuestionTypeEnum } from "@shared/domain/enums";
 import { useFeedbackEffects } from "@/hooks/use-feedback-effects";
 import { runErrorEffects, runSuccessEffects } from "@/lib/feedback-effects";
 import { useHybridAudio } from "@/hooks/use-hybrid-audio";
-import { getLanguageLabel } from "@/hooks/use-language";
-
-interface QuizOption {
-  id: number;
-  text: string;
-}
+import { cn } from "@/lib/utils";
+import { QuizPromptPanel } from "@/components/quiz/quiz-prompt-panel";
+import { QuizAnswerPanel } from "@/components/quiz/quiz-answer-panel";
+import { QuizFeedbackPanel } from "@/components/quiz/quiz-feedback-panel";
+import type { QuizOption, QuizResult } from "@/components/quiz/quiz-card.types";
 
 interface QuizCardProps {
   wordId?: number;
@@ -27,22 +23,7 @@ interface QuizCardProps {
   onConfidenceChange: (value: 1 | 2 | 3) => void;
   onAnswer: (optionId: number, confidenceLevel: 1 | 2 | 3) => void;
   isSubmitting: boolean;
-  result: {
-    isCorrect: boolean;
-    correctAnswer: {
-      id?: number;
-      originalScript: string;
-      english: string;
-      transliteration: string;
-      audioUrl?: string | null;
-      exampleSentences: string[];
-    };
-    examples: Array<{
-      originalScript: string;
-      pronunciation: string;
-      meaning: string;
-    }>;
-  } | null;
+  result: QuizResult | null;
   onNext: () => void;
 }
 
@@ -56,7 +37,6 @@ export function QuizCard({
   type,
   options,
   confidenceLevel,
-  onConfidenceChange,
   onAnswer,
   isSubmitting,
   result,
@@ -94,14 +74,7 @@ export function QuizCard({
   const handleOptionClick = (id: number) => {
     if (result) return;
     setSelectedOption(id);
-    onAnswer(id, confidenceLevel);
   };
-
-  const languageLabel = getLanguageLabel(language);
-  const promptLabel =
-    type === QuizQuestionTypeEnum.SOURCE_TO_TARGET
-      ? `${languageLabel} to English`
-      : `Translate to ${languageLabel}`;
 
   return (
     <div className="mx-auto w-full max-w-6xl px-1 sm:px-2 md:px-4">
@@ -112,312 +85,60 @@ export function QuizCard({
           animate={cardAnimate}
           exit={{ opacity: 0, y: -20 }}
           transition={{ duration: 0.3 }}
-          className="relative flex min-h-[calc(100vh-5.5rem)] flex-col overflow-hidden rounded-[1.75rem] border border-border/50 bg-card/95 shadow-2xl backdrop-blur md:h-[min(88vh,820px)] md:min-h-0"
+          className={cn(
+            "relative flex h-[calc(100vh-5.5rem)] min-h-[calc(100vh-5.5rem)] flex-col overflow-hidden rounded-[1.75rem] md:h-[min(88vh,820px)] md:min-h-0",
+            result
+              ? "border border-transparent bg-transparent shadow-none backdrop-blur-0 md:border md:border-border/50 md:bg-card/95 md:shadow-2xl md:backdrop-blur"
+              : "border border-border/50 bg-card/95 shadow-2xl backdrop-blur",
+          )}
         >
-          <div className="grid grid-cols-1 lg:grid-cols-[1.05fr_1fr] flex-1 min-h-0">
-            <section className="flex min-h-0 flex-col border-b border-border/60 bg-gradient-to-br from-primary/10 via-primary/5 to-transparent p-4 sm:p-5 md:p-8 lg:border-b-0 lg:border-r">
-              <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-                <span className="inline-flex w-fit rounded-full bg-primary/15 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-primary">
-                  {promptLabel}
-                </span>
-                <Button
-                  type="button"
-                  variant="outline"
-                  size="sm"
-                  className="w-full gap-2 rounded-full sm:w-auto"
-                  onClick={toggleEffects}
-                  aria-label={effectsEnabled ? "Mute feedback effects" : "Unmute feedback effects"}
-                >
-                  {effectsEnabled ? (
-                    <Volume2 className="w-4 h-4" />
-                  ) : (
-                    <VolumeX className="w-4 h-4" />
-                  )}
-                  {effectsEnabled ? "Effects On" : "Effects Off"}
-                </Button>
-              </div>
+          {!result ? (
+            <div className="grid min-h-0 flex-1 grid-cols-1 grid-rows-[auto_minmax(0,1fr)] lg:grid-cols-[1.05fr_1fr] lg:grid-rows-1">
+              <QuizPromptPanel
+                wordId={wordId}
+                question={question}
+                pronunciation={pronunciation}
+                audioUrl={audioUrl}
+                language={language}
+                imageUrl={imageUrl}
+                type={type}
+                effectsEnabled={effectsEnabled}
+                activeAudioKey={activeKey}
+                onToggleEffects={toggleEffects}
+                onPlayQuestionAudio={() =>
+                  play({
+                    key: "question-audio",
+                    audioUrl,
+                    wordId,
+                    text: question,
+                    speechText: pronunciation ?? question,
+                    resolveText: question,
+                    language,
+                  })
+                }
+              />
 
-              <div className="mt-5 min-h-0 overflow-y-auto pr-1">
-                <h2
-                  className={cn(
-                    "font-bold text-foreground break-words leading-tight",
-                    type === QuizQuestionTypeEnum.SOURCE_TO_TARGET
-                      ? "text-3xl sm:text-4xl md:text-5xl"
-                      : "text-2xl sm:text-3xl md:text-4xl",
-                  )}
-                >
-                  {question}
-                </h2>
-                {pronunciation && (
-                  <p className="text-sm md:text-base text-muted-foreground mt-4 break-words">
-                    Pronunciation:{" "}
-                    <span className="font-semibold text-foreground">{pronunciation}</span>
-                  </p>
-                )}
-                <div className="mt-4">
-                  <Button
-                    type="button"
-                    variant="outline"
-                    size="sm"
-                    className="w-full gap-2 rounded-full sm:w-auto"
-                    onClick={() =>
-                      play({
-                        key: "question-audio",
-                        audioUrl,
-                        wordId,
-                        text: question,
-                        speechText: pronunciation ?? question,
-                        resolveText: question,
-                        language,
-                      })
-                    }
-                  >
-                    <Volume2 className="h-4 w-4" />
-                    {activeKey === "question-audio" ? "Stop Audio" : "Listen"}
-                  </Button>
-                </div>
-                {imageUrl && (
-                  <div className="mt-5">
-                    <img
-                      src={imageUrl}
-                      alt="Vocabulary hint"
-                      className="max-h-64 w-full rounded-xl border border-border/60 object-contain bg-background/70"
-                      loading="lazy"
-                    />
-                  </div>
-                )}
-              </div>
-            </section>
-
-            <section className="grid min-h-0 grid-rows-[auto_minmax(0,1fr)_auto] gap-4 p-4 sm:p-5 md:p-8">
-              <div>
-                <p className="text-sm font-medium text-muted-foreground mb-2">
-                  How confident are you?
-                </p>
-                <div
-                  className="grid grid-cols-1 gap-2 sm:flex sm:flex-wrap"
-                  role="radiogroup"
-                  aria-label="Answer confidence"
-                >
-                  <Button
-                    type="button"
-                    variant={confidenceLevel === 1 ? "default" : "outline"}
-                    size="sm"
-                    onClick={() => onConfidenceChange(1)}
-                    aria-pressed={confidenceLevel === 1}
-                    disabled={isSubmitting || Boolean(result)}
-                  >
-                    Guess
-                  </Button>
-                  <Button
-                    type="button"
-                    variant={confidenceLevel === 2 ? "default" : "outline"}
-                    size="sm"
-                    onClick={() => onConfidenceChange(2)}
-                    aria-pressed={confidenceLevel === 2}
-                    disabled={isSubmitting || Boolean(result)}
-                  >
-                    Somewhat Sure
-                  </Button>
-                  <Button
-                    type="button"
-                    variant={confidenceLevel === 3 ? "default" : "outline"}
-                    size="sm"
-                    onClick={() => onConfidenceChange(3)}
-                    aria-pressed={confidenceLevel === 3}
-                    disabled={isSubmitting || Boolean(result)}
-                  >
-                    Very Sure
-                  </Button>
-                </div>
-              </div>
-
-              {!result ? (
-                <div className="min-h-0 overflow-y-auto pr-1">
-                  <div className="grid grid-cols-1 gap-3">
-                    {options.map((option) => {
-                      const isSelected = selectedOption === option.id;
-                      const className = isSelected
-                        ? "border-primary bg-primary/10 text-primary ring-2 ring-primary ring-offset-2"
-                        : "hover:border-primary hover:bg-primary/5";
-
-                      return (
-                        <button
-                          key={option.id}
-                          disabled={isSubmitting}
-                          onClick={() => handleOptionClick(option.id)}
-                          aria-label={`Option ${option.text}`}
-                          className={cn(
-                            "relative overflow-hidden rounded-xl border-2 p-4 text-left text-base font-medium break-words transition-all duration-200 md:text-lg",
-                            type !== QuizQuestionTypeEnum.SOURCE_TO_TARGET && "text-xl",
-                            className,
-                          )}
-                        >
-                          <span className="relative z-10">{option.text}</span>
-                          {isSelected && isSubmitting && (
-                            <div className="absolute inset-0 bg-white/20 animate-pulse" />
-                          )}
-                        </button>
-                      );
-                    })}
-                  </div>
-                </div>
-              ) : (
-                <AnimatePresence>
-                  <motion.div
-                    initial={{ opacity: 0, y: 8 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -8 }}
-                    aria-live="polite"
-                    className={cn(
-                      "relative rounded-2xl border p-4 md:p-5 min-h-0 overflow-hidden grid grid-rows-[auto_minmax(0,1fr)]",
-                      result.isCorrect
-                        ? "bg-emerald-50/80 border-emerald-200 dark:bg-emerald-950/30 dark:border-emerald-800/70"
-                        : "bg-rose-50/80 border-rose-200 dark:bg-rose-950/30 dark:border-rose-800/70",
-                    )}
-                  >
-                    {!result.isCorrect && (
-                      <motion.div
-                        key={negativeVisualNonce}
-                        initial={{ opacity: 0.18 }}
-                        animate={{ opacity: 0 }}
-                        transition={{ duration: 0.45, ease: "easeOut" }}
-                        className="pointer-events-none absolute inset-0 bg-rose-500/20"
-                      />
-                    )}
-
-                    <div className="flex items-start gap-3 mb-3">
-                      <div
-                        className={cn(
-                          "p-2 rounded-full shrink-0",
-                          result.isCorrect
-                            ? "bg-emerald-100 text-emerald-700 dark:bg-emerald-900/60 dark:text-emerald-300"
-                            : "bg-rose-100 text-rose-700 dark:bg-rose-900/60 dark:text-rose-300",
-                        )}
-                      >
-                        {result.isCorrect ? (
-                          <CheckCircle2 className="w-5 h-5" />
-                        ) : (
-                          <XCircle className="w-5 h-5" />
-                        )}
-                      </div>
-                      <div className="min-w-0">
-                        <h4
-                          className={cn(
-                            "text-lg font-bold",
-                            result.isCorrect
-                              ? "text-emerald-800 dark:text-emerald-300"
-                              : "text-rose-800 dark:text-rose-300",
-                          )}
-                        >
-                          {result.isCorrect ? "Excellent!" : "Not quite right"}
-                        </h4>
-                        <p className="text-sm text-foreground/90 dark:text-foreground mt-1 break-words">
-                          <span className="italic">{result.correctAnswer.transliteration}</span>
-                          <span className="mx-2">•</span>
-                          <span className="font-semibold">
-                            ({result.correctAnswer.originalScript})
-                          </span>
-                          <span className="mx-2">•</span>
-                          <span>{result.correctAnswer.english}</span>
-                        </p>
-                        <Button
-                          type="button"
-                          variant="outline"
-                          size="sm"
-                          className="mt-2 w-full gap-2 rounded-full sm:w-auto"
-                          onClick={() =>
-                            play({
-                              key: "answer-audio",
-                              audioUrl: result.correctAnswer.audioUrl ?? null,
-                              wordId: result.correctAnswer.id,
-                              text: result.correctAnswer.originalScript,
-                              speechText:
-                                result.correctAnswer.transliteration ??
-                                result.correctAnswer.originalScript,
-                              resolveText: result.correctAnswer.originalScript,
-                              language,
-                            })
-                          }
-                        >
-                          <Volume2 className="h-4 w-4" />
-                          {activeKey === "answer-audio" ? "Stop Audio" : "Listen Answer"}
-                        </Button>
-                      </div>
-                    </div>
-
-                    {result.examples.length > 0 ? (
-                      <div className="space-y-2 overflow-y-auto pr-1 min-h-0">
-                        {result.examples.map((example, index) => (
-                          <div
-                            key={`${example.originalScript}-${index}`}
-                            className="p-3 rounded-lg border border-border/70 bg-background/90 dark:bg-background/60 text-sm text-foreground"
-                          >
-                            <div className="flex items-center justify-end pb-2">
-                              <Button
-                                type="button"
-                                variant="ghost"
-                                size="sm"
-                                className="h-7 rounded-full gap-1 text-xs"
-                                onClick={() =>
-                                  play({
-                                    key: `example-audio-${index}`,
-                                    text: example.originalScript,
-                                    speechText: example.pronunciation ?? example.originalScript,
-                                    resolveText: example.originalScript,
-                                    language,
-                                  })
-                                }
-                              >
-                                <Volume2 className="h-3.5 w-3.5" />
-                                {activeKey === `example-audio-${index}` ? "Stop" : "Listen"}
-                              </Button>
-                            </div>
-                            <p className="break-words">
-                              <span className="font-semibold">Sentence:</span>{" "}
-                              {example.originalScript}
-                            </p>
-                            <p className="break-words">
-                              <span className="font-semibold">Pronunciation:</span>{" "}
-                              {example.pronunciation}
-                            </p>
-                            <p className="break-words">
-                              <span className="font-semibold">Meaning:</span> {example.meaning}
-                            </p>
-                          </div>
-                        ))}
-                      </div>
-                    ) : (
-                      <div className="text-sm text-muted-foreground">
-                        No examples available for this item yet.
-                      </div>
-                    )}
-                  </motion.div>
-                </AnimatePresence>
-              )}
-
-              <div className="pt-2 border-t border-border/60">
-                {result ? (
-                  <Button
-                    size="lg"
-                    onClick={onNext}
-                    className={cn(
-                      "w-full gap-2 shadow-lg hover:shadow-xl transition-all",
-                      result.isCorrect
-                        ? "bg-green-600 hover:bg-green-700 text-white shadow-green-200"
-                        : "bg-primary hover:bg-primary/90 shadow-primary/20",
-                    )}
-                  >
-                    Continue <ArrowRight className="w-4 h-4" />
-                  </Button>
-                ) : (
-                  <p className="text-xs text-muted-foreground text-center">
-                    Choose an option to view feedback and examples.
-                  </p>
-                )}
-              </div>
-            </section>
-          </div>
+              <QuizAnswerPanel
+                options={options}
+                selectedOption={selectedOption}
+                isSubmitting={isSubmitting}
+                confidenceLevel={confidenceLevel}
+                onSelectOption={handleOptionClick}
+                onSubmitSelection={onAnswer}
+              />
+            </div>
+          ) : (
+            <div className="min-h-0 flex-1 p-3 sm:p-4 md:px-6 md:pt-6 md:pb-0">
+              <QuizFeedbackPanel
+                result={result}
+                activeAudioKey={activeKey}
+                language={language}
+                negativeVisualNonce={negativeVisualNonce}
+                onPlayAudio={play}
+                onNext={onNext}
+              />
+            </div>
+          )}
 
           {/* Hidden visual state container for accessibility continuity */}
           <div className="sr-only" aria-hidden={!result}>

@@ -102,11 +102,28 @@ export function Layout({ children }: { children: React.ReactNode }) {
       : []),
   ];
 
-  const isItemActive = (href: string) => {
+  const matchesHref = (href: string) => {
     if (href === "/") {
       return location === "/";
     }
+
     return location === href || location.startsWith(`${href}/`) || location.startsWith(`${href}?`);
+  };
+
+  const allNavigationHrefs = navigationSections.flatMap((section) =>
+    section.items.map((item) => item.href),
+  );
+
+  const isItemActive = (href: string) => {
+    if (!matchesHref(href)) {
+      return false;
+    }
+
+    const longerMatch = allNavigationHrefs.some(
+      (candidate) => candidate !== href && candidate.length > href.length && matchesHref(candidate),
+    );
+
+    return !longerMatch;
   };
   const avatarUrl = buildAvatarUrl({
     profileImageUrl: user?.profileImageUrl,
