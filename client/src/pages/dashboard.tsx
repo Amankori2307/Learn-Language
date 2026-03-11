@@ -1,10 +1,11 @@
 import { Layout } from "@/components/layout";
+import { Button } from "@/components/ui/button";
 import { useDashboardViewModel } from "@/features/dashboard/use-dashboard-view-model";
-import { DashboardPageSkeleton } from "@/components/ui/page-states";
+import { DashboardPageSkeleton, SurfaceMessage } from "@/components/ui/page-states";
 import { DashboardOverview } from "@/features/dashboard/dashboard-overview";
 
 export default function Dashboard() {
-  const { isLoading, userName, stats, primaryMode, primaryLabel, coreActions, bucketCards } =
+  const { isLoading, isError, retry, userName, stats, primaryMode, primaryLabel, coreActions, bucketCards } =
     useDashboardViewModel();
 
   if (isLoading) {
@@ -14,6 +15,24 @@ export default function Dashboard() {
       </Layout>
     );
   }
+
+  if (isError) {
+    return (
+      <Layout>
+        <SurfaceMessage
+          title="Could not load dashboard"
+          description="The dashboard request failed before progress data could be shown."
+          tone="error"
+          action={
+            <Button variant="outline" onClick={retry}>
+              Retry
+            </Button>
+          }
+        />
+      </Layout>
+    );
+  }
+
   const s = stats;
 
   return (

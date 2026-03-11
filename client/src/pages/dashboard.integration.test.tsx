@@ -1,4 +1,5 @@
 import { render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import type { ReactNode } from "react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { QuizDirectionEnum } from "@shared/domain/enums";
@@ -18,6 +19,8 @@ let statsData = {
   recommendedDirection: QuizDirectionEnum.SOURCE_TO_TARGET,
 };
 let statsLoading = false;
+let statsError = false;
+const refetch = vi.fn();
 
 vi.mock("@/components/layout", () => ({
   Layout: ({ children }: { children: ReactNode }) => <div>{children}</div>,
@@ -33,6 +36,8 @@ vi.mock("@/hooks/use-quiz", () => ({
   useStats: () => ({
     data: statsData,
     isLoading: statsLoading,
+    isError: statsError,
+    refetch,
   }),
   useLearningInsights: () => ({
     data: {
@@ -59,6 +64,8 @@ vi.mock("@/hooks/use-quiz", () => ({
 describe("Dashboard integration", () => {
   beforeEach(() => {
     statsLoading = false;
+    statsError = false;
+    refetch.mockClear();
     statsData = {
       totalWords: 120,
       mastered: 24,
@@ -79,6 +86,17 @@ describe("Dashboard integration", () => {
 
     const { container } = render(<Dashboard />);
     expect(container.querySelectorAll(".animate-pulse").length).toBeGreaterThan(0);
+  });
+
+  it("renders retryable error state when dashboard stats fail to load", async () => {
+    const user = userEvent.setup();
+    statsError = true;
+
+    render(<Dashboard />);
+
+    expect(screen.getByText("Could not load dashboard")).toBeTruthy();
+    await user.click(screen.getByRole("button", { name: "Retry" }));
+    expect(refetch).toHaveBeenCalledTimes(1);
   });
 
   it("shows primary dashboard actions and core mode cards", () => {

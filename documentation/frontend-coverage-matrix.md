@@ -12,7 +12,7 @@ Status legend:
 
 | Surface | Loading | Error | Empty | Success / normal render | Pending / interaction | Responsive | Notes |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| `dashboard` | `partial` | `gap` | `gap` | `covered` | `gap` | `partial` | page integration currently protects the populated dashboard shell only |
+| `dashboard` | `covered` | `covered` | `gap` | `covered` | `partial` | `partial` | loading, retryable error, and default primary-action behavior are covered; an explicit empty/zero-data interpretation is still not |
 | `quiz` | `covered` | `partial` | `covered` | `covered` | `covered` | `partial` | quiz completion and active-session shell are covered; explicit route-level error fallback remains thin |
 | `clusters` | `covered` | `covered` | `covered` | `covered` | `partial` | `partial` | search/filter interaction and request-failure handling are covered; responsive assertions are still absent |
 | `contextual` | `covered` | `covered` | `covered` | `covered` | `partial` | `partial` | cluster selection and request-failure handling are covered; responsive assertions are still absent |
@@ -42,7 +42,7 @@ Status legend:
 
 ## Highest-priority remaining gaps
 
-1. `dashboard`: add loading/error integration coverage and confirm the page still composes correctly when stats or insights are missing.
+1. `dashboard`: decide whether zero-data/default-stat composition deserves its own explicit empty-state assertions beyond the current loading/error/success coverage.
 2. `auth`: decide whether `/auth` needs an explicit failure surface beyond the current bootstrap/redirect behavior.
 3. responsive regression checks: add high-signal assertions for the main action rows and mobile stacking behavior already refactored in leaderboard, history, review, and word-buckets.
 

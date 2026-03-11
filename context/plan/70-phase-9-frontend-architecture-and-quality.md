@@ -59,8 +59,8 @@ Out of scope for this phase:
 | P9-003 | doing | Define and implement a shared async UX contract for queries and mutations | P9-002 | L | every API-backed interaction exposes visible loading or pending feedback, mutation progress is surfaced in UI, and async components follow one consistent contract |
 | P9-004 | doing | Introduce shared loading, skeleton, empty, and error state primitives for the main app surfaces | P9-003 | M | reusable state primitives exist and are used by dashboard, quiz, clusters, analytics, review, profile, and auth-adjacent flows |
 | P9-005 | todo | Harden layout shell, navigation, and page composition for mobile-first responsive behavior | P9-001,P9-003,P9-004 | L | layout, sidebar/navigation, top-level spacing, and page containers adapt cleanly across mobile, tablet, and desktop widths |
-| P9-006 | todo | Refactor core learner pages to keep logic in feature/view-model layers and rendering in replaceable UI components | P9-002,P9-004,P9-005 | XL | dashboard, quiz, clusters, contextual, history, word buckets, leaderboard, profile, and auth flows follow the target separation pattern |
-| P9-007 | todo | Refactor reviewer/admin flows to the same architecture and async UX standards | P9-002,P9-004,P9-005 | L | review queue, add vocabulary, review history, and conflict-related surfaces use the same separation and loading conventions |
+| P9-006 | done | Refactor core learner pages to keep logic in feature/view-model layers and rendering in replaceable UI components | P9-002,P9-004,P9-005 | XL | dashboard, quiz, clusters, contextual, history, word buckets, leaderboard, profile, and auth flows follow the target separation pattern |
+| P9-007 | done | Refactor reviewer/admin flows to the same architecture and async UX standards | P9-002,P9-004,P9-005 | L | review queue, add vocabulary, review history, and conflict-related surfaces use the same separation and loading conventions |
 | P9-008 | todo | Expand backend automated coverage for refactor-sensitive contracts and behavior invariants | P9-006,P9-007 | L | backend unit/integration coverage protects auth, quiz, review, analytics, vocabulary, and audio contracts touched by frontend-driven refactors |
 | P9-009 | todo | Expand frontend component/integration coverage for stabilized user flows and state handling | P9-006,P9-007 | XL | frontend tests cover loading, error, empty, success, responsive, and role-gated paths for core learner and reviewer flows |
 | P9-010 | todo | Add end-to-end and smoke coverage for the complete production-critical path | P9-008,P9-009 | XL | smoke and E2E suites cover auth, dashboard load, quiz session start/submit, analytics access, review access, and production-like boot flows |
@@ -123,39 +123,39 @@ The top-level tasks above are the phase gates. Actual execution should happen in
 
 | ID | Status | Task | Depends On | Done When |
 | -- | ------ | ---- | ---------- | --------- |
-| P9-006A | todo | Refactor dashboard to the agreed container/view-model/presentational split | P9-002E,P9-004E,P9-005E | dashboard follows the target architecture and shared state primitives |
-| P9-006B | todo | Refactor quiz flow with clear boundaries between session orchestration, async feedback, and visual rendering | P9-006A | quiz page and quiz card composition follow the target pattern |
-| P9-006C | todo | Refactor clusters and contextual learning flows with shared filter/loading/responsive patterns | P9-006B | cluster/context pages no longer carry ad hoc orchestration logic |
-| P9-006D | todo | Refactor analytics surfaces: history, word buckets, leaderboard | P9-006C | analytics pages share common state and responsive conventions |
-| P9-006E | todo | Refactor profile and auth surfaces to the same async and presentational contract | P9-006D | auth/profile no longer use inconsistent ad hoc pending and loading patterns |
-| P9-006F | todo | Reassess tutor retention or alignment after core learner flows are standardized | P9-006E | tutor is either aligned to the architecture or explicitly documented as non-core/deferred |
+| P9-006A | done | Refactor dashboard to the agreed container/view-model/presentational split | P9-002E,P9-004E,P9-005E | dashboard follows the target architecture and shared state primitives |
+| P9-006B | done | Refactor quiz flow with clear boundaries between session orchestration, async feedback, and visual rendering | P9-006A | quiz page and quiz card composition follow the target pattern |
+| P9-006C | done | Refactor clusters and contextual learning flows with shared filter/loading/responsive patterns | P9-006B | cluster/context pages no longer carry ad hoc orchestration logic |
+| P9-006D | done | Refactor analytics surfaces: history, word buckets, leaderboard | P9-006C | analytics pages share common state and responsive conventions |
+| P9-006E | done | Refactor profile and auth surfaces to the same async and presentational contract | P9-006D | auth/profile no longer use inconsistent ad hoc pending and loading patterns |
+| P9-006F | done | Reassess tutor retention or alignment after core learner flows are standardized | P9-006E | tutor is either aligned to the architecture or explicitly documented as non-core/deferred |
 
 ### P9-007 - Reviewer/admin flow refactor
 
 | ID | Status | Task | Depends On | Done When |
 | -- | ------ | ---- | ---------- | --------- |
-| P9-007A | todo | Refactor review queue list actions and selection state to the agreed pattern | P9-002E,P9-004E,P9-005E | queue actions follow shared async and presentational rules |
-| P9-007B | todo | Refactor review history/details panel to separate data orchestration from rendering | P9-007A | detail/history rendering is thin and reusable |
-| P9-007C | todo | Refactor add-vocabulary flow, form submission, and pending/error handling | P9-007B | add-vocabulary follows shared mutation UX and boundary rules |
-| P9-007D | todo | Align any reviewer-only or conflict-related surfaces to the same primitives and responsive patterns | P9-007C | reviewer/admin surfaces are no longer architectural outliers |
+| P9-007A | done | Refactor review queue list actions and selection state to the agreed pattern | P9-002E,P9-004E,P9-005E | queue actions follow shared async and presentational rules |
+| P9-007B | done | Refactor review history/details panel to separate data orchestration from rendering | P9-007A | detail/history rendering is thin and reusable |
+| P9-007C | done | Refactor add-vocabulary flow, form submission, and pending/error handling | P9-007B | add-vocabulary follows shared mutation UX and boundary rules |
+| P9-007D | done | Align any reviewer-only or conflict-related surfaces to the same primitives and responsive patterns | P9-007C | reviewer/admin surfaces are no longer architectural outliers |
 
 ### P9-008 - Backend test expansion
 
 | ID | Status | Task | Depends On | Done When |
 | -- | ------ | ---- | ---------- | --------- |
-| P9-008A | todo | Identify backend invariants most likely to be stressed by frontend contract refactors | P9-006F,P9-007D | refactor-sensitive backend invariants are explicitly listed |
-| P9-008B | todo | Expand unit coverage for service-level logic in quiz, analytics, review, vocabulary, auth, and audio where gaps remain | P9-008A | service logic risk areas have targeted unit coverage |
-| P9-008C | todo | Expand integration coverage for request/response contract stability and authorization boundaries | P9-008B | backend integration tests guard critical contracts |
-| P9-008D | todo | Consolidate backend test commands and target suites for reliable local/CI execution | P9-008C | backend coverage additions run predictably |
+| P9-008A | doing | Identify backend invariants most likely to be stressed by frontend contract refactors | P9-006F,P9-007D | refactor-sensitive backend invariants are explicitly listed |
+| P9-008B | doing | Expand unit coverage for service-level logic in quiz, analytics, review, vocabulary, auth, and audio where gaps remain | P9-008A | service logic risk areas have targeted unit coverage |
+| P9-008C | doing | Expand integration coverage for request/response contract stability and authorization boundaries | P9-008B | backend integration tests guard critical contracts |
+| P9-008D | doing | Consolidate backend test commands and target suites for reliable local/CI execution | P9-008C | backend coverage additions run predictably |
 
 ### P9-009 - Frontend test expansion
 
 | ID | Status | Task | Depends On | Done When |
 | -- | ------ | ---- | ---------- | --------- |
 | P9-009A | done | Create a frontend coverage matrix by page and state type: loading, error, empty, success, pending, responsive | P9-006F,P9-007D | a stabilized page-state coverage map exists |
-| P9-009B | todo | Add focused tests for shared state primitives and async feedback behaviors | P9-009A | shared primitive behavior is directly protected |
-| P9-009C | todo | Add learner-flow integration coverage for standardized pages | P9-009B | dashboard/quiz/clusters/analytics/auth/profile key states are covered |
-| P9-009D | todo | Add reviewer/admin integration coverage for queue, history, and draft creation flows | P9-009C | reviewer/admin stabilized flows are covered |
+| P9-009B | done | Add focused tests for shared state primitives and async feedback behaviors | P9-009A | shared primitive behavior is directly protected |
+| P9-009C | doing | Add learner-flow integration coverage for standardized pages | P9-009B | dashboard/quiz/clusters/analytics/auth/profile key states are covered |
+| P9-009D | doing | Add reviewer/admin integration coverage for queue, history, and draft creation flows | P9-009C | reviewer/admin stabilized flows are covered |
 | P9-009E | todo | Add responsive regression checks for high-risk layouts | P9-009D | layout regressions are detectable in automated frontend tests |
 
 ### P9-010 - E2E and smoke coverage

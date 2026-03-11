@@ -20,7 +20,8 @@ const DEFAULT_STATS = {
 
 export function useDashboardViewModel() {
   const { user } = useAuth();
-  const { data: stats, isLoading } = useStats();
+  const statsQuery = useStats();
+  const { data: stats, isLoading } = statsQuery;
   const resolvedStats = stats ?? DEFAULT_STATS;
 
   const primaryMode = resolvedStats.weak > 0 ? QuizModeEnum.WEAK_WORDS : QuizModeEnum.DAILY_REVIEW;
@@ -91,6 +92,8 @@ export function useDashboardViewModel() {
 
   return {
     isLoading,
+    isError: statsQuery.isError,
+    retry: () => statsQuery.refetch(),
     userName: user?.firstName || "Learner",
     stats: resolvedStats,
     primaryMode,
