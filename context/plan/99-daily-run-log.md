@@ -81,7 +81,9 @@ Next task ID: P9-007
   - responsive/mobile hardening continued across extracted action rows and pagination surfaces in leaderboard, contextual, dashboard, review, history, clusters, and word buckets so primary actions stack cleanly and footer controls expand to full-width buttons on small screens
   - backend test coverage expanded for auth/profile controller behavior and audio language mismatch handling
   - smoke coverage expanded to include auth, profile, stats, leaderboard, and word buckets critical paths
-  - full `pnpm run lint` and `pnpm run test:ui` now pass on the current branch state, with the UI suite now at 32 files / 61 tests
+  - responsive/mobile hardening continued across extracted action rows and pagination surfaces in leaderboard, contextual, dashboard, review, history, clusters, and word buckets so primary actions stack cleanly and footer controls expand to full-width buttons on small screens
+  - page-level integration coverage now also includes [clusters.integration.test.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/pages/clusters.integration.test.tsx) and [contextual.integration.test.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/pages/contextual.integration.test.tsx)
+  - full `pnpm run lint` and `pnpm run test:ui` now pass on the current branch state, with the UI suite now at 34 files / 65 tests
 
 ## Current blockers
 
