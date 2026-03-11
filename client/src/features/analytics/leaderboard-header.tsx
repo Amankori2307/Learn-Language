@@ -1,8 +1,9 @@
 import { Button } from "@/components/ui/button";
 import { Trophy } from "lucide-react";
+import type { LeaderboardWindow } from "@/hooks/use-leaderboard";
 
 type WindowOption = {
-  key: string;
+  key: LeaderboardWindow;
   label: string;
 };
 
@@ -12,8 +13,8 @@ export function LeaderboardHeader({
   options,
   isFetching,
 }: {
-  window: string;
-  setWindow: (value: string) => void;
+  window: LeaderboardWindow;
+  setWindow: React.Dispatch<React.SetStateAction<LeaderboardWindow>>;
   options: WindowOption[];
   isFetching: boolean;
 }) {

@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import { Link } from "wouter";
 
-export function ContextualHeader({ activeClusterId }: { activeClusterId?: number }) {
+export function ContextualHeader({ activeClusterId }: { activeClusterId: number | null }) {
   return (
     <div className="flex flex-col gap-4 sm:flex-row sm:flex-wrap sm:items-center sm:justify-between">
       <div>
@@ -28,7 +28,7 @@ export function ContextualClusterSelector({
   clusters,
   setSelectedClusterId,
 }: {
-  activeClusterId?: number;
+  activeClusterId: number | null;
   clusters: Array<{ id: number; name: string }>;
   setSelectedClusterId: (id: number) => void;
 }) {

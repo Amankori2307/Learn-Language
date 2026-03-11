@@ -1,14 +1,15 @@
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
+import type { ReviewStatus } from "@/hooks/use-review";
 
 export function ReviewPageHeader({
   status,
   setStatus,
   statusOptions,
 }: {
-  status: string;
-  setStatus: (value: string) => void;
-  statusOptions: string[];
+  status: ReviewStatus;
+  setStatus: React.Dispatch<React.SetStateAction<ReviewStatus>>;
+  statusOptions: ReviewStatus[];
 }) {
   return (
     <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
