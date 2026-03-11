@@ -65,7 +65,7 @@ Implemented behavior:
 - supported question directions:
   - source language to English
   - English to source language
-- confidence level capture on answers
+- confidence level capture on answers, with the quiz-side selector available behind an explicit learner preference
 - response-time capture on answers
 - completion flows with next recommended session
 
@@ -185,4 +185,3 @@ Implementation references:
 - [server/src/infrastructure/tables/users.table.ts](/Users/aman/Projects/personal-projects/Learn-Language/server/src/infrastructure/tables/users.table.ts)
 - [server/src/infrastructure/tables/words.table.ts](/Users/aman/Projects/personal-projects/Learn-Language/server/src/infrastructure/tables/words.table.ts)
 - [server/src/infrastructure/tables/clusters.table.ts](/Users/aman/Projects/personal-projects/Learn-Language/server/src/infrastructure/tables/clusters.table.ts)
-

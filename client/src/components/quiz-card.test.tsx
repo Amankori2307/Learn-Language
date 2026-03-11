@@ -24,6 +24,7 @@ describe("QuizCard", () => {
       pronunciation: null,
       imageUrl: null,
       type: QuizQuestionTypeEnum.TARGET_TO_SOURCE,
+      showConfidenceControl: false,
       confidenceLevel: 2 as const,
       onConfidenceChange: vi.fn(),
       onAnswer,
@@ -83,6 +84,7 @@ describe("QuizCard", () => {
           { id: 1, text: "namaste" },
           { id: 2, text: "dhanyavaadalu" },
         ]}
+        showConfidenceControl={false}
         confidenceLevel={2}
         onConfidenceChange={vi.fn()}
         onAnswer={onAnswer}
@@ -113,6 +115,7 @@ describe("QuizCard", () => {
           { id: 2, text: "dhanyavaadalu" },
           { id: 3, text: "shubharaatri" },
         ]}
+        showConfidenceControl={false}
         confidenceLevel={2}
         onConfidenceChange={vi.fn()}
         onAnswer={vi.fn()}
@@ -158,6 +161,7 @@ describe("QuizCard", () => {
           { id: 1, text: "hello" },
           { id: 2, text: "thanks" },
         ]}
+        showConfidenceControl={false}
         confidenceLevel={2}
         onConfidenceChange={vi.fn()}
         onAnswer={vi.fn()}
@@ -193,6 +197,7 @@ describe("QuizCard", () => {
           { id: 1, text: "hello" },
           { id: 2, text: "thanks" },
         ]}
+        showConfidenceControl={false}
         confidenceLevel={2}
         onConfidenceChange={vi.fn()}
         onAnswer={vi.fn()}
@@ -234,5 +239,62 @@ describe("QuizCard", () => {
     expect(container.innerHTML.includes("md:border-border/50")).toBe(true);
     expect(container.innerHTML.includes("md:bg-card/95")).toBe(true);
     expect(container.innerHTML.includes("md:shadow-2xl")).toBe(true);
+  });
+
+  it("shows confidence controls only when the preference is enabled", async () => {
+    const user = userEvent.setup();
+    const onAnswer = vi.fn();
+    const onConfidenceChange = vi.fn();
+
+    const { rerender } = render(
+      <QuizCard
+        question="hello"
+        pronunciation={null}
+        imageUrl={null}
+        type={QuizQuestionTypeEnum.TARGET_TO_SOURCE}
+        options={[
+          { id: 1, text: "namaste" },
+          { id: 2, text: "dhanyavaadalu" },
+        ]}
+        showConfidenceControl={false}
+        confidenceLevel={2}
+        onConfidenceChange={onConfidenceChange}
+        onAnswer={onAnswer}
+        isSubmitting={false}
+        result={null}
+        onNext={vi.fn()}
+      />,
+    );
+
+    expect(screen.queryByLabelText("Answer confidence")).toBeNull();
+
+    rerender(
+      <QuizCard
+        question="hello"
+        pronunciation={null}
+        imageUrl={null}
+        type={QuizQuestionTypeEnum.TARGET_TO_SOURCE}
+        options={[
+          { id: 1, text: "namaste" },
+          { id: 2, text: "dhanyavaadalu" },
+        ]}
+        showConfidenceControl
+        confidenceLevel={3}
+        onConfidenceChange={onConfidenceChange}
+        onAnswer={onAnswer}
+        isSubmitting={false}
+        result={null}
+        onNext={vi.fn()}
+      />,
+    );
+
+    expect(screen.getByLabelText("Answer confidence")).toBeTruthy();
+
+    await user.click(screen.getByText("Low"));
+    expect(onConfidenceChange).toHaveBeenCalledWith(1);
+
+    await user.click(screen.getByRole("button", { name: "Option namaste" }));
+    await user.click(screen.getByRole("button", { name: "Check Answer" }));
+    expect(onAnswer).toHaveBeenCalledWith(1, 3);
   });
 });

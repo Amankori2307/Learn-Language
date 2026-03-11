@@ -1,5 +1,7 @@
 import { useCallback, useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Label } from "@/components/ui/label";
 import { cn } from "@/lib/utils";
 import { ArrowRight } from "lucide-react";
 import type { QuizAnswerPanelProps } from "./quiz-card.types";
@@ -8,7 +10,9 @@ export function QuizAnswerPanel({
   options,
   selectedOption,
   isSubmitting,
+  showConfidenceControl,
   confidenceLevel,
+  onConfidenceChange,
   onSelectOption,
   onSubmitSelection,
 }: QuizAnswerPanelProps) {
@@ -106,7 +110,45 @@ export function QuizAnswerPanel({
         </div>
       </div>
 
-      <div className="border-t border-border/60 pt-2">
+      <div className="space-y-3 border-t border-border/60 pt-2">
+        {showConfidenceControl ? (
+          <div className="rounded-2xl border border-border/50 bg-background/40 p-3">
+            <div className="mb-2 flex items-center justify-between gap-3">
+              <p className="text-sm font-medium text-foreground">Confidence</p>
+              <span className="text-xs text-muted-foreground">Used to grade recall quality</span>
+            </div>
+            <RadioGroup
+              value={String(confidenceLevel)}
+              onValueChange={(value) => onConfidenceChange(Number(value) as 1 | 2 | 3)}
+              className="grid grid-cols-3 gap-2"
+              aria-label="Answer confidence"
+            >
+              {[
+                { value: "1", label: "Low" },
+                { value: "2", label: "Medium" },
+                { value: "3", label: "High" },
+              ].map((option) => {
+                const itemId = `quiz-confidence-${option.value}`;
+                const isSelected = confidenceLevel === Number(option.value);
+                return (
+                  <Label
+                    key={option.value}
+                    htmlFor={itemId}
+                    className={cn(
+                      "flex cursor-pointer items-center justify-center gap-2 rounded-xl border border-border/60 px-3 py-2 text-sm transition-colors",
+                      isSelected
+                        ? "border-primary/60 bg-primary/10 text-foreground"
+                        : "bg-background/60 text-muted-foreground hover:border-primary/30 hover:text-foreground",
+                    )}
+                  >
+                    <RadioGroupItem id={itemId} value={option.value} />
+                    {option.label}
+                  </Label>
+                );
+              })}
+            </RadioGroup>
+          </div>
+        ) : null}
         {selectedOption !== null ? (
           <Button
             size="lg"

@@ -21,6 +21,7 @@ export default function QuizPage() {
     sessionStats,
     isFinished,
     confidenceLevel,
+    showConfidenceControl,
     setConfidenceLevel,
     submitPending,
     startSession,
@@ -80,6 +81,7 @@ export default function QuizPage() {
           imageUrl={currentQuestion.imageUrl}
           type={currentQuestion.type}
           options={currentQuestion.options}
+          showConfidenceControl={showConfidenceControl}
           confidenceLevel={confidenceLevel}
           onConfidenceChange={setConfidenceLevel}
           onAnswer={handleAnswer}

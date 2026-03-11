@@ -13,6 +13,7 @@ Build a text-first language learning app with high data correctness, strong memo
 - Phase 9 frontend architecture, async UX, responsive UI, and test hardening is complete.
 - Phase 10 platform hardening, API normalization, observability, security, performance, SEO, and product intelligence is complete.
 - Phase 12 theme system and design token extraction is complete.
+- `P11-002` confidence-input follow-up is complete.
 
 ## Core capabilities live
 
@@ -42,6 +43,7 @@ Build a text-first language learning app with high data correctness, strong memo
     - generic imported descriptions are normalized to meaningful learner-facing copy
   - Quiz feedback now returns and renders up to 3 example sentences per answer (sentence + pronunciation + meaning)
   - Quiz completion CTA flow now resets session state on mode switches and routes to working next-session CTAs (including reinforcement loop)
+  - Quiz confidence input is available again behind an explicit learner preference in profile so mobile quiz UI stays uncluttered by default
 - Stats/analytics:
   - recall vs recognition accuracy
   - direction strength averages
@@ -113,6 +115,6 @@ Build a text-first language learning app with high data correctness, strong memo
 
 - Execute in order from [01-master-task-registry.md](/Users/aman/Projects/personal-projects/Learn-Language/context/plan/01-master-task-registry.md).
 - Current execution track:
-  - last completed implementation slice is `P12-009` final regression coverage and verification
-  - next planned implementation slice is `P11-002` confidence-input follow-up for quiz UX
+  - last completed implementation slice is `P11-002` confidence-input follow-up for quiz UX
+  - current in-progress implementation slice is `-`
   - Phase 12 outcome: named theme ownership, current/minimal shipped themes, semantic tokenized primitives, and chart theme support are now in place

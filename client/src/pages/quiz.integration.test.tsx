@@ -3,6 +3,7 @@ import userEvent from "@testing-library/user-event";
 import type { ReactNode } from "react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { QuizModeEnum, QuizQuestionTypeEnum } from "@shared/domain/enums";
+import { APP_STORAGE_KEYS } from "@shared/domain/constants/app-brand";
 import QuizPage from "./quiz";
 
 const setLocation = vi.fn();
@@ -55,6 +56,7 @@ vi.mock("@/lib/feedback-effects", () => ({
 
 describe("QuizPage integration", () => {
   beforeEach(() => {
+    window.localStorage.clear();
     setLocation.mockReset();
     submitAnswerMock.mockReset();
     quizDataState.data = [];
@@ -147,5 +149,28 @@ describe("QuizPage integration", () => {
     await user.click(screen.getByRole("button", { name: /Start Reinforcement Loop/ }));
 
     expect(setLocation).toHaveBeenCalledWith(`/quiz?mode=${QuizModeEnum.WEAK_WORDS}`);
+  });
+
+  it("shows confidence controls when the learner preference is enabled", () => {
+    window.localStorage.setItem(APP_STORAGE_KEYS.quizConfidenceEnabled, "true");
+    quizDataState.data = [
+      {
+        wordId: 11,
+        type: QuizQuestionTypeEnum.SOURCE_TO_TARGET,
+        questionText: "నమస్తే",
+        pronunciation: "namaste",
+        audioUrl: null,
+        imageUrl: null,
+        options: [
+          { id: 11, text: "hello" },
+          { id: 12, text: "thank you" },
+        ],
+      },
+    ];
+
+    render(<QuizPage />);
+
+    expect(screen.getByLabelText("Answer confidence")).toBeTruthy();
+    expect(screen.getByText("Used to grade recall quality")).toBeTruthy();
   });
 });

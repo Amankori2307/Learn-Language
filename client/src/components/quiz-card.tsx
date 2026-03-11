@@ -19,6 +19,7 @@ interface QuizCardProps {
   imageUrl?: string | null;
   type: QuizQuestionTypeEnum;
   options: QuizOption[];
+  showConfidenceControl: boolean;
   confidenceLevel: 1 | 2 | 3;
   onConfidenceChange: (value: 1 | 2 | 3) => void;
   onAnswer: (optionId: number, confidenceLevel: 1 | 2 | 3) => void;
@@ -36,7 +37,9 @@ export function QuizCard({
   imageUrl,
   type,
   options,
+  showConfidenceControl,
   confidenceLevel,
+  onConfidenceChange,
   onAnswer,
   isSubmitting,
   result,
@@ -122,7 +125,9 @@ export function QuizCard({
                 options={options}
                 selectedOption={selectedOption}
                 isSubmitting={isSubmitting}
+                showConfidenceControl={showConfidenceControl}
                 confidenceLevel={confidenceLevel}
+                onConfidenceChange={onConfidenceChange}
                 onSelectOption={handleOptionClick}
                 onSubmitSelection={onAnswer}
               />

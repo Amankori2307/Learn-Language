@@ -2,6 +2,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useLocation, useSearch } from "wouter";
 import { QuizDirectionEnum, QuizModeEnum, QuizQuestionTypeEnum } from "@shared/domain/enums";
 import { useLearningLanguage } from "@/hooks/use-language";
+import { useQuizConfidencePreference } from "@/hooks/use-quiz-confidence-preference";
 import { useGenerateQuiz, useSubmitAnswer, type QuizModeValue } from "@/hooks/use-quiz";
 import {
   QUIZ_DEFAULT_CONFIDENCE_LEVEL,
@@ -30,6 +31,7 @@ export function useQuizPageViewModel() {
   const clusterId = parseClusterId(params.get("clusterId"));
 
   const { language } = useLearningLanguage();
+  const quizConfidencePreference = useQuizConfidencePreference();
   const { data: questions, isLoading, isError } = useGenerateQuiz(mode, clusterId);
   const submitAnswer = useSubmitAnswer();
 
@@ -197,6 +199,7 @@ export function useQuizPageViewModel() {
     isFinished,
     confidenceLevel,
     setConfidenceLevel,
+    showConfidenceControl: quizConfidencePreference.enabled,
     submitPending: submitAnswer.isPending,
     startSession,
     setLocation,

@@ -159,7 +159,7 @@ Required behavior:
 
 - question and answer layout remains usable on phone
 - answer options remain tap-friendly
-- confidence controls wrap cleanly
+- optional confidence controls wrap cleanly when the learner enables them
 - result/next-step CTAs remain visible without awkward overflow
 
 Special caution:

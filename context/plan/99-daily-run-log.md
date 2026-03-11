@@ -32,9 +32,9 @@ Next task ID: -
 
 Date: 2026-03-11  
 Session owner: Codex  
-Last completed task ID: P12-009  
+Last completed task ID: P11-002  
 Current in-progress task ID: -  
-Next task ID: P11-002
+Next task ID: -
 
 ## Current state
 
@@ -54,6 +54,10 @@ Next task ID: P11-002
 - Follow-up noted for `P11-002`:
   - the visible quiz confidence UI was removed for UX reasons during mobile hardening
   - product still needs to decide whether confidence returns behind a learner preference or is replaced by a lower-friction input model
+- `P11-002` is now complete:
+  - the quiz confidence selector was restored behind a learner preference stored locally
+  - profile now exposes a dedicated toggle for that preference
+  - quiz answer submission still captures confidence while leaving the mobile quiz UI uncluttered by default
 - Phase 12 planning is now active in [81-phase-12-theme-system-and-design-token-extraction.md](/Users/aman/Projects/personal-projects/Learn-Language/context/plan/81-phase-12-theme-system-and-design-token-extraction.md).
 - Active backlog was reprioritized to start with theming-system readiness before UI theme selection work:
   - `P12-001` is now complete via [theme-system-baseline.md](/Users/aman/Projects/personal-projects/Learn-Language/documentation/theme-system-baseline.md)
