@@ -119,4 +119,29 @@ describe("Dashboard integration", () => {
 
     expect(screen.getByRole("button", { name: "Start Daily Review" })).toBeTruthy();
   });
+
+  it("renders zero-data dashboard stats as a valid default success state", () => {
+    statsData = {
+      totalWords: 0,
+      mastered: 0,
+      learning: 0,
+      weak: 0,
+      streak: 0,
+      xp: 0,
+      recognitionAccuracy: 0,
+      recallAccuracy: 0,
+      sourceToTargetStrength: 0.5,
+      targetToSourceStrength: 0.5,
+      recommendedDirection: QuizDirectionEnum.SOURCE_TO_TARGET,
+    };
+
+    render(<Dashboard />);
+
+    expect(screen.getByText("0 day streak • 0 mastered words")).toBeTruthy();
+    expect(screen.getByText("Total XP")).toBeTruthy();
+    expect(screen.getByText("Words Mastered")).toBeTruthy();
+    expect(screen.getByText("Learning")).toBeTruthy();
+    expect(screen.getByText("Needs Review")).toBeTruthy();
+    expect(screen.getByRole("button", { name: "Start Daily Review" })).toBeTruthy();
+  });
 });

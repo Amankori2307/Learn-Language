@@ -61,7 +61,7 @@ Out of scope for this phase:
 | P9-005 | doing | Harden layout shell, navigation, and page composition for mobile-first responsive behavior | P9-001,P9-003,P9-004 | L | layout, sidebar/navigation, top-level spacing, and page containers adapt cleanly across mobile, tablet, and desktop widths |
 | P9-006 | done | Refactor core learner pages to keep logic in feature/view-model layers and rendering in replaceable UI components | P9-002,P9-004,P9-005 | XL | dashboard, quiz, clusters, contextual, history, word buckets, leaderboard, profile, and auth flows follow the target separation pattern |
 | P9-007 | done | Refactor reviewer/admin flows to the same architecture and async UX standards | P9-002,P9-004,P9-005 | L | review queue, add vocabulary, review history, and conflict-related surfaces use the same separation and loading conventions |
-| P9-008 | doing | Expand backend automated coverage for refactor-sensitive contracts and behavior invariants | P9-006,P9-007 | L | backend unit/integration coverage protects auth, quiz, review, analytics, vocabulary, and audio contracts touched by frontend-driven refactors |
+| P9-008 | done | Expand backend automated coverage for refactor-sensitive contracts and behavior invariants | P9-006,P9-007 | L | backend unit/integration coverage protects auth, quiz, review, analytics, vocabulary, and audio contracts touched by frontend-driven refactors |
 | P9-009 | doing | Expand frontend component/integration coverage for stabilized user flows and state handling | P9-006,P9-007 | XL | frontend tests cover loading, error, empty, success, responsive, and role-gated paths for core learner and reviewer flows |
 | P9-010 | done | Add end-to-end and smoke coverage for the complete production-critical path | P9-008,P9-009 | XL | smoke and E2E suites cover auth, dashboard load, quiz session start/submit, analytics access, review access, and production-like boot flows |
 
@@ -144,8 +144,8 @@ The top-level tasks above are the phase gates. Actual execution should happen in
 | ID | Status | Task | Depends On | Done When |
 | -- | ------ | ---- | ---------- | --------- |
 | P9-008A | done | Identify backend invariants most likely to be stressed by frontend contract refactors | P9-006F,P9-007D | refactor-sensitive backend invariants are explicitly listed |
-| P9-008B | doing | Expand unit coverage for service-level logic in quiz, analytics, review, vocabulary, auth, and audio where gaps remain | P9-008A | service logic risk areas have targeted unit coverage |
-| P9-008C | doing | Expand integration coverage for request/response contract stability and authorization boundaries | P9-008B | backend integration tests guard critical contracts |
+| P9-008B | done | Expand unit coverage for service-level logic in quiz, analytics, review, vocabulary, auth, and audio where gaps remain | P9-008A | service logic risk areas have targeted unit coverage |
+| P9-008C | done | Expand integration coverage for request/response contract stability and authorization boundaries | P9-008B | backend integration tests guard critical contracts |
 | P9-008D | done | Consolidate backend test commands and target suites for reliable local/CI execution | P9-008C | backend coverage additions run predictably |
 
 ### P9-009 - Frontend test expansion
@@ -156,7 +156,7 @@ The top-level tasks above are the phase gates. Actual execution should happen in
 | P9-009B | done | Add focused tests for shared state primitives and async feedback behaviors | P9-009A | shared primitive behavior is directly protected |
 | P9-009C | doing | Add learner-flow integration coverage for standardized pages | P9-009B | dashboard/quiz/clusters/analytics/auth/profile key states are covered |
 | P9-009D | doing | Add reviewer/admin integration coverage for queue, history, and draft creation flows | P9-009C | reviewer/admin stabilized flows are covered |
-| P9-009E | doing | Add responsive regression checks for high-risk layouts | P9-009D | layout regressions are detectable in automated frontend tests |
+| P9-009E | done | Add responsive regression checks for high-risk layouts | P9-009D | layout regressions are detectable in automated frontend tests |
 
 ### P9-010 - E2E and smoke coverage
 

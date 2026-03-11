@@ -170,6 +170,8 @@ describe("HistoryPage integration", () => {
 
     expect(screen.getByText("namaste (నమస్తే)")).toBeTruthy();
     expect(screen.getByText("100%")).toBeTruthy();
+    expect(screen.getByRole("button", { name: "Refresh" }).className).toContain("w-full");
+    expect(screen.getByRole("button", { name: "Refresh" }).className).toContain("sm:w-auto");
 
     await user.click(screen.getByRole("button", { name: "Refresh" }));
     expect(refresh).toHaveBeenCalledTimes(1);

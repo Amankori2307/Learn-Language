@@ -40,6 +40,21 @@ describe("LeaderboardPage integration", () => {
     expect(screen.getByText("No leaderboard data yet")).toBeTruthy();
   });
 
+  it("renders a loading skeleton while leaderboard data is loading", () => {
+    viewModel.mockReturnValue({
+      window: "weekly",
+      setWindow: vi.fn(),
+      entries: [],
+      isLoading: true,
+      isError: false,
+      isFetching: false,
+      retry: vi.fn(),
+    });
+
+    const { container } = render(<LeaderboardPage />);
+    expect(container.querySelectorAll(".animate-pulse").length).toBeGreaterThan(0);
+  });
+
   it("renders a retryable error surface when leaderboard loading fails", async () => {
     const user = userEvent.setup();
     const retry = vi.fn();
@@ -89,5 +104,7 @@ describe("LeaderboardPage integration", () => {
 
     expect(screen.getAllByText(/Aman K/i).length).toBeGreaterThan(0);
     expect(screen.getAllByText(/420 XP/i).length).toBeGreaterThan(0);
+    expect(screen.getByRole("button", { name: "Daily" }).className).toContain("w-full");
+    expect(screen.getByRole("button", { name: "Daily" }).className).toContain("sm:w-auto");
   });
 });

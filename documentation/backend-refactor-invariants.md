@@ -46,11 +46,13 @@ These are the backend-relevant commands currently used in local and CI verificat
   - full quality gate, including backend tests plus frontend/UI checks
 - `pnpm run test:e2e:smoke:development`
   - production-critical smoke verification for the integrated app path
+- `pnpm run test:e2e:smoke:production`
+  - production-like smoke verification for the same integrated path
 
 ## Remaining backend gaps
 
-These are the highest-value remaining backend follow-ups after the current Phase 9 coverage expansion:
+No additional Phase 9 backend coverage gaps are currently open.
 
-1. confirm whether additional controller/service tests are still needed for any newly added frontend failure states
-2. tighten explicit documentation around which invariants are protected only by DB-backed integration tests
-3. reassess whether the current smoke suite already covers all frontend-driven backend contracts strongly enough to mark `P9-010` complete later
+The remaining backend risk is environmental rather than test-shape related:
+
+- DB-backed integration and smoke suites still skip locally when Postgres is unavailable, but CI now provisions the required database for enforced execution.

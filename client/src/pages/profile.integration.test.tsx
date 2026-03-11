@@ -83,4 +83,11 @@ describe("ProfilePage integration", () => {
     await user.click(screen.getByRole("button", { name: "Retry" }));
     expect(refetch).toHaveBeenCalledTimes(1);
   });
+
+  it("shows profile loading composition while the profile request is pending", () => {
+    mockProfileLoading = true;
+
+    const { container } = render(<ProfilePage />);
+    expect(container.querySelectorAll(".animate-pulse").length).toBeGreaterThan(0);
+  });
 });

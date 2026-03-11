@@ -133,6 +133,9 @@ describe("ReviewPage integration", () => {
     const user = userEvent.setup();
     render(<ReviewPage />);
 
+    expect(screen.getByRole("button", { name: "Bulk Approve" }).className).toContain("w-full");
+    expect(screen.getByRole("button", { name: "Bulk Approve" }).className).toContain("sm:w-auto");
+
     const notesInput = screen.getByLabelText("Review Notes (applied to bulk action)");
     await user.type(notesInput, "verified by reviewer");
 

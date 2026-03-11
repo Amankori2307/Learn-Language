@@ -122,5 +122,8 @@ describe("WordBucketsPage integration", () => {
 
     expect(screen.getAllByText(/namaste/i).length).toBeGreaterThan(0);
     expect(screen.getAllByText(/hello/i).length).toBeGreaterThan(0);
+    const switchContainer = screen.getByRole("button", { name: "Mastered" }).parentElement;
+    expect(switchContainer?.className).toContain("grid-cols-1");
+    expect(switchContainer?.className).toContain("sm:flex");
   });
 });

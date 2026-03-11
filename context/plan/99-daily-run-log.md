@@ -32,9 +32,9 @@ Next task ID: P9-001
 
 Date: 2026-03-11  
 Session owner: Codex  
-Last completed task ID: P9-010  
-Current in-progress task ID: P9-005  
-Next task ID: P9-008
+Last completed task ID: P9-008  
+Current in-progress task ID: P9-009  
+Next task ID: P9-005
 
 ## Current state
 
@@ -43,6 +43,7 @@ Next task ID: P9-008
 - Core feature documentation remains available in [documentation/core-features.md](/Users/aman/Projects/personal-projects/Learn-Language/documentation/core-features.md).
 - The final Phase 9 smoke/E2E scope is now explicit in [documentation/e2e-smoke-scope.md](/Users/aman/Projects/personal-projects/Learn-Language/documentation/e2e-smoke-scope.md), including the minimum production-critical path set, suite ownership, and the remaining automation gaps before `P9-010` can close.
 - `P9-010` is now complete: the smoke suite covers learner and reviewer critical paths, the release-gate split between frontend integration and API-level smoke is explicit, and CI now provisions Postgres, migrates/imports content, runs `pnpm run ci`, runs production-like smoke, and then builds.
+- `P9-008` is now complete: backend service/controller/integration coverage and the invariant map cover the Phase 9 refactor-sensitive auth, quiz, review, analytics, vocabulary, audio, and language-isolation contracts, with remaining risk reduced to environment availability rather than missing automated cases.
 - Planning baselines for the next implementation tasks are now documented:
   - React Query ownership baseline in [documentation/react-query-ownership-baseline.md](/Users/aman/Projects/personal-projects/Learn-Language/documentation/react-query-ownership-baseline.md)
   - Async UX contract in [documentation/async-ux-contract.md](/Users/aman/Projects/personal-projects/Learn-Language/documentation/async-ux-contract.md)
@@ -117,6 +118,11 @@ Next task ID: P9-008
   - `P9-010A` is now complete: [e2e-smoke-scope.md](/Users/aman/Projects/personal-projects/Learn-Language/documentation/e2e-smoke-scope.md) names the minimum production-critical path set, maps each path to its current automated owner, and keeps the remaining learner/reviewer smoke gaps explicit
   - the integrated smoke suite now also bootstraps a reviewer user via `/auth/me`, verifies live reviewer queue access at `/api/review/queue`, and submits a vocabulary draft through `/api/review/words`
   - the GitHub Actions quality workflow now provisions Postgres, applies migrations, imports content, runs `pnpm run ci`, runs `pnpm run test:e2e:smoke:production`, and only then proceeds to build verification
+  - dashboard zero-data/default-stat rendering is now directly covered in [dashboard.integration.test.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/pages/dashboard.integration.test.tsx), closing the old ambiguity around whether an all-zero dashboard should be treated as an empty or success state
+  - page-level responsive assertions now backstop the highest-risk analytics/review layouts in [history.integration.test.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/pages/history.integration.test.tsx), [leaderboard.integration.test.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/pages/leaderboard.integration.test.tsx), [review.integration.test.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/pages/review.integration.test.tsx), and [word-buckets.integration.test.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/pages/word-buckets.integration.test.tsx)
+  - leaderboard and profile route-level loading composition are now directly covered in [leaderboard.integration.test.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/pages/leaderboard.integration.test.tsx) and [profile.integration.test.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/pages/profile.integration.test.tsx)
+  - [frontend-coverage-matrix.md](/Users/aman/Projects/personal-projects/Learn-Language/documentation/frontend-coverage-matrix.md) now reflects the closed dashboard/responsive gaps and explicitly defers only the remaining auth-provider failure semantics and lower-priority long-tail responsive coverage
+  - [backend-refactor-invariants.md](/Users/aman/Projects/personal-projects/Learn-Language/documentation/backend-refactor-invariants.md) now records both smoke commands and closes the old generic backend-gap list
   - responsive/mobile hardening continued across extracted action rows and pagination surfaces in leaderboard, contextual, dashboard, review, history, clusters, and word buckets so primary actions stack cleanly and footer controls expand to full-width buttons on small screens
   - page-level integration coverage now also includes [clusters.integration.test.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/pages/clusters.integration.test.tsx) and [contextual.integration.test.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/pages/contextual.integration.test.tsx)
   - page-level integration coverage now also includes [tutor.integration.test.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/pages/tutor.integration.test.tsx)
@@ -132,8 +138,8 @@ Next task ID: P9-008
 
 - Continue `P9-005`, `P9-008`, and `P9-009`:
   - finish the remaining responsive shell/layout cleanup and decide whether any top-level page containers still need mobile hardening before Phase 9 can close
-  - reconcile whether any backend contract coverage gaps still remain after the current invariants map and smoke expansion
-  - do one final pass over long-tail frontend responsive and state coverage gaps before marking the remaining Phase 9 tasks done
+  - decide whether the remaining explicitly deferred auth/add-vocabulary/frontend long-tail gaps should stay deferred or be covered before marking `P9-009` done
+  - reconcile whether `P9-003`, `P9-004`, and `P9-005` still have any implementation gap or whether they are now only stale status rows
 
 ---
 
