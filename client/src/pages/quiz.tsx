@@ -2,6 +2,7 @@ import { QuizCard } from "@/components/quiz-card";
 import { useQuizPageViewModel } from "@/features/quiz/use-quiz-page-view-model";
 import {
   QuizEmptyState,
+  QuizErrorState,
   QuizFinishedState,
   QuizLoadingState,
   QuizMissingQuestionState,
@@ -26,6 +27,7 @@ export default function QuizPage() {
     submitPending,
     startSession,
     setLocation,
+    retry,
     handleAnswer,
     handleNext,
     completionMessage,
@@ -39,7 +41,11 @@ export default function QuizPage() {
     return <QuizLoadingState />;
   }
 
-  if (isError || !questions || questions.length === 0) {
+  if (isError) {
+    return <QuizErrorState retry={retry} navigate={setLocation} />;
+  }
+
+  if (!questions || questions.length === 0) {
     return (
       <QuizEmptyState
         completionMessage={completionMessage}

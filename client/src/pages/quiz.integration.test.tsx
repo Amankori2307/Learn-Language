@@ -8,7 +8,10 @@ import QuizPage from "./quiz";
 
 const setLocation = vi.fn();
 const submitAnswerMock = vi.fn();
+const refetchQuizMock = vi.fn();
 let searchMode: QuizModeEnum = QuizModeEnum.NEW_WORDS;
+let quizIsLoading = false;
+let quizIsError = false;
 const quizDataState = {
   data: [] as Array<{
     wordId: number;
@@ -33,8 +36,9 @@ vi.mock("@/components/layout", () => ({
 vi.mock("@/hooks/use-quiz", () => ({
   useGenerateQuiz: () => ({
     data: quizDataState.data,
-    isLoading: false,
-    isError: false,
+    isLoading: quizIsLoading,
+    isError: quizIsError,
+    refetch: refetchQuizMock,
   }),
   useSubmitAnswer: () => ({
     mutateAsync: submitAnswerMock,
@@ -59,8 +63,24 @@ describe("QuizPage integration", () => {
     window.localStorage.clear();
     setLocation.mockReset();
     submitAnswerMock.mockReset();
+    refetchQuizMock.mockReset();
+    quizIsLoading = false;
+    quizIsError = false;
     quizDataState.data = [];
     searchMode = QuizModeEnum.NEW_WORDS;
+  });
+
+  it("renders a retryable route-level error surface when quiz loading fails", async () => {
+    const user = userEvent.setup();
+    quizIsError = true;
+    render(<QuizPage />);
+
+    expect(screen.getByText("Could not load quiz session")).toBeTruthy();
+    await user.click(screen.getByRole("button", { name: "Retry Session" }));
+    await user.click(screen.getByRole("button", { name: "Return Home" }));
+
+    expect(refetchQuizMock).toHaveBeenCalledTimes(1);
+    expect(setLocation).toHaveBeenCalledWith("/");
   });
 
   it("shows new-word completion copy when new_words queue is empty", async () => {

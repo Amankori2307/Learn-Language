@@ -32,7 +32,7 @@ export function useQuizPageViewModel() {
 
   const { language } = useLearningLanguage();
   const quizConfidencePreference = useQuizConfidencePreference();
-  const { data: questions, isLoading, isError } = useGenerateQuiz(mode, clusterId);
+  const { data: questions, isLoading, isError, refetch } = useGenerateQuiz(mode, clusterId);
   const submitAnswer = useSubmitAnswer();
 
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -203,6 +203,9 @@ export function useQuizPageViewModel() {
     submitPending: submitAnswer.isPending,
     startSession,
     setLocation,
+    retry: () => {
+      void refetch();
+    },
     handleAnswer,
     handleNext,
     completionMessage,
