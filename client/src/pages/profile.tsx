@@ -4,6 +4,7 @@ import { useProfilePageViewModel } from "@/features/profile/use-profile-page-vie
 import { SurfaceMessage } from "@/components/ui/page-states";
 import { ProfileFormCard } from "@/features/profile/profile-form-card";
 import { ProfileLoadingCard } from "@/features/profile/profile-loading-card";
+import { ProfilePageHeader } from "@/features/profile/profile-page-header";
 
 export default function ProfilePage() {
   const {
@@ -28,10 +29,7 @@ export default function ProfilePage() {
   return (
     <Layout>
       <div className="max-w-3xl space-y-6">
-        <div>
-          <h1 className="text-3xl font-bold">Profile</h1>
-          <p className="text-muted-foreground mt-1">Manage your identity and avatar.</p>
-        </div>
+        <ProfilePageHeader />
 
         {isLoading ? (
           <ProfileLoadingCard />
