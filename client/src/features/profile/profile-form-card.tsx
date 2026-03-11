@@ -53,8 +53,8 @@ export function ProfileFormCard({
   }
 
   return (
-    <div className="space-y-6 rounded-2xl border border-border/50 bg-card p-6 md:p-8">
-      <div className="flex items-center gap-4 border-b border-border/40 pb-2">
+    <div className="space-y-6 rounded-2xl border border-border/50 bg-card p-4 sm:p-6 md:p-8">
+      <div className="flex flex-col gap-4 border-b border-border/40 pb-3 sm:flex-row sm:items-center">
         <Avatar className="h-16 w-16 border border-border">
           <AvatarImage src={avatarPreview} />
           <AvatarFallback>
@@ -111,6 +111,7 @@ export function ProfileFormCard({
           disabled={!isDirty}
           pending={isSaving}
           pendingLabel="Saving..."
+          className="w-full sm:w-auto"
         >
           Save Profile
         </PendingButton>

@@ -118,22 +118,33 @@ export function Layout({ children }: { children: React.ReactNode }) {
   const sidebarWidthClass = isCollapsed ? "w-24" : "w-72";
   const mainOffsetClass = isCollapsed ? "md:ml-24" : "md:ml-72";
 
-  const NavContent = ({ compact = false }: { compact?: boolean }) => (
-    <div className="flex flex-col h-full">
-      <div className={cn("p-4 border-b border-border/60", compact ? "pb-4" : "pb-5")}>
+  const NavContent = ({
+    compact = false,
+    mobile = false,
+  }: {
+    compact?: boolean;
+    mobile?: boolean;
+  }) => (
+    <div className="flex h-full flex-col">
+      <div
+        className={cn(
+          "border-b border-border/60",
+          compact ? "p-4 pb-4" : mobile ? "p-4 pb-4" : "p-4 pb-5",
+        )}
+      >
         <div className={cn("flex items-center", compact ? "justify-center" : "justify-between")}>
           <div className={cn("flex items-center gap-3", compact && "justify-center")}>
             <BrandMark />
             {!compact && (
-              <div>
-                <h1 className="text-lg font-semibold text-foreground leading-none">
+              <div className="min-w-0">
+                <h1 className="truncate text-base font-semibold leading-none text-foreground sm:text-lg">
                   {APP_BRAND_NAME}
                 </h1>
-                <p className="text-xs text-muted-foreground mt-1">{APP_BRAND_TAGLINE}</p>
+                <p className="mt-1 text-xs text-muted-foreground">{APP_BRAND_TAGLINE}</p>
               </div>
             )}
           </div>
-          {!compact && (
+          {!compact && !mobile && (
             <Button
               type="button"
               variant="ghost"
@@ -183,7 +194,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
         )}
       </div>
 
-      <nav className="flex-1 px-3 py-4 overflow-y-auto space-y-4">
+      <nav className="flex-1 space-y-4 overflow-y-auto px-3 py-4">
         {navigationSections.map((section) => (
           <div key={section.title}>
             {!compact && (
@@ -225,14 +236,14 @@ export function Layout({ children }: { children: React.ReactNode }) {
         ))}
       </nav>
 
-      <div className="p-3 mt-auto border-t border-border/60 bg-gradient-to-b from-background to-secondary/30">
-        <div className={cn("grid gap-2 mb-3", compact ? "grid-cols-1" : "grid-cols-2")}>
+      <div className="mt-auto border-t border-border/60 bg-gradient-to-b from-background to-secondary/30 p-3">
+        <div className={cn("mb-3 grid gap-2", compact ? "grid-cols-1" : "grid-cols-1 sm:grid-cols-2")}>
           <a
             href="https://forms.gle/f2hH1BL3v4eNsxEg8"
             target="_blank"
             rel="noopener noreferrer"
             className={cn(
-              "inline-flex items-center justify-center rounded-lg border border-border bg-background/70 px-3 py-2 text-xs text-muted-foreground hover:text-foreground hover:bg-secondary transition",
+              "inline-flex items-center justify-center rounded-lg border border-border bg-background/70 px-3 py-2 text-xs text-muted-foreground transition hover:bg-secondary hover:text-foreground",
               compact && "px-2",
             )}
             title="Feedback"
@@ -248,7 +259,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
           <Button
             type="button"
             variant="outline"
-            className={cn("rounded-lg h-9 text-xs", compact && "px-2")}
+            className={cn("h-9 rounded-lg text-xs", compact && "px-2")}
             aria-label="Toggle theme"
             title="Toggle theme"
             onClick={() => setTheme((resolvedTheme ?? "light") === "dark" ? "light" : "dark")}
@@ -265,7 +276,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <button
           type="button"
           className={cn(
-            "w-full rounded-xl border border-border/70 bg-background/80 hover:bg-secondary/60 transition px-2 py-2.5 flex items-center gap-3",
+            "flex w-full items-center gap-3 rounded-xl border border-border/70 bg-background/80 px-2 py-2.5 transition hover:bg-secondary/60",
             compact && "justify-center px-1",
           )}
           onClick={() => setIsProfileModalOpen(true)}
@@ -314,7 +325,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
             </div>
           </div>
         </div>
-        <div className="grid grid-cols-2 gap-2">
+        <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
           <Link href="/profile">
             <Button
               variant="outline"
@@ -341,7 +352,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
             href="https://forms.gle/f2hH1BL3v4eNsxEg8"
             target="_blank"
             rel="noopener noreferrer"
-            className="col-span-2"
+            className="sm:col-span-2"
           >
             <Button variant="secondary" className="w-full rounded-lg">
               <MessageSquare className="size-4 mr-2" />
@@ -350,7 +361,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
           </a>
           <Button
             variant="destructive"
-            className="col-span-2 rounded-lg"
+            className="rounded-lg sm:col-span-2"
             onClick={() => {
               setIsProfileModalOpen(false);
               logout();
@@ -379,20 +390,22 @@ export function Layout({ children }: { children: React.ReactNode }) {
       </aside>
 
       {/* Mobile Header */}
-      <div className="md:hidden fixed top-0 left-0 right-0 h-16 bg-card/90 backdrop-blur-md border-b border-border/60 z-30 flex items-center justify-between px-3 sm:px-4">
-        <div className="flex items-center gap-2">
+      <div className="fixed left-0 right-0 top-0 z-30 flex h-16 items-center justify-between border-b border-border/60 bg-card/90 px-3 backdrop-blur-md sm:px-4 md:hidden">
+        <div className="flex min-w-0 items-center gap-2">
           <BrandMark compact />
-          <h1 className="text-lg font-semibold text-foreground">{APP_BRAND_NAME}</h1>
+          <h1 className="truncate text-base font-semibold text-foreground sm:text-lg">
+            {APP_BRAND_NAME}
+          </h1>
         </div>
         <div className="flex items-center gap-2">
           <Sheet open={isOpen} onOpenChange={setIsOpen}>
             <SheetTrigger asChild>
-              <Button variant="ghost" size="icon">
+              <Button variant="ghost" size="icon" className="rounded-xl">
                 <Menu className="w-6 h-6" />
               </Button>
             </SheetTrigger>
-            <SheetContent side="left" className="w-[86vw] max-w-80 p-0">
-              <NavContent />
+            <SheetContent side="left" className="w-[88vw] max-w-[22rem] p-0">
+              <NavContent mobile />
             </SheetContent>
           </Sheet>
         </div>
@@ -401,11 +414,11 @@ export function Layout({ children }: { children: React.ReactNode }) {
       {/* Main Content */}
       <main
         className={cn(
-          "flex-1 min-h-screen overflow-x-hidden pt-16 md:pt-0 transition-all duration-300",
+          "flex-1 min-h-screen overflow-x-hidden pt-16 transition-all duration-300 md:pt-0",
           mainOffsetClass,
         )}
       >
-        <div className="mx-auto w-full max-w-6xl animate-in fade-in px-4 pb-24 pt-4 duration-500 sm:px-6 md:p-8 md:pb-8">
+        <div className="mx-auto w-full max-w-6xl animate-in fade-in px-3 pb-20 pt-4 duration-500 sm:px-5 md:px-8 md:pb-8 md:pt-8">
           {children}
         </div>
       </main>

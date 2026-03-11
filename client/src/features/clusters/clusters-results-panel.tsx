@@ -29,7 +29,7 @@ export function ClustersResultsPanel({
 }) {
   return (
     <div className="overflow-hidden rounded-2xl border border-border/50 bg-card">
-      <div className="grid grid-cols-12 gap-3 border-b border-border/60 bg-secondary/30 px-4 py-3 text-xs font-semibold text-muted-foreground">
+      <div className="hidden grid-cols-12 gap-3 border-b border-border/60 bg-secondary/30 px-4 py-3 text-xs font-semibold text-muted-foreground md:grid">
         <div className="col-span-4 md:col-span-3">Cluster</div>
         <div className="col-span-3 md:col-span-2">Type</div>
         <div className="col-span-3 text-right md:col-span-2">Word Count</div>
@@ -47,29 +47,58 @@ export function ClustersResultsPanel({
           />
         </div>
       ) : (
-        <div className="divide-y divide-border/50">
-          {pageRows.map((cluster) => (
-            <div key={cluster.id} className="grid grid-cols-12 items-center gap-3 px-4 py-3">
-              <div className="col-span-4 min-w-0 md:col-span-3">
-                <p className="truncate font-medium">{cluster.name}</p>
-              </div>
-              <div className="col-span-3 truncate text-sm text-muted-foreground md:col-span-2">
-                {cluster.type}
-              </div>
-              <div className="col-span-3 text-right text-sm md:col-span-2">{cluster.wordCount}</div>
-              <div className="hidden truncate text-sm text-muted-foreground md:col-span-3 md:block">
-                {cluster.description || "No description"}
-              </div>
-              <div className="col-span-2 text-right md:col-span-2">
+        <>
+          <div className="space-y-3 p-4 md:hidden">
+            {pageRows.map((cluster) => (
+              <div
+                key={cluster.id}
+                className="rounded-xl border border-border/50 bg-background/70 p-4"
+              >
+                <div className="flex items-start justify-between gap-3">
+                  <div className="min-w-0">
+                    <p className="font-medium">{cluster.name}</p>
+                    <p className="mt-1 text-sm text-muted-foreground">{cluster.type}</p>
+                  </div>
+                  <span className="shrink-0 rounded-full border border-border/60 bg-secondary px-2 py-1 text-xs">
+                    {cluster.wordCount} words
+                  </span>
+                </div>
+                <p className="mt-3 text-sm text-muted-foreground">
+                  {cluster.description || "No description"}
+                </p>
                 <Link href={`/quiz?mode=cluster&clusterId=${cluster.id}`}>
-                  <Button variant="outline" size="sm" className="gap-1">
+                  <Button variant="outline" size="sm" className="mt-4 w-full gap-1">
                     Practice <ArrowRight className="h-3 w-3" />
                   </Button>
                 </Link>
               </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+
+          <div className="hidden divide-y divide-border/50 md:block">
+            {pageRows.map((cluster) => (
+              <div key={cluster.id} className="grid grid-cols-12 items-center gap-3 px-4 py-3">
+                <div className="col-span-4 min-w-0 md:col-span-3">
+                  <p className="truncate font-medium">{cluster.name}</p>
+                </div>
+                <div className="col-span-3 truncate text-sm text-muted-foreground md:col-span-2">
+                  {cluster.type}
+                </div>
+                <div className="col-span-3 text-right text-sm md:col-span-2">{cluster.wordCount}</div>
+                <div className="hidden truncate text-sm text-muted-foreground md:col-span-3 md:block">
+                  {cluster.description || "No description"}
+                </div>
+                <div className="col-span-2 text-right md:col-span-2">
+                  <Link href={`/quiz?mode=cluster&clusterId=${cluster.id}`}>
+                    <Button variant="outline" size="sm" className="gap-1">
+                      Practice <ArrowRight className="h-3 w-3" />
+                    </Button>
+                  </Link>
+                </div>
+              </div>
+            ))}
+          </div>
+        </>
       )}
 
       <div className="flex flex-col gap-3 border-t border-border/50 bg-secondary/20 px-4 py-3 sm:flex-row sm:items-center sm:justify-between">

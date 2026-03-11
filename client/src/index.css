@@ -68,6 +68,9 @@
   * {
     @apply border-border;
   }
+  html {
+    overflow-x: hidden;
+  }
   body {
     @apply bg-background text-foreground antialiased font-sans selection:bg-primary/20;
     background-image: radial-gradient(
@@ -75,6 +78,13 @@
       hsl(var(--primary) / 0.06),
       transparent 28rem
     );
+    overflow-x: hidden;
+  }
+  img,
+  svg,
+  video,
+  canvas {
+    max-width: 100%;
   }
   h1,
   h2,

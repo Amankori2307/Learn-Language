@@ -102,7 +102,7 @@ export function QuizCard({
       : "Translate to Source Language";
 
   return (
-    <div className="w-full max-w-6xl mx-auto px-2 md:px-4">
+    <div className="mx-auto w-full max-w-6xl px-1 sm:px-2 md:px-4">
       <AnimatePresence mode="wait">
         <motion.div
           key={question}
@@ -110,19 +110,19 @@ export function QuizCard({
           animate={cardAnimate}
           exit={{ opacity: 0, y: -20 }}
           transition={{ duration: 0.3 }}
-          className="relative bg-card/95 backdrop-blur rounded-3xl shadow-2xl border border-border/50 overflow-hidden h-[min(88vh,820px)] flex flex-col"
+          className="relative flex min-h-[calc(100vh-5.5rem)] flex-col overflow-hidden rounded-[1.75rem] border border-border/50 bg-card/95 shadow-2xl backdrop-blur md:h-[min(88vh,820px)] md:min-h-0"
         >
           <div className="grid grid-cols-1 lg:grid-cols-[1.05fr_1fr] flex-1 min-h-0">
-            <section className="min-h-0 border-b lg:border-b-0 lg:border-r border-border/60 bg-gradient-to-br from-primary/10 via-primary/5 to-transparent p-5 md:p-8 flex flex-col">
-              <div className="flex items-center justify-between gap-3">
-                <span className="inline-flex px-3 py-1 rounded-full bg-primary/15 text-primary text-xs font-semibold uppercase tracking-wider">
+            <section className="flex min-h-0 flex-col border-b border-border/60 bg-gradient-to-br from-primary/10 via-primary/5 to-transparent p-4 sm:p-5 md:p-8 lg:border-b-0 lg:border-r">
+              <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+                <span className="inline-flex w-fit rounded-full bg-primary/15 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-primary">
                   {promptLabel}
                 </span>
                 <Button
                   type="button"
                   variant="outline"
                   size="sm"
-                  className="rounded-full gap-2"
+                  className="w-full gap-2 rounded-full sm:w-auto"
                   onClick={toggleEffects}
                   aria-label={effectsEnabled ? "Mute feedback effects" : "Unmute feedback effects"}
                 >
@@ -140,8 +140,8 @@ export function QuizCard({
                   className={cn(
                     "font-bold text-foreground break-words leading-tight",
                     type === QuizQuestionTypeEnum.SOURCE_TO_TARGET
-                      ? "text-4xl md:text-5xl"
-                      : "text-3xl md:text-4xl",
+                      ? "text-3xl sm:text-4xl md:text-5xl"
+                      : "text-2xl sm:text-3xl md:text-4xl",
                   )}
                 >
                   {question}
@@ -157,7 +157,7 @@ export function QuizCard({
                     type="button"
                     variant="outline"
                     size="sm"
-                    className="rounded-full gap-2"
+                    className="w-full gap-2 rounded-full sm:w-auto"
                     onClick={() =>
                       play({
                         key: "question-audio",
@@ -187,13 +187,13 @@ export function QuizCard({
               </div>
             </section>
 
-            <section className="min-h-0 p-5 md:p-8 grid grid-rows-[auto_minmax(0,1fr)_auto] gap-4">
+            <section className="grid min-h-0 grid-rows-[auto_minmax(0,1fr)_auto] gap-4 p-4 sm:p-5 md:p-8">
               <div>
                 <p className="text-sm font-medium text-muted-foreground mb-2">
                   How confident are you?
                 </p>
                 <div
-                  className="flex flex-wrap gap-2"
+                  className="grid grid-cols-1 gap-2 sm:flex sm:flex-wrap"
                   role="radiogroup"
                   aria-label="Answer confidence"
                 >
@@ -246,7 +246,7 @@ export function QuizCard({
                           onClick={() => handleOptionClick(option.id)}
                           aria-label={`Option ${option.text}`}
                           className={cn(
-                            "p-4 rounded-xl text-base md:text-lg font-medium border-2 transition-all duration-200 text-left relative overflow-hidden break-words",
+                            "relative overflow-hidden rounded-xl border-2 p-4 text-left text-base font-medium break-words transition-all duration-200 md:text-lg",
                             type !== QuizQuestionTypeEnum.SOURCE_TO_TARGET && "text-xl",
                             className,
                           )}
@@ -323,7 +323,7 @@ export function QuizCard({
                           type="button"
                           variant="outline"
                           size="sm"
-                          className="mt-2 rounded-full gap-2"
+                          className="mt-2 w-full gap-2 rounded-full sm:w-auto"
                           onClick={() =>
                             play({
                               key: "answer-audio",

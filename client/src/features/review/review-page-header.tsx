@@ -14,7 +14,7 @@ export function ReviewPageHeader({
   return (
     <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
       <div>
-        <h1 className="text-3xl font-bold">Review Queue</h1>
+        <h1 className="text-2xl font-bold sm:text-3xl">Review Queue</h1>
         <p className="text-muted-foreground">
           Approve or reject vocabulary before learner exposure.
         </p>

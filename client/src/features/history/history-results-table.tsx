@@ -44,7 +44,7 @@ export function HistoryResultsTable({
 }) {
   return (
     <div className="overflow-hidden rounded-2xl border border-border/50 bg-card">
-      <div className="grid grid-cols-12 gap-3 border-b border-border/60 bg-secondary/30 px-4 py-3 text-xs font-semibold text-muted-foreground">
+      <div className="hidden grid-cols-12 gap-3 border-b border-border/60 bg-secondary/30 px-4 py-3 text-xs font-semibold text-muted-foreground md:grid">
         <div className="col-span-3 md:col-span-2">Result</div>
         <div className="col-span-9 md:col-span-4">Word</div>
         <div className="hidden md:col-span-2 md:block">Direction</div>
@@ -52,7 +52,44 @@ export function HistoryResultsTable({
         <div className="hidden md:col-span-1 md:block">Time</div>
         <div className="col-span-12 md:col-span-2">When</div>
       </div>
-      <div className="divide-y divide-border/50">
+      <div className="space-y-3 p-4 md:hidden">
+        {pageAttempts.map((attempt) => (
+          <div key={attempt.id} className="rounded-xl border border-border/50 bg-background/70 p-4">
+            <div className="flex items-start justify-between gap-3">
+              <div className="min-w-0">
+                <p className="font-medium">{attempt.word.transliteration}</p>
+                <p className="mt-1 text-xs text-muted-foreground">{attempt.word.originalScript}</p>
+                <p className="mt-1 text-sm text-muted-foreground">{attempt.word.english}</p>
+              </div>
+              <Badge
+                variant={attempt.isCorrect ? "default" : "destructive"}
+                className={attempt.isCorrect ? "bg-emerald-600 hover:bg-emerald-600" : ""}
+              >
+                {attempt.isCorrect ? "Correct" : "Wrong"}
+              </Badge>
+            </div>
+            <div className="mt-3 grid grid-cols-1 gap-2 text-sm sm:grid-cols-2">
+              <p className="text-muted-foreground">
+                <span className="font-medium text-foreground">Direction:</span>{" "}
+                {toLabel(attempt.direction)}
+              </p>
+              <p className="text-muted-foreground">
+                <span className="font-medium text-foreground">Confidence:</span>{" "}
+                {attempt.confidenceLevel ?? "-"}
+              </p>
+              <p className="text-muted-foreground">
+                <span className="font-medium text-foreground">Time:</span>{" "}
+                {attempt.responseTimeMs ? `${Math.round(attempt.responseTimeMs / 1000)}s` : "-"}
+              </p>
+              <p className="text-muted-foreground">
+                <span className="font-medium text-foreground">When:</span>{" "}
+                {formatWhen(attempt.createdAt)}
+              </p>
+            </div>
+          </div>
+        ))}
+      </div>
+      <div className="hidden divide-y divide-border/50 md:block">
         {pageAttempts.map((attempt) => (
           <div key={attempt.id} className="grid grid-cols-12 items-center gap-3 px-4 py-3">
             <div className="col-span-3 md:col-span-2">

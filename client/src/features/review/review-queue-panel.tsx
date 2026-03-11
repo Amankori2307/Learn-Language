@@ -72,7 +72,7 @@ export function ReviewQueuePanel({
           />
         </div>
       ) : (
-        <div className="max-h-[560px] overflow-auto">
+        <div className="overflow-auto md:max-h-[560px]">
           {queueItems.map((word) => (
             <div
               key={word.id}
@@ -84,10 +84,10 @@ export function ReviewQueuePanel({
                   onCheckedChange={() => toggleSelected(word.id)}
                 />
                 <div className="min-w-0 flex-1">
-                  <p className="font-medium">
+                  <p className="break-words font-medium">
                     {word.transliteration} ({word.originalScript})
                   </p>
-                  <p className="text-sm text-muted-foreground">
+                  <p className="break-words text-sm text-muted-foreground">
                     {word.english} • {word.partOfSpeech}
                   </p>
                   <p className="mt-1 text-xs text-muted-foreground">status: {word.reviewStatus}</p>
@@ -97,11 +97,11 @@ export function ReviewQueuePanel({
                   <p className="text-xs text-muted-foreground">
                     reviewed: {word.reviewedBy || "n/a"} • {formatReviewDate(word.reviewedAt)}
                   </p>
-                  <div className="mt-2 flex flex-col gap-2 sm:flex-row sm:flex-wrap">
+                  <div className="mt-2 grid grid-cols-1 gap-2 sm:flex sm:flex-row sm:flex-wrap">
                     <Button
                       size="sm"
                       variant="outline"
-                      className="sm:w-auto"
+                      className="w-full sm:w-auto"
                       onClick={() => setActiveWordId(word.id)}
                     >
                       View History
@@ -116,7 +116,7 @@ export function ReviewQueuePanel({
                       }
                       pending={isTransitionPending}
                       pendingLabel="Approving..."
-                      className="sm:w-auto"
+                      className="w-full sm:w-auto"
                     >
                       Approve
                     </PendingButton>
@@ -131,7 +131,7 @@ export function ReviewQueuePanel({
                       }
                       pending={isTransitionPending}
                       pendingLabel="Rejecting..."
-                      className="sm:w-auto"
+                      className="w-full sm:w-auto"
                     >
                       Reject
                     </PendingButton>
