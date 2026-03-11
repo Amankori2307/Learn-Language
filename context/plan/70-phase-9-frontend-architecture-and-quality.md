@@ -56,13 +56,13 @@ Out of scope for this phase:
 | ------ | ------ | ---- | ---------- | ------ | --------- |
 | P9-001 | done | Produce a frontend architecture baseline and enforce a feature boundary contract for pages, feature view-models, service adapters, and presentational UI | - | M | page-level responsibilities are documented, boundary rules are codified, and target files for migration are identified before refactor work starts |
 | P9-002 | done | Standardize UI-facing data access on React Query patterns and eliminate ad hoc/raw request handling from page components | P9-001 | L | all page-level API interactions flow through query/mutation hooks or feature adapters with consistent query keys, invalidation, retries, and error handling |
-| P9-003 | doing | Define and implement a shared async UX contract for queries and mutations | P9-002 | L | every API-backed interaction exposes visible loading or pending feedback, mutation progress is surfaced in UI, and async components follow one consistent contract |
-| P9-004 | doing | Introduce shared loading, skeleton, empty, and error state primitives for the main app surfaces | P9-003 | M | reusable state primitives exist and are used by dashboard, quiz, clusters, analytics, review, profile, and auth-adjacent flows |
-| P9-005 | doing | Harden layout shell, navigation, and page composition for mobile-first responsive behavior | P9-001,P9-003,P9-004 | L | layout, sidebar/navigation, top-level spacing, and page containers adapt cleanly across mobile, tablet, and desktop widths |
+| P9-003 | done | Define and implement a shared async UX contract for queries and mutations | P9-002 | L | every API-backed interaction exposes visible loading or pending feedback, mutation progress is surfaced in UI, and async components follow one consistent contract |
+| P9-004 | done | Introduce shared loading, skeleton, empty, and error state primitives for the main app surfaces | P9-003 | M | reusable state primitives exist and are used by dashboard, quiz, clusters, analytics, review, profile, and auth-adjacent flows |
+| P9-005 | done | Harden layout shell, navigation, and page composition for mobile-first responsive behavior | P9-001,P9-003,P9-004 | L | layout, sidebar/navigation, top-level spacing, and page containers adapt cleanly across mobile, tablet, and desktop widths |
 | P9-006 | done | Refactor core learner pages to keep logic in feature/view-model layers and rendering in replaceable UI components | P9-002,P9-004,P9-005 | XL | dashboard, quiz, clusters, contextual, history, word buckets, leaderboard, profile, and auth flows follow the target separation pattern |
 | P9-007 | done | Refactor reviewer/admin flows to the same architecture and async UX standards | P9-002,P9-004,P9-005 | L | review queue, add vocabulary, review history, and conflict-related surfaces use the same separation and loading conventions |
 | P9-008 | done | Expand backend automated coverage for refactor-sensitive contracts and behavior invariants | P9-006,P9-007 | L | backend unit/integration coverage protects auth, quiz, review, analytics, vocabulary, and audio contracts touched by frontend-driven refactors |
-| P9-009 | doing | Expand frontend component/integration coverage for stabilized user flows and state handling | P9-006,P9-007 | XL | frontend tests cover loading, error, empty, success, responsive, and role-gated paths for core learner and reviewer flows |
+| P9-009 | done | Expand frontend component/integration coverage for stabilized user flows and state handling | P9-006,P9-007 | XL | frontend tests cover loading, error, empty, success, responsive, and role-gated paths for core learner and reviewer flows |
 | P9-010 | done | Add end-to-end and smoke coverage for the complete production-critical path | P9-008,P9-009 | XL | smoke and E2E suites cover auth, dashboard load, quiz session start/submit, analytics access, review access, and production-like boot flows |
 
 ## Micro-task execution map
@@ -154,8 +154,8 @@ The top-level tasks above are the phase gates. Actual execution should happen in
 | -- | ------ | ---- | ---------- | --------- |
 | P9-009A | done | Create a frontend coverage matrix by page and state type: loading, error, empty, success, pending, responsive | P9-006F,P9-007D | a stabilized page-state coverage map exists |
 | P9-009B | done | Add focused tests for shared state primitives and async feedback behaviors | P9-009A | shared primitive behavior is directly protected |
-| P9-009C | doing | Add learner-flow integration coverage for standardized pages | P9-009B | dashboard/quiz/clusters/analytics/auth/profile key states are covered |
-| P9-009D | doing | Add reviewer/admin integration coverage for queue, history, and draft creation flows | P9-009C | reviewer/admin stabilized flows are covered |
+| P9-009C | done | Add learner-flow integration coverage for standardized pages | P9-009B | dashboard/quiz/clusters/analytics/auth/profile key states are covered |
+| P9-009D | done | Add reviewer/admin integration coverage for queue, history, and draft creation flows | P9-009C | reviewer/admin stabilized flows are covered |
 | P9-009E | done | Add responsive regression checks for high-risk layouts | P9-009D | layout regressions are detectable in automated frontend tests |
 
 ### P9-010 - E2E and smoke coverage

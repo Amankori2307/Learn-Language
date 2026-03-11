@@ -32,9 +32,9 @@ Next task ID: P9-001
 
 Date: 2026-03-11  
 Session owner: Codex  
-Last completed task ID: P9-008  
-Current in-progress task ID: P9-009  
-Next task ID: P9-005
+Last completed task ID: P9-009  
+Current in-progress task ID: -  
+Next task ID: -
 
 ## Current state
 
@@ -44,6 +44,9 @@ Next task ID: P9-005
 - The final Phase 9 smoke/E2E scope is now explicit in [documentation/e2e-smoke-scope.md](/Users/aman/Projects/personal-projects/Learn-Language/documentation/e2e-smoke-scope.md), including the minimum production-critical path set, suite ownership, and the remaining automation gaps before `P9-010` can close.
 - `P9-010` is now complete: the smoke suite covers learner and reviewer critical paths, the release-gate split between frontend integration and API-level smoke is explicit, and CI now provisions Postgres, migrates/imports content, runs `pnpm run ci`, runs production-like smoke, and then builds.
 - `P9-008` is now complete: backend service/controller/integration coverage and the invariant map cover the Phase 9 refactor-sensitive auth, quiz, review, analytics, vocabulary, audio, and language-isolation contracts, with remaining risk reduced to environment availability rather than missing automated cases.
+- `P9-003`, `P9-004`, and `P9-005` are now complete: the shared async UX contract, shared state primitives, and responsive/mobile hardening work have all been implemented and adopted broadly enough that only explicitly deferred low-priority long-tail gaps remain.
+- `P9-009` is now complete: learner/reviewer integration coverage, shared primitive coverage, high-risk responsive regressions, and explicit deferrals are all documented in [frontend-coverage-matrix.md](/Users/aman/Projects/personal-projects/Learn-Language/documentation/frontend-coverage-matrix.md).
+- Phase 9 is now complete.
 - Planning baselines for the next implementation tasks are now documented:
   - React Query ownership baseline in [documentation/react-query-ownership-baseline.md](/Users/aman/Projects/personal-projects/Learn-Language/documentation/react-query-ownership-baseline.md)
   - Async UX contract in [documentation/async-ux-contract.md](/Users/aman/Projects/personal-projects/Learn-Language/documentation/async-ux-contract.md)
@@ -123,6 +126,7 @@ Next task ID: P9-005
   - leaderboard and profile route-level loading composition are now directly covered in [leaderboard.integration.test.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/pages/leaderboard.integration.test.tsx) and [profile.integration.test.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/pages/profile.integration.test.tsx)
   - [frontend-coverage-matrix.md](/Users/aman/Projects/personal-projects/Learn-Language/documentation/frontend-coverage-matrix.md) now reflects the closed dashboard/responsive gaps and explicitly defers only the remaining auth-provider failure semantics and lower-priority long-tail responsive coverage
   - [backend-refactor-invariants.md](/Users/aman/Projects/personal-projects/Learn-Language/documentation/backend-refactor-invariants.md) now records both smoke commands and closes the old generic backend-gap list
+  - top-level Phase 9 statuses are now reconciled: `P9-003`, `P9-004`, `P9-005`, `P9-008`, `P9-009`, and `P9-010` are all marked done in the phase plan and master registry
   - responsive/mobile hardening continued across extracted action rows and pagination surfaces in leaderboard, contextual, dashboard, review, history, clusters, and word buckets so primary actions stack cleanly and footer controls expand to full-width buttons on small screens
   - page-level integration coverage now also includes [clusters.integration.test.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/pages/clusters.integration.test.tsx) and [contextual.integration.test.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/pages/contextual.integration.test.tsx)
   - page-level integration coverage now also includes [tutor.integration.test.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/pages/tutor.integration.test.tsx)
@@ -136,10 +140,7 @@ Next task ID: P9-005
 
 ## Immediate next actions
 
-- Continue `P9-005`, `P9-008`, and `P9-009`:
-  - finish the remaining responsive shell/layout cleanup and decide whether any top-level page containers still need mobile hardening before Phase 9 can close
-  - decide whether the remaining explicitly deferred auth/add-vocabulary/frontend long-tail gaps should stay deferred or be covered before marking `P9-009` done
-  - reconcile whether `P9-003`, `P9-004`, and `P9-005` still have any implementation gap or whether they are now only stale status rows
+- Start the next phase/task only after the backlog is re-prioritized against the now-closed Phase 9 baseline.
 
 ---
 
