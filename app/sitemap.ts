@@ -1,12 +1,10 @@
 import type { MetadataRoute } from "next";
-import { APP_PUBLIC_ROUTES, APP_SITE_URL } from "@shared/domain/constants/seo";
+import { APP_SITE_URL, SEO_ROUTE_DEFINITIONS } from "@shared/domain/constants/seo";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const now = new Date();
-  return APP_PUBLIC_ROUTES.map((route) => ({
-    url: `${APP_SITE_URL}${route}`,
-    lastModified: now,
-    changeFrequency: route === "/auth" ? "monthly" : "weekly",
-    priority: route === "/auth" ? 0.6 : 0.7,
+  return SEO_ROUTE_DEFINITIONS.filter((route) => route.index).map((route) => ({
+    url: `${APP_SITE_URL}${route.path}`,
+    changeFrequency: route.changeFrequency,
+    priority: route.priority,
   }));
 }

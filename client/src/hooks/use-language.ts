@@ -12,13 +12,6 @@ export type IUserLanguageOption = {
 
 export const LANGUAGE_OPTIONS: IUserLanguageOption[] = [
   { value: LanguageEnum.TELUGU, label: "Telugu" },
-  { value: LanguageEnum.HINDI, label: "Hindi" },
-  { value: LanguageEnum.TAMIL, label: "Tamil" },
-  { value: LanguageEnum.KANNADA, label: "Kannada" },
-  { value: LanguageEnum.MALAYALAM, label: "Malayalam" },
-  { value: LanguageEnum.SPANISH, label: "Spanish" },
-  { value: LanguageEnum.FRENCH, label: "French" },
-  { value: LanguageEnum.GERMAN, label: "German" },
 ];
 
 export function getLanguageLabel(language: LanguageEnum | null | undefined) {
@@ -37,7 +30,7 @@ function getInitialLanguage(): LanguageEnum {
 
   const stored =
     window.localStorage.getItem(STORAGE_KEY) ?? window.localStorage.getItem(LEGACY_STORAGE_KEY);
-  const isValid = stored && Object.values(LanguageEnum).includes(stored as LanguageEnum);
+  const isValid = stored && LANGUAGE_OPTIONS.some((option) => option.value === stored);
   return isValid ? (stored as LanguageEnum) : fallback;
 }
 

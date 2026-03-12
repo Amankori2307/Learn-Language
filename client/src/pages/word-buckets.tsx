@@ -59,7 +59,7 @@ export default function WordBucketsPage() {
         <WordBucketHeader
           title={data?.title ?? "Word Bucket"}
           meaning={data?.meaning ?? "Track your progress state by word."}
-          onBack={() => navigate("/")}
+          onBack={() => navigate("/dashboard")}
         />
 
         <WordBucketImprovementCard

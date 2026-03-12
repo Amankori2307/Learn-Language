@@ -38,7 +38,7 @@ Current high-level observation:
 
 | Route | File | Current responsibility | Current architecture assessment |
 | ----- | ---- | ---------------------- | ------------------------------- |
-| `/` | `client/src/pages/dashboard.tsx` | renders learner dashboard from feature view-model output | good baseline; page is thin |
+| `/dashboard` | `client/src/pages/dashboard.tsx` | renders learner dashboard from feature view-model output | good baseline; page is thin |
 | `/quiz` | `client/src/pages/quiz.tsx` | renders session states and delegates orchestration to a feature view-model | mostly healthy; flow is large but structured |
 | `/clusters` | `client/src/pages/clusters.tsx` | cluster listing plus query-param sync, filtering, sorting, paging, and local derived analytics | page owns too much data shaping and URL-state orchestration |
 | `/contextual` | `client/src/pages/contextual.tsx` | cluster selection and context-line generation | page owns transformation logic that should live in feature layer |
@@ -48,6 +48,12 @@ Current high-level observation:
 | `/profile` | `client/src/pages/profile.tsx` | profile query binding, local editable form state, save handling | mixed; mutation flow is fine but page still owns form workflow directly |
 | `/auth` | `client/src/pages/auth.tsx` | token bootstrap, redirect handling, login redirect | page owns browser bootstrap side effects directly |
 | `/tutor` | `client/src/pages/tutor.tsx` | local tutor feedback loop built from learned words | page contains non-trivial product logic and should either move to feature layer or be explicitly treated as non-core |
+
+Public app-router entry surface:
+
+| Route | File | Current responsibility | Current architecture assessment |
+| ----- | ---- | ---------------------- | ------------------------------- |
+| `/` | `app/page.tsx` | public marketing and SEO landing page that funnels visitors into auth or the signed-in dashboard | intentionally separate from the SPA so search engines can index a real home page |
 
 ### Reviewer/admin routes
 

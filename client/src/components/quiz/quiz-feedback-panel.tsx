@@ -51,13 +51,13 @@ export function QuizFeedbackPanel({
   }, [onNext]);
 
   return (
-    <div className="grid h-full min-h-0 grid-rows-[minmax(0,1fr)_auto] gap-3">
+    <div className="grid h-full min-h-0 grid-rows-[minmax(0,1fr)_auto] gap-2 sm:gap-3">
       <motion.div
         initial={{ opacity: 0, y: 8 }}
         animate={{ opacity: 1, y: 0 }}
         exit={{ opacity: 0, y: -8 }}
         aria-live="polite"
-        className="grid min-h-0 grid-rows-[auto_minmax(0,1fr)] gap-3 overflow-hidden md:grid-cols-[minmax(18rem,22rem)_minmax(0,1fr)] md:grid-rows-1 md:gap-5"
+        className="grid min-h-0 grid-rows-[auto_minmax(0,1fr)] gap-2 overflow-hidden md:grid-cols-[minmax(18rem,22rem)_minmax(0,1fr)] md:grid-rows-1 md:gap-5"
       >
         <div
           className={cn(
@@ -154,7 +154,7 @@ export function QuizFeedbackPanel({
         </div>
       </motion.div>
 
-      <div className="border-t border-border/60 pt-2 md:pb-6">
+      <div className="sticky bottom-0 border-t border-border/60 bg-background/95 pt-2 pb-[calc(env(safe-area-inset-bottom)+0.5rem)] backdrop-blur md:static md:bg-transparent md:pb-6 md:backdrop-blur-0">
         <Button
           ref={continueButtonRef}
           size="lg"

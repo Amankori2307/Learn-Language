@@ -65,9 +65,9 @@ export function QuizAnswerPanel({
   }, [confidenceLevel, focusOptionAt, isSubmitting, onSubmitSelection, options.length, selectedIndex, selectedOption]);
 
   return (
-    <section className="grid min-h-0 grid-rows-[minmax(0,1fr)_auto] gap-3 overflow-hidden p-3 sm:p-4 md:p-6">
-      <div className="min-h-0 overflow-y-auto pr-1">
-        <div className="grid grid-cols-1 gap-3">
+    <section className="grid min-h-0 grid-rows-[minmax(0,1fr)_auto] gap-2 overflow-hidden p-2.5 sm:gap-3 sm:p-4 md:p-6">
+      <div className="min-h-0 overflow-y-auto pr-1 pb-2">
+        <div className="grid grid-cols-1 gap-2.5 sm:gap-3">
           {options.map((option, index) => {
             const isSelected = selectedOption === option.id;
             const className = isSelected
@@ -111,7 +111,7 @@ export function QuizAnswerPanel({
         </div>
       </div>
 
-      <div className="space-y-3 border-t border-border/60 pt-2">
+      <div className="sticky bottom-0 -mx-2.5 space-y-2 border-t border-border/60 bg-card/95 px-2.5 pt-2 pb-[calc(env(safe-area-inset-bottom)+0.5rem)] backdrop-blur sm:static sm:mx-0 sm:space-y-3 sm:bg-transparent sm:px-0 sm:pb-0 sm:backdrop-blur-0">
         {submitError ? (
           <p className="rounded-xl border border-status-error/35 bg-status-error-surface px-3 py-2 text-sm text-status-error">
             {submitError}

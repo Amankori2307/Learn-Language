@@ -7,7 +7,7 @@ import {
 import {
   APP_DEFAULT_DESCRIPTION,
   APP_SITE_URL,
-  SEO_ROUTE_METADATA,
+  getSeoRouteDefinition,
 } from "@shared/domain/constants/seo";
 
 export const dynamic = "force-dynamic";
@@ -26,7 +26,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const resolvedParams = await params;
   const routePath = normalizeRoutePath(resolvedParams.slug);
-  const routeMetadata = SEO_ROUTE_METADATA[routePath];
+  const routeMetadata = getSeoRouteDefinition(routePath);
 
   if (!routeMetadata) {
     return {
@@ -40,7 +40,9 @@ export async function generateMetadata({
   }
 
   return {
-    title: routeMetadata.title,
+    title: {
+      absolute: routeMetadata.title,
+    },
     description: routeMetadata.description,
     alternates: {
       canonical: routeMetadata.index ? routePath : undefined,

@@ -84,10 +84,10 @@ describe("QuizPage integration", () => {
 
     expect(screen.getByText("Could not load quiz session")).toBeTruthy();
     await user.click(screen.getByRole("button", { name: "Retry Session" }));
-    await user.click(screen.getByRole("button", { name: "Return Home" }));
+    await user.click(screen.getByRole("button", { name: "Return Dashboard" }));
 
     expect(refetchQuizMock).toHaveBeenCalledTimes(1);
-    expect(setLocation).toHaveBeenCalledWith("/");
+    expect(setLocation).toHaveBeenCalledWith("/dashboard");
   });
 
   it("shows new-word completion copy when new_words queue is empty", async () => {

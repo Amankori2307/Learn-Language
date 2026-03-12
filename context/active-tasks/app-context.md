@@ -85,6 +85,7 @@ Keep this file compact. It should capture the durable gist of the current app an
 ## Current execution state
 
 - Active backlog: none in [backlog.md](/Users/aman/Projects/personal-projects/Learn-Language/context/active-tasks/backlog.md)
+- Future candidate work belongs in [future-tasks/backlog.md](/Users/aman/Projects/personal-projects/Learn-Language/context/future-tasks/backlog.md)
 - Recent completed work:
   - planning/context system cleanup and rename pass
   - repo-level `AGENTS.md` creation

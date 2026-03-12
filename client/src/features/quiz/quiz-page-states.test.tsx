@@ -52,10 +52,10 @@ describe("quiz page states", () => {
     render(<QuizErrorState retry={retry} navigate={navigate} />);
 
     await user.click(screen.getByRole("button", { name: "Retry Session" }));
-    await user.click(screen.getByRole("button", { name: "Return Home" }));
+    await user.click(screen.getByRole("button", { name: "Return Dashboard" }));
 
     expect(retry).toHaveBeenCalledTimes(1);
-    expect(navigate).toHaveBeenCalledWith("/");
+    expect(navigate).toHaveBeenCalledWith("/dashboard");
   });
 
   it("renders completion CTAs and follow-up recommendations", async () => {
@@ -88,7 +88,7 @@ describe("quiz page states", () => {
     expect(startSession).toHaveBeenNthCalledWith(1, `/quiz?mode=${QuizModeEnum.WEAK_WORDS}`);
     expect(navigate).toHaveBeenNthCalledWith(1, "/quiz?mode=cluster&clusterId=9");
     expect(startSession).toHaveBeenNthCalledWith(2, `/quiz?mode=${QuizModeEnum.NEW_WORDS}`);
-    expect(navigate).toHaveBeenNthCalledWith(2, "/");
+    expect(navigate).toHaveBeenNthCalledWith(2, "/dashboard");
   });
 
   it("supports keyboard navigation on the completion actions", async () => {
@@ -135,7 +135,7 @@ describe("quiz page states", () => {
 
     render(<QuizMissingQuestionState navigate={navigate} />);
 
-    await user.click(screen.getByRole("button", { name: "Return Home" }));
-    expect(navigate).toHaveBeenCalledWith("/");
+    await user.click(screen.getByRole("button", { name: "Return Dashboard" }));
+    expect(navigate).toHaveBeenCalledWith("/dashboard");
   });
 });

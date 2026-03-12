@@ -77,7 +77,7 @@ export default function QuizPage() {
 
   return (
     <QuizSessionFrame
-      header={<QuizSessionHeader progress={progress} onExit={() => setLocation("/")} />}
+      header={<QuizSessionHeader progress={progress} onExit={() => setLocation("/dashboard")} />}
     >
         <QuizCard
           wordId={currentQuestion.wordId}

@@ -83,7 +83,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
     {
       title: "Learn",
       items: [
-        { name: "Dashboard", href: "/", icon: LayoutDashboard },
+        { name: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
         { name: "Clusters", href: "/clusters", icon: Layers },
       ],
     },
@@ -108,10 +108,6 @@ export function Layout({ children }: { children: React.ReactNode }) {
   ];
 
   const matchesHref = (href: string) => {
-    if (href === "/") {
-      return location === "/";
-    }
-
     return location === href || location.startsWith(`${href}/`) || location.startsWith(`${href}?`);
   };
 
@@ -199,6 +195,9 @@ export function Layout({ children }: { children: React.ReactNode }) {
                 </option>
               ))}
             </select>
+            <p className="mt-2 text-xs text-muted-foreground">
+              Telugu is live now. More languages are planned for a later rollout.
+            </p>
           </div>
         ) : (
           <div className="mt-4">

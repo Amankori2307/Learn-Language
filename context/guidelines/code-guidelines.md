@@ -85,6 +85,7 @@
 - If a code change makes an existing document inaccurate, update that document in the same task instead of leaving stale guidance behind.
 - Prefer updating the canonical existing document over creating duplicate notes for the same topic.
 - When a planning file contains durable information that is still useful after implementation, move that information into `documentation/` and archive the planning file instead of deleting it.
+- When public routing, crawlability, analytics tags, sitemap contents, metadata policy, robots rules, or canonical behavior changes, update the canonical SEO/runtime docs and the shared SEO ownership module in the same task.
 
 10. Branch workflow:
 
@@ -130,6 +131,15 @@
 - New components must not assume only `light` and `dark`; they should work under the implemented named themes and avoid `dark:` branches unless there is no token-based alternative yet.
 - Theme-sensitive values such as overlay treatment, border radius, shadows, and transition feel should come from existing CSS variables or shared variants instead of local one-off styling.
 - If a new component cannot be made theme-safe immediately, document the limitation in the task and treat it as explicit follow-up debt instead of leaving the assumption implicit.
+
+16. SEO ownership:
+
+- Route titles, descriptions, canonical/index rules, sitemap inclusion, and shared marketing/runtime tags must be owned from the centralized SEO constants/module rather than scattered across pages.
+- When adding, renaming, opening, or closing a route, update that centralized SEO ownership file so sitemap and metadata stay in sync.
+- Public/indexable routes must have explicit title, description, canonical behavior, sitemap policy, and crawler intent; protected routes must explicitly declare `noindex` behavior instead of relying on omission.
+- Keep `shared/domain/constants/seo.ts`, `app/layout.tsx`, `app/sitemap.ts`, `app/robots.ts`, route-level metadata generation, and `documentation/seo-crawlability-contract.md` aligned with the centralized SEO ownership file.
+- When SEO behavior changes, also review the related public SEO surfaces and assets, including structured data, canonical links, Open Graph/Twitter metadata, manifest/icon references, favicon/app-icon assets under `public/`, and any public marketing-entry routes that affect crawlability.
+- Treat SEO upkeep as part of the route-definition done criteria: a route change is not complete until metadata, sitemap eligibility, robots intent, analytics tags, and documentation have been reviewed and updated where needed.
 
 ## Adoption plan
 

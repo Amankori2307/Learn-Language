@@ -1,8 +1,14 @@
 /* eslint-disable react-refresh/only-export-components */
 import type { Metadata, Viewport } from "next";
+import Script from "next/script";
 import "../client/src/index.css";
 import { APP_BRAND_NAME } from "@shared/domain/constants/app-brand";
-import { APP_DEFAULT_DESCRIPTION, APP_KEYWORDS, APP_SITE_URL } from "@shared/domain/constants/seo";
+import {
+  APP_DEFAULT_DESCRIPTION,
+  APP_GOOGLE_TAG_MANAGER_ID,
+  APP_KEYWORDS,
+  APP_SITE_URL,
+} from "@shared/domain/constants/seo";
 
 export const metadata: Metadata = {
   metadataBase: new URL(APP_SITE_URL),
@@ -110,9 +116,45 @@ export default function RootLayout({
     description: APP_DEFAULT_DESCRIPTION,
   };
 
+  const organizationStructuredData = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: APP_BRAND_NAME,
+    url: APP_SITE_URL,
+    logo: {
+      "@type": "ImageObject",
+      url: `${APP_SITE_URL}/brand-logo.png`,
+      width: 500,
+      height: 500,
+    },
+  };
+
   return (
     <html lang="en">
       <body>
+        {APP_GOOGLE_TAG_MANAGER_ID ? (
+          <>
+            <Script
+              id="google-tag-manager"
+              strategy="afterInteractive"
+              dangerouslySetInnerHTML={{
+                __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','${APP_GOOGLE_TAG_MANAGER_ID}');`,
+              }}
+            />
+            <noscript>
+              <iframe
+                src={`https://www.googletagmanager.com/ns.html?id=${APP_GOOGLE_TAG_MANAGER_ID}`}
+                height="0"
+                width="0"
+                style={{ display: "none", visibility: "hidden" }}
+              />
+            </noscript>
+          </>
+        ) : null}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteStructuredData) }}
@@ -120,6 +162,10 @@ export default function RootLayout({
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(softwareStructuredData) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationStructuredData) }}
         />
         {children}
       </body>
