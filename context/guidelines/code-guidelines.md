@@ -47,6 +47,10 @@
 - Keep business logic, data shaping, and side effects in hooks/services/view-model helpers.
 - Keep presentational components focused on rendering and event wiring.
 - UI libraries/components should be replaceable without rewriting business logic.
+- New UI components must be theme-aware by default and consume shared semantic tokens for color, border, surface, radius, shadow, and motion.
+- Do not hardcode one-off palette classes, raw hex values, or light/dark-only assumptions in new reusable components when an existing theme token or shared variant can express the same intent.
+- Shared and feature UI components should render correctly across all currently implemented themes, not just the theme active during development.
+- If a component introduces a new reusable visual state or variant, add it through the shared token/variant system so future themes inherit it automatically.
 - Pages and presentational components must not define transport-backed `useQuery`/`useMutation` calls or call `apiClient` directly.
 - Shared React Query lifecycle belongs in `client/src/hooks/*`; page-specific orchestration belongs in feature `use-*-view-model.ts` modules.
 - The module that defines a shared query should also define its query-key builder and own its invalidation expectations.
@@ -75,12 +79,12 @@
 - `pnpm run lint` also enforces symbol ownership through `script/check-symbol-governance.ts`.
 - Exported enums outside approved enum modules and duplicate exported reusable symbol names are CI failures.
 
-9. Planning hygiene:
+9. Documentation hygiene:
 
-- Treat `context/plan/01-master-task-registry.md` as active backlog only.
-- When a phase or task is complete, mark it done once, migrate durable outcomes into feature documentation or `APP_CONTEXT.md`, and remove its detailed execution tracking from active planning files.
-- Do not keep completed phase breakdowns in `context/plan` just for history; keep only unfinished phases or genuinely active strategy docs there.
-- If a completed phase still contains information worth retaining, fold that information into implementation-backed docs such as feature docs, server/deploy docs, or architecture baselines before removing the phase plan from active context.
+- Keep implementation-backed documentation in the `documentation/` folder up to date when behavior, architecture, operations, testing scope, or governance rules change.
+- If a code change makes an existing document inaccurate, update that document in the same task instead of leaving stale guidance behind.
+- Prefer updating the canonical existing document over creating duplicate notes for the same topic.
+- When a planning file contains durable information that is still useful after implementation, move that information into `documentation/` and archive the planning file instead of deleting it.
 
 10. Branch workflow:
 
@@ -119,6 +123,13 @@
 - When changing a surface for phone layouts, explicitly preserve or improve the corresponding desktop layout.
 - Do not remove desktop structure, hierarchy, spacing, or affordances just to simplify the mobile version.
 - Responsive refactors must be reviewed in at least one phone width and one desktop width before they are considered complete.
+
+15. Theme-safe component bar:
+
+- New shared primitives and feature components must prefer semantic classes such as `bg-background`, `text-foreground`, `border-border`, `bg-card`, and shared status tokens over raw Tailwind palette classes.
+- New components must not assume only `light` and `dark`; they should work under the implemented named themes and avoid `dark:` branches unless there is no token-based alternative yet.
+- Theme-sensitive values such as overlay treatment, border radius, shadows, and transition feel should come from existing CSS variables or shared variants instead of local one-off styling.
+- If a new component cannot be made theme-safe immediately, document the limitation in the task and treat it as explicit follow-up debt instead of leaving the assumption implicit.
 
 ## Adoption plan
 
