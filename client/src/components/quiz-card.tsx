@@ -1,5 +1,5 @@
 import { motion, AnimatePresence } from "framer-motion";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { LanguageEnum, QuizQuestionTypeEnum } from "@shared/domain/enums";
 import { useFeedbackEffects } from "@/hooks/use-feedback-effects";
 import { runErrorEffects, runSuccessEffects } from "@/lib/feedback-effects";
@@ -51,6 +51,7 @@ export function QuizCard({
   const [negativeVisualNonce, setNegativeVisualNonce] = useState(0);
   const { enabled: effectsEnabled, toggle: toggleEffects } = useFeedbackEffects();
   const { activeKey, play } = useHybridAudio();
+  const bodyRef = useRef<HTMLDivElement | null>(null);
 
   const cardAnimate =
     result && !result.isCorrect
@@ -76,6 +77,20 @@ export function QuizCard({
     setSelectedOption(null);
   }, [question, options, type]);
 
+  useEffect(() => {
+    const node = bodyRef.current;
+    if (!node) {
+      return;
+    }
+
+    if (typeof node.scrollTo === "function") {
+      node.scrollTo({ top: 0, behavior: "instant" as ScrollBehavior });
+      return;
+    }
+
+    node.scrollTop = 0;
+  }, [question, result]);
+
   const handleOptionClick = (id: number) => {
     if (result) return;
     setSelectedOption(id);
@@ -97,8 +112,9 @@ export function QuizCard({
               : "border border-border/50 bg-card/95 shadow-2xl backdrop-blur",
           )}
         >
+          <div ref={bodyRef} className="min-h-0 flex-1 overflow-y-auto">
           {!result ? (
-            <div className="grid min-h-0 flex-1 grid-cols-1 grid-rows-[auto_minmax(0,1fr)] lg:grid-cols-[1.05fr_1fr] lg:grid-rows-1">
+            <div className="grid min-h-0 grid-cols-1 grid-rows-[auto_minmax(0,1fr)] lg:grid-cols-[1.05fr_1fr] lg:grid-rows-1">
               <QuizPromptPanel
                 wordId={wordId}
                 question={question}
@@ -136,7 +152,7 @@ export function QuizCard({
               />
             </div>
           ) : (
-            <div className="min-h-0 flex-1 p-3 sm:p-4 md:px-6 md:pt-6 md:pb-0">
+            <div className="min-h-0 p-3 sm:p-4 md:px-6 md:pt-6 md:pb-0">
               <QuizFeedbackPanel
                 result={result}
                 activeAudioKey={activeKey}
@@ -147,6 +163,7 @@ export function QuizCard({
               />
             </div>
           )}
+          </div>
 
           {/* Hidden visual state container for accessibility continuity */}
           <div className="sr-only" aria-hidden={!result}>

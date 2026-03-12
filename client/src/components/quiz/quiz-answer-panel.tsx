@@ -66,7 +66,7 @@ export function QuizAnswerPanel({
 
   return (
     <section className="grid min-h-0 grid-rows-[minmax(0,1fr)_auto] gap-2 overflow-hidden p-2.5 sm:gap-3 sm:p-4 md:p-6">
-      <div className="min-h-0 overflow-y-auto px-0.5 pb-2">
+      <div className="min-h-0 overflow-visible px-0.5 pb-2">
         <div className="grid grid-cols-1 gap-2.5 sm:gap-3">
           {options.map((option, index) => {
             const isSelected = selectedOption === option.id;
