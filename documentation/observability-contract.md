@@ -1,6 +1,6 @@
 # Observability Contract
 
-This document is the execution contract for `P10-004`. It defines the current logging shape, request correlation behavior, and redaction rules for backend observability.
+This document is the completed execution record for `P10-004`. It defines the current logging shape, request correlation behavior, and redaction rules for backend observability.
 
 ## Goals
 
@@ -96,7 +96,7 @@ Redacted values are replaced with:
 
 ## Current scope and remaining work
 
-Implemented in the current slice:
+Implemented in the completed Phase 10 slice:
 
 - shared JSON log formatting
 - shared recursive redaction
@@ -104,7 +104,7 @@ Implemented in the current slice:
 - removal of the remaining `console.error` fallback in auth controller error handling
 - focused logger tests for redaction, circular-safe serialization, and request metadata extraction
 
-Still to complete in later `P10-004` slices:
+Remaining follow-up considerations:
 
 - decide whether more request lifecycle stages should be logged beyond completion/abort
 - standardize module naming and field conventions across all service/repository logs

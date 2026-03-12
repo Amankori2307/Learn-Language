@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { LanguageEnum } from "@shared/domain/enums";
-import { resolveAudio } from "@/services/audioService";
+import { isMostlyAscii } from "@/lib/text-script";
+import { useAudioResolution } from "@/hooks/use-audio-resolution";
 
 interface IPlayHybridAudioInput {
   key: string;
@@ -36,10 +37,6 @@ function resolveSpeechLang(inputLanguage?: LanguageEnum | null): string {
   }
 }
 
-function isMostlyAscii(value: string): boolean {
-  return Array.from(value).every((character) => character.charCodeAt(0) <= 0x7f);
-}
-
 function getPublicClientEnv(name: string): string | undefined {
   if (typeof process !== "undefined" && process.env?.[name]) {
     return process.env[name];
@@ -67,7 +64,7 @@ export function useHybridAudio() {
   const [activeKey, setActiveKey] = useState<string | null>(null);
   const htmlAudioRef = useRef<HTMLAudioElement | null>(null);
   const utteranceRef = useRef<SpeechSynthesisUtterance | null>(null);
-  const resolvedAudioRef = useRef<Map<string, string>>(new Map());
+  const { resolveAudioUrl } = useAudioResolution();
 
   const stop = useCallback(() => {
     if (htmlAudioRef.current) {
@@ -105,9 +102,8 @@ export function useHybridAudio() {
       stop();
       setActiveKey(key);
       const playbackMode = getAudioPlaybackMode();
-      const resolvedAudioUrl = await resolveServerAudioUrl({
+      const resolvedAudioUrl = await resolveAudioUrl({
         cachedUrl: audioUrl,
-        cacheRef: resolvedAudioRef.current,
         wordId,
         language,
         text: resolveText ?? text ?? speechText,
@@ -157,7 +153,7 @@ export function useHybridAudio() {
         fallbackToSpeech();
       }
     },
-    [activeKey, stop],
+    [activeKey, resolveAudioUrl, stop],
   );
 
   useEffect(() => stop, [stop]);
@@ -167,42 +163,4 @@ export function useHybridAudio() {
     play,
     stop,
   };
-}
-
-async function resolveServerAudioUrl(input: {
-  cachedUrl?: string | null;
-  cacheRef: Map<string, string>;
-  wordId?: number | null;
-  language?: LanguageEnum | null;
-  text?: string | null;
-}): Promise<string | null> {
-  if (input.cachedUrl?.trim()) {
-    return input.cachedUrl.trim();
-  }
-
-  const normalizedText = input.text?.trim();
-  if (!normalizedText || !input.language || isMostlyAscii(normalizedText)) {
-    return null;
-  }
-
-  const cacheKey = `${input.wordId ?? "text"}:${input.language}:${normalizedText}`;
-  const cached = input.cacheRef.get(cacheKey);
-  if (cached) {
-    return cached;
-  }
-
-  try {
-    const audioUrl = await resolveAudio({
-      wordId: input.wordId ?? undefined,
-      language: input.language,
-      text: normalizedText,
-    });
-    if (!audioUrl) {
-      return null;
-    }
-    input.cacheRef.set(cacheKey, audioUrl);
-    return audioUrl;
-  } catch {
-    return null;
-  }
 }

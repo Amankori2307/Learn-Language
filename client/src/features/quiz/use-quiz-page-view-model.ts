@@ -2,6 +2,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useLocation, useSearch } from "wouter";
 import { QuizDirectionEnum, QuizModeEnum, QuizQuestionTypeEnum } from "@shared/domain/enums";
 import { useLearningLanguage } from "@/hooks/use-language";
+import { useQuizConfidencePreference } from "@/hooks/use-quiz-confidence-preference";
 import { useGenerateQuiz, useSubmitAnswer, type QuizModeValue } from "@/hooks/use-quiz";
 import {
   QUIZ_DEFAULT_CONFIDENCE_LEVEL,
@@ -30,11 +31,13 @@ export function useQuizPageViewModel() {
   const clusterId = parseClusterId(params.get("clusterId"));
 
   const { language } = useLearningLanguage();
-  const { data: questions, isLoading, isError } = useGenerateQuiz(mode, clusterId);
+  const quizConfidencePreference = useQuizConfidencePreference();
+  const { data: questions, isLoading, isError, refetch } = useGenerateQuiz(mode, clusterId);
   const submitAnswer = useSubmitAnswer();
 
   const [currentIndex, setCurrentIndex] = useState(0);
   const [result, setResult] = useState<any>(null);
+  const [submitError, setSubmitError] = useState<string | null>(null);
   const [sessionStats, setSessionStats] = useState({ correct: 0, total: 0 });
   const [isFinished, setIsFinished] = useState(false);
   const [questionStartedAt, setQuestionStartedAt] = useState<number>(Date.now());
@@ -48,6 +51,7 @@ export function useQuizPageViewModel() {
   const resetSession = useCallback(() => {
     setCurrentIndex(0);
     setResult(null);
+    setSubmitError(null);
     setSessionStats({ correct: 0, total: 0 });
     setIsFinished(false);
     setQuestionStartedAt(Date.now());
@@ -62,6 +66,7 @@ export function useQuizPageViewModel() {
     if (!currentQuestion) return;
 
     try {
+      setSubmitError(null);
       const responseTimeMs = Math.max(QUIZ_RESPONSE_TIME_MIN_MS, Date.now() - questionStartedAt);
       const direction =
         currentQuestion.type === QuizQuestionTypeEnum.TARGET_TO_SOURCE
@@ -93,12 +98,15 @@ export function useQuizPageViewModel() {
         isCorrect: response.isCorrect,
       });
     } catch (error) {
-      console.error("Failed to submit answer:", error);
+      setSubmitError(
+        error instanceof Error ? error.message : "Could not submit your answer. Please try again.",
+      );
     }
   };
 
   const handleNext = () => {
     setResult(null);
+    setSubmitError(null);
     setQuestionStartedAt(Date.now());
     if (questions && currentIndex < questions.length - 1) {
       setCurrentIndex((prev) => prev + 1);
@@ -193,13 +201,18 @@ export function useQuizPageViewModel() {
     currentIndex,
     progress,
     result,
+    submitError,
     sessionStats,
     isFinished,
     confidenceLevel,
     setConfidenceLevel,
+    showConfidenceControl: quizConfidencePreference.enabled,
     submitPending: submitAnswer.isPending,
     startSession,
     setLocation,
+    retry: () => {
+      void refetch();
+    },
     handleAnswer,
     handleNext,
     completionMessage,

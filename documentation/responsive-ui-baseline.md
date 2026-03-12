@@ -159,7 +159,7 @@ Required behavior:
 
 - question and answer layout remains usable on phone
 - answer options remain tap-friendly
-- confidence controls wrap cleanly
+- optional confidence controls wrap cleanly when the learner enables them
 - result/next-step CTAs remain visible without awkward overflow
 
 Special caution:
@@ -298,6 +298,6 @@ Responsive implementation should proceed in this order:
 - high-risk responsive hotspots are identified
 - implementation order is locked before page rewrites begin
 
-## Immediate next dependency
+## Phase follow-up status
 
-After `P9-005`, the next correct work is page-level refactor execution under `P9-006` and `P9-007`.
+The historical next dependency from this baseline is complete: page-level refactor execution under `P9-006` and `P9-007` has already landed.

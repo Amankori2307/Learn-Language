@@ -34,8 +34,9 @@ export function TutorChatPanel({
         ))}
       </div>
 
-      <div className="flex gap-2">
+      <div className="flex flex-col gap-2 sm:flex-row">
         <Input
+          className="flex-1"
           value={input}
           onChange={(e) => setInput(e.target.value)}
           placeholder="Write a sentence..."
@@ -43,7 +44,9 @@ export function TutorChatPanel({
             if (e.key === "Enter") sendMessage();
           }}
         />
-        <Button onClick={sendMessage}>Send</Button>
+        <Button className="w-full sm:w-auto" onClick={sendMessage}>
+          Send
+        </Button>
       </div>
     </>
   );

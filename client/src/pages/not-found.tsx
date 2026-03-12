@@ -5,16 +5,18 @@ import { Link } from "wouter";
 
 export default function NotFound() {
   return (
-    <div className="min-h-screen w-full flex items-center justify-center bg-gray-50">
-      <Card className="w-full max-w-md mx-4 shadow-xl border-0">
+    <div className="flex min-h-screen w-full items-center justify-center bg-background px-4">
+      <Card className="mx-4 w-full max-w-md border-border/60 bg-card/95 [box-shadow:var(--shadow-lg)]">
         <CardContent className="pt-6 text-center space-y-6">
           <div className="flex justify-center">
-            <AlertCircle className="h-20 w-20 text-red-500 opacity-20" />
+            <div className="flex h-24 w-24 items-center justify-center rounded-full surface-status-error">
+              <AlertCircle className="h-12 w-12 text-status-error opacity-90" />
+            </div>
           </div>
 
           <div className="space-y-2">
-            <h1 className="text-2xl font-bold text-gray-900">Page Not Found</h1>
-            <p className="text-gray-500">
+            <h1 className="text-2xl font-bold text-foreground">Page Not Found</h1>
+            <p className="text-muted-foreground">
               Oops! The page you're looking for seems to have wandered off.
             </p>
           </div>

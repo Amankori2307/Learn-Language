@@ -59,6 +59,31 @@ export function QuizEmptyState({
   );
 }
 
+export function QuizErrorState({
+  retry,
+  navigate,
+}: {
+  retry: () => void;
+  navigate: (target: string) => void;
+}) {
+  return (
+    <Layout>
+      <div className="mx-auto max-w-2xl rounded-2xl border border-border/50 bg-card p-8 text-center md:p-10">
+        <h2 className="text-2xl font-bold text-foreground">Could not load quiz session</h2>
+        <p className="mt-2 text-muted-foreground">
+          The quiz request failed before a question could be prepared.
+        </p>
+        <div className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2">
+          <Button onClick={retry}>Retry Session</Button>
+          <Button variant="outline" onClick={() => navigate("/")}>
+            Return Home
+          </Button>
+        </div>
+      </div>
+    </Layout>
+  );
+}
+
 export function QuizMissingQuestionState({ navigate }: { navigate: (target: string) => void }) {
   return (
     <Layout>

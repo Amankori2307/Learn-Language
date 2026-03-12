@@ -30,11 +30,11 @@ Next task ID: -
 
 ---
 
-Date: 2026-03-11  
+Date: 2026-03-12  
 Session owner: Codex  
-Last completed task ID: P11-001  
+Last completed task ID: P13-020  
 Current in-progress task ID: -  
-Next task ID: P11-002
+Next task ID: -
 
 ## Current state
 
@@ -54,6 +54,135 @@ Next task ID: P11-002
 - Follow-up noted for `P11-002`:
   - the visible quiz confidence UI was removed for UX reasons during mobile hardening
   - product still needs to decide whether confidence returns behind a learner preference or is replaced by a lower-friction input model
+- `P11-002` is now complete:
+  - the quiz confidence selector was restored behind a learner preference stored locally
+  - profile now exposes a dedicated toggle for that preference
+  - quiz answer submission still captures confidence while leaving the mobile quiz UI uncluttered by default
+- `P13-001` is now complete:
+  - auth-route failure handling now returns OAuth cancellation/provider/configuration failures to `/auth`
+  - the auth page renders retryable learner-facing failure messaging instead of silently dropping the redirect outcome
+  - focused auth route and redirect helper tests now protect the failure-state behavior
+- `P13-002` is now complete:
+  - add-vocabulary route-level failure coverage now protects draft-creation errors in page composition tests
+  - the frontend coverage matrix now reflects that the explicit create-failure gap is closed
+- `P13-003` is now complete:
+  - page-level responsive assertions now protect the existing mobile-safe and desktop-upgrade classes for `profile`, `auth`, and `add-vocabulary`
+  - the remaining lower-priority responsive backlog is now limited to `clusters` and `contextual`
+- `P13-004` is now complete:
+  - page-level responsive assertions now protect the existing responsive filter, pagination, header, selector, and story-grid classes for `clusters` and `contextual`
+  - the previously documented low-priority responsive backlog for core learner pages is now closed
+- `P13-005` is now complete:
+  - leaderboard page integration coverage now protects route-level window switching and fetch-pending disable behavior
+  - the learner-route coverage matrix now marks leaderboard interaction coverage as fully covered
+- `P13-006` is now complete:
+  - dashboard page integration coverage now protects route-level learner action wiring across the primary CTA, analytics CTA, core modes, and bucket-card links
+  - the learner-route coverage matrix now marks dashboard interaction coverage as fully covered
+- `P13-007` is now complete:
+  - clusters page integration coverage now protects route-level pagination forwarding and practice-link wiring
+  - contextual page integration coverage now protects route-level workout-CTA wiring
+  - the learner-route coverage matrix now marks `clusters` and `contextual` interaction coverage as fully covered
+- `P13-008` is now complete:
+  - quiz route request failures now render a dedicated retryable error surface instead of collapsing into the completion empty state
+  - quiz page state and route integration coverage now protect the retry and return-home behavior
+- `P13-009` is now complete:
+  - route-level responsive assertions now protect the existing mobile-first CTA/grid layout on `dashboard`
+  - route-level responsive assertions now protect the session-shell and split-card layout on `quiz`
+  - the learner-route coverage matrix now marks `dashboard` and `quiz` responsiveness as fully covered
+- `P13-010` is now complete:
+  - tutor page now owns loading, error, and empty states instead of assuming vocabulary context is always available
+  - tutor route coverage now protects those route-owned states in addition to the existing chat interaction path
+- `P13-011` is now complete:
+  - add-vocabulary page now owns the initial cluster-bootstrap loading branch instead of leaving it entirely inside the draft form
+  - route-level integration coverage now protects that loading surface alongside the existing create/error/responsive checks
+- `P13-012` is now complete:
+  - tutor composer now uses an explicit stacked-on-mobile and row-on-desktop layout instead of an implicit single flex row
+  - tutor route integration coverage now protects that responsive seam, closing the last explicit partial entry in the frontend coverage matrix
+- `P13-013` is now complete:
+  - quiz answer submission now surfaces inline retryable failure messaging instead of falling back to a raw `console.error`
+  - focused quiz card and route integration coverage now protects the submit-failure branch
+- `P13-014` is now complete:
+  - `useSeedData` now invalidates only seed-affected query resources instead of calling blanket `invalidateQueries()`
+  - focused hook coverage now locks the invalidation list and the React Query baseline reflects the narrowed mutation behavior
+- `P13-015` is now complete:
+  - audio URL resolution now lives in a dedicated `useAudioResolution` hook instead of being hidden inside the browser playback hook
+  - focused hook coverage now protects cached-url, ascii-skip, and cache-hit behavior for audio resolution
+- `P13-016` is now complete:
+  - quiz answer submission now invalidates the learner-facing progress surfaces it actually affects instead of refreshing only stats
+  - focused hook coverage now locks the quiz-submit invalidation list alongside the existing seed invalidation contract
+- `P13-017` is now complete:
+  - high-traffic shared hooks now export explicit query-key builders and consume those builders in query/invalidation sites instead of relying on scattered tuple literals
+  - focused hook coverage now protects both the shared key shapes and the narrowed review-history invalidation behavior
+- `P13-018` is now complete:
+  - the add-vocabulary draft form no longer defines its own cluster transport query and now consumes the shared `useClustersForLanguage` hook seam
+  - focused shared-hook coverage now protects the extracted cluster-fetch ownership path directly
+- `P13-019` is now complete:
+  - the remaining shared auth and word hooks now export explicit query-key builders, and profile now reuses the auth-owned `authMe` key instead of duplicating it
+  - the shared key-contract test now protects the auth and word key shapes too
+- `P13-020` is now complete:
+  - the remaining auth and quiz query-behavior overrides now live behind an explicit shared `QUERY_BEHAVIOR_RULES` seam instead of inline literals and one-off constants
+  - focused tests now protect the shared override contract directly
+- `P13-021` is now complete:
+  - the React Query ownership baseline now reflects the current state of shared query-key ownership, invalidation narrowing, query-behavior overrides, and audio resolution ownership
+  - stale migration/prioritization text was removed so the document now describes the remaining convention debt rather than already-finished implementation slices
+- `P13-022` is now complete:
+  - the repo-wide coding guidance and governance contract now explicitly cover React Query ownership boundaries, stable query-key ownership, narrow-by-default invalidation, and centralized query-behavior overrides
+  - the ownership baseline now records that this governance follow-up is complete, leaving only future alignment and periodic re-inventory work
+- `P13-023` is now complete:
+  - deployment runbook links in [server.md](/Users/aman/Projects/personal-projects/Learn-Language/documentation/server.md) now point at the actual repository paths instead of an old Codex worktree path
+  - the production server documentation is once again navigable from the current workspace
+- `P13-024` is now complete:
+  - completed Phase 9 architecture, async UX, shared-state, and responsive baselines no longer describe already-finished tasks as upcoming dependencies
+  - observability wording now distinguishes current implementation from optional follow-up considerations without implying an active incomplete slice
+- `P13-025` is now complete:
+  - the performance baseline now matches the completed Phase 10 task state instead of marking `P10-008A` through `P10-008D` as in progress
+  - the document now distinguishes future optimization candidates from active incomplete performance-phase work
+- `P13-026` is now complete:
+  - the observability contract now reads as a completed Phase 10 record instead of an active execution slice
+  - implementation wording now distinguishes shipped logging behavior from optional follow-up considerations
+- Phase 12 planning is now active in [81-phase-12-theme-system-and-design-token-extraction.md](/Users/aman/Projects/personal-projects/Learn-Language/context/plan/81-phase-12-theme-system-and-design-token-extraction.md).
+- Active backlog was reprioritized to start with theming-system readiness before UI theme selection work:
+  - `P12-001` is now complete via [theme-system-baseline.md](/Users/aman/Projects/personal-projects/Learn-Language/documentation/theme-system-baseline.md)
+  - `P12-002` is now complete via [theme-contract.md](/Users/aman/Projects/personal-projects/Learn-Language/documentation/theme-contract.md)
+  - `P12-003` is now complete:
+    - supported theme ownership now lives in [app-theme.ts](/Users/aman/Projects/personal-projects/Learn-Language/client/src/theme/app-theme.ts)
+    - app-level provider wiring now flows through [app-theme-provider.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/theme/app-theme-provider.tsx)
+    - the frontend boot path now reads the default theme from one seam in [client/src/App.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/App.tsx)
+    - focused UI config coverage now exists in [app-theme.test.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/theme/app-theme.test.tsx)
+  - `P12-004` is now complete:
+    - the current shipped visual style now lives in the named current-theme token set in [client/src/index.css](/Users/aman/Projects/personal-projects/Learn-Language/client/src/index.css)
+    - a complete `minimal` token set now exists in [client/src/index.css](/Users/aman/Projects/personal-projects/Learn-Language/client/src/index.css)
+    - implemented theme rotation now switches between `dark` and `minimal` through [client/src/components/layout.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/components/layout.tsx)
+    - theme config coverage now verifies both implemented themes in [client/src/theme/app-theme.test.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/theme/app-theme.test.tsx)
+    - verification passed with `pnpm exec vitest run client/src/theme/app-theme.test.tsx` and `pnpm run check`
+  - `P12-005` is now complete:
+    - shared token utilities now own reusable motion/status-surface behavior in [client/src/index.css](/Users/aman/Projects/personal-projects/Learn-Language/client/src/index.css)
+    - core primitives now use semantic radius/shadow/status tokens across [button-variants.ts](/Users/aman/Projects/personal-projects/Learn-Language/client/src/components/ui/button-variants.ts), [card.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/components/ui/card.tsx), [alert.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/components/ui/alert.tsx), [toast.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/components/ui/toast.tsx), [avatar.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/components/ui/avatar.tsx), and [page-states.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/components/ui/page-states.tsx)
+    - form and overlay primitives now use theme-safe token surfaces in [input.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/components/ui/input.tsx), [textarea.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/components/ui/textarea.tsx), [select.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/components/ui/select.tsx), [dialog.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/components/ui/dialog.tsx), [popover.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/components/ui/popover.tsx), and [sheet.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/components/ui/sheet.tsx)
+    - verification passed with `pnpm run test:ui` and `pnpm run check`
+  - `P12-006` is now complete:
+    - quiz feedback, profile save messaging, review draft feedback, and history result badges now consume semantic status tokens in [quiz-feedback-panel.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/components/quiz/quiz-feedback-panel.tsx), [profile-form-card.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/features/profile/profile-form-card.tsx), [create-vocabulary-draft-form.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/features/review/create-vocabulary-draft-form.tsx), and [history-results-table.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/features/history/history-results-table.tsx)
+    - status text utility classes now exist in [client/src/index.css](/Users/aman/Projects/personal-projects/Learn-Language/client/src/index.css)
+    - targeted verification passed with `pnpm exec vitest run client/src/features/profile/profile-form-card.test.tsx client/src/features/review/create-vocabulary-draft-form.test.tsx client/src/features/history/history-results-table.test.tsx client/src/components/quiz-card.test.tsx client/src/pages/history.integration.test.tsx client/src/pages/add-vocabulary.integration.test.tsx client/src/theme/app-theme.test.tsx` and `pnpm run check`
+    - remaining raw status-color outlier is now limited to [client/src/pages/not-found.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/pages/not-found.tsx), which moves into `P12-007`
+  - `P12-007` is now complete:
+    - the not-found route now uses shared theme-safe surface/status styling in [client/src/pages/not-found.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/pages/not-found.tsx)
+    - quiz feedback examples no longer rely on `dark:` branching in [client/src/components/quiz/quiz-feedback-examples.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/components/quiz/quiz-feedback-examples.tsx)
+    - the final page/feature outlier scan now leaves only [client/src/components/ui/chart.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/components/ui/chart.tsx), which is the intended scope of `P12-008`
+    - targeted verification passed with `pnpm exec vitest run client/src/components/quiz-card.test.tsx client/src/pages/auth.integration.test.tsx client/src/theme/app-theme.test.tsx` and `pnpm run check`
+  - `P12-008` is now complete:
+    - chart theme selector ownership now derives from the named theme registry in [client/src/components/ui/chart.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/components/ui/chart.tsx) and [client/src/theme/app-theme.ts](/Users/aman/Projects/personal-projects/Learn-Language/client/src/theme/app-theme.ts)
+    - chart tooltip surfaces now use tokenized shadow/radius styling in [client/src/components/ui/chart.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/components/ui/chart.tsx)
+    - focused chart coverage now exists in [client/src/components/ui/chart.test.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/components/ui/chart.test.tsx)
+    - verification passed with `pnpm exec vitest run client/src/components/ui/chart.test.tsx client/src/theme/app-theme.test.tsx` and `pnpm run check`
+  - `P12-009` is now complete:
+    - provider boot coverage now exists in [client/src/theme/app-theme-provider.test.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/theme/app-theme-provider.test.tsx)
+    - outlier page regression coverage now exists in [client/src/pages/not-found.test.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/pages/not-found.test.tsx)
+    - shared error-state class coverage was tightened in [client/src/components/ui/page-states.test.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/components/ui/page-states.test.tsx)
+    - verification passed with:
+      - `pnpm exec vitest run client/src/theme/app-theme-provider.test.tsx client/src/pages/not-found.test.tsx client/src/components/ui/page-states.test.tsx client/src/components/ui/chart.test.tsx client/src/theme/app-theme.test.tsx`
+      - `pnpm run test:ui`
+      - `pnpm run check`
+  - Phase 12 is now complete and the active backlog returns to `P11-002`
 - Planning baselines for the next implementation tasks are now documented:
   - React Query ownership baseline in [documentation/react-query-ownership-baseline.md](/Users/aman/Projects/personal-projects/Learn-Language/documentation/react-query-ownership-baseline.md)
   - Async UX contract in [documentation/async-ux-contract.md](/Users/aman/Projects/personal-projects/Learn-Language/documentation/async-ux-contract.md)

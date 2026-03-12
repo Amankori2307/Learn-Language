@@ -1,6 +1,6 @@
 # Performance Baseline
 
-This document is the active execution record for `P10-008`.
+This document is the completed execution record for `P10-008`.
 
 ## Measurement date
 
@@ -146,10 +146,13 @@ Why this was chosen fourth:
 
 ## Current status
 
-- `P10-008A`: in progress
-- `P10-008B`: in progress
-- `P10-008C`: in progress
-- `P10-008D`: started with the first backend optimization slice above
+- `P10-008A`: complete
+- `P10-008B`: complete
+- `P10-008C`: complete
+- `P10-008D`: complete
+- `P10-008E`: complete
+
+The performance phase is complete for the current codebase. The items above under "Current ranking of likely next performance work" are future optimization candidates, not active incomplete phase slices.
 
 ## Known limitations
 

@@ -42,7 +42,10 @@ export interface QuizAnswerPanelProps {
   options: QuizOption[];
   selectedOption: number | null;
   isSubmitting: boolean;
+  submitError: string | null;
+  showConfidenceControl: boolean;
   confidenceLevel: 1 | 2 | 3;
+  onConfidenceChange: (value: 1 | 2 | 3) => void;
   onSelectOption: (optionId: number) => void;
   onSubmitSelection: (optionId: number, confidenceLevel: 1 | 2 | 3) => void;
 }

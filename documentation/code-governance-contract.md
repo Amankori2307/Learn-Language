@@ -24,6 +24,19 @@ This document turns the Phase 10 anti-duplication guidance into explicit ownersh
 - Reusable client types belong in feature-owned hook/service/lib modules only when they are not shared across domains. If a type becomes cross-feature or cross-layer, promote it into `shared/*`.
 - Avoid public alias wrappers that simply restate an existing enum or interface name in another module unless the alias carries genuinely different semantics.
 
+### React Query ownership
+
+- Pages and presentational components must not call `apiClient` directly or define transport-backed `useQuery` / `useMutation` ownership.
+- Shared data-access ownership belongs in `client/src/hooks/*`; page-specific orchestration belongs in feature `use-*-view-model.ts` modules.
+- The module that defines a shared query must also define the query-key builder used by callers and invalidation sites.
+- Prefer stable positional tuple keys:
+  - resource key first
+  - scope variables next
+  - pagination/filter variables last
+- Use narrow invalidation by default.
+- Broad invalidation is reserved for truly global/admin mutations and should carry explicit rationale.
+- Query-behavior overrides such as stale-time or retry exceptions should be centralized in a shared seam instead of repeated as inline literals.
+
 ### Magic numbers
 
 - Business-rule numbers such as limits, thresholds, window sizes, retry counts, cache TTLs, and scoring weights must be named constants.
@@ -46,6 +59,9 @@ Before merging a change:
 - confirm new shared shapes were added to the correct ownership layer
 - confirm no feature file duplicated an existing exported symbol name
 - confirm any new threshold, timeout, page size, or scoring number was named if it affects business behavior
+- confirm new query ownership lives in shared hooks or feature view-models rather than pages/presentational components
+- confirm new shared queries export and reuse a stable key builder instead of scattering tuple literals
+- confirm mutation invalidation is intentionally narrow unless the change is explicitly global/admin in scope
 - confirm branch workflow still follows the phase-branch to `main` integration model
 - confirm commits were split on meaningful logical units instead of unrelated mixed work
 

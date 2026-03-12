@@ -10,7 +10,13 @@ import { LanguageEnum } from "@shared/domain/enums";
 import { PART_OF_SPEECH_OPTIONS } from "@shared/domain/part-of-speech";
 import { VOCABULARY_TAG_OPTIONS } from "@shared/domain/vocabulary-tags";
 
-export function CreateVocabularyDraftForm() {
+export type CreateVocabularyDraftFormViewModel = ReturnType<typeof useCreateVocabularyDraftForm>;
+
+export function CreateVocabularyDraftFormContent({
+  viewModel,
+}: {
+  viewModel: CreateVocabularyDraftFormViewModel;
+}) {
   const {
     createError,
     createSuccess,
@@ -42,7 +48,7 @@ export function CreateVocabularyDraftForm() {
     removeExample,
     submitDraft,
     isSubmitting,
-  } = useCreateVocabularyDraftForm();
+  } = viewModel;
 
   return (
     <div className="space-y-4 rounded-2xl border border-border/50 bg-card p-4 md:p-6">
@@ -151,7 +157,7 @@ export function CreateVocabularyDraftForm() {
           <Label htmlFor="draft-clusters">Clusters (Optional)</Label>
           {availableClustersQuery.isLoading ? <InlineLoading label="Loading clusters..." /> : null}
           {availableClustersQuery.isError ? (
-            <p className="text-sm text-red-600">Failed to load clusters.</p>
+            <p className="text-sm text-status-error">Failed to load clusters.</p>
           ) : null}
           <SearchableMultiSelect
             id="draft-clusters"
@@ -172,8 +178,8 @@ export function CreateVocabularyDraftForm() {
         removeExample={removeExample}
       />
 
-      {createError ? <p className="text-sm text-red-600">{createError}</p> : null}
-      {createSuccess ? <p className="text-sm text-emerald-600">{createSuccess}</p> : null}
+      {createError ? <p className="text-sm text-status-error">{createError}</p> : null}
+      {createSuccess ? <p className="text-sm text-status-success">{createSuccess}</p> : null}
 
       <PendingButton
         onClick={submitDraft}
@@ -185,4 +191,10 @@ export function CreateVocabularyDraftForm() {
       </PendingButton>
     </div>
   );
+}
+
+export function CreateVocabularyDraftForm() {
+  const viewModel = useCreateVocabularyDraftForm();
+
+  return <CreateVocabularyDraftFormContent viewModel={viewModel} />;
 }

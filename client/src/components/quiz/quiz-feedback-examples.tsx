@@ -30,7 +30,7 @@ export function QuizFeedbackExamples({
         {examples.map((example, index) => (
           <div
             key={`${example.originalScript}-${index}`}
-            className="rounded-lg bg-background/90 p-3 text-foreground dark:bg-background/60"
+            className="rounded-[var(--radius-md)] border border-border/50 bg-background/80 p-3 text-foreground [box-shadow:var(--shadow-xs)]"
           >
             <div className="flex items-center justify-end pb-2">
               <Button

@@ -61,6 +61,10 @@ export function useTutorPageViewModel() {
 
   return {
     wordsQuery,
+    isLoading: wordsQuery.isLoading,
+    isError: wordsQuery.isError,
+    hasWords: (wordsQuery.data?.length ?? 0) > 0,
+    retry: () => wordsQuery.refetch(),
     input,
     setInput,
     chat,

@@ -1,11 +1,17 @@
 import { APP_BRAND_NAME } from "@shared/domain/constants/app-brand";
+import { SurfaceMessage } from "@/components/ui/page-states";
 import { PendingButton } from "@/components/ui/pending-button";
 
 export function AuthSignInPanel({
   isLoginPending,
+  authError,
   handleLogin,
 }: {
   isLoginPending: boolean;
+  authError: {
+    title: string;
+    description: string;
+  } | null;
   handleLogin: () => void;
 }) {
   return (
@@ -32,6 +38,14 @@ export function AuthSignInPanel({
         </div>
 
         <div className="rounded-3xl border border-border/50 bg-card p-6 shadow-xl sm:p-8">
+          {authError ? (
+            <SurfaceMessage
+              title={authError.title}
+              description={authError.description}
+              tone="error"
+              className="mb-5 p-5 text-left"
+            />
+          ) : null}
           <PendingButton
             size="lg"
             className="h-12 w-full text-base font-semibold shadow-lg shadow-primary/20"

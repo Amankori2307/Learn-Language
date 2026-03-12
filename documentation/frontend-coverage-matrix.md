@@ -12,23 +12,23 @@ Status legend:
 
 | Surface | Loading | Error | Empty | Success / normal render | Pending / interaction | Responsive | Notes |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| `dashboard` | `covered` | `covered` | `covered` | `covered` | `partial` | `partial` | loading, retryable error, default primary-action behavior, and zero-data/default-stat rendering are now covered |
-| `quiz` | `covered` | `partial` | `covered` | `covered` | `covered` | `partial` | quiz completion and active-session shell are covered; explicit route-level error fallback remains thin |
-| `clusters` | `covered` | `covered` | `covered` | `covered` | `partial` | `partial` | search/filter interaction and request-failure handling are covered; responsive assertions are still absent |
-| `contextual` | `covered` | `covered` | `covered` | `covered` | `partial` | `partial` | cluster selection and request-failure handling are covered; responsive assertions are still absent |
+| `dashboard` | `covered` | `covered` | `covered` | `covered` | `covered` | `covered` | loading, retryable error, zero-data/default-stat rendering, route-level learner action wiring, and responsive hero/grid classes are covered |
+| `quiz` | `covered` | `covered` | `covered` | `covered` | `covered` | `covered` | quiz completion, active-session shell, dedicated route-level error fallback, and responsive session/card layout classes are covered |
+| `clusters` | `covered` | `covered` | `covered` | `covered` | `covered` | `covered` | search/filter interaction, pagination forwarding, practice-link wiring, request-failure handling, and responsive filter/pagination classes are covered |
+| `contextual` | `covered` | `covered` | `covered` | `covered` | `covered` | `covered` | cluster selection, workout-CTA wiring, request-failure handling, and responsive header/story-grid classes are covered |
 | `history` | `covered` | `covered` | `covered` | `covered` | `covered` | `covered` | page-level refresh and responsive CTA composition are covered |
-| `leaderboard` | `covered` | `covered` | `covered` | `covered` | `partial` | `covered` | loading-state page composition and responsive window-switch layout are now covered |
+| `leaderboard` | `covered` | `covered` | `covered` | `covered` | `covered` | `covered` | loading-state page composition, route-level window switching, pending disable-state, and responsive window-switch layout are covered |
 | `word-buckets` | `covered` | `covered` | `covered` | `covered` | `covered` | `covered` | bucket switching and responsive bucket-switch layout are covered |
-| `profile` | `covered` | `covered` | `n/a` | `covered` | `covered` | `partial` | save flow, retryable error, and route-level loading composition are covered |
-| `auth` | `covered` | `gap` | `n/a` | `covered` | `covered` | `partial` | sign-in CTA, pending button, and bootstrap/redirect handshake now have direct route and hook coverage; explicit auth-route failure handling is still absent |
-| `tutor` | `gap` | `gap` | `gap` | `covered` | `covered` | `partial` | intentionally lower priority until tutor retention is finalized |
+| `profile` | `covered` | `covered` | `n/a` | `covered` | `covered` | `covered` | save flow, retryable error, loading composition, and responsive stacked-to-two-column form behavior are covered |
+| `auth` | `covered` | `covered` | `n/a` | `covered` | `covered` | `covered` | sign-in CTA, pending button, bootstrap/redirect handshake, retryable failure messaging, and responsive auth shell classes are covered |
+| `tutor` | `covered` | `covered` | `covered` | `covered` | `covered` | `covered` | route-owned loading/error/empty states and responsive stacked-to-row tutor composer layout are covered, but tutor remains lower priority until retention is finalized |
 
 ## Reviewer/admin surfaces
 
 | Surface | Loading | Error | Empty | Success / normal render | Pending / interaction | Role-gated | Responsive | Notes |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | `review` | `covered` | `covered` | `covered` | `covered` | `covered` | `covered` | `covered` | queue/history loading, error, empty, actions, role denial, and responsive bulk-action layout are covered |
-| `add-vocabulary` | `partial` | `partial` | `n/a` | `covered` | `covered` | `covered` | `partial` | create flow, access gating, cluster-loading, and submit pending are covered; explicit create-failure page composition is still thin |
+| `add-vocabulary` | `covered` | `covered` | `n/a` | `covered` | `covered` | `covered` | `covered` | route-owned cluster bootstrap loading, create flow, access gating, submit pending, draft-creation failure composition, and responsive form/CTA behavior are covered |
 
 ## Shared presentation / async primitives
 
@@ -42,14 +42,11 @@ Status legend:
 
 ## Highest-priority remaining gaps
 
-1. `auth`: decide whether `/auth` needs an explicit failure surface beyond the current bootstrap/redirect behavior, or document that provider failure remains intentionally outside route-owned UI state.
-2. `add-vocabulary`: decide whether draft-creation failure needs a stronger route-level composition test beyond the current mutation and access-gating coverage.
-3. lower-priority responsive assertions remain thin for `profile`, `auth`, `clusters`, and `contextual`, but the highest-risk analytics/review layouts now have direct page-level protection.
+1. route-level frontend coverage is broadly in place across core learner and reviewer surfaces; remaining work is now mostly long-tail polish rather than visible state-ownership gaps.
 
 ## Explicit Phase 9 deferrals
 
-- `auth` failure UI is currently deferred: the route only owns bootstrap, redirect, and sign-in initiation, while provider-login failure still resolves outside local route state.
-- `tutor` remains non-core for Phase 9 closeout and does not block completion of the stabilized learner/reviewer flow coverage.
+- `tutor` remains non-core for prioritization purposes even though basic route-state coverage now exists.
 
 ## Exit criteria for `P9-009`
 

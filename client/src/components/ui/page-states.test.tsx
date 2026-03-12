@@ -11,7 +11,7 @@ import {
 
 describe("page state primitives", () => {
   it("renders a surface message with action content", () => {
-    render(
+    const { container } = render(
       <SurfaceMessage
         title="Failed to load"
         description="Retry the request."
@@ -23,6 +23,7 @@ describe("page state primitives", () => {
     expect(screen.getByText("Failed to load")).toBeTruthy();
     expect(screen.getByText("Retry the request.")).toBeTruthy();
     expect(screen.getByRole("button", { name: "Retry" })).toBeTruthy();
+    expect(container.innerHTML.includes("surface-status-error")).toBe(true);
   });
 
   it("renders inline loading feedback", () => {

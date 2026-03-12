@@ -144,4 +144,39 @@ describe("Dashboard integration", () => {
     expect(screen.getByText("Needs Review")).toBeTruthy();
     expect(screen.getByRole("button", { name: "Start Daily Review" })).toBeTruthy();
   });
+
+  it("wires dashboard learner actions to the expected routes", () => {
+    render(<Dashboard />);
+
+    expect(screen.getByRole("link", { name: "Resume Weak Words" }).getAttribute("href")).toBe(
+      "/quiz?mode=weak_words",
+    );
+    expect(screen.getByRole("link", { name: "Open Analytics" }).getAttribute("href")).toBe(
+      "/analytics",
+    );
+    const openHrefs = screen
+      .getAllByRole("link", { name: "Open" })
+      .map((link) => link.getAttribute("href"));
+    expect(openHrefs).toContain("/quiz?mode=daily_review");
+    expect(openHrefs).toContain("/quiz?mode=new_words");
+    expect(openHrefs).toContain("/quiz?mode=weak_words");
+    expect(openHrefs).toContain("/clusters");
+
+    const bucketHrefs = screen
+      .getAllByRole("link", { name: "View Words" })
+      .map((link) => link.getAttribute("href"));
+    expect(bucketHrefs).toContain("/analytics/words?bucket=mastered");
+    expect(bucketHrefs).toContain("/analytics/words?bucket=learning");
+    expect(bucketHrefs).toContain("/analytics/words?bucket=needs_review");
+  });
+
+  it("keeps the dashboard route responsive with stacked hero actions and upgraded grids", () => {
+    const { container } = render(<Dashboard />);
+
+    expect(screen.getByRole("button", { name: "Resume Weak Words" }).className).toContain("w-full");
+    expect(screen.getByRole("button", { name: "Resume Weak Words" }).className).toContain("sm:w-auto");
+    expect(screen.getByRole("button", { name: "Open Analytics" }).className).toContain("w-full");
+    expect(container.querySelector(".grid.grid-cols-1.gap-4.md\\:grid-cols-2.lg\\:grid-cols-4")).toBeTruthy();
+    expect(container.querySelector(".grid.grid-cols-1.gap-4.md\\:grid-cols-2.xl\\:grid-cols-4")).toBeTruthy();
+  });
 });

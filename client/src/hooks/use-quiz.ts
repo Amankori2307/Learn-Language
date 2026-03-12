@@ -5,10 +5,51 @@ import { QuizModeEnum } from "@shared/domain/enums";
 import { useLearningLanguage } from "@/hooks/use-language";
 import { AxiosError } from "axios";
 import { apiClient, buildApiUrl } from "@/services/apiClient";
+import { QUERY_BEHAVIOR_RULES } from "@/hooks/query-behavior";
 
 // Types derived from API definition
 export type QuizModeValue = QuizModeEnum;
 type QuizSubmitInput = z.infer<typeof api.quiz.submit.input>;
+
+export function quizGenerateQueryKey(
+  mode: QuizModeValue,
+  clusterId: number | null,
+  language: string,
+) {
+  return [api.quiz.generate.path, mode, clusterId, language] as const;
+}
+
+export function statsQueryKey(language: string) {
+  return [api.stats.get.path, language] as const;
+}
+
+export function learningInsightsQueryKey(language: string) {
+  return [api.analytics.learning.path, language] as const;
+}
+
+const SEED_INVALIDATION_QUERY_KEYS = [
+  [api.stats.get.path],
+  [api.analytics.learning.path],
+  [api.analytics.wordBuckets.path],
+  [api.attempts.history.path],
+  [api.leaderboard.list.path],
+  [api.words.list.path],
+  [api.words.get.path],
+  [api.clusters.list.path],
+  [api.clusters.get.path],
+  [api.quiz.generate.path],
+  [api.review.queue.path],
+  [api.review.history.path],
+  [api.admin.srsDrift.path],
+] as const;
+
+const QUIZ_SUBMIT_INVALIDATION_QUERY_KEYS = [
+  [api.stats.get.path],
+  [api.analytics.learning.path],
+  [api.analytics.wordBuckets.path],
+  [api.attempts.history.path],
+  [api.leaderboard.list.path],
+] as const;
 
 export function useGenerateQuiz(
   mode: QuizModeValue = QuizModeEnum.DAILY_REVIEW,
@@ -16,7 +57,7 @@ export function useGenerateQuiz(
 ) {
   const { language } = useLearningLanguage();
   return useQuery({
-    queryKey: [api.quiz.generate.path, mode, clusterId ?? null, language],
+    queryKey: quizGenerateQueryKey(mode, clusterId ?? null, language),
     queryFn: async () => {
       const params = new URLSearchParams();
       params.append("mode", mode);
@@ -28,8 +69,8 @@ export function useGenerateQuiz(
       );
       return parseSuccessResponse(api.quiz.generate.responses[200], res.data);
     },
-    refetchOnWindowFocus: false,
-    staleTime: 0, // Always fetch fresh quiz
+    refetchOnWindowFocus: QUERY_BEHAVIOR_RULES.quiz.refetchOnWindowFocus,
+    staleTime: QUERY_BEHAVIOR_RULES.quiz.generateStaleTimeMs,
   });
 }
 
@@ -51,8 +92,9 @@ export function useSubmitAnswer() {
       return parseSuccessResponse(api.quiz.submit.responses[200], res.data);
     },
     onSuccess: () => {
-      // Invalidate stats to refresh dashboard progress immediately
-      queryClient.invalidateQueries({ queryKey: [api.stats.get.path, language] });
+      QUIZ_SUBMIT_INVALIDATION_QUERY_KEYS.forEach((queryKey) => {
+        queryClient.invalidateQueries({ queryKey: [...queryKey, language] });
+      });
     },
   });
 }
@@ -60,7 +102,7 @@ export function useSubmitAnswer() {
 export function useStats() {
   const { language } = useLearningLanguage();
   return useQuery({
-    queryKey: [api.stats.get.path, language],
+    queryKey: statsQueryKey(language),
     queryFn: async () => {
       const params = new URLSearchParams({ language });
       try {
@@ -79,7 +121,7 @@ export function useStats() {
 export function useLearningInsights() {
   const { language } = useLearningLanguage();
   return useQuery({
-    queryKey: [api.analytics.learning.path, language],
+    queryKey: learningInsightsQueryKey(language),
     queryFn: async () => {
       const params = new URLSearchParams({ language });
       try {
@@ -105,7 +147,9 @@ export function useSeedData() {
       return parseSuccessResponse(api.admin.seed.responses[200], res.data);
     },
     onSuccess: () => {
-      queryClient.invalidateQueries();
+      SEED_INVALIDATION_QUERY_KEYS.forEach((queryKey) => {
+        queryClient.invalidateQueries({ queryKey: [...queryKey] });
+      });
     },
   });
 }

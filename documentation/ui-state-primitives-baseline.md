@@ -336,7 +336,6 @@ Reason:
 - accessibility and motion constraints are documented
 - adoption order is locked before responsive/page refactor work proceeds
 
-## Immediate next dependency
+## Phase follow-up status
 
-After `P9-004`, the next correct step is `P9-005`: responsive and adaptive layout hardening using these shared state assumptions.
-
+The historical next dependency from this baseline is complete: `P9-005` applied the shared state assumptions during responsive and adaptive layout hardening.

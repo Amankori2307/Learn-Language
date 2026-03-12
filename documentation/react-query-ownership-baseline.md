@@ -20,10 +20,9 @@ Current reality:
 - most shared data access hooks already use React Query
 - some feature surfaces are already reasonably structured
 - request ownership is still inconsistent
-- query key conventions are not explicitly documented
+- shared hooks now broadly export explicit query-key builders, but the repo-wide convention is still not fully documented
 - invalidation strategy is uneven
-- one component still defines its own query
-- one browser capability hook still performs direct API resolution work
+- query ownership is now broadly aligned; the remaining issues are more about conventions than obvious boundary leaks
 
 ## UI-facing request inventory
 
@@ -40,10 +39,10 @@ Current reality:
 | Flow | Current owner | Classification | Assessment |
 | ---- | ------------- | -------------- | ---------- |
 | quiz generation | `useGenerateQuiz` | query | healthy |
-| answer submit | `useSubmitAnswer` | mutation | healthy, but invalidation only refreshes stats |
+| answer submit | `useSubmitAnswer` | mutation | healthy enough; invalidation now refreshes learner progress summaries, history, buckets, and leaderboard data touched by answer submission |
 | stats | `useStats` | query | healthy |
 | learning insights | `useLearningInsights` | query | healthy |
-| admin seed | `useSeedData` | mutation | weak invalidation strategy; currently invalidates everything |
+| admin seed | `useSeedData` | mutation | healthy enough; invalidation is now scoped to seed-affected learner/reviewer/admin resources |
 
 ### Vocabulary and clusters
 
@@ -53,7 +52,7 @@ Current reality:
 | cluster detail | `useCluster` | query | healthy |
 | word list | `useWords` | query | healthy |
 | word detail | `useWord` | query | healthy |
-| cluster list for add-vocabulary form | `CreateVocabularyDraftForm` local `useQuery` | query | boundary violation; should move to hook/feature layer |
+| cluster list for add-vocabulary form | `useCreateVocabularyDraftForm` via `useClustersForLanguage` | query | healthy; transport/query ownership is delegated to the shared clusters hook |
 
 ### Analytics
 
@@ -84,45 +83,11 @@ Current reality:
 
 | Flow | Current owner | Classification | Assessment |
 | ---- | ------------- | -------------- | ---------- |
-| audio resolve | `useHybridAudio` private helper `resolveServerAudioUrl` | mutation-like async side effect | architecture leak; request lifecycle is hidden inside a browser-playback hook |
+| audio resolve | `useAudioResolution` | mutation-like async side effect | healthy enough; request ownership is separated from browser playback behavior |
 
 ## Current request ownership problems
 
-### 1. A component still owns a query definition
-
-Problem file:
-
-- [client/src/components/review/create-vocabulary-draft-form.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/components/review/create-vocabulary-draft-form.tsx)
-
-Why this is a problem:
-
-- component owns request construction
-- component owns transport calls
-- cluster-fetch concern is mixed with a large form view
-- the component becomes harder to replace or test in isolation
-
-Required future state:
-
-- cluster options for the form come from a hook or feature view-model
-
-### 2. Browser capability hook owns API resolution logic
-
-Problem file:
-
-- [client/src/hooks/use-hybrid-audio.ts](/Users/aman/Projects/personal-projects/Learn-Language/client/src/hooks/use-hybrid-audio.ts)
-
-Why this is a problem:
-
-- playback behavior and API resolution are coupled
-- not expressed through a normal feature-owned async state contract
-- makes later async UX and loading semantics harder to standardize
-
-Required future state:
-
-- audio resolution should move behind a clearer adapter/hook boundary
-- playback hook should focus on browser/media behavior
-
-### 3. Query key conventions exist but are implicit
+### 1. Query key conventions are mostly implemented but not yet promoted to a repo-wide policy
 
 Current patterns:
 
@@ -131,26 +96,26 @@ Current patterns:
 - route-path plus object
 - route-path plus page/filter variables
 
-Problems:
+Remaining gap:
 
-- no documented ownership of key structure
+- most shared hooks now own and export their key builders, but the repo still lacks one centralized convention policy
 - invalidation partials are used without a formal contract
-- future refactors could easily break cache behavior
+- future refactors could still drift if new hooks do not follow the same ownership pattern
 
-### 4. Invalidation strategy is inconsistent
+### 2. Invalidation strategy is narrower now, but the policy is still implicit
 
 Examples:
 
-- `useSubmitAnswer` invalidates stats only
+- `useSubmitAnswer` invalidates the main learner progress surfaces, but the repo still has no shared policy for how wide learner mutation invalidation should be
 - `useProfile` invalidates profile and auth user
 - review mutations invalidate queue/history
-- `useSeedData` invalidates everything with `invalidateQueries()`
+- `useSeedData` now invalidates a fixed list of seed-affected resource prefixes, but the repo still has no shared invalidation policy
 
-Problem:
+Remaining gap:
 
-- there is no shared rule for narrow versus broad invalidation
+- there is no shared rule for narrow versus broad invalidation beyond this baseline
 
-### 5. Query defaults are global but feature-specific overrides are undocumented
+### 3. Query defaults are now centralized, but the exception policy still needs to stay explicit
 
 Global defaults in [client/src/lib/queryClient.ts](/Users/aman/Projects/personal-projects/Learn-Language/client/src/lib/queryClient.ts):
 
@@ -163,9 +128,9 @@ Feature overrides:
 - auth sets finite stale time
 - quiz generation sets `staleTime: 0`
 
-Problem:
+Remaining gap:
 
-- the reasons for these exceptions are not formalized
+- the reasons for these exceptions are now formalized in code, but future overrides still need to follow the same shared seam
 
 ## Ownership rules to enforce
 
@@ -278,7 +243,7 @@ Examples:
   - invalidate review history for affected item if visible
 - quiz answer submit:
   - invalidate stats
-  - consider invalidating any current learning-insight summaries impacted by attempt results if those views are expected to stay fresh
+  - invalidate any learner summaries/history views expected to stay fresh immediately after an answer submit
 
 ### Broad invalidation is allowed only for exceptional admin/global mutations
 
@@ -305,69 +270,36 @@ This is currently aligned with the app’s behavior and avoids noisy retries on 
 ### Stale-time rules
 
 - auth/user identity:
-  - finite stale time is acceptable
+  - finite stale time is acceptable and now formalized in `QUERY_BEHAVIOR_RULES.auth`
 - quiz generation:
-  - `staleTime: 0` because quiz content must be freshly generated per session intent
+  - `staleTime: 0` because quiz content must be freshly generated per session intent, and this is now formalized in `QUERY_BEHAVIOR_RULES.quiz`
 - static-ish reference data such as clusters:
   - can be longer-lived once conventions are documented
 - profile/review/analytics:
   - use explicit reasoning per feature rather than inheriting `Infinity` accidentally
 
-The main requirement is not one exact value. It is that each override must be intentional and documented.
+The main requirement is not one exact value. It is that each override must be intentional, documented, and preferably owned from one explicit rule seam rather than repeated as ad hoc literals.
 
-## Migration order for `P9-002`
+## Outcome after `P9-002` follow-up work
 
-### Step 1
+The originally identified migration slices are now complete:
 
-Move all component-level queries into hooks or feature view-models.
+- component-level transport-backed query ownership was moved out of learner-facing presentational surfaces
+- shared learner hooks now broadly export explicit query-key builders
+- auth and quiz query-behavior overrides now live behind a shared rule seam
+- add-vocabulary cluster lookup now reuses the shared clusters hook
+- audio resolution request ownership is separated from browser playback behavior
+- high-impact learner invalidation paths are now narrowed and explicit
 
-Immediate target:
+## Remaining follow-up work
 
-- `CreateVocabularyDraftForm`
+The remaining work is smaller and more policy-oriented than migration-oriented:
 
-### Step 2
+1. document the query-key and invalidation conventions in the repo-wide governance docs so new hooks follow the same ownership model by default
+2. keep reviewer/admin surfaces aligned when future mutations or shared hooks are added
+3. periodically re-run the inventory if new feature areas introduce direct transport access or ad hoc cache rules
 
-Normalize key structure and invalidation expectations in shared hooks.
-
-Highest-priority hooks:
-
-- `use-quiz`
-- `use-review`
-- `use-profile`
-- `use-clusters`
-- `use-leaderboard`
-- `use-attempt-history`
-
-### Step 3
-
-Refactor page-specific orchestration into feature view-models where pages currently combine:
-
-- URL-state synchronization
-- filtering/sorting/pagination
-- request consumption
-- summary derivation
-
-Highest-priority pages:
-
-- clusters
-- history
-- review
-
-### Step 4
-
-Separate audio resolution request logic from browser playback ownership.
-
-### Step 5
-
-Re-run inventory after learner surfaces stabilize, then align reviewer/admin surfaces.
-
-## Immediate implementation priorities
-
-The first code migrations under `P9-002` should target:
-
-1. cluster query ownership in add-vocabulary
-2. query key normalization for high-traffic learner hooks
-3. page-level orchestration extraction for clusters/history/review
+The first follow-up item is now complete through the repo-wide coding guidance and governance docs.
 
 ## Acceptance checks for `P9-002`
 
@@ -379,3 +311,5 @@ The first code migrations under `P9-002` should target:
 - invalidation behavior is intentional and narrow by default
 - Axios remains behind service/hook boundaries
 - React Query lifecycle ownership is consistent across learner and reviewer flows
+
+That acceptance bar is now met for the current codebase. The remaining debt is about keeping the conventions explicit and enforced as new features are added.

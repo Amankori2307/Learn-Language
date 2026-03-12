@@ -6,4 +6,4 @@ Completed work is intentionally removed from this file and should live in featur
 
 ## Active tasks
 
-- `todo` `P11-002` Decide and implement the future of quiz confidence input: either restore it behind an explicit learner preference (for example in profile) or replace it with a lower-friction interaction that preserves useful grading signal without crowding the mobile quiz UI.
+No active tasks. Re-prioritize the next slice before implementation continues.

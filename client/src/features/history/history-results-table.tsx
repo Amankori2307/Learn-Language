@@ -65,8 +65,12 @@ export function HistoryResultsTable({
                 <p className="mt-1 text-sm text-muted-foreground">{attempt.word.english}</p>
               </div>
               <Badge
-                variant={attempt.isCorrect ? "default" : "destructive"}
-                className={attempt.isCorrect ? "bg-emerald-600 hover:bg-emerald-600" : ""}
+                variant={attempt.isCorrect ? "secondary" : "destructive"}
+                className={
+                  attempt.isCorrect
+                    ? "border-[hsl(var(--status-success-border))] bg-[hsl(var(--status-success))] text-[hsl(var(--status-success-foreground))] hover:bg-[hsl(var(--status-success))]"
+                    : ""
+                }
               >
                 {attempt.isCorrect ? "Correct" : "Wrong"}
               </Badge>
@@ -97,8 +101,12 @@ export function HistoryResultsTable({
           <div key={attempt.id} className="grid grid-cols-12 items-center gap-3 px-4 py-3">
             <div className="col-span-3 md:col-span-2">
               <Badge
-                variant={attempt.isCorrect ? "default" : "destructive"}
-                className={attempt.isCorrect ? "bg-emerald-600 hover:bg-emerald-600" : ""}
+                variant={attempt.isCorrect ? "secondary" : "destructive"}
+                className={
+                  attempt.isCorrect
+                    ? "border-[hsl(var(--status-success-border))] bg-[hsl(var(--status-success))] text-[hsl(var(--status-success-foreground))] hover:bg-[hsl(var(--status-success))]"
+                    : ""
+                }
               >
                 {attempt.isCorrect ? "Correct" : "Wrong"}
               </Badge>

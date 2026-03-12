@@ -12,6 +12,34 @@ Build a text-first language learning app with high data correctness, strong memo
 - Phase 8 functionality-first product hardening is complete.
 - Phase 9 frontend architecture, async UX, responsive UI, and test hardening is complete.
 - Phase 10 platform hardening, API normalization, observability, security, performance, SEO, and product intelligence is complete.
+- Phase 12 theme system and design token extraction is complete.
+- `P11-002` confidence-input follow-up is complete.
+- `P13-001` auth-route failure handling is complete.
+- `P13-002` add-vocabulary failure coverage is complete.
+- `P13-003` responsive coverage for profile/auth/add-vocabulary is complete.
+- `P13-004` responsive coverage for clusters/contextual is complete.
+- `P13-005` leaderboard interaction coverage is complete.
+- `P13-006` dashboard interaction coverage is complete.
+- `P13-007` clusters/contextual interaction coverage is complete.
+- `P13-008` quiz route error handling is complete.
+- `P13-009` dashboard/quiz responsive coverage is complete.
+- `P13-010` tutor route-state coverage is complete.
+- `P13-011` add-vocabulary route loading coverage is complete.
+- `P13-012` tutor responsive coverage is complete.
+- `P13-013` quiz submit failure handling is complete.
+- `P13-014` admin seed invalidation narrowing is complete.
+- `P13-015` audio resolution ownership cleanup is complete.
+- `P13-016` quiz submit invalidation widening is complete.
+- `P13-017` shared query-key normalization is complete.
+- `P13-018` add-vocabulary cluster query ownership cleanup is complete.
+- `P13-019` auth and word query-key normalization is complete.
+- `P13-020` shared query-behavior override formalization is complete.
+- `P13-021` React Query ownership baseline refresh is complete.
+- `P13-022` React Query governance policy promotion is complete.
+- `P13-023` deployment doc link normalization is complete.
+- `P13-024` phase-baseline dependency note cleanup is complete.
+- `P13-025` performance baseline status reconciliation is complete.
+- `P13-026` observability contract wording normalization is complete.
 
 ## Core capabilities live
 
@@ -41,6 +69,7 @@ Build a text-first language learning app with high data correctness, strong memo
     - generic imported descriptions are normalized to meaningful learner-facing copy
   - Quiz feedback now returns and renders up to 3 example sentences per answer (sentence + pronunciation + meaning)
   - Quiz completion CTA flow now resets session state on mode switches and routes to working next-session CTAs (including reinforcement loop)
+  - Quiz confidence input is available again behind an explicit learner preference in profile so mobile quiz UI stays uncluttered by default
 - Stats/analytics:
   - recall vs recognition accuracy
   - direction strength averages
@@ -112,5 +141,6 @@ Build a text-first language learning app with high data correctness, strong memo
 
 - Execute in order from [01-master-task-registry.md](/Users/aman/Projects/personal-projects/Learn-Language/context/plan/01-master-task-registry.md).
 - Current execution track:
-  - next planned implementation slice is `P11-002` confidence-input follow-up for quiz UX
-  - current product gap: visible confidence controls were removed from the quiz UI for mobile UX, but the long-term interaction model is still undecided
+  - last completed implementation slice is `P13-026` observability contract wording normalization
+  - current in-progress implementation slice is `-`
+  - Phase 12 outcome: named theme ownership, current/minimal shipped themes, semantic tokenized primitives, and chart theme support are now in place

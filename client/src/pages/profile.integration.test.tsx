@@ -3,6 +3,7 @@ import userEvent from "@testing-library/user-event";
 import type { ReactNode } from "react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import ProfilePage from "./profile";
+import { APP_STORAGE_KEYS } from "@shared/domain/constants/app-brand";
 
 const mutateAsync = vi.fn().mockResolvedValue(undefined);
 const refetch = vi.fn();
@@ -40,6 +41,7 @@ vi.mock("@/hooks/use-profile", () => ({
 
 describe("ProfilePage integration", () => {
   beforeEach(() => {
+    window.localStorage.clear();
     mockProfile = profileData;
     mockProfileLoading = false;
     mockProfileError = false;
@@ -89,5 +91,27 @@ describe("ProfilePage integration", () => {
 
     const { container } = render(<ProfilePage />);
     expect(container.querySelectorAll(".animate-pulse").length).toBeGreaterThan(0);
+  });
+
+  it("persists quiz confidence preference from the profile toggle", async () => {
+    const user = userEvent.setup();
+    render(<ProfilePage />);
+
+    const toggle = screen.getByRole("switch", { name: "Quiz confidence selector" });
+    expect(toggle.getAttribute("data-state")).toBe("unchecked");
+
+    await user.click(toggle);
+
+    expect(window.localStorage.getItem(APP_STORAGE_KEYS.quizConfidenceEnabled)).toBe("true");
+  });
+
+  it("keeps the profile form mobile-safe with stacked actions and two-column upgrade classes", () => {
+    const { container } = render(<ProfilePage />);
+
+    expect(screen.getByRole("button", { name: "Save Profile" }).className).toContain("sm:w-auto");
+
+    const formCard = container.querySelector(".rounded-2xl.border.border-border\\/50.bg-card");
+    expect(formCard?.querySelector(".grid.gap-4.md\\:grid-cols-2")).toBeTruthy();
+    expect(formCard?.querySelector(".flex.flex-col.gap-4.border-b.border-border\\/40.pb-3.sm\\:flex-row.sm\\:items-center")).toBeTruthy();
   });
 });

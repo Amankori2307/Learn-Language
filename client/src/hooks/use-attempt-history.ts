@@ -3,10 +3,14 @@ import { api, parseSuccessResponse } from "@shared/routes";
 import { useLearningLanguage } from "@/hooks/use-language";
 import { apiClient, buildApiUrl } from "@/services/apiClient";
 
+export function attemptHistoryQueryKey(limit: number, language: string) {
+  return [api.attempts.history.path, limit, language] as const;
+}
+
 export function useAttemptHistory(limit: number = 100) {
   const { language } = useLearningLanguage();
   return useQuery({
-    queryKey: [api.attempts.history.path, limit, language],
+    queryKey: attemptHistoryQueryKey(limit, language),
     queryFn: async () => {
       const params = new URLSearchParams({ limit: String(limit), language });
       const res = await apiClient.get(

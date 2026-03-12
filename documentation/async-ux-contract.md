@@ -321,7 +321,6 @@ Before implementation is considered complete, verify:
 - new one-off loading patterns without justification
 - blank content regions where the user cannot tell if the app is working
 
-## Immediate next dependency
+## Phase follow-up status
 
-After `P9-003`, the next correct step is `P9-004`: define the shared loading, skeleton, empty, and error-state primitives that implement this contract consistently.
-
+The historical next dependency from this baseline is complete: `P9-004` established the shared loading, skeleton, empty, and error-state primitives used across the client.

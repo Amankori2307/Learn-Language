@@ -19,8 +19,8 @@ const toneStyles = {
   },
   error: {
     icon: AlertTriangle,
-    wrapper: "border-red-200 bg-red-50 text-red-700",
-    iconClassName: "text-red-600",
+    wrapper: "surface-status-error",
+    iconClassName: "text-[hsl(var(--status-error-emphasis))]",
   },
   empty: {
     icon: Inbox,

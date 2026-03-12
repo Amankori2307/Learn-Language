@@ -10,15 +10,15 @@ import {
   Menu,
   MessageSquare,
   PlusCircle,
-  Moon,
   Sun,
   PanelLeftClose,
   PanelLeftOpen,
   ExternalLink,
   UserRound,
+  Palette,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { Sheet, SheetContent, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -34,6 +34,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { APP_BRAND_NAME, APP_BRAND_TAGLINE } from "@shared/domain/constants/app-brand";
+import { AppThemeId, getAppThemeIdForProviderTheme, getNextImplementedProviderTheme } from "@/theme/app-theme";
 
 function getInitials(firstName?: string | null, lastName?: string | null, email?: string | null) {
   const fromNames = `${firstName ?? ""} ${lastName ?? ""}`.trim();
@@ -72,6 +73,10 @@ export function Layout({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     setMounted(true);
   }, []);
+
+  const activeThemeId = getAppThemeIdForProviderTheme(resolvedTheme);
+  const isMinimalTheme = activeThemeId === AppThemeId.MINIMAL;
+  const nextTheme = getNextImplementedProviderTheme(resolvedTheme);
 
   const isReviewer = user?.role === UserTypeEnum.REVIEWER || user?.role === UserTypeEnum.ADMIN;
   const navigationSections = [
@@ -279,14 +284,14 @@ export function Layout({ children }: { children: React.ReactNode }) {
             className={cn("h-9 rounded-lg text-xs", compact && "px-2")}
             aria-label="Toggle theme"
             title="Toggle theme"
-            onClick={() => setTheme((resolvedTheme ?? "light") === "dark" ? "light" : "dark")}
+            onClick={() => setTheme(nextTheme)}
           >
-            {mounted && resolvedTheme === "dark" ? (
-              <Sun className="size-4" />
+            {mounted ? (
+              isMinimalTheme ? <Sun className="size-4" /> : <Palette className="size-4" />
             ) : (
-              <Moon className="size-4" />
+              <Palette className="size-4" />
             )}
-            {!compact && <span className="ml-2">Theme</span>}
+            {!compact && <span className="ml-2">{isMinimalTheme ? "Minimal" : "Current"}</span>}
           </Button>
         </div>
 
@@ -356,14 +361,14 @@ export function Layout({ children }: { children: React.ReactNode }) {
           <Button
             variant="outline"
             className="w-full rounded-lg"
-            onClick={() => setTheme((resolvedTheme ?? "light") === "dark" ? "light" : "dark")}
+            onClick={() => setTheme(nextTheme)}
           >
-            {mounted && resolvedTheme === "dark" ? (
-              <Sun className="size-4 mr-2" />
+            {mounted ? (
+              isMinimalTheme ? <Sun className="size-4 mr-2" /> : <Palette className="size-4 mr-2" />
             ) : (
-              <Moon className="size-4 mr-2" />
+              <Palette className="size-4 mr-2" />
             )}
-            Toggle Theme
+            {isMinimalTheme ? "Switch to Current Theme" : "Switch to Minimal Theme"}
           </Button>
           <a
             href="https://forms.gle/f2hH1BL3v4eNsxEg8"
@@ -422,6 +427,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
               </Button>
             </SheetTrigger>
             <SheetContent side="left" className="w-[88vw] max-w-[22rem] p-0">
+              <SheetTitle className="sr-only">Main navigation</SheetTitle>
               <NavContent mobile />
             </SheetContent>
           </Sheet>

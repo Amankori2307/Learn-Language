@@ -3,11 +3,15 @@ import userEvent from "@testing-library/user-event";
 import type { ReactNode } from "react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { QuizModeEnum, QuizQuestionTypeEnum } from "@shared/domain/enums";
+import { APP_STORAGE_KEYS } from "@shared/domain/constants/app-brand";
 import QuizPage from "./quiz";
 
 const setLocation = vi.fn();
 const submitAnswerMock = vi.fn();
+const refetchQuizMock = vi.fn();
 let searchMode: QuizModeEnum = QuizModeEnum.NEW_WORDS;
+let quizIsLoading = false;
+let quizIsError = false;
 const quizDataState = {
   data: [] as Array<{
     wordId: number;
@@ -32,8 +36,9 @@ vi.mock("@/components/layout", () => ({
 vi.mock("@/hooks/use-quiz", () => ({
   useGenerateQuiz: () => ({
     data: quizDataState.data,
-    isLoading: false,
-    isError: false,
+    isLoading: quizIsLoading,
+    isError: quizIsError,
+    refetch: refetchQuizMock,
   }),
   useSubmitAnswer: () => ({
     mutateAsync: submitAnswerMock,
@@ -55,10 +60,27 @@ vi.mock("@/lib/feedback-effects", () => ({
 
 describe("QuizPage integration", () => {
   beforeEach(() => {
+    window.localStorage.clear();
     setLocation.mockReset();
     submitAnswerMock.mockReset();
+    refetchQuizMock.mockReset();
+    quizIsLoading = false;
+    quizIsError = false;
     quizDataState.data = [];
     searchMode = QuizModeEnum.NEW_WORDS;
+  });
+
+  it("renders a retryable route-level error surface when quiz loading fails", async () => {
+    const user = userEvent.setup();
+    quizIsError = true;
+    render(<QuizPage />);
+
+    expect(screen.getByText("Could not load quiz session")).toBeTruthy();
+    await user.click(screen.getByRole("button", { name: "Retry Session" }));
+    await user.click(screen.getByRole("button", { name: "Return Home" }));
+
+    expect(refetchQuizMock).toHaveBeenCalledTimes(1);
+    expect(setLocation).toHaveBeenCalledWith("/");
   });
 
   it("shows new-word completion copy when new_words queue is empty", async () => {
@@ -147,5 +169,79 @@ describe("QuizPage integration", () => {
     await user.click(screen.getByRole("button", { name: /Start Reinforcement Loop/ }));
 
     expect(setLocation).toHaveBeenCalledWith(`/quiz?mode=${QuizModeEnum.WEAK_WORDS}`);
+  });
+
+  it("shows inline submit error messaging when answer submission fails", async () => {
+    quizDataState.data = [
+      {
+        wordId: 11,
+        type: QuizQuestionTypeEnum.SOURCE_TO_TARGET,
+        questionText: "నమస్తే",
+        pronunciation: "namaste",
+        audioUrl: null,
+        imageUrl: null,
+        options: [
+          { id: 11, text: "hello" },
+          { id: 12, text: "thank you" },
+        ],
+      },
+    ];
+    submitAnswerMock.mockRejectedValueOnce(new Error("Could not submit your answer right now."));
+
+    const user = userEvent.setup();
+    render(<QuizPage />);
+
+    await user.click(screen.getByRole("button", { name: "Option hello" }));
+    await user.click(screen.getByRole("button", { name: "Check Answer" }));
+
+    expect(screen.getByText("Could not submit your answer right now.")).toBeTruthy();
+    expect(screen.getByRole("button", { name: "Check Answer" })).toBeTruthy();
+  });
+
+  it("shows confidence controls when the learner preference is enabled", () => {
+    window.localStorage.setItem(APP_STORAGE_KEYS.quizConfidenceEnabled, "true");
+    quizDataState.data = [
+      {
+        wordId: 11,
+        type: QuizQuestionTypeEnum.SOURCE_TO_TARGET,
+        questionText: "నమస్తే",
+        pronunciation: "namaste",
+        audioUrl: null,
+        imageUrl: null,
+        options: [
+          { id: 11, text: "hello" },
+          { id: 12, text: "thank you" },
+        ],
+      },
+    ];
+
+    render(<QuizPage />);
+
+    expect(screen.getByLabelText("Answer confidence")).toBeTruthy();
+    expect(screen.getByText("Used to grade recall quality")).toBeTruthy();
+  });
+
+  it("keeps the quiz route responsive with mobile-first session shell and desktop split card", () => {
+    quizDataState.data = [
+      {
+        wordId: 11,
+        type: QuizQuestionTypeEnum.SOURCE_TO_TARGET,
+        questionText: "నమస్తే",
+        pronunciation: "namaste",
+        audioUrl: null,
+        imageUrl: null,
+        options: [
+          { id: 11, text: "hello" },
+          { id: 12, text: "thank you" },
+        ],
+      },
+    ];
+
+    const { container } = render(<QuizPage />);
+
+    expect(container.querySelector(".flex.h-screen.overflow-hidden.flex-col.bg-background")).toBeTruthy();
+    expect(container.querySelector(".flex.min-h-0.flex-1.items-center.justify-center.overflow-hidden.p-3.sm\\:p-4.md\\:px-6.md\\:pt-4.md\\:pb-8")).toBeTruthy();
+    expect(container.querySelector(".relative.flex.h-\\[calc\\(100vh-5\\.5rem\\)\\].min-h-\\[calc\\(100vh-5\\.5rem\\)\\].flex-col.overflow-hidden.rounded-\\[1\\.75rem\\].md\\:h-\\[min\\(88vh\\,820px\\)\\].md\\:min-h-0")).toBeTruthy();
+    expect(container.querySelector(".grid.min-h-0.flex-1.grid-cols-1.grid-rows-\\[auto_minmax\\(0\\,1fr\\)\\].lg\\:grid-cols-\\[1\\.05fr_1fr\\].lg\\:grid-rows-1")).toBeTruthy();
   });
 });

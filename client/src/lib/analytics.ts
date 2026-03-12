@@ -3,6 +3,7 @@ export type AnalyticsProvider = "noop" | "console" | "window-mixpanel";
 export type AnalyticsEventName =
   | "auth_login_started"
   | "auth_login_completed"
+  | "auth_login_failed"
   | "quiz_session_started"
   | "quiz_answer_submitted"
   | "quiz_session_completed"

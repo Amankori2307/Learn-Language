@@ -14,7 +14,7 @@ This document records the exact production server setup performed for `Learn-Lan
 
 ## What GitHub Actions does
 
-The CI/CD workflow in [`.github/workflows/ci-cd.yml`](/Users/aman/.codex/worktrees/063e/Learn-Language/.github/workflows/ci-cd.yml) only:
+The CI/CD workflow in [`.github/workflows/ci-cd.yml`](/Users/aman/Projects/personal-projects/Learn-Language/.github/workflows/ci-cd.yml) only:
 
 - builds the app
 - builds Docker images
@@ -26,14 +26,14 @@ It does not deploy to the server.
 
 Manual deployment is done from local machine with:
 
-- [`script/deploy-production.sh`](/Users/aman/.codex/worktrees/063e/Learn-Language/script/deploy-production.sh)
+- [`script/deploy-production.sh`](/Users/aman/Projects/personal-projects/Learn-Language/script/deploy-production.sh)
 
 The deploy script defaults to the `latest` image tag, so deployment is not tied to the local checked-out branch. Set `IMAGE_TAG` explicitly only when you want to deploy a specific published image.
 
 Server-side runtime files are:
 
-- [`deploy/production/docker-compose.prod.yml`](/Users/aman/.codex/worktrees/063e/Learn-Language/deploy/production/docker-compose.prod.yml)
-- [`deploy/production/deploy.sh`](/Users/aman/.codex/worktrees/063e/Learn-Language/deploy/production/deploy.sh)
+- [`deploy/production/docker-compose.prod.yml`](/Users/aman/Projects/personal-projects/Learn-Language/deploy/production/docker-compose.prod.yml)
+- [`deploy/production/deploy.sh`](/Users/aman/Projects/personal-projects/Learn-Language/deploy/production/deploy.sh)
 
 ## Initial server inspection that was done
 

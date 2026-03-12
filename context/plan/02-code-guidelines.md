@@ -47,6 +47,12 @@
 - Keep business logic, data shaping, and side effects in hooks/services/view-model helpers.
 - Keep presentational components focused on rendering and event wiring.
 - UI libraries/components should be replaceable without rewriting business logic.
+- Pages and presentational components must not define transport-backed `useQuery`/`useMutation` calls or call `apiClient` directly.
+- Shared React Query lifecycle belongs in `client/src/hooks/*`; page-specific orchestration belongs in feature `use-*-view-model.ts` modules.
+- The module that defines a shared query should also define its query-key builder and own its invalidation expectations.
+- Query keys should use stable positional tuples with resource key first, scope variables next, and pagination/filter variables last.
+- Use narrow invalidation by default; broad invalidation is allowed only for clearly global/admin mutations and should be documented inline.
+- Feature-specific stale-time/retry overrides should come from one shared rule seam rather than repeated ad hoc literals.
 
 6. No magic numbers:
 

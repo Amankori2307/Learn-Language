@@ -6,6 +6,7 @@ import { describe, expect, it, vi } from "vitest";
 import { QuizModeEnum } from "@shared/domain/enums";
 import {
   QuizEmptyState,
+  QuizErrorState,
   QuizFinishedState,
   QuizLoadingState,
   QuizMissingQuestionState,
@@ -41,6 +42,20 @@ describe("quiz page states", () => {
 
     expect(startSession).toHaveBeenCalledWith(`/quiz?mode=${QuizModeEnum.DAILY_REVIEW}`);
     expect(navigate).toHaveBeenCalledWith("/analytics");
+  });
+
+  it("routes retry actions from the error state", async () => {
+    const user = userEvent.setup();
+    const retry = vi.fn();
+    const navigate = vi.fn();
+
+    render(<QuizErrorState retry={retry} navigate={navigate} />);
+
+    await user.click(screen.getByRole("button", { name: "Retry Session" }));
+    await user.click(screen.getByRole("button", { name: "Return Home" }));
+
+    expect(retry).toHaveBeenCalledTimes(1);
+    expect(navigate).toHaveBeenCalledWith("/");
   });
 
   it("renders completion CTAs and follow-up recommendations", async () => {
