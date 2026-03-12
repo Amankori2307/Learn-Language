@@ -72,6 +72,8 @@ The enforced release gate covers:
 
 GitHub Actions provisions Postgres, runs migrations and content import, runs `pnpm run ci`, runs production-like smoke coverage, and then builds artifacts.
 
+The workflow now opts JavaScript-based actions into the GitHub Actions Node.js 24 runtime ahead of the June 2, 2026 default change. It uses `actions/checkout@v6`, `actions/setup-node@v6`, and installs `pnpm` through `corepack` instead of `pnpm/action-setup`, because the latest published `pnpm/action-setup` release still targets the deprecated Node.js 20 action runtime.
+
 ## Maintenance rule
 
 When a change adds a new critical route, a new correctness-sensitive API behavior, or a new shared UI state pattern, update this document and the relevant test coverage in the same change.

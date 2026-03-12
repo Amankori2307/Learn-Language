@@ -16,9 +16,10 @@ describe("AuthSignInPanel", () => {
   });
 
   it("shows a pending label while login is in flight", () => {
-    render(<AuthSignInPanel isLoginPending handleLogin={vi.fn()} />);
+    const { container } = render(<AuthSignInPanel isLoginPending handleLogin={vi.fn()} />);
 
     const button = screen.getByRole("button", { name: "Redirecting..." });
     expect((button as HTMLButtonElement).disabled).toBe(true);
+    expect(container.innerHTML.includes("min-h-dvh")).toBe(true);
   });
 });

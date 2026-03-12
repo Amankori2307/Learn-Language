@@ -172,6 +172,35 @@ describe("QuizCard", () => {
     expect(container.innerHTML.includes("bg-background/95")).toBe(true);
   });
 
+  it("fills the session frame instead of recalculating mobile viewport height", () => {
+    const { container } = render(
+      <QuizCard
+        question="hello"
+        pronunciation={null}
+        imageUrl={null}
+        type={QuizQuestionTypeEnum.TARGET_TO_SOURCE}
+        options={[
+          { id: 1, text: "namaste" },
+          { id: 2, text: "dhanyavaadalu" },
+        ]}
+        showConfidenceControl={false}
+        confidenceLevel={2}
+        onConfidenceChange={vi.fn()}
+        onAnswer={vi.fn()}
+        isSubmitting={false}
+        submitError={null}
+        result={null}
+        onNext={vi.fn()}
+      />,
+    );
+
+    expect(container.innerHTML.includes("h-[calc(100vh-5.5rem)]")).toBe(false);
+    expect(container.innerHTML.includes("min-h-[calc(100vh-5.5rem)]")).toBe(false);
+    expect(container.innerHTML.includes("flex h-full min-h-0 w-full")).toBe(true);
+    expect(container.innerHTML.includes("md:max-h-[var(--pane-quiz-session-max-height)]")).toBe(true);
+    expect(container.innerHTML.includes("min-h-14")).toBe(true);
+  });
+
   it("supports arrow-key option navigation", async () => {
     const user = userEvent.setup();
 

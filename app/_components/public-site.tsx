@@ -37,7 +37,7 @@ function joinClasses(...values: Array<string | false | null | undefined>) {
 
 export function PublicPageShell({ children }: PublicPageShellProps) {
   return (
-    <main className="min-h-screen bg-background text-foreground">
+    <main className="min-h-screen min-h-dvh bg-background text-foreground">
       {children}
       <PublicPageFooter />
     </main>

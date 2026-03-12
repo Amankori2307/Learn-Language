@@ -75,7 +75,7 @@ export function SearchableMultiSelect<TValue extends string>({
           </Button>
         </PopoverTrigger>
         <PopoverContent
-          className="w-[var(--radix-popover-trigger-width)] border-border bg-card p-0 shadow-xl"
+          className="w-[var(--radix-popover-trigger-width)] max-w-[var(--size-overlay-viewport-max-width)] border-border bg-card p-0 shadow-xl"
           align="start"
         >
           <Command className="bg-card text-card-foreground">

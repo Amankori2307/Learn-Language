@@ -28,7 +28,7 @@ function ProtectedRoute({ component: Component }: { component: React.ComponentTy
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-background p-4 md:p-8">
+      <div className="min-h-screen min-h-dvh bg-background p-4 md:p-8">
         <DashboardPageSkeleton />
       </div>
     );

@@ -10,6 +10,7 @@ describe("NotFound", () => {
     expect(screen.getByText("Return Home")).toBeTruthy();
     expect(container.innerHTML.includes("surface-status-error")).toBe(true);
     expect(container.innerHTML.includes("text-status-error")).toBe(true);
+    expect(container.innerHTML.includes("min-h-dvh")).toBe(true);
     expect(container.innerHTML.includes("bg-gray-50")).toBe(false);
     expect(container.innerHTML.includes("text-red-500")).toBe(false);
   });

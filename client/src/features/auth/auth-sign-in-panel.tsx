@@ -15,7 +15,7 @@ export function AuthSignInPanel({
   handleLogin: () => void;
 }) {
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center bg-background p-5 sm:p-8">
+    <div className="flex min-h-screen min-h-dvh flex-col items-center justify-center bg-background p-5 sm:p-8">
       <div className="w-full max-w-md space-y-6 text-center sm:space-y-8">
         <div className="relative overflow-hidden rounded-3xl border border-border/60 bg-primary px-6 py-8 text-left text-primary-foreground shadow-xl lg:hidden">
           <div className="absolute inset-0 bg-gradient-to-br from-primary via-primary to-accent/80" />

@@ -6,7 +6,7 @@ import { QuizModeEnum } from "@shared/domain/enums";
 
 export function QuizLoadingState() {
   return (
-    <div className="min-h-screen bg-background p-4">
+    <div className="min-h-screen min-h-dvh bg-background p-4">
       <div className="mx-auto flex min-h-[var(--surface-quiz-state-min-height)] w-full max-w-2xl items-center justify-center rounded-3xl border border-border/50 bg-card p-8 text-center shadow-sm">
         <div className="space-y-3">
           <h2 className="text-2xl font-semibold">Preparing your session</h2>
@@ -180,7 +180,7 @@ export function QuizFinishedState({
   }, [actions]);
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background p-4">
+    <div className="flex min-h-screen min-h-dvh items-center justify-center bg-background p-4">
       <div className="w-full max-w-md rounded-3xl border border-border/50 bg-card p-8 text-center shadow-2xl">
         <div className="mx-auto mb-6 flex h-20 w-20 items-center justify-center rounded-full bg-primary/10">
           <span className="text-3xl">🎉</span>

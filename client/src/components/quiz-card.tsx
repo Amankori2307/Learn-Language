@@ -82,7 +82,7 @@ export function QuizCard({
   };
 
   return (
-    <div className="mx-auto w-full max-w-6xl px-1 sm:px-2 md:px-4">
+    <div className="mx-auto flex h-full min-h-0 w-full max-w-6xl px-1 sm:px-2 md:px-4">
       <AnimatePresence mode="wait">
         <motion.div
           key={question}
@@ -91,7 +91,7 @@ export function QuizCard({
           exit={{ opacity: 0, y: -20 }}
           transition={{ duration: 0.3 }}
           className={cn(
-            "relative flex h-[calc(100vh-5.5rem)] min-h-[calc(100vh-5.5rem)] flex-col overflow-hidden rounded-[var(--radius-xl)] md:h-[min(88vh,820px)] md:min-h-0",
+            "relative flex h-full min-h-0 w-full flex-col overflow-hidden rounded-[var(--radius-xl)] md:mx-auto md:max-h-[var(--pane-quiz-session-max-height)]",
             result
               ? "border border-transparent bg-transparent shadow-none backdrop-blur-0 md:border md:border-border/50 md:bg-card/95 md:shadow-2xl md:backdrop-blur"
               : "border border-border/50 bg-card/95 shadow-2xl backdrop-blur",

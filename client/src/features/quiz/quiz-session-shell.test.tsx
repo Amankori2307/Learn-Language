@@ -17,7 +17,7 @@ describe("quiz session shell", () => {
   });
 
   it("renders header and content inside the session frame", () => {
-    render(
+    const { container } = render(
       <QuizSessionFrame header={<div>Header</div>}>
         <div>Question Card</div>
       </QuizSessionFrame>,
@@ -25,5 +25,7 @@ describe("quiz session shell", () => {
 
     expect(screen.getByText("Header")).toBeTruthy();
     expect(screen.getByText("Question Card")).toBeTruthy();
+    expect((container.firstChild as HTMLElement).className.includes("h-dvh")).toBe(true);
+    expect((container.firstChild as HTMLElement).className.includes("min-h-dvh")).toBe(true);
   });
 });

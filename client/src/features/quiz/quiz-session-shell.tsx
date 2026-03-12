@@ -10,7 +10,7 @@ export function QuizSessionHeader({
   onExit: () => void;
 }) {
   return (
-    <div className="mx-auto flex w-full max-w-4xl items-center gap-3 px-3 py-4 sm:gap-4 sm:px-4 sm:py-6">
+    <div className="mx-auto flex w-full max-w-4xl shrink-0 items-center gap-3 px-3 py-4 sm:gap-4 sm:px-4 sm:py-6">
       <Button
         variant="ghost"
         size="icon"
@@ -31,9 +31,9 @@ export function QuizSessionHeader({
 
 export function QuizSessionFrame({ header, children }: { header: ReactNode; children: ReactNode }) {
   return (
-    <div className="flex h-screen overflow-hidden flex-col bg-background">
+    <div className="flex h-screen min-h-screen flex-col overflow-hidden bg-background h-dvh min-h-dvh">
       {header}
-      <div className="flex min-h-0 flex-1 items-center justify-center overflow-hidden p-3 sm:p-4 md:px-6 md:pt-4 md:pb-8">
+      <div className="flex min-h-0 flex-1 items-stretch justify-center overflow-hidden px-2 pb-2 pt-1 sm:p-4 md:px-6 md:pt-4 md:pb-8">
         {children}
       </div>
     </div>

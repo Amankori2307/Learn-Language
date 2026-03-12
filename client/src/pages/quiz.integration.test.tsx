@@ -246,11 +246,19 @@ describe("QuizPage integration", () => {
 
     const { container } = render(<QuizPage />);
 
-    expect(container.querySelector(".flex.h-screen.overflow-hidden.flex-col.bg-background")).toBeTruthy();
-    expect(container.querySelector(".flex.min-h-0.flex-1.items-center.justify-center.overflow-hidden.p-3.sm\\:p-4.md\\:px-6.md\\:pt-4.md\\:pb-8")).toBeTruthy();
     expect(
       container.querySelector(
-        ".relative.flex.h-\\[calc\\(100vh-5\\.5rem\\)\\].min-h-\\[calc\\(100vh-5\\.5rem\\)\\].flex-col.overflow-hidden.rounded-\\[var\\(--radius-xl\\)\\].md\\:h-\\[min\\(88vh\\,820px\\)\\].md\\:min-h-0",
+        ".flex.h-screen.min-h-screen.flex-col.overflow-hidden.bg-background.h-dvh.min-h-dvh",
+      ),
+    ).toBeTruthy();
+    expect(
+      container.querySelector(
+        ".flex.min-h-0.flex-1.items-stretch.justify-center.overflow-hidden.px-2.pb-2.pt-1.sm\\:p-4.md\\:px-6.md\\:pt-4.md\\:pb-8",
+      ),
+    ).toBeTruthy();
+    expect(
+      container.querySelector(
+        ".relative.flex.h-full.min-h-0.w-full.flex-col.overflow-hidden.rounded-\\[var\\(--radius-xl\\)\\].md\\:mx-auto.md\\:max-h-\\[var\\(--pane-quiz-session-max-height\\)\\]",
       ),
     ).toBeTruthy();
     expect(container.querySelector(".grid.min-h-0.flex-1.grid-cols-1.grid-rows-\\[auto_minmax\\(0\\,1fr\\)\\].lg\\:grid-cols-\\[1\\.05fr_1fr\\].lg\\:grid-rows-1")).toBeTruthy();

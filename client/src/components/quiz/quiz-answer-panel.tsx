@@ -66,7 +66,7 @@ export function QuizAnswerPanel({
 
   return (
     <section className="grid min-h-0 grid-rows-[minmax(0,1fr)_auto] gap-2 overflow-hidden p-2.5 sm:gap-3 sm:p-4 md:p-6">
-      <div className="min-h-0 overflow-y-auto pr-1 pb-2">
+      <div className="min-h-0 overflow-y-auto px-0.5 pb-2">
         <div className="grid grid-cols-1 gap-2.5 sm:gap-3">
           {options.map((option, index) => {
             const isSelected = selectedOption === option.id;
@@ -96,7 +96,7 @@ export function QuizAnswerPanel({
                 }}
                 aria-label={`Option ${option.text}`}
                 className={cn(
-                  "relative overflow-hidden rounded-xl border p-4 text-left text-base font-medium break-words transition-colors duration-150 md:text-lg",
+                  "relative min-h-14 rounded-xl border p-4 text-left text-base font-medium break-words transition-colors duration-150 md:text-lg",
                   className,
                 )}
                 autoFocus={index === 0 && selectedOption === null}

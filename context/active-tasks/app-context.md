@@ -41,6 +41,7 @@ Current canonical app truth lives in:
 - CI:
   - pnpm-based workflow parity with local/docker checks
   - GitHub Actions quality gate now provisions Postgres, runs migrations/content import, runs `pnpm run ci`, runs production-like smoke, and then builds
+  - the CI workflow now forces JavaScript actions onto the Node.js 24 runner runtime and installs `pnpm` with `corepack` instead of `pnpm/action-setup`
   - lint now also enforces symbol ownership through `script/check-symbol-governance.ts`
   - lint now also enforces design-system governance through `script/check-design-system-governance.ts`
 - Governance/documentation:
@@ -52,6 +53,7 @@ Current canonical app truth lives in:
 - Active backlog: [backlog.md](/Users/aman/Projects/personal-projects/Learn-Language/context/active-tasks/backlog.md)
 - Future candidate work belongs in [future-tasks/backlog.md](/Users/aman/Projects/personal-projects/Learn-Language/context/future-tasks/backlog.md)
 - Recent completed work:
+  - quiz session mobile viewport sizing now follows the feedback-screen fixed-shell pattern using shared viewport-safe sizing tokens
   - repo-wide Continuum enforcement hardening across shared UI primitives with no remaining checker folder escape hatch
   - shared primitive width/height/radius/hairline values migrated onto named Continuum size tokens
   - public Next.js marketing-route adoption onto shared Continuum primitives

@@ -2,7 +2,7 @@ import { APP_BRAND_NAME } from "@shared/domain/constants/app-brand";
 
 export function AuthBootstrapPanel() {
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center bg-background p-6 text-center">
+    <div className="flex min-h-screen min-h-dvh flex-col items-center justify-center bg-background p-6 text-center">
       <div className="w-full max-w-md rounded-3xl border border-border/50 bg-card p-8 shadow-xl">
         <p className="text-xs font-semibold uppercase tracking-[0.24em] text-muted-foreground">
           {APP_BRAND_NAME}
