@@ -10,7 +10,6 @@ import {
   Menu,
   MessageSquare,
   PlusCircle,
-  Sun,
   PanelLeftClose,
   PanelLeftOpen,
   ExternalLink,
@@ -34,7 +33,8 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { APP_BRAND_NAME, APP_BRAND_TAGLINE } from "@shared/domain/constants/app-brand";
-import { AppThemeId, getAppThemeIdForProviderTheme, getNextImplementedProviderTheme } from "@/theme/app-theme";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuLabel, DropdownMenuRadioGroup, DropdownMenuRadioItem, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
+import { IMPLEMENTED_APP_THEMES, getDefaultProviderTheme } from "@/theme/app-theme";
 
 function getInitials(firstName?: string | null, lastName?: string | null, email?: string | null) {
   const fromNames = `${firstName ?? ""} ${lastName ?? ""}`.trim();
@@ -74,9 +74,11 @@ export function Layout({ children }: { children: React.ReactNode }) {
     setMounted(true);
   }, []);
 
-  const activeThemeId = getAppThemeIdForProviderTheme(resolvedTheme);
-  const isMinimalTheme = activeThemeId === AppThemeId.MINIMAL;
-  const nextTheme = getNextImplementedProviderTheme(resolvedTheme);
+  const themeOptions = IMPLEMENTED_APP_THEMES;
+  const activeProviderTheme = mounted ? resolvedTheme : getDefaultProviderTheme();
+  const activeTheme =
+    themeOptions.find((theme) => theme.providerTheme === activeProviderTheme) ?? themeOptions[0];
+  const activeThemeLabel = activeTheme?.label ?? "Theme";
 
   const isReviewer = user?.role === UserTypeEnum.REVIEWER || user?.role === UserTypeEnum.ADMIN;
   const navigationSections = [
@@ -288,21 +290,34 @@ export function Layout({ children }: { children: React.ReactNode }) {
               </>
             )}
           </a>
-          <Button
-            type="button"
-            variant="outline"
-            className={cn("h-9 rounded-lg text-xs", compact && "px-2")}
-            aria-label="Toggle theme"
-            title="Toggle theme"
-            onClick={() => setTheme(nextTheme)}
-          >
-            {mounted ? (
-              isMinimalTheme ? <Sun className="size-4" /> : <Palette className="size-4" />
-            ) : (
-              <Palette className="size-4" />
-            )}
-            {!compact && <span className="ml-2">{isMinimalTheme ? "Minimal" : "Dark"}</span>}
-          </Button>
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button
+                type="button"
+                variant="outline"
+                className={cn("h-9 rounded-lg text-xs", compact && "px-2")}
+                aria-label="Select theme"
+                title="Select theme"
+              >
+                <Palette className="size-4" />
+                {!compact && <span className="ml-2">{activeThemeLabel}</span>}
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align={compact ? "center" : "start"} className="w-44">
+              <DropdownMenuLabel>Theme</DropdownMenuLabel>
+              <DropdownMenuSeparator />
+              <DropdownMenuRadioGroup
+                value={activeProviderTheme ?? getDefaultProviderTheme()}
+                onValueChange={(value) => setTheme(value)}
+              >
+                {themeOptions.map((theme) => (
+                  <DropdownMenuRadioItem key={theme.id} value={theme.providerTheme}>
+                    {theme.label}
+                  </DropdownMenuRadioItem>
+                ))}
+              </DropdownMenuRadioGroup>
+            </DropdownMenuContent>
+          </DropdownMenu>
         </div>
 
         <button
@@ -368,18 +383,28 @@ export function Layout({ children }: { children: React.ReactNode }) {
               Open Profile
             </Button>
           </Link>
-          <Button
-            variant="outline"
-            className="w-full rounded-lg"
-            onClick={() => setTheme(nextTheme)}
-          >
-            {mounted ? (
-              isMinimalTheme ? <Sun className="size-4 mr-2" /> : <Palette className="size-4 mr-2" />
-            ) : (
-              <Palette className="size-4 mr-2" />
-            )}
-            {isMinimalTheme ? "Switch to Dark Theme" : "Switch to Minimal Theme"}
-          </Button>
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="outline" className="w-full rounded-lg">
+                <Palette className="size-4 mr-2" />
+                Theme: {activeThemeLabel}
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="center" className="w-48">
+              <DropdownMenuLabel>Theme</DropdownMenuLabel>
+              <DropdownMenuSeparator />
+              <DropdownMenuRadioGroup
+                value={activeProviderTheme ?? getDefaultProviderTheme()}
+                onValueChange={(value) => setTheme(value)}
+              >
+                {themeOptions.map((theme) => (
+                  <DropdownMenuRadioItem key={theme.id} value={theme.providerTheme}>
+                    {theme.label}
+                  </DropdownMenuRadioItem>
+                ))}
+              </DropdownMenuRadioGroup>
+            </DropdownMenuContent>
+          </DropdownMenu>
           <a
             href="https://forms.gle/f2hH1BL3v4eNsxEg8"
             target="_blank"

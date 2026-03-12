@@ -43,8 +43,6 @@ When a future item becomes active, move it into `context/active-tasks/backlog.md
 | F-003 | todo | Review semantic search over vocabulary and clusters | Must not replace deterministic reviewer/admin filters |
 | F-002 | todo | Evaluate adaptive study recommendations from learner analytics | Advisory only; do not place non-deterministic logic in grading paths |
 | F-001 | todo | Evaluate reviewer-assist AI for draft/example generation | Keep reviewer approval as the final gate and preserve deterministic fallback behavior |
-| F-011 | todo | Ship the remaining planned named themes | Implement the planned `warm`, `midnight`, `editorial`, `playful`, and `high-contrast` themes end to end across provider mappings, tokens, and selector UX |
-| F-022 | todo | Add a black theme | Add a high-contrast black theme to address concerns with the default palette |
 | F-004 | todo | Revisit server operational hardening gaps | Strong production secrets, SSH-key auth, and tighter firewall posture remain desirable |
 | F-016 | todo | Audit and expand test coverage for core features | Ensure unit, integration, e2e, and smoke coverage is strong for both UI and backend |
 | F-018 | todo | Assess and improve performance | Identify bottlenecks and define concrete optimizations for both frontend and backend |

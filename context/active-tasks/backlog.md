@@ -11,7 +11,8 @@ Use this file as the single active queue for current work.
 | ID | Status | Task | Notes |
 | --- | --- | --- | --- |
 | P14-001 | todo | Add Mixpanel env placeholders | Add Mixpanel-related entries in sample `.env` files with dummy values so the integration can be wired safely |
-| P14-002 | doing | Fix SPA page title updates | Ensure document title updates per route instead of sticking to the auth page title |
+| P14-002 | todo | Fix SPA page title updates | Ensure document title updates per route instead of sticking to the auth page title |
+| P14-003 | doing | Ship remaining planned themes and selector UI | Add warm, midnight, editorial, playful, and high-contrast themes and keep selector updated |
 
 ## Template
 

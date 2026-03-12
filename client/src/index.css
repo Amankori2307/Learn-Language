@@ -271,6 +271,798 @@
   --ease-emphasized: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
+.black {
+  --font-sans: "Outfit", sans-serif;
+  --font-serif: "Noto Sans", serif;
+  --font-mono: "ui-monospace", "SFMono-Regular", "SF Mono", Consolas, "Liberation Mono", Menlo,
+    monospace;
+  --font-display: "Outfit", sans-serif;
+  --font-script: "Noto Sans", sans-serif;
+
+  --background: 222 60% 4%;
+  --foreground: 210 40% 98%;
+
+  --primary: 217 91% 60%;
+  --primary-foreground: 0 0% 100%;
+  --primary-border: hsl(var(--primary) / 0.28);
+
+  --secondary: 222 26% 9%;
+  --secondary-foreground: 210 40% 94%;
+  --secondary-border: hsl(var(--secondary) / 0.92);
+
+  --muted: 222 24% 10%;
+  --muted-foreground: 215 18% 62%;
+  --muted-border: hsl(var(--muted) / 0.92);
+
+  --accent: 193 89% 45%;
+  --accent-foreground: 0 0% 100%;
+  --accent-border: hsl(var(--accent) / 0.26);
+
+  --destructive: 0 63% 42%;
+  --destructive-foreground: 0 0% 98%;
+  --destructive-border: hsl(var(--destructive) / 0.3);
+
+  --border: 222 20% 16%;
+  --border-soft: 222 18% 20%;
+  --border-strong: 222 18% 26%;
+  --border-contrast: 210 30% 72%;
+  --input: 222 22% 14%;
+  --ring: 217 91% 60%;
+
+  --card: 222 46% 6%;
+  --card-foreground: 210 40% 98%;
+  --card-border: 222 22% 16%;
+  --popover: 222 44% 7%;
+  --popover-foreground: 210 40% 98%;
+  --popover-border: 222 22% 16%;
+
+  --sidebar: 222 52% 5%;
+  --sidebar-foreground: 210 40% 98%;
+  --sidebar-border: 222 24% 14%;
+  --sidebar-ring: 217 91% 60%;
+  --sidebar-primary: 217 91% 60%;
+  --sidebar-primary-foreground: 0 0% 100%;
+  --sidebar-primary-border: hsl(var(--sidebar-primary) / 0.28);
+  --sidebar-accent: 222 26% 9%;
+  --sidebar-accent-foreground: 210 40% 96%;
+  --sidebar-accent-border: hsl(var(--sidebar-accent) / 0.94);
+
+  --chart-1: 217 91% 60%;
+  --chart-2: 193 89% 45%;
+  --chart-3: 160 84% 39%;
+  --chart-4: 43 96% 56%;
+  --chart-5: 280 89% 69%;
+
+  --status-success: 145 63% 18%;
+  --status-success-foreground: 145 58% 78%;
+  --status-success-border: 145 47% 32%;
+  --status-success-emphasis: 145 68% 52%;
+  --status-warning: 36 74% 18%;
+  --status-warning-foreground: 42 88% 80%;
+  --status-warning-border: 36 65% 34%;
+  --status-warning-emphasis: 42 96% 58%;
+  --status-error: 0 53% 18%;
+  --status-error-foreground: 0 86% 86%;
+  --status-error-border: 0 57% 32%;
+  --status-error-emphasis: 0 82% 62%;
+  --status-info: 217 46% 18%;
+  --status-info-foreground: 210 85% 88%;
+  --status-info-border: 217 44% 34%;
+  --status-info-emphasis: 210 92% 62%;
+
+  --button-outline: hsl(var(--border));
+
+  --radius-xs: 0.375rem;
+  --radius-sm: 0.5rem;
+  --radius-md: 0.85rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.5rem;
+  --radius-pill: 999px;
+  --radius: var(--radius-md);
+
+  --shadow-xs: 0 1px 1px rgb(2 6 23 / 0.22);
+  --shadow-sm: 0 12px 34px rgb(0 0 0 / 0.32);
+  --shadow-md: 0 22px 60px rgb(0 0 0 / 0.36);
+  --shadow-lg: 0 30px 80px rgb(0 0 0 / 0.42);
+  --shadow-xl: 0 40px 110px rgb(0 0 0 / 0.5);
+  --shadow-accent: 0 24px 70px hsl(var(--primary) / 0.26);
+
+  --surface-glass: hsl(222 60% 8% / 0.78);
+  --surface-glass-border: hsl(210 40% 96% / 0.08);
+  --overlay-backdrop: rgb(0 0 0 / 0.84);
+  --app-gradient-start: hsl(var(--primary) / 0.12);
+  --app-gradient-end: transparent;
+
+  --shell-sidebar-width: 18rem;
+  --shell-sidebar-width-collapsed: 6rem;
+  --shell-mobile-nav-width: 88vw;
+  --shell-mobile-nav-max-width: 22rem;
+  --size-menu-panel-min-width: 8rem;
+  --size-menu-panel-wide-min-width: 12rem;
+  --size-command-panel-max-height: min(18.75rem, calc(100dvh - 8rem));
+  --size-drawer-handle-width: 6.25rem;
+  --size-textarea-min-height: 5rem;
+  --size-toast-viewport-max-width: 26.25rem;
+  --size-overlay-viewport-max-width: calc(100vw - 1rem);
+  --size-chart-tooltip-min-width: 8rem;
+  --size-chart-indicator-radius: 0.125rem;
+  --size-scrollbar-padding: 0.0625rem;
+  --size-hairline: 0.0625rem;
+  --size-sidebar-rail: 0.125rem;
+  --pane-review-max-height: 35rem;
+  --pane-quiz-session-max-height: 51.25rem;
+  --pane-tutor-chat-height: 26.25rem;
+  --surface-quiz-state-min-height: 60svh;
+  --surface-dashboard-card-min-height: 12.5rem;
+  --action-cluster-button-min-width: 13.75rem;
+
+  --motion-fast: 160ms;
+  --motion-base: 240ms;
+  --motion-slow: 420ms;
+  --ease-standard: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --ease-emphasized: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.warm {
+  --font-sans: "Outfit", sans-serif;
+  --font-serif: "Noto Sans", serif;
+  --font-mono: "ui-monospace", "SFMono-Regular", "SF Mono", Consolas, "Liberation Mono", Menlo,
+    monospace;
+  --font-display: "Outfit", sans-serif;
+  --font-script: "Noto Sans", sans-serif;
+
+  --background: 28 46% 95%;
+  --foreground: 18 32% 18%;
+
+  --primary: 18 86% 48%;
+  --primary-foreground: 0 0% 100%;
+  --primary-border: hsl(var(--primary) / 0.22);
+
+  --secondary: 28 32% 90%;
+  --secondary-foreground: 18 26% 24%;
+  --secondary-border: hsl(28 22% 80%);
+
+  --muted: 30 24% 92%;
+  --muted-foreground: 20 18% 42%;
+  --muted-border: hsl(28 18% 82%);
+
+  --accent: 12 82% 48%;
+  --accent-foreground: 0 0% 100%;
+  --accent-border: hsl(var(--accent) / 0.2);
+
+  --destructive: 0 68% 45%;
+  --destructive-foreground: 0 0% 98%;
+  --destructive-border: hsl(var(--destructive) / 0.2);
+
+  --border: 24 20% 84%;
+  --border-soft: 24 18% 88%;
+  --border-strong: 24 18% 74%;
+  --border-contrast: 18 28% 34%;
+  --input: 24 20% 84%;
+  --ring: 18 86% 48%;
+
+  --card: 0 0% 100%;
+  --card-foreground: 18 32% 18%;
+  --card-border: 24 18% 90%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 18 32% 18%;
+  --popover-border: 24 18% 86%;
+
+  --sidebar: 30 30% 96%;
+  --sidebar-foreground: 18 32% 18%;
+  --sidebar-border: 26 18% 88%;
+  --sidebar-ring: 18 86% 48%;
+  --sidebar-primary: 18 86% 48%;
+  --sidebar-primary-foreground: 0 0% 100%;
+  --sidebar-primary-border: hsl(var(--sidebar-primary) / 0.22);
+  --sidebar-accent: 28 30% 90%;
+  --sidebar-accent-foreground: 18 26% 22%;
+  --sidebar-accent-border: hsl(26 18% 84%);
+
+  --chart-1: 18 86% 48%;
+  --chart-2: 32 82% 46%;
+  --chart-3: 8 70% 42%;
+  --chart-4: 42 78% 46%;
+  --chart-5: 300 40% 44%;
+
+  --status-success: 140 28% 92%;
+  --status-success-foreground: 146 38% 26%;
+  --status-success-border: 144 22% 78%;
+  --status-success-emphasis: 144 42% 36%;
+  --status-warning: 42 58% 92%;
+  --status-warning-foreground: 36 52% 28%;
+  --status-warning-border: 38 36% 78%;
+  --status-warning-emphasis: 36 58% 42%;
+  --status-error: 0 68% 94%;
+  --status-error-foreground: 0 48% 34%;
+  --status-error-border: 0 45% 82%;
+  --status-error-emphasis: 0 66% 48%;
+  --status-info: 210 52% 92%;
+  --status-info-foreground: 214 38% 32%;
+  --status-info-border: 212 34% 82%;
+  --status-info-emphasis: 214 54% 40%;
+
+  --button-outline: hsl(var(--border));
+
+  --radius-xs: 0.375rem;
+  --radius-sm: 0.5rem;
+  --radius-md: 0.85rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.5rem;
+  --radius-pill: 999px;
+  --radius: var(--radius-md);
+
+  --shadow-xs: 0 1px 1px rgb(15 23 42 / 0.05);
+  --shadow-sm: 0 8px 20px rgb(15 23 42 / 0.08);
+  --shadow-md: 0 14px 30px rgb(15 23 42 / 0.12);
+  --shadow-lg: 0 22px 44px rgb(15 23 42 / 0.16);
+  --shadow-xl: 0 28px 60px rgb(15 23 42 / 0.2);
+  --shadow-accent: 0 16px 36px hsl(var(--primary) / 0.22);
+
+  --surface-glass: hsl(28 46% 96% / 0.84);
+  --surface-glass-border: hsl(24 18% 82% / 0.75);
+  --overlay-backdrop: rgb(15 23 42 / 0.22);
+  --app-gradient-start: hsl(var(--primary) / 0.12);
+  --app-gradient-end: transparent;
+
+  --shell-sidebar-width: 18rem;
+  --shell-sidebar-width-collapsed: 6rem;
+  --shell-mobile-nav-width: 88vw;
+  --shell-mobile-nav-max-width: 22rem;
+  --size-menu-panel-min-width: 8rem;
+  --size-menu-panel-wide-min-width: 12rem;
+  --size-command-panel-max-height: min(18.75rem, calc(100dvh - 8rem));
+  --size-drawer-handle-width: 6.25rem;
+  --size-textarea-min-height: 5rem;
+  --size-toast-viewport-max-width: 26.25rem;
+  --size-overlay-viewport-max-width: calc(100vw - 1rem);
+  --size-chart-tooltip-min-width: 8rem;
+  --size-chart-indicator-radius: 0.125rem;
+  --size-scrollbar-padding: 0.0625rem;
+  --size-hairline: 0.0625rem;
+  --size-sidebar-rail: 0.125rem;
+  --pane-review-max-height: 35rem;
+  --pane-quiz-session-max-height: 51.25rem;
+  --pane-tutor-chat-height: 26.25rem;
+  --surface-quiz-state-min-height: 60svh;
+  --surface-dashboard-card-min-height: 12.5rem;
+  --action-cluster-button-min-width: 13.75rem;
+
+  --motion-fast: 140ms;
+  --motion-base: 210ms;
+  --motion-slow: 320ms;
+  --ease-standard: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-emphasized: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.midnight {
+  --font-sans: "Outfit", sans-serif;
+  --font-serif: "Noto Sans", serif;
+  --font-mono: "ui-monospace", "SFMono-Regular", "SF Mono", Consolas, "Liberation Mono", Menlo,
+    monospace;
+  --font-display: "Outfit", sans-serif;
+  --font-script: "Noto Sans", sans-serif;
+
+  --background: 234 56% 6%;
+  --foreground: 220 40% 96%;
+
+  --primary: 262 87% 68%;
+  --primary-foreground: 0 0% 100%;
+  --primary-border: hsl(var(--primary) / 0.3);
+
+  --secondary: 232 36% 12%;
+  --secondary-foreground: 225 30% 90%;
+  --secondary-border: hsl(232 28% 18%);
+
+  --muted: 234 30% 12%;
+  --muted-foreground: 222 20% 66%;
+  --muted-border: hsl(232 24% 18%);
+
+  --accent: 196 88% 48%;
+  --accent-foreground: 0 0% 100%;
+  --accent-border: hsl(var(--accent) / 0.24);
+
+  --destructive: 0 62% 48%;
+  --destructive-foreground: 0 0% 98%;
+  --destructive-border: hsl(var(--destructive) / 0.28);
+
+  --border: 232 28% 18%;
+  --border-soft: 232 24% 22%;
+  --border-strong: 232 22% 28%;
+  --border-contrast: 220 34% 78%;
+  --input: 232 24% 18%;
+  --ring: 262 87% 68%;
+
+  --card: 232 40% 8%;
+  --card-foreground: 220 40% 96%;
+  --card-border: 232 26% 18%;
+  --popover: 232 38% 9%;
+  --popover-foreground: 220 40% 96%;
+  --popover-border: 232 24% 18%;
+
+  --sidebar: 232 46% 7%;
+  --sidebar-foreground: 220 40% 96%;
+  --sidebar-border: 232 26% 16%;
+  --sidebar-ring: 262 87% 68%;
+  --sidebar-primary: 262 87% 68%;
+  --sidebar-primary-foreground: 0 0% 100%;
+  --sidebar-primary-border: hsl(var(--sidebar-primary) / 0.3);
+  --sidebar-accent: 232 36% 12%;
+  --sidebar-accent-foreground: 220 40% 96%;
+  --sidebar-accent-border: hsl(232 24% 18%);
+
+  --chart-1: 262 87% 68%;
+  --chart-2: 196 88% 48%;
+  --chart-3: 150 62% 50%;
+  --chart-4: 30 88% 56%;
+  --chart-5: 300 82% 70%;
+
+  --status-success: 150 38% 18%;
+  --status-success-foreground: 148 58% 78%;
+  --status-success-border: 150 40% 32%;
+  --status-success-emphasis: 150 58% 50%;
+  --status-warning: 36 54% 18%;
+  --status-warning-foreground: 42 88% 80%;
+  --status-warning-border: 36 45% 34%;
+  --status-warning-emphasis: 42 96% 58%;
+  --status-error: 0 53% 18%;
+  --status-error-foreground: 0 86% 86%;
+  --status-error-border: 0 57% 32%;
+  --status-error-emphasis: 0 82% 62%;
+  --status-info: 214 46% 18%;
+  --status-info-foreground: 210 85% 88%;
+  --status-info-border: 216 44% 34%;
+  --status-info-emphasis: 210 92% 62%;
+
+  --button-outline: hsl(var(--border));
+
+  --radius-xs: 0.375rem;
+  --radius-sm: 0.5rem;
+  --radius-md: 0.85rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.5rem;
+  --radius-pill: 999px;
+  --radius: var(--radius-md);
+
+  --shadow-xs: 0 1px 1px rgb(3 7 18 / 0.2);
+  --shadow-sm: 0 12px 32px rgb(0 0 0 / 0.32);
+  --shadow-md: 0 22px 56px rgb(0 0 0 / 0.4);
+  --shadow-lg: 0 32px 80px rgb(0 0 0 / 0.48);
+  --shadow-xl: 0 44px 110px rgb(0 0 0 / 0.58);
+  --shadow-accent: 0 24px 70px hsl(var(--primary) / 0.28);
+
+  --surface-glass: hsl(232 46% 10% / 0.78);
+  --surface-glass-border: hsl(220 40% 96% / 0.08);
+  --overlay-backdrop: rgb(0 0 0 / 0.84);
+  --app-gradient-start: hsl(var(--primary) / 0.16);
+  --app-gradient-end: transparent;
+
+  --shell-sidebar-width: 18rem;
+  --shell-sidebar-width-collapsed: 6rem;
+  --shell-mobile-nav-width: 88vw;
+  --shell-mobile-nav-max-width: 22rem;
+  --size-menu-panel-min-width: 8rem;
+  --size-menu-panel-wide-min-width: 12rem;
+  --size-command-panel-max-height: min(18.75rem, calc(100dvh - 8rem));
+  --size-drawer-handle-width: 6.25rem;
+  --size-textarea-min-height: 5rem;
+  --size-toast-viewport-max-width: 26.25rem;
+  --size-overlay-viewport-max-width: calc(100vw - 1rem);
+  --size-chart-tooltip-min-width: 8rem;
+  --size-chart-indicator-radius: 0.125rem;
+  --size-scrollbar-padding: 0.0625rem;
+  --size-hairline: 0.0625rem;
+  --size-sidebar-rail: 0.125rem;
+  --pane-review-max-height: 35rem;
+  --pane-quiz-session-max-height: 51.25rem;
+  --pane-tutor-chat-height: 26.25rem;
+  --surface-quiz-state-min-height: 60svh;
+  --surface-dashboard-card-min-height: 12.5rem;
+  --action-cluster-button-min-width: 13.75rem;
+
+  --motion-fast: 160ms;
+  --motion-base: 240ms;
+  --motion-slow: 420ms;
+  --ease-standard: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --ease-emphasized: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.editorial {
+  --font-sans: "Outfit", sans-serif;
+  --font-serif: "Noto Sans", serif;
+  --font-mono: "ui-monospace", "SFMono-Regular", "SF Mono", Consolas, "Liberation Mono", Menlo,
+    monospace;
+  --font-display: "Outfit", sans-serif;
+  --font-script: "Noto Sans", sans-serif;
+
+  --background: 210 24% 97%;
+  --foreground: 222 34% 14%;
+
+  --primary: 222 34% 14%;
+  --primary-foreground: 210 40% 98%;
+  --primary-border: hsl(var(--primary) / 0.18);
+
+  --secondary: 210 18% 93%;
+  --secondary-foreground: 222 28% 22%;
+  --secondary-border: hsl(215 14% 80%);
+
+  --muted: 210 16% 92%;
+  --muted-foreground: 215 12% 42%;
+  --muted-border: hsl(214 14% 84%);
+
+  --accent: 210 24% 24%;
+  --accent-foreground: 210 40% 98%;
+  --accent-border: hsl(var(--accent) / 0.16);
+
+  --destructive: 0 66% 46%;
+  --destructive-foreground: 0 0% 98%;
+  --destructive-border: hsl(var(--destructive) / 0.2);
+
+  --border: 214 18% 86%;
+  --border-soft: 214 17% 90%;
+  --border-strong: 214 16% 76%;
+  --border-contrast: 214 18% 34%;
+  --input: 214 18% 86%;
+  --ring: 222 34% 18%;
+
+  --card: 0 0% 100%;
+  --card-foreground: 222 34% 14%;
+  --card-border: 214 17% 90%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 222 34% 14%;
+  --popover-border: 214 17% 88%;
+
+  --sidebar: 0 0% 100%;
+  --sidebar-foreground: 222 34% 14%;
+  --sidebar-border: 214 17% 90%;
+  --sidebar-ring: 222 34% 18%;
+  --sidebar-primary: 222 34% 14%;
+  --sidebar-primary-foreground: 210 40% 98%;
+  --sidebar-primary-border: hsl(var(--sidebar-primary) / 0.18);
+  --sidebar-accent: 210 18% 95%;
+  --sidebar-accent-foreground: 222 24% 20%;
+  --sidebar-accent-border: hsl(214 17% 88%);
+
+  --chart-1: 222 34% 20%;
+  --chart-2: 210 18% 40%;
+  --chart-3: 199 26% 45%;
+  --chart-4: 32 30% 44%;
+  --chart-5: 0 0% 58%;
+
+  --status-success: 142 28% 94%;
+  --status-success-foreground: 146 35% 26%;
+  --status-success-border: 144 22% 78%;
+  --status-success-emphasis: 145 48% 34%;
+  --status-warning: 44 52% 94%;
+  --status-warning-foreground: 35 50% 28%;
+  --status-warning-border: 40 38% 78%;
+  --status-warning-emphasis: 37 62% 42%;
+  --status-error: 0 68% 95%;
+  --status-error-foreground: 0 48% 34%;
+  --status-error-border: 0 45% 82%;
+  --status-error-emphasis: 0 66% 48%;
+  --status-info: 213 52% 95%;
+  --status-info-foreground: 217 38% 32%;
+  --status-info-border: 214 34% 82%;
+  --status-info-emphasis: 216 54% 40%;
+
+  --button-outline: hsl(var(--border));
+
+  --radius-xs: 0.375rem;
+  --radius-sm: 0.5rem;
+  --radius-md: 0.85rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.5rem;
+  --radius-pill: 999px;
+  --radius: var(--radius-md);
+
+  --shadow-xs: 0 1px 1px rgb(15 23 42 / 0.04);
+  --shadow-sm: 0 6px 18px rgb(15 23 42 / 0.05);
+  --shadow-md: 0 10px 24px rgb(15 23 42 / 0.06);
+  --shadow-lg: 0 16px 34px rgb(15 23 42 / 0.07);
+  --shadow-xl: 0 20px 40px rgb(15 23 42 / 0.08);
+  --shadow-accent: 0 10px 24px hsl(var(--foreground) / 0.05);
+
+  --surface-glass: hsl(0 0% 100% / 0.86);
+  --surface-glass-border: hsl(214 17% 82% / 0.7);
+  --overlay-backdrop: rgb(15 23 42 / 0.2);
+  --app-gradient-start: hsl(var(--foreground) / 0.035);
+  --app-gradient-end: transparent;
+
+  --shell-sidebar-width: 18rem;
+  --shell-sidebar-width-collapsed: 6rem;
+  --shell-mobile-nav-width: 88vw;
+  --shell-mobile-nav-max-width: 22rem;
+  --size-menu-panel-min-width: 8rem;
+  --size-menu-panel-wide-min-width: 12rem;
+  --size-command-panel-max-height: min(18.75rem, calc(100dvh - 8rem));
+  --size-drawer-handle-width: 6.25rem;
+  --size-textarea-min-height: 5rem;
+  --size-toast-viewport-max-width: 26.25rem;
+  --size-overlay-viewport-max-width: calc(100vw - 1rem);
+  --size-chart-tooltip-min-width: 8rem;
+  --size-chart-indicator-radius: 0.125rem;
+  --size-scrollbar-padding: 0.0625rem;
+  --size-hairline: 0.0625rem;
+  --size-sidebar-rail: 0.125rem;
+  --pane-review-max-height: 35rem;
+  --pane-quiz-session-max-height: 51.25rem;
+  --pane-tutor-chat-height: 26.25rem;
+  --surface-quiz-state-min-height: 60svh;
+  --surface-dashboard-card-min-height: 12.5rem;
+  --action-cluster-button-min-width: 13.75rem;
+
+  --motion-fast: 120ms;
+  --motion-base: 180ms;
+  --motion-slow: 260ms;
+  --ease-standard: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-emphasized: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.playful {
+  --font-sans: "Outfit", sans-serif;
+  --font-serif: "Noto Sans", serif;
+  --font-mono: "ui-monospace", "SFMono-Regular", "SF Mono", Consolas, "Liberation Mono", Menlo,
+    monospace;
+  --font-display: "Outfit", sans-serif;
+  --font-script: "Noto Sans", sans-serif;
+
+  --background: 216 35% 96%;
+  --foreground: 226 32% 18%;
+
+  --primary: 268 86% 62%;
+  --primary-foreground: 0 0% 100%;
+  --primary-border: hsl(var(--primary) / 0.22);
+
+  --secondary: 210 30% 92%;
+  --secondary-foreground: 226 28% 22%;
+  --secondary-border: hsl(214 22% 82%);
+
+  --muted: 210 24% 92%;
+  --muted-foreground: 226 16% 44%;
+  --muted-border: hsl(214 20% 84%);
+
+  --accent: 340 82% 54%;
+  --accent-foreground: 0 0% 100%;
+  --accent-border: hsl(var(--accent) / 0.2);
+
+  --destructive: 0 66% 46%;
+  --destructive-foreground: 0 0% 98%;
+  --destructive-border: hsl(var(--destructive) / 0.2);
+
+  --border: 214 18% 86%;
+  --border-soft: 214 17% 90%;
+  --border-strong: 214 16% 76%;
+  --border-contrast: 226 26% 34%;
+  --input: 214 18% 86%;
+  --ring: 268 86% 62%;
+
+  --card: 0 0% 100%;
+  --card-foreground: 226 32% 18%;
+  --card-border: 214 17% 90%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 226 32% 18%;
+  --popover-border: 214 17% 88%;
+
+  --sidebar: 0 0% 100%;
+  --sidebar-foreground: 226 32% 18%;
+  --sidebar-border: 214 17% 90%;
+  --sidebar-ring: 268 86% 62%;
+  --sidebar-primary: 268 86% 62%;
+  --sidebar-primary-foreground: 0 0% 100%;
+  --sidebar-primary-border: hsl(var(--sidebar-primary) / 0.22);
+  --sidebar-accent: 210 28% 94%;
+  --sidebar-accent-foreground: 226 24% 22%;
+  --sidebar-accent-border: hsl(214 18% 88%);
+
+  --chart-1: 268 86% 62%;
+  --chart-2: 186 76% 46%;
+  --chart-3: 32 86% 54%;
+  --chart-4: 146 58% 44%;
+  --chart-5: 340 82% 54%;
+
+  --status-success: 142 28% 94%;
+  --status-success-foreground: 146 35% 26%;
+  --status-success-border: 144 22% 78%;
+  --status-success-emphasis: 145 48% 34%;
+  --status-warning: 44 52% 94%;
+  --status-warning-foreground: 35 50% 28%;
+  --status-warning-border: 40 38% 78%;
+  --status-warning-emphasis: 37 62% 42%;
+  --status-error: 0 68% 95%;
+  --status-error-foreground: 0 48% 34%;
+  --status-error-border: 0 45% 82%;
+  --status-error-emphasis: 0 66% 48%;
+  --status-info: 213 52% 95%;
+  --status-info-foreground: 217 38% 32%;
+  --status-info-border: 214 34% 82%;
+  --status-info-emphasis: 216 54% 40%;
+
+  --button-outline: hsl(var(--border));
+
+  --radius-xs: 0.5rem;
+  --radius-sm: 0.6rem;
+  --radius-md: 1rem;
+  --radius-lg: 1.25rem;
+  --radius-xl: 1.75rem;
+  --radius-pill: 999px;
+  --radius: var(--radius-md);
+
+  --shadow-xs: 0 1px 2px rgb(15 23 42 / 0.06);
+  --shadow-sm: 0 8px 18px rgb(15 23 42 / 0.1);
+  --shadow-md: 0 12px 26px rgb(15 23 42 / 0.14);
+  --shadow-lg: 0 18px 34px rgb(15 23 42 / 0.18);
+  --shadow-xl: 0 26px 46px rgb(15 23 42 / 0.22);
+  --shadow-accent: 0 18px 34px hsl(var(--primary) / 0.22);
+
+  --surface-glass: hsl(0 0% 100% / 0.86);
+  --surface-glass-border: hsl(214 17% 82% / 0.7);
+  --overlay-backdrop: rgb(15 23 42 / 0.2);
+  --app-gradient-start: hsl(var(--primary) / 0.12);
+  --app-gradient-end: transparent;
+
+  --shell-sidebar-width: 18rem;
+  --shell-sidebar-width-collapsed: 6rem;
+  --shell-mobile-nav-width: 88vw;
+  --shell-mobile-nav-max-width: 22rem;
+  --size-menu-panel-min-width: 8rem;
+  --size-menu-panel-wide-min-width: 12rem;
+  --size-command-panel-max-height: min(18.75rem, calc(100dvh - 8rem));
+  --size-drawer-handle-width: 6.25rem;
+  --size-textarea-min-height: 5rem;
+  --size-toast-viewport-max-width: 26.25rem;
+  --size-overlay-viewport-max-width: calc(100vw - 1rem);
+  --size-chart-tooltip-min-width: 8rem;
+  --size-chart-indicator-radius: 0.125rem;
+  --size-scrollbar-padding: 0.0625rem;
+  --size-hairline: 0.0625rem;
+  --size-sidebar-rail: 0.125rem;
+  --pane-review-max-height: 35rem;
+  --pane-quiz-session-max-height: 51.25rem;
+  --pane-tutor-chat-height: 26.25rem;
+  --surface-quiz-state-min-height: 60svh;
+  --surface-dashboard-card-min-height: 12.5rem;
+  --action-cluster-button-min-width: 13.75rem;
+
+  --motion-fast: 140ms;
+  --motion-base: 210ms;
+  --motion-slow: 320ms;
+  --ease-standard: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-emphasized: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.high-contrast {
+  --font-sans: "Outfit", sans-serif;
+  --font-serif: "Noto Sans", serif;
+  --font-mono: "ui-monospace", "SFMono-Regular", "SF Mono", Consolas, "Liberation Mono", Menlo,
+    monospace;
+  --font-display: "Outfit", sans-serif;
+  --font-script: "Noto Sans", sans-serif;
+
+  --background: 0 0% 100%;
+  --foreground: 0 0% 0%;
+
+  --primary: 0 0% 0%;
+  --primary-foreground: 0 0% 100%;
+  --primary-border: hsl(var(--primary) / 0.28);
+
+  --secondary: 0 0% 96%;
+  --secondary-foreground: 0 0% 0%;
+  --secondary-border: hsl(0 0% 70%);
+
+  --muted: 0 0% 94%;
+  --muted-foreground: 0 0% 25%;
+  --muted-border: hsl(0 0% 75%);
+
+  --accent: 220 95% 42%;
+  --accent-foreground: 0 0% 100%;
+  --accent-border: hsl(var(--accent) / 0.28);
+
+  --destructive: 0 72% 45%;
+  --destructive-foreground: 0 0% 98%;
+  --destructive-border: hsl(var(--destructive) / 0.28);
+
+  --border: 0 0% 70%;
+  --border-soft: 0 0% 82%;
+  --border-strong: 0 0% 56%;
+  --border-contrast: 0 0% 18%;
+  --input: 0 0% 70%;
+  --ring: 0 0% 0%;
+
+  --card: 0 0% 100%;
+  --card-foreground: 0 0% 0%;
+  --card-border: 0 0% 70%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 0 0% 0%;
+  --popover-border: 0 0% 60%;
+
+  --sidebar: 0 0% 100%;
+  --sidebar-foreground: 0 0% 0%;
+  --sidebar-border: 0 0% 70%;
+  --sidebar-ring: 0 0% 0%;
+  --sidebar-primary: 0 0% 0%;
+  --sidebar-primary-foreground: 0 0% 100%;
+  --sidebar-primary-border: hsl(var(--sidebar-primary) / 0.28);
+  --sidebar-accent: 0 0% 94%;
+  --sidebar-accent-foreground: 0 0% 0%;
+  --sidebar-accent-border: hsl(0 0% 70%);
+
+  --chart-1: 0 0% 0%;
+  --chart-2: 220 95% 42%;
+  --chart-3: 140 64% 30%;
+  --chart-4: 32 90% 40%;
+  --chart-5: 300 64% 40%;
+
+  --status-success: 140 64% 96%;
+  --status-success-foreground: 140 46% 20%;
+  --status-success-border: 140 40% 58%;
+  --status-success-emphasis: 140 54% 32%;
+  --status-warning: 44 70% 94%;
+  --status-warning-foreground: 32 60% 26%;
+  --status-warning-border: 40 48% 58%;
+  --status-warning-emphasis: 36 62% 34%;
+  --status-error: 0 70% 94%;
+  --status-error-foreground: 0 50% 28%;
+  --status-error-border: 0 48% 58%;
+  --status-error-emphasis: 0 62% 36%;
+  --status-info: 214 70% 94%;
+  --status-info-foreground: 214 46% 26%;
+  --status-info-border: 214 42% 58%;
+  --status-info-emphasis: 214 58% 36%;
+
+  --button-outline: hsl(var(--border));
+
+  --radius-xs: 0.375rem;
+  --radius-sm: 0.5rem;
+  --radius-md: 0.85rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.5rem;
+  --radius-pill: 999px;
+  --radius: var(--radius-md);
+
+  --shadow-xs: 0 1px 1px rgb(0 0 0 / 0.08);
+  --shadow-sm: 0 6px 16px rgb(0 0 0 / 0.12);
+  --shadow-md: 0 12px 24px rgb(0 0 0 / 0.16);
+  --shadow-lg: 0 16px 34px rgb(0 0 0 / 0.2);
+  --shadow-xl: 0 24px 46px rgb(0 0 0 / 0.24);
+  --shadow-accent: 0 14px 30px hsl(var(--accent) / 0.2);
+
+  --surface-glass: hsl(0 0% 100% / 0.88);
+  --surface-glass-border: hsl(0 0% 0% / 0.1);
+  --overlay-backdrop: rgb(0 0 0 / 0.28);
+  --app-gradient-start: hsl(var(--accent) / 0.12);
+  --app-gradient-end: transparent;
+
+  --shell-sidebar-width: 18rem;
+  --shell-sidebar-width-collapsed: 6rem;
+  --shell-mobile-nav-width: 88vw;
+  --shell-mobile-nav-max-width: 22rem;
+  --size-menu-panel-min-width: 8rem;
+  --size-menu-panel-wide-min-width: 12rem;
+  --size-command-panel-max-height: min(18.75rem, calc(100dvh - 8rem));
+  --size-drawer-handle-width: 6.25rem;
+  --size-textarea-min-height: 5rem;
+  --size-toast-viewport-max-width: 26.25rem;
+  --size-overlay-viewport-max-width: calc(100vw - 1rem);
+  --size-chart-tooltip-min-width: 8rem;
+  --size-chart-indicator-radius: 0.125rem;
+  --size-scrollbar-padding: 0.0625rem;
+  --size-hairline: 0.0625rem;
+  --size-sidebar-rail: 0.125rem;
+  --pane-review-max-height: 35rem;
+  --pane-quiz-session-max-height: 51.25rem;
+  --pane-tutor-chat-height: 26.25rem;
+  --surface-quiz-state-min-height: 60svh;
+  --surface-dashboard-card-min-height: 12.5rem;
+  --action-cluster-button-min-width: 13.75rem;
+
+  --motion-fast: 120ms;
+  --motion-base: 180ms;
+  --motion-slow: 260ms;
+  --ease-standard: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-emphasized: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
 @layer base {
   * {
     @apply border-border;

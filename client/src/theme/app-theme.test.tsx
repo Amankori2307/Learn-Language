@@ -21,23 +21,52 @@ describe("app theme config", () => {
   it("keeps future planned themes in the enum/config without marking them implemented", () => {
     expect(APP_THEME_DEFINITIONS.some((theme) => theme.id === AppThemeId.MINIMAL)).toBe(true);
     expect(isImplementedAppTheme(AppThemeId.MINIMAL)).toBe(true);
-    expect(isImplementedAppTheme(AppThemeId.WARM)).toBe(false);
+    expect(isImplementedAppTheme(AppThemeId.BLACK)).toBe(true);
+    expect(isImplementedAppTheme(AppThemeId.WARM)).toBe(true);
   });
 
   it("maps implemented themes to provider theme values", () => {
     expect(IMPLEMENTED_APP_THEMES.map((theme) => theme.id)).toEqual([
       AppThemeId.CURRENT,
       AppThemeId.MINIMAL,
+      AppThemeId.BLACK,
+      AppThemeId.WARM,
+      AppThemeId.MIDNIGHT,
+      AppThemeId.EDITORIAL,
+      AppThemeId.PLAYFUL,
+      AppThemeId.HIGH_CONTRAST,
     ]);
-    expect(IMPLEMENTED_PROVIDER_THEMES).toEqual(["dark", "minimal"]);
+    expect(IMPLEMENTED_PROVIDER_THEMES).toEqual([
+      "dark",
+      "minimal",
+      "black",
+      "warm",
+      "midnight",
+      "editorial",
+      "playful",
+      "high-contrast",
+    ]);
     expect(getProviderThemeForAppTheme(AppThemeId.CURRENT)).toBe("dark");
     expect(getProviderThemeForAppTheme(AppThemeId.MINIMAL)).toBe("minimal");
+    expect(getProviderThemeForAppTheme(AppThemeId.BLACK)).toBe("black");
+    expect(getProviderThemeForAppTheme(AppThemeId.WARM)).toBe("warm");
+    expect(getProviderThemeForAppTheme(AppThemeId.MIDNIGHT)).toBe("midnight");
+    expect(getProviderThemeForAppTheme(AppThemeId.EDITORIAL)).toBe("editorial");
+    expect(getProviderThemeForAppTheme(AppThemeId.PLAYFUL)).toBe("playful");
+    expect(getProviderThemeForAppTheme(AppThemeId.HIGH_CONTRAST)).toBe("high-contrast");
   });
 
   it("cycles between the implemented themes using provider theme values", () => {
     expect(getAppThemeIdForProviderTheme("dark")).toBe(AppThemeId.CURRENT);
     expect(getAppThemeIdForProviderTheme("minimal")).toBe(AppThemeId.MINIMAL);
+    expect(getAppThemeIdForProviderTheme("black")).toBe(AppThemeId.BLACK);
     expect(getNextImplementedProviderTheme("dark")).toBe("minimal");
-    expect(getNextImplementedProviderTheme("minimal")).toBe("dark");
+    expect(getNextImplementedProviderTheme("minimal")).toBe("black");
+    expect(getNextImplementedProviderTheme("black")).toBe("warm");
+    expect(getNextImplementedProviderTheme("warm")).toBe("midnight");
+    expect(getNextImplementedProviderTheme("midnight")).toBe("editorial");
+    expect(getNextImplementedProviderTheme("editorial")).toBe("playful");
+    expect(getNextImplementedProviderTheme("playful")).toBe("high-contrast");
+    expect(getNextImplementedProviderTheme("high-contrast")).toBe("dark");
   });
 });

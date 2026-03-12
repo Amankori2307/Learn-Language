@@ -18,14 +18,15 @@ Implemented themes:
 
 - `dark`
 - `minimal`
-
-Planned but not yet shipped:
-
+- `black`
 - `warm`
 - `midnight`
 - `editorial`
 - `playful`
 - `high-contrast`
+
+Planned but not yet shipped:
+None.
 
 ## Contract
 
@@ -46,6 +47,12 @@ Required token groups:
 
 - `dark` is the user-facing label for app theme id `current`, which maps to provider theme `dark`
 - `minimal` maps to provider theme `minimal`
+- `black` maps to provider theme `black`
+- `warm` maps to provider theme `warm`
+- `midnight` maps to provider theme `midnight`
+- `editorial` maps to provider theme `editorial`
+- `playful` maps to provider theme `playful`
+- `high-contrast` maps to provider theme `high-contrast`
 - system theme detection is disabled intentionally
 - chart theming already uses the implemented theme registry instead of a `light`/`dark` assumption
 
