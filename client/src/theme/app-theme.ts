@@ -1,10 +1,7 @@
 export const AppThemeId = {
   CURRENT: "current",
   MINIMAL: "minimal",
-  BLACK: "black",
   WARM: "warm",
-  MIDNIGHT: "midnight",
-  EDITORIAL: "editorial",
   PLAYFUL: "playful",
   HIGH_CONTRAST: "high-contrast",
 } as const;
@@ -31,17 +28,10 @@ export const APP_THEME_DEFINITIONS: readonly AppThemeDefinition[] = [
   },
   {
     id: AppThemeId.MINIMAL,
-    label: "Minimal",
+    label: "Light",
     availability: "implemented",
     providerTheme: "minimal",
     selector: ".minimal",
-  },
-  {
-    id: AppThemeId.BLACK,
-    label: "Black",
-    availability: "implemented",
-    providerTheme: "black",
-    selector: ".black",
   },
   {
     id: AppThemeId.WARM,
@@ -49,20 +39,6 @@ export const APP_THEME_DEFINITIONS: readonly AppThemeDefinition[] = [
     availability: "implemented",
     providerTheme: "warm",
     selector: ".warm",
-  },
-  {
-    id: AppThemeId.MIDNIGHT,
-    label: "Midnight",
-    availability: "implemented",
-    providerTheme: "midnight",
-    selector: ".midnight",
-  },
-  {
-    id: AppThemeId.EDITORIAL,
-    label: "Editorial",
-    availability: "implemented",
-    providerTheme: "editorial",
-    selector: ".editorial",
   },
   {
     id: AppThemeId.PLAYFUL,

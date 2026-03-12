@@ -26,7 +26,7 @@ describe("AppThemeProvider", () => {
         attribute: "class",
         defaultTheme: "dark",
         enableSystem: false,
-        themes: ["dark", "minimal", "black", "warm", "midnight", "editorial", "playful", "high-contrast"],
+        themes: ["dark", "minimal", "warm", "playful", "high-contrast"],
       }),
     );
   });

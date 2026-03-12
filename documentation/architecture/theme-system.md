@@ -17,13 +17,10 @@ Theme ownership lives in:
 Implemented themes:
 
 - `dark`
-- `minimal`
-- `black`
 - `warm`
-- `midnight`
-- `editorial`
 - `playful`
 - `high-contrast`
+- `light` (app theme id `minimal`)
 
 Planned but not yet shipped:
 None.
@@ -46,11 +43,8 @@ Required token groups:
 ## Current implementation notes
 
 - `dark` is the user-facing label for app theme id `current`, which maps to provider theme `dark`
-- `minimal` maps to provider theme `minimal`
-- `black` maps to provider theme `black`
+- `light` maps to provider theme `minimal`
 - `warm` maps to provider theme `warm`
-- `midnight` maps to provider theme `midnight`
-- `editorial` maps to provider theme `editorial`
 - `playful` maps to provider theme `playful`
 - `high-contrast` maps to provider theme `high-contrast`
 - system theme detection is disabled intentionally
