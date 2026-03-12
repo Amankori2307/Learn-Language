@@ -1,6 +1,6 @@
 # Async UX Contract
 
-This document is the execution baseline for `P9-003`. It defines how the frontend must expose async behavior for all API-backed work.
+This document defines how the frontend must expose async behavior for all API-backed work.
 
 ## Core rule
 
@@ -259,40 +259,15 @@ Instead of:
 - there is no usable prior content
 - the view meaningfully changes shape and stale content would mislead the user
 
-## Current gap inventory
+## Current implementation note
 
-### Learner surfaces
+The app now broadly follows this contract across learner and reviewer surfaces through shared page-state primitives, pending buttons, feature view-models, and route integration coverage.
 
-- `dashboard`
-  - has simple loading state, but no shared skeleton standard yet
-- `quiz`
-  - shows large route-level loading and submit pending, but pending semantics are specific to this page
-- `clusters`
-  - has loading, but filter/pagination updates are not modeled as explicit async view states
-- `history`
-  - manual refresh is visible, but filter/sort/page-change async semantics are not standardized
-- `leaderboard`
-  - loading and fetch states exist, but no consistent background-refetch pattern
-- `profile`
-  - save pending exists, but success/error/pending are local one-offs
-- `auth`
-  - redirect/bootstrap path needs a clearer dedicated async treatment
+The remaining expectation is consistency:
 
-### Reviewer/admin surfaces
-
-- `review`
-  - mutation pending exists, but per-row, bulk, and history-panel semantics are not standardized
-- `add-vocabulary`
-  - submit pending exists through mutation state, but cluster fetch and success/error states are component-local and one-off
-
-### Cross-cutting
-
-- no shared distinction between:
-  - initial load
-  - background refresh
-  - form submit pending
-  - destructive pending
-  - filter/pagination pending
+- new features should map into the same async state taxonomy instead of inventing local semantics
+- background refetch and localized pending behavior should stay visible when adding new data surfaces
+- route-level bootstrap and access-gated flows should keep dedicated loading/error treatments
 
 ## Async checklist for every API-backed interaction
 
@@ -307,20 +282,16 @@ Before implementation is considered complete, verify:
 7. Is there a visible error path?
 8. Is there a visible empty path if the request succeeds with no data?
 
-## Rules for Phase 9 implementation
-
-### Required before page refactors
-
-- shared async state primitives must exist
-- page work must map each request state to one of the semantics in this document
-
-### Not allowed
+## Not allowed
 
 - silent API calls
 - mutation work with no visible pending state
 - new one-off loading patterns without justification
 - blank content regions where the user cannot tell if the app is working
 
-## Phase follow-up status
+## Current status
 
-The historical next dependency from this baseline is complete: `P9-004` established the shared loading, skeleton, empty, and error-state primitives used across the client.
+This contract is implementation-backed. Keep it aligned with:
+
+- [context/archive/documentation-history/ui-state-primitives-baseline.md](/Users/aman/Projects/personal-projects/Learn-Language/context/archive/documentation-history/ui-state-primitives-baseline.md)
+- [context/archive/documentation-history/frontend-coverage-matrix.md](/Users/aman/Projects/personal-projects/Learn-Language/context/archive/documentation-history/frontend-coverage-matrix.md)

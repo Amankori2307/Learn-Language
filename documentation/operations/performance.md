@@ -1,12 +1,12 @@
-# Performance Baseline
+# Performance
 
-This document is the completed execution record for `P10-008`.
+This document records the current performance notes, measured observations, and optimization decisions that still matter for the repository.
 
 ## Measurement date
 
 - 2026-03-11
 
-## Frontend baseline
+## Frontend build observations
 
 Command run:
 
@@ -25,11 +25,11 @@ Observed result:
 - build emitted one warning:
   - `themeColor` is configured in metadata export for `/_not-found` and should be moved to `viewport`
 
-Initial interpretation:
+Interpretation at the time of measurement:
 
 - the Next app shell itself is small and not the obvious primary bottleneck
 - the more likely runtime cost is in the client SPA data flows and backend request work, not in a large static app-route bundle
-- the metadata warning should be handled later in `P10-009`, not folded into performance work
+- that metadata warning was treated as a metadata concern rather than a performance concern
 
 ## Backend hotspot audit
 
@@ -136,23 +136,6 @@ Why this was chosen fourth:
 - it removes one of the last obvious cold-read hotspots in the analytics path
 - it reduces payload shaping work in application code without changing the response contract
 - it complements the short-lived cache by lowering the cost of cache misses
-
-## Current ranking of likely next performance work
-
-1. leaderboard aggregation pushdown or user narrowing without changing empty-state behavior
-2. quiz distractor-pool sizing review and possible caching of stable reference data
-3. cluster listing query consolidation beyond the current parallel-query improvement
-4. route-level frontend client payload inspection if the SPA shell becomes the next bottleneck
-
-## Current status
-
-- `P10-008A`: complete
-- `P10-008B`: complete
-- `P10-008C`: complete
-- `P10-008D`: complete
-- `P10-008E`: complete
-
-The performance phase is complete for the current codebase. The items above under "Current ranking of likely next performance work" are future optimization candidates, not active incomplete phase slices.
 
 ## Known limitations
 

@@ -79,15 +79,32 @@
 - `pnpm run lint` also enforces symbol ownership through `script/check-symbol-governance.ts`.
 - Exported enums outside approved enum modules and duplicate exported reusable symbol names are CI failures.
 
-9. Documentation hygiene:
+9. Shared contract governance:
 
-- Keep implementation-backed documentation in the `documentation/` folder up to date when behavior, architecture, operations, testing scope, or governance rules change.
-- If a code change makes an existing document inaccurate, update that document in the same task instead of leaving stale guidance behind.
+- Shared domain enums belong in `shared/domain/enums.ts`.
+- Database-only enums belong in `server/src/infrastructure/database.enums.ts`.
+- New exported enums should not be introduced anywhere else without first promoting them into one of those modules.
+- Cross-layer API and domain shapes belong in `shared/*`.
+- Module-level reusable server shapes belong in `*.types.ts` or `*.repository.types.ts` files, not in controllers, services, or repositories.
+- Reusable client types belong in feature-owned hook/service/lib modules only when they are not shared across domains.
+- Avoid public alias wrappers that simply restate an existing enum or interface name in another module unless the alias carries genuinely different semantics.
+
+10. Documentation hygiene:
+
+- Keep implementation-backed documentation in the `documentation/` folder up to date when behavior, architecture, operations, or testing scope changes.
+- If a code change makes an existing document inaccurate, update that document in the same change instead of leaving stale guidance behind.
 - Prefer updating the canonical existing document over creating duplicate notes for the same topic.
 - When a planning file contains durable information that is still useful after implementation, move that information into `documentation/` and archive the planning file instead of deleting it.
-- When public routing, crawlability, analytics tags, sitemap contents, metadata policy, robots rules, or canonical behavior changes, update the canonical SEO/runtime docs and the shared SEO ownership module in the same task.
+- Keep a hard boundary between canonical docs and planning material:
+  - `documentation/` is for current product, architecture, and operations docs only
+  - workflow and repository-governance rules belong in `context/guidelines/`
+  - active or future work belongs in `context/active-tasks/` or `context/future-tasks/`
+  - completed planning history and superseded notes belong in `context/archive/`
+- `pnpm run lint` enforces the documentation boundary through `script/check-documentation-boundary.ts`; do not bypass it by placing planning-oriented markdown under `documentation/`.
+- `pnpm run lint` also enforces context workflow boundaries through `script/check-context-workflow.ts`; do not leave active phase files untracked in the backlog or turn future backlog files into an execution board.
+- When public routing, crawlability, analytics tags, sitemap contents, metadata policy, robots rules, or canonical behavior changes, update the canonical SEO/runtime docs and the shared SEO ownership module in the same change.
 
-10. Branch workflow:
+11. Branch workflow:
 
 - Start each new phase on a new git branch.
 - Use one branch per phase; do not stack multiple active phases on the same long-lived branch.
@@ -98,46 +115,50 @@
 - If a phase is large, use short-lived sub-branches off the phase branch only when necessary, then merge them back into the phase branch before merging to `main`.
 - Before starting the next phase, branch from the latest `main` unless there is an explicit reason to branch from another approved integration branch.
 
-11. Commit hygiene:
+12. Commit hygiene:
 
 - Commit once you have a sizable, coherent set of changes.
 - Commit when you complete a major logical task, not only at the very end of a long phase.
 - Prefer commits that represent one meaningful unit of progress and can be understood or reverted independently.
 - Do not mix unrelated fixes, refactors, and feature work into the same commit unless they are inseparable for correctness.
 
-12. Dependency injection:
+13. Dependency injection:
 
 - Prefer plain constructor injection for concrete Nest class providers.
 - Use `@Inject(...)` only when the runtime token cannot be inferred safely from the parameter type.
 - Typical valid cases: custom tokens, interfaces, `useFactory`, `useValue`, or multiple provider implementations behind one abstraction.
 - Avoid `@Inject(ClassName)` by default when plain constructor injection is equivalent.
+- Prefer constructor injection by class for normal module-local controllers, services, and repositories.
+- Reserve explicit tokens for true abstractions and infrastructure seams.
+- If a provider begins as a concrete class and later needs multiple implementations, introduce a named token at that time instead of pre-optimizing every constructor now.
+- Keep provider ownership obvious: modules wire providers, constructors declare dependencies, and tokens appear only where runtime indirection is real.
 
-13. AI feature bar:
+14. AI feature bar:
 
 - Do not add AI features without an explicit product problem, rollout gate, privacy check, and deterministic fallback where needed.
 - Never put non-deterministic AI behavior directly into grading, reviewer approval, or other correctness-critical paths.
 - Prefer reviewer-assist and recommendation use cases over autonomous learner-scoring flows.
 
-14. Responsive implementation bar:
+15. Responsive implementation bar:
 
 - Treat mobile-first as a layering strategy, not permission to degrade tablet/laptop/desktop UX.
 - When changing a surface for phone layouts, explicitly preserve or improve the corresponding desktop layout.
 - Do not remove desktop structure, hierarchy, spacing, or affordances just to simplify the mobile version.
 - Responsive refactors must be reviewed in at least one phone width and one desktop width before they are considered complete.
 
-15. Theme-safe component bar:
+16. Theme-safe component bar:
 
 - New shared primitives and feature components must prefer semantic classes such as `bg-background`, `text-foreground`, `border-border`, `bg-card`, and shared status tokens over raw Tailwind palette classes.
 - New components must not assume only `light` and `dark`; they should work under the implemented named themes and avoid `dark:` branches unless there is no token-based alternative yet.
 - Theme-sensitive values such as overlay treatment, border radius, shadows, and transition feel should come from existing CSS variables or shared variants instead of local one-off styling.
 - If a new component cannot be made theme-safe immediately, document the limitation in the task and treat it as explicit follow-up debt instead of leaving the assumption implicit.
 
-16. SEO ownership:
+17. SEO ownership:
 
 - Route titles, descriptions, canonical/index rules, sitemap inclusion, and shared marketing/runtime tags must be owned from the centralized SEO constants/module rather than scattered across pages.
 - When adding, renaming, opening, or closing a route, update that centralized SEO ownership file so sitemap and metadata stay in sync.
 - Public/indexable routes must have explicit title, description, canonical behavior, sitemap policy, and crawler intent; protected routes must explicitly declare `noindex` behavior instead of relying on omission.
-- Keep `shared/domain/constants/seo.ts`, `app/layout.tsx`, `app/sitemap.ts`, `app/robots.ts`, route-level metadata generation, and `documentation/seo-crawlability-contract.md` aligned with the centralized SEO ownership file.
+- Keep `shared/domain/constants/seo.ts`, `app/layout.tsx`, `app/sitemap.ts`, `app/robots.ts`, route-level metadata generation, and `documentation/operations/seo-crawlability.md` aligned with the centralized SEO ownership file.
 - When SEO behavior changes, also review the related public SEO surfaces and assets, including structured data, canonical links, Open Graph/Twitter metadata, manifest/icon references, favicon/app-icon assets under `public/`, and any public marketing-entry routes that affect crawlability.
 - Treat SEO upkeep as part of the route-definition done criteria: a route change is not complete until metadata, sitemap eligibility, robots intent, analytics tags, and documentation have been reviewed and updated where needed.
 

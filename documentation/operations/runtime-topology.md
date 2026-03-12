@@ -1,6 +1,6 @@
-# Runtime Topology Contract
+# Runtime Topology
 
-This document records the completed `P10-007` runtime exposure hardening.
+This document defines the current runtime exposure and network-topology posture for the deployed application.
 
 ## Current topology
 

@@ -1,6 +1,6 @@
 # Frontend Coverage Matrix
 
-This document is the execution baseline for `P9-009A`. It records current automated frontend coverage by core surface and state type so the remaining Phase 9 coverage work can target real gaps instead of guesswork.
+This document records current automated frontend coverage by core surface and state type.
 
 Status legend:
 
@@ -40,17 +40,19 @@ Status legend:
 | review page fragments | access, header, bulk actions, queue, history | `covered` | direct tests exist for most extracted fragments |
 | quiz page states | loading, missing-question, completion, CTA routing | `covered` | direct tests exist |
 
-## Highest-priority remaining gaps
+## Current status
 
-1. route-level frontend coverage is broadly in place across core learner and reviewer surfaces; remaining work is now mostly long-tail polish rather than visible state-ownership gaps.
+- route-level frontend coverage is broadly in place across core learner and reviewer surfaces
+- the matrix is now primarily a maintenance inventory, not an active gap tracker
+- new route or state work should update this file when it changes the automated coverage shape
 
-## Explicit Phase 9 deferrals
+## Explicit lower-priority note
 
 - `tutor` remains non-core for prioritization purposes even though basic route-state coverage now exists.
 
-## Exit criteria for `P9-009`
+## Maintenance bar
 
-`P9-009` should be considered complete when:
+Keep this coverage baseline healthy by ensuring:
 
 - every core learner and reviewer page has at least one automated assertion for each applicable state category:
   - loading

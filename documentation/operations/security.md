@@ -1,10 +1,10 @@
-# Security Hardening Contract
+# Security
 
-This document records the completed `P10-006` baseline hardening now enforced by the backend runtime.
+This document defines the current backend security and abuse-control posture enforced by the runtime.
 
 ## Current protections
 
-- backend responses now include baseline browser security headers:
+- backend responses now include browser security headers:
   - `X-Content-Type-Options: nosniff`
   - `X-Frame-Options: DENY`
   - `Referrer-Policy: strict-origin-when-cross-origin`

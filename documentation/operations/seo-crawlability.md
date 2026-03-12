@@ -1,6 +1,6 @@
-# SEO And Crawlability Contract
+# SEO And Crawlability
 
-This document records the completed `P10-009` SEO hardening baseline.
+This document defines the current SEO, crawlability, and metadata ownership rules for the application.
 
 It is also the maintenance contract for future sitemap, metadata, and tag-manager updates. Keep this document aligned with the shared SEO ownership module whenever route visibility or crawler policy changes.
 

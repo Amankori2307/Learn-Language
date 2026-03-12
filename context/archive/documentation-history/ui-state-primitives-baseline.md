@@ -1,6 +1,6 @@
 # UI State Primitives Baseline
 
-This document is the execution baseline for `P9-004`. It defines the shared loading, skeleton, empty, error, and pending-state primitives that Phase 9 should standardize across the app.
+This document defines the shared loading, skeleton, empty, error, and pending-state primitives used across the app.
 
 ## Objective
 
@@ -15,7 +15,7 @@ This is required so that:
 
 ## Primitive inventory
 
-Phase 9 should standardize these primitives.
+The client should standardize on these primitives.
 
 ### 1. `PageSkeleton`
 
@@ -301,41 +301,18 @@ Skeletons and refresh indicators must:
 - work with reduced motion
 - avoid aggressive shimmer or infinite distracting animation
 
-## Adoption order
-
-Shared primitive implementation should happen in this order:
-
-1. `PendingButton`
-2. `ErrorState`
-3. `EmptyState`
-4. `SectionLoader`
-5. `TableSkeleton`
-6. `CardGridSkeleton`
-7. `PageSkeleton`
-8. `InlineRefreshIndicator`
-
-Reason:
-
-- mutation pending and failure visibility are the most urgent product trust issues
-- table/list heavy surfaces are the largest current gap
-- page-wide skeletons can be built after the smaller pieces are consistent
-
-## Current anti-patterns to eliminate
+## Current anti-patterns to continue avoiding
 
 - page-specific bordered loading boxes repeated across screens
 - page-specific retry cards repeated with slight copy changes
 - mutation pending expressed only by disabling a button with no visual change
 - empty states that are just plain text with no consistent structure
 
-## Acceptance checks for `P9-004`
+## Current acceptance bar
 
-`P9-004` is complete only when:
+This primitive layer is healthy when:
 
 - the primitive set is defined
 - each core page maps to a known state primitive set
 - accessibility and motion constraints are documented
-- adoption order is locked before responsive/page refactor work proceeds
-
-## Phase follow-up status
-
-The historical next dependency from this baseline is complete: `P9-005` applied the shared state assumptions during responsive and adaptive layout hardening.
+- new surfaces reuse these primitives or extend them intentionally instead of bypassing them

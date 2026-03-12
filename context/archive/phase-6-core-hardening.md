@@ -1,10 +1,10 @@
-# Phase 6 - Core Hardening Execution Plan
+# Phase 6 - Core Hardening Execution Record
 
 Status: `complete`
 
 Objective: enforce data correctness, review-quality governance, and scheduling reliability before broader media expansion.
 
-## Execution order (must follow)
+## Execution order
 
 1. P6-001
 2. P6-002

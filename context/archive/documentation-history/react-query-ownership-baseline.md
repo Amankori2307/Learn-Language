@@ -1,6 +1,6 @@
 # React Query Ownership Baseline
 
-This document is the execution baseline for `P9-002`. It inventories current UI-facing request paths, defines ownership rules for React Query usage, and locks the migration order needed before async UX and loading-state work.
+This document inventories the current UI-facing request paths and defines the ownership rules the codebase now follows for React Query usage.
 
 ## Objective
 
@@ -17,12 +17,11 @@ The codebase already uses React Query in many places. This phase is not a greenf
 
 Current reality:
 
-- most shared data access hooks already use React Query
-- some feature surfaces are already reasonably structured
-- request ownership is still inconsistent
-- shared hooks now broadly export explicit query-key builders, but the repo-wide convention is still not fully documented
-- invalidation strategy is uneven
-- query ownership is now broadly aligned; the remaining issues are more about conventions than obvious boundary leaks
+- shared data access is broadly React Query-owned
+- pages and presentational components are no longer expected to define transport-backed queries or mutations
+- shared hooks broadly export explicit query-key builders
+- invalidation is narrower and more deliberate than earlier refactor stages
+- the remaining work is mostly maintenance and convention enforcement, not structural migration
 
 ## UI-facing request inventory
 
@@ -291,19 +290,17 @@ The originally identified migration slices are now complete:
 - audio resolution request ownership is separated from browser playback behavior
 - high-impact learner invalidation paths are now narrowed and explicit
 
-## Remaining follow-up work
+## Ongoing maintenance notes
 
-The remaining work is smaller and more policy-oriented than migration-oriented:
+The major migration is complete. The remaining responsibility is to preserve the pattern:
 
-1. document the query-key and invalidation conventions in the repo-wide governance docs so new hooks follow the same ownership model by default
-2. keep reviewer/admin surfaces aligned when future mutations or shared hooks are added
-3. periodically re-run the inventory if new feature areas introduce direct transport access or ad hoc cache rules
+1. keep new hooks aligned with the documented key-shape and invalidation rules
+2. keep reviewer/admin additions using the same ownership boundaries as learner features
+3. periodically re-audit if new feature areas introduce direct transport access or ad hoc cache rules
 
-The first follow-up item is now complete through the repo-wide coding guidance and governance docs.
+## Current acceptance bar
 
-## Acceptance checks for `P9-002`
-
-`P9-002` is complete only when:
+This area is considered healthy as long as:
 
 - no page file defines transport-backed queries or mutations
 - no presentational component imports `apiClient`

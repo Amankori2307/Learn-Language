@@ -1,8 +1,8 @@
-# Phase 4C - Words First, Sentences in Feedback
+# Phase 4C - Words First, Sentences In Feedback
 
 Objective: keep learning prompts word-first, and use sentences only as post-answer reinforcement.
 
-## Improved implementation prompt/spec
+## Implementation record
 
 Build a text-first source language learning flow where:
 
@@ -15,7 +15,7 @@ Build a text-first source language learning flow where:
 4. This example triplet must be stored and served from structured data (`word_examples`), not ad-hoc UI strings.
 5. If example data is missing, server should provide a safe fallback triplet to avoid blank feedback UI.
 
-Out of scope for this phase:
+Out of scope:
 
 - audio/video/image-first experiences
 - sentence-only quiz modes as primary prompts

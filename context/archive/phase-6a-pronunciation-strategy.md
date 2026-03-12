@@ -1,6 +1,6 @@
-# Pronunciation Strategy (Decision Note)
+# Phase 6A - Pronunciation Strategy Decision Note
 
-## Goal
+## Objective
 
 Provide pronunciation for words and sentences with high correctness, low operational risk, and predictable cost.
 
@@ -54,7 +54,7 @@ Provide pronunciation for words and sentences with high correctness, low operati
 - Secondary assist: Option B as draft helper only (never auto-publish).
 - Optional fallback: Option C behind explicit feature flag for low-confidence gaps.
 
-## Rollout Plan
+## Rollout plan
 
 1. Keep manual pronunciation mandatory for reviewer-created words/sentences.
 2. Add pronunciation style guide per language (syllable style, long-vowel convention, stress notation policy).

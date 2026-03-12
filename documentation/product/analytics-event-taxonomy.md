@@ -1,6 +1,6 @@
 # Analytics Event Taxonomy
 
-This document is the execution contract for `P10-005`. It defines the initial analytics abstraction, provider model, and first event set for the app.
+This document defines the current analytics abstraction, provider model, and event set for the app.
 
 ## Goals
 

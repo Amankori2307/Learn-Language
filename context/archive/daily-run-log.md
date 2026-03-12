@@ -9,8 +9,8 @@ Next task ID: -
 ## Current state
 
 - Production deploy flow now uploads local `.env.production` to the server on every deploy and force-recreates containers so runtime env changes apply.
-- Production server notes were moved to [documentation/server.md](/Users/aman/Projects/personal-projects/Learn-Language/documentation/server.md).
-- Implementation-backed core feature documentation now exists in [documentation/core-features.md](/Users/aman/Projects/personal-projects/Learn-Language/documentation/core-features.md).
+- Production server notes were moved to [documentation/operations/server.md](/Users/aman/Projects/personal-projects/Learn-Language/documentation/operations/server.md).
+- Implementation-backed core feature documentation now exists in [documentation/product/core-features.md](/Users/aman/Projects/personal-projects/Learn-Language/documentation/product/core-features.md).
 - Completed phase plans have since been folded into implementation-backed documentation and removed from active context.
 - Phase 9 is ordered to avoid wasted work:
   - architecture boundary first
@@ -39,13 +39,13 @@ Next task ID: -
 ## Current state
 
 - `P9-001` and `P9-002` are complete.
-- Frontend architecture baseline created in [documentation/frontend-architecture-baseline.md](/Users/aman/Projects/personal-projects/Learn-Language/documentation/frontend-architecture-baseline.md).
-- Core feature documentation remains available in [documentation/core-features.md](/Users/aman/Projects/personal-projects/Learn-Language/documentation/core-features.md).
-- The final Phase 9 smoke/E2E scope is now explicit in [documentation/e2e-smoke-scope.md](/Users/aman/Projects/personal-projects/Learn-Language/documentation/e2e-smoke-scope.md), including the minimum production-critical path set, suite ownership, and the remaining automation gaps before `P9-010` can close.
+- Frontend architecture baseline created in [documentation/architecture/frontend-architecture.md](/Users/aman/Projects/personal-projects/Learn-Language/documentation/architecture/frontend-architecture.md).
+- Core feature documentation remains available in [documentation/product/core-features.md](/Users/aman/Projects/personal-projects/Learn-Language/documentation/product/core-features.md).
+- The final Phase 9 smoke/E2E scope is now explicit in [context/archive/documentation-history/e2e-smoke-scope.md](/Users/aman/Projects/personal-projects/Learn-Language/context/archive/documentation-history/e2e-smoke-scope.md), including the minimum production-critical path set, suite ownership, and the remaining automation gaps before `P9-010` can close.
 - `P9-010` is now complete: the smoke suite covers learner and reviewer critical paths, the release-gate split between frontend integration and API-level smoke is explicit, and CI now provisions Postgres, migrates/imports content, runs `pnpm run ci`, runs production-like smoke, and then builds.
 - `P9-008` is now complete: backend service/controller/integration coverage and the invariant map cover the Phase 9 refactor-sensitive auth, quiz, review, analytics, vocabulary, audio, and language-isolation contracts, with remaining risk reduced to environment availability rather than missing automated cases.
 - `P9-003`, `P9-004`, and `P9-005` are now complete: the shared async UX contract, shared state primitives, and responsive/mobile hardening work have all been implemented and adopted broadly enough that only explicitly deferred low-priority long-tail gaps remain.
-- `P9-009` is now complete: learner/reviewer integration coverage, shared primitive coverage, high-risk responsive regressions, and explicit deferrals are all documented in [frontend-coverage-matrix.md](/Users/aman/Projects/personal-projects/Learn-Language/documentation/frontend-coverage-matrix.md).
+- `P9-009` is now complete: learner/reviewer integration coverage, shared primitive coverage, high-risk responsive regressions, and explicit deferrals are all documented in [frontend-coverage-matrix.md](/Users/aman/Projects/personal-projects/Learn-Language/context/archive/documentation-history/frontend-coverage-matrix.md).
 - Phase 9 is now complete.
 - `P11-001` is now complete:
   - app shell, dense data surfaces, forms, and learner flows were reworked for stronger phone-first behavior
@@ -128,7 +128,7 @@ Next task ID: -
   - the repo-wide coding guidance and governance contract now explicitly cover React Query ownership boundaries, stable query-key ownership, narrow-by-default invalidation, and centralized query-behavior overrides
   - the ownership baseline now records that this governance follow-up is complete, leaving only future alignment and periodic re-inventory work
 - `P13-023` is now complete:
-  - deployment runbook links in [server.md](/Users/aman/Projects/personal-projects/Learn-Language/documentation/server.md) now point at the actual repository paths instead of an old Codex worktree path
+  - deployment runbook links in [server.md](/Users/aman/Projects/personal-projects/Learn-Language/documentation/operations/server.md) now point at the actual repository paths instead of an old Codex worktree path
   - the production server documentation is once again navigable from the current workspace
 - `P13-024` is now complete:
   - completed Phase 9 architecture, async UX, shared-state, and responsive baselines no longer describe already-finished tasks as upcoming dependencies
@@ -141,8 +141,8 @@ Next task ID: -
   - implementation wording now distinguishes shipped logging behavior from optional follow-up considerations
 - Phase 12 planning is now active in [phase-12-theme-system-and-design-token-extraction.md](/Users/aman/Projects/personal-projects/Learn-Language/context/archive/phase-12-theme-system-and-design-token-extraction.md).
 - Active backlog was reprioritized to start with theming-system readiness before UI theme selection work:
-  - `P12-001` is now complete via [theme-system-baseline.md](/Users/aman/Projects/personal-projects/Learn-Language/documentation/theme-system-baseline.md)
-  - `P12-002` is now complete via [theme-contract.md](/Users/aman/Projects/personal-projects/Learn-Language/documentation/theme-contract.md)
+  - `P12-001` is now complete via [theme-system-baseline.md](/Users/aman/Projects/personal-projects/Learn-Language/context/archive/documentation-history/theme-system-baseline.md)
+  - `P12-002` is now complete via [theme-contract.md](/Users/aman/Projects/personal-projects/Learn-Language/context/archive/documentation-history/theme-contract.md)
   - `P12-003` is now complete:
     - supported theme ownership now lives in [app-theme.ts](/Users/aman/Projects/personal-projects/Learn-Language/client/src/theme/app-theme.ts)
     - app-level provider wiring now flows through [app-theme-provider.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/theme/app-theme-provider.tsx)
@@ -184,12 +184,12 @@ Next task ID: -
       - `pnpm run check`
   - Phase 12 is now complete and the active backlog returns to `P11-002`
 - Planning baselines for the next implementation tasks are now documented:
-  - React Query ownership baseline in [documentation/react-query-ownership-baseline.md](/Users/aman/Projects/personal-projects/Learn-Language/documentation/react-query-ownership-baseline.md)
-  - Async UX contract in [documentation/async-ux-contract.md](/Users/aman/Projects/personal-projects/Learn-Language/documentation/async-ux-contract.md)
-  - UI state primitive baseline in [documentation/ui-state-primitives-baseline.md](/Users/aman/Projects/personal-projects/Learn-Language/documentation/ui-state-primitives-baseline.md)
-  - Responsive UI baseline in [documentation/responsive-ui-baseline.md](/Users/aman/Projects/personal-projects/Learn-Language/documentation/responsive-ui-baseline.md)
-  - Frontend coverage matrix in [documentation/frontend-coverage-matrix.md](/Users/aman/Projects/personal-projects/Learn-Language/documentation/frontend-coverage-matrix.md)
-  - Backend refactor invariants in [documentation/backend-refactor-invariants.md](/Users/aman/Projects/personal-projects/Learn-Language/documentation/backend-refactor-invariants.md)
+  - React Query ownership baseline in [context/archive/documentation-history/react-query-ownership-baseline.md](/Users/aman/Projects/personal-projects/Learn-Language/context/archive/documentation-history/react-query-ownership-baseline.md)
+  - Async UX contract in [context/archive/documentation-history/async-ux-contract.md](/Users/aman/Projects/personal-projects/Learn-Language/context/archive/documentation-history/async-ux-contract.md)
+  - UI state primitive baseline in [context/archive/documentation-history/ui-state-primitives-baseline.md](/Users/aman/Projects/personal-projects/Learn-Language/context/archive/documentation-history/ui-state-primitives-baseline.md)
+  - Responsive UI baseline in [context/archive/documentation-history/responsive-ui-baseline.md](/Users/aman/Projects/personal-projects/Learn-Language/context/archive/documentation-history/responsive-ui-baseline.md)
+  - Frontend coverage matrix in [context/archive/documentation-history/frontend-coverage-matrix.md](/Users/aman/Projects/personal-projects/Learn-Language/context/archive/documentation-history/frontend-coverage-matrix.md)
+  - Backend refactor invariants in [context/archive/documentation-history/backend-refactor-invariants.md](/Users/aman/Projects/personal-projects/Learn-Language/context/archive/documentation-history/backend-refactor-invariants.md)
 - Active implementation order is now moving through async UX, responsive hardening, and surface extraction:
   - `P9-003` is in progress with shared async visibility implemented and adopted on main mutation paths
   - `P9-004` is in progress with shared state primitives introduced and adopted on high-traffic pages
@@ -230,14 +230,14 @@ Next task ID: -
   - page-level integration coverage now also protects leaderboard retryable errors and contextual loading-state rendering in [leaderboard.integration.test.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/pages/leaderboard.integration.test.tsx) and [contextual.integration.test.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/pages/contextual.integration.test.tsx)
   - page-level integration coverage now also protects history loading/error states, clusters empty-state composition, and word-bucket loading plus bucket-switch behavior in [history.integration.test.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/pages/history.integration.test.tsx), [clusters.integration.test.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/pages/clusters.integration.test.tsx), and [word-buckets.integration.test.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/pages/word-buckets.integration.test.tsx)
   - page-level integration coverage now also protects dashboard loading/default-primary-action behavior and review queue loading/error/empty state composition in [dashboard.integration.test.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/pages/dashboard.integration.test.tsx) and [review.integration.test.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/pages/review.integration.test.tsx)
-  - `P9-009A` is now complete with a stabilized page/state inventory in [frontend-coverage-matrix.md](/Users/aman/Projects/personal-projects/Learn-Language/documentation/frontend-coverage-matrix.md), including the current gap list for dashboard, auth bootstrap, clusters/context failure states, review state branches, and responsive regressions
+  - `P9-009A` is now complete with a stabilized page/state inventory in [frontend-coverage-matrix.md](/Users/aman/Projects/personal-projects/Learn-Language/context/archive/documentation-history/frontend-coverage-matrix.md), including the current gap list for dashboard, auth bootstrap, clusters/context failure states, review state branches, and responsive regressions
   - clusters and contextual pages now expose explicit retryable request-failure states from their view-models and page shells, and review page integration coverage now also protects history loading/error branches after item selection
   - auth bootstrap/redirect behavior is now directly covered in [use-auth-page-view-model.test.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/features/auth/use-auth-page-view-model.test.tsx), narrowing the remaining auth gap to whether the route needs explicit failure treatment
   - dashboard now exposes a retryable request-failure state from [dashboard.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/pages/dashboard.tsx), with integration coverage protecting loading, retry, populated render, and default-primary-action behavior in [dashboard.integration.test.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/pages/dashboard.integration.test.tsx)
   - Phase 9 task rows were reconciled against the current implementation: learner/reviewer architecture slices (`P9-006`, `P9-007`) are now marked done, `P9-009A` and `P9-009B` are done, and remaining frontend/backend test-expansion items stay explicitly in progress
   - `/auth` now renders a dedicated bootstrap surface in [auth-bootstrap-panel.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/features/auth/auth-bootstrap-panel.tsx) while token handoff or session restoration is in progress, with direct route and hook coverage protecting that behavior
   - responsive regression work has started under `P9-009E`: high-risk action rows now have direct responsive class assertions in [history-page-header.test.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/features/history/history-page-header.test.tsx), [leaderboard-header.test.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/features/analytics/leaderboard-header.test.tsx), [word-bucket-controls.test.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/features/analytics/word-bucket-controls.test.tsx), and [review-bulk-actions.test.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/features/review/review-bulk-actions.test.tsx)
-  - `P9-008A` and `P9-008D` are now explicit in [backend-refactor-invariants.md](/Users/aman/Projects/personal-projects/Learn-Language/documentation/backend-refactor-invariants.md), which maps current backend invariants to protecting tests and documents the active backend test-command set
+  - `P9-008A` and `P9-008D` are now explicit in [backend-refactor-invariants.md](/Users/aman/Projects/personal-projects/Learn-Language/context/archive/documentation-history/backend-refactor-invariants.md), which maps current backend invariants to protecting tests and documents the active backend test-command set
   - review page presentation was further split into [review-access-state.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/features/review/review-access-state.tsx), [review-page-header.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/features/review/review-page-header.tsx), and [review-bulk-actions.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/features/review/review-bulk-actions.tsx)
   - direct tests now cover [review-access-state.test.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/features/review/review-access-state.test.tsx), [review-page-header.test.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/features/review/review-page-header.test.tsx), and [review-bulk-actions.test.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/features/review/review-bulk-actions.test.tsx)
   - leaderboard, contextual, clusters, and profile shells were thinned further via [leaderboard-header.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/features/analytics/leaderboard-header.tsx), [contextual-header.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/features/contextual/contextual-header.tsx), [clusters-header.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/features/clusters/clusters-header.tsx), [clusters-filter-panel.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/features/clusters/clusters-filter-panel.tsx), and [profile-loading-card.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/features/profile/profile-loading-card.tsx)
@@ -254,14 +254,14 @@ Next task ID: -
   - backend vocabulary-controller coverage now exists in [vocabulary.controller.test.ts](/Users/aman/Projects/personal-projects/Learn-Language/server/src/modules/vocabulary/vocabulary.controller.test.ts) for cluster-list forwarding and cluster-detail not-found mapping
   - backend vocabulary-service coverage now exists in [vocabulary.service.test.ts](/Users/aman/Projects/personal-projects/Learn-Language/server/src/modules/vocabulary/vocabulary.service.test.ts) for cluster language forwarding and not-found behavior on word/cluster lookups
   - smoke coverage expanded to include auth, profile, stats, learning insights, attempt history, leaderboard, word buckets, cluster list, cluster detail, quiz generation, and quiz submission critical paths
-  - `P9-010A` is now complete: [e2e-smoke-scope.md](/Users/aman/Projects/personal-projects/Learn-Language/documentation/e2e-smoke-scope.md) names the minimum production-critical path set, maps each path to its current automated owner, and keeps the remaining learner/reviewer smoke gaps explicit
+  - `P9-010A` is now complete: [e2e-smoke-scope.md](/Users/aman/Projects/personal-projects/Learn-Language/context/archive/documentation-history/e2e-smoke-scope.md) names the minimum production-critical path set, maps each path to its current automated owner, and keeps the remaining learner/reviewer smoke gaps explicit
   - the integrated smoke suite now also bootstraps a reviewer user via `/auth/me`, verifies live reviewer queue access at `/api/review/queue`, and submits a vocabulary draft through `/api/review/words`
   - the GitHub Actions quality workflow now provisions Postgres, applies migrations, imports content, runs `pnpm run ci`, runs `pnpm run test:e2e:smoke:production`, and only then proceeds to build verification
   - dashboard zero-data/default-stat rendering is now directly covered in [dashboard.integration.test.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/pages/dashboard.integration.test.tsx), closing the old ambiguity around whether an all-zero dashboard should be treated as an empty or success state
   - page-level responsive assertions now backstop the highest-risk analytics/review layouts in [history.integration.test.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/pages/history.integration.test.tsx), [leaderboard.integration.test.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/pages/leaderboard.integration.test.tsx), [review.integration.test.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/pages/review.integration.test.tsx), and [word-buckets.integration.test.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/pages/word-buckets.integration.test.tsx)
   - leaderboard and profile route-level loading composition are now directly covered in [leaderboard.integration.test.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/pages/leaderboard.integration.test.tsx) and [profile.integration.test.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/pages/profile.integration.test.tsx)
-  - [frontend-coverage-matrix.md](/Users/aman/Projects/personal-projects/Learn-Language/documentation/frontend-coverage-matrix.md) now reflects the closed dashboard/responsive gaps and explicitly defers only the remaining auth-provider failure semantics and lower-priority long-tail responsive coverage
-  - [backend-refactor-invariants.md](/Users/aman/Projects/personal-projects/Learn-Language/documentation/backend-refactor-invariants.md) now records both smoke commands and closes the old generic backend-gap list
+  - [frontend-coverage-matrix.md](/Users/aman/Projects/personal-projects/Learn-Language/context/archive/documentation-history/frontend-coverage-matrix.md) now reflects the closed dashboard/responsive gaps and explicitly defers only the remaining auth-provider failure semantics and lower-priority long-tail responsive coverage
+  - [backend-refactor-invariants.md](/Users/aman/Projects/personal-projects/Learn-Language/context/archive/documentation-history/backend-refactor-invariants.md) now records both smoke commands and closes the old generic backend-gap list
   - top-level Phase 9 statuses are now reconciled: `P9-003`, `P9-004`, `P9-005`, `P9-008`, `P9-009`, and `P9-010` are all marked done in the phase plan and master registry
   - responsive/mobile hardening continued across extracted action rows and pagination surfaces in leaderboard, contextual, dashboard, review, history, clusters, and word buckets so primary actions stack cleanly and footer controls expand to full-width buttons on small screens
   - page-level integration coverage now also includes [clusters.integration.test.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/pages/clusters.integration.test.tsx) and [contextual.integration.test.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/pages/contextual.integration.test.tsx)
@@ -290,7 +290,7 @@ Next task ID: -
 
 - Phase 9 remains complete and closed.
 - Phase 10 execution plan now exists in [phase-10-platform-hardening-and-product-intelligence.md](/Users/aman/Projects/personal-projects/Learn-Language/context/archive/phase-10-platform-hardening-and-product-intelligence.md).
-- `P10-001` is complete via the current-state inventory in [platform-hardening-baseline.md](/Users/aman/Projects/personal-projects/Learn-Language/documentation/platform-hardening-baseline.md).
+- `P10-001` is complete via the current-state inventory in [platform-hardening-baseline.md](/Users/aman/Projects/personal-projects/Learn-Language/context/archive/documentation-history/platform-hardening-baseline.md).
 - `P10-002` is complete:
   - shared route contracts now express success/error envelopes
   - backend success responses now emit a canonical envelope through `sendSuccess(...)`
@@ -317,26 +317,26 @@ Next task ID: -
   - request logging now emits structured `http.request.completed` and `http.request.aborted` events with `requestId`, method, path, status, duration, and optional `userId`
   - recursive redaction now masks auth headers, cookies, tokens, secrets, passwords, and API keys before logs are emitted
   - the last `console.error` fallback was removed from auth controller error handling
-  - observability guidance now exists in [observability-contract.md](/Users/aman/Projects/personal-projects/Learn-Language/documentation/observability-contract.md)
+  - observability guidance now exists in [observability-contract.md](/Users/aman/Projects/personal-projects/Learn-Language/documentation/operations/observability.md)
   - focused logger tests now protect redaction, circular-safe serialization, and request log metadata extraction
   - full `pnpm run lint` passes on the current branch state after the observability work
 - `P10-005` is complete:
   - analytics provider abstraction now exists in [analytics.ts](/Users/aman/Projects/personal-projects/Learn-Language/client/src/lib/analytics.ts)
-  - analytics taxonomy and ownership guidance now exist in [analytics-event-taxonomy.md](/Users/aman/Projects/personal-projects/Learn-Language/documentation/analytics-event-taxonomy.md)
+  - analytics taxonomy and ownership guidance now exist in [analytics-event-taxonomy.md](/Users/aman/Projects/personal-projects/Learn-Language/documentation/product/analytics-event-taxonomy.md)
   - auth, quiz, clusters, review, and profile flows now emit controlled client analytics events through the shared adapter
 - `P10-006` is complete:
   - backend now applies baseline security headers, no-store auth caching, targeted rate limits, hardened static file serving, and production-safe Express error normalization
   - reviewer authorization now returns `403 FORBIDDEN` consistently
-  - the current hardening baseline is documented in [security-hardening-contract.md](/Users/aman/Projects/personal-projects/Learn-Language/documentation/security-hardening-contract.md)
+  - the current hardening baseline is documented in [security-hardening-contract.md](/Users/aman/Projects/personal-projects/Learn-Language/documentation/operations/security.md)
   - full `pnpm run lint` passes after the security slice
 - `P10-007` is complete:
   - production compose now binds frontend/backend ports to loopback by default instead of publishing them on all interfaces
   - runtime port ownership is now env-driven through host/container bind variables
   - backend app config now resolves `BACKEND_PORT` consistently with bootstrap
-  - the current topology is documented in [runtime-topology-contract.md](/Users/aman/Projects/personal-projects/Learn-Language/documentation/runtime-topology-contract.md)
+  - the current topology is documented in [runtime-topology-contract.md](/Users/aman/Projects/personal-projects/Learn-Language/documentation/operations/runtime-topology.md)
   - full `pnpm run lint` passes after the runtime hardening slice
 - `P10-008` is now in progress:
-  - initial performance findings are documented in [performance-baseline.md](/Users/aman/Projects/personal-projects/Learn-Language/documentation/performance-baseline.md)
+  - initial performance findings are documented in [performance-baseline.md](/Users/aman/Projects/personal-projects/Learn-Language/documentation/operations/performance.md)
   - production frontend build completed successfully and exposed a metadata warning to fold into later SEO work
   - backend hotspot review identified quiz generation, leaderboard aggregation, and learning-insights aggregation as the highest-value candidates
   - the first optimization slice is complete: quiz generation now narrows word-cluster link loading to the active distractor pool instead of scanning all links per request
@@ -351,19 +351,19 @@ Next task ID: -
   - sitemap and robots now align with the actual public route map
   - the misleading protected-route `SearchAction` was removed from structured data
   - the Next metadata `themeColor` warning was fixed by moving it into viewport export
-  - the crawlability and submission runbook now exists in [seo-crawlability-contract.md](/Users/aman/Projects/personal-projects/Learn-Language/documentation/seo-crawlability-contract.md)
+  - the crawlability and submission runbook now exists in [seo-crawlability-contract.md](/Users/aman/Projects/personal-projects/Learn-Language/documentation/operations/seo-crawlability.md)
   - the full `pnpm run lint` gate passes after the SEO slice
   - two unrelated slow UI integration tests now carry explicit 15s per-test timeouts so the gate reflects real regressions instead of runner slowness
 - `P10-010` is now complete:
-  - code-governance ownership and enforcement guidance now lives in [code-governance-contract.md](/Users/aman/Projects/personal-projects/Learn-Language/documentation/code-governance-contract.md)
+  - code-governance ownership and enforcement guidance now lives in [code-guidelines.md](/Users/aman/Projects/personal-projects/Learn-Language/context/guidelines/code-guidelines.md)
   - the repo now enforces symbol ownership in the lint gate through [check-symbol-governance.ts](/Users/aman/Projects/personal-projects/Learn-Language/script/check-symbol-governance.ts)
   - exported enums are now restricted to the approved enum modules and duplicate exported symbol names fail CI
   - the duplicate exported `QuizMode` alias was removed so the new check starts green without a permanent allowlist
 - `P10-011` is now complete:
-  - DI guidance now lives in [dependency-injection-policy.md](/Users/aman/Projects/personal-projects/Learn-Language/documentation/dependency-injection-policy.md)
+  - DI guidance now lives in [code-guidelines.md](/Users/aman/Projects/personal-projects/Learn-Language/context/guidelines/code-guidelines.md)
   - the code guidelines now explicitly state when plain constructor injection is preferred and when `@Inject(...)` is actually required
 - `P10-012` is now complete:
-  - AI prioritization and rollout constraints now live in [ai-product-roadmap.md](/Users/aman/Projects/personal-projects/Learn-Language/documentation/ai-product-roadmap.md)
+  - AI prioritization and rollout constraints now live in [future-tasks/backlog.md](/Users/aman/Projects/personal-projects/Learn-Language/context/future-tasks/backlog.md)
   - the recommended MVP is reviewer-assist for draft/example generation, with adaptive study recommendations deferred as the next higher-upside experiment
 - Phase 10 is now complete.
 - the full `pnpm run lint` gate should be treated as the final verification step for the governance closeout once run on the current branch state

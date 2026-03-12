@@ -1,6 +1,6 @@
 # E2E and Smoke Scope
 
-This document is the execution baseline for `P9-010A`. It defines the minimum production-critical path set for Phase 9, the suite that currently owns each path, and the remaining automation gaps before `P9-010` can be closed.
+This document defines the current production-critical path set, the suite that owns each path, and the release-gate coverage enforced in local verification and CI.
 
 ## Why this scope exists
 
@@ -10,7 +10,7 @@ This document makes the current state explicit so:
 
 - release-critical flows are named once and tracked consistently
 - smoke coverage is distinguished from page-level integration coverage
-- remaining gaps for learner, reviewer, and production-like verification stay visible
+- the maintained release-gate scope stays visible as the app evolves
 
 ## Minimum production-critical path set
 

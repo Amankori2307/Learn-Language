@@ -1,16 +1,20 @@
 # Planning Guidelines
 
-This file is the canonical source for how planning and phase files should be created, named, updated, and archived.
+This file is the canonical source for how planning and execution files should be created, named, updated, and archived.
 
 ## Purpose
 
 - keep active execution context small
-- preserve detailed phase history for future reference
-- make phase planning predictable across sessions
+- preserve detailed execution history for future reference
+- make planning predictable across sessions
 - separate planning rules from coding rules
 
 ## Folder ownership
 
+- `documentation`
+  - canonical current-state documentation only
+  - implementation-backed product, architecture, and operations docs
+  - must not contain backlog-style plans, execution logs, workflow rules, or historical task archives
 - `context/active-tasks`
   - active execution files only
   - currently:
@@ -21,9 +25,11 @@ This file is the canonical source for how planning and phase files should be cre
   - currently:
     - `backlog.md`
 - `context/archive`
-  - completed or inactive phase/task/history files
+  - completed or inactive planning/history files
+  - historical documentation snapshots and superseded planning-era writeups also belong here when they are no longer canonical docs
 - `context/guidelines`
   - stable planning and coding instructions
+  - canonical home for workflow rules, repository governance, and documentation-boundary policy
 
 ## Active planning files
 
@@ -69,8 +75,8 @@ Use this as the parking area for future work only.
 It should contain:
 
 - deferred ideas
-- possible follow-ups
-- candidate phases that are not active yet
+- possible future work
+- candidate execution slices that are not active yet
 
 It should not contain:
 
@@ -102,6 +108,74 @@ Use this sequence every time planning starts or resumes:
    - summarize the gist in `app-context.md`
    - remove completed items from `backlog.md`
    - move the phase file to `context/archive/`
+
+## Trigger map
+
+Use these trigger rules consistently:
+
+- a new user request starts as triage, not as an automatic phase
+- if the work is approved for immediate execution, promote it into `context/active-tasks/backlog.md`
+- if the work is real but not approved for immediate execution, put it in `context/future-tasks/backlog.md`
+- create a dedicated phase file only when the active work has multiple dependent tasks, likely spans multiple commits or sessions, or needs durable execution history
+- if a task grows beyond what fits cleanly in `backlog.md`, promote it into a phase file before implementation sprawls
+- if active priorities change, update `context/active-tasks/backlog.md` first and only then continue implementation
+- if work is completed or intentionally paused, archive its phase file instead of leaving it in `context/active-tasks/`
+
+## Intake and promotion flow
+
+1. classify the request as one of:
+   - immediate active work
+   - future candidate work
+   - historical/reference-only material
+2. choose the canonical home before creating any file:
+   - current product, architecture, or operations truth: `documentation/`
+   - active execution state: `context/active-tasks/`
+   - future work: `context/future-tasks/`
+   - historical detail: `context/archive/`
+3. if the work is active:
+   - add or update the `doing` or `todo` row in `context/active-tasks/backlog.md`
+   - create a phase file only if the work meets the phase threshold
+4. if the work is not active:
+   - do not place it in `documentation/`
+   - do not place it in `context/active-tasks/`
+   - capture it in `context/future-tasks/backlog.md` if it is a real future candidate
+
+## Definition of ready
+
+Do not start implementation until the active work item has:
+
+- one clear owner file in `context/active-tasks/`
+- a defined scope that is small enough to verify
+- explicit dependencies when ordering matters
+- explicit done-when expectations
+- an identified documentation impact when behavior or architecture will change
+
+If those are missing, tighten the active task or create a phase file before writing code.
+
+## Documentation boundary
+
+Use this rule consistently:
+
+- `documentation/` is for canonical current-state documentation only
+- `context/active-tasks/` and `context/future-tasks/` are for active and future task planning
+- `context/archive/` is for completed planning files, historical execution notes, and superseded documentation snapshots
+
+Do not leave temporary migration notes, task matrices, or status docs in `documentation/` once they stop being the canonical source of truth.
+
+## Single source of truth
+
+Use this ownership model consistently:
+
+- product truth lives in `documentation/product/*`
+- architecture truth lives in `documentation/architecture/*`
+- operations truth lives in `documentation/operations/*`
+- workflow and repository-governance rules live in `context/guidelines/*`
+- active handoff context lives in `context/active-tasks/app-context.md`
+- active planning lives in `context/active-tasks/*`
+- future planning lives in `context/future-tasks/*`
+- historical execution and superseded writeups live in `context/archive/*`
+
+Never let the same rule or status live authoritatively in two places. Link to the canonical file instead.
 
 ## When to use only `backlog.md`
 
@@ -279,6 +353,31 @@ Microtasks should break the phase task into concrete executable steps.
 - if a task becomes blocked, mark it `blocked` and record the blocker in the owning file instead of silently stalling
 - if reprioritization happens, update `backlog.md` first so the current lane is explicit
 
+## Documentation update triggers
+
+Update canonical documentation in the same change whenever the work alters:
+
+- shipped features or product surface area
+- route ownership or route availability
+- API contracts, response envelopes, auth behavior, or reviewer/admin access rules
+- architecture boundaries, request ownership, async-state handling, or theme behavior
+- runtime topology, server behavior, security posture, observability, performance guidance, or release gates
+
+Do not create a planning file to hold durable implementation truth once the change has landed. Move that truth into `documentation/` and keep planning files focused on execution.
+
+## Definition of done
+
+An active task or phase item is not done until all of these are true:
+
+- implementation is complete
+- required verification ran
+- canonical documentation is updated when needed
+- `context/active-tasks/app-context.md` reflects the new durable handoff summary when needed
+- `context/active-tasks/backlog.md` reflects the current active lane
+- any superseded temporary planning notes are removed or archived
+
+If any one of those is still missing, the item stays `doing` or `blocked`, not `done`.
+
 ## Archive rules
 
 - do not delete completed phase files
@@ -288,6 +387,23 @@ Microtasks should break the phase task into concrete executable steps.
 - archive renamed phase files with their human-readable names intact
 - if an older phase file does not exist because it predates the current system, do not reconstruct it speculatively; recreate historical detail only when there is a concrete need
 - keep `context/archive/archive-index.md` updated when archive files are added, renamed, or removed
+
+## Archive flow
+
+Archive a phase file when:
+
+- every phase task is `done`, or
+- the phase is intentionally paused and no longer belongs in the active lane
+
+Before archiving:
+
+1. finish required implementation-backed doc updates
+2. reduce the lasting gist into `context/active-tasks/app-context.md` if it matters for the next session
+3. clear completed items from `context/active-tasks/backlog.md`
+4. move the phase file into `context/archive/`
+5. update `context/archive/archive-index.md`
+
+Never leave a completed phase file in `context/active-tasks/` after its backlog item is gone.
 
 ## Maintenance rules
 

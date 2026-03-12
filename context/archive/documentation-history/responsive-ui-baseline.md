@@ -1,6 +1,6 @@
 # Responsive UI Baseline
 
-This document is the execution baseline for `P9-005`. It defines the responsive/adaptive UI contract for the app shell and core product surfaces.
+This document defines the responsive/adaptive UI contract for the app shell and core product surfaces.
 
 ## Objective
 
@@ -263,9 +263,9 @@ Prefer:
 - grouped sections with clear headings
 - sticky or repeated submit affordance only if necessary and safe
 
-## Priority responsive hotspots
+## Current responsive hotspots
 
-These should be treated as the first responsive implementation targets:
+These remain the surfaces most worth watching when responsive changes land:
 
 - [client/src/components/layout.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/components/layout.tsx)
 - [client/src/pages/clusters.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/pages/clusters.tsx)
@@ -275,29 +275,11 @@ These should be treated as the first responsive implementation targets:
 - [client/src/pages/quiz.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/pages/quiz.tsx)
 - [client/src/components/quiz-card.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/components/quiz-card.tsx)
 
-## Implementation priority order
+## Current acceptance bar
 
-Responsive implementation should proceed in this order:
-
-1. layout shell
-2. dashboard
-3. quiz
-4. clusters
-5. history / analytics
-6. review
-7. add vocabulary
-8. profile and auth
-9. lower-priority residual surfaces
-
-## Acceptance checks for `P9-005`
-
-`P9-005` is complete only when:
+Responsive work on this repo is healthy when:
 
 - shell behavior is defined for mobile and desktop
 - page-family adaptation rules are documented
 - high-risk responsive hotspots are identified
-- implementation order is locked before page rewrites begin
-
-## Phase follow-up status
-
-The historical next dependency from this baseline is complete: page-level refactor execution under `P9-006` and `P9-007` has already landed.
+- mobile and desktop layouts remain intentional after feature changes

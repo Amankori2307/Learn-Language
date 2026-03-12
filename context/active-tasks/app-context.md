@@ -15,51 +15,15 @@ Keep this file compact. It should capture the durable gist of the current app an
   - quiz/auth/add-vocabulary/tutor route-state hardening
   - React Query ownership/query-key/invalidation cleanup
   - documentation and planning-context reconciliation
+  - single-source-of-truth ownership and documentation/context boundary enforcement
 
-## Core capabilities live
+Current canonical app truth lives in:
 
-- Auth:
-  - Google OAuth
-- Learning:
-  - quiz modes: `daily_review`, `new_words`, `cluster`, `weak_words`, `complex_workout`
-  - optional `listen_identify` audio mode
-  - optional image hints in quiz payload/UI
-  - language-scoped learner isolation across quiz, analytics, clusters, leaderboard, and vocabulary
-  - versioned, direction-aware SRS with config stamping and weaker-direction prioritization
-  - quiz feedback with example sentences and working completion/next-session CTA flow
-  - quiz confidence input restored behind a learner preference
-- Analytics:
-  - stats, attempt history, word buckets, leaderboard, learning insights, and SRS drift monitoring
-- Review:
-  - draft/pending/approved/rejected lifecycle
-  - reviewer conflict queue and conflict resolution flow
-  - reviewer/admin draft creation with optional `audioUrl` and `imageUrl`
-- Theming:
-  - named theme ownership is in place
-  - implemented themes: `Current`, `Minimal`
-  - planned themes exist in the enum/registry for later rollout
-
-## Data/source of truth
-
-- Split seed source:
-  - `assets/processed/words.json`
-  - `assets/processed/sentences.json`
-- Text-first structure:
-  - words and sentences store source script, pronunciation, and meaning directly
-  - sentence records include `wordRefs` links so examples are deterministic and reusable
-  - language is mandatory on all content rows
-  - part-of-speech and tags are enum-backed across contracts, import, validation, and vocab forms
-- Seed expansion policy (persistent):
-  - when adding seed content, always add both:
-    - new words in `words.json`
-    - linked example sentences in `sentences.json`
-  - each new word should get at least 2 linked sentences via `wordRefs`
-  - sentence pronunciation must be complete sentence-level romanization (not word-level fragments)
-  - pronunciation/transliteration must be normalized for browser `speechSynthesis` (ASCII-friendly, no hidden unicode artifacts)
-  - keep validator rules green:
-    - no placeholders/dummy values
-    - lowercase kebab-case for clusters/context tags
-    - valid enum-backed `language`, `partOfSpeech`, and tags
+- [core-features.md](/Users/aman/Projects/personal-projects/Learn-Language/documentation/product/core-features.md)
+- [frontend-architecture.md](/Users/aman/Projects/personal-projects/Learn-Language/documentation/architecture/frontend-architecture.md)
+- [frontend-ui-contract.md](/Users/aman/Projects/personal-projects/Learn-Language/documentation/architecture/frontend-ui-contract.md)
+- [theme-system.md](/Users/aman/Projects/personal-projects/Learn-Language/documentation/architecture/theme-system.md)
+- [planning-guidelines.md](/Users/aman/Projects/personal-projects/Learn-Language/context/guidelines/planning-guidelines.md)
 
 ## Runtime and quality gates
 
@@ -78,18 +42,17 @@ Keep this file compact. It should capture the durable gist of the current app an
   - GitHub Actions quality gate now provisions Postgres, runs migrations/content import, runs `pnpm run ci`, runs production-like smoke, and then builds
   - lint now also enforces symbol ownership through `script/check-symbol-governance.ts`
 - Governance/documentation:
-  - code governance contract in [documentation/code-governance-contract.md](/Users/aman/Projects/personal-projects/Learn-Language/documentation/code-governance-contract.md)
-  - DI policy in [documentation/dependency-injection-policy.md](/Users/aman/Projects/personal-projects/Learn-Language/documentation/dependency-injection-policy.md)
-  - AI roadmap in [documentation/ai-product-roadmap.md](/Users/aman/Projects/personal-projects/Learn-Language/documentation/ai-product-roadmap.md)
+  - code and DI rules in [code-guidelines.md](/Users/aman/Projects/personal-projects/Learn-Language/context/guidelines/code-guidelines.md)
+  - planning and source-of-truth rules in [planning-guidelines.md](/Users/aman/Projects/personal-projects/Learn-Language/context/guidelines/planning-guidelines.md)
 
 ## Current execution state
 
-- Active backlog: none in [backlog.md](/Users/aman/Projects/personal-projects/Learn-Language/context/active-tasks/backlog.md)
+- Active backlog: [backlog.md](/Users/aman/Projects/personal-projects/Learn-Language/context/active-tasks/backlog.md)
 - Future candidate work belongs in [future-tasks/backlog.md](/Users/aman/Projects/personal-projects/Learn-Language/context/future-tasks/backlog.md)
 - Recent completed work:
   - planning/context system cleanup and rename pass
   - repo-level `AGENTS.md` creation
   - dedicated planning guidelines creation
+  - documentation boundary enforcement and canonical doc restructuring
+  - source-of-truth policy publication and `app-context.md` handoff reduction
 - Detailed completed phase history lives in `context/archive/`.
-- Theme-system outcome:
-  - named theme ownership, semantic tokenized primitives, and chart theme support are in place

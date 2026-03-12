@@ -1,6 +1,6 @@
 # Backend Refactor Invariants
 
-This document is the execution baseline for `P9-008A`. It lists the backend behaviors most likely to be stressed by frontend contract refactors and the automated tests currently protecting them.
+This document lists the backend behaviors most likely to be stressed by frontend contract refactors and the automated tests currently protecting them.
 
 ## Why these invariants matter
 

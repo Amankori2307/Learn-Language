@@ -1,8 +1,8 @@
-# Phase 4B - Active Review Governance Work
+# Phase 4B - Review Governance Execution Record
 
 Objective: enforce vocabulary quality through reviewer controls and safe publishing.
 
-## In progress
+## Completed work items
 
 ### P4B-007 - Reviewer queue and permissions
 
@@ -23,7 +23,7 @@ Validation:
 - Endpoint-level middleware tests enforce learner block and reviewer/admin allow paths.
 - Dev runtime path validated with reviewer UI routes and guarded actions.
 
-## Pending
+## Additional completed items
 
 ### P4B-008 - Approval gate in learner flows
 

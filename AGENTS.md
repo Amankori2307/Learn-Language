@@ -23,7 +23,7 @@ Read these files first for repo context:
 - Follow the active backlog in `context/active-tasks/backlog.md`.
 - Keep deferred or candidate work in `context/future-tasks/backlog.md` until it is explicitly promoted into the active lane.
 - Keep `context/active-tasks/app-context.md` compact and factual.
-- Treat `context/guidelines/planning-guidelines.md` as the authority for phase creation, naming, execution, and archiving rules.
+- Treat `context/guidelines/planning-guidelines.md` as the authority for work intake, promotion, phase creation, execution, documentation updates, and archiving rules.
 - Keep implementation truth in code and implementation-backed docs, not in stale planning notes.
 - Keep using the context system consistently:
   - keep `app-context.md` short
@@ -31,6 +31,7 @@ Read these files first for repo context:
   - keep future-only work in `context/future-tasks/backlog.md` instead of mixing it into the active backlog
   - archive completed phase files instead of deleting them
   - update `context/archive/archive-index.md` when archive contents change
+  - update canonical documentation in the same change when behavior, architecture, operations, or testing scope changes
 
 ## UI / Theme Rules
 

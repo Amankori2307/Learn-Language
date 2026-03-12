@@ -382,21 +382,21 @@ Expected:
 
 This `401` is correct because the endpoint is protected and the backend is reachable through Nginx.
 
-## Current known issues / follow-up required
+## Operational caveats
 
-These still need manual completion:
+The documented setup still assumes these caveats are addressed appropriately in real production use:
 
-1. Replace `JWT_SECRET` with a strong production secret.
-2. Rotate the exposed server and database passwords.
-3. Consider closing direct public access to `3000` and `5001` after confirming Nginx-only access is sufficient:
+1. `JWT_SECRET` should be strong and production-specific.
+2. Any exposed server or database passwords should be rotated.
+3. Direct public access to `3000` and `5001` should be closed once Nginx-only access is confirmed:
 
 ```sh
 ufw delete allow 3000/tcp
 ufw delete allow 5001/tcp
 ```
 
-4. Consider changing deployment to SSH key auth instead of root password auth.
-5. Consider pinning deploys to `sha-<commit>` instead of `latest` in `/opt/learn-language/.deploy.env` if you want deterministic rollbacks.
+4. SSH key auth is preferable to root password auth.
+5. Pinning deploys to `sha-<commit>` instead of `latest` gives more deterministic rollbacks.
 
 ## Manual deploy procedure for future use
 

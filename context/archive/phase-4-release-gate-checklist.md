@@ -1,10 +1,10 @@
-# Phase 4 Release Gate Checklist (P4-005)
+# Phase 4 - Release Gate Record (P4-005)
 
 Status: `passed`  
 Date: 2026-02-20  
 Owner: Codex
 
-## Gate Criteria
+## Gate criteria
 
 1. Core text-first learning flows are functional.
 2. Review governance is enforced (role-guarded review actions + approval gate).
@@ -12,7 +12,7 @@ Owner: Codex
 4. Local developer runtime is stable (compose startup + hot reload).
 5. Regression coverage is in place for critical backend and UI paths.
 
-## Verification Evidence
+## Verification evidence
 
 ### 1) Core Flow Quality
 
@@ -41,7 +41,7 @@ Result: `pass`
 
 Result: `pass`
 
-### 4) Runtime Stability (Docker Compose)
+### 4) Runtime stability (Docker Compose)
 
 - `docker compose up -d --build` succeeds.
 - Startup sequence applies schema, migration/backfill, imports MVP dataset, starts dev server.
@@ -49,7 +49,7 @@ Result: `pass`
 
 Result: `pass`
 
-### 5) Automated Checks
+### 5) Automated checks
 
 - `pnpm run check` passes.
 - `pnpm run test` passes.
@@ -58,7 +58,7 @@ Result: `pass`
 
 Result: `pass`
 
-## Release Decision
+## Release decision
 
 Phase 4 release gate is green for beta readiness on text-first scope.  
 Move to deferred media phase only when explicitly prioritized.
