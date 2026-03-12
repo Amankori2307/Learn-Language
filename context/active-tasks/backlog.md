@@ -4,6 +4,8 @@ Status legend: `todo` | `doing` | `blocked`
 
 Completed work is intentionally removed from this file and should live in feature documentation and `app-context.md`, not in the active backlog.
 
+Use this file as the single active queue for current work.
+
 ## Active tasks
 
 No active tasks. Re-prioritize the next slice before implementation continues.
@@ -19,3 +21,4 @@ Use this format when active tasks exist:
 Rule:
 
 - keep only one `doing` row unless parallel execution is explicitly intentional
+- keep this file current whenever active priorities change

@@ -22,3 +22,5 @@ This folder preserves completed or inactive planning history.
 - treat these files as detailed historical context
 - do not move them back into active use unless the work is explicitly restored
 - if a historical phase never had a file, do not recreate it speculatively; only add missing historical detail when there is a concrete need
+- archive completed phase files here instead of deleting them
+- update this index whenever archive contents change

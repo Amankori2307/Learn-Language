@@ -4,6 +4,8 @@
 
 Build a text-first language learning app with high data correctness, strong memory retention loops, and reviewer-governed content quality.
 
+Keep this file compact. It should capture the durable gist of the current app and execution state, not become a running log.
+
 ## Product state
 
 - Core platform work through Phases 4, 6, 7, 8, 9, 10, and 12 is complete.
