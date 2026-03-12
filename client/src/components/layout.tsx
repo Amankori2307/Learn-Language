@@ -18,7 +18,7 @@ import {
   Palette,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { Sheet, SheetContent, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -427,6 +427,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
               </Button>
             </SheetTrigger>
             <SheetContent side="left" className="w-[88vw] max-w-[22rem] p-0">
+              <SheetTitle className="sr-only">Main navigation</SheetTitle>
               <NavContent mobile />
             </SheetContent>
           </Sheet>
