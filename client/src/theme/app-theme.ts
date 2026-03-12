@@ -1,12 +1,14 @@
-export enum AppThemeId {
-  CURRENT = "current",
-  MINIMAL = "minimal",
-  WARM = "warm",
-  MIDNIGHT = "midnight",
-  EDITORIAL = "editorial",
-  PLAYFUL = "playful",
-  HIGH_CONTRAST = "high-contrast",
-}
+export const AppThemeId = {
+  CURRENT: "current",
+  MINIMAL: "minimal",
+  WARM: "warm",
+  MIDNIGHT: "midnight",
+  EDITORIAL: "editorial",
+  PLAYFUL: "playful",
+  HIGH_CONTRAST: "high-contrast",
+} as const;
+
+export type AppThemeId = (typeof AppThemeId)[keyof typeof AppThemeId];
 
 export type AppThemeAvailability = "implemented" | "planned";
 

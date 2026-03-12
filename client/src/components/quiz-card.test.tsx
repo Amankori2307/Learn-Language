@@ -16,6 +16,13 @@ vi.mock("@/lib/feedback-effects", () => ({
   runErrorEffects: vi.fn(),
 }));
 
+vi.mock("@/hooks/use-hybrid-audio", () => ({
+  useHybridAudio: () => ({
+    activeKey: null,
+    play: vi.fn(),
+  }),
+}));
+
 describe("QuizCard", () => {
   it("resets selected option styling when question changes", async () => {
     const user = userEvent.setup();

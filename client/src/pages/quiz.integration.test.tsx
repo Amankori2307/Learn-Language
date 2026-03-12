@@ -58,6 +58,13 @@ vi.mock("@/lib/feedback-effects", () => ({
   runErrorEffects: vi.fn(),
 }));
 
+vi.mock("@/hooks/use-hybrid-audio", () => ({
+  useHybridAudio: () => ({
+    activeKey: null,
+    play: vi.fn(),
+  }),
+}));
+
 describe("QuizPage integration", () => {
   beforeEach(() => {
     window.localStorage.clear();
