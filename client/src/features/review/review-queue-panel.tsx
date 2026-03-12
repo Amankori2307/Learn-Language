@@ -72,7 +72,7 @@ export function ReviewQueuePanel({
           />
         </div>
       ) : (
-        <div className="overflow-auto md:max-h-[560px]">
+        <div className="overflow-auto md:max-h-[var(--pane-review-max-height)]">
           {queueItems.map((word) => (
             <div
               key={word.id}

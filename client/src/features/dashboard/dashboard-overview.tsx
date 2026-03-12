@@ -35,13 +35,20 @@ export function DashboardOverview({
           </div>
           <div className="grid w-full grid-cols-1 gap-3 sm:flex sm:w-auto sm:flex-row">
             <Link href={`/quiz?mode=${primaryMode}`}>
-              <Button size="lg" className="w-full gap-2 sm:min-w-[220px] sm:w-auto">
+              <Button
+                size="lg"
+                className="w-full gap-2 sm:min-w-[var(--action-cluster-button-min-width)] sm:w-auto"
+              >
                 <PlayCircle className="h-5 w-5" />
                 {primaryLabel}
               </Button>
             </Link>
             <Link href="/analytics">
-              <Button size="lg" variant="outline" className="w-full sm:min-w-[220px] sm:w-auto">
+              <Button
+                size="lg"
+                variant="outline"
+                className="w-full sm:min-w-[var(--action-cluster-button-min-width)] sm:w-auto"
+              >
                 Open Analytics
               </Button>
             </Link>
@@ -84,7 +91,7 @@ export function DashboardOverview({
           {coreActions.map((action) => (
             <div
               key={action.title}
-              className="flex min-h-[200px] flex-col justify-between rounded-xl border border-border/60 bg-card p-4"
+              className="flex min-h-[var(--surface-dashboard-card-min-height)] flex-col justify-between rounded-xl border border-border/60 bg-card p-4"
             >
               <div>
                 <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-lg bg-secondary text-foreground">

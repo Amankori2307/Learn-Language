@@ -2,6 +2,8 @@
 
 This document is the canonical frontend implementation contract for request ownership, async UX, shared state primitives, and responsive behavior.
 
+Visual foundation, layout primitives, and design-system governance live in [continuum-design-system.md](/Users/aman/Projects/personal-projects/Learn-Language/documentation/architecture/continuum-design-system.md).
+
 ## Request ownership
 
 - React Query owns transport-backed request lifecycle.

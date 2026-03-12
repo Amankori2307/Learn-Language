@@ -162,6 +162,35 @@
 - When SEO behavior changes, also review the related public SEO surfaces and assets, including structured data, canonical links, Open Graph/Twitter metadata, manifest/icon references, favicon/app-icon assets under `public/`, and any public marketing-entry routes that affect crawlability.
 - Treat SEO upkeep as part of the route-definition done criteria: a route change is not complete until metadata, sitemap eligibility, robots intent, analytics tags, and documentation have been reviewed and updated where needed.
 
+18. Design system governance:
+
+- The app must have one canonical design-system contract documented in `documentation/architecture/`, and shared UI work must follow it instead of inventing local page rules.
+- New or changed UI must use shared semantic tokens for color, typography, spacing, radius, border, elevation, motion, and interactive states wherever a shared token or variant already exists.
+- Reusable components must not hardcode one-off widths, spacing scales, arbitrary radii, shadows, or palette values when the same outcome can be expressed through the design-system contract.
+- When a new reusable visual pattern appears in more than one surface, promote it into a shared primitive, shared composite, or shared variant instead of copying styling into feature files.
+- Feature-local styling exceptions are allowed only when the need is truly feature-specific and the limitation is documented as explicit follow-up debt or a tracked approved exception.
+- Shared components must define consistent size, variant, and state behavior. Do not let the same semantic action or status use different visual hierarchy across routes without an approved design-system reason.
+- Page composition should prefer approved shell, section, stack, cluster, pane, and content-width patterns over ad hoc layout wrappers.
+
+19. Responsive design-system rules:
+
+- Treat phone and desktop as first-class targets for every meaningful UI change. Tablet and laptop behavior should be an intentional transition between those two states, not an accidental byproduct.
+- Mobile layouts must preserve primary actions, content hierarchy, and readable spacing without relying on hover, tiny hit targets, or sideways scrolling for core tasks.
+- Desktop layouts must preserve scanability, density, alignment, and multi-column structure where that improves comprehension; do not collapse rich desktop surfaces to oversized single-column layouts unless the surface genuinely benefits from it.
+- Minimum touch-target and control sizing should follow the shared component-size contract; mobile compaction must never make controls harder to activate than the shared standard allows.
+- Dense data surfaces must define an intentional degradation strategy for smaller widths, such as stacked cards, wrapped action rows, sectional disclosure, sticky summary bars, or contained horizontal scrolling only when the information type truly requires it.
+- Forms must define label, helper, validation, and action placement rules for both mobile and desktop. Desktop forms should use available width intentionally; mobile forms should avoid side-by-side compression that harms readability.
+- Overlays must have viewport-specific behavior. If a dialog pattern is not workable on phone, use the approved sheet or drawer pattern instead of shrinking the desktop dialog indefinitely.
+- Responsive success, empty, loading, and error states must follow the same container and spacing rules as the success layout for that route.
+
+20. Design-system enforcement:
+
+- `pnpm run lint` is expected to enforce design-system governance alongside existing quality gates. When the repo adds or extends checks, raw palette classes, forbidden arbitrary values, and unauthorized shared-style duplication should be treated as CI failures, not optional warnings.
+- If a shared token, shared variant, or layout primitive exists, bypassing it requires a documented exception. Exceptions must have an owner, a reason, and a follow-up path; they must not remain as silent permanent drift.
+- UI pull requests should verify affected surfaces at at least one phone width and one desktop width before merge. A responsive change is incomplete if only one viewport class was checked.
+- Reviews should reject reusable UI additions that introduce raw hex values, raw Tailwind palette classes, ad hoc breakpoint behavior, or duplicated state styling without first extending the design system.
+- Design-system changes that alter durable component behavior, layout rules, or responsive contracts must update the canonical architecture documentation in the same change.
+
 ## Adoption plan
 
 - Phase 4D:

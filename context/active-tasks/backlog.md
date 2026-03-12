@@ -8,7 +8,10 @@ Use this file as the single active queue for current work.
 
 ## Active tasks
 
-No active tasks. Re-prioritize the next slice before implementation continues.
+| ID | Status | Task | Notes |
+| --- | --- | --- | --- |
+
+No active tasks.
 
 ## Template
 

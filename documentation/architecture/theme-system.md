@@ -2,6 +2,8 @@
 
 This document is the canonical source for named-theme behavior and theme-safe component expectations.
 
+Theme tokens are one foundation layer of the broader [Continuum Design System](/Users/aman/Projects/personal-projects/Learn-Language/documentation/architecture/continuum-design-system.md).
+
 ## Current theme model
 
 Theme ownership lives in:
@@ -53,6 +55,7 @@ Required token groups:
 - prefer semantic classes such as `bg-background`, `text-foreground`, and `border-border`
 - add new reusable visual states through shared tokens or variants instead of one-off local styling
 - a planned theme is not live until its provider mapping, selector, and token set all exist
+- token decisions should stay aligned with the Continuum spacing, layout, responsive, and component-governance contract
 
 ## Remaining practical debt
 

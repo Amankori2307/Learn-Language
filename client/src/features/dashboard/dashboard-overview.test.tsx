@@ -5,7 +5,7 @@ import { DashboardOverview } from "./dashboard-overview";
 
 describe("DashboardOverview", () => {
   it("renders the primary action, bucket cards, and core modes", () => {
-    render(
+    const { container } = render(
       <DashboardOverview
         userName="Aman"
         stats={{ streak: 5, mastered: 24, xp: 230 }}
@@ -58,5 +58,11 @@ describe("DashboardOverview", () => {
     expect(screen.getByText("Core Modes")).toBeTruthy();
     expect(screen.getByText("Daily Review")).toBeTruthy();
     expect(screen.getByText("Practice by Cluster")).toBeTruthy();
+    expect(
+      container.querySelector(".sm\\:min-w-\\[var\\(--action-cluster-button-min-width\\)\\]"),
+    ).toBeTruthy();
+    expect(
+      container.querySelector(".min-h-\\[var\\(--surface-dashboard-card-min-height\\)\\]"),
+    ).toBeTruthy();
   });
 });

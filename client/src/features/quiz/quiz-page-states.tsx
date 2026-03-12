@@ -7,7 +7,7 @@ import { QuizModeEnum } from "@shared/domain/enums";
 export function QuizLoadingState() {
   return (
     <div className="min-h-screen bg-background p-4">
-      <div className="mx-auto flex min-h-[60vh] w-full max-w-2xl items-center justify-center rounded-3xl border border-border/50 bg-card p-8 text-center shadow-sm">
+      <div className="mx-auto flex min-h-[var(--surface-quiz-state-min-height)] w-full max-w-2xl items-center justify-center rounded-3xl border border-border/50 bg-card p-8 text-center shadow-sm">
         <div className="space-y-3">
           <h2 className="text-2xl font-semibold">Preparing your session</h2>
           <InlineLoading label="Generating your lesson..." className="justify-center" />

@@ -1,8 +1,15 @@
 /* eslint-disable react-refresh/only-export-components */
-import Link from "next/link";
 import type { Metadata } from "next";
 import { APP_SITE_URL, getSeoRouteDefinition } from "@shared/domain/constants/seo";
-import { PublicBreadcrumbs, PublicPageFooter } from "../_components/public-page-seo";
+import {
+  PublicActionLink,
+  PublicActionRow,
+  PublicCard,
+  PublicCardGrid,
+  PublicIntro,
+  PublicPageShell,
+  PublicSection,
+} from "../_components/public-site";
 
 const routeSeo = getSeoRouteDefinition("/features");
 
@@ -44,52 +51,34 @@ const featureSections = [
 
 export default function FeaturesPage() {
   return (
-    <main className="min-h-screen bg-background text-foreground">
-      <section className="mx-auto max-w-5xl px-6 py-16 sm:px-8 md:py-24">
-        <PublicBreadcrumbs
-          items={[
+    <PublicPageShell>
+      <PublicSection className="py-16 md:py-24" width="content">
+        <PublicIntro
+          breadcrumbs={[
             { label: "Home", href: "/" },
             { label: "Features", href: "/features" },
           ]}
+          eyebrow="Product Features"
+          title="Language learning features built for retention, not just repetition."
+          description="Learn-Lang combines adaptive review, pronunciation support, analytics, and reviewer governance into one product surface for structured vocabulary practice."
         />
-        <div className="max-w-3xl space-y-5">
-          <p className="text-sm font-medium uppercase tracking-[0.18em] text-muted-foreground">
-            Product Features
-          </p>
-          <h1 className="text-4xl font-semibold tracking-tight sm:text-5xl">
-            Language learning features built for retention, not just repetition.
-          </h1>
-          <p className="text-base leading-7 text-muted-foreground sm:text-lg">
-            Learn-Lang combines adaptive review, pronunciation support, analytics, and reviewer
-            governance into one product surface for structured vocabulary practice.
-          </p>
-        </div>
 
-        <div className="mt-12 grid gap-5 md:grid-cols-2">
+        <PublicCardGrid>
           {featureSections.map((section) => (
-            <article key={section.title} className="rounded-3xl border border-border/60 bg-card p-6 shadow-sm">
+            <PublicCard key={section.title}>
               <h2 className="text-xl font-semibold">{section.title}</h2>
               <p className="mt-3 text-sm leading-7 text-muted-foreground">{section.body}</p>
-            </article>
+            </PublicCard>
           ))}
-        </div>
+        </PublicCardGrid>
 
-        <div className="mt-12 flex flex-col gap-3 sm:flex-row">
-          <Link
-            href="/how-it-works"
-            className="inline-flex items-center justify-center rounded-xl bg-primary px-5 py-3 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
-          >
+        <PublicActionRow>
+          <PublicActionLink href="/how-it-works" variant="primary">
             See how it works
-          </Link>
-          <Link
-            href="/auth"
-            className="inline-flex items-center justify-center rounded-xl border border-border bg-background px-5 py-3 text-sm font-medium text-foreground transition-colors hover:bg-muted"
-          >
-            Start learning
-          </Link>
-        </div>
-      </section>
-      <PublicPageFooter />
-    </main>
+          </PublicActionLink>
+          <PublicActionLink href="/auth">Start learning</PublicActionLink>
+        </PublicActionRow>
+      </PublicSection>
+    </PublicPageShell>
   );
 }

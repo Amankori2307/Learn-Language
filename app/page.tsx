@@ -3,7 +3,15 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { APP_BRAND_NAME, APP_BRAND_TAGLINE } from "@shared/domain/constants/app-brand";
 import { APP_SITE_URL, getSeoRouteDefinition } from "@shared/domain/constants/seo";
-import { PublicPageFooter } from "./_components/public-page-seo";
+import {
+  PublicActionLink,
+  PublicActionRow,
+  PublicCard,
+  PublicCardGrid,
+  PublicPageShell,
+  PublicSection,
+  PublicSurface,
+} from "./_components/public-site";
 
 const homeSeo = getSeoRouteDefinition("/");
 
@@ -103,7 +111,7 @@ const publicExplorationLinks = [
 
 export default function HomePage() {
   return (
-    <main className="min-h-screen bg-background text-foreground">
+    <PublicPageShell>
       <section className="relative overflow-hidden border-b border-border/60">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,hsl(var(--primary)/0.16),transparent_42%),linear-gradient(180deg,hsl(var(--background)),hsl(var(--muted)/0.45))]" />
         <div className="relative mx-auto flex w-full max-w-6xl flex-col gap-10 px-6 py-16 sm:px-8 md:py-24 lg:flex-row lg:items-center lg:gap-16">
@@ -120,7 +128,7 @@ export default function HomePage() {
                 pronunciation-aware study, and reviewer-governed vocabulary building.
               </p>
             </div>
-            <div className="flex flex-col gap-3 sm:flex-row">
+            <PublicActionRow>
               <Link
                 href="/auth"
                 className="inline-flex items-center justify-center rounded-xl bg-primary px-6 py-3 text-sm font-medium text-primary-foreground shadow-sm transition-colors hover:bg-primary/90"
@@ -133,25 +141,25 @@ export default function HomePage() {
               >
                 Open Dashboard
               </Link>
-            </div>
+            </PublicActionRow>
           </div>
 
           <div className="grid w-full max-w-xl gap-4">
             {featureHighlights.map((feature) => (
-              <article
+              <PublicCard
                 key={feature.title}
-                className="rounded-2xl border border-border/60 bg-card/90 p-5 shadow-sm backdrop-blur"
+                className="rounded-2xl bg-card/90 p-5 backdrop-blur"
               >
                 <h2 className="text-lg font-semibold">{feature.title}</h2>
                 <p className="mt-2 text-sm leading-6 text-muted-foreground">{feature.description}</p>
-              </article>
+              </PublicCard>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="mx-auto grid w-full max-w-6xl gap-6 px-6 py-14 sm:px-8 md:grid-cols-[1.1fr_0.9fr] md:py-20">
-        <div className="rounded-3xl border border-border/60 bg-card p-8 shadow-sm">
+      <PublicSection className="grid gap-6 py-14 md:grid-cols-[1.1fr_0.9fr] md:py-20">
+        <PublicSurface>
           <p className="text-sm font-medium uppercase tracking-[0.18em] text-muted-foreground">
             Built For Learners
           </p>
@@ -160,15 +168,15 @@ export default function HomePage() {
           </h2>
           <div className="mt-5 space-y-4">
             {productPromises.map((item) => (
-              <article key={item.title} className="rounded-2xl border border-border/50 bg-background/80 p-4">
+              <PublicCard key={item.title} className="rounded-2xl border-border/50 bg-background/80 p-4 shadow-none">
                 <h3 className="text-lg font-semibold">{item.title}</h3>
                 <p className="mt-2 text-sm leading-6 text-muted-foreground">{item.description}</p>
-              </article>
+              </PublicCard>
             ))}
           </div>
-        </div>
+        </PublicSurface>
 
-        <div className="rounded-3xl border border-border/60 bg-muted/40 p-8">
+        <PublicSurface className="bg-muted/40 shadow-none">
           <h2 className="text-xl font-semibold">What learners can do inside the app</h2>
           <p className="mt-2 text-sm leading-6 text-muted-foreground">
             Learn-Lang is designed for focused vocabulary practice rather than passive browsing.
@@ -180,25 +188,17 @@ export default function HomePage() {
               </li>
             ))}
           </ul>
-          <div className="mt-6 flex flex-col gap-3 sm:flex-row">
-            <Link
-              href="/auth"
-              className="inline-flex items-center justify-center rounded-xl bg-primary px-5 py-3 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
-            >
+          <PublicActionRow>
+            <PublicActionLink href="/auth" variant="primary">
               Create your study routine
-            </Link>
-            <Link
-              href="/features"
-              className="inline-flex items-center justify-center rounded-xl border border-border bg-background px-5 py-3 text-sm font-medium text-foreground transition-colors hover:bg-muted"
-            >
-              Explore the product
-            </Link>
-          </div>
-        </div>
-      </section>
+            </PublicActionLink>
+            <PublicActionLink href="/features">Explore the product</PublicActionLink>
+          </PublicActionRow>
+        </PublicSurface>
+      </PublicSection>
 
       <section className="border-t border-border/60 bg-card/40">
-        <div className="mx-auto max-w-6xl px-6 py-14 sm:px-8 md:py-18">
+        <PublicSection className="py-14 md:py-18">
           <div className="max-w-2xl">
             <p className="text-sm font-medium uppercase tracking-[0.18em] text-muted-foreground">
               Explore Public Pages
@@ -211,7 +211,7 @@ export default function HomePage() {
               expose example topic coverage without requiring an account first.
             </p>
           </div>
-          <div className="mt-8 grid gap-5 md:grid-cols-2">
+          <PublicCardGrid className="mt-8">
             {publicExplorationLinks.map((item) => (
               <Link
                 key={item.href}
@@ -222,10 +222,9 @@ export default function HomePage() {
                 <p className="mt-3 text-sm leading-7 text-muted-foreground">{item.description}</p>
               </Link>
             ))}
-          </div>
-        </div>
+          </PublicCardGrid>
+        </PublicSection>
       </section>
-      <PublicPageFooter />
-    </main>
+    </PublicPageShell>
   );
 }

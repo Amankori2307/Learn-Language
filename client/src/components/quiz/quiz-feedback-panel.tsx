@@ -61,7 +61,7 @@ export function QuizFeedbackPanel({
       >
         <div
           className={cn(
-            "relative overflow-hidden rounded-[1rem] border px-3 py-3 sm:px-4 md:px-5 md:py-5",
+            "relative overflow-hidden rounded-[var(--radius-lg)] border px-3 py-3 sm:px-4 md:px-5 md:py-5",
             result.isCorrect ? "surface-status-success" : "surface-status-error",
           )}
         >
@@ -71,7 +71,7 @@ export function QuizFeedbackPanel({
               initial={{ opacity: 0.2, scale: 0.98 }}
               animate={{ opacity: 0, scale: 1 }}
               transition={{ duration: 0.35, ease: "easeOut" }}
-              className="pointer-events-none absolute inset-x-0 top-0 h-24 rounded-[1.5rem] bg-[hsl(var(--status-error-emphasis)/0.16)] blur-xl"
+              className="pointer-events-none absolute inset-x-0 top-0 h-24 rounded-[var(--radius-xl)] bg-[hsl(var(--status-error-emphasis)/0.16)] blur-xl"
             />
           ) : null}
 

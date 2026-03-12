@@ -10,7 +10,7 @@ describe("TutorChatPanel", () => {
     const setInput = vi.fn();
     const sendMessage = vi.fn();
 
-    render(
+    const { container } = render(
       <TutorChatPanel
         input=""
         setInput={setInput}
@@ -30,5 +30,6 @@ describe("TutorChatPanel", () => {
 
     expect(setInput).toHaveBeenCalled();
     expect(sendMessage).toHaveBeenCalledTimes(2);
+    expect(container.querySelector(".h-\\[var\\(--pane-tutor-chat-height\\)\\]")).toBeTruthy();
   });
 });

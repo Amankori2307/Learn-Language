@@ -18,6 +18,8 @@ The main layers inside the SPA are:
 - transport adapters in `client/src/services`
 - reusable UI/state primitives in `client/src/components` and `client/src/components/ui`
 - shared theme ownership in `client/src/theme/*`
+- canonical design-system ownership in [continuum-design-system.md](/Users/aman/Projects/personal-projects/Learn-Language/documentation/architecture/continuum-design-system.md)
+- shared public-site route composition in `app/_components/*`
 
 ## Current route ownership
 
@@ -46,6 +48,11 @@ The SPA owns:
 - `/tutor`
 
 Protected route gating remains in [client/src/App.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/App.tsx) through `useAuth()`.
+
+Public-route Continuum composition now lives primarily in:
+
+- [public-site.tsx](/Users/aman/Projects/personal-projects/Learn-Language/app/_components/public-site.tsx)
+- [public-page-seo.tsx](/Users/aman/Projects/personal-projects/Learn-Language/app/_components/public-page-seo.tsx)
 
 ## Feature-layer structure
 
@@ -109,3 +116,5 @@ Architecture-sensitive surfaces are protected by:
 - Reuse shared UI/state primitives instead of hand-rolling loading, error, pending, and empty states.
 - Preserve the split between crawlable public app-router pages and authenticated SPA routes.
 - Keep theme-aware behavior in shared tokens, variants, and theme helpers rather than route-local styling logic.
+- Preserve the Continuum design-system contract for layout, responsive behavior, component ownership, and enforcement.
+- Keep public app-router pages on the shared public-site Continuum layer instead of restyling page shells independently.

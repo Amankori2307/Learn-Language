@@ -133,8 +133,12 @@ export function Layout({ children }: { children: React.ReactNode }) {
     email: user?.email,
   });
 
-  const sidebarWidthClass = isCollapsed ? "w-24" : "w-72";
-  const mainOffsetClass = isCollapsed ? "md:ml-24" : "md:ml-72";
+  const sidebarWidthClass = isCollapsed
+    ? "w-[var(--shell-sidebar-width-collapsed)]"
+    : "w-[var(--shell-sidebar-width)]";
+  const mainOffsetClass = isCollapsed
+    ? "md:ml-[var(--shell-sidebar-width-collapsed)]"
+    : "md:ml-[var(--shell-sidebar-width)]";
 
   const NavContent = ({
     compact = false,
@@ -425,7 +429,10 @@ export function Layout({ children }: { children: React.ReactNode }) {
                 <Menu className="w-6 h-6" />
               </Button>
             </SheetTrigger>
-            <SheetContent side="left" className="w-[88vw] max-w-[22rem] p-0">
+            <SheetContent
+              side="left"
+              className="w-[var(--shell-mobile-nav-width)] max-w-[var(--shell-mobile-nav-max-width)] p-0"
+            >
               <SheetTitle className="sr-only">Main navigation</SheetTitle>
               <NavContent mobile />
             </SheetContent>

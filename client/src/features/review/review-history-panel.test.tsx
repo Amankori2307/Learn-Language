@@ -17,7 +17,7 @@ describe("ReviewHistoryPanel", () => {
   });
 
   it("renders word, related words, and event details when history is available", () => {
-    render(
+    const { container } = render(
       <ReviewHistoryPanel
         activeWordId={11}
         historyLoading={false}
@@ -61,5 +61,6 @@ describe("ReviewHistoryPanel", () => {
     expect(screen.getByText(/vandana \(వందన\)/)).toBeTruthy();
     expect(screen.getByText("draft -> approved")).toBeTruthy();
     expect(screen.getByText("Verified against source")).toBeTruthy();
+    expect(container.querySelector(".md\\:max-h-\\[var\\(--pane-review-max-height\\)\\]")).toBeTruthy();
   });
 });
