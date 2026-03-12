@@ -675,76 +675,76 @@
   --font-display: "Outfit", sans-serif;
   --font-script: "Noto Sans", sans-serif;
 
-  --background: 228 52% 6%;
-  --foreground: 210 40% 96%;
+  --background: 0 0% 100%;
+  --foreground: 222 32% 12%;
 
-  --primary: 199 89% 55%;
+  --primary: 260 90% 54%;
   --primary-foreground: 0 0% 100%;
-  --primary-border: hsl(var(--primary) / 0.32);
+  --primary-border: hsl(var(--primary) / 0.38);
 
-  --secondary: 232 30% 12%;
-  --secondary-foreground: 220 30% 90%;
-  --secondary-border: hsl(232 22% 18%);
+  --secondary: 210 35% 94%;
+  --secondary-foreground: 222 28% 18%;
+  --secondary-border: hsl(214 22% 82%);
 
-  --muted: 234 28% 12%;
-  --muted-foreground: 222 18% 66%;
-  --muted-border: hsl(232 22% 18%);
+  --muted: 210 30% 92%;
+  --muted-foreground: 222 16% 40%;
+  --muted-border: hsl(214 20% 84%);
 
-  --accent: 268 86% 68%;
+  --accent: 188 100% 46%;
   --accent-foreground: 0 0% 100%;
-  --accent-border: hsl(var(--accent) / 0.28);
+  --accent-border: hsl(var(--accent) / 0.34);
 
-  --destructive: 0 70% 50%;
-  --destructive-foreground: 0 0% 98%;
-  --destructive-border: hsl(var(--destructive) / 0.32);
+  --destructive: 0 78% 50%;
+  --destructive-foreground: 0 0% 100%;
+  --destructive-border: hsl(var(--destructive) / 0.36);
 
-  --border: 232 24% 18%;
-  --border-soft: 232 22% 22%;
-  --border-strong: 232 20% 28%;
-  --border-contrast: 220 34% 78%;
-  --input: 232 22% 18%;
-  --ring: 199 89% 55%;
+  --border: 214 18% 82%;
+  --border-soft: 214 18% 88%;
+  --border-strong: 214 18% 72%;
+  --border-contrast: 222 22% 30%;
+  --input: 214 18% 82%;
+  --ring: 260 90% 54%;
 
-  --card: 232 40% 8%;
-  --card-foreground: 220 40% 96%;
-  --card-border: 232 24% 18%;
-  --popover: 232 38% 9%;
-  --popover-foreground: 220 40% 96%;
-  --popover-border: 232 24% 18%;
+  --card: 0 0% 100%;
+  --card-foreground: 222 32% 12%;
+  --card-border: 214 18% 90%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 222 32% 12%;
+  --popover-border: 214 18% 86%;
 
-  --sidebar: 232 48% 7%;
-  --sidebar-foreground: 220 40% 96%;
-  --sidebar-border: 232 24% 16%;
-  --sidebar-ring: 199 89% 55%;
-  --sidebar-primary: 199 89% 55%;
+  --sidebar: 0 0% 100%;
+  --sidebar-foreground: 222 32% 12%;
+  --sidebar-border: 214 18% 90%;
+  --sidebar-ring: 260 90% 54%;
+  --sidebar-primary: 260 90% 54%;
   --sidebar-primary-foreground: 0 0% 100%;
-  --sidebar-primary-border: hsl(var(--sidebar-primary) / 0.32);
-  --sidebar-accent: 232 30% 12%;
-  --sidebar-accent-foreground: 220 40% 96%;
-  --sidebar-accent-border: hsl(232 22% 18%);
+  --sidebar-primary-border: hsl(var(--sidebar-primary) / 0.38);
+  --sidebar-accent: 210 30% 94%;
+  --sidebar-accent-foreground: 222 28% 18%;
+  --sidebar-accent-border: hsl(214 18% 86%);
 
-  --chart-1: 199 89% 55%;
-  --chart-2: 268 86% 68%;
-  --chart-3: 150 62% 52%;
-  --chart-4: 32 88% 56%;
-  --chart-5: 340 82% 62%;
+  --chart-1: 0 92% 62%;
+  --chart-2: 28 95% 60%;
+  --chart-3: 50 95% 55%;
+  --chart-4: 145 78% 46%;
+  --chart-5: 210 100% 60%;
 
-  --status-success: 150 38% 18%;
-  --status-success-foreground: 148 58% 78%;
-  --status-success-border: 150 40% 32%;
-  --status-success-emphasis: 150 58% 50%;
-  --status-warning: 36 54% 18%;
-  --status-warning-foreground: 42 88% 80%;
-  --status-warning-border: 36 45% 34%;
-  --status-warning-emphasis: 42 96% 58%;
-  --status-error: 0 53% 18%;
-  --status-error-foreground: 0 86% 86%;
-  --status-error-border: 0 57% 32%;
-  --status-error-emphasis: 0 82% 62%;
-  --status-info: 214 46% 18%;
-  --status-info-foreground: 210 85% 88%;
-  --status-info-border: 216 44% 34%;
-  --status-info-emphasis: 210 92% 62%;
+  --status-success: 142 60% 92%;
+  --status-success-foreground: 148 50% 24%;
+  --status-success-border: 144 38% 74%;
+  --status-success-emphasis: 144 54% 42%;
+  --status-warning: 42 80% 90%;
+  --status-warning-foreground: 34 62% 26%;
+  --status-warning-border: 38 50% 70%;
+  --status-warning-emphasis: 36 72% 46%;
+  --status-error: 0 76% 92%;
+  --status-error-foreground: 0 56% 30%;
+  --status-error-border: 0 56% 72%;
+  --status-error-emphasis: 0 72% 50%;
+  --status-info: 214 80% 92%;
+  --status-info-foreground: 214 50% 28%;
+  --status-info-border: 214 52% 72%;
+  --status-info-emphasis: 214 72% 48%;
 
   --button-outline: hsl(var(--border));
 
@@ -756,18 +756,18 @@
   --radius-pill: 999px;
   --radius: var(--radius-md);
 
-  --shadow-xs: 0 1px 1px rgb(3 7 18 / 0.22);
-  --shadow-sm: 0 12px 32px rgb(0 0 0 / 0.34);
-  --shadow-md: 0 22px 56px rgb(0 0 0 / 0.42);
-  --shadow-lg: 0 32px 80px rgb(0 0 0 / 0.5);
-  --shadow-xl: 0 44px 110px rgb(0 0 0 / 0.6);
-  --shadow-accent: 0 28px 70px hsl(var(--primary) / 0.3);
+  --shadow-xs: 0 1px 2px rgb(15 23 42 / 0.06);
+  --shadow-sm: 0 10px 22px rgb(15 23 42 / 0.12);
+  --shadow-md: 0 18px 36px rgb(15 23 42 / 0.18);
+  --shadow-lg: 0 26px 48px rgb(15 23 42 / 0.22);
+  --shadow-xl: 0 36px 70px rgb(15 23 42 / 0.26);
+  --shadow-accent: 0 24px 50px hsl(var(--primary) / 0.34);
 
-  --surface-glass: hsl(232 44% 10% / 0.78);
-  --surface-glass-border: hsl(220 40% 96% / 0.08);
-  --overlay-backdrop: rgb(0 0 0 / 0.84);
-  --app-gradient-start: hsl(var(--accent) / 0.18);
-  --app-gradient-end: transparent;
+  --surface-glass: hsl(0 0% 100% / 0.84);
+  --surface-glass-border: hsl(var(--chart-5) / 0.2);
+  --overlay-backdrop: rgb(15 23 42 / 0.35);
+  --app-gradient-start: hsl(var(--chart-2) / 0.3);
+  --app-gradient-end: hsl(var(--chart-1) / 0.2);
 
   --shell-sidebar-width: 18rem;
   --shell-sidebar-width-collapsed: 6rem;
@@ -797,6 +797,51 @@
   --motion-slow: 420ms;
   --ease-standard: cubic-bezier(0.2, 0.8, 0.2, 1);
   --ease-emphasized: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.rainbow body {
+  background-image: radial-gradient(
+      circle at 15% 15%,
+      hsl(var(--chart-2) / 0.45),
+      transparent 38%
+    ),
+    radial-gradient(
+      circle at 85% 20%,
+      hsl(var(--chart-5) / 0.42),
+      transparent 42%
+    ),
+    radial-gradient(
+      circle at 20% 85%,
+      hsl(var(--chart-1) / 0.4),
+      transparent 44%
+    ),
+    radial-gradient(
+      circle at 80% 80%,
+      hsl(var(--chart-4) / 0.38),
+      transparent 44%
+    ),
+    conic-gradient(
+      from 210deg at 50% 50%,
+      hsl(0 92% 60% / 0.28),
+      hsl(28 95% 58% / 0.28),
+      hsl(50 95% 55% / 0.28),
+      hsl(130 70% 52% / 0.28),
+      hsl(185 95% 58% / 0.28),
+      hsl(220 95% 62% / 0.28),
+      hsl(282 92% 62% / 0.28),
+      hsl(0 92% 60% / 0.28)
+    ),
+    linear-gradient(
+      140deg,
+      hsl(0 92% 58% / 0.22) 0%,
+      hsl(28 95% 56% / 0.22) 16%,
+      hsl(50 95% 54% / 0.22) 32%,
+      hsl(130 70% 50% / 0.22) 48%,
+      hsl(185 95% 56% / 0.22) 64%,
+      hsl(220 95% 60% / 0.22) 80%,
+      hsl(282 92% 62% / 0.22) 100%
+    ),
+    linear-gradient(135deg, hsl(var(--background)), hsl(var(--background)));
 }
 
 @layer base {
