@@ -23,7 +23,7 @@ export type AppThemeDefinition = {
 export const APP_THEME_DEFINITIONS: readonly AppThemeDefinition[] = [
   {
     id: AppThemeId.CURRENT,
-    label: "Current",
+    label: "Dark",
     availability: "implemented",
     providerTheme: "dark",
     selector: ".dark",

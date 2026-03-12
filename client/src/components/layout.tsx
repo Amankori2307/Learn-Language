@@ -294,7 +294,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
             ) : (
               <Palette className="size-4" />
             )}
-            {!compact && <span className="ml-2">{isMinimalTheme ? "Minimal" : "Current"}</span>}
+            {!compact && <span className="ml-2">{isMinimalTheme ? "Minimal" : "Dark"}</span>}
           </Button>
         </div>
 
@@ -371,7 +371,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
             ) : (
               <Palette className="size-4 mr-2" />
             )}
-            {isMinimalTheme ? "Switch to Current Theme" : "Switch to Minimal Theme"}
+            {isMinimalTheme ? "Switch to Dark Theme" : "Switch to Minimal Theme"}
           </Button>
           <a
             href="https://forms.gle/f2hH1BL3v4eNsxEg8"

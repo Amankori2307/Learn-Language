@@ -16,7 +16,7 @@ Theme ownership lives in:
 
 Implemented themes:
 
-- `current`
+- `dark`
 - `minimal`
 
 Planned but not yet shipped:
@@ -44,7 +44,7 @@ Required token groups:
 
 ## Current implementation notes
 
-- `current` maps to provider theme `dark`
+- `dark` is the user-facing label for app theme id `current`, which maps to provider theme `dark`
 - `minimal` maps to provider theme `minimal`
 - system theme detection is disabled intentionally
 - chart theming already uses the implemented theme registry instead of a `light`/`dark` assumption
