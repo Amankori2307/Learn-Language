@@ -667,6 +667,138 @@
   --ease-emphasized: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
+.rainbow {
+  --font-sans: "Outfit", sans-serif;
+  --font-serif: "Noto Sans", serif;
+  --font-mono: "ui-monospace", "SFMono-Regular", "SF Mono", Consolas, "Liberation Mono", Menlo,
+    monospace;
+  --font-display: "Outfit", sans-serif;
+  --font-script: "Noto Sans", sans-serif;
+
+  --background: 228 52% 6%;
+  --foreground: 210 40% 96%;
+
+  --primary: 199 89% 55%;
+  --primary-foreground: 0 0% 100%;
+  --primary-border: hsl(var(--primary) / 0.32);
+
+  --secondary: 232 30% 12%;
+  --secondary-foreground: 220 30% 90%;
+  --secondary-border: hsl(232 22% 18%);
+
+  --muted: 234 28% 12%;
+  --muted-foreground: 222 18% 66%;
+  --muted-border: hsl(232 22% 18%);
+
+  --accent: 268 86% 68%;
+  --accent-foreground: 0 0% 100%;
+  --accent-border: hsl(var(--accent) / 0.28);
+
+  --destructive: 0 70% 50%;
+  --destructive-foreground: 0 0% 98%;
+  --destructive-border: hsl(var(--destructive) / 0.32);
+
+  --border: 232 24% 18%;
+  --border-soft: 232 22% 22%;
+  --border-strong: 232 20% 28%;
+  --border-contrast: 220 34% 78%;
+  --input: 232 22% 18%;
+  --ring: 199 89% 55%;
+
+  --card: 232 40% 8%;
+  --card-foreground: 220 40% 96%;
+  --card-border: 232 24% 18%;
+  --popover: 232 38% 9%;
+  --popover-foreground: 220 40% 96%;
+  --popover-border: 232 24% 18%;
+
+  --sidebar: 232 48% 7%;
+  --sidebar-foreground: 220 40% 96%;
+  --sidebar-border: 232 24% 16%;
+  --sidebar-ring: 199 89% 55%;
+  --sidebar-primary: 199 89% 55%;
+  --sidebar-primary-foreground: 0 0% 100%;
+  --sidebar-primary-border: hsl(var(--sidebar-primary) / 0.32);
+  --sidebar-accent: 232 30% 12%;
+  --sidebar-accent-foreground: 220 40% 96%;
+  --sidebar-accent-border: hsl(232 22% 18%);
+
+  --chart-1: 199 89% 55%;
+  --chart-2: 268 86% 68%;
+  --chart-3: 150 62% 52%;
+  --chart-4: 32 88% 56%;
+  --chart-5: 340 82% 62%;
+
+  --status-success: 150 38% 18%;
+  --status-success-foreground: 148 58% 78%;
+  --status-success-border: 150 40% 32%;
+  --status-success-emphasis: 150 58% 50%;
+  --status-warning: 36 54% 18%;
+  --status-warning-foreground: 42 88% 80%;
+  --status-warning-border: 36 45% 34%;
+  --status-warning-emphasis: 42 96% 58%;
+  --status-error: 0 53% 18%;
+  --status-error-foreground: 0 86% 86%;
+  --status-error-border: 0 57% 32%;
+  --status-error-emphasis: 0 82% 62%;
+  --status-info: 214 46% 18%;
+  --status-info-foreground: 210 85% 88%;
+  --status-info-border: 216 44% 34%;
+  --status-info-emphasis: 210 92% 62%;
+
+  --button-outline: hsl(var(--border));
+
+  --radius-xs: 0.5rem;
+  --radius-sm: 0.7rem;
+  --radius-md: 1rem;
+  --radius-lg: 1.25rem;
+  --radius-xl: 1.75rem;
+  --radius-pill: 999px;
+  --radius: var(--radius-md);
+
+  --shadow-xs: 0 1px 1px rgb(3 7 18 / 0.22);
+  --shadow-sm: 0 12px 32px rgb(0 0 0 / 0.34);
+  --shadow-md: 0 22px 56px rgb(0 0 0 / 0.42);
+  --shadow-lg: 0 32px 80px rgb(0 0 0 / 0.5);
+  --shadow-xl: 0 44px 110px rgb(0 0 0 / 0.6);
+  --shadow-accent: 0 28px 70px hsl(var(--primary) / 0.3);
+
+  --surface-glass: hsl(232 44% 10% / 0.78);
+  --surface-glass-border: hsl(220 40% 96% / 0.08);
+  --overlay-backdrop: rgb(0 0 0 / 0.84);
+  --app-gradient-start: hsl(var(--accent) / 0.18);
+  --app-gradient-end: transparent;
+
+  --shell-sidebar-width: 18rem;
+  --shell-sidebar-width-collapsed: 6rem;
+  --shell-mobile-nav-width: 88vw;
+  --shell-mobile-nav-max-width: 22rem;
+  --size-menu-panel-min-width: 8rem;
+  --size-menu-panel-wide-min-width: 12rem;
+  --size-command-panel-max-height: min(18.75rem, calc(100dvh - 8rem));
+  --size-drawer-handle-width: 6.25rem;
+  --size-textarea-min-height: 5rem;
+  --size-toast-viewport-max-width: 26.25rem;
+  --size-overlay-viewport-max-width: calc(100vw - 1rem);
+  --size-chart-tooltip-min-width: 8rem;
+  --size-chart-indicator-radius: 0.125rem;
+  --size-scrollbar-padding: 0.0625rem;
+  --size-hairline: 0.0625rem;
+  --size-sidebar-rail: 0.125rem;
+  --pane-review-max-height: 35rem;
+  --pane-quiz-session-max-height: 51.25rem;
+  --pane-tutor-chat-height: 26.25rem;
+  --surface-quiz-state-min-height: 60svh;
+  --surface-dashboard-card-min-height: 12.5rem;
+  --action-cluster-button-min-width: 13.75rem;
+
+  --motion-fast: 160ms;
+  --motion-base: 240ms;
+  --motion-slow: 420ms;
+  --ease-standard: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --ease-emphasized: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
 @layer base {
   * {
     @apply border-border;

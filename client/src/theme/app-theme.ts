@@ -4,6 +4,7 @@ export const AppThemeId = {
   WARM: "warm",
   PLAYFUL: "playful",
   HIGH_CONTRAST: "high-contrast",
+  RAINBOW: "rainbow",
 } as const;
 
 export type AppThemeId = (typeof AppThemeId)[keyof typeof AppThemeId];
@@ -53,6 +54,13 @@ export const APP_THEME_DEFINITIONS: readonly AppThemeDefinition[] = [
     availability: "implemented",
     providerTheme: "high-contrast",
     selector: ".high-contrast",
+  },
+  {
+    id: AppThemeId.RAINBOW,
+    label: "Rainbow",
+    availability: "implemented",
+    providerTheme: "rainbow",
+    selector: ".rainbow",
   },
 ] as const;
 

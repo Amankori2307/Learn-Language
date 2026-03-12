@@ -20,6 +20,7 @@ Implemented themes:
 - `warm`
 - `playful`
 - `high-contrast`
+- `rainbow`
 - `light` (app theme id `minimal`)
 
 Planned but not yet shipped:
@@ -47,6 +48,7 @@ Required token groups:
 - `warm` maps to provider theme `warm`
 - `playful` maps to provider theme `playful`
 - `high-contrast` maps to provider theme `high-contrast`
+- `rainbow` maps to provider theme `rainbow`
 - system theme detection is disabled intentionally
 - chart theming already uses the implemented theme registry instead of a `light`/`dark` assumption
 

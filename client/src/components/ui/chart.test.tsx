@@ -13,6 +13,7 @@ describe("ChartStyle", () => {
           warm: "#dd5500",
           playful: "#ff2d95",
           "high-contrast": "#000000",
+          rainbow: "#3b82f6",
         },
       },
     };
@@ -25,10 +26,12 @@ describe("ChartStyle", () => {
     expect(style?.innerHTML.includes(".warm [data-chart=chart-1]")).toBe(true);
     expect(style?.innerHTML.includes(".playful [data-chart=chart-1]")).toBe(true);
     expect(style?.innerHTML.includes(".high-contrast [data-chart=chart-1]")).toBe(true);
+    expect(style?.innerHTML.includes(".rainbow [data-chart=chart-1]")).toBe(true);
     expect(style?.innerHTML.includes("--color-score: #111111;")).toBe(true);
     expect(style?.innerHTML.includes("--color-score: #eeeeee;")).toBe(true);
     expect(style?.innerHTML.includes("--color-score: #dd5500;")).toBe(true);
     expect(style?.innerHTML.includes("--color-score: #ff2d95;")).toBe(true);
+    expect(style?.innerHTML.includes("--color-score: #3b82f6;")).toBe(true);
   });
 
   it("falls back to a color entry when a themed value is not provided", () => {
@@ -47,6 +50,7 @@ describe("ChartStyle", () => {
     expect(style?.innerHTML.includes(".warm [data-chart=chart-2]")).toBe(true);
     expect(style?.innerHTML.includes(".playful [data-chart=chart-2]")).toBe(true);
     expect(style?.innerHTML.includes(".high-contrast [data-chart=chart-2]")).toBe(true);
-    expect(style?.innerHTML.match(/--color-attempts: #123456;/g)?.length).toBe(5);
+    expect(style?.innerHTML.includes(".rainbow [data-chart=chart-2]")).toBe(true);
+    expect(style?.innerHTML.match(/--color-attempts: #123456;/g)?.length).toBe(6);
   });
 });

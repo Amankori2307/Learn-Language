@@ -31,6 +31,7 @@ describe("app theme config", () => {
       AppThemeId.WARM,
       AppThemeId.PLAYFUL,
       AppThemeId.HIGH_CONTRAST,
+      AppThemeId.RAINBOW,
     ]);
     expect(IMPLEMENTED_PROVIDER_THEMES).toEqual([
       "dark",
@@ -38,12 +39,14 @@ describe("app theme config", () => {
       "warm",
       "playful",
       "high-contrast",
+      "rainbow",
     ]);
     expect(getProviderThemeForAppTheme(AppThemeId.CURRENT)).toBe("dark");
     expect(getProviderThemeForAppTheme(AppThemeId.MINIMAL)).toBe("minimal");
     expect(getProviderThemeForAppTheme(AppThemeId.WARM)).toBe("warm");
     expect(getProviderThemeForAppTheme(AppThemeId.PLAYFUL)).toBe("playful");
     expect(getProviderThemeForAppTheme(AppThemeId.HIGH_CONTRAST)).toBe("high-contrast");
+    expect(getProviderThemeForAppTheme(AppThemeId.RAINBOW)).toBe("rainbow");
   });
 
   it("cycles between the implemented themes using provider theme values", () => {
@@ -53,6 +56,7 @@ describe("app theme config", () => {
     expect(getNextImplementedProviderTheme("minimal")).toBe("warm");
     expect(getNextImplementedProviderTheme("warm")).toBe("playful");
     expect(getNextImplementedProviderTheme("playful")).toBe("high-contrast");
-    expect(getNextImplementedProviderTheme("high-contrast")).toBe("dark");
+    expect(getNextImplementedProviderTheme("high-contrast")).toBe("rainbow");
+    expect(getNextImplementedProviderTheme("rainbow")).toBe("dark");
   });
 });
