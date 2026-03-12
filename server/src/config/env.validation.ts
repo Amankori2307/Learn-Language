@@ -23,27 +23,29 @@ export const envSchema = z
     GOOGLE_TTS_API_KEY: z.string().optional(),
   })
   .superRefine((data, ctx) => {
-    if (!data.GOOGLE_CLIENT_ID?.trim()) {
+    const requireAuthSecrets = data.NODE_ENV === "production" && data.AUTH_PROVIDER === "google";
+
+    if (requireAuthSecrets && !data.GOOGLE_CLIENT_ID?.trim()) {
       ctx.addIssue({
         code: z.ZodIssueCode.custom,
         path: ["GOOGLE_CLIENT_ID"],
-        message: "GOOGLE_CLIENT_ID is required when AUTH_PROVIDER=google",
+        message: "GOOGLE_CLIENT_ID is required when AUTH_PROVIDER=google in production",
       });
     }
 
-    if (!data.GOOGLE_CLIENT_SECRET?.trim()) {
+    if (requireAuthSecrets && !data.GOOGLE_CLIENT_SECRET?.trim()) {
       ctx.addIssue({
         code: z.ZodIssueCode.custom,
         path: ["GOOGLE_CLIENT_SECRET"],
-        message: "GOOGLE_CLIENT_SECRET is required when AUTH_PROVIDER=google",
+        message: "GOOGLE_CLIENT_SECRET is required when AUTH_PROVIDER=google in production",
       });
     }
 
-    if (!data.JWT_SECRET?.trim()) {
+    if (requireAuthSecrets && !data.JWT_SECRET?.trim()) {
       ctx.addIssue({
         code: z.ZodIssueCode.custom,
         path: ["JWT_SECRET"],
-        message: "JWT_SECRET is required when AUTH_PROVIDER=google",
+        message: "JWT_SECRET is required when AUTH_PROVIDER=google in production",
       });
     }
   });
