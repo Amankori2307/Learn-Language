@@ -44,7 +44,7 @@ export function LeaderboardPanel({
             key={entry.userId}
             className={cn(
               "rounded-2xl border border-border/50 bg-card p-4",
-              entry.rank <= 3 && "bg-amber-50/40",
+              entry.rank <= 3 && "surface-status-warning-subtle",
             )}
           >
             <div className="flex items-center justify-between gap-3">
@@ -90,7 +90,7 @@ export function LeaderboardPanel({
             key={entry.userId}
             className={cn(
               "grid grid-cols-12 items-center gap-2 border-b border-border/30 px-4 py-3 last:border-b-0",
-              entry.rank <= 3 && "bg-amber-50/30",
+              entry.rank <= 3 && "surface-status-warning-subtle",
             )}
           >
             <div className="col-span-1 text-lg font-bold">#{entry.rank}</div>

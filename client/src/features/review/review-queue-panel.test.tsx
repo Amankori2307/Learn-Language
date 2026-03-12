@@ -33,7 +33,7 @@ describe("ReviewQueuePanel", () => {
     const setActiveWordId = vi.fn();
     const transitionWord = vi.fn();
 
-    render(
+    const { container } = render(
       <ReviewQueuePanel
         queueItems={[
           {
@@ -71,5 +71,6 @@ describe("ReviewQueuePanel", () => {
       id: 11,
       toStatus: ReviewStatusEnum.APPROVED,
     });
+    expect(container.querySelector(".md\\:max-h-\\[var\\(--pane-review-max-height\\)\\]")).toBeTruthy();
   });
 });

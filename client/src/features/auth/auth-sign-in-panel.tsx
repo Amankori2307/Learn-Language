@@ -18,7 +18,7 @@ export function AuthSignInPanel({
     <div className="flex min-h-screen flex-col items-center justify-center bg-background p-5 sm:p-8">
       <div className="w-full max-w-md space-y-6 text-center sm:space-y-8">
         <div className="relative overflow-hidden rounded-3xl border border-border/60 bg-primary px-6 py-8 text-left text-primary-foreground shadow-xl lg:hidden">
-          <div className="absolute inset-0 bg-gradient-to-br from-primary via-primary to-emerald-500/80" />
+          <div className="absolute inset-0 bg-gradient-to-br from-primary via-primary to-accent/80" />
           <div className="relative">
             <p className="text-xs font-semibold uppercase tracking-[0.24em] text-primary-foreground/80">
               {APP_BRAND_NAME}

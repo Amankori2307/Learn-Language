@@ -61,7 +61,7 @@ export function ReviewHistoryPanel({
           />
         </div>
       ) : (
-        <div className="space-y-3 overflow-auto p-4 md:max-h-[560px]">
+        <div className="space-y-3 overflow-auto p-4 md:max-h-[var(--pane-review-max-height)]">
           <div className="rounded-xl border border-border/50 p-3">
             <p className="break-words font-medium">
               {history.word.transliteration} ({history.word.originalScript})

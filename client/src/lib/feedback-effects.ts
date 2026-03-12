@@ -1,5 +1,28 @@
 import confetti from "canvas-confetti";
 
+function readThemeHslVariable(variableName: string): string | null {
+  if (typeof window === "undefined") {
+    return null;
+  }
+
+  const value = window.getComputedStyle(document.documentElement).getPropertyValue(variableName).trim();
+  if (!value) {
+    return null;
+  }
+
+  return `hsl(${value})`;
+}
+
+function getSuccessConfettiColors() {
+  const colors = [
+    readThemeHslVariable("--status-success-emphasis"),
+    readThemeHslVariable("--accent"),
+    readThemeHslVariable("--chart-3"),
+  ].filter((value): value is string => Boolean(value));
+
+  return colors.length > 0 ? colors : ["hsl(145 68% 52%)", "hsl(193 89% 45%)", "hsl(160 84% 39%)"];
+}
+
 function canAnimate(): boolean {
   if (typeof window === "undefined" || typeof window.matchMedia !== "function") {
     return true;
@@ -64,7 +87,7 @@ export function runSuccessEffects(enabled: boolean) {
       spread: 70,
       startVelocity: 35,
       origin: { y: 0.65 },
-      colors: ["#22c55e", "#34d399", "#86efac"],
+      colors: getSuccessConfettiColors(),
     });
   }
 

@@ -91,7 +91,7 @@ export function QuizCard({
           exit={{ opacity: 0, y: -20 }}
           transition={{ duration: 0.3 }}
           className={cn(
-            "relative flex h-[calc(100vh-5.5rem)] min-h-[calc(100vh-5.5rem)] flex-col overflow-hidden rounded-[1.75rem] md:h-[min(88vh,820px)] md:min-h-0",
+            "relative flex h-[calc(100vh-5.5rem)] min-h-[calc(100vh-5.5rem)] flex-col overflow-hidden rounded-[var(--radius-xl)] md:h-[min(88vh,820px)] md:min-h-0",
             result
               ? "border border-transparent bg-transparent shadow-none backdrop-blur-0 md:border md:border-border/50 md:bg-card/95 md:shadow-2xl md:backdrop-blur"
               : "border border-border/50 bg-card/95 shadow-2xl backdrop-blur",

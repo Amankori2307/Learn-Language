@@ -18,10 +18,13 @@ vi.mock("@/components/layout", () => ({
 
 describe("quiz page states", () => {
   it("renders the loading surface", () => {
-    render(<QuizLoadingState />);
+    const { container } = render(<QuizLoadingState />);
 
     expect(screen.getByText("Preparing your session")).toBeTruthy();
     expect(screen.getByText("Generating your lesson...")).toBeTruthy();
+    expect(
+      container.querySelector(".min-h-\\[var\\(--surface-quiz-state-min-height\\)\\]"),
+    ).toBeTruthy();
   });
 
   it("routes restart actions from the empty state", async () => {

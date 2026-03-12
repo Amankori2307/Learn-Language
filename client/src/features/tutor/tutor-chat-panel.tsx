@@ -20,7 +20,7 @@ export function TutorChatPanel({
 }) {
   return (
     <>
-      <div className="h-[420px] space-y-3 overflow-y-auto rounded-2xl border border-border/50 bg-card p-4">
+      <div className="h-[var(--pane-tutor-chat-height)] space-y-3 overflow-y-auto rounded-2xl border border-border/50 bg-card p-4">
         {chat.map((msg, idx) => (
           <div
             key={`${msg.role}-${idx}`}

@@ -1,8 +1,14 @@
 /* eslint-disable react-refresh/only-export-components */
-import Link from "next/link";
 import type { Metadata } from "next";
 import { APP_SITE_URL, getSeoRouteDefinition } from "@shared/domain/constants/seo";
-import { PublicBreadcrumbs, PublicPageFooter } from "../_components/public-page-seo";
+import {
+  PublicActionLink,
+  PublicActionRow,
+  PublicCard,
+  PublicIntro,
+  PublicPageShell,
+  PublicSection,
+} from "../_components/public-site";
 
 const routeSeo = getSeoRouteDefinition("/how-it-works");
 
@@ -44,52 +50,34 @@ const steps = [
 
 export default function HowItWorksPage() {
   return (
-    <main className="min-h-screen bg-background text-foreground">
-      <section className="mx-auto max-w-4xl px-6 py-16 sm:px-8 md:py-24">
-        <PublicBreadcrumbs
-          items={[
+    <PublicPageShell>
+      <PublicSection className="py-16 md:py-24" width="content">
+        <PublicIntro
+          breadcrumbs={[
             { label: "Home", href: "/" },
             { label: "How It Works", href: "/how-it-works" },
           ]}
+          eyebrow="How It Works"
+          title="A learning loop designed around recall quality and review timing."
+          description="Learn-Lang uses an adaptive loop: study what matters now, review what is drifting, and use analytics to decide the next session instead of repeating everything equally."
+          descriptionClassName="max-w-3xl"
         />
-        <div className="space-y-5">
-          <p className="text-sm font-medium uppercase tracking-[0.18em] text-muted-foreground">
-            How It Works
-          </p>
-          <h1 className="text-4xl font-semibold tracking-tight sm:text-5xl">
-            A learning loop designed around recall quality and review timing.
-          </h1>
-          <p className="max-w-3xl text-base leading-7 text-muted-foreground sm:text-lg">
-            Learn-Lang uses an adaptive loop: study what matters now, review what is drifting, and
-            use analytics to decide the next session instead of repeating everything equally.
-          </p>
-        </div>
-
         <div className="mt-12 space-y-4">
           {steps.map((step) => (
-            <article key={step.title} className="rounded-3xl border border-border/60 bg-card p-6 shadow-sm">
+            <PublicCard key={step.title}>
               <h2 className="text-xl font-semibold">{step.title}</h2>
               <p className="mt-3 text-sm leading-7 text-muted-foreground">{step.body}</p>
-            </article>
+            </PublicCard>
           ))}
         </div>
 
-        <div className="mt-12 flex flex-col gap-3 sm:flex-row">
-          <Link
-            href="/features"
-            className="inline-flex items-center justify-center rounded-xl border border-border bg-background px-5 py-3 text-sm font-medium text-foreground transition-colors hover:bg-muted"
-          >
-            Explore features
-          </Link>
-          <Link
-            href="/auth"
-            className="inline-flex items-center justify-center rounded-xl bg-primary px-5 py-3 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
-          >
+        <PublicActionRow>
+          <PublicActionLink href="/features">Explore features</PublicActionLink>
+          <PublicActionLink href="/auth" variant="primary">
             Start learning
-          </Link>
-        </div>
-      </section>
-      <PublicPageFooter />
-    </main>
+          </PublicActionLink>
+        </PublicActionRow>
+      </PublicSection>
+    </PublicPageShell>
   );
 }

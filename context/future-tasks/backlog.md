@@ -27,3 +27,8 @@ When a future item becomes active, move it into `context/active-tasks/backlog.md
 | F-003 | todo | Review semantic search over vocabulary and clusters | Must not replace deterministic reviewer/admin filters |
 | F-004 | todo | Revisit server operational hardening gaps | Strong production secrets, SSH-key auth, and tighter firewall posture remain desirable |
 | F-005 | todo | Revisit next-round performance optimization candidates | Leaderboard pushdown, distractor-pool sizing, cluster-query consolidation, and client-payload inspection |
+| F-006 | todo | Strengthen the Continuum primitive library | Promote remaining documented layout conventions into first-class reusable primitives where that reduces feature-level duplication |
+| F-007 | todo | Extend design-system governance beyond token misuse checks | Detect repeated composition drift, inconsistent semantic action usage, and non-approved responsive patterns |
+| F-008 | todo | Add visual regression coverage for Continuum | Lock key public and app surfaces across phone and desktop viewports with screenshot-based checks |
+| F-009 | todo | Increase semantic component adoption on feature surfaces | Replace acceptable tokenized one-off compositions with higher-level shared primitives where patterns have stabilized |
+| F-010 | todo | Define long-term design-system governance operations | Establish an explicit audit cadence, exception review process, and ownership model for Continuum changes |

@@ -22,6 +22,7 @@ Current canonical app truth lives in:
 - [core-features.md](/Users/aman/Projects/personal-projects/Learn-Language/documentation/product/core-features.md)
 - [frontend-architecture.md](/Users/aman/Projects/personal-projects/Learn-Language/documentation/architecture/frontend-architecture.md)
 - [frontend-ui-contract.md](/Users/aman/Projects/personal-projects/Learn-Language/documentation/architecture/frontend-ui-contract.md)
+- [continuum-design-system.md](/Users/aman/Projects/personal-projects/Learn-Language/documentation/architecture/continuum-design-system.md)
 - [theme-system.md](/Users/aman/Projects/personal-projects/Learn-Language/documentation/architecture/theme-system.md)
 - [planning-guidelines.md](/Users/aman/Projects/personal-projects/Learn-Language/context/guidelines/planning-guidelines.md)
 
@@ -41,6 +42,7 @@ Current canonical app truth lives in:
   - pnpm-based workflow parity with local/docker checks
   - GitHub Actions quality gate now provisions Postgres, runs migrations/content import, runs `pnpm run ci`, runs production-like smoke, and then builds
   - lint now also enforces symbol ownership through `script/check-symbol-governance.ts`
+  - lint now also enforces design-system governance through `script/check-design-system-governance.ts`
 - Governance/documentation:
   - code and DI rules in [code-guidelines.md](/Users/aman/Projects/personal-projects/Learn-Language/context/guidelines/code-guidelines.md)
   - planning and source-of-truth rules in [planning-guidelines.md](/Users/aman/Projects/personal-projects/Learn-Language/context/guidelines/planning-guidelines.md)
@@ -50,6 +52,14 @@ Current canonical app truth lives in:
 - Active backlog: [backlog.md](/Users/aman/Projects/personal-projects/Learn-Language/context/active-tasks/backlog.md)
 - Future candidate work belongs in [future-tasks/backlog.md](/Users/aman/Projects/personal-projects/Learn-Language/context/future-tasks/backlog.md)
 - Recent completed work:
+  - repo-wide Continuum enforcement hardening across shared UI primitives with no remaining checker folder escape hatch
+  - shared primitive width/height/radius/hairline values migrated onto named Continuum size tokens
+  - public Next.js marketing-route adoption onto shared Continuum primitives
+  - design-system governance extension from `client/src` into `app/`
+  - Continuum design-system publication and cross-doc adoption
+  - design-system governance enforcement in the lint gate
+  - shell, dashboard, review, tutor, and quiz state migration onto shared sizing tokens
+  - responsive regression coverage for shell and migrated high-risk surfaces
   - planning/context system cleanup and rename pass
   - repo-level `AGENTS.md` creation
   - dedicated planning guidelines creation

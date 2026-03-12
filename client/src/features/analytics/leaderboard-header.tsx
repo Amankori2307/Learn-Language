@@ -22,7 +22,7 @@ export function LeaderboardHeader({
     <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
       <div>
         <h1 className="flex items-center gap-2 text-3xl font-bold">
-          <Trophy className="h-7 w-7 text-amber-500" />
+          <Trophy className="h-7 w-7 text-status-warning" />
           Leaderboard
         </h1>
         <p className="mt-1 text-muted-foreground">

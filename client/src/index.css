@@ -109,6 +109,27 @@
   --app-gradient-start: hsl(var(--primary) / 0.1);
   --app-gradient-end: transparent;
 
+  --shell-sidebar-width: 18rem;
+  --shell-sidebar-width-collapsed: 6rem;
+  --shell-mobile-nav-width: 88vw;
+  --shell-mobile-nav-max-width: 22rem;
+  --size-menu-panel-min-width: 8rem;
+  --size-menu-panel-wide-min-width: 12rem;
+  --size-command-panel-max-height: 18.75rem;
+  --size-drawer-handle-width: 6.25rem;
+  --size-textarea-min-height: 5rem;
+  --size-toast-viewport-max-width: 26.25rem;
+  --size-chart-tooltip-min-width: 8rem;
+  --size-chart-indicator-radius: 0.125rem;
+  --size-scrollbar-padding: 0.0625rem;
+  --size-hairline: 0.0625rem;
+  --size-sidebar-rail: 0.125rem;
+  --pane-review-max-height: 35rem;
+  --pane-tutor-chat-height: 26.25rem;
+  --surface-quiz-state-min-height: 60vh;
+  --surface-dashboard-card-min-height: 12.5rem;
+  --action-cluster-button-min-width: 13.75rem;
+
   --motion-fast: 160ms;
   --motion-base: 240ms;
   --motion-slow: 420ms;
@@ -218,6 +239,27 @@
   --app-gradient-start: hsl(var(--foreground) / 0.035);
   --app-gradient-end: transparent;
 
+  --shell-sidebar-width: 18rem;
+  --shell-sidebar-width-collapsed: 6rem;
+  --shell-mobile-nav-width: 88vw;
+  --shell-mobile-nav-max-width: 22rem;
+  --size-menu-panel-min-width: 8rem;
+  --size-menu-panel-wide-min-width: 12rem;
+  --size-command-panel-max-height: 18.75rem;
+  --size-drawer-handle-width: 6.25rem;
+  --size-textarea-min-height: 5rem;
+  --size-toast-viewport-max-width: 26.25rem;
+  --size-chart-tooltip-min-width: 8rem;
+  --size-chart-indicator-radius: 0.125rem;
+  --size-scrollbar-padding: 0.0625rem;
+  --size-hairline: 0.0625rem;
+  --size-sidebar-rail: 0.125rem;
+  --pane-review-max-height: 35rem;
+  --pane-tutor-chat-height: 26.25rem;
+  --surface-quiz-state-min-height: 60vh;
+  --surface-dashboard-card-min-height: 12.5rem;
+  --action-cluster-button-min-width: 13.75rem;
+
   --motion-fast: 120ms;
   --motion-base: 180ms;
   --motion-slow: 260ms;
@@ -307,6 +349,12 @@
     background: hsl(var(--status-warning));
     border-color: hsl(var(--status-warning-border));
     color: hsl(var(--status-warning-foreground));
+  }
+
+  .surface-status-warning-subtle {
+    background: hsl(var(--status-warning-emphasis) / 0.12);
+    border-color: hsl(var(--status-warning-border) / 0.55);
+    color: hsl(var(--foreground));
   }
 
   .text-status-success {
