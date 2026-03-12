@@ -171,6 +171,7 @@ If the active work belongs to a phase file:
 - use the phase task ID in `backlog.md`
 - keep the wording short
 - use `Notes` to point to the owning phase file when helpful
+- keep only one `doing` row in `backlog.md` unless parallel execution is explicitly intentional
 
 Example:
 
@@ -259,6 +260,7 @@ Microtasks should break the phase task into concrete executable steps.
 - keep only the gist of completed work in `app-context.md`
 - archive renamed phase files with their human-readable names intact
 - if an older phase file does not exist because it predates the current system, do not reconstruct it speculatively; recreate historical detail only when there is a concrete need
+- keep `context/archive/archive-index.md` updated when archive files are added, renamed, or removed
 
 ## Documentation rules for planning
 

@@ -15,3 +15,7 @@ Use this format when active tasks exist:
 | ID | Status | Task | Notes |
 | --- | --- | --- | --- |
 | P14-001 | doing | Example active task | Optional pointer to owning phase file |
+
+Rule:
+
+- keep only one `doing` row unless parallel execution is explicitly intentional
