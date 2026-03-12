@@ -22,6 +22,11 @@ Read these files first for repo context:
 - Keep `context/active-tasks/app-context.md` compact and factual.
 - Treat `context/guidelines/planning-guidelines.md` as the authority for phase creation, naming, execution, and archiving rules.
 - Keep implementation truth in code and implementation-backed docs, not in stale planning notes.
+- Keep using the context system consistently:
+  - keep `app-context.md` short
+  - keep `backlog.md` current
+  - archive completed phase files instead of deleting them
+  - update `context/archive/archive-index.md` when archive contents change
 
 ## UI / Theme Rules
 

@@ -262,6 +262,14 @@ Microtasks should break the phase task into concrete executable steps.
 - if an older phase file does not exist because it predates the current system, do not reconstruct it speculatively; recreate historical detail only when there is a concrete need
 - keep `context/archive/archive-index.md` updated when archive files are added, renamed, or removed
 
+## Maintenance rules
+
+- keep using this planning system consistently instead of falling back to ad hoc notes
+- keep `app-context.md` short and durable; remove noise instead of letting it accumulate
+- keep `backlog.md` current whenever priorities or active work change
+- never let completed work drift back into `backlog.md`
+- archive completed phase files rather than deleting them
+
 ## Documentation rules for planning
 
 - if a completed phase contains durable implementation truth, move that truth into the relevant file under `documentation/`
