@@ -19,7 +19,7 @@ Observed result:
 - production build completed successfully
 - app routes currently emitted by the Next app shell:
   - `/_not-found`
-  - `/[[...slug]]`
+  - `/[...slug]`
   - `/robots.txt`
   - `/sitemap.xml`
 - build emitted one warning:

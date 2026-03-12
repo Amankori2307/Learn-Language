@@ -68,7 +68,7 @@ describe("useAuthPageViewModel", () => {
     clearAuthErrorFromUrl.mockReset();
   });
 
-  it("boots from a token in the URL and redirects home", async () => {
+  it("boots from a token in the URL and redirects to the dashboard", async () => {
     readAuthTokenFromUrl.mockReturnValue("jwt-token");
 
     render(<Harness />);
@@ -78,7 +78,7 @@ describe("useAuthPageViewModel", () => {
     await waitFor(() => {
       expect(setToken).toHaveBeenCalledWith("jwt-token");
       expect(clearAuthTokenFromUrl).toHaveBeenCalledTimes(1);
-      expect(setLocation).toHaveBeenCalledWith("/");
+      expect(setLocation).toHaveBeenCalledWith("/dashboard");
     });
   });
 
@@ -88,7 +88,7 @@ describe("useAuthPageViewModel", () => {
     render(<Harness />);
 
     await waitFor(() => {
-      expect(setLocation).toHaveBeenCalledWith("/");
+      expect(setLocation).toHaveBeenCalledWith("/dashboard");
     });
   });
 

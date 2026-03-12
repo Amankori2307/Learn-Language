@@ -8,23 +8,27 @@ Read these files first for repo context:
 2. `context/guidelines/planning-guidelines.md`
 3. `context/active-tasks/app-context.md`
 4. `context/active-tasks/backlog.md`
+5. `context/future-tasks/backlog.md`
 
 ## Context Rules
 
 - `context/guidelines` contains stable instructions and coding rules.
 - `context/active-tasks` contains the active backlog and current app context only.
+- `context/future-tasks` contains future candidates and explicitly non-active work only.
 - `context/archive` contains completed or inactive planning files.
 - Do not treat archived files as active backlog unless they are explicitly restored.
 
 ## Working Rules
 
 - Follow the active backlog in `context/active-tasks/backlog.md`.
+- Keep deferred or candidate work in `context/future-tasks/backlog.md` until it is explicitly promoted into the active lane.
 - Keep `context/active-tasks/app-context.md` compact and factual.
 - Treat `context/guidelines/planning-guidelines.md` as the authority for phase creation, naming, execution, and archiving rules.
 - Keep implementation truth in code and implementation-backed docs, not in stale planning notes.
 - Keep using the context system consistently:
   - keep `app-context.md` short
   - keep `backlog.md` current
+  - keep future-only work in `context/future-tasks/backlog.md` instead of mixing it into the active backlog
   - archive completed phase files instead of deleting them
   - update `context/archive/archive-index.md` when archive contents change
 

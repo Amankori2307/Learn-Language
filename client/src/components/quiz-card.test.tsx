@@ -110,6 +110,68 @@ describe("QuizCard", () => {
     expect(onAnswer).toHaveBeenCalledWith(1, 2);
   });
 
+  it("keeps mobile answer and feedback actions in sticky safe-area footers", async () => {
+    const user = userEvent.setup();
+    const { container, rerender } = render(
+      <QuizCard
+        question="hello"
+        pronunciation={null}
+        imageUrl={null}
+        type={QuizQuestionTypeEnum.TARGET_TO_SOURCE}
+        options={[
+          { id: 1, text: "namaste" },
+          { id: 2, text: "dhanyavaadalu" },
+        ]}
+        showConfidenceControl={false}
+        confidenceLevel={2}
+        onConfidenceChange={vi.fn()}
+        onAnswer={vi.fn()}
+        isSubmitting={false}
+        submitError={null}
+        result={null}
+        onNext={vi.fn()}
+      />,
+    );
+
+    await user.click(screen.getByRole("button", { name: "Option namaste" }));
+
+    expect(container.innerHTML.includes("sticky bottom-0")).toBe(true);
+    expect(container.innerHTML.includes("env(safe-area-inset-bottom)+0.5rem")).toBe(true);
+
+    rerender(
+      <QuizCard
+        question="hello"
+        pronunciation={null}
+        imageUrl={null}
+        type={QuizQuestionTypeEnum.SOURCE_TO_TARGET}
+        options={[
+          { id: 1, text: "hello" },
+          { id: 2, text: "thanks" },
+        ]}
+        showConfidenceControl={false}
+        confidenceLevel={2}
+        onConfidenceChange={vi.fn()}
+        onAnswer={vi.fn()}
+        isSubmitting={false}
+        submitError={null}
+        result={{
+          isCorrect: true,
+          correctAnswer: {
+            id: 1,
+            originalScript: "నమస్తే",
+            english: "hello",
+            transliteration: "namaste",
+            exampleSentences: [],
+          },
+          examples: [],
+        }}
+        onNext={vi.fn()}
+      />,
+    );
+
+    expect(container.innerHTML.includes("bg-background/95")).toBe(true);
+  });
+
   it("supports arrow-key option navigation", async () => {
     const user = userEvent.setup();
 

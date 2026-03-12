@@ -16,6 +16,10 @@ This file is the canonical source for how planning and phase files should be cre
   - currently:
     - `backlog.md`
     - `app-context.md`
+- `context/future-tasks`
+  - future ideas and intentionally non-active candidate work only
+  - currently:
+    - `backlog.md`
 - `context/archive`
   - completed or inactive phase/task/history files
 - `context/guidelines`
@@ -58,6 +62,23 @@ It should not contain:
 - duplicate implementation detail that already lives in `documentation/`
 - rolling session chatter or temporary notes that do not matter after the next handoff
 
+### `context/future-tasks/backlog.md`
+
+Use this as the parking area for future work only.
+
+It should contain:
+
+- deferred ideas
+- possible follow-ups
+- candidate phases that are not active yet
+
+It should not contain:
+
+- the current active lane
+- `doing` work
+- completed history
+- archival records
+
 ## Planning lifecycle
 
 Use this sequence every time planning starts or resumes:
@@ -67,16 +88,17 @@ Use this sequence every time planning starts or resumes:
 3. read `context/guidelines/code-guidelines.md`
 4. read `context/active-tasks/app-context.md`
 5. read `context/active-tasks/backlog.md`
-6. decide whether the next slice is:
+6. read `context/future-tasks/backlog.md` when you need future-candidate context or are reprioritizing upcoming work
+7. decide whether the next slice is:
    - a small standalone task that can live directly in `backlog.md`, or
    - a larger phase/subphase that needs its own phase file
-7. if a phase file is needed:
+8. if a phase file is needed:
    - create it in `context/active-tasks/`
    - define the task breakdown, sequencing, and exit criteria there
    - keep `backlog.md` pointing to the currently active executable item from that phase
-8. execute work in dependency order
-9. update implementation docs and active context as the work lands
-10. when the phase finishes:
+9. execute work in dependency order
+10. update implementation docs and active context as the work lands
+11. when the phase finishes:
    - summarize the gist in `app-context.md`
    - remove completed items from `backlog.md`
    - move the phase file to `context/archive/`
@@ -94,6 +116,8 @@ Good examples:
 - one bug fix
 - one documentation correction
 - one small refactor with obvious scope
+
+Future ideas that are not yet approved for execution should go into `context/future-tasks/backlog.md`, not the active backlog.
 
 ## When to create a phase file
 
@@ -173,6 +197,8 @@ If the active work belongs to a phase file:
 - use `Notes` to point to the owning phase file when helpful
 - keep only one `doing` row in `backlog.md` unless parallel execution is explicitly intentional
 
+`context/future-tasks/backlog.md` may use the same table format, but it should not contain `doing` items because it is not an execution board.
+
 Example:
 
 | ID | Status | Task | Notes |
@@ -245,6 +271,7 @@ Microtasks should break the phase task into concrete executable steps.
 ## Execution rules
 
 - always work from the active backlog first
+- do not treat `context/future-tasks/backlog.md` as executable work until an item is moved into the active backlog or an active phase file
 - if a phase file is actively used, its next executable item should agree with `backlog.md`
 - mark work `doing` before implementation when maintaining the planning files
 - mark work `done` only after implementation, validation, and required doc/context updates are complete

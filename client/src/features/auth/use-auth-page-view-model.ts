@@ -72,12 +72,12 @@ export function useAuthPageViewModel() {
       route: "/auth",
       source: "token_handoff",
     });
-    setLocation("/");
+    setLocation("/dashboard");
   }, [setLocation]);
 
   useEffect(() => {
     if (!isLoading && user) {
-      setLocation("/");
+      setLocation("/dashboard");
     }
   }, [user, isLoading, setLocation]);
 

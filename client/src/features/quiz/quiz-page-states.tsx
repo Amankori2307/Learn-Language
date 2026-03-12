@@ -51,8 +51,8 @@ export function QuizEmptyState({
             View Analytics
           </Button>
         </div>
-        <Button variant="ghost" className="mt-4" onClick={() => navigate("/")}>
-          Return Home
+        <Button variant="ghost" className="mt-4" onClick={() => navigate("/dashboard")}>
+          Return Dashboard
         </Button>
       </div>
     </Layout>
@@ -75,8 +75,8 @@ export function QuizErrorState({
         </p>
         <div className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2">
           <Button onClick={retry}>Retry Session</Button>
-          <Button variant="outline" onClick={() => navigate("/")}>
-            Return Home
+          <Button variant="outline" onClick={() => navigate("/dashboard")}>
+            Return Dashboard
           </Button>
         </div>
       </div>
@@ -90,7 +90,7 @@ export function QuizMissingQuestionState({ navigate }: { navigate: (target: stri
       <div className="py-20 text-center">
         <h2 className="text-2xl font-bold text-foreground">No active question</h2>
         <p className="mb-6 mt-2 text-muted-foreground">Please restart the session.</p>
-        <Button onClick={() => navigate("/")}>Return Home</Button>
+        <Button onClick={() => navigate("/dashboard")}>Return Dashboard</Button>
       </div>
     </Layout>
   );
@@ -140,7 +140,7 @@ export function QuizFinishedState({
       },
       {
         key: "dashboard",
-        run: () => navigate("/"),
+        run: () => navigate("/dashboard"),
       },
     ],
     [clusterId, incorrectCount, navigate, recommendedMode, startSession],
@@ -243,7 +243,7 @@ export function QuizFinishedState({
             }}
             variant="outline"
             className="h-12 w-full rounded-xl text-lg"
-            onClick={() => navigate("/")}
+            onClick={() => navigate("/dashboard")}
           >
             Back to Dashboard
           </Button>
