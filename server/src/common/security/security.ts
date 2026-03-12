@@ -3,6 +3,7 @@ import type { ErrorCode } from "../http";
 import { sendError } from "../http";
 import { AppError } from "../errors/app-error";
 import { appLogger } from "../logger/logger";
+import { isProductionEnv } from "../../config/env.runtime";
 
 const SECURITY_HEADERS = {
   "X-Content-Type-Options": "nosniff",
@@ -49,7 +50,7 @@ export const securityHeadersMiddleware: RequestHandler = (_req, res, next) => {
     res.setHeader(header, value);
   }
 
-  if (process.env.NODE_ENV === "production") {
+  if (isProductionEnv()) {
     res.setHeader("Strict-Transport-Security", "max-age=31536000; includeSubDomains");
   }
 

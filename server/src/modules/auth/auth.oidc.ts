@@ -12,6 +12,7 @@ import { resolveRoleFromEmail } from "./auth.roles";
 import { AUTH_SESSION_RULES } from "./auth.constants";
 import { UserClaims } from "./auth.types";
 import { appLogger } from "../../common/logger/logger";
+import { isProductionEnv } from "../../config/env.runtime";
 
 export type AuthRuntimeConfig = {
   provider: "google";
@@ -113,7 +114,7 @@ function signAuthToken(claims: UserClaims): string {
 function setAuthCookie(res: any, token: string) {
   res.cookie(AUTH_TOKEN_COOKIE, token, {
     httpOnly: true,
-    secure: process.env.NODE_ENV === "production",
+    secure: isProductionEnv(),
     sameSite: "lax",
     maxAge: AUTH_TOKEN_TTL_MS,
     path: "/",
@@ -123,7 +124,7 @@ function setAuthCookie(res: any, token: string) {
 function clearAuthCookie(res: any) {
   res.clearCookie(AUTH_TOKEN_COOKIE, {
     httpOnly: true,
-    secure: process.env.NODE_ENV === "production",
+    secure: isProductionEnv(),
     sameSite: "lax",
     path: "/",
   });
@@ -191,7 +192,7 @@ export async function setupAuth(app: Express, config: AuthRuntimeConfig) {
       saveUninitialized: false,
       cookie: {
         httpOnly: true,
-        secure: process.env.NODE_ENV === "production",
+        secure: isProductionEnv(),
         sameSite: "lax",
         maxAge: OAUTH_SESSION_TTL_MS,
         path: "/",

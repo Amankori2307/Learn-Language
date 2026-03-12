@@ -1,5 +1,6 @@
 import { registerAs } from "@nestjs/config";
 import { UserTypeEnum } from "@shared/domain/enums";
+import { getRuntimeEnv } from "./env.runtime";
 
 function parseEmailList(value?: string): Set<string> {
   return new Set(
@@ -10,16 +11,19 @@ function parseEmailList(value?: string): Set<string> {
   );
 }
 
-export const authConfig = registerAs("auth", () => ({
-  provider: "google" as const,
-  googleClientId: process.env.GOOGLE_CLIENT_ID,
-  googleClientSecret: process.env.GOOGLE_CLIENT_SECRET,
-  googleIssuerUrl: process.env.GOOGLE_ISSUER_URL ?? "https://accounts.google.com",
-  frontendBaseUrl: process.env.FRONTEND_BASE_URL,
-  jwtSecret: process.env.JWT_SECRET,
-  reviewerEmails: parseEmailList(process.env.REVIEWER_EMAILS),
-  adminEmails: parseEmailList(process.env.ADMIN_EMAILS),
-}));
+export const authConfig = registerAs("auth", () => {
+  const env = getRuntimeEnv();
+  return {
+    provider: "google" as const,
+    googleClientId: env.GOOGLE_CLIENT_ID,
+    googleClientSecret: env.GOOGLE_CLIENT_SECRET,
+    googleIssuerUrl: env.GOOGLE_ISSUER_URL ?? "https://accounts.google.com",
+    frontendBaseUrl: env.FRONTEND_BASE_URL,
+    jwtSecret: env.JWT_SECRET,
+    reviewerEmails: parseEmailList(env.REVIEWER_EMAILS),
+    adminEmails: parseEmailList(env.ADMIN_EMAILS),
+  };
+});
 
 export function resolveRoleFromEmailFromConfig(
   email: string | null | undefined,

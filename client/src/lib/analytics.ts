@@ -1,3 +1,5 @@
+import { getAnalyticsProviderEnv } from "@/config/runtime";
+
 export type AnalyticsProvider = "noop" | "console" | "window-mixpanel";
 
 export type AnalyticsEventName =
@@ -28,7 +30,7 @@ declare global {
 }
 
 function resolveProvider(): AnalyticsProvider {
-  const raw = process.env.NEXT_PUBLIC_ANALYTICS_PROVIDER?.trim().toLowerCase();
+  const raw = getAnalyticsProviderEnv();
   if (raw === "console") {
     return "console";
   }

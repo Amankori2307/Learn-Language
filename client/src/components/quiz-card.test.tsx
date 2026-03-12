@@ -199,7 +199,7 @@ describe("QuizCard", () => {
     expect(container.innerHTML.includes("flex h-full min-h-0 w-full")).toBe(true);
     expect(container.innerHTML.includes("md:max-h-[var(--pane-quiz-session-max-height)]")).toBe(true);
     expect(container.innerHTML.includes("min-h-14")).toBe(true);
-    expect(container.innerHTML.includes("overflow-y-auto")).toBe(true);
+    expect(container.innerHTML.includes("overflow-hidden")).toBe(true);
   });
 
   it("supports arrow-key option navigation", async () => {

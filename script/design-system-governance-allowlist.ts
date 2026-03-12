@@ -1,4 +1,4 @@
-export type DesignSystemGovernanceRule = "arbitrary-layout" | "hex-color";
+export type DesignSystemGovernanceRule = "arbitrary-layout" | "hex-color" | "legacy-vh";
 
 export type DesignSystemGovernanceAllowlistEntry = {
   filePath: string;

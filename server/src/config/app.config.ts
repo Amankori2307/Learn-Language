@@ -1,7 +1,12 @@
 import { registerAs } from "@nestjs/config";
+import { getRuntimeEnv } from "./env.runtime";
 
-export const nestAppConfig = registerAs("app", () => ({
-  nodeEnv: process.env.NODE_ENV ?? "development",
-  port: Number(process.env.BACKEND_PORT ?? process.env.PORT ?? 5001),
-  authProvider: "google" as const,
-}));
+export const nestAppConfig = registerAs("app", () => {
+  const env = getRuntimeEnv();
+  return {
+    nodeEnv: env.NODE_ENV ?? "development",
+    port: Number(env.BACKEND_PORT ?? env.PORT ?? 5001),
+    host: env.BACKEND_HOST ?? "localhost",
+    authProvider: "google" as const,
+  };
+});

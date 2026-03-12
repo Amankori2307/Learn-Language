@@ -1,7 +1,8 @@
 import { createLogger, format, transports } from "winston";
 import type { NextFunction, Request, Response } from "express";
+import { isProductionEnv } from "../../config/env.runtime";
 
-const isProduction = process.env.NODE_ENV === "production";
+const isProduction = isProductionEnv();
 const REDACTED = "[redacted]";
 const SENSITIVE_KEY_PATTERN =
   /authorization|cookie|set-cookie|token|secret|password|api[-_]?key/i;

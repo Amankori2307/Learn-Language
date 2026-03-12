@@ -2,6 +2,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { LanguageEnum } from "@shared/domain/enums";
 import { isMostlyAscii } from "@/lib/text-script";
 import { useAudioResolution } from "@/hooks/use-audio-resolution";
+import { getAudioPlaybackMode, isQuizAudioEnabled } from "@/config/runtime";
 
 interface IPlayHybridAudioInput {
   key: string;
@@ -35,29 +36,6 @@ function resolveSpeechLang(inputLanguage?: LanguageEnum | null): string {
     default:
       return "en-US";
   }
-}
-
-function getPublicClientEnv(name: string): string | undefined {
-  if (typeof process !== "undefined" && process.env?.[name]) {
-    return process.env[name];
-  }
-  return undefined;
-}
-
-function isQuizAudioEnabled(): boolean {
-  return getPublicClientEnv("NEXT_PUBLIC_ENABLE_QUIZ_AUDIO") !== "false";
-}
-
-type AudioPlaybackMode = "hybrid" | "url_only" | "tts_only";
-
-function getAudioPlaybackMode(): AudioPlaybackMode {
-  const mode = String(
-    getPublicClientEnv("NEXT_PUBLIC_AUDIO_PLAYBACK_MODE") ?? "hybrid",
-  ).toLowerCase();
-  if (mode === "url_only" || mode === "tts_only") {
-    return mode;
-  }
-  return "hybrid";
 }
 
 export function useHybridAudio() {

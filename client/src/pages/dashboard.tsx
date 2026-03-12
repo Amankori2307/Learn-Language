@@ -3,10 +3,12 @@ import { Button } from "@/components/ui/button";
 import { useDashboardViewModel } from "@/features/dashboard/use-dashboard-view-model";
 import { DashboardPageSkeleton, SurfaceMessage } from "@/components/ui/page-states";
 import { DashboardOverview } from "@/features/dashboard/dashboard-overview";
+import { useLearningLanguage } from "@/hooks/use-language";
 
 export default function Dashboard() {
-  const { isLoading, isError, retry, userName, stats, primaryMode, primaryLabel, coreActions, bucketCards } =
+  const { isLoading, isError, retry, stats, primaryMode, primaryLabel, coreActions, bucketCards } =
     useDashboardViewModel();
+  const { languageLabel } = useLearningLanguage();
 
   if (isLoading) {
     return (
@@ -37,8 +39,10 @@ export default function Dashboard() {
 
   return (
     <Layout>
+      <div className="mb-4 rounded-2xl border border-border/60 bg-card px-4 py-3 text-sm text-muted-foreground md:hidden">
+        Learning language: <span className="font-semibold text-foreground">{languageLabel}</span>
+      </div>
       <DashboardOverview
-        userName={userName}
         stats={s}
         primaryMode={primaryMode}
         primaryLabel={primaryLabel}

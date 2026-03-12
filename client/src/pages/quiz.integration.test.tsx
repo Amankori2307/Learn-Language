@@ -248,7 +248,7 @@ describe("QuizPage integration", () => {
 
     expect(
       container.querySelector(
-        ".flex.h-screen.min-h-screen.flex-col.overflow-hidden.bg-background.h-dvh.min-h-dvh",
+        ".flex.h-dvh.min-h-dvh.flex-col.overflow-hidden.bg-background",
       ),
     ).toBeTruthy();
     expect(
@@ -261,7 +261,7 @@ describe("QuizPage integration", () => {
         ".relative.flex.h-full.min-h-0.w-full.flex-col.overflow-hidden.rounded-\\[var\\(--radius-xl\\)\\].md\\:mx-auto.md\\:max-h-\\[var\\(--pane-quiz-session-max-height\\)\\]",
       ),
     ).toBeTruthy();
-    expect(container.querySelector(".min-h-0.flex-1.overflow-y-auto")).toBeTruthy();
+    expect(container.querySelector(".min-h-0.flex-1.overflow-hidden")).toBeTruthy();
     expect(container.querySelector(".grid.min-h-0.grid-cols-1.grid-rows-\\[auto_minmax\\(0\\,1fr\\)\\].lg\\:grid-cols-\\[1\\.05fr_1fr\\].lg\\:grid-rows-1")).toBeTruthy();
   });
 });

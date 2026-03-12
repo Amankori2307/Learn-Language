@@ -1,5 +1,6 @@
 import { registerAs } from "@nestjs/config";
+import { getRuntimeEnv } from "./env.runtime";
 
 export const databaseConfig = registerAs("database", () => ({
-  url: process.env.DATABASE_URL as string,
+  url: getRuntimeEnv().DATABASE_URL,
 }));

@@ -5,6 +5,7 @@ export const envSchema = z
     NODE_ENV: z.enum(["development", "test", "production"]).default("development"),
     PORT: z.coerce.number().int().positive().default(3000),
     BACKEND_PORT: z.coerce.number().int().positive().default(5001),
+    BACKEND_HOST: z.string().optional(),
     DATABASE_URL: z.string().min(1, "DATABASE_URL is required"),
     AUTH_PROVIDER: z.literal("google").default("google"),
     GOOGLE_CLIENT_ID: z.string().optional(),

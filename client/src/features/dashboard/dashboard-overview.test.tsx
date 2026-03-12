@@ -1,13 +1,14 @@
 import { render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import { describe, expect, it } from "vitest";
 import { BookOpen, Flame, Target, TriangleAlert } from "lucide-react";
 import { DashboardOverview } from "./dashboard-overview";
 
 describe("DashboardOverview", () => {
-  it("renders the primary action, bucket cards, and core modes", () => {
+  it("renders the primary action and separates progress content behind a tab", async () => {
+    const user = userEvent.setup();
     const { container } = render(
       <DashboardOverview
-        userName="Aman"
         stats={{ streak: 5, mastered: 24, xp: 230 }}
         primaryMode="weak"
         primaryLabel="Resume Weak Words"
@@ -48,10 +49,12 @@ describe("DashboardOverview", () => {
       />,
     );
 
-    expect(screen.getByText("Welcome back, Aman. Continue with the next recommended session.")).toBeTruthy();
+    expect(screen.getByText("Start Learning")).toBeTruthy();
     expect(screen.getByRole("button", { name: "Resume Weak Words" })).toBeTruthy();
-    expect(screen.getByText(/5 day streak/)).toBeTruthy();
-    expect(screen.getByText(/24 mastered words/)).toBeTruthy();
+    expect(screen.getByText("5 day streak")).toBeTruthy();
+    expect(screen.getByText("24 mastered words")).toBeTruthy();
+
+    await user.click(screen.getByRole("tab", { name: "Progress" }));
     expect(screen.getByText("Total XP")).toBeTruthy();
     expect(screen.getByText("Learning")).toBeTruthy();
     expect(screen.getByText("Needs Review")).toBeTruthy();

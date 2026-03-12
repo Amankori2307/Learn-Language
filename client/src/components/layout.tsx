@@ -155,17 +155,24 @@ export function Layout({ children }: { children: React.ReactNode }) {
         )}
       >
         <div className={cn("flex items-center", compact ? "justify-center" : "justify-between")}>
-          <div className={cn("flex items-center gap-3", compact && "justify-center")}>
-            <BrandMark />
-            {!compact && (
-              <div className="min-w-0">
-                <h1 className="truncate text-base font-semibold leading-none text-foreground sm:text-lg">
-                  {APP_BRAND_NAME}
-                </h1>
-                <p className="mt-1 text-xs text-muted-foreground">{APP_BRAND_TAGLINE}</p>
-              </div>
-            )}
-          </div>
+          <Link href={user ? "/dashboard" : "/"} onClick={() => setIsOpen(false)}>
+            <div
+              className={cn(
+                "flex items-center gap-3 rounded-xl transition hover:bg-secondary/70",
+                compact ? "justify-center p-1" : "p-1.5",
+              )}
+            >
+              <BrandMark />
+              {!compact && (
+                <div className="min-w-0">
+                  <h1 className="truncate text-base font-semibold leading-none text-foreground sm:text-lg">
+                    {APP_BRAND_NAME}
+                  </h1>
+                  <p className="mt-1 text-xs text-muted-foreground">{APP_BRAND_TAGLINE}</p>
+                </div>
+              )}
+            </div>
+          </Link>
           {!compact && !mobile && (
             <Button
               type="button"
@@ -416,12 +423,14 @@ export function Layout({ children }: { children: React.ReactNode }) {
 
       {/* Mobile Header */}
       <div className="fixed left-0 right-0 top-0 z-30 flex h-16 items-center justify-between border-b border-border/60 bg-card/90 px-3 backdrop-blur-md sm:px-4 md:hidden">
-        <div className="flex min-w-0 items-center gap-2">
-          <BrandMark compact />
-          <h1 className="truncate text-base font-semibold text-foreground sm:text-lg">
-            {APP_BRAND_NAME}
-          </h1>
-        </div>
+        <Link href={user ? "/dashboard" : "/"} onClick={() => setIsOpen(false)}>
+          <div className="flex min-w-0 items-center gap-2 rounded-lg px-1.5 py-1 transition hover:bg-secondary/70">
+            <BrandMark compact />
+            <h1 className="truncate text-base font-semibold text-foreground sm:text-lg">
+              {APP_BRAND_NAME}
+            </h1>
+          </div>
+        </Link>
         <div className="flex items-center gap-2">
           <Sheet open={isOpen} onOpenChange={setIsOpen}>
             <SheetTrigger asChild>

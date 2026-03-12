@@ -1,6 +1,5 @@
-import { config as loadEnv } from "dotenv";
 import { z } from "zod";
-import { resolveEnvFile } from "./env-files";
+import { getRuntimeEnv } from "./env.runtime";
 
 const databaseEnvSchema = z.object({
   DATABASE_URL: z.string().min(1, "DATABASE_URL is required"),
@@ -12,8 +11,8 @@ let cachedDatabaseEnv: DatabaseEnv | null = null;
 
 export function getDatabaseRuntimeEnv(): DatabaseEnv {
   if (!cachedDatabaseEnv) {
-    loadEnv({ path: resolveEnvFile(process.env.APP_ENV ?? process.env.NODE_ENV) });
-    const parsed = databaseEnvSchema.safeParse(process.env);
+    const env = getRuntimeEnv();
+    const parsed = databaseEnvSchema.safeParse(env);
     if (!parsed.success) {
       const message = parsed.error.issues
         .map((issue) => `${issue.path.join(".")}: ${issue.message}`)

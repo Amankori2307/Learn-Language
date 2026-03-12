@@ -145,6 +145,7 @@
 - When changing a surface for phone layouts, explicitly preserve or improve the corresponding desktop layout.
 - Do not remove desktop structure, hierarchy, spacing, or affordances just to simplify the mobile version.
 - Responsive refactors must be reviewed in at least one phone width and one desktop width before they are considered complete.
+- Do not use legacy `vh` for layout sizing. Prefer `dvh` for dynamic viewport sizing when browser UI changes should reflow layout, `svh` for the smallest stable viewport when UI chrome should never overlap content, and `lvh` for the largest stable viewport when full-bleed growth is acceptable.
 
 16. Theme-safe component bar:
 

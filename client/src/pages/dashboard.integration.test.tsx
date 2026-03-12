@@ -99,11 +99,13 @@ describe("Dashboard integration", () => {
     expect(refetch).toHaveBeenCalledTimes(1);
   });
 
-  it("shows primary dashboard actions and core mode cards", () => {
+  it("shows primary dashboard actions and core mode cards", async () => {
+    const user = userEvent.setup();
     render(<Dashboard />);
     expect(screen.getByText("Start Learning")).toBeTruthy();
     expect(screen.getByText("Primary Action")).toBeTruthy();
     expect(screen.getByRole("button", { name: "Resume Weak Words" })).toBeTruthy();
+    await user.click(screen.getByRole("tab", { name: "Progress" }));
     expect(screen.getByText("Core Modes")).toBeTruthy();
     expect(screen.getByText("Daily Review")).toBeTruthy();
     expect(screen.getByText("Practice by Cluster")).toBeTruthy();
@@ -120,7 +122,8 @@ describe("Dashboard integration", () => {
     expect(screen.getByRole("button", { name: "Start Daily Review" })).toBeTruthy();
   });
 
-  it("renders zero-data dashboard stats as a valid default success state", () => {
+  it("renders zero-data dashboard stats as a valid default success state", async () => {
+    const user = userEvent.setup();
     statsData = {
       totalWords: 0,
       mastered: 0,
@@ -137,23 +140,26 @@ describe("Dashboard integration", () => {
 
     render(<Dashboard />);
 
-    expect(screen.getByText("0 day streak • 0 mastered words")).toBeTruthy();
+    expect(screen.getByText("0 day streak")).toBeTruthy();
+    expect(screen.getByText("0 mastered words")).toBeTruthy();
+    await user.click(screen.getByRole("tab", { name: "Progress" }));
     expect(screen.getByText("Total XP")).toBeTruthy();
     expect(screen.getByText("Words Mastered")).toBeTruthy();
     expect(screen.getByText("Learning")).toBeTruthy();
     expect(screen.getByText("Needs Review")).toBeTruthy();
+    await user.click(screen.getByRole("tab", { name: "Learn" }));
     expect(screen.getByRole("button", { name: "Start Daily Review" })).toBeTruthy();
   });
 
-  it("wires dashboard learner actions to the expected routes", () => {
+  it("wires dashboard learner actions to the expected routes", async () => {
+    const user = userEvent.setup();
     render(<Dashboard />);
 
     expect(screen.getByRole("link", { name: "Resume Weak Words" }).getAttribute("href")).toBe(
       "/quiz?mode=weak_words",
     );
-    expect(screen.getByRole("link", { name: "Open Analytics" }).getAttribute("href")).toBe(
-      "/analytics",
-    );
+    await user.click(screen.getByRole("tab", { name: "Progress" }));
+    expect(screen.getByRole("link", { name: "Open Analytics" }).getAttribute("href")).toBe("/analytics");
     const openHrefs = screen
       .getAllByRole("link", { name: "Open" })
       .map((link) => link.getAttribute("href"));
@@ -170,11 +176,13 @@ describe("Dashboard integration", () => {
     expect(bucketHrefs).toContain("/analytics/words?bucket=needs_review");
   });
 
-  it("keeps the dashboard route responsive with stacked hero actions and upgraded grids", () => {
+  it("keeps the dashboard route responsive with stacked hero actions and upgraded grids", async () => {
+    const user = userEvent.setup();
     const { container } = render(<Dashboard />);
 
     expect(screen.getByRole("button", { name: "Resume Weak Words" }).className).toContain("w-full");
     expect(screen.getByRole("button", { name: "Resume Weak Words" }).className).toContain("sm:w-auto");
+    await user.click(screen.getByRole("tab", { name: "Progress" }));
     expect(screen.getByRole("button", { name: "Open Analytics" }).className).toContain("w-full");
     expect(container.querySelector(".grid.grid-cols-1.gap-4.md\\:grid-cols-2.lg\\:grid-cols-4")).toBeTruthy();
     expect(container.querySelector(".grid.grid-cols-1.gap-4.md\\:grid-cols-2.xl\\:grid-cols-4")).toBeTruthy();

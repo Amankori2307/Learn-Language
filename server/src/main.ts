@@ -9,6 +9,7 @@ import { type INestApplication } from "@nestjs/common";
 import { AppModule } from "./app.module";
 import { setupAuth } from "./modules/auth";
 import { authConfig } from "./config/auth.config";
+import { getRuntimeEnv } from "./config/env.runtime";
 import { randomUUID } from "crypto";
 import { appLogger, httpRequestLogger } from "./common/logger/logger";
 import { NestAppLogger } from "./common/logger/nest-app-logger";
@@ -26,20 +27,36 @@ const DEFAULT_ALLOWED_FRONTEND_ORIGINS = [
   "https://learn-lang.amankori.me",
 ];
 
-function resolveAllowedOrigins(rawOrigins?: string): Set<string> {
+function resolveAllowedOrigins(rawOrigins?: string, frontendBaseUrl?: string) {
   const configured = (rawOrigins ?? "")
     .split(",")
     .map((entry) => entry.trim())
     .filter(Boolean);
-  return new Set([...DEFAULT_ALLOWED_FRONTEND_ORIGINS, ...configured]);
+  const allowAll = configured.includes("*");
+  const configuredOrigins = allowAll
+    ? []
+    : configured.filter((origin) => origin !== "*");
+  const origins = new Set([...DEFAULT_ALLOWED_FRONTEND_ORIGINS, ...configuredOrigins]);
+
+  if (frontendBaseUrl) {
+    try {
+      origins.add(new URL(frontendBaseUrl).origin);
+    } catch {
+      // Ignore invalid FRONTEND_BASE_URL; env validation covers production correctness.
+    }
+  }
+
+  return { allowAll, origins };
 }
 
 async function bootstrap() {
   const { app } = await createNestApiApp();
   await ensureDatabaseConnection();
-  const port = Number(process.env.BACKEND_PORT ?? process.env.PORT ?? 5001);
-  await app.listen(port);
-  appLogger.info(`[nest-api] Backend API listening on http://localhost:${port}`);
+  const env = getRuntimeEnv();
+  const port = Number(env.BACKEND_PORT ?? env.PORT ?? 5001);
+  const host = env.BACKEND_HOST ?? "localhost";
+  await app.listen(port, host);
+  appLogger.info(`[nest-api] Backend API listening on http://${host}:${port}`);
 }
 
 export async function createNestApiApp(): Promise<{
@@ -62,14 +79,18 @@ export async function createNestApiApp(): Promise<{
 
   const configService = app.get(ConfigService);
   const resolvedAuthConfig = configService.getOrThrow<ConfigType<typeof authConfig>>("auth");
-  const allowedOrigins = resolveAllowedOrigins(process.env.FRONTEND_ORIGINS);
+  const env = getRuntimeEnv();
+  const { allowAll, origins } = resolveAllowedOrigins(
+    env.FRONTEND_ORIGINS,
+    resolvedAuthConfig.frontendBaseUrl,
+  );
 
   app.enableCors({
     origin: (
       origin: string | undefined,
       callback: (error: Error | null, allow?: boolean) => void,
     ) => {
-      if (!origin || allowedOrigins.has(origin)) {
+      if (!origin || allowAll || origins.has(origin)) {
         callback(null, true);
         return;
       }

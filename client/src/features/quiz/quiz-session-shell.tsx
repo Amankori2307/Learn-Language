@@ -31,7 +31,7 @@ export function QuizSessionHeader({
 
 export function QuizSessionFrame({ header, children }: { header: ReactNode; children: ReactNode }) {
   return (
-    <div className="flex h-screen min-h-screen flex-col overflow-hidden bg-background h-dvh min-h-dvh">
+    <div className="flex h-dvh min-h-dvh flex-col overflow-hidden bg-background">
       {header}
       <div className="flex min-h-0 flex-1 items-stretch justify-center overflow-hidden px-2 pb-2 pt-1 sm:p-4 md:px-6 md:pt-4 md:pb-8">
         {children}

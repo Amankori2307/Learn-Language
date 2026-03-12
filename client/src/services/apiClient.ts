@@ -1,7 +1,8 @@
 import axios from "axios";
 import { getAuthToken } from "./authTokenStorage";
+import { resolveApiBaseUrl } from "@/config/runtime";
 
-export const BASE_URL = (process.env.NEXT_PUBLIC_API_BASE_URL ?? "").replace(/\/+$/, "");
+export const BASE_URL = resolveApiBaseUrl(typeof window !== "undefined" ? window.location : undefined);
 
 export function buildApiUrl(path: string): string {
   if (!path) {

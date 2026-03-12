@@ -16,6 +16,7 @@ const rawPaletteClassPattern =
 const hexColorPattern = /#[0-9a-fA-F]{3,8}\b/g;
 const arbitraryLayoutPattern =
   /\b(?:w|min-w|max-w|h|min-h|max-h|p|px|py|pt|pr|pb|pl|m|mx|my|mt|mr|mb|ml|gap|rounded)-\[[^\]]+\]/g;
+const legacyViewportUnitPattern = /(?<![a-z])vh\b/gi;
 
 type Violation = {
   filePath: string;
@@ -136,6 +137,23 @@ function collectViolations(relativePath: string, content: string): Violation[] {
       rule: "arbitrary-layout",
       match: token,
       reason: `Arbitrary layout token \`${token}\` needs a shared token, shared primitive, or explicit allowlisted exception.`,
+    });
+  }
+
+  for (const match of content.matchAll(legacyViewportUnitPattern)) {
+    const token = match[0];
+    const line = getLineNumber(content, match.index ?? 0);
+
+    if (isAllowlisted(relativePath, "legacy-vh", token)) {
+      continue;
+    }
+
+    violations.push({
+      filePath: relativePath,
+      line,
+      rule: "legacy-vh",
+      match: token,
+      reason: "Legacy viewport unit `vh` is disallowed. Use `dvh`, `svh`, or `lvh` instead.",
     });
   }
 
