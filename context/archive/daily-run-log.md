@@ -139,7 +139,7 @@ Next task ID: -
 - `P13-026` is now complete:
   - the observability contract now reads as a completed Phase 10 record instead of an active execution slice
   - implementation wording now distinguishes shipped logging behavior from optional follow-up considerations
-- Phase 12 planning is now active in [81-phase-12-theme-system-and-design-token-extraction.md](/Users/aman/Projects/personal-projects/Learn-Language/context/plan/81-phase-12-theme-system-and-design-token-extraction.md).
+- Phase 12 planning is now active in [phase-12-theme-system-and-design-token-extraction.md](/Users/aman/Projects/personal-projects/Learn-Language/context/archive/phase-12-theme-system-and-design-token-extraction.md).
 - Active backlog was reprioritized to start with theming-system readiness before UI theme selection work:
   - `P12-001` is now complete via [theme-system-baseline.md](/Users/aman/Projects/personal-projects/Learn-Language/documentation/theme-system-baseline.md)
   - `P12-002` is now complete via [theme-contract.md](/Users/aman/Projects/personal-projects/Learn-Language/documentation/theme-contract.md)
@@ -289,7 +289,7 @@ Next task ID: -
 ## Current state
 
 - Phase 9 remains complete and closed.
-- Phase 10 execution plan now exists in [80-phase-10-platform-hardening-and-product-intelligence.md](/Users/aman/Projects/personal-projects/Learn-Language/context/plan/80-phase-10-platform-hardening-and-product-intelligence.md).
+- Phase 10 execution plan now exists in [phase-10-platform-hardening-and-product-intelligence.md](/Users/aman/Projects/personal-projects/Learn-Language/context/archive/phase-10-platform-hardening-and-product-intelligence.md).
 - `P10-001` is complete via the current-state inventory in [platform-hardening-baseline.md](/Users/aman/Projects/personal-projects/Learn-Language/documentation/platform-hardening-baseline.md).
 - `P10-002` is complete:
   - shared route contracts now express success/error envelopes

@@ -48,7 +48,7 @@ Acceptance criteria:
 
 Deliverable:
 
-- `context/plan/93-language-isolation-endpoint-matrix.md`
+- `context/archive/phase-6-language-isolation-endpoint-matrix.md`
 
 ---
 
@@ -93,7 +93,7 @@ Acceptance criteria:
 
 Deliverable:
 
-- `context/plan/94-p6-003-storage-query-audit.md`
+- `context/archive/phase-6-storage-query-audit.md`
 
 ---
 
