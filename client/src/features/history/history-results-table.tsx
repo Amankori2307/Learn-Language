@@ -52,7 +52,7 @@ export function HistoryResultsTable({
         <div className="col-span-3 md:col-span-2">Result</div>
         <div className="col-span-9 md:col-span-4">Word</div>
         <div className="hidden md:col-span-2 md:block">Direction</div>
-        <div className="hidden md:col-span-1 md:block">Confidence</div>
+        <div className="hidden md:col-span-1 md:block">System Signal</div>
         <div className="hidden md:col-span-1 md:block">Time</div>
         <div className="col-span-12 md:col-span-2">When</div>
       </div>
@@ -82,7 +82,7 @@ export function HistoryResultsTable({
                 {toLabel(attempt.direction, languageLabel)}
               </p>
               <p className="text-muted-foreground">
-                <span className="font-medium text-foreground">Confidence:</span>{" "}
+                <span className="font-medium text-foreground">System signal:</span>{" "}
                 {attempt.confidenceLevel ?? "-"}
               </p>
               <p className="text-muted-foreground">

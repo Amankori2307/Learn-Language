@@ -60,14 +60,15 @@ test("quiz generate input accepts all supported quiz modes", () => {
   }
 });
 
-test("quiz submit contract rejects out-of-range confidence", () => {
-  assert.throws(() => {
-    api.quiz.submit.input.parse({
-      wordId: 1,
-      selectedOptionId: 2,
-      confidenceLevel: 7,
-    });
+test("quiz submit contract accepts answer submissions without learner confidence", () => {
+  const parsed = api.quiz.submit.input.parse({
+    wordId: 1,
+    selectedOptionId: 2,
+    responseTimeMs: 1400,
   });
+
+  assert.equal(parsed.wordId, 1);
+  assert.equal(parsed.selectedOptionId, 2);
 });
 
 test("quiz submit contract rejects sentence-style question types in words-first mode", () => {
@@ -76,7 +77,6 @@ test("quiz submit contract rejects sentence-style question types in words-first 
       wordId: 1,
       selectedOptionId: 2,
       questionType: "fill_in_blank",
-      confidenceLevel: 2,
     });
   });
 });

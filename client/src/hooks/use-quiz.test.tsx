@@ -137,7 +137,6 @@ describe("useSubmitAnswer", () => {
       selectedOptionId: 11,
       questionType: QuizQuestionTypeEnum.SOURCE_TO_TARGET,
       direction: QuizDirectionEnum.SOURCE_TO_TARGET,
-      confidenceLevel: 2,
       responseTimeMs: 1200,
     });
     mutation.onSuccess?.();

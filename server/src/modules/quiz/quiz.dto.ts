@@ -1,5 +1,5 @@
 import { Type } from "class-transformer";
-import { IsEnum, IsInt, IsOptional, Max, Min } from "class-validator";
+import { IsEnum, IsInt, IsOptional, Min, Max } from "class-validator";
 import {
   LanguageEnum,
   QuizDirectionEnum,
@@ -50,12 +50,6 @@ export class SubmitQuizBodyDto {
   @IsOptional()
   @IsEnum(QuizDirectionEnum)
   direction?: QuizDirectionEnum;
-
-  @Type(() => Number)
-  @IsInt()
-  @Min(1)
-  @Max(3)
-  confidenceLevel!: number;
 
   @IsOptional()
   @Type(() => Number)

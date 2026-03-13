@@ -34,8 +34,6 @@ describe("ProfileFormCard", () => {
         isSaving={false}
         saveError={false}
         saveSuccess={false}
-        quizConfidenceEnabled={false}
-        setQuizConfidenceEnabled={vi.fn()}
       />,
     );
 
@@ -76,48 +74,10 @@ describe("ProfileFormCard", () => {
         isSaving
         saveError
         saveSuccess={false}
-        quizConfidenceEnabled
-        setQuizConfidenceEnabled={vi.fn()}
       />,
     );
 
     expect(screen.getByRole("button", { name: "Saving..." })).toBeTruthy();
     expect(screen.getByText("Failed to save changes.")).toBeTruthy();
-  });
-
-  it("forwards quiz confidence preference changes", async () => {
-    const user = userEvent.setup();
-    const setQuizConfidenceEnabled = vi.fn();
-
-    render(
-      <ProfileFormCard
-        profile={{
-          id: "u-1",
-          email: "learner@example.com",
-          firstName: "Aman",
-          lastName: "K",
-          profileImageUrl: null,
-          createdAt: null,
-          updatedAt: null,
-        }}
-        firstName="Aman"
-        setFirstName={vi.fn()}
-        lastName="K"
-        setLastName={vi.fn()}
-        avatarUrl=""
-        setAvatarUrl={vi.fn()}
-        avatarPreview=""
-        isDirty={false}
-        saveProfile={vi.fn()}
-        isSaving={false}
-        saveError={false}
-        saveSuccess={false}
-        quizConfidenceEnabled={false}
-        setQuizConfidenceEnabled={setQuizConfidenceEnabled}
-      />,
-    );
-
-    await user.click(screen.getByRole("switch", { name: "Quiz confidence selector" }));
-    expect(setQuizConfidenceEnabled).toHaveBeenCalledWith(true);
   });
 });

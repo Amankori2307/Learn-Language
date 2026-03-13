@@ -68,6 +68,11 @@ export enum QuizQuestionTypeEnum {
   TARGET_TO_SOURCE = "target_to_source",
 }
 
+export enum QuizConfidenceSourceEnum {
+  MANUAL = "manual",
+  INFERRED = "inferred",
+}
+
 export enum TutorChatRoleEnum {
   USER = "user",
   TUTOR = "tutor",

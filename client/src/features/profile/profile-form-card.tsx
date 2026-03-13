@@ -2,7 +2,6 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { PendingButton } from "@/components/ui/pending-button";
-import { Switch } from "@/components/ui/switch";
 import type { useProfilePageViewModel } from "@/features/profile/use-profile-page-view-model";
 
 type ProfileViewModel = ReturnType<typeof useProfilePageViewModel>;
@@ -33,8 +32,6 @@ export function ProfileFormCard({
   isSaving,
   saveError,
   saveSuccess,
-  quizConfidenceEnabled,
-  setQuizConfidenceEnabled,
 }: Pick<
   ProfileViewModel,
   | "profile"
@@ -50,8 +47,6 @@ export function ProfileFormCard({
   | "isSaving"
   | "saveError"
   | "saveSuccess"
-  | "quizConfidenceEnabled"
-  | "setQuizConfidenceEnabled"
 >) {
   if (!profile) {
     return null;
@@ -108,23 +103,6 @@ export function ProfileFormCard({
         <p className="text-xs text-muted-foreground">
           Leave empty to use initials avatar fallback.
         </p>
-      </div>
-
-      <div className="rounded-2xl border border-border/50 bg-background/40 p-4">
-        <div className="flex items-start justify-between gap-4">
-          <div className="space-y-1">
-            <Label htmlFor="quiz-confidence-preference">Quiz confidence selector</Label>
-            <p className="text-sm text-muted-foreground">
-              Show the low, medium, and high confidence choices during quiz answers.
-            </p>
-          </div>
-          <Switch
-            id="quiz-confidence-preference"
-            checked={quizConfidenceEnabled}
-            onCheckedChange={setQuizConfidenceEnabled}
-            aria-label="Quiz confidence selector"
-          />
-        </div>
       </div>
 
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center">

@@ -10,7 +10,7 @@ Keep this file compact. It should capture the durable gist of the current app an
 
 - Core platform work through Phases 4, 6, 7, 8, 9, 10, and 12 is complete.
 - Recent follow-up work is complete for:
-  - quiz confidence preference restoration
+  - server-inferred quiz confidence rollout
   - learner/reviewer route coverage expansion
   - quiz/auth/add-vocabulary/tutor route-state hardening
   - React Query ownership/query-key/invalidation cleanup
@@ -54,6 +54,7 @@ Current canonical app truth lives in:
 - Future candidate work belongs in [future-tasks/backlog.md](/Users/aman/Projects/personal-projects/Learn-Language/context/future-tasks/backlog.md)
 - Recent completed work:
   - admins can now download repo-style vocabulary exports from the review surface, with the backend emitting `words.json` and `sentences.json` payloads from the live database
+  - quiz answers no longer ask learners for manual confidence; the server now infers a recall-confidence signal for SRS and history while preserving backward-compatible attempt fields
   - review queue actions are now status-aware: approved items show un-approve, rejected items show revised-draft recovery plus move-for-approval, and the queue header explains what `draft` means in the lifecycle
   - browser speech synthesis now ranks higher-quality English and Telugu-family voices instead of taking the first acceptable system voice, improving macOS fallback quality when better local voices exist
   - browser speech fallback now warms the voice list, prefers better Indian-language voice matches for Telugu-family playback, and avoids generic English fallback that caused distorted macOS pronunciation

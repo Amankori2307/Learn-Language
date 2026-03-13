@@ -39,7 +39,6 @@ test("applySrsUpdate increases streak and interval on correct answers", () => {
     progress: { ...baseProgress, correctStreak: 2, interval: 6 } as any,
     isCorrect: true,
     confidenceLevel: 3,
-    responseTimeMs: 2000,
     direction: QuizDirectionEnum.SOURCE_TO_TARGET,
     now,
   });

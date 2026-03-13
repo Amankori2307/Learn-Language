@@ -4,6 +4,7 @@ import { api } from "@shared/routes";
 import { QuizModeEnum, QuizQuestionTypeEnum } from "@shared/domain/enums";
 import { applySrsUpdate } from "../../infrastructure/services/srs";
 import { chooseDistractors } from "../../infrastructure/services/distractors";
+import { inferQuizConfidence } from "../../infrastructure/services/quiz-confidence";
 import { formatPronunciationFirst, parseLanguage } from "../../common/utils/language";
 import { QuizRepository } from "./quiz.repository";
 import { AppError } from "../../common/errors/app-error";
@@ -148,11 +149,21 @@ export class QuizService {
       }
 
       const now = new Date();
+      const {
+        inferredConfidenceLevel,
+        effectiveConfidenceLevel,
+        confidenceSource,
+      } = inferQuizConfidence({
+        isCorrect,
+        progress,
+        responseTimeMs: parsedInput.responseTimeMs,
+        direction: parsedInput.direction,
+        questionType: parsedInput.questionType,
+      });
       progress = applySrsUpdate({
         progress,
         isCorrect,
-        confidenceLevel: parsedInput.confidenceLevel,
-        responseTimeMs: parsedInput.responseTimeMs,
+        confidenceLevel: effectiveConfidenceLevel,
         direction: parsedInput.direction,
         now,
         config: srsConfig,
@@ -166,7 +177,10 @@ export class QuizService {
         direction: parsedInput.direction ?? null,
         responseTimeMs: parsedInput.responseTimeMs ?? null,
         isCorrect,
-        confidenceLevel: parsedInput.confidenceLevel,
+        confidenceLevel: effectiveConfidenceLevel,
+        inferredConfidenceLevel,
+        effectiveConfidenceLevel,
+        confidenceSource,
       });
 
       const fallbackSentence = word.exampleSentences?.[0] ?? word.originalScript;

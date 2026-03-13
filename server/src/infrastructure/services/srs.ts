@@ -12,7 +12,6 @@ export type SrsInput = {
   progress: UserWordProgress;
   isCorrect: boolean;
   confidenceLevel: number;
-  responseTimeMs?: number;
   direction?: QuizDirectionEnum;
   now?: Date;
   config?: {
@@ -27,7 +26,7 @@ function clamp(value: number, min: number, max: number) {
   return Math.min(max, Math.max(min, value));
 }
 
-function computeQuality(isCorrect: boolean, confidenceLevel: number, responseTimeMs?: number) {
+function computeQuality(isCorrect: boolean, confidenceLevel: number) {
   if (!isCorrect) return SRS_QUALITY_RULES.INCORRECT_QUALITY;
 
   let quality = SRS_QUALITY_RULES.BASE_QUALITY;
@@ -36,15 +35,6 @@ function computeQuality(isCorrect: boolean, confidenceLevel: number, responseTim
   }
   if (confidenceLevel <= SRS_QUALITY_RULES.LOW_CONFIDENCE_THRESHOLD) {
     quality -= SRS_QUALITY_RULES.LOW_CONFIDENCE_PENALTY;
-  }
-
-  if (typeof responseTimeMs === "number") {
-    if (responseTimeMs <= SRS_QUALITY_RULES.FAST_RESPONSE_MS_THRESHOLD) {
-      quality += SRS_QUALITY_RULES.FAST_RESPONSE_BONUS;
-    }
-    if (responseTimeMs >= SRS_QUALITY_RULES.SLOW_RESPONSE_MS_THRESHOLD) {
-      quality -= SRS_QUALITY_RULES.SLOW_RESPONSE_PENALTY;
-    }
   }
 
   return clamp(Math.round(quality), SRS_QUALITY_RULES.QUALITY_MIN, SRS_QUALITY_RULES.QUALITY_MAX);
@@ -86,7 +76,7 @@ export function applySrsUpdate(input: SrsInput): UserWordProgress {
     easeMax: SRS_DEFAULT_CONFIG.EASE_MAX,
     incorrectEasePenalty: SRS_DEFAULT_CONFIG.INCORRECT_EASE_PENALTY,
   };
-  const quality = computeQuality(input.isCorrect, input.confidenceLevel, input.responseTimeMs);
+  const quality = computeQuality(input.isCorrect, input.confidenceLevel);
 
   const currentEase = next.easeFactor ?? SRS_DEFAULT_CONFIG.DEFAULT_EASE;
   const currentInterval = next.interval ?? SRS_DEFAULT_CONFIG.DEFAULT_INTERVAL_DAYS;

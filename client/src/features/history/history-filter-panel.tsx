@@ -86,7 +86,7 @@ export function HistoryFilterPanel({
         >
           <option value="newest">Newest</option>
           <option value="oldest">Oldest</option>
-          <option value="confidence_desc">Confidence (High first)</option>
+          <option value="confidence_desc">System signal (High first)</option>
           <option value="response_time_desc">Slowest first</option>
         </select>
       </div>

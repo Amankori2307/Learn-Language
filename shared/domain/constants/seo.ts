@@ -133,7 +133,7 @@ export const SEO_ROUTE_DEFINITIONS: readonly ISeoRouteDefinition[] = [
   {
     path: "/profile",
     title: `Profile | ${APP_BRAND_NAME}`,
-    description: "Manage learner preferences, confidence settings, and account details.",
+    description: "Manage learner preferences and account details.",
     index: false,
   },
   {

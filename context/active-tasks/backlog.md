@@ -10,6 +10,7 @@ Use this file as the single active queue for current work.
 
 | ID | Status | Task | Notes |
 | --- | --- | --- | --- |
+| P14-001 | doing | Re-evaluate learner confidence input model | Remove learner-entered confidence, infer recall confidence on the server, and keep SRS/history coherent |
 
 ## Template
 

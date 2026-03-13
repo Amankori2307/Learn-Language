@@ -2,10 +2,8 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useLocation, useSearch } from "wouter";
 import { QuizDirectionEnum, QuizModeEnum, QuizQuestionTypeEnum } from "@shared/domain/enums";
 import { useLearningLanguage } from "@/hooks/use-language";
-import { useQuizConfidencePreference } from "@/hooks/use-quiz-confidence-preference";
 import { useGenerateQuiz, useSubmitAnswer, type QuizModeValue } from "@/hooks/use-quiz";
 import {
-  QUIZ_DEFAULT_CONFIDENCE_LEVEL,
   QUIZ_NEXT_RECOMMENDATION_MODE,
   QUIZ_RESPONSE_TIME_MIN_MS,
   QUIZ_WEAK_WORDS_THRESHOLD_PERCENT,
@@ -31,7 +29,6 @@ export function useQuizPageViewModel() {
   const clusterId = parseClusterId(params.get("clusterId"));
 
   const { language } = useLearningLanguage();
-  const quizConfidencePreference = useQuizConfidencePreference();
   const { data: questions, isLoading, isError, refetch } = useGenerateQuiz(mode, clusterId);
   const submitAnswer = useSubmitAnswer();
 
@@ -41,7 +38,6 @@ export function useQuizPageViewModel() {
   const [sessionStats, setSessionStats] = useState({ correct: 0, total: 0 });
   const [isFinished, setIsFinished] = useState(false);
   const [questionStartedAt, setQuestionStartedAt] = useState<number>(Date.now());
-  const [confidenceLevel, setConfidenceLevel] = useState<1 | 2 | 3>(QUIZ_DEFAULT_CONFIDENCE_LEVEL);
   const trackedSessionKeyRef = useRef<string | null>(null);
   const trackedCompletionKeyRef = useRef<string | null>(null);
 
@@ -62,7 +58,7 @@ export function useQuizPageViewModel() {
     setLocation(target);
   };
 
-  const handleAnswer = async (optionId: number, answerConfidence: 1 | 2 | 3) => {
+  const handleAnswer = async (optionId: number) => {
     if (!currentQuestion) return;
 
     try {
@@ -77,7 +73,6 @@ export function useQuizPageViewModel() {
         selectedOptionId: optionId,
         questionType: currentQuestion.type,
         direction,
-        confidenceLevel: answerConfidence,
         responseTimeMs,
       });
 
@@ -204,9 +199,6 @@ export function useQuizPageViewModel() {
     submitError,
     sessionStats,
     isFinished,
-    confidenceLevel,
-    setConfidenceLevel,
-    showConfidenceControl: quizConfidencePreference.enabled,
     submitPending: submitAnswer.isPending,
     startSession,
     setLocation,

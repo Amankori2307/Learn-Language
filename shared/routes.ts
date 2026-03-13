@@ -347,7 +347,6 @@ export const api = {
         language: z.nativeEnum(LanguageEnum).optional(),
         questionType: z.nativeEnum(QuizQuestionTypeEnum).optional(),
         direction: z.nativeEnum(QuizDirectionEnum).optional(),
-        confidenceLevel: z.number().min(1).max(3),
         responseTimeMs: z.number().int().positive().optional(),
       }),
       responses: {

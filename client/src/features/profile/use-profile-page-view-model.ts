@@ -1,12 +1,10 @@
 import { useEffect, useMemo, useState } from "react";
-import { useQuizConfidencePreference } from "@/hooks/use-quiz-confidence-preference";
 import { useProfile, useUpdateProfile } from "@/hooks/use-profile";
 import { buildAvatarUrl } from "@/lib/avatar";
 
 export function useProfilePageViewModel() {
   const profileQuery = useProfile();
   const updateProfile = useUpdateProfile();
-  const quizConfidencePreference = useQuizConfidencePreference();
 
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -61,7 +59,5 @@ export function useProfilePageViewModel() {
     isSaving: updateProfile.isPending,
     saveError: updateProfile.isError,
     saveSuccess: updateProfile.isSuccess && !updateProfile.isPending,
-    quizConfidenceEnabled: quizConfidencePreference.enabled,
-    setQuizConfidenceEnabled: quizConfidencePreference.setEnabled,
   };
 }

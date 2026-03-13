@@ -24,8 +24,6 @@ export default function ProfilePage() {
     isSaving,
     saveError,
     saveSuccess,
-    quizConfidenceEnabled,
-    setQuizConfidenceEnabled,
   } = useProfilePageViewModel();
 
   return (
@@ -61,8 +59,6 @@ export default function ProfilePage() {
             isSaving={isSaving}
             saveError={saveError}
             saveSuccess={saveSuccess}
-            quizConfidenceEnabled={quizConfidenceEnabled}
-            setQuizConfidenceEnabled={setQuizConfidenceEnabled}
           />
         )}
       </div>

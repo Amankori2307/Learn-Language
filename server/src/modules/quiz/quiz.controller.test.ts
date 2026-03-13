@@ -1,11 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import type { Request, Response } from "express";
-import {
-  LanguageEnum,
-  QuizModeEnum,
-  QuizQuestionTypeEnum,
-} from "@shared/domain/enums";
+import { LanguageEnum, QuizModeEnum, QuizQuestionTypeEnum } from "@shared/domain/enums";
 import { QuizApiController } from "./quiz.controller";
 import { AppError } from "../../common/errors/app-error";
 
@@ -134,7 +130,6 @@ test("QuizApiController.submitQuizAnswer forwards payload and user id", async ()
     selectedOptionId: 11,
     language: LanguageEnum.TELUGU,
     questionType: QuizQuestionTypeEnum.SOURCE_TO_TARGET,
-    confidenceLevel: 2,
     responseTimeMs: 1200,
   };
 

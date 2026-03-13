@@ -27,6 +27,9 @@ export const quizAttempts = pgTable(
     responseTimeMs: integer("response_time_ms"),
     isCorrect: boolean("is_correct").notNull(),
     confidenceLevel: integer("confidence_level"),
+    inferredConfidenceLevel: integer("inferred_confidence_level"),
+    effectiveConfidenceLevel: integer("effective_confidence_level"),
+    confidenceSource: text("confidence_source"),
     createdAt: timestamp("created_at").defaultNow(),
   },
   (table) => ({

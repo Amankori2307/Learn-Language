@@ -23,7 +23,6 @@ When a future item becomes active, move it into `context/active-tasks/backlog.md
 | ID | Status | Task | Notes |
 | --- | --- | --- | --- |
 | F-010 | todo | Define long-term design-system governance operations | Establish an explicit audit cadence, exception review process, and ownership model for Continuum changes |
-| F-029 | todo | Re-evaluate learner confidence input model | Determine whether quiz confidence should remain user-entered or be inferred dynamically from observable answer signals, then document how confidence should affect SRS quality, strength, and learner UX |
 | F-005 | todo | Revisit next-round performance optimization candidates | Leaderboard pushdown, distractor-pool sizing, cluster-query consolidation, and client-payload inspection |
 | F-014 | todo | Investigate frequent logout behavior | Document session expiry criteria and reduce unexpected logouts without weakening security |
 | F-019 | todo | Reduce Docker image sizes | Shrink frontend and backend images to speed up deploys and lower bandwidth usage |

@@ -3,7 +3,6 @@ import userEvent from "@testing-library/user-event";
 import type { ReactNode } from "react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { QuizModeEnum, QuizQuestionTypeEnum } from "@shared/domain/enums";
-import { APP_STORAGE_KEYS } from "@shared/domain/constants/app-brand";
 import QuizPage from "./quiz";
 
 const setLocation = vi.fn();
@@ -205,8 +204,7 @@ describe("QuizPage integration", () => {
     expect(screen.getByRole("button", { name: "Check Answer" })).toBeTruthy();
   });
 
-  it("shows confidence controls when the learner preference is enabled", () => {
-    window.localStorage.setItem(APP_STORAGE_KEYS.quizConfidenceEnabled, "true");
+  it("keeps quiz submission focused on option selection without extra confidence controls", () => {
     quizDataState.data = [
       {
         wordId: 11,
@@ -224,8 +222,8 @@ describe("QuizPage integration", () => {
 
     render(<QuizPage />);
 
-    expect(screen.getByLabelText("Answer confidence")).toBeTruthy();
-    expect(screen.getByText("Used to grade recall quality")).toBeTruthy();
+    expect(screen.queryByLabelText("Answer confidence")).toBeNull();
+    expect(screen.queryByText("Used to grade recall quality")).toBeNull();
   });
 
   it("keeps the quiz route responsive with mobile-first session shell and desktop split card", () => {

@@ -31,9 +31,6 @@ describe("QuizCard", () => {
       pronunciation: null,
       imageUrl: null,
       type: QuizQuestionTypeEnum.TARGET_TO_SOURCE,
-      showConfidenceControl: false,
-      confidenceLevel: 2 as const,
-      onConfidenceChange: vi.fn(),
       onAnswer,
       isSubmitting: false,
       submitError: null,
@@ -92,9 +89,6 @@ describe("QuizCard", () => {
           { id: 1, text: "namaste" },
           { id: 2, text: "dhanyavaadalu" },
         ]}
-        showConfidenceControl={false}
-        confidenceLevel={2}
-        onConfidenceChange={vi.fn()}
         onAnswer={onAnswer}
         isSubmitting={false}
         submitError={null}
@@ -107,7 +101,7 @@ describe("QuizCard", () => {
     expect(onAnswer).not.toHaveBeenCalled();
 
     await user.click(screen.getByRole("button", { name: "Check Answer" }));
-    expect(onAnswer).toHaveBeenCalledWith(1, 2);
+    expect(onAnswer).toHaveBeenCalledWith(1);
   });
 
   it("keeps mobile answer and feedback actions in sticky safe-area footers", async () => {
@@ -122,9 +116,6 @@ describe("QuizCard", () => {
           { id: 1, text: "namaste" },
           { id: 2, text: "dhanyavaadalu" },
         ]}
-        showConfidenceControl={false}
-        confidenceLevel={2}
-        onConfidenceChange={vi.fn()}
         onAnswer={vi.fn()}
         isSubmitting={false}
         submitError={null}
@@ -148,9 +139,6 @@ describe("QuizCard", () => {
           { id: 1, text: "hello" },
           { id: 2, text: "thanks" },
         ]}
-        showConfidenceControl={false}
-        confidenceLevel={2}
-        onConfidenceChange={vi.fn()}
         onAnswer={vi.fn()}
         isSubmitting={false}
         submitError={null}
@@ -184,9 +172,6 @@ describe("QuizCard", () => {
           { id: 1, text: "namaste" },
           { id: 2, text: "dhanyavaadalu" },
         ]}
-        showConfidenceControl={false}
-        confidenceLevel={2}
-        onConfidenceChange={vi.fn()}
         onAnswer={vi.fn()}
         isSubmitting={false}
         submitError={null}
@@ -217,9 +202,6 @@ describe("QuizCard", () => {
           { id: 2, text: "dhanyavaadalu" },
           { id: 3, text: "shubharaatri" },
         ]}
-        showConfidenceControl={false}
-        confidenceLevel={2}
-        onConfidenceChange={vi.fn()}
         onAnswer={vi.fn()}
         isSubmitting={false}
         submitError={null}
@@ -264,9 +246,6 @@ describe("QuizCard", () => {
           { id: 1, text: "hello" },
           { id: 2, text: "thanks" },
         ]}
-        showConfidenceControl={false}
-        confidenceLevel={2}
-        onConfidenceChange={vi.fn()}
         onAnswer={vi.fn()}
         isSubmitting={false}
         submitError={null}
@@ -301,9 +280,6 @@ describe("QuizCard", () => {
           { id: 1, text: "hello" },
           { id: 2, text: "thanks" },
         ]}
-        showConfidenceControl={false}
-        confidenceLevel={2}
-        onConfidenceChange={vi.fn()}
         onAnswer={vi.fn()}
         isSubmitting={false}
         submitError={null}
@@ -347,65 +323,6 @@ describe("QuizCard", () => {
     expect(container.innerHTML.includes("overflow-y-auto")).toBe(true);
   });
 
-  it("shows confidence controls only when the preference is enabled", async () => {
-    const user = userEvent.setup();
-    const onAnswer = vi.fn();
-    const onConfidenceChange = vi.fn();
-
-    const { rerender } = render(
-      <QuizCard
-        question="hello"
-        pronunciation={null}
-        imageUrl={null}
-        type={QuizQuestionTypeEnum.TARGET_TO_SOURCE}
-        options={[
-          { id: 1, text: "namaste" },
-          { id: 2, text: "dhanyavaadalu" },
-        ]}
-        showConfidenceControl={false}
-        confidenceLevel={2}
-        onConfidenceChange={onConfidenceChange}
-        onAnswer={onAnswer}
-        isSubmitting={false}
-        submitError={null}
-        result={null}
-        onNext={vi.fn()}
-      />,
-    );
-
-    expect(screen.queryByLabelText("Answer confidence")).toBeNull();
-
-    rerender(
-      <QuizCard
-        question="hello"
-        pronunciation={null}
-        imageUrl={null}
-        type={QuizQuestionTypeEnum.TARGET_TO_SOURCE}
-        options={[
-          { id: 1, text: "namaste" },
-          { id: 2, text: "dhanyavaadalu" },
-        ]}
-        showConfidenceControl
-        confidenceLevel={3}
-        onConfidenceChange={onConfidenceChange}
-        onAnswer={onAnswer}
-        isSubmitting={false}
-        submitError={null}
-        result={null}
-        onNext={vi.fn()}
-      />,
-    );
-
-    expect(screen.getByLabelText("Answer confidence")).toBeTruthy();
-
-    await user.click(screen.getByText("Low"));
-    expect(onConfidenceChange).toHaveBeenCalledWith(1);
-
-    await user.click(screen.getByRole("button", { name: "Option namaste" }));
-    await user.click(screen.getByRole("button", { name: "Check Answer" }));
-    expect(onAnswer).toHaveBeenCalledWith(1, 3);
-  });
-
   it("shows inline submit error messaging when answer submission fails", () => {
     render(
       <QuizCard
@@ -417,9 +334,6 @@ describe("QuizCard", () => {
           { id: 1, text: "namaste" },
           { id: 2, text: "dhanyavaadalu" },
         ]}
-        showConfidenceControl={false}
-        confidenceLevel={2}
-        onConfidenceChange={vi.fn()}
         onAnswer={vi.fn()}
         isSubmitting={false}
         submitError="Could not submit your answer. Please try again."
@@ -442,9 +356,6 @@ describe("QuizCard", () => {
           { id: 1, text: "they" },
           { id: 2, text: "we (inclusive)" },
         ]}
-        showConfidenceControl={false}
-        confidenceLevel={2}
-        onConfidenceChange={vi.fn()}
         onAnswer={vi.fn()}
         isSubmitting={false}
         submitError={null}

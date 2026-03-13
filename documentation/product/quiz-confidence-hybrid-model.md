@@ -1,276 +1,140 @@
-# Quiz Confidence Hybrid Model
+# Quiz Confidence Model
 
-This document defines a concrete hybrid-model proposal for quiz confidence.
+This document describes the current quiz-confidence behavior in the product.
 
-It does not mean the model is live yet. It is the reviewable implementation contract for deciding whether learner-entered confidence should stay manual, become inferred, or move to a hybrid operating mode.
+The learner is no longer asked to self-report confidence during quiz answers. Instead, the system infers a discrete recall-confidence signal and uses that signal inside the SRS update flow.
 
 ## Goal
 
-Reduce quiz friction without weakening scheduling quality.
+Reduce answer friction without weakening scheduling quality.
 
-Today, the learner can optionally provide a low/medium/high confidence value on each answer. That value is used by the quiz and SRS pipeline, so removing it blindly would change real learning behavior.
-
-The hybrid model is the recommended investigation path because it lets the product compare learner-entered confidence against an inferred confidence signal before making a permanent product decision.
+The quiz flow should stay focused on recall. Learners choose an answer and submit it. The platform estimates recall confidence from observable answer behavior and current memory state.
 
 ## Current contract
 
 Current confidence behavior:
 
-- quiz answer submission includes `confidenceLevel`
-- the confidence selector is behind an explicit learner preference
-- quiz attempts persist confidence in history
-- SRS uses confidence when computing answer quality
-- SRS uses confidence when updating direction-specific strength
+- quiz answer submission does not require learner-entered `confidenceLevel`
+- quiz attempts still persist a confidence value for history and analytics compatibility
+- the stored confidence value now reflects the system's effective confidence signal
+- SRS uses the effective confidence signal when computing answer quality
+- SRS uses the effective confidence signal when updating direction-specific strength
 
-Primary implementation seams today:
+Primary implementation seams:
 
 - [client/src/features/quiz/use-quiz-page-view-model.ts](/Users/aman/Projects/personal-projects/Learn-Language/client/src/features/quiz/use-quiz-page-view-model.ts)
-- [client/src/hooks/use-quiz-confidence-preference.ts](/Users/aman/Projects/personal-projects/Learn-Language/client/src/hooks/use-quiz-confidence-preference.ts)
 - [server/src/modules/quiz/quiz.service.ts](/Users/aman/Projects/personal-projects/Learn-Language/server/src/modules/quiz/quiz.service.ts)
+- [server/src/infrastructure/services/quiz-confidence.ts](/Users/aman/Projects/personal-projects/Learn-Language/server/src/infrastructure/services/quiz-confidence.ts)
 - [server/src/infrastructure/services/srs.ts](/Users/aman/Projects/personal-projects/Learn-Language/server/src/infrastructure/services/srs.ts)
 - [shared/routes.ts](/Users/aman/Projects/personal-projects/Learn-Language/shared/routes.ts)
 
-## Candidate models
+## Confidence sources
 
-### 1. Manual confidence
+The system distinguishes between historical manual confidence and current inferred confidence:
 
-The learner continues to provide confidence explicitly.
+- `manual`
+- `inferred`
 
-Pros:
+For new quiz attempts, the effective source is always `inferred`.
 
-- direct learner self-report
-- no migration complexity
-- preserves current behavior
+Persisted attempt fields:
 
-Cons:
+- `confidenceLevel`
+- `inferredConfidenceLevel`
+- `effectiveConfidenceLevel`
+- `confidenceSource`
 
-- adds friction to quiz completion
-- self-report can be noisy or inconsistent
-- many learners may ignore the control or answer quickly without reflecting
+For current submissions:
 
-### 2. Inferred confidence
+- `confidenceLevel` mirrors `effectiveConfidenceLevel` for backward compatibility
+- `inferredConfidenceLevel` stores the raw inferred result
+- `effectiveConfidenceLevel` stores the value actually used by SRS
+- `confidenceSource` is `inferred`
 
-Confidence is computed from observable answer signals.
+## Inference inputs
 
-Possible inputs:
+Version 1 stays simple and deterministic.
+
+Inputs:
 
 - correctness
 - response time
 - current correct streak
 - wrong-count history
 - direction-specific strength
-- question type
-- quiz mode
+- submitted direction or question type
 
-Pros:
-
-- lower quiz friction
-- more consistent system behavior
-- easier to keep enabled by default
-
-Cons:
-
-- can misread fast guesses as certainty
-- can misread slow but deliberate recall as low confidence
-- changes current SRS semantics if shipped directly
-
-### 3. Hybrid confidence
-
-Confidence is inferred by the system while still allowing optional learner override or side-by-side comparison.
-
-Pros:
-
-- lowest-risk path to evaluation
-- preserves current manual signal for comparison
-- allows feature-flagged rollout
-
-Cons:
-
-- adds short-term implementation complexity
-- requires temporary coexistence of manual and inferred semantics
-
-## Recommended model
-
-Recommended path: `hybrid`
-
-Reason:
-
-- confidence already affects scheduling quality and strength updates
-- there is not enough evidence yet that inferred confidence is better than manual input
-- the product should not remove a correctness-affecting signal before measuring disagreement and predictive value
-
-## Hybrid model design
-
-### Confidence sources
-
-The system should distinguish between:
-
-- `manual`
-- `inferred`
-
-If a hybrid override mode is enabled later, an answer can carry:
-
-- `manualConfidenceLevel`
-- `inferredConfidenceLevel`
-- `effectiveConfidenceLevel`
-- `confidenceSource`
-
-Where:
-
-- `effectiveConfidenceLevel` is the value that actually feeds SRS
-- `confidenceSource` is the source used for the effective value
-
-### Inference inputs
-
-Version 1 of inferred confidence should remain simple and deterministic.
-
-Recommended inputs:
-
-- `isCorrect`
-- `responseTimeMs`
-- `correctStreak`
-- `wrongCount`
-- direction-specific strength for the submitted direction
-- `questionType`
-
-Do not use:
+Non-goals:
 
 - opaque AI scoring
-- device-specific heuristics
-- browsing/session metadata unrelated to recall quality
+- device-specific guesswork
+- unrelated session metadata
 
-### Inference output
+## Inference output
 
-The inferred model should produce the same current discrete scale:
+The inferred model uses the existing discrete scale:
 
 - `1` = low confidence
 - `2` = medium confidence
 - `3` = high confidence
 
-This keeps the current SRS contract stable during the experiment.
+This keeps attempt history, analytics sorting, and SRS integration stable while removing quiz friction.
 
-## Proposed inferred-confidence rules v1
+## Rules v1
 
-These rules are intentionally simple so they can be reviewed and tuned:
+The current deterministic rules are:
 
 1. Start from baseline `2`.
-2. If the answer is incorrect, clamp to `1`.
-3. If the answer is correct and response time is fast, raise toward `3`.
-4. If the answer is correct but response time is slow, reduce toward `1` or `2`.
-5. If direction-specific strength is already high, bias upward modestly.
-6. If wrong-count history is elevated or recent streak is weak, bias downward modestly.
-7. Never let one secondary signal override correctness.
+2. If the answer is incorrect, set confidence to `1`.
+3. On correct answers, adjust confidence from response-time bands.
+4. Bias upward modestly when the direction-specific strength is already strong.
+5. Bias downward modestly when the direction-specific strength is weak.
+6. Bias upward modestly for strong streaks.
+7. Bias downward modestly when wrong-count history is elevated.
+8. Clamp the final result to the `1..3` range.
 
-This means correctness remains the dominant signal, with response time and memory state acting as modifiers.
+Correctness remains the dominant signal. Timing and memory-state signals only nudge correct answers up or down.
 
-## Instrumentation plan
+## SRS interaction
 
-Phase 1 should add comparison telemetry without changing SRS behavior.
+SRS now consumes the effective inferred confidence signal as its confidence input.
 
-Store or emit:
+Important behavior:
 
-- `manualConfidenceLevel`
-- `inferredConfidenceLevel`
-- `effectiveConfidenceLevel`
-- `confidenceSource`
-- `responseTimeMs`
-- `isCorrect`
-- `questionType`
-- `mode`
-- `language`
-- direction-specific strength snapshot
-- streak and wrong-count snapshot
+- response time still matters, but it is folded into the inferred confidence model instead of being applied again as a separate SRS quality bonus/penalty
+- this avoids double-counting the same timing signal
+- direction-specific strength updates still use the effective confidence signal
 
-Primary purpose:
+## UX implications
 
-- measure disagreement between manual and inferred confidence
-- test whether inferred confidence predicts later recall at least as well as manual confidence
+Learners no longer see:
 
-## Evaluation metrics
+- a quiz confidence selector
+- a profile-level preference for enabling the selector
 
-### Product metrics
+Learners still see confidence-derived history values, but those values now represent a system-generated recall signal rather than a self-report.
 
-- answer completion time
-- quiz friction and completion rate
-- confidence-selector usage rate when visible
-- disagreement rate between manual and inferred values
+## Migration notes
 
-### Learning metrics
+- historical attempts may still contain manual confidence data
+- new attempts are recorded with `confidenceSource = inferred`
+- old rows do not need synthetic backfills to remain readable
+- existing history and analytics surfaces can continue reading `confidenceLevel`
 
-- correlation with next-review correctness
-- correlation with future weak-word entry
-- impact on mastery progression speed
-- impact on direction-specific strength growth
+## Future tuning questions
 
-### Decision metrics
+Open follow-up questions:
 
-- whether inferred confidence is at least as predictive as manual confidence
-- whether removing manual input materially improves answer throughput
-- whether history and analytics remain understandable to learners
+1. Should history eventually label the signal more explicitly than "confidence" everywhere?
+2. Should analytics surface disagreement or stability metrics for inferred confidence later?
+3. Do the response-time thresholds need language- or mode-specific tuning after more production data?
 
-## Rollout plan
+## Decision
 
-### Phase 1. Comparison-only
+The current product decision is:
 
-- keep manual confidence as the effective SRS input
-- compute inferred confidence in parallel
-- instrument both values
+- remove learner-entered confidence from quiz flow
+- keep a confidence-driven SRS signal
+- infer that signal deterministically on the server
 
-Done when:
-
-- enough quiz traffic exists to compare manual and inferred confidence across languages and modes
-
-### Phase 2. Flagged hybrid mode
-
-- allow inferred confidence to become the effective value behind a feature flag
-- optionally keep manual confidence visible for selected cohorts
-
-Done when:
-
-- SRS behavior under inferred confidence is measurable without forcing a full migration
-
-### Phase 3. Product decision
-
-Choose one:
-
-- keep manual confidence
-- keep hybrid permanently
-- remove manual confidence and use inferred confidence only
-
-## Migration strategy
-
-Do not remove the current confidence field immediately.
-
-Recommended migration path:
-
-1. preserve the current manual confidence field for historical attempts
-2. add inferred/effective/source fields only when the experiment starts
-3. keep old attempts readable without backfilling invented values
-4. delay route-contract removal until the final product decision
-
-## Rollback strategy
-
-Rollback must be low-risk.
-
-Requirements:
-
-- a feature flag can switch effective confidence back to manual
-- manual confidence submission remains supported during the experiment
-- history can still render attempts even if inferred fields are absent
-
-## Open product questions
-
-These decisions should be reviewed before implementation:
-
-1. Should the learner continue to see a visible confidence signal in history if the value becomes inferred?
-2. Should the profile toggle remain, change meaning, or disappear under hybrid mode?
-3. Is the product optimizing primarily for lower quiz friction or for explicit learner self-report?
-4. Should inferred confidence be invisible to the learner, or surfaced as an explanation in analytics later?
-
-## Recommendation
-
-Proceed only with the comparison-first hybrid plan.
-
-Do not replace manual confidence directly.
-
-The current system already uses confidence deeply enough that immediate removal would create behavior change without evidence. The hybrid model is the safest path because it measures real disagreement and predictive value before committing the product to a new scheduling signal.
+This preserves the scheduling model while removing a piece of quiz friction from every answer.

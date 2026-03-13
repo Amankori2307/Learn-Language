@@ -43,10 +43,10 @@ If you answer incorrectly, the interval resets to the shortest default and the e
 Answer quality is derived from:
 
 - correctness
-- confidence level (low/medium/high)
-- response time (fast/slow)
+- a system-generated confidence signal inferred from response time and current progress state
+- response time
 
-Higher confidence and faster responses increase quality. Lower confidence and slower responses decrease quality.
+Faster, more reliable recall raises the inferred confidence signal. Slower or less stable recall lowers it.
 
 Quality affects the ease factor, which influences how quickly your review intervals grow.
 
@@ -63,7 +63,7 @@ These strengths are updated separately based on your answers in each direction.
 
 - Mastery is streak‑based and increases at 1, 3, 5, and 7 correct answers.
 - Incorrect answers reset the streak and shorten the next review interval.
-- Confidence and response time affect scheduling by influencing the ease factor.
+- The app now infers recall confidence automatically instead of asking learners to self-report it.
 - Strength is tracked separately for both translation directions.
 
 If the mastery rules change in the future, this document will be updated alongside the code.

@@ -76,7 +76,7 @@ export function useDashboardViewModel() {
       value: resolvedStats.learning,
       meaning: "Learning means the word is in active progress (mastery level 1-3).",
       improve:
-        "To move words out of learning: keep practicing daily and answer with higher confidence.",
+        "To move words out of learning: keep practicing daily and aim for fast, reliable recall.",
       icon: BookOpen,
     },
     {

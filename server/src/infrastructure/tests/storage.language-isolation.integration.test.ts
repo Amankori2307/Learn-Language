@@ -189,16 +189,18 @@ test("language isolation: user data reads are scoped by selected language", asyn
       },
     ]);
 
-    const teluguHistory = await storage.getUserAttemptHistory(
-      learnerUserId,
-      50,
-      LanguageEnum.TELUGU,
-    );
-    const hindiHistory = await storage.getUserAttemptHistory(learnerUserId, 50, LanguageEnum.HINDI);
-    assert.equal(teluguHistory.length, 1);
-    assert.equal(hindiHistory.length, 1);
-    assert.equal(teluguHistory[0]?.word.language, LanguageEnum.TELUGU);
-    assert.equal(hindiHistory[0]?.word.language, LanguageEnum.HINDI);
+    const teluguHistory = await storage.getUserAttemptHistory(learnerUserId, {
+      limit: 50,
+      language: LanguageEnum.TELUGU,
+    });
+    const hindiHistory = await storage.getUserAttemptHistory(learnerUserId, {
+      limit: 50,
+      language: LanguageEnum.HINDI,
+    });
+    assert.equal(teluguHistory.items.length, 1);
+    assert.equal(hindiHistory.items.length, 1);
+    assert.equal(teluguHistory.items[0]?.word.language, LanguageEnum.TELUGU);
+    assert.equal(hindiHistory.items[0]?.word.language, LanguageEnum.HINDI);
 
     const teluguStats = await storage.getUserStats(learnerUserId, LanguageEnum.TELUGU);
     const hindiStats = await storage.getUserStats(learnerUserId, LanguageEnum.HINDI);
@@ -272,25 +274,51 @@ test("language isolation: user data reads are scoped by selected language", asyn
     assert.ok(teluguWords.every((row) => row.language === LanguageEnum.TELUGU));
     assert.ok(hindiWords.every((row) => row.language === LanguageEnum.HINDI));
 
-    const teluguClusters = await storage.getClusters(LanguageEnum.TELUGU);
-    const hindiClusters = await storage.getClusters(LanguageEnum.HINDI);
-    assert.ok(teluguClusters.some((cluster) => cluster.id === teluguCluster.id));
-    assert.ok(!teluguClusters.some((cluster) => cluster.id === hindiCluster.id));
-    assert.ok(hindiClusters.some((cluster) => cluster.id === hindiCluster.id));
-    assert.ok(!hindiClusters.some((cluster) => cluster.id === teluguCluster.id));
+    const teluguClusters = await storage.getClusters({ language: LanguageEnum.TELUGU, limit: 50 });
+    const hindiClusters = await storage.getClusters({ language: LanguageEnum.HINDI, limit: 50 });
+    assert.ok(teluguClusters.items.some((cluster) => cluster.id === teluguCluster.id));
+    assert.ok(!teluguClusters.items.some((cluster) => cluster.id === hindiCluster.id));
+    assert.ok(hindiClusters.items.some((cluster) => cluster.id === hindiCluster.id));
+    assert.ok(!hindiClusters.items.some((cluster) => cluster.id === teluguCluster.id));
 
-    const teluguLeaderboard = await storage.getLeaderboard("all_time", 10, LanguageEnum.TELUGU);
-    const hindiLeaderboard = await storage.getLeaderboard("all_time", 10, LanguageEnum.HINDI);
-    const hindiWeeklyLeaderboard = await storage.getLeaderboard("weekly", 10, LanguageEnum.HINDI);
-    const hindiDailyLeaderboard = await storage.getLeaderboard("daily", 10, LanguageEnum.HINDI);
-    const teluguLearner = teluguLeaderboard.find((row) => row.userId === learnerUserId);
-    const hindiLeader = hindiLeaderboard.find((row) => row.userId === leaderboardUserId);
-    const hindiWeeklyLeader = hindiWeeklyLeaderboard.find(
+    const teluguLeaderboard = await storage.getLeaderboard({
+      userId: learnerUserId,
+      window: "all_time",
+      limit: 10,
+      language: LanguageEnum.TELUGU,
+    });
+    const hindiLeaderboard = await storage.getLeaderboard({
+      userId: learnerUserId,
+      window: "all_time",
+      limit: 10,
+      language: LanguageEnum.HINDI,
+    });
+    const hindiWeeklyLeaderboard = await storage.getLeaderboard({
+      userId: learnerUserId,
+      window: "weekly",
+      limit: 10,
+      language: LanguageEnum.HINDI,
+    });
+    const hindiDailyLeaderboard = await storage.getLeaderboard({
+      userId: learnerUserId,
+      window: "daily",
+      limit: 10,
+      language: LanguageEnum.HINDI,
+    });
+    const teluguLearner = teluguLeaderboard.items.find((row) => row.userId === learnerUserId);
+    const hindiLeader = hindiLeaderboard.items.find((row) => row.userId === leaderboardUserId);
+    const hindiWeeklyLeader = hindiWeeklyLeaderboard.items.find(
       (row) => row.userId === leaderboardUserId,
     );
-    const hindiDailyLeader = hindiDailyLeaderboard.find((row) => row.userId === leaderboardUserId);
-    const hindiWeeklyLearner = hindiWeeklyLeaderboard.find((row) => row.userId === learnerUserId);
-    const hindiDailyLearner = hindiDailyLeaderboard.find((row) => row.userId === learnerUserId);
+    const hindiDailyLeader = hindiDailyLeaderboard.items.find(
+      (row) => row.userId === leaderboardUserId,
+    );
+    const hindiWeeklyLearner = hindiWeeklyLeaderboard.items.find(
+      (row) => row.userId === learnerUserId,
+    );
+    const hindiDailyLearner = hindiDailyLeaderboard.items.find(
+      (row) => row.userId === learnerUserId,
+    );
     assert.ok(teluguLearner);
     assert.ok(hindiLeader);
     assert.ok(hindiWeeklyLeader);

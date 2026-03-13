@@ -65,10 +65,10 @@ Implemented behavior:
 - supported question directions:
   - source language to English
   - English to source language
-- confidence level capture on answers, with the quiz-side selector available behind an explicit learner preference
+- system-inferred recall confidence derived from correctness, response time, and current progress state
 - response-time capture on answers
 - completion flows with next recommended session
-- hybrid-confidence evaluation is documented as a planned decision model, not a shipped behavior
+- learner confidence is no longer collected manually during quiz answers
 
 Implementation references:
 
@@ -77,6 +77,7 @@ Implementation references:
 - [client/src/hooks/use-quiz.ts](/Users/aman/Projects/personal-projects/Learn-Language/client/src/hooks/use-quiz.ts)
 - [client/src/components/quiz-card.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/components/quiz-card.tsx)
 - [server/src/modules/quiz/quiz.controller.ts](/Users/aman/Projects/personal-projects/Learn-Language/server/src/modules/quiz/quiz.controller.ts)
+- [server/src/infrastructure/services/quiz-confidence.ts](/Users/aman/Projects/personal-projects/Learn-Language/server/src/infrastructure/services/quiz-confidence.ts)
 - [shared/routes.ts](/Users/aman/Projects/personal-projects/Learn-Language/shared/routes.ts)
 - [documentation/product/quiz-confidence-hybrid-model.md](/Users/aman/Projects/personal-projects/Learn-Language/documentation/product/quiz-confidence-hybrid-model.md)
 

@@ -2,6 +2,7 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import {
   LanguageEnum,
+  QuizConfidenceSourceEnum,
   QuizDirectionEnum,
   QuizModeEnum,
   QuizQuestionTypeEnum,
@@ -129,7 +130,6 @@ test("QuizService.submitQuizAnswer rejects words outside selected language", asy
           language: LanguageEnum.TELUGU,
           questionType: QuizQuestionTypeEnum.SOURCE_TO_TARGET,
           direction: QuizDirectionEnum.SOURCE_TO_TARGET,
-          confidenceLevel: 2,
         },
       }),
     (error: unknown) => {
@@ -215,7 +215,6 @@ test("QuizService.submitQuizAnswer creates progress, updates it, and logs attemp
       language: LanguageEnum.TELUGU,
       questionType: QuizQuestionTypeEnum.SOURCE_TO_TARGET,
       direction: QuizDirectionEnum.SOURCE_TO_TARGET,
-      confidenceLevel: 3,
       responseTimeMs: 900,
     },
   });
@@ -230,6 +229,9 @@ test("QuizService.submitQuizAnswer creates progress, updates it, and logs attemp
     responseTimeMs: 900,
     isCorrect: true,
     confidenceLevel: 3,
+    inferredConfidenceLevel: 3,
+    effectiveConfidenceLevel: 3,
+    confidenceSource: QuizConfidenceSourceEnum.INFERRED,
   });
   assert.equal(result.isCorrect, true);
   assert.equal(result.correctAnswer.id, 21);

@@ -201,7 +201,7 @@ test("e2e smoke: auth, analytics, cluster, review, and quiz critical paths are l
   );
   assert.equal(attemptHistoryResponse.status, 200, "/api/attempts/history should return 200");
   const attemptHistoryPayload = await attemptHistoryResponse.json();
-  assert.equal(Array.isArray(attemptHistoryPayload.data), true);
+  assert.equal(Array.isArray(attemptHistoryPayload.data.items), true);
 
   const leaderboardResponse = await fetch(
     `${baseUrl}/api/leaderboard?window=weekly&limit=5&language=telugu`,
@@ -211,16 +211,20 @@ test("e2e smoke: auth, analytics, cluster, review, and quiz critical paths are l
   );
   assert.equal(leaderboardResponse.status, 200, "/api/leaderboard should return 200");
   const leaderboardPayload = await leaderboardResponse.json();
-  assert.equal(Array.isArray(leaderboardPayload.data), true);
+  assert.equal(Array.isArray(leaderboardPayload.data.items), true);
 
   const clustersResponse = await fetch(`${baseUrl}/api/clusters?language=telugu`, {
     headers: authHeaders,
   });
   assert.equal(clustersResponse.status, 200, "/api/clusters should return 200");
   const clustersPayload = await clustersResponse.json();
-  assert.equal(Array.isArray(clustersPayload.data), true, "/api/clusters should return array payload");
+  assert.equal(
+    Array.isArray(clustersPayload.data.items),
+    true,
+    "/api/clusters should return paginated items payload",
+  );
 
-  const firstCluster = clustersPayload.data[0];
+  const firstCluster = clustersPayload.data.items[0];
   if (firstCluster?.id) {
     const clusterDetailResponse = await fetch(
       `${baseUrl}/api/clusters/${firstCluster.id}?language=telugu`,
@@ -238,7 +242,11 @@ test("e2e smoke: auth, analytics, cluster, review, and quiz critical paths are l
   });
   assert.equal(reviewQueueResponse.status, 200, "/api/review/queue should return 200");
   const reviewQueuePayload = await reviewQueueResponse.json();
-  assert.equal(Array.isArray(reviewQueuePayload.data), true, "/api/review/queue should return array payload");
+  assert.equal(
+    Array.isArray(reviewQueuePayload.data.items),
+    true,
+    "/api/review/queue should return paginated items payload",
+  );
 
   const reviewDraftResponse = await fetch(`${baseUrl}/api/review/words`, {
     method: "POST",

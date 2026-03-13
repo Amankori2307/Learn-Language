@@ -3,7 +3,6 @@ import userEvent from "@testing-library/user-event";
 import type { ReactNode } from "react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import ProfilePage from "./profile";
-import { APP_STORAGE_KEYS } from "@shared/domain/constants/app-brand";
 
 const mutateAsync = vi.fn().mockResolvedValue(undefined);
 const refetch = vi.fn();
@@ -91,18 +90,6 @@ describe("ProfilePage integration", () => {
 
     const { container } = render(<ProfilePage />);
     expect(container.querySelectorAll(".animate-pulse").length).toBeGreaterThan(0);
-  });
-
-  it("persists quiz confidence preference from the profile toggle", async () => {
-    const user = userEvent.setup();
-    render(<ProfilePage />);
-
-    const toggle = screen.getByRole("switch", { name: "Quiz confidence selector" });
-    expect(toggle.getAttribute("data-state")).toBe("unchecked");
-
-    await user.click(toggle);
-
-    expect(window.localStorage.getItem(APP_STORAGE_KEYS.quizConfidenceEnabled)).toBe("true");
   });
 
   it("keeps the profile form mobile-safe with stacked actions and two-column upgrade classes", () => {

@@ -104,7 +104,16 @@
 - `pnpm run lint` also enforces context workflow boundaries through `script/check-context-workflow.ts`; do not leave active phase files untracked in the backlog or turn future backlog files into an execution board.
 - When public routing, crawlability, analytics tags, sitemap contents, metadata policy, robots rules, or canonical behavior changes, update the canonical SEO/runtime docs and the shared SEO ownership module in the same change.
 
-11. Branch workflow:
+11. Migration workflow:
+
+- Do not hand-write Drizzle migration SQL files or manually edit Drizzle migration metadata when a schema change requires a migration.
+- Generate migrations through the project command line workflow so SQL and Drizzle meta snapshots stay consistent.
+- Use the repo migration command:
+  - `pnpm run db:generate`
+- Review the generated migration contents before keeping them, but do not replace the generated file with a manually authored version.
+- If a generated migration includes unexpected changes, fix the schema inputs and regenerate instead of patching the migration by hand unless there is an explicitly approved exception.
+
+12. Branch workflow:
 
 - Start each new phase on a new git branch.
 - Use one branch per phase; do not stack multiple active phases on the same long-lived branch.
@@ -115,14 +124,14 @@
 - If a phase is large, use short-lived sub-branches off the phase branch only when necessary, then merge them back into the phase branch before merging to `main`.
 - Before starting the next phase, branch from the latest `main` unless there is an explicit reason to branch from another approved integration branch.
 
-12. Commit hygiene:
+13. Commit hygiene:
 
 - Commit once you have a sizable, coherent set of changes.
 - Commit when you complete a major logical task, not only at the very end of a long phase.
 - Prefer commits that represent one meaningful unit of progress and can be understood or reverted independently.
 - Do not mix unrelated fixes, refactors, and feature work into the same commit unless they are inseparable for correctness.
 
-13. Dependency injection:
+14. Dependency injection:
 
 - Prefer plain constructor injection for concrete Nest class providers.
 - Use `@Inject(...)` only when the runtime token cannot be inferred safely from the parameter type.
@@ -133,13 +142,13 @@
 - If a provider begins as a concrete class and later needs multiple implementations, introduce a named token at that time instead of pre-optimizing every constructor now.
 - Keep provider ownership obvious: modules wire providers, constructors declare dependencies, and tokens appear only where runtime indirection is real.
 
-14. AI feature bar:
+15. AI feature bar:
 
 - Do not add AI features without an explicit product problem, rollout gate, privacy check, and deterministic fallback where needed.
 - Never put non-deterministic AI behavior directly into grading, reviewer approval, or other correctness-critical paths.
 - Prefer reviewer-assist and recommendation use cases over autonomous learner-scoring flows.
 
-15. Responsive implementation bar:
+16. Responsive implementation bar:
 
 - Treat mobile-first as a layering strategy, not permission to degrade tablet/laptop/desktop UX.
 - When changing a surface for phone layouts, explicitly preserve or improve the corresponding desktop layout.
@@ -147,14 +156,14 @@
 - Responsive refactors must be reviewed in at least one phone width and one desktop width before they are considered complete.
 - Do not use legacy `vh` for layout sizing. Prefer `dvh` for dynamic viewport sizing when browser UI changes should reflow layout, `svh` for the smallest stable viewport when UI chrome should never overlap content, and `lvh` for the largest stable viewport when full-bleed growth is acceptable.
 
-16. Theme-safe component bar:
+17. Theme-safe component bar:
 
 - New shared primitives and feature components must prefer semantic classes such as `bg-background`, `text-foreground`, `border-border`, `bg-card`, and shared status tokens over raw Tailwind palette classes.
 - New components must not assume only `light` and `dark`; they should work under the implemented named themes and avoid `dark:` branches unless there is no token-based alternative yet.
 - Theme-sensitive values such as overlay treatment, border radius, shadows, and transition feel should come from existing CSS variables or shared variants instead of local one-off styling.
 - If a new component cannot be made theme-safe immediately, document the limitation in the task and treat it as explicit follow-up debt instead of leaving the assumption implicit.
 
-17. SEO ownership:
+18. SEO ownership:
 
 - Route titles, descriptions, canonical/index rules, sitemap inclusion, and shared marketing/runtime tags must be owned from the centralized SEO constants/module rather than scattered across pages.
 - When adding, renaming, opening, or closing a route, update that centralized SEO ownership file so sitemap and metadata stay in sync.
@@ -163,7 +172,7 @@
 - When SEO behavior changes, also review the related public SEO surfaces and assets, including structured data, canonical links, Open Graph/Twitter metadata, manifest/icon references, favicon/app-icon assets under `public/`, and any public marketing-entry routes that affect crawlability.
 - Treat SEO upkeep as part of the route-definition done criteria: a route change is not complete until metadata, sitemap eligibility, robots intent, analytics tags, and documentation have been reviewed and updated where needed.
 
-18. Design system governance:
+19. Design system governance:
 
 - The app must have one canonical design-system contract documented in `documentation/architecture/`, and shared UI work must follow it instead of inventing local page rules.
 - New or changed UI must use shared semantic tokens for color, typography, spacing, radius, border, elevation, motion, and interactive states wherever a shared token or variant already exists.
@@ -173,7 +182,7 @@
 - Shared components must define consistent size, variant, and state behavior. Do not let the same semantic action or status use different visual hierarchy across routes without an approved design-system reason.
 - Page composition should prefer approved shell, section, stack, cluster, pane, and content-width patterns over ad hoc layout wrappers.
 
-19. Responsive design-system rules:
+20. Responsive design-system rules:
 
 - Treat phone and desktop as first-class targets for every meaningful UI change. Tablet and laptop behavior should be an intentional transition between those two states, not an accidental byproduct.
 - Mobile layouts must preserve primary actions, content hierarchy, and readable spacing without relying on hover, tiny hit targets, or sideways scrolling for core tasks.
@@ -184,7 +193,7 @@
 - Overlays must have viewport-specific behavior. If a dialog pattern is not workable on phone, use the approved sheet or drawer pattern instead of shrinking the desktop dialog indefinitely.
 - Responsive success, empty, loading, and error states must follow the same container and spacing rules as the success layout for that route.
 
-20. Design-system enforcement:
+21. Design-system enforcement:
 
 - `pnpm run lint` is expected to enforce design-system governance alongside existing quality gates. When the repo adds or extends checks, raw palette classes, forbidden arbitrary values, and unauthorized shared-style duplication should be treated as CI failures, not optional warnings.
 - If a shared token, shared variant, or layout primitive exists, bypassing it requires a documented exception. Exceptions must have an owner, a reason, and a follow-up path; they must not remain as silent permanent drift.
@@ -192,7 +201,7 @@
 - Reviews should reject reusable UI additions that introduce raw hex values, raw Tailwind palette classes, ad hoc breakpoint behavior, or duplicated state styling without first extending the design system.
 - Design-system changes that alter durable component behavior, layout rules, or responsive contracts must update the canonical architecture documentation in the same change.
 
-21. Env naming:
+22. Env naming:
 
 - Backend/runtime env vars must be namespaced with `APP_` unless they are standard platform variables (`NODE_ENV`, `PORT`, `DATABASE_URL`, etc.).
 - Client-exposed env vars must use `NEXT_PUBLIC_`.
