@@ -88,6 +88,7 @@ Implemented behavior:
 - correct streak and wrong count tracking
 - direction-specific memory strength tracking
 - stats-driven recommendation of next mode/direction
+- learner-facing mastery rules and criteria documentation
 
 Implementation references:
 
@@ -96,6 +97,7 @@ Implementation references:
 - [server/src/infrastructure/services/srs-config.ts](/Users/aman/Projects/personal-projects/Learn-Language/server/src/infrastructure/services/srs-config.ts)
 - [server/src/modules/analytics/analytics.controller.ts](/Users/aman/Projects/personal-projects/Learn-Language/server/src/modules/analytics/analytics.controller.ts)
 - [client/src/features/dashboard/use-dashboard-view-model.ts](/Users/aman/Projects/personal-projects/Learn-Language/client/src/features/dashboard/use-dashboard-view-model.ts)
+- [documentation/product/mastery-guide.md](/Users/aman/Projects/personal-projects/Learn-Language/documentation/product/mastery-guide.md)
 
 ### 5. Cluster and context-based vocabulary organization
 

@@ -17,10 +17,11 @@ Theme ownership lives in:
 Implemented themes:
 
 - `dark`
+- `soothing`
 - `warm`
 - `playful`
 - `high-contrast`
-- `rainbow`
+- `black`
 - `light` (app theme id `minimal`)
 
 Planned but not yet shipped:
@@ -46,9 +47,10 @@ Required token groups:
 - `dark` is the user-facing label for app theme id `current`, which maps to provider theme `dark`
 - `light` maps to provider theme `minimal`
 - `warm` maps to provider theme `warm`
+- `soothing` maps to provider theme `soothing`
 - `playful` maps to provider theme `playful`
 - `high-contrast` maps to provider theme `high-contrast`
-- `rainbow` maps to provider theme `rainbow`
+- `black` maps to provider theme `black`
 - system theme detection is disabled intentionally
 - chart theming already uses the implemented theme registry instead of a `light`/`dark` assumption
 

@@ -23,5 +23,7 @@ services:
       - /bin/sh
       - -lc
       - pnpm run db:migrate:production && pnpm run content:import:production && pnpm run start:backend
+    volumes:
+      - "${APP_LOG_DIR:-/var/log/learn-language}:${APP_LOG_DIR:-/var/log/learn-language}"
     ports:
       - "${BACKEND_HOST_BIND:-127.0.0.1}:${BACKEND_HOST_PORT:-5001}:${BACKEND_PORT:-5001}"

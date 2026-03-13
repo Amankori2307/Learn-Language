@@ -23,6 +23,7 @@ When a future item becomes active, move it into `context/active-tasks/backlog.md
 | ID | Status | Task | Notes |
 | --- | --- | --- | --- |
 | F-010 | todo | Define long-term design-system governance operations | Establish an explicit audit cadence, exception review process, and ownership model for Continuum changes |
+| F-028 | todo | Enforce single-theme consistency across all app and public pages | Ensure every surface (public marketing pages + authenticated app) adheres to one shared theme system and remove any remaining theme drift |
 | F-005 | todo | Revisit next-round performance optimization candidates | Leaderboard pushdown, distractor-pool sizing, cluster-query consolidation, and client-payload inspection |
 | F-014 | todo | Investigate frequent logout behavior | Document session expiry criteria and reduce unexpected logouts without weakening security |
 | F-019 | todo | Reduce Docker image sizes | Shrink frontend and backend images to speed up deploys and lower bandwidth usage |

@@ -2,9 +2,10 @@ export const AppThemeId = {
   CURRENT: "current",
   MINIMAL: "minimal",
   WARM: "warm",
+  SOOTHING: "soothing",
   PLAYFUL: "playful",
   HIGH_CONTRAST: "high-contrast",
-  RAINBOW: "rainbow",
+  BLACK: "black",
 } as const;
 
 export type AppThemeId = (typeof AppThemeId)[keyof typeof AppThemeId];
@@ -42,6 +43,13 @@ export const APP_THEME_DEFINITIONS: readonly AppThemeDefinition[] = [
     selector: ".warm",
   },
   {
+    id: AppThemeId.SOOTHING,
+    label: "Soothing",
+    availability: "implemented",
+    providerTheme: "soothing",
+    selector: ".soothing",
+  },
+  {
     id: AppThemeId.PLAYFUL,
     label: "Playful",
     availability: "implemented",
@@ -56,11 +64,11 @@ export const APP_THEME_DEFINITIONS: readonly AppThemeDefinition[] = [
     selector: ".high-contrast",
   },
   {
-    id: AppThemeId.RAINBOW,
-    label: "Rainbow",
+    id: AppThemeId.BLACK,
+    label: "Black",
     availability: "implemented",
-    providerTheme: "rainbow",
-    selector: ".rainbow",
+    providerTheme: "black",
+    selector: ".black",
   },
 ] as const;
 

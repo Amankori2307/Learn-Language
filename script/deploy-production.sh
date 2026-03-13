@@ -79,7 +79,13 @@ fi
 
 run_ssh() {
   if [ -n "${PROD_SSH_PASSWORD:-}" ]; then
-    SSHPASS="${PROD_SSH_PASSWORD}" sshpass -e ssh "$@"
+    SSHPASS="${PROD_SSH_PASSWORD}" sshpass -e ssh \
+      -o PreferredAuthentications=password \
+      -o PubkeyAuthentication=no \
+      -o IdentitiesOnly=yes \
+      -o StrictHostKeyChecking=no \
+      -o UserKnownHostsFile=/dev/null \
+      "$@"
     return
   fi
   ssh "$@"
@@ -87,7 +93,13 @@ run_ssh() {
 
 run_scp() {
   if [ -n "${PROD_SSH_PASSWORD:-}" ]; then
-    SSHPASS="${PROD_SSH_PASSWORD}" sshpass -e scp "$@"
+    SSHPASS="${PROD_SSH_PASSWORD}" sshpass -e scp \
+      -o PreferredAuthentications=password \
+      -o PubkeyAuthentication=no \
+      -o IdentitiesOnly=yes \
+      -o StrictHostKeyChecking=no \
+      -o UserKnownHostsFile=/dev/null \
+      "$@"
     return
   fi
   scp "$@"

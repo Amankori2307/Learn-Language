@@ -183,6 +183,7 @@ Backend:
 
 - binds loopback-only host port `${BACKEND_HOST_BIND:-127.0.0.1}:${BACKEND_HOST_PORT:-5001}` to container `${BACKEND_PORT:-5001}`
 - loads env from `.env.production`
+- mounts `${APP_LOG_DIR:-/var/log/learn-language}` to persist backend logs
 - runs:
 
 ```sh

@@ -62,6 +62,15 @@ export const SEO_ROUTE_DEFINITIONS: readonly ISeoRouteDefinition[] = [
     priority: 0.85,
   },
   {
+    path: "/mastery",
+    title: `Mastery Guide | ${APP_BRAND_NAME}`,
+    description:
+      "Learn how mastery is earned in Learn-Lang, the streak thresholds, and how review timing adapts to your recall quality.",
+    index: true,
+    changeFrequency: "monthly",
+    priority: 0.78,
+  },
+  {
     path: "/languages/telugu",
     title: `Learn Telugu Vocabulary | ${APP_BRAND_NAME}`,
     description:

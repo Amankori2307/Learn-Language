@@ -1,7 +1,11 @@
-import { createLogger, format, transports } from "winston";
+import { createLogger, format, transports, type transport } from "winston";
+import DailyRotateFile from "winston-daily-rotate-file";
 import type { NextFunction, Request, Response } from "express";
 import { isProductionEnv } from "../../config/env.runtime";
+import { getRuntimeEnv } from "../../config/env.runtime";
+import fs from "fs";
 
+const runtimeEnv = getRuntimeEnv();
 const isProduction = isProductionEnv();
 const REDACTED = "[redacted]";
 const SENSITIVE_KEY_PATTERN =
@@ -57,8 +61,30 @@ const sanitizeLogFormat = format((info) => {
   return info;
 });
 
+const logLevel = runtimeEnv.APP_LOG_LEVEL?.trim() || (isProduction ? "info" : "debug");
+const loggerTransports: transport[] = [new transports.Console()];
+
+if (runtimeEnv.APP_LOG_DIR?.trim()) {
+  const logDir = runtimeEnv.APP_LOG_DIR.trim();
+  fs.mkdirSync(logDir, { recursive: true });
+  loggerTransports.push(
+    new DailyRotateFile({
+      dirname: logDir,
+      filename: "backend-%DATE%.log",
+      datePattern: "YYYY-MM-DD",
+      maxFiles: runtimeEnv.APP_LOG_RETENTION_DAYS
+        ? `${runtimeEnv.APP_LOG_RETENTION_DAYS}d`
+        : "14d",
+      maxSize: runtimeEnv.APP_LOG_MAX_SIZE ?? "20m",
+      zippedArchive: true,
+      level: logLevel,
+      handleExceptions: true,
+    }),
+  );
+}
+
 export const appLogger = createLogger({
-  level: isProduction ? "info" : "debug",
+  level: logLevel,
   format: format.combine(
     format.timestamp(),
     format.errors({ stack: true }),
@@ -73,7 +99,7 @@ export const appLogger = createLogger({
       });
     }),
   ),
-  transports: [new transports.Console()],
+  transports: loggerTransports,
 });
 
 function getUserId(req: Request): string | null {

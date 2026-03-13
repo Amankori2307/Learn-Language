@@ -11,6 +11,7 @@ const PUBLIC_DISCOVERY_LINKS: readonly IPublicCrumb[] = [
   { label: "Home", href: "/" },
   { label: "Features", href: "/features" },
   { label: "How It Works", href: "/how-it-works" },
+  { label: "Mastery", href: "/mastery" },
   { label: "Learn Telugu", href: "/languages/telugu" },
   { label: "Topics", href: "/topics" },
   { label: "Sign In", href: "/auth" },

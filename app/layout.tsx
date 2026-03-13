@@ -130,8 +130,8 @@ export default function RootLayout({
   };
 
   return (
-    <html lang="en">
-      <body>
+    <html lang="en" className="theme-current">
+      <body className="bg-background text-foreground">
         {APP_GOOGLE_TAG_MANAGER_ID ? (
           <>
             <Script

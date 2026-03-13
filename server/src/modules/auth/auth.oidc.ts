@@ -217,7 +217,23 @@ export async function setupAuth(app: Express, config: AuthRuntimeConfig) {
     const strategyName = `google:${req.hostname}`;
     if (!registeredStrategies.has(strategyName)) {
       const oidcConfig = await getOidcConfig();
-      const callbackURL = `${req.protocol}://${req.get("host")}${AUTH_GOOGLE_CALLBACK_ROUTE}`;
+      const forwardedProto = req.headers?.["x-forwarded-proto"];
+      const forwardedHost = req.headers?.["x-forwarded-host"];
+      const resolvedProto = Array.isArray(forwardedProto)
+        ? forwardedProto[0]
+        : forwardedProto ?? "";
+      const resolvedHost = Array.isArray(forwardedHost)
+        ? forwardedHost[0]
+        : forwardedHost ?? "";
+      const protocol =
+        typeof resolvedProto === "string" && resolvedProto.trim().length > 0
+          ? resolvedProto.split(",")[0].trim()
+          : req.protocol;
+      const host =
+        typeof resolvedHost === "string" && resolvedHost.trim().length > 0
+          ? resolvedHost.split(",")[0].trim()
+          : req.get("host");
+      const callbackURL = `${protocol}://${host}${AUTH_GOOGLE_CALLBACK_ROUTE}`;
       const scope = "openid email profile";
 
       const strategy = new Strategy(

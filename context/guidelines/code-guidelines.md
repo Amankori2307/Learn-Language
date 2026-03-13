@@ -192,6 +192,12 @@
 - Reviews should reject reusable UI additions that introduce raw hex values, raw Tailwind palette classes, ad hoc breakpoint behavior, or duplicated state styling without first extending the design system.
 - Design-system changes that alter durable component behavior, layout rules, or responsive contracts must update the canonical architecture documentation in the same change.
 
+21. Env naming:
+
+- Backend/runtime env vars must be namespaced with `APP_` unless they are standard platform variables (`NODE_ENV`, `PORT`, `DATABASE_URL`, etc.).
+- Client-exposed env vars must use `NEXT_PUBLIC_`.
+- New env vars must be added to the env validation schema and kept in `.env` files and documentation.
+
 ## Adoption plan
 
 - Phase 4D:

@@ -16,6 +16,10 @@ export const envSchema = z
     FRONTEND_ORIGINS: z.string().optional(),
     REVIEWER_EMAILS: z.string().optional(),
     ADMIN_EMAILS: z.string().optional(),
+    APP_LOG_DIR: z.string().optional(),
+    APP_LOG_LEVEL: z.string().optional(),
+    APP_LOG_RETENTION_DAYS: z.coerce.number().int().positive().optional(),
+    APP_LOG_MAX_SIZE: z.string().optional(),
     ENABLE_GCP_TTS: z
       .string()
       .optional()

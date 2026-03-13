@@ -29,24 +29,27 @@ describe("app theme config", () => {
       AppThemeId.CURRENT,
       AppThemeId.MINIMAL,
       AppThemeId.WARM,
+      AppThemeId.SOOTHING,
       AppThemeId.PLAYFUL,
       AppThemeId.HIGH_CONTRAST,
-      AppThemeId.RAINBOW,
+      AppThemeId.BLACK,
     ]);
     expect(IMPLEMENTED_PROVIDER_THEMES).toEqual([
       "dark",
       "minimal",
       "warm",
+      "soothing",
       "playful",
       "high-contrast",
-      "rainbow",
+      "black",
     ]);
     expect(getProviderThemeForAppTheme(AppThemeId.CURRENT)).toBe("dark");
     expect(getProviderThemeForAppTheme(AppThemeId.MINIMAL)).toBe("minimal");
     expect(getProviderThemeForAppTheme(AppThemeId.WARM)).toBe("warm");
+    expect(getProviderThemeForAppTheme(AppThemeId.SOOTHING)).toBe("soothing");
     expect(getProviderThemeForAppTheme(AppThemeId.PLAYFUL)).toBe("playful");
     expect(getProviderThemeForAppTheme(AppThemeId.HIGH_CONTRAST)).toBe("high-contrast");
-    expect(getProviderThemeForAppTheme(AppThemeId.RAINBOW)).toBe("rainbow");
+    expect(getProviderThemeForAppTheme(AppThemeId.BLACK)).toBe("black");
   });
 
   it("cycles between the implemented themes using provider theme values", () => {
@@ -54,9 +57,10 @@ describe("app theme config", () => {
     expect(getAppThemeIdForProviderTheme("minimal")).toBe(AppThemeId.MINIMAL);
     expect(getNextImplementedProviderTheme("dark")).toBe("minimal");
     expect(getNextImplementedProviderTheme("minimal")).toBe("warm");
-    expect(getNextImplementedProviderTheme("warm")).toBe("playful");
+    expect(getNextImplementedProviderTheme("warm")).toBe("soothing");
+    expect(getNextImplementedProviderTheme("soothing")).toBe("playful");
     expect(getNextImplementedProviderTheme("playful")).toBe("high-contrast");
-    expect(getNextImplementedProviderTheme("high-contrast")).toBe("rainbow");
-    expect(getNextImplementedProviderTheme("rainbow")).toBe("dark");
+    expect(getNextImplementedProviderTheme("high-contrast")).toBe("black");
+    expect(getNextImplementedProviderTheme("black")).toBe("dark");
   });
 });

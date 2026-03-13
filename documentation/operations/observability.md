@@ -108,4 +108,21 @@ Operational considerations:
 
 - request lifecycle logging currently focuses on completion and abort events
 - module-level log field conventions are not yet fully standardized across every service and repository
-- transport behavior is still centered on the current logger setup and should be revisited only if new transports are introduced
+- transport behavior now includes optional file rotation when `APP_LOG_DIR` is set
+
+## Log rotation
+
+When `APP_LOG_DIR` is configured, the backend writes JSON log lines to rotating files in that directory.
+
+Supported env vars:
+
+- `APP_LOG_DIR` (required to enable file logs)
+- `APP_LOG_LEVEL` (optional override of `info`/`debug` defaults)
+- `APP_LOG_RETENTION_DAYS` (default `14`)
+- `APP_LOG_MAX_SIZE` (default `20m`)
+
+Rotation details:
+
+- filename pattern: `backend-YYYY-MM-DD.log`
+- zipped archive enabled
+- console logging remains enabled alongside file logging
