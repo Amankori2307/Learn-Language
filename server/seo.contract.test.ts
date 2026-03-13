@@ -14,6 +14,7 @@ test("SEO route definitions include metadata for every app route", () => {
     "/features",
     "/how-it-works",
     "/mastery",
+    "/methodology",
     "/languages/telugu",
     "/topics",
     "/auth",
@@ -65,6 +66,11 @@ test("sitemap only contains indexable public routes", () => {
       url: `${APP_SITE_URL}/mastery`,
       changeFrequency: "monthly",
       priority: 0.78,
+    },
+    {
+      url: `${APP_SITE_URL}/methodology`,
+      changeFrequency: "monthly",
+      priority: 0.8,
     },
     {
       url: `${APP_SITE_URL}/languages/telugu`,
