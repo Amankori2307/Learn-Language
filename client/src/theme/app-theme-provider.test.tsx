@@ -24,7 +24,7 @@ describe("AppThemeProvider", () => {
     expect(themeProviderSpy).toHaveBeenCalledWith(
       expect.objectContaining({
         attribute: "class",
-        defaultTheme: "dark",
+        defaultTheme: "warm",
         enableSystem: false,
         themes: ["dark", "minimal", "warm", "soothing", "playful", "high-contrast", "black"],
       }),

@@ -13,9 +13,9 @@ import {
 } from "@/theme/app-theme";
 
 describe("app theme config", () => {
-  it("uses current as the default app theme", () => {
-    expect(DEFAULT_APP_THEME).toBe(AppThemeId.CURRENT);
-    expect(getDefaultProviderTheme()).toBe("dark");
+  it("uses warm as the default app theme", () => {
+    expect(DEFAULT_APP_THEME).toBe(AppThemeId.WARM);
+    expect(getDefaultProviderTheme()).toBe("warm");
   });
 
   it("keeps future planned themes in the enum/config without marking them implemented", () => {
