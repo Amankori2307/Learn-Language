@@ -12,35 +12,40 @@ import {
 test("ReviewService.getQueue normalizes nullable review fields", async () => {
   const repository = {
     async getReviewQueue() {
-      return [
-        {
-          id: 11,
-          language: LanguageEnum.TELUGU,
-          originalScript: "నమస్తే",
-          transliteration: "namaste",
-          english: "hello",
-          partOfSpeech: PartOfSpeechEnum.PHRASE,
-          reviewStatus: ReviewStatusEnum.PENDING_REVIEW,
-          sourceCapturedAt: new Date("2026-03-10T10:00:00.000Z"),
-          submittedAt: new Date("2026-03-10T10:00:00.000Z"),
-          reviewedAt: null,
-          createdAt: new Date("2026-03-09T10:00:00.000Z"),
-          reviewerConfidenceScore: null,
-          requiresSecondaryReview: null,
-          disagreementStatus: null,
-        },
-      ];
+      return {
+        items: [
+          {
+            id: 11,
+            language: LanguageEnum.TELUGU,
+            originalScript: "నమస్తే",
+            transliteration: "namaste",
+            english: "hello",
+            partOfSpeech: PartOfSpeechEnum.PHRASE,
+            reviewStatus: ReviewStatusEnum.PENDING_REVIEW,
+            sourceCapturedAt: new Date("2026-03-10T10:00:00.000Z"),
+            submittedAt: new Date("2026-03-10T10:00:00.000Z"),
+            reviewedAt: null,
+            createdAt: new Date("2026-03-09T10:00:00.000Z"),
+            reviewerConfidenceScore: null,
+            requiresSecondaryReview: null,
+            disagreementStatus: null,
+          },
+        ],
+        page: 1,
+        limit: 10,
+        total: 1,
+      };
     },
   };
 
   const service = new ReviewService(repository as any);
   const result = await service.getQueue({ status: ReviewStatusEnum.PENDING_REVIEW, limit: 10 });
 
-  assert.equal(result[0]?.sourceCapturedAt, "2026-03-10T10:00:00.000Z");
-  assert.equal(result[0]?.reviewedAt, null);
-  assert.equal(result[0]?.reviewerConfidenceScore, null);
-  assert.equal(result[0]?.requiresSecondaryReview, false);
-  assert.equal(result[0]?.disagreementStatus, ReviewDisagreementStatusEnum.NONE);
+  assert.equal(result.items[0]?.sourceCapturedAt, "2026-03-10T10:00:00.000Z");
+  assert.equal(result.items[0]?.reviewedAt, null);
+  assert.equal(result.items[0]?.reviewerConfidenceScore, null);
+  assert.equal(result.items[0]?.requiresSecondaryReview, false);
+  assert.equal(result.items[0]?.disagreementStatus, ReviewDisagreementStatusEnum.NONE);
 });
 
 test("ReviewService.bulkTransition reports updated and skipped counts", async () => {

@@ -3,7 +3,7 @@ import { api } from "@shared/routes";
 import { LanguageEnum } from "@shared/domain/enums";
 import { VocabularyRepository } from "./vocabulary.repository";
 import { AppError } from "../../common/errors/app-error";
-import { ListWordsInput } from "./vocabulary.types";
+import { ListClustersInput, ListWordsInput } from "./vocabulary.types";
 
 @Injectable()
 export class VocabularyService {
@@ -22,9 +22,9 @@ export class VocabularyService {
     return word;
   }
 
-  async listClusters(language?: LanguageEnum) {
-    const parsed = api.clusters.list.input?.parse({ language }) ?? {};
-    return this.repository.getClusters(parsed.language);
+  async listClusters(input: ListClustersInput) {
+    const parsed = api.clusters.list.input?.parse(input) ?? {};
+    return this.repository.getClusters(parsed);
   }
 
   async getCluster(clusterId: number, language?: LanguageEnum) {

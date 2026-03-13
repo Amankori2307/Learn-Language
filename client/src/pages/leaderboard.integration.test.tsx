@@ -28,7 +28,12 @@ describe("LeaderboardPage integration", () => {
     viewModel.mockReturnValue({
       window: "weekly",
       setWindow: vi.fn(),
+      currentPage: 1,
+      totalPages: 1,
+      totalResults: 0,
+      setPage: vi.fn(),
       entries: [],
+      currentUserEntry: null,
       isLoading: false,
       isError: false,
       isFetching: false,
@@ -44,7 +49,12 @@ describe("LeaderboardPage integration", () => {
     viewModel.mockReturnValue({
       window: "weekly",
       setWindow: vi.fn(),
+      currentPage: 1,
+      totalPages: 1,
+      totalResults: 0,
+      setPage: vi.fn(),
       entries: [],
+      currentUserEntry: null,
       isLoading: true,
       isError: false,
       isFetching: false,
@@ -62,7 +72,12 @@ describe("LeaderboardPage integration", () => {
     viewModel.mockReturnValue({
       window: "weekly",
       setWindow: vi.fn(),
+      currentPage: 1,
+      totalPages: 1,
+      totalResults: 0,
+      setPage: vi.fn(),
       entries: [],
+      currentUserEntry: null,
       isLoading: false,
       isError: true,
       isFetching: false,
@@ -80,6 +95,22 @@ describe("LeaderboardPage integration", () => {
     viewModel.mockReturnValue({
       window: "weekly",
       setWindow: vi.fn(),
+      currentPage: 1,
+      totalPages: 1,
+      totalResults: 1,
+      setPage: vi.fn(),
+      currentUserEntry: {
+        rank: 32,
+        userId: "u-1",
+        firstName: "Aman",
+        lastName: "K",
+        email: "aman@example.com",
+        profileImageUrl: null,
+        attempts: 32,
+        xp: 420,
+        streak: 8,
+        accuracy: 84,
+      },
       entries: [
         {
           userId: "u-1",
@@ -104,6 +135,7 @@ describe("LeaderboardPage integration", () => {
 
     expect(screen.getAllByText(/Aman K/i).length).toBeGreaterThan(0);
     expect(screen.getAllByText(/420 XP/i).length).toBeGreaterThan(0);
+    expect(screen.getByText("Your rank: #32 • 420 XP • 84%")).toBeTruthy();
     expect(screen.getByRole("button", { name: "Daily" }).className).toContain("w-full");
     expect(screen.getByRole("button", { name: "Daily" }).className).toContain("sm:w-auto");
   });
@@ -115,6 +147,11 @@ describe("LeaderboardPage integration", () => {
     viewModel.mockReturnValue({
       window: "weekly",
       setWindow,
+      currentPage: 1,
+      totalPages: 1,
+      totalResults: 1,
+      setPage: vi.fn(),
+      currentUserEntry: null,
       entries: [
         {
           userId: "u-1",
@@ -145,6 +182,11 @@ describe("LeaderboardPage integration", () => {
     viewModel.mockReturnValue({
       window: "weekly",
       setWindow: vi.fn(),
+      currentPage: 1,
+      totalPages: 1,
+      totalResults: 1,
+      setPage: vi.fn(),
+      currentUserEntry: null,
       entries: [
         {
           userId: "u-1",

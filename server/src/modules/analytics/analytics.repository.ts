@@ -1,6 +1,7 @@
 import { Injectable } from "@nestjs/common";
 import { storage } from "../../infrastructure/storage";
 import { LanguageEnum } from "@shared/domain/enums";
+import { AttemptHistoryInput, LeaderboardInput } from "./analytics.types";
 
 @Injectable()
 export class AnalyticsRepository {
@@ -24,11 +25,17 @@ export class AnalyticsRepository {
     return storage.getWordBucket(userId, input);
   }
 
-  getUserAttemptHistory(userId: string, limit: number, language?: LanguageEnum) {
-    return storage.getUserAttemptHistory(userId, limit, language);
+  getUserAttemptHistory(userId: string, input: AttemptHistoryInput) {
+    return storage.getUserAttemptHistory(userId, input);
   }
 
-  getLeaderboard(window: "daily" | "weekly" | "all_time", limit: number, language?: LanguageEnum) {
-    return storage.getLeaderboard(window, limit, language);
+  getLeaderboard(userId: string, input: LeaderboardInput) {
+    return storage.getLeaderboard({
+      userId,
+      window: input.window ?? "weekly",
+      page: input.page,
+      limit: input.limit,
+      language: input.language,
+    });
   }
 }

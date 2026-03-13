@@ -72,7 +72,7 @@ test("AnalyticsApiController.getLearningInsights forwards user id and language",
       return [];
     },
     async getLeaderboard() {
-      return [];
+      return { items: [], page: 1, limit: 25, total: 0, currentUserEntry: null };
     },
   };
 
@@ -106,7 +106,7 @@ test("AnalyticsApiController.getAttemptHistory maps AppError from service", asyn
       throw new AppError(400, "VALIDATION_ERROR", "Bad query");
     },
     async getLeaderboard() {
-      return [];
+      return { items: [], page: 1, limit: 25, total: 0, currentUserEntry: null };
     },
   };
 

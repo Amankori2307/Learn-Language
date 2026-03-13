@@ -14,18 +14,45 @@ export class AttemptHistoryQueryDto {
   @Type(() => Number)
   @IsInt()
   @Min(1)
+  page?: number;
+
+  @IsOptional()
+  @Type(() => Number)
+  @IsInt()
+  @Min(1)
   @Max(API_PAGINATION_LIMITS.GENERIC_MAX)
   limit?: number;
 
   @IsOptional()
   @IsEnum(LanguageEnum)
   language?: LanguageEnum;
+
+  @IsOptional()
+  search?: string;
+
+  @IsOptional()
+  @IsIn(["all", "correct", "wrong"])
+  result?: "all" | "correct" | "wrong";
+
+  @IsOptional()
+  @IsIn(["all", "source_to_target", "target_to_source"])
+  direction?: "all" | "source_to_target" | "target_to_source";
+
+  @IsOptional()
+  @IsIn(["newest", "oldest", "confidence_desc", "response_time_desc"])
+  sort?: "newest" | "oldest" | "confidence_desc" | "response_time_desc";
 }
 
 export class LeaderboardQueryDto {
   @IsOptional()
   @IsIn(["daily", "weekly", "all_time"])
   window?: "daily" | "weekly" | "all_time";
+
+  @IsOptional()
+  @Type(() => Number)
+  @IsInt()
+  @Min(1)
+  page?: number;
 
   @IsOptional()
   @Type(() => Number)

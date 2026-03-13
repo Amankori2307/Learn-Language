@@ -48,7 +48,7 @@ export class VocabularyApiController {
     @Query() query: ListClustersQueryDto,
   ) {
     try {
-      const clusters = await this.vocabularyService.listClusters(query.language);
+      const clusters = await this.vocabularyService.listClusters(query);
       sendSuccess(req, res, clusters);
     } catch (error) {
       this.handleError(req, res, error);

@@ -1,3 +1,4 @@
+import { type Dispatch, type SetStateAction } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { QuizDirectionEnum } from "@shared/domain/enums";
@@ -41,7 +42,7 @@ export function HistoryResultsTable({
   currentPage: number;
   totalPages: number;
   totalResults: number;
-  setPage: React.Dispatch<React.SetStateAction<number>>;
+  setPage: Dispatch<SetStateAction<number>>;
 }) {
   const { languageLabel } = useLearningLanguage();
 

@@ -137,7 +137,7 @@ export function QuizCard({
               />
             </div>
           ) : (
-            <div className="min-h-0 p-3 sm:p-4 md:px-6 md:pt-6 md:pb-0">
+            <div className="flex h-full min-h-0 flex-col p-3 sm:p-4 md:px-6 md:pt-6 md:pb-0">
               <QuizFeedbackPanel
                 result={result}
                 activeAudioKey={activeKey}

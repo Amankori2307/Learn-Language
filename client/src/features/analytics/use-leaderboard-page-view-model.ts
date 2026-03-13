@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { type Dispatch, type SetStateAction, useState } from "react";
 import { useLeaderboard, type LeaderboardWindow } from "@/hooks/use-leaderboard";
 
 export const LEADERBOARD_LIMIT = 25;
@@ -11,12 +11,27 @@ export const LEADERBOARD_WINDOW_OPTIONS: Array<{ key: LeaderboardWindow; label: 
 
 export function useLeaderboardPageViewModel() {
   const [window, setWindow] = useState<LeaderboardWindow>("weekly");
-  const leaderboardQuery = useLeaderboard(window, LEADERBOARD_LIMIT);
+  const [page, setPage] = useState(1);
+  const leaderboardQuery = useLeaderboard(window, page, LEADERBOARD_LIMIT);
+
+  const total = leaderboardQuery.data?.total ?? 0;
+  const totalPages = Math.max(1, Math.ceil(total / LEADERBOARD_LIMIT));
+  const currentPage = Math.min(page, totalPages);
+
+  const setWindowAndResetPage: Dispatch<SetStateAction<LeaderboardWindow>> = (nextWindow) => {
+    setPage(1);
+    setWindow(nextWindow);
+  };
 
   return {
     window,
-    setWindow,
-    entries: leaderboardQuery.data ?? [],
+    setWindow: setWindowAndResetPage,
+    currentPage,
+    totalPages,
+    totalResults: total,
+    setPage,
+    entries: leaderboardQuery.data?.items ?? [],
+    currentUserEntry: leaderboardQuery.data?.currentUserEntry ?? null,
     isLoading: leaderboardQuery.isLoading,
     isError: leaderboardQuery.isError,
     isFetching: leaderboardQuery.isFetching,

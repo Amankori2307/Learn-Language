@@ -1,3 +1,4 @@
+import { type Dispatch, type SetStateAction } from "react";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { PendingButton } from "@/components/ui/pending-button";
@@ -70,6 +71,10 @@ function getRowActions(reviewStatus: string) {
 
 export function ReviewQueuePanel({
   queueItems,
+  currentPage,
+  totalPages,
+  totalResults,
+  setPage,
   queueLoading,
   queueError,
   retryQueue,
@@ -81,6 +86,10 @@ export function ReviewQueuePanel({
   transitionWord,
 }: {
   queueItems: ReviewWord[];
+  currentPage: number;
+  totalPages: number;
+  totalResults: number;
+  setPage: Dispatch<SetStateAction<number>>;
   queueLoading: boolean;
   queueError: boolean;
   retryQueue: () => void;
@@ -122,8 +131,9 @@ export function ReviewQueuePanel({
           />
         </div>
       ) : (
-        <div className="overflow-auto md:max-h-[var(--pane-review-max-height)]">
-          {queueItems.map((word) => (
+        <>
+          <div className="overflow-auto md:max-h-[var(--pane-review-max-height)]">
+            {queueItems.map((word) => (
             (() => {
               const rowActions = getRowActions(word.reviewStatus);
               return (
@@ -189,8 +199,34 @@ export function ReviewQueuePanel({
             </div>
               );
             })()
-          ))}
-        </div>
+            ))}
+          </div>
+          <div className="flex flex-col gap-3 border-t border-border/50 bg-secondary/20 px-4 py-3 sm:flex-row sm:items-center sm:justify-between">
+            <p className="text-xs text-muted-foreground">
+              Page {currentPage} of {totalPages} • {totalResults} results
+            </p>
+            <div className="grid w-full grid-cols-2 gap-2 sm:flex sm:w-auto sm:items-center">
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => setPage((prev) => Math.max(1, prev - 1))}
+                disabled={currentPage <= 1}
+                className="w-full sm:w-auto"
+              >
+                Prev
+              </Button>
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => setPage((prev) => Math.min(totalPages, prev + 1))}
+                disabled={currentPage >= totalPages}
+                className="w-full sm:w-auto"
+              >
+                Next
+              </Button>
+            </div>
+          </div>
+        </>
       )}
     </div>
   );

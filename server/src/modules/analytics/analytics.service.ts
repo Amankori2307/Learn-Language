@@ -45,24 +45,41 @@ export class AnalyticsService {
   async getAttemptHistory(userId: string, input: AttemptHistoryInput) {
     const parsed = api.attempts.history.input?.safeParse(input);
     const parsedData = parsed && parsed.success ? parsed.data : null;
-    const limit = parsedData?.limit ?? 100;
+    const page = parsedData?.page ?? 1;
+    const limit = parsedData?.limit ?? 20;
     const language = parsedData?.language ?? parseLanguage(input.language);
-    return this.getOrSetCache(`history:${userId}:${limit}:${language ?? "all"}`, async () => {
-      const history = await this.repository.getUserAttemptHistory(userId, limit, language);
-      return history.map((item) => ({
-        ...item,
-        createdAt: item.createdAt?.toISOString() ?? null,
-      }));
-    });
+    return this.getOrSetCache(
+      `history:${userId}:${page}:${limit}:${language ?? "all"}:${parsedData?.search ?? ""}:${parsedData?.result ?? "all"}:${parsedData?.direction ?? "all"}:${parsedData?.sort ?? "newest"}`,
+      async () => {
+        const history = await this.repository.getUserAttemptHistory(userId, {
+          ...parsedData,
+          page,
+          limit,
+          language,
+        });
+        return {
+          ...history,
+          items: history.items.map((item) => ({
+            ...item,
+            createdAt: item.createdAt?.toISOString() ?? null,
+          })),
+        };
+      },
+    );
   }
 
-  async getLeaderboard(input: LeaderboardInput) {
-    const parsed = api.leaderboard.list.input?.parse(input) ?? { window: "weekly", limit: 25 };
+  async getLeaderboard(userId: string, input: LeaderboardInput) {
+    const parsed = api.leaderboard.list.input?.parse(input) ?? {
+      window: "weekly",
+      page: 1,
+      limit: 25,
+    };
     const window = parsed.window ?? "weekly";
+    const page = parsed.page ?? 1;
     const limit = parsed.limit ?? 25;
     return this.getOrSetCache(
-      `leaderboard:${window}:${limit}:${parsed.language ?? "all"}`,
-      () => this.repository.getLeaderboard(window, limit, parsed.language),
+      `leaderboard:${userId}:${window}:${page}:${limit}:${parsed.language ?? "all"}`,
+      () => this.repository.getLeaderboard(userId, { window, page, limit, language: parsed.language }),
     );
   }
 

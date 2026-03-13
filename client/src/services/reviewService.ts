@@ -30,8 +30,8 @@ export type CreateReviewDraftPayload = {
 };
 
 export const reviewService = {
-  async getQueue(status: ReviewStatus, limit: number) {
-    const params = new URLSearchParams({ status, limit: String(limit) });
+  async getQueue(status: ReviewStatus, page: number, limit: number) {
+    const params = new URLSearchParams({ status, page: String(page), limit: String(limit) });
     const response = await apiClient.get(
       buildApiUrl(`${api.review.queue.path}?${params.toString()}`),
     );

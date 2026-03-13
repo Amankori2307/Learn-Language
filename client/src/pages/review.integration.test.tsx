@@ -10,24 +10,29 @@ const bulkMutateAsync = vi.fn().mockResolvedValue({ updated: 1, skipped: 0 });
 const downloadVocabMutate = vi.fn();
 let currentUserRole = UserTypeEnum.REVIEWER;
 let reviewQueueState = {
-  data: [
-    {
-      id: 11,
-      language: LanguageEnum.TELUGU,
-      originalScript: "namaste",
-      transliteration: "namaste",
-      english: "hello",
-      partOfSpeech: "phrase",
-      reviewStatus: ReviewStatusEnum.PENDING_REVIEW,
-      sourceUrl: "https://example.com/source",
-      sourceCapturedAt: "2026-02-20T11:00:00.000Z",
-      submittedBy: "u-1",
-      submittedAt: "2026-02-20T11:00:00.000Z",
-      reviewedBy: null,
-      reviewedAt: null,
-      reviewNotes: null,
-    },
-  ],
+  data: {
+    items: [
+      {
+        id: 11,
+        language: LanguageEnum.TELUGU,
+        originalScript: "namaste",
+        transliteration: "namaste",
+        english: "hello",
+        partOfSpeech: "phrase",
+        reviewStatus: ReviewStatusEnum.PENDING_REVIEW,
+        sourceUrl: "https://example.com/source",
+        sourceCapturedAt: "2026-02-20T11:00:00.000Z",
+        submittedBy: "u-1",
+        submittedAt: "2026-02-20T11:00:00.000Z",
+        reviewedBy: null,
+        reviewedAt: null,
+        reviewNotes: null,
+      },
+    ],
+    page: 1,
+    limit: 50,
+    total: 1,
+  },
   isLoading: false,
   isError: false,
   refetch: vi.fn(),
@@ -95,24 +100,29 @@ describe("ReviewPage integration", () => {
     currentUserRole = UserTypeEnum.REVIEWER;
     downloadVocabMutate.mockReset();
     reviewQueueState = {
-      data: [
-        {
-          id: 11,
-          language: LanguageEnum.TELUGU,
-          originalScript: "namaste",
-          transliteration: "namaste",
-          english: "hello",
-          partOfSpeech: "phrase",
-          reviewStatus: ReviewStatusEnum.PENDING_REVIEW,
-          sourceUrl: "https://example.com/source",
-          sourceCapturedAt: "2026-02-20T11:00:00.000Z",
-          submittedBy: "u-1",
-          submittedAt: "2026-02-20T11:00:00.000Z",
-          reviewedBy: null,
-          reviewedAt: null,
-          reviewNotes: null,
-        },
-      ],
+      data: {
+        items: [
+          {
+            id: 11,
+            language: LanguageEnum.TELUGU,
+            originalScript: "namaste",
+            transliteration: "namaste",
+            english: "hello",
+            partOfSpeech: "phrase",
+            reviewStatus: ReviewStatusEnum.PENDING_REVIEW,
+            sourceUrl: "https://example.com/source",
+            sourceCapturedAt: "2026-02-20T11:00:00.000Z",
+            submittedBy: "u-1",
+            submittedAt: "2026-02-20T11:00:00.000Z",
+            reviewedBy: null,
+            reviewedAt: null,
+            reviewNotes: null,
+          },
+        ],
+        page: 1,
+        limit: 50,
+        total: 1,
+      },
       isLoading: false,
       isError: false,
       refetch: vi.fn(),
@@ -164,7 +174,8 @@ describe("ReviewPage integration", () => {
 
   it("shows status-aware bulk actions for approved queue", async () => {
     reviewQueueState = {
-      data: [
+      data: {
+        items: [
         {
           id: 11,
           language: LanguageEnum.TELUGU,
@@ -181,7 +192,11 @@ describe("ReviewPage integration", () => {
           reviewedAt: "2026-02-21T11:00:00.000Z",
           reviewNotes: null,
         },
-      ],
+        ],
+        page: 1,
+        limit: 50,
+        total: 1,
+      },
       isLoading: false,
       isError: false,
       refetch: vi.fn(),
@@ -196,7 +211,8 @@ describe("ReviewPage integration", () => {
 
   it("shows rejected-row actions without a duplicate reject action", async () => {
     reviewQueueState = {
-      data: [
+      data: {
+        items: [
         {
           id: 11,
           language: LanguageEnum.TELUGU,
@@ -213,7 +229,11 @@ describe("ReviewPage integration", () => {
           reviewedAt: "2026-02-21T11:00:00.000Z",
           reviewNotes: "needs cleaner example",
         },
-      ],
+        ],
+        page: 1,
+        limit: 50,
+        total: 1,
+      },
       isLoading: false,
       isError: false,
       refetch: vi.fn(),
@@ -271,7 +291,7 @@ describe("ReviewPage integration", () => {
 
   it("renders queue loading state for reviewer users", () => {
     reviewQueueState = {
-      data: [],
+      data: { items: [], page: 1, limit: 50, total: 0 },
       isLoading: true,
       isError: false,
       refetch: vi.fn(),
@@ -285,7 +305,7 @@ describe("ReviewPage integration", () => {
     const user = userEvent.setup();
     const refetch = vi.fn();
     reviewQueueState = {
-      data: [],
+      data: { items: [], page: 1, limit: 50, total: 0 },
       isLoading: false,
       isError: true,
       refetch,
@@ -300,7 +320,7 @@ describe("ReviewPage integration", () => {
 
   it("renders empty queue messaging when no items are available", () => {
     reviewQueueState = {
-      data: [],
+      data: { items: [], page: 1, limit: 50, total: 0 },
       isLoading: false,
       isError: false,
       refetch: vi.fn(),

@@ -1,6 +1,7 @@
 import { Injectable } from "@nestjs/common";
 import { storage } from "../../infrastructure/storage";
 import { LanguageEnum } from "@shared/domain/enums";
+import { ListClustersInput } from "./vocabulary.types";
 
 @Injectable()
 export class VocabularyRepository {
@@ -12,8 +13,8 @@ export class VocabularyRepository {
     return storage.getWord(wordId);
   }
 
-  getClusters(language?: LanguageEnum) {
-    return storage.getClusters(language);
+  getClusters(input: ListClustersInput) {
+    return storage.getClusters(input);
   }
 
   getCluster(clusterId: number, language?: LanguageEnum) {

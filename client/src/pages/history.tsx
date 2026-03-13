@@ -20,7 +20,7 @@ export default function HistoryPage() {
     sortBy,
     setSortBy,
     setPage,
-    filteredAttempts,
+    totalResults,
     currentPage,
     totalPages,
     pageAttempts,
@@ -69,7 +69,7 @@ export default function HistoryPage() {
               </Button>
             }
           />
-        ) : filteredAttempts.length === 0 ? (
+        ) : totalResults === 0 ? (
           <SurfaceMessage
             title="No attempts match these filters"
             description="Adjust the search term or filters to widen the result set."
@@ -80,7 +80,7 @@ export default function HistoryPage() {
             pageAttempts={pageAttempts}
             currentPage={currentPage}
             totalPages={totalPages}
-            totalResults={filteredAttempts.length}
+            totalResults={totalResults}
             setPage={setPage}
           />
         )}

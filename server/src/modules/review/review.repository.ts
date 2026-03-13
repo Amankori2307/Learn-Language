@@ -6,11 +6,16 @@ import {
   IResolveConflictOptions,
   ITransitionOptions,
 } from "./review.repository.types";
+import { ReviewQueueInput } from "./review.types";
 
 @Injectable()
 export class ReviewRepository {
-  getReviewQueue(status: ReviewStatusEnum, limit: number) {
-    return storage.getReviewQueue(status, limit);
+  getReviewQueue(input: ReviewQueueInput) {
+    return storage.getReviewQueue({
+      status: input.status ?? ReviewStatusEnum.PENDING_REVIEW,
+      page: input.page,
+      limit: input.limit,
+    });
   }
 
   getConflictReviewQueue(limit: number) {

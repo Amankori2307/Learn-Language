@@ -5,7 +5,7 @@ import { AppError } from "../../common/errors/app-error";
 import { LanguageEnum } from "@shared/domain/enums";
 
 test("VocabularyService.listClusters forwards parsed language", async () => {
-  let receivedLanguage: LanguageEnum | undefined;
+  let receivedInput: unknown = null;
 
   const repository = {
     async getWords() {
@@ -14,9 +14,20 @@ test("VocabularyService.listClusters forwards parsed language", async () => {
     async getWord() {
       return null;
     },
-    async getClusters(language?: LanguageEnum) {
-      receivedLanguage = language;
-      return [{ id: 1, name: "Travel", wordCount: 14 }];
+    async getClusters(input: unknown) {
+      receivedInput = input;
+      return {
+        items: [{ id: 1, name: "Travel", wordCount: 14 }],
+        page: 1,
+        limit: 12,
+        total: 1,
+        availableTypes: ["all", "topic"],
+        summary: {
+          totalWords: 14,
+          nonEmptyClusters: 1,
+          topCluster: { id: 1, name: "Travel", wordCount: 14 },
+        },
+      };
     },
     async getCluster() {
       return null;
@@ -24,10 +35,15 @@ test("VocabularyService.listClusters forwards parsed language", async () => {
   };
 
   const service = new VocabularyService(repository as any);
-  const result = await service.listClusters(LanguageEnum.TELUGU);
+  const result = await service.listClusters({ language: LanguageEnum.TELUGU });
 
-  assert.equal(receivedLanguage, LanguageEnum.TELUGU);
-  assert.equal(result[0]?.name, "Travel");
+  assert.deepEqual(receivedInput, {
+    language: LanguageEnum.TELUGU,
+    sort: "words_desc",
+    page: 1,
+    limit: 12,
+  });
+  assert.equal(result.items[0]?.name, "Travel");
 });
 
 test("VocabularyService.getCluster throws not found when repository returns null", async () => {

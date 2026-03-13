@@ -5,8 +5,7 @@ import { LanguageEnum } from "@shared/domain/enums";
 
 test("AnalyticsService.getAttemptHistory falls back to parsed language and normalizes dates", async () => {
   let receivedUserId: string | null = null;
-  let receivedLimit: number | null = null;
-  let receivedLanguage: LanguageEnum | undefined;
+  let receivedInput: unknown = null;
 
   const repository = {
     async getUserStats() {
@@ -18,18 +17,27 @@ test("AnalyticsService.getAttemptHistory falls back to parsed language and norma
     async getWordBucket() {
       return null;
     },
-    async getUserAttemptHistory(userId: string, limit: number, language?: LanguageEnum) {
+    async getUserAttemptHistory(userId: string, input: unknown) {
       receivedUserId = userId;
-      receivedLimit = limit;
-      receivedLanguage = language;
-      return [
-        {
-          id: 1,
-          isCorrect: true,
-          createdAt: new Date("2026-03-10T10:00:00.000Z"),
-          word: { transliteration: "namaste", originalScript: "నమస్తే", english: "hello" },
+      receivedInput = input;
+      return {
+        items: [
+          {
+            id: 1,
+            isCorrect: true,
+            createdAt: new Date("2026-03-10T10:00:00.000Z"),
+            word: { transliteration: "namaste", originalScript: "నమస్తే", english: "hello" },
+          },
+        ],
+        page: 1,
+        limit: 20,
+        total: 1,
+        summary: {
+          total: 1,
+          correct: 1,
+          accuracy: 100,
         },
-      ];
+      };
     },
     async getLeaderboard() {
       return [];
@@ -43,15 +51,17 @@ test("AnalyticsService.getAttemptHistory falls back to parsed language and norma
   });
 
   assert.equal(receivedUserId, "u-1");
-  assert.equal(receivedLimit, 100);
-  assert.equal(receivedLanguage, LanguageEnum.TELUGU);
-  assert.equal(result[0]?.createdAt, "2026-03-10T10:00:00.000Z");
+  assert.deepEqual(receivedInput, {
+    page: 1,
+    limit: 20,
+    language: LanguageEnum.TELUGU,
+  });
+  assert.equal(result.items[0]?.createdAt, "2026-03-10T10:00:00.000Z");
 });
 
 test("AnalyticsService.getLeaderboard applies default window and limit", async () => {
-  let receivedWindow: string | null = null;
-  let receivedLimit: number | null = null;
-  let receivedLanguage: LanguageEnum | undefined;
+  let receivedUserId: string | null = null;
+  let receivedInput: unknown = null;
 
   const repository = {
     async getUserStats() {
@@ -66,20 +76,23 @@ test("AnalyticsService.getLeaderboard applies default window and limit", async (
     async getUserAttemptHistory() {
       return [];
     },
-    async getLeaderboard(window: string, limit: number, language?: LanguageEnum) {
-      receivedWindow = window;
-      receivedLimit = limit;
-      receivedLanguage = language;
-      return [];
+    async getLeaderboard(userId: string, input: unknown) {
+      receivedUserId = userId;
+      receivedInput = input;
+      return { items: [], page: 1, limit: 25, total: 0, currentUserEntry: null };
     },
   };
 
   const service = new AnalyticsService(repository as any);
-  await service.getLeaderboard({});
+  await service.getLeaderboard("u-1", {});
 
-  assert.equal(receivedWindow, "weekly");
-  assert.equal(receivedLimit, 25);
-  assert.equal(receivedLanguage, undefined);
+  assert.equal(receivedUserId, "u-1");
+  assert.deepEqual(receivedInput, {
+    window: "weekly",
+    page: 1,
+    limit: 25,
+    language: undefined,
+  });
 });
 
 test("AnalyticsService.getWordBucket forwards parsed payload", async () => {
@@ -141,13 +154,19 @@ test("AnalyticsService caches repeated leaderboard reads by normalized key", asy
     },
     async getLeaderboard() {
       leaderboardCalls += 1;
-      return [{ rank: 1, userId: "u-1" }];
+      return {
+        items: [{ rank: 1, userId: "u-1" }],
+        page: 1,
+        limit: 25,
+        total: 1,
+        currentUserEntry: { rank: 1, userId: "u-1" },
+      };
     },
   };
 
   const service = new AnalyticsService(repository as any);
-  const first = await service.getLeaderboard({});
-  const second = await service.getLeaderboard({ window: "weekly", limit: 25 });
+  const first = await service.getLeaderboard("u-1", {});
+  const second = await service.getLeaderboard("u-1", { window: "weekly", limit: 25 });
 
   assert.equal(leaderboardCalls, 1);
   assert.deepEqual(first, second);

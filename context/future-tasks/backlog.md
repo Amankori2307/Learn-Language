@@ -31,6 +31,7 @@ When a future item becomes active, move it into `context/active-tasks/backlog.md
 | F-009 | todo | Increase semantic component adoption on feature surfaces | Replace acceptable tokenized one-off compositions with higher-level shared primitives where patterns have stabilized |
 | F-020 | todo | Improve Telugu audio quality | Evaluate better Telugu TTS options while keeping the current English audio setup |
 | F-030 | todo | Add language filter to admin vocab export | Let admins download repo-style `words.json` and `sentences.json` for a specific language instead of always exporting the full dataset |
+| F-039 | todo | Show the current user's rank on the leaderboard | Surface the signed-in learner's current position even when their rank falls outside the visible leaderboard page |
 | F-032 | todo | Add in-place rejected-word edit and resubmit flow | Replace the current revised-draft workaround with true editing of rejected vocabulary and a direct move back into approval |
 | F-033 | todo | Add first-class sentence review workflow | Give example sentences their own review/edit lifecycle instead of governing them only through the parent word status |
 | F-021 | todo | Add German language support | Extend vocab, audio, and UI to support German learning flows |

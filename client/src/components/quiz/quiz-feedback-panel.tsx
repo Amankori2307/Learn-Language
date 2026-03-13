@@ -51,17 +51,17 @@ export function QuizFeedbackPanel({
   }, [onNext]);
 
   return (
-    <div className="grid h-full min-h-0 grid-rows-[minmax(0,1fr)_auto] gap-2 sm:gap-3">
+    <div className="grid h-full min-h-0 grid-rows-[minmax(0,1fr)_auto] gap-0">
       <motion.div
         initial={{ opacity: 0, y: 8 }}
         animate={{ opacity: 1, y: 0 }}
         exit={{ opacity: 0, y: -8 }}
         aria-live="polite"
-        className="grid min-h-0 grid-rows-[auto_minmax(0,1fr)] gap-2 overflow-hidden md:grid-cols-[minmax(18rem,22rem)_minmax(0,1fr)] md:grid-rows-1 md:gap-5"
+        className="grid h-full min-h-0 grid-rows-[auto_minmax(0,1fr)] gap-2 overflow-hidden pb-2 sm:pb-3 md:grid-cols-[minmax(18rem,22rem)_minmax(0,1fr)] md:grid-rows-1 md:gap-5 md:pb-4"
       >
         <div
           className={cn(
-            "relative overflow-hidden rounded-[var(--radius-lg)] border px-3 py-3 sm:px-4 md:px-5 md:py-5",
+            "relative h-full min-h-0 overflow-hidden rounded-[var(--radius-lg)] border px-3 py-3 sm:px-4 md:px-5 md:py-5",
             result.isCorrect ? "surface-status-success" : "surface-status-error",
           )}
         >
@@ -140,7 +140,7 @@ export function QuizFeedbackPanel({
           </div>
         </div>
 
-        <div className="min-h-0 overflow-hidden">
+        <div className="h-full min-h-0 overflow-hidden">
           {result.examples.length > 0 ? (
             <QuizFeedbackExamples
               examples={result.examples}
@@ -154,7 +154,7 @@ export function QuizFeedbackPanel({
         </div>
       </motion.div>
 
-      <div className="sticky bottom-0 border-t border-border/60 bg-background/95 pt-2 pb-[calc(env(safe-area-inset-bottom)+0.5rem)] backdrop-blur md:static md:bg-transparent md:pb-6 md:backdrop-blur-0">
+      <div className="sticky bottom-0 border-t border-border/60 bg-background/95 pt-2 pb-[calc(env(safe-area-inset-bottom)+0.5rem)] backdrop-blur md:static md:pb-6 md:backdrop-blur-0">
         <Button
           ref={continueButtonRef}
           size="lg"

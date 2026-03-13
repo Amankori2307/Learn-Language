@@ -10,18 +10,18 @@ export function reviewQueueQueryPrefix() {
   return [api.review.queue.path] as const;
 }
 
-export function reviewQueueQueryKey(status: ReviewStatus, limit: number) {
-  return [api.review.queue.path, status, limit] as const;
+export function reviewQueueQueryKey(status: ReviewStatus, page: number, limit: number) {
+  return [api.review.queue.path, status, page, limit] as const;
 }
 
 export function reviewHistoryQueryKey(wordId?: number) {
   return [api.review.history.path, wordId] as const;
 }
 
-export function useReviewQueue(status: ReviewStatus, limit = 50) {
+export function useReviewQueue(status: ReviewStatus, page: number, limit = 50) {
   return useQuery({
-    queryKey: reviewQueueQueryKey(status, limit),
-    queryFn: () => reviewService.getQueue(status, limit),
+    queryKey: reviewQueueQueryKey(status, page, limit),
+    queryFn: () => reviewService.getQueue(status, page, limit),
   });
 }
 

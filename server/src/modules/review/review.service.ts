@@ -13,21 +13,23 @@ export class ReviewService {
   async getQueue(input: ReviewQueueInput) {
     const parsed = api.review.queue.input?.parse(input) ?? {
       status: ReviewStatusEnum.PENDING_REVIEW,
+      page: 1,
       limit: 50,
     };
-    const status = parsed.status ?? ReviewStatusEnum.PENDING_REVIEW;
-    const limit = parsed.limit ?? 50;
-    const queue = await this.repository.getReviewQueue(status, limit);
-    return queue.map((word) => ({
-      ...word,
-      sourceCapturedAt: word.sourceCapturedAt?.toISOString() ?? null,
-      submittedAt: word.submittedAt?.toISOString() ?? null,
-      reviewedAt: word.reviewedAt?.toISOString() ?? null,
-      createdAt: word.createdAt?.toISOString() ?? null,
-      reviewerConfidenceScore: word.reviewerConfidenceScore ?? null,
-      requiresSecondaryReview: word.requiresSecondaryReview ?? false,
-      disagreementStatus: word.disagreementStatus ?? ReviewDisagreementStatusEnum.NONE,
-    }));
+    const queue = await this.repository.getReviewQueue(parsed);
+    return {
+      ...queue,
+      items: queue.items.map((word) => ({
+        ...word,
+        sourceCapturedAt: word.sourceCapturedAt?.toISOString() ?? null,
+        submittedAt: word.submittedAt?.toISOString() ?? null,
+        reviewedAt: word.reviewedAt?.toISOString() ?? null,
+        createdAt: word.createdAt?.toISOString() ?? null,
+        reviewerConfidenceScore: word.reviewerConfidenceScore ?? null,
+        requiresSecondaryReview: word.requiresSecondaryReview ?? false,
+        disagreementStatus: word.disagreementStatus ?? ReviewDisagreementStatusEnum.NONE,
+      })),
+    };
   }
 
   async getConflicts(input: ReviewConflictInput) {

@@ -170,6 +170,7 @@ describe("QuizCard", () => {
     );
 
     expect(container.innerHTML.includes("bg-background/95")).toBe(true);
+    expect(container.innerHTML.includes("grid h-full min-h-0 grid-rows-[minmax(0,1fr)_auto] gap-0")).toBe(true);
   });
 
   it("fills the session frame instead of recalculating mobile viewport height", () => {
@@ -343,6 +344,7 @@ describe("QuizCard", () => {
     expect(container.innerHTML.includes("md:border-border/50")).toBe(true);
     expect(container.innerHTML.includes("md:bg-card/95")).toBe(true);
     expect(container.innerHTML.includes("md:shadow-2xl")).toBe(true);
+    expect(container.innerHTML.includes("overflow-y-auto")).toBe(true);
   });
 
   it("shows confidence controls only when the preference is enabled", async () => {

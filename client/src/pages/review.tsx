@@ -27,6 +27,10 @@ export default function ReviewPage() {
     notes,
     setNotes,
     queueItems,
+    currentPage,
+    totalPages,
+    totalResults,
+    setPage,
     queueLoading,
     queueError,
     retryQueue,
@@ -74,6 +78,10 @@ export default function ReviewPage() {
         <div className="grid gap-6 xl:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)]">
           <ReviewQueuePanel
             queueItems={queueItems}
+            currentPage={currentPage}
+            totalPages={totalPages}
+            totalResults={totalResults}
+            setPage={setPage}
             queueLoading={queueLoading}
             queueError={queueError}
             retryQueue={retryQueue}

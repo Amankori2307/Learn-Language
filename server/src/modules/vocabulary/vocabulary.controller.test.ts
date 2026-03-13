@@ -52,8 +52,19 @@ function error(requestId: string, code: string, message: string) {
 }
 
 test("VocabularyApiController.listClusters forwards language query", async () => {
-  let receivedLanguage: LanguageEnum | undefined;
-  const expected = [{ id: 1, name: "Travel", wordCount: 14 }];
+  let receivedInput: unknown = null;
+  const expected = {
+    items: [{ id: 1, name: "Travel", wordCount: 14 }],
+    page: 1,
+    limit: 12,
+    total: 1,
+    availableTypes: ["all", "topic"],
+    summary: {
+      totalWords: 14,
+      nonEmptyClusters: 1,
+      topCluster: { id: 1, name: "Travel", wordCount: 14 },
+    },
+  };
 
   const vocabularyService = {
     async listWords() {
@@ -62,8 +73,8 @@ test("VocabularyApiController.listClusters forwards language query", async () =>
     async getWord() {
       return null;
     },
-    async listClusters(language?: LanguageEnum) {
-      receivedLanguage = language;
+    async listClusters(input: unknown) {
+      receivedInput = input;
       return expected;
     },
     async getCluster() {
@@ -75,9 +86,9 @@ test("VocabularyApiController.listClusters forwards language query", async () =>
   const { response, state } = createMockResponse();
   const request = { requestId: "req-clusters" } as unknown as Request;
 
-  await controller.listClusters(request, response, { language: LanguageEnum.TELUGU });
+  await controller.listClusters(request, response, { language: LanguageEnum.TELUGU, page: 1 });
 
-  assert.equal(receivedLanguage, LanguageEnum.TELUGU);
+  assert.deepEqual(receivedInput, { language: LanguageEnum.TELUGU, page: 1 });
   assert.equal(state.statusCode, 200);
   assert.deepEqual(state.body, success("req-clusters", expected));
 });

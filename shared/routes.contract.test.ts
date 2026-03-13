@@ -145,8 +145,25 @@ test("stats contract accepts direction metrics", () => {
 });
 
 test("leaderboard contract accepts ranked entries", () => {
-  const payload = [
-    {
+  const payload = {
+    items: [
+      {
+        rank: 1,
+        userId: "u-1",
+        firstName: "Aman",
+        lastName: "K",
+        email: "a@example.com",
+        profileImageUrl: null,
+        xp: 180,
+        streak: 5,
+        attempts: 24,
+        accuracy: 83.3,
+      },
+    ],
+    page: 1,
+    limit: 25,
+    total: 1,
+    currentUserEntry: {
       rank: 1,
       userId: "u-1",
       firstName: "Aman",
@@ -158,34 +175,45 @@ test("leaderboard contract accepts ranked entries", () => {
       attempts: 24,
       accuracy: 83.3,
     },
-  ];
+  };
 
   const parsed = api.leaderboard.list.responses[200].parse(success(payload));
-  assert.equal(parsed.data[0].rank, 1);
+  assert.equal(parsed.data.items[0].rank, 1);
+  assert.equal(parsed.data.currentUserEntry?.userId, "u-1");
 });
 
 test("attempt history contract accepts payload", () => {
-  const payload = [
-    {
-      id: 99,
-      wordId: 1,
-      isCorrect: true,
-      confidenceLevel: 3,
-      direction: QuizDirectionEnum.SOURCE_TO_TARGET,
-      questionType: QuizQuestionTypeEnum.SOURCE_TO_TARGET,
-      responseTimeMs: 1820,
-      createdAt: "2026-02-20T12:00:00.000Z",
-      word: {
-        language: LanguageEnum.TELUGU,
-        originalScript: "neeru",
-        transliteration: "neeru",
-        english: "water",
+  const payload = {
+    items: [
+      {
+        id: 99,
+        wordId: 1,
+        isCorrect: true,
+        confidenceLevel: 3,
+        direction: QuizDirectionEnum.SOURCE_TO_TARGET,
+        questionType: QuizQuestionTypeEnum.SOURCE_TO_TARGET,
+        responseTimeMs: 1820,
+        createdAt: "2026-02-20T12:00:00.000Z",
+        word: {
+          language: LanguageEnum.TELUGU,
+          originalScript: "neeru",
+          transliteration: "neeru",
+          english: "water",
+        },
       },
+    ],
+    page: 1,
+    limit: 20,
+    total: 1,
+    summary: {
+      total: 1,
+      correct: 1,
+      accuracy: 100,
     },
-  ];
+  };
 
   const parsed = api.attempts.history.responses[200].parse(success(payload));
-  assert.equal(parsed.data[0].wordId, 1);
+  assert.equal(parsed.data.items[0].wordId, 1);
 });
 
 test("profile update contract rejects invalid avatar URL", () => {
@@ -226,30 +254,35 @@ test("audio resolve contract validates and accepts cached miss payload", () => {
 });
 
 test("review queue contract accepts pending review payload", () => {
-  const payload = [
-    {
-      id: 10,
-      language: LanguageEnum.TELUGU,
-      originalScript: "namaste",
-      transliteration: "namaste",
-      english: "hello",
-      partOfSpeech: "phrase",
-      reviewStatus: ReviewStatusEnum.PENDING_REVIEW,
-      sourceUrl: null,
-      sourceCapturedAt: null,
-      submittedBy: null,
-      submittedAt: null,
-      reviewedBy: null,
-      reviewedAt: null,
-      reviewNotes: null,
-      reviewerConfidenceScore: 4,
-      requiresSecondaryReview: false,
-      disagreementStatus: ReviewDisagreementStatusEnum.NONE,
-    },
-  ];
+  const payload = {
+    items: [
+      {
+        id: 10,
+        language: LanguageEnum.TELUGU,
+        originalScript: "namaste",
+        transliteration: "namaste",
+        english: "hello",
+        partOfSpeech: "phrase",
+        reviewStatus: ReviewStatusEnum.PENDING_REVIEW,
+        sourceUrl: null,
+        sourceCapturedAt: null,
+        submittedBy: null,
+        submittedAt: null,
+        reviewedBy: null,
+        reviewedAt: null,
+        reviewNotes: null,
+        reviewerConfidenceScore: 4,
+        requiresSecondaryReview: false,
+        disagreementStatus: ReviewDisagreementStatusEnum.NONE,
+      },
+    ],
+    page: 1,
+    limit: 50,
+    total: 1,
+  };
 
   const parsed = api.review.queue.responses[200].parse(success(payload));
-  assert.equal(parsed.data[0].reviewStatus, ReviewStatusEnum.PENDING_REVIEW);
+  assert.equal(parsed.data.items[0].reviewStatus, ReviewStatusEnum.PENDING_REVIEW);
 });
 
 test("review transition contract rejects invalid status", () => {

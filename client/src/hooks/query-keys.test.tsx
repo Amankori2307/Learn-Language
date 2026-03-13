@@ -5,7 +5,7 @@ import {
 } from "./use-attempt-history";
 import { leaderboardQueryKey } from "./use-leaderboard";
 import { wordBucketQueryKey } from "./use-word-bucket";
-import { clusterQueryKey, clustersQueryKey } from "./use-clusters";
+import { clusterQueryKey, clustersCatalogQueryKey, clustersQueryKey } from "./use-clusters";
 import { authMeQueryKey } from "./use-auth";
 import { profileQueryKey } from "./use-profile";
 import { reviewHistoryQueryKey, reviewQueueQueryKey } from "./use-review";
@@ -29,14 +29,32 @@ describe("shared query key builders", () => {
       "/api/analytics/learning",
       "telugu",
     ]);
-    expect(attemptHistoryQueryKey(200, "telugu")).toEqual([
+    expect(
+      attemptHistoryQueryKey(
+        {
+          page: 1,
+          limit: 20,
+          search: "",
+          result: "all",
+          direction: "all",
+          sort: "newest",
+        },
+        "telugu",
+      ),
+    ).toEqual([
       "/api/attempts/history",
-      200,
+      1,
+      20,
+      "",
+      "all",
+      "all",
+      "newest",
       "telugu",
     ]);
-    expect(leaderboardQueryKey("weekly", 25, "telugu")).toEqual([
+    expect(leaderboardQueryKey("weekly", 1, 25, "telugu")).toEqual([
       "/api/leaderboard",
       "weekly",
+      1,
       25,
       "telugu",
     ]);
@@ -51,15 +69,28 @@ describe("shared query key builders", () => {
 
   it("builds stable vocabulary, profile, and review query keys", () => {
     expect(clustersQueryKey("telugu")).toEqual(["/api/clusters", "telugu"]);
+    expect(
+      clustersCatalogQueryKey(
+        {
+          q: "",
+          type: "all",
+          sort: "words_desc",
+          page: 1,
+          limit: 12,
+        },
+        "telugu",
+      ),
+    ).toEqual(["/api/clusters", "", "all", "words_desc", 1, 12, "telugu"]);
     expect(clusterQueryKey(42, "telugu")).toEqual(["/api/clusters/:id", 42, "telugu"]);
     expect(wordsQueryKey()).toEqual(["/api/words", null]);
     expect(wordsQueryKey(42)).toEqual(["/api/words", 42]);
     expect(wordQueryKey(42)).toEqual(["/api/words/:id", 42]);
     expect(profileQueryKey()).toEqual(["/api/auth/profile"]);
     expect(authMeQueryKey()).toEqual(["/api/auth/me"]);
-    expect(reviewQueueQueryKey(ReviewStatusEnum.PENDING_REVIEW, 50)).toEqual([
+    expect(reviewQueueQueryKey(ReviewStatusEnum.PENDING_REVIEW, 1, 50)).toEqual([
       "/api/review/queue",
       ReviewStatusEnum.PENDING_REVIEW,
+      1,
       50,
     ]);
     expect(reviewHistoryQueryKey(42)).toEqual(["/api/review/words/:id/history", 42]);

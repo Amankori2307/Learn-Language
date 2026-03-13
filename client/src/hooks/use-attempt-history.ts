@@ -1,18 +1,45 @@
 import { useQuery } from "@tanstack/react-query";
 import { api, parseSuccessResponse } from "@shared/routes";
+import { QuizDirectionEnum } from "@shared/domain/enums";
 import { useLearningLanguage } from "@/hooks/use-language";
 import { apiClient, buildApiUrl } from "@/services/apiClient";
 
-export function attemptHistoryQueryKey(limit: number, language: string) {
-  return [api.attempts.history.path, limit, language] as const;
+export type AttemptHistoryQueryInput = {
+  page: number;
+  limit: number;
+  search: string;
+  result: "all" | "correct" | "wrong";
+  direction: "all" | QuizDirectionEnum.SOURCE_TO_TARGET | QuizDirectionEnum.TARGET_TO_SOURCE;
+  sort: "newest" | "oldest" | "confidence_desc" | "response_time_desc";
+};
+
+export function attemptHistoryQueryKey(input: AttemptHistoryQueryInput, language: string) {
+  return [
+    api.attempts.history.path,
+    input.page,
+    input.limit,
+    input.search,
+    input.result,
+    input.direction,
+    input.sort,
+    language,
+  ] as const;
 }
 
-export function useAttemptHistory(limit: number = 100) {
+export function useAttemptHistory(input: AttemptHistoryQueryInput) {
   const { language } = useLearningLanguage();
   return useQuery({
-    queryKey: attemptHistoryQueryKey(limit, language),
+    queryKey: attemptHistoryQueryKey(input, language),
     queryFn: async () => {
-      const params = new URLSearchParams({ limit: String(limit), language });
+      const params = new URLSearchParams({
+        page: String(input.page),
+        limit: String(input.limit),
+        search: input.search,
+        result: input.result,
+        direction: input.direction,
+        sort: input.sort,
+        language,
+      });
       const res = await apiClient.get(
         buildApiUrl(`${api.attempts.history.path}?${params.toString()}`),
       );

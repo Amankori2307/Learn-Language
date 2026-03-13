@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Trophy } from "lucide-react";
 import type { LeaderboardWindow } from "@/hooks/use-leaderboard";
+import type { LeaderboardEntry } from "./leaderboard-panel";
 
 type WindowOption = {
   key: LeaderboardWindow;
@@ -12,11 +13,13 @@ export function LeaderboardHeader({
   setWindow,
   options,
   isFetching,
+  currentUserEntry,
 }: {
   window: LeaderboardWindow;
   setWindow: React.Dispatch<React.SetStateAction<LeaderboardWindow>>;
   options: WindowOption[];
   isFetching: boolean;
+  currentUserEntry: LeaderboardEntry | null;
 }) {
   return (
     <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
@@ -28,6 +31,11 @@ export function LeaderboardHeader({
         <p className="mt-1 text-muted-foreground">
           Track top learners by XP, streak, and accuracy.
         </p>
+        {currentUserEntry ? (
+          <p className="mt-2 text-sm font-medium text-foreground">
+            Your rank: #{currentUserEntry.rank} • {currentUserEntry.xp} XP • {currentUserEntry.accuracy}%
+          </p>
+        ) : null}
       </div>
       <div className="grid w-full grid-cols-2 gap-2 sm:flex sm:w-auto sm:flex-wrap">
         {options.map((option) => (

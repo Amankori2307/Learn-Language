@@ -1,9 +1,11 @@
+import { type Dispatch, type SetStateAction } from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { buildAvatarUrl } from "@/lib/avatar";
 import { useLeaderboard } from "@/hooks/use-leaderboard";
 
-type LeaderboardEntry = NonNullable<ReturnType<typeof useLeaderboard>["data"]>[number];
+export type LeaderboardEntry = NonNullable<ReturnType<typeof useLeaderboard>["data"]>["items"][number];
 
 function initials(firstName: string | null, lastName: string | null, email: string | null) {
   const name = `${firstName ?? ""} ${lastName ?? ""}`.trim();
@@ -33,19 +35,24 @@ function avatarFor(entry: {
 
 export function LeaderboardPanel({
   entries,
+  currentPage,
+  totalPages,
+  totalResults,
+  setPage,
 }: {
   entries: LeaderboardEntry[];
+  currentPage: number;
+  totalPages: number;
+  totalResults: number;
+  setPage: Dispatch<SetStateAction<number>>;
 }) {
   return (
-    <>
+    <div className="overflow-hidden rounded-2xl border border-border/50 bg-card">
       <div className="space-y-3 md:hidden">
         {entries.map((entry) => (
           <div
             key={entry.userId}
-            className={cn(
-              "rounded-2xl border border-border/50 bg-card p-4",
-              entry.rank <= 3 && "surface-status-warning-subtle",
-            )}
+            className={cn("border-b border-border/30 p-4 last:border-b-0", entry.rank <= 3 && "surface-status-warning-subtle")}
           >
             <div className="flex items-center justify-between gap-3">
               <div className="flex min-w-0 items-center gap-3">
@@ -77,7 +84,7 @@ export function LeaderboardPanel({
         ))}
       </div>
 
-      <div className="hidden overflow-hidden rounded-2xl border border-border/50 bg-card md:block">
+      <div className="hidden md:block">
         <div className="grid grid-cols-12 gap-2 border-b border-border/50 px-4 py-3 text-xs font-semibold uppercase tracking-wide text-muted-foreground">
           <div className="col-span-1">Rank</div>
           <div className="col-span-5">Learner</div>
@@ -116,6 +123,31 @@ export function LeaderboardPanel({
           </div>
         ))}
       </div>
-    </>
+      <div className="flex flex-col gap-3 border-t border-border/50 bg-secondary/20 px-4 py-3 sm:flex-row sm:items-center sm:justify-between">
+        <p className="text-xs text-muted-foreground">
+          Page {currentPage} of {totalPages} • {totalResults} results
+        </p>
+        <div className="grid w-full grid-cols-2 gap-2 sm:flex sm:w-auto sm:items-center">
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => setPage((prev) => Math.max(1, prev - 1))}
+            disabled={currentPage <= 1}
+            className="w-full sm:w-auto"
+          >
+            Prev
+          </Button>
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => setPage((prev) => Math.min(totalPages, prev + 1))}
+            disabled={currentPage >= totalPages}
+            className="w-full sm:w-auto"
+          >
+            Next
+          </Button>
+        </div>
+      </div>
+    </div>
   );
 }

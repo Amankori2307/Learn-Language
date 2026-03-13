@@ -93,7 +93,11 @@ export function useSubmitAnswer() {
     },
     onSuccess: () => {
       QUIZ_SUBMIT_INVALIDATION_QUERY_KEYS.forEach((queryKey) => {
-        queryClient.invalidateQueries({ queryKey: [...queryKey, language] });
+        const needsLanguageScopedKey =
+          queryKey[0] === api.stats.get.path || queryKey[0] === api.analytics.learning.path;
+        queryClient.invalidateQueries({
+          queryKey: needsLanguageScopedKey ? [...queryKey, language] : [...queryKey],
+        });
       });
     },
   });

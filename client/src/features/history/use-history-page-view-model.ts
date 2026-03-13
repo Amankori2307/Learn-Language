@@ -11,64 +11,28 @@ export type HistoryDirectionFilter =
 export type HistorySortOption = "newest" | "oldest" | "confidence_desc" | "response_time_desc";
 
 export function useHistoryPageViewModel() {
-  const historyQuery = useAttemptHistory(200);
   const [search, setSearch] = useState("");
   const [resultFilter, setResultFilter] = useState<HistoryResultFilter>("all");
   const [directionFilter, setDirectionFilter] = useState<HistoryDirectionFilter>("all");
   const [sortBy, setSortBy] = useState<HistorySortOption>("newest");
   const [page, setPage] = useState(1);
+  const historyQuery = useAttemptHistory({
+    page,
+    limit: HISTORY_PAGE_SIZE,
+    search,
+    result: resultFilter,
+    direction: directionFilter,
+    sort: sortBy,
+  });
 
-  const filteredAttempts = useMemo(() => {
-    const raw = historyQuery.data ?? [];
-    const searchTerm = search.trim().toLowerCase();
-    const filtered = raw.filter((attempt) => {
-      if (resultFilter === "correct" && !attempt.isCorrect) return false;
-      if (resultFilter === "wrong" && attempt.isCorrect) return false;
-      if (directionFilter !== "all" && attempt.direction !== directionFilter) return false;
-      if (!searchTerm) return true;
-      const haystack = [
-        attempt.word.transliteration,
-        attempt.word.originalScript,
-        attempt.word.english,
-      ]
-        .join(" ")
-        .toLowerCase();
-      return haystack.includes(searchTerm);
-    });
-
-    filtered.sort((a, b) => {
-      if (sortBy === "newest") {
-        const at = a.createdAt ? new Date(a.createdAt).getTime() : 0;
-        const bt = b.createdAt ? new Date(b.createdAt).getTime() : 0;
-        return bt - at;
-      }
-      if (sortBy === "oldest") {
-        const at = a.createdAt ? new Date(a.createdAt).getTime() : 0;
-        const bt = b.createdAt ? new Date(b.createdAt).getTime() : 0;
-        return at - bt;
-      }
-      if (sortBy === "confidence_desc") {
-        return (b.confidenceLevel ?? 0) - (a.confidenceLevel ?? 0);
-      }
-      return (b.responseTimeMs ?? 0) - (a.responseTimeMs ?? 0);
-    });
-
-    return filtered;
-  }, [directionFilter, historyQuery.data, resultFilter, search, sortBy]);
-
-  const totalPages = Math.max(1, Math.ceil(filteredAttempts.length / HISTORY_PAGE_SIZE));
+  const totalPages = Math.max(1, Math.ceil((historyQuery.data?.total ?? 0) / HISTORY_PAGE_SIZE));
   const currentPage = Math.min(page, totalPages);
-  const pageAttempts = filteredAttempts.slice(
-    (currentPage - 1) * HISTORY_PAGE_SIZE,
-    currentPage * HISTORY_PAGE_SIZE,
+  const pageAttempts = historyQuery.data?.items ?? [];
+  const totalResults = historyQuery.data?.total ?? 0;
+  const summary = useMemo(
+    () => historyQuery.data?.summary ?? { total: 0, correct: 0, accuracy: 0 },
+    [historyQuery.data],
   );
-
-  const summary = useMemo(() => {
-    const total = filteredAttempts.length;
-    const correct = filteredAttempts.filter((attempt) => attempt.isCorrect).length;
-    const accuracy = total > 0 ? Math.round((correct / total) * 100) : 0;
-    return { total, correct, accuracy };
-  }, [filteredAttempts]);
 
   const applyFilterReset = <T,>(setter: (value: T) => void, value: T) => {
     setter(value);
@@ -86,7 +50,7 @@ export function useHistoryPageViewModel() {
     setSortBy,
     page,
     setPage,
-    filteredAttempts,
+    totalResults,
     currentPage,
     totalPages,
     pageAttempts,

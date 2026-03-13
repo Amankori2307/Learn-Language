@@ -79,7 +79,8 @@ export class AnalyticsApiController {
     @Query() query: LeaderboardQueryDto,
     ) {
     try {
-      const leaderboard = await this.analyticsService.getLeaderboard(query);
+      const userId = (req.user as { claims: { sub: string } }).claims.sub;
+      const leaderboard = await this.analyticsService.getLeaderboard(userId, query);
       sendSuccess(req, res, leaderboard);
     } catch (error) {
       this.handleError(req, res, error);

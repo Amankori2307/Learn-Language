@@ -12,6 +12,7 @@ import {
   ReviewStatusEnum,
   VocabularyTagEnum,
 } from "@shared/domain/enums";
+import { API_PAGINATION_DEFAULTS } from "@shared/domain/api-limits";
 import {
   getClusterDescription,
   isGenericClusterDescription,
@@ -113,6 +114,12 @@ function resolveSeedSourceType(input: {
   return "manual-review";
 }
 
+type ClusterCatalogSort = "name_asc" | "name_desc" | "type_asc" | "words_desc" | "words_asc";
+
+type AttemptHistoryDirection = "all" | "source_to_target" | "target_to_source";
+type AttemptHistoryResult = "all" | "correct" | "wrong";
+type AttemptHistorySort = "newest" | "oldest" | "confidence_desc" | "response_time_desc";
+
 export interface IStorage {
   // Words & Clusters
   getWords(limit?: number, language?: LanguageEnum): Promise<Word[]>;
@@ -121,7 +128,25 @@ export interface IStorage {
   getWordsByCluster(clusterId: number, language?: LanguageEnum): Promise<Word[]>;
   createWord(word: CreateWordRequest): Promise<Word>;
 
-  getClusters(language?: LanguageEnum): Promise<Array<Cluster & { wordCount: number }>>;
+  getClusters(input?: {
+    language?: LanguageEnum;
+    q?: string;
+    type?: string;
+    sort?: ClusterCatalogSort;
+    page?: number;
+    limit?: number;
+  }): Promise<{
+    items: Array<Cluster & { wordCount: number }>;
+    page: number;
+    limit: number;
+    total: number;
+    availableTypes: string[];
+    summary: {
+      totalWords: number;
+      nonEmptyClusters: number;
+      topCluster: (Cluster & { wordCount: number }) | null;
+    };
+  }>;
   getCluster(
     id: number,
     language?: LanguageEnum,
@@ -153,10 +178,17 @@ export interface IStorage {
   logQuizAttempt(attempt: Omit<QuizAttempt, "id" | "createdAt">): Promise<QuizAttempt>;
   getUserAttemptHistory(
     userId: string,
-    limit?: number,
-    language?: LanguageEnum,
-  ): Promise<
-    Array<{
+    input?: {
+      page?: number;
+      limit?: number;
+      language?: LanguageEnum;
+      search?: string;
+      result?: AttemptHistoryResult;
+      direction?: AttemptHistoryDirection;
+      sort?: AttemptHistorySort;
+    },
+  ): Promise<{
+    items: Array<{
       id: number;
       wordId: number;
       isCorrect: boolean;
@@ -171,8 +203,16 @@ export interface IStorage {
         transliteration: string;
         english: string;
       };
-    }>
-  >;
+    }>;
+    page: number;
+    limit: number;
+    total: number;
+    summary: {
+      total: number;
+      correct: number;
+      accuracy: number;
+    };
+  }>;
   getQuizCandidates(
     userId: string,
     limit?: number,
@@ -260,11 +300,15 @@ export interface IStorage {
   }>;
   getRecentAccuracy(userId: string, limit?: number, language?: LanguageEnum): Promise<number>;
   getLeaderboard(
-    window: "daily" | "weekly" | "all_time",
-    limit?: number,
-    language?: LanguageEnum,
-  ): Promise<
-    Array<{
+    input: {
+      userId: string;
+      window: "daily" | "weekly" | "all_time";
+      page?: number;
+      limit?: number;
+      language?: LanguageEnum;
+    },
+  ): Promise<{
+    items: Array<{
       rank: number;
       userId: string;
       firstName: string | null;
@@ -275,11 +319,35 @@ export interface IStorage {
       streak: number;
       attempts: number;
       accuracy: number;
-    }>
-  >;
+    }>;
+    page: number;
+    limit: number;
+    total: number;
+    currentUserEntry: {
+      rank: number;
+      userId: string;
+      firstName: string | null;
+      lastName: string | null;
+      email: string | null;
+      profileImageUrl: string | null;
+      xp: number;
+      streak: number;
+      attempts: number;
+      accuracy: number;
+    } | null;
+  }>;
   getSrsDriftSummary(language?: LanguageEnum): Promise<SrsDriftSummary>;
   getActiveSrsConfig(): Promise<SrsConfigSnapshot>;
-  getReviewQueue(status: ReviewStatusEnum, limit?: number): Promise<Word[]>;
+  getReviewQueue(input: {
+    status: ReviewStatusEnum;
+    page?: number;
+    limit?: number;
+  }): Promise<{
+    items: Word[];
+    page: number;
+    limit: number;
+    total: number;
+  }>;
   getConflictReviewQueue(limit?: number): Promise<Word[]>;
   getWordWithReviewHistory(wordId: number): Promise<
     | {
@@ -431,7 +499,26 @@ export class DatabaseStorage implements IStorage {
     return newWord;
   }
 
-  async getClusters(language?: LanguageEnum): Promise<Array<Cluster & { wordCount: number }>> {
+  async getClusters(input?: {
+    language?: LanguageEnum;
+    q?: string;
+    type?: string;
+    sort?: ClusterCatalogSort;
+    page?: number;
+    limit?: number;
+  }): Promise<{
+    items: Array<Cluster & { wordCount: number }>;
+    page: number;
+    limit: number;
+    total: number;
+    availableTypes: string[];
+    summary: {
+      totalWords: number;
+      nonEmptyClusters: number;
+      topCluster: (Cluster & { wordCount: number }) | null;
+    };
+  }> {
+    const language = input?.language;
     const countWhere = language
       ? and(eq(words.language, language), eq(words.reviewStatus, ReviewStatusEnum.APPROVED))
       : eq(words.reviewStatus, ReviewStatusEnum.APPROVED);
@@ -458,11 +545,50 @@ export class DatabaseStorage implements IStorage {
       wordCount: countByClusterId.get(cluster.id) ?? 0,
     }));
 
-    if (!language) {
-      return enriched;
-    }
+    const baseCatalog = language ? enriched.filter((cluster) => cluster.wordCount > 0) : enriched;
+    const normalizedQuery = input?.q?.trim().toLowerCase() ?? "";
+    const filtered = baseCatalog.filter((cluster) => {
+      if (input?.type && input.type !== "all" && cluster.type !== input.type) {
+        return false;
+      }
+      if (!normalizedQuery) {
+        return true;
+      }
 
-    return enriched.filter((cluster) => cluster.wordCount > 0);
+      return [cluster.name, cluster.description ?? "", cluster.type]
+        .join(" ")
+        .toLowerCase()
+        .includes(normalizedQuery);
+    });
+
+    const sort = input?.sort ?? "words_desc";
+    filtered.sort((left, right) => {
+      if (sort === "name_asc") return left.name.localeCompare(right.name);
+      if (sort === "name_desc") return right.name.localeCompare(left.name);
+      if (sort === "type_asc") return left.type.localeCompare(right.type);
+      if (sort === "words_asc") return left.wordCount - right.wordCount;
+      return right.wordCount - left.wordCount;
+    });
+
+    const page = Math.max(1, input?.page ?? API_PAGINATION_DEFAULTS.PAGE);
+    const limit = Math.max(1, input?.limit ?? API_PAGINATION_DEFAULTS.CLUSTER_LIMIT);
+    const offset = (page - 1) * limit;
+
+    return {
+      items: filtered.slice(offset, offset + limit),
+      page,
+      limit,
+      total: filtered.length,
+      availableTypes: ["all", ...Array.from(new Set(baseCatalog.map((cluster) => cluster.type))).sort()],
+      summary: {
+        totalWords: baseCatalog.reduce((sum, cluster) => sum + cluster.wordCount, 0),
+        nonEmptyClusters: baseCatalog.filter((cluster) => cluster.wordCount > 0).length,
+        topCluster:
+          baseCatalog.length > 0
+            ? [...baseCatalog].sort((left, right) => right.wordCount - left.wordCount)[0] ?? null
+            : null,
+      },
+    };
   }
 
   async getCluster(
@@ -595,10 +721,17 @@ export class DatabaseStorage implements IStorage {
 
   async getUserAttemptHistory(
     userId: string,
-    limit: number = 100,
-    language?: LanguageEnum,
-  ): Promise<
-    Array<{
+    input?: {
+      page?: number;
+      limit?: number;
+      language?: LanguageEnum;
+      search?: string;
+      result?: AttemptHistoryResult;
+      direction?: AttemptHistoryDirection;
+      sort?: AttemptHistorySort;
+    },
+  ): Promise<{
+    items: Array<{
       id: number;
       wordId: number;
       isCorrect: boolean;
@@ -613,8 +746,17 @@ export class DatabaseStorage implements IStorage {
         transliteration: string;
         english: string;
       };
-    }>
-  > {
+    }>;
+    page: number;
+    limit: number;
+    total: number;
+    summary: {
+      total: number;
+      correct: number;
+      accuracy: number;
+    };
+  }> {
+    const language = input?.language;
     const whereClause = language
       ? and(eq(quizAttempts.userId, userId), eq(words.language, language))
       : eq(quizAttempts.userId, userId);
@@ -637,10 +779,26 @@ export class DatabaseStorage implements IStorage {
       .from(quizAttempts)
       .innerJoin(words, eq(quizAttempts.wordId, words.id))
       .where(whereClause)
-      .orderBy(sql`${quizAttempts.createdAt} desc`)
-      .limit(limit);
+      .orderBy(sql`${quizAttempts.createdAt} desc`);
 
-    return rows.map((row) => ({
+    const normalizedSearch = input?.search?.trim().toLowerCase() ?? "";
+    const filtered = rows.filter((row) => {
+      if (input?.result === "correct" && !row.isCorrect) return false;
+      if (input?.result === "wrong" && row.isCorrect) return false;
+      if (input?.direction && input.direction !== "all" && row.direction !== input.direction) {
+        return false;
+      }
+      if (!normalizedSearch) {
+        return true;
+      }
+
+      return [row.transliteration, row.originalScript, row.english]
+        .join(" ")
+        .toLowerCase()
+        .includes(normalizedSearch);
+    });
+
+    const mapped = filtered.map((row) => ({
       id: row.id,
       wordId: row.wordId,
       isCorrect: row.isCorrect,
@@ -664,6 +822,38 @@ export class DatabaseStorage implements IStorage {
         english: row.english,
       },
     }));
+
+    const sort = input?.sort ?? "newest";
+    mapped.sort((left, right) => {
+      if (sort === "oldest") {
+        return (left.createdAt?.getTime() ?? 0) - (right.createdAt?.getTime() ?? 0);
+      }
+      if (sort === "confidence_desc") {
+        return (right.confidenceLevel ?? 0) - (left.confidenceLevel ?? 0);
+      }
+      if (sort === "response_time_desc") {
+        return (right.responseTimeMs ?? 0) - (left.responseTimeMs ?? 0);
+      }
+      return (right.createdAt?.getTime() ?? 0) - (left.createdAt?.getTime() ?? 0);
+    });
+
+    const total = mapped.length;
+    const correct = mapped.filter((attempt) => attempt.isCorrect).length;
+    const page = Math.max(1, input?.page ?? API_PAGINATION_DEFAULTS.PAGE);
+    const limit = Math.max(1, input?.limit ?? API_PAGINATION_DEFAULTS.ATTEMPT_HISTORY_LIMIT);
+    const offset = (page - 1) * limit;
+
+    return {
+      items: mapped.slice(offset, offset + limit),
+      page,
+      limit,
+      total,
+      summary: {
+        total,
+        correct,
+        accuracy: total > 0 ? Math.round((correct / total) * 100) : 0,
+      },
+    };
   }
 
   // Implementation of the "Word Selection Algorithm" from PRD
@@ -728,12 +918,14 @@ export class DatabaseStorage implements IStorage {
     return correct / attempts.length;
   }
 
-  async getLeaderboard(
-    window: "daily" | "weekly" | "all_time",
-    limit: number = 25,
-    language?: LanguageEnum,
-  ): Promise<
-    Array<{
+  async getLeaderboard(input: {
+    userId: string;
+    window: "daily" | "weekly" | "all_time";
+    page?: number;
+    limit?: number;
+    language?: LanguageEnum;
+  }): Promise<{
+    items: Array<{
       rank: number;
       userId: string;
       firstName: string | null;
@@ -744,8 +936,25 @@ export class DatabaseStorage implements IStorage {
       streak: number;
       attempts: number;
       accuracy: number;
-    }>
-  > {
+    }>;
+    page: number;
+    limit: number;
+    total: number;
+    currentUserEntry: {
+      rank: number;
+      userId: string;
+      firstName: string | null;
+      lastName: string | null;
+      email: string | null;
+      profileImageUrl: string | null;
+      xp: number;
+      streak: number;
+      attempts: number;
+      accuracy: number;
+    } | null;
+  }> {
+    const window = input.window;
+    const language = input.language;
     const now = new Date();
     const from = new Date(now);
     if (window === "daily") {
@@ -777,7 +986,7 @@ export class DatabaseStorage implements IStorage {
 
     const [allUsers, attempts] = await Promise.all([db.select().from(users), attemptsPromise]);
 
-    return computeLeaderboard(
+    const ranked = computeLeaderboard(
       allUsers.map((u) => ({
         id: u.id,
         firstName: u.firstName ?? null,
@@ -791,8 +1000,19 @@ export class DatabaseStorage implements IStorage {
         isCorrect: a.isCorrect,
         difficulty: a.difficulty ?? null,
       })),
-      limit,
+      allUsers.length,
     );
+    const page = Math.max(1, input.page ?? API_PAGINATION_DEFAULTS.PAGE);
+    const limit = Math.max(1, input.limit ?? API_PAGINATION_DEFAULTS.LEADERBOARD_LIMIT);
+    const offset = (page - 1) * limit;
+
+    return {
+      items: ranked.slice(offset, offset + limit),
+      page,
+      limit,
+      total: ranked.length,
+      currentUserEntry: ranked.find((entry) => entry.userId === input.userId) ?? null,
+    };
   }
 
   async getSrsDriftSummary(language?: LanguageEnum): Promise<SrsDriftSummary> {
@@ -879,16 +1099,41 @@ export class DatabaseStorage implements IStorage {
     return resolveSrsConfig((active as SrsConfig | undefined) ?? null);
   }
 
-  async getReviewQueue(
-    status: ReviewStatusEnum,
-    limit: number = STORAGE_RULES.DEFAULT_REVIEW_QUEUE_LIMIT,
-  ): Promise<Word[]> {
-    return db
+  async getReviewQueue(input: {
+    status: ReviewStatusEnum;
+    page?: number;
+    limit?: number;
+  }): Promise<{
+    items: Word[];
+    page: number;
+    limit: number;
+    total: number;
+  }> {
+    const status = input.status;
+    const page = Math.max(1, input.page ?? API_PAGINATION_DEFAULTS.PAGE);
+    const limit = Math.max(1, input.limit ?? STORAGE_RULES.DEFAULT_REVIEW_QUEUE_LIMIT);
+    const offset = (page - 1) * limit;
+
+    const [rows, countResult] = await Promise.all([
+      db
       .select()
       .from(words)
       .where(eq(words.reviewStatus, status))
       .orderBy(sql`${words.submittedAt} desc nulls last`, sql`${words.createdAt} desc`)
-      .limit(limit);
+      .limit(limit)
+      .offset(offset),
+      db
+        .select({ count: sql<number>`count(*)` })
+        .from(words)
+        .where(eq(words.reviewStatus, status)),
+    ]);
+
+    return {
+      items: rows,
+      page,
+      limit,
+      total: Number(countResult[0]?.count ?? 0),
+    };
   }
 
   async getConflictReviewQueue(

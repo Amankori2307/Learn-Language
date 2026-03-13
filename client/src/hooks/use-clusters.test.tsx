@@ -38,15 +38,32 @@ describe("useClustersForLanguage", () => {
         error: false,
         message: "ok",
         requestId: "clusters-request",
-        data: [
-          {
-            id: 1,
-            name: "Greetings",
-            type: "topic",
-            description: null,
-            wordCount: 10,
+        data: {
+          items: [
+            {
+              id: 1,
+              name: "Greetings",
+              type: "topic",
+              description: null,
+              wordCount: 10,
+            },
+          ],
+          page: 1,
+          limit: 12,
+          total: 1,
+          availableTypes: ["all", "topic"],
+          summary: {
+            totalWords: 10,
+            nonEmptyClusters: 1,
+            topCluster: {
+              id: 1,
+              name: "Greetings",
+              type: "topic",
+              description: null,
+              wordCount: 10,
+            },
           },
-        ],
+        },
       },
     });
 

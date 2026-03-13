@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useRef } from "react";
 import { useLocation, useSearch } from "wouter";
-import { useClusters } from "@/hooks/use-clusters";
+import { useClustersCatalog } from "@/hooks/use-clusters";
 import { CLUSTERS_PAGE_SIZE } from "./clusters.constants";
 import { trackAnalyticsEvent } from "@/lib/analytics";
 
@@ -16,17 +16,14 @@ export function useClustersPageViewModel() {
   const pageParam = Number.parseInt(params.get("page") ?? "1", 10);
   const page = Number.isFinite(pageParam) && pageParam > 0 ? pageParam : 1;
 
-  const clustersQuery = useClusters();
-  const allClusters = useMemo(() => clustersQuery.data ?? [], [clustersQuery.data]);
+  const clustersQuery = useClustersCatalog({
+    q: query,
+    type: typeFilter,
+    sort: sortBy,
+    page,
+    limit: CLUSTERS_PAGE_SIZE,
+  });
   const trackedCatalogKeyRef = useRef<string | null>(null);
-
-  const clusterTypes = useMemo(
-    () => [
-      "all",
-      ...Array.from(new Set(allClusters.map((cluster) => cluster.type).filter(Boolean))).sort(),
-    ],
-    [allClusters],
-  );
 
   const updateQuery = (
     next: Partial<{ q: string; type: string; sort: ClusterSortBy; page: number }>,
@@ -58,61 +55,21 @@ export function useClustersPageViewModel() {
     setLocation(`/clusters${qs ? `?${qs}` : ""}`);
   };
 
-  const filteredAndSorted = useMemo(() => {
-    const term = query.trim().toLowerCase();
-    const filtered = allClusters.filter((cluster) => {
-      if (typeFilter !== "all" && cluster.type !== typeFilter) {
-        return false;
-      }
-      if (!term) {
-        return true;
-      }
-      return [cluster.name, cluster.description ?? "", cluster.type]
-        .join(" ")
-        .toLowerCase()
-        .includes(term);
-    });
-
-    filtered.sort((a, b) => {
-      if (sortBy === "name_asc") return a.name.localeCompare(b.name);
-      if (sortBy === "name_desc") return b.name.localeCompare(a.name);
-      if (sortBy === "type_asc") return a.type.localeCompare(b.type);
-      if (sortBy === "words_asc") return a.wordCount - b.wordCount;
-      return b.wordCount - a.wordCount;
-    });
-
-    return filtered;
-  }, [allClusters, query, sortBy, typeFilter]);
-
-  const topCluster = useMemo(() => {
-    if (allClusters.length === 0) {
-      return null;
-    }
-    return [...allClusters].sort((left, right) => right.wordCount - left.wordCount)[0] ?? null;
-  }, [allClusters]);
-
-  const totalWords = useMemo(
-    () => allClusters.reduce((sum, cluster) => sum + cluster.wordCount, 0),
-    [allClusters],
-  );
-  const nonEmptyClusters = useMemo(
-    () => allClusters.filter((cluster) => cluster.wordCount > 0).length,
-    [allClusters],
-  );
-  const totalResults = filteredAndSorted.length;
+  const clusterTypes = clustersQuery.data?.availableTypes ?? ["all"];
+  const totalResults = clustersQuery.data?.total ?? 0;
   const totalPages = Math.max(1, Math.ceil(totalResults / CLUSTERS_PAGE_SIZE));
   const currentPage = Math.min(page, totalPages);
-  const pageRows = filteredAndSorted.slice(
-    (currentPage - 1) * CLUSTERS_PAGE_SIZE,
-    currentPage * CLUSTERS_PAGE_SIZE,
-  );
+  const pageRows = clustersQuery.data?.items ?? [];
+  const topCluster = clustersQuery.data?.summary.topCluster ?? null;
+  const totalWords = clustersQuery.data?.summary.totalWords ?? 0;
+  const nonEmptyClusters = clustersQuery.data?.summary.nonEmptyClusters ?? 0;
 
   useEffect(() => {
     if (clustersQuery.isLoading || clustersQuery.isError || !clustersQuery.data) {
       return;
     }
 
-    const analyticsKey = `${query}:${typeFilter}:${sortBy}:${filteredAndSorted.length}`;
+    const analyticsKey = `${query}:${typeFilter}:${sortBy}:${totalResults}`;
     if (trackedCatalogKeyRef.current === analyticsKey) {
       return;
     }
@@ -120,11 +77,11 @@ export function useClustersPageViewModel() {
     trackedCatalogKeyRef.current = analyticsKey;
     trackAnalyticsEvent("clusters_catalog_viewed", {
       route: "/clusters",
-      totalResults: filteredAndSorted.length,
+      totalResults,
       typeFilter,
       sortBy,
     });
-  }, [clustersQuery.data, clustersQuery.isError, clustersQuery.isLoading, filteredAndSorted.length, query, sortBy, typeFilter]);
+  }, [clustersQuery.data, clustersQuery.isError, clustersQuery.isLoading, query, sortBy, totalResults, typeFilter]);
 
   return {
     query,

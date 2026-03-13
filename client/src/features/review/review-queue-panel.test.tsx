@@ -12,6 +12,10 @@ describe("ReviewQueuePanel", () => {
     render(
       <ReviewQueuePanel
         queueItems={[]}
+        currentPage={1}
+        totalPages={1}
+        totalResults={0}
+        setPage={vi.fn()}
         queueLoading={false}
         queueError
         retryQueue={retryQueue}
@@ -49,6 +53,10 @@ describe("ReviewQueuePanel", () => {
             reviewedAt: null,
           },
         ]}
+        currentPage={2}
+        totalPages={4}
+        totalResults={17}
+        setPage={vi.fn()}
         queueLoading={false}
         queueError={false}
         retryQueue={vi.fn()}
@@ -91,6 +99,10 @@ describe("ReviewQueuePanel", () => {
             reviewedAt: "2026-03-11T10:00:00.000Z",
           },
         ]}
+        currentPage={1}
+        totalPages={1}
+        totalResults={1}
+        setPage={vi.fn()}
         queueLoading={false}
         queueError={false}
         retryQueue={vi.fn()}
@@ -121,6 +133,10 @@ describe("ReviewQueuePanel", () => {
             reviewedAt: "2026-03-11T10:00:00.000Z",
           },
         ]}
+        currentPage={1}
+        totalPages={1}
+        totalResults={1}
+        setPage={vi.fn()}
         queueLoading={false}
         queueError={false}
         retryQueue={vi.fn()}

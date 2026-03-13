@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { type SetStateAction, useMemo, useState } from "react";
 import {
   useReviewQueue,
   useTransitionReview,
@@ -38,16 +38,20 @@ export function formatReviewDate(value?: string | null) {
 
 export function useReviewPageViewModel() {
   const [status, setStatus] = useState<ReviewStatus>(ReviewStatusEnum.PENDING_REVIEW);
+  const [page, setPage] = useState(1);
   const [selectedIds, setSelectedIds] = useState<number[]>([]);
   const [activeWordId, setActiveWordId] = useState<number | undefined>(undefined);
   const [notes, setNotes] = useState("");
 
-  const queueQuery = useReviewQueue(status, 100);
+  const queueQuery = useReviewQueue(status, page, 50);
   const historyQuery = useReviewHistory(activeWordId);
   const transition = useTransitionReview();
   const bulk = useBulkTransitionReview();
 
   const selectedSet = useMemo(() => new Set(selectedIds), [selectedIds]);
+  const totalResults = queueQuery.data?.total ?? 0;
+  const totalPages = Math.max(1, Math.ceil(totalResults / 50));
+  const currentPage = Math.min(page, totalPages);
 
   const toggleSelected = (id: number) => {
     setSelectedIds((prev) => {
@@ -58,6 +62,13 @@ export function useReviewPageViewModel() {
 
   const clearSelection = () => {
     setSelectedIds([]);
+  };
+
+  const setStatusAndResetPage = (nextStatus: SetStateAction<ReviewStatus>) => {
+    setSelectedIds([]);
+    setActiveWordId(undefined);
+    setPage(1);
+    setStatus(nextStatus);
   };
 
   const runBulk = async (toStatus: ReviewStatus) => {
@@ -76,14 +87,18 @@ export function useReviewPageViewModel() {
 
   return {
     status,
-    setStatus,
+    setStatus: setStatusAndResetPage,
+    currentPage,
+    totalPages,
+    totalResults,
+    setPage,
     selectedIds,
     selectedSet,
     activeWordId,
     setActiveWordId,
     notes,
     setNotes,
-    queueItems: queueQuery.data ?? [],
+    queueItems: queueQuery.data?.items ?? [],
     queueLoading: queueQuery.isLoading,
     queueError: queueQuery.isError,
     retryQueue: () => queueQuery.refetch(),

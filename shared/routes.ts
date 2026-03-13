@@ -60,6 +60,19 @@ export const errorSchemas = {
   rateLimited: errorResponseSchema("RATE_LIMITED"),
 };
 
+function paginatedDataSchema<T extends z.ZodTypeAny, Extra extends z.ZodRawShape = {}>(
+  itemSchema: T,
+  extraShape?: Extra,
+) {
+  return z.object({
+    items: z.array(itemSchema),
+    page: z.number().int().positive(),
+    limit: z.number().int().positive(),
+    total: z.number().int().nonnegative(),
+    ...(extraShape ?? ({} as Extra)),
+  });
+}
+
 const seedWordSchema = z.object({
   key: z.string(),
   language: z.nativeEnum(LanguageEnum),
@@ -91,6 +104,64 @@ const seedSentenceSchema = z.object({
   contextTag: z.string(),
   difficulty: z.number(),
   wordRefs: z.array(z.string()),
+});
+
+const clusterListItemSchema = z.object({
+  id: z.number(),
+  name: z.string(),
+  type: z.string(),
+  description: z.string().nullable(),
+  wordCount: z.number(),
+});
+
+const leaderboardEntrySchema = z.object({
+  rank: z.number(),
+  userId: z.string(),
+  firstName: z.string().nullable(),
+  lastName: z.string().nullable(),
+  email: z.string().nullable(),
+  profileImageUrl: z.string().nullable(),
+  xp: z.number(),
+  streak: z.number(),
+  attempts: z.number(),
+  accuracy: z.number(),
+});
+
+const attemptHistoryItemSchema = z.object({
+  id: z.number(),
+  wordId: z.number(),
+  isCorrect: z.boolean(),
+  confidenceLevel: z.number().nullable(),
+  direction: z.nativeEnum(QuizDirectionEnum).nullable(),
+  questionType: z.nativeEnum(QuizQuestionTypeEnum).nullable(),
+  responseTimeMs: z.number().nullable(),
+  createdAt: z.string().nullable(),
+  word: z.object({
+    language: z.nativeEnum(LanguageEnum),
+    originalScript: z.string(),
+    transliteration: z.string(),
+    english: z.string(),
+  }),
+});
+
+const reviewQueueItemSchema = z.object({
+  id: z.number(),
+  language: z.nativeEnum(LanguageEnum),
+  originalScript: z.string(),
+  transliteration: z.string(),
+  english: z.string(),
+  partOfSpeech: z.nativeEnum(PartOfSpeechEnum),
+  reviewStatus: z.nativeEnum(ReviewStatusEnum),
+  sourceUrl: z.string().nullable(),
+  sourceCapturedAt: z.string().nullable(),
+  submittedBy: z.string().nullable(),
+  submittedAt: z.string().nullable(),
+  reviewedBy: z.string().nullable(),
+  reviewedAt: z.string().nullable(),
+  reviewNotes: z.string().nullable(),
+  reviewerConfidenceScore: z.number().int().min(1).max(5).nullable(),
+  requiresSecondaryReview: z.boolean(),
+  disagreementStatus: z.nativeEnum(ReviewDisagreementStatusEnum),
 });
 
 // ============================================
@@ -190,20 +261,31 @@ export const api = {
       path: "/api/clusters" as const,
       input: z
         .object({
+          q: z.string().optional(),
           language: z.nativeEnum(LanguageEnum).optional(),
+          type: z.string().optional(),
+          sort: z
+            .enum(["name_asc", "name_desc", "type_asc", "words_desc", "words_asc"])
+            .default("words_desc"),
+          page: z.coerce.number().int().positive().default(API_PAGINATION_DEFAULTS.PAGE),
+          limit: z.coerce
+            .number()
+            .int()
+            .positive()
+            .max(API_PAGINATION_LIMITS.GENERIC_MAX)
+            .default(API_PAGINATION_DEFAULTS.CLUSTER_LIMIT),
         })
         .optional(),
       responses: {
         200: successResponseSchema(
-          z.array(
-            z.object({
-              id: z.number(),
-              name: z.string(),
-              type: z.string(),
-              description: z.string().nullable(),
-              wordCount: z.number(),
+          paginatedDataSchema(clusterListItemSchema, {
+            availableTypes: z.array(z.string()),
+            summary: z.object({
+              totalWords: z.number(),
+              nonEmptyClusters: z.number(),
+              topCluster: clusterListItemSchema.nullable(),
             }),
-          ),
+          }),
         ),
       },
     },
@@ -444,6 +526,7 @@ export const api = {
       path: "/api/attempts/history" as const,
       input: z
         .object({
+          page: z.coerce.number().int().positive().default(API_PAGINATION_DEFAULTS.PAGE),
           limit: z.coerce
             .number()
             .int()
@@ -451,28 +534,25 @@ export const api = {
             .max(API_PAGINATION_LIMITS.GENERIC_MAX)
             .default(API_PAGINATION_DEFAULTS.ATTEMPT_HISTORY_LIMIT),
           language: z.nativeEnum(LanguageEnum).optional(),
+          search: z.string().optional(),
+          result: z.enum(["all", "correct", "wrong"]).default("all"),
+          direction: z
+            .enum(["all", QuizDirectionEnum.SOURCE_TO_TARGET, QuizDirectionEnum.TARGET_TO_SOURCE])
+            .default("all"),
+          sort: z
+            .enum(["newest", "oldest", "confidence_desc", "response_time_desc"])
+            .default("newest"),
         })
         .optional(),
       responses: {
         200: successResponseSchema(
-          z.array(
-            z.object({
-              id: z.number(),
-              wordId: z.number(),
-              isCorrect: z.boolean(),
-              confidenceLevel: z.number().nullable(),
-              direction: z.nativeEnum(QuizDirectionEnum).nullable(),
-              questionType: z.nativeEnum(QuizQuestionTypeEnum).nullable(),
-              responseTimeMs: z.number().nullable(),
-              createdAt: z.string().nullable(),
-              word: z.object({
-                language: z.nativeEnum(LanguageEnum),
-                originalScript: z.string(),
-                transliteration: z.string(),
-                english: z.string(),
-              }),
+          paginatedDataSchema(attemptHistoryItemSchema, {
+            summary: z.object({
+              total: z.number(),
+              correct: z.number(),
+              accuracy: z.number(),
             }),
-          ),
+          }),
         ),
         401: errorSchemas.unauthorized,
       },
@@ -485,31 +565,21 @@ export const api = {
       input: z
         .object({
           window: z.enum(["daily", "weekly", "all_time"]).default("weekly"),
+          page: z.coerce.number().int().positive().default(API_PAGINATION_DEFAULTS.PAGE),
           limit: z.coerce
-          .number()
-          .int()
-          .positive()
-          .max(API_PAGINATION_LIMITS.LEADERBOARD_MAX)
-          .default(API_PAGINATION_DEFAULTS.LEADERBOARD_LIMIT),
-        language: z.nativeEnum(LanguageEnum).optional(),
-      })
+            .number()
+            .int()
+            .positive()
+            .max(API_PAGINATION_LIMITS.LEADERBOARD_MAX)
+            .default(API_PAGINATION_DEFAULTS.LEADERBOARD_LIMIT),
+          language: z.nativeEnum(LanguageEnum).optional(),
+        })
         .optional(),
       responses: {
         200: successResponseSchema(
-          z.array(
-            z.object({
-              rank: z.number(),
-              userId: z.string(),
-              firstName: z.string().nullable(),
-              lastName: z.string().nullable(),
-              email: z.string().nullable(),
-              profileImageUrl: z.string().nullable(),
-              xp: z.number(),
-              streak: z.number(),
-              attempts: z.number(),
-              accuracy: z.number(),
-            }),
-          ),
+          paginatedDataSchema(leaderboardEntrySchema, {
+            currentUserEntry: leaderboardEntrySchema.nullable(),
+          }),
         ),
         401: errorSchemas.unauthorized,
       },
@@ -522,6 +592,26 @@ export const api = {
       input: z
         .object({
           status: z.nativeEnum(ReviewStatusEnum).default(ReviewStatusEnum.PENDING_REVIEW),
+          page: z.coerce.number().int().positive().default(API_PAGINATION_DEFAULTS.PAGE),
+          limit: z.coerce
+            .number()
+            .int()
+            .positive()
+            .max(API_PAGINATION_LIMITS.GENERIC_MAX)
+            .default(API_PAGINATION_DEFAULTS.REVIEW_LIMIT),
+        })
+        .optional(),
+      responses: {
+        200: successResponseSchema(paginatedDataSchema(reviewQueueItemSchema)),
+        401: errorSchemas.unauthorized,
+        403: errorSchemas.forbidden,
+      },
+    },
+    conflicts: {
+      method: "GET" as const,
+      path: "/api/review/conflicts" as const,
+      input: z
+        .object({
           limit: z.coerce
             .number()
             .int()
@@ -541,16 +631,12 @@ export const api = {
               english: z.string(),
               partOfSpeech: z.nativeEnum(PartOfSpeechEnum),
               reviewStatus: z.nativeEnum(ReviewStatusEnum),
-              sourceUrl: z.string().nullable(),
-              sourceCapturedAt: z.string().nullable(),
-              submittedBy: z.string().nullable(),
-              submittedAt: z.string().nullable(),
-              reviewedBy: z.string().nullable(),
-              reviewedAt: z.string().nullable(),
-              reviewNotes: z.string().nullable(),
               reviewerConfidenceScore: z.number().int().min(1).max(5).nullable(),
               requiresSecondaryReview: z.boolean(),
               disagreementStatus: z.nativeEnum(ReviewDisagreementStatusEnum),
+              reviewNotes: z.string().nullable(),
+              submittedAt: z.string().nullable(),
+              reviewedAt: z.string().nullable(),
             }),
           ),
         ),
@@ -581,7 +667,7 @@ export const api = {
             reviewedBy: z.string().nullable(),
             reviewedAt: z.string().nullable(),
             reviewNotes: z.string().nullable(),
-            reviewerConfidenceScore: z.number().int().min(1).max(5).nullable(),
+            reviewerConfidenceScore: z.number().nullable(),
             requiresSecondaryReview: z.boolean(),
             disagreementStatus: z.nativeEnum(ReviewDisagreementStatusEnum),
           }),
@@ -676,43 +762,6 @@ export const api = {
         401: errorSchemas.unauthorized,
         403: errorSchemas.forbidden,
         404: errorSchemas.notFound,
-      },
-    },
-    conflicts: {
-      method: "GET" as const,
-      path: "/api/review/conflicts" as const,
-      input: z
-        .object({
-          limit: z.coerce
-            .number()
-            .int()
-            .positive()
-            .max(API_PAGINATION_LIMITS.GENERIC_MAX)
-            .default(API_PAGINATION_DEFAULTS.REVIEW_LIMIT),
-        })
-        .optional(),
-      responses: {
-        200: successResponseSchema(
-          z.array(
-            z.object({
-              id: z.number(),
-              language: z.nativeEnum(LanguageEnum),
-              originalScript: z.string(),
-              transliteration: z.string(),
-              english: z.string(),
-              partOfSpeech: z.nativeEnum(PartOfSpeechEnum),
-              reviewStatus: z.nativeEnum(ReviewStatusEnum),
-              reviewerConfidenceScore: z.number().int().min(1).max(5).nullable(),
-              requiresSecondaryReview: z.boolean(),
-              disagreementStatus: z.nativeEnum(ReviewDisagreementStatusEnum),
-              reviewNotes: z.string().nullable(),
-              submittedAt: z.string().nullable(),
-              reviewedAt: z.string().nullable(),
-            }),
-          ),
-        ),
-        401: errorSchemas.unauthorized,
-        403: errorSchemas.forbidden,
       },
     },
     resolveConflict: {

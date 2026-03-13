@@ -150,13 +150,13 @@ describe("useSubmitAnswer", () => {
       queryKey: [api.analytics.learning.path, LanguageEnum.TELUGU],
     });
     expect(invalidateQueries).toHaveBeenNthCalledWith(3, {
-      queryKey: [api.analytics.wordBuckets.path, LanguageEnum.TELUGU],
+      queryKey: [api.analytics.wordBuckets.path],
     });
     expect(invalidateQueries).toHaveBeenNthCalledWith(4, {
-      queryKey: [api.attempts.history.path, LanguageEnum.TELUGU],
+      queryKey: [api.attempts.history.path],
     });
     expect(invalidateQueries).toHaveBeenNthCalledWith(5, {
-      queryKey: [api.leaderboard.list.path, LanguageEnum.TELUGU],
+      queryKey: [api.leaderboard.list.path],
     });
   });
 });

@@ -9,8 +9,20 @@ import { LeaderboardPanel } from "@/features/analytics/leaderboard-panel";
 import { LeaderboardHeader } from "@/features/analytics/leaderboard-header";
 
 export default function LeaderboardPage() {
-  const { window, setWindow, entries, isLoading, isError, isFetching, retry } =
-    useLeaderboardPageViewModel();
+  const {
+    window,
+    setWindow,
+    currentPage,
+    totalPages,
+    totalResults,
+    setPage,
+    entries,
+    currentUserEntry,
+    isLoading,
+    isError,
+    isFetching,
+    retry,
+  } = useLeaderboardPageViewModel();
 
   return (
     <Layout>
@@ -20,6 +32,7 @@ export default function LeaderboardPage() {
           setWindow={setWindow}
           options={LEADERBOARD_WINDOW_OPTIONS}
           isFetching={isFetching}
+          currentUserEntry={currentUserEntry}
         />
 
         {isLoading ? (
@@ -42,7 +55,13 @@ export default function LeaderboardPage() {
             tone="empty"
           />
         ) : (
-          <LeaderboardPanel entries={entries} />
+          <LeaderboardPanel
+            entries={entries}
+            currentPage={currentPage}
+            totalPages={totalPages}
+            totalResults={totalResults}
+            setPage={setPage}
+          />
         )}
       </div>
     </Layout>

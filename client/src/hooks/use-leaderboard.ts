@@ -5,17 +5,23 @@ import { apiClient, buildApiUrl } from "@/services/apiClient";
 
 export type LeaderboardWindow = "daily" | "weekly" | "all_time";
 
-export function leaderboardQueryKey(window: LeaderboardWindow, limit: number, language: string) {
-  return [api.leaderboard.list.path, window, limit, language] as const;
+export function leaderboardQueryKey(
+  window: LeaderboardWindow,
+  page: number,
+  limit: number,
+  language: string,
+) {
+  return [api.leaderboard.list.path, window, page, limit, language] as const;
 }
 
-export function useLeaderboard(window: LeaderboardWindow, limit = 25) {
+export function useLeaderboard(window: LeaderboardWindow, page: number, limit = 25) {
   const { language } = useLearningLanguage();
   return useQuery({
-    queryKey: leaderboardQueryKey(window, limit, language),
+    queryKey: leaderboardQueryKey(window, page, limit, language),
     queryFn: async () => {
       const params = new URLSearchParams({
         window,
+        page: String(page),
         limit: String(limit),
         language,
       });
