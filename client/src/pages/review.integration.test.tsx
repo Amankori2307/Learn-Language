@@ -7,6 +7,7 @@ import ReviewPage from "./review";
 
 const transitionMutate = vi.fn();
 const bulkMutateAsync = vi.fn().mockResolvedValue({ updated: 1, skipped: 0 });
+const downloadVocabMutate = vi.fn();
 let currentUserRole = UserTypeEnum.REVIEWER;
 let reviewQueueState = {
   data: [
@@ -82,9 +83,17 @@ vi.mock("@/hooks/use-review", () => ({
   }),
 }));
 
+vi.mock("@/hooks/use-admin", () => ({
+  useDownloadVocabularyExport: () => ({
+    mutate: downloadVocabMutate,
+    isPending: false,
+  }),
+}));
+
 describe("ReviewPage integration", () => {
   beforeEach(() => {
     currentUserRole = UserTypeEnum.REVIEWER;
+    downloadVocabMutate.mockReset();
     reviewQueueState = {
       data: [
         {
@@ -153,6 +162,71 @@ describe("ReviewPage integration", () => {
     });
   });
 
+  it("shows status-aware bulk actions for approved queue", async () => {
+    reviewQueueState = {
+      data: [
+        {
+          id: 11,
+          language: LanguageEnum.TELUGU,
+          originalScript: "namaste",
+          transliteration: "namaste",
+          english: "hello",
+          partOfSpeech: "phrase",
+          reviewStatus: ReviewStatusEnum.APPROVED,
+          sourceUrl: "https://example.com/source",
+          sourceCapturedAt: "2026-02-20T11:00:00.000Z",
+          submittedBy: "u-1",
+          submittedAt: "2026-02-20T11:00:00.000Z",
+          reviewedBy: "u-2",
+          reviewedAt: "2026-02-21T11:00:00.000Z",
+          reviewNotes: null,
+        },
+      ],
+      isLoading: false,
+      isError: false,
+      refetch: vi.fn(),
+    };
+
+    render(<ReviewPage />);
+
+    await userEvent.setup().click(screen.getByRole("button", { name: "approved" }));
+    expect(screen.getByRole("button", { name: "Bulk Un-approve" })).toBeTruthy();
+    expect(screen.queryByRole("button", { name: "Bulk Approve" })).toBeNull();
+  });
+
+  it("shows rejected-row actions without a duplicate reject action", async () => {
+    reviewQueueState = {
+      data: [
+        {
+          id: 11,
+          language: LanguageEnum.TELUGU,
+          originalScript: "namaste",
+          transliteration: "namaste",
+          english: "hello",
+          partOfSpeech: "phrase",
+          reviewStatus: ReviewStatusEnum.REJECTED,
+          sourceUrl: "https://example.com/source",
+          sourceCapturedAt: "2026-02-20T11:00:00.000Z",
+          submittedBy: "u-1",
+          submittedAt: "2026-02-20T11:00:00.000Z",
+          reviewedBy: "u-2",
+          reviewedAt: "2026-02-21T11:00:00.000Z",
+          reviewNotes: "needs cleaner example",
+        },
+      ],
+      isLoading: false,
+      isError: false,
+      refetch: vi.fn(),
+    };
+
+    render(<ReviewPage />);
+
+    await userEvent.setup().click(screen.getByRole("button", { name: "rejected" }));
+    expect(screen.getByRole("link", { name: "Create Revised Draft" })).toBeTruthy();
+    expect(screen.getByRole("button", { name: "Move for Approval" })).toBeTruthy();
+    expect(screen.queryByRole("button", { name: "Reject" })).toBeNull();
+  });
+
   it("runs per-item approve action", async () => {
     const user = userEvent.setup();
     render(<ReviewPage />);
@@ -168,6 +242,21 @@ describe("ReviewPage integration", () => {
       toStatus: ReviewStatusEnum.APPROVED,
       notes: undefined,
     });
+  });
+
+  it("shows admin vocab download and triggers export", async () => {
+    currentUserRole = UserTypeEnum.ADMIN;
+    const user = userEvent.setup();
+
+    render(<ReviewPage />);
+
+    await user.click(screen.getByRole("button", { name: "Download Vocab Data" }));
+    expect(downloadVocabMutate).toHaveBeenCalledTimes(1);
+  });
+
+  it("hides admin vocab download for non-admin reviewers", () => {
+    render(<ReviewPage />);
+    expect(screen.queryByRole("button", { name: "Download Vocab Data" })).toBeNull();
   });
 
   it("renders reviewer-only access state for learner users", () => {

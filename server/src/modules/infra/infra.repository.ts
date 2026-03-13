@@ -11,4 +11,8 @@ export class InfraRepository {
   getSrsDriftSummary(language?: LanguageEnum) {
     return storage.getSrsDriftSummary(language);
   }
+
+  exportVocabularyData() {
+    return storage.exportVocabularyData();
+  }
 }

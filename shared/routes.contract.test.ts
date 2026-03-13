@@ -3,11 +3,13 @@ import assert from "node:assert/strict";
 import { api, errorSchemas } from "./routes";
 import {
   LanguageEnum,
+  PartOfSpeechEnum,
   QuizDirectionEnum,
   QuizModeEnum,
   QuizQuestionTypeEnum,
   ReviewDisagreementStatusEnum,
   ReviewStatusEnum,
+  VocabularyTagEnum,
 } from "./domain/enums";
 
 function success<T>(data: T) {
@@ -400,4 +402,46 @@ test("admin srs drift contract accepts alert summary payload", () => {
   };
   const parsed = api.admin.srsDrift.responses[200].parse(success(payload));
   assert.equal(parsed.data.alerts[0].code, "overdue_growth");
+});
+
+test("admin vocab export contract accepts repo-style payload", () => {
+  const payload = {
+    generatedAt: "2026-03-13T06:00:00.000Z",
+    words: [
+      {
+        key: "telugu::namaste::hello",
+        language: LanguageEnum.TELUGU,
+        originalScript: "నమస్తే",
+        transliteration: "namaste",
+        english: "hello",
+        partOfSpeech: PartOfSpeechEnum.PHRASE,
+        difficulty: 1,
+        difficultyLevel: "beginner",
+        frequencyScore: 0.9,
+        cefrLevel: "A1",
+        tags: [VocabularyTagEnum.MODEL_SEED],
+        clusters: ["greetings"],
+        source: {
+          type: "model-knowledge",
+          generatedAt: "2026-03-13T06:00:00.000Z",
+          reviewStatus: ReviewStatusEnum.APPROVED,
+        },
+      },
+    ],
+    sentences: [
+      {
+        language: LanguageEnum.TELUGU,
+        originalScript: "నమస్తే, మీరు ఎలా ఉన్నారు?",
+        pronunciation: "Namastee, meeru elaa unnaaru?",
+        english: "Hello, how are you?",
+        contextTag: "daily-use",
+        difficulty: 1,
+        wordRefs: ["telugu::namaste::hello"],
+      },
+    ],
+  };
+
+  const parsed = api.admin.vocabExport.responses[200].parse(success(payload));
+  assert.equal(parsed.data.words[0]?.key, "telugu::namaste::hello");
+  assert.equal(parsed.data.sentences[0]?.wordRefs[0], "telugu::namaste::hello");
 });

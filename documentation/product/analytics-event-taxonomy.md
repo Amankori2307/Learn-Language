@@ -27,6 +27,10 @@ Current meanings:
 - `console`: log events to browser console for verification
 - `window-mixpanel`: call `window.mixpanel.track(...)` when Mixpanel is already present on the page
 
+Mixpanel bootstrap placeholder:
+
+- `NEXT_PUBLIC_MIXPANEL_PROJECT_TOKEN` (reserved for loading Mixpanel outside the app bundle)
+
 Primary implementation file:
 
 - [analytics.ts](/Users/aman/Projects/personal-projects/Learn-Language/client/src/lib/analytics.ts)

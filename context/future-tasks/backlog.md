@@ -23,19 +23,19 @@ When a future item becomes active, move it into `context/active-tasks/backlog.md
 | ID | Status | Task | Notes |
 | --- | --- | --- | --- |
 | F-010 | todo | Define long-term design-system governance operations | Establish an explicit audit cadence, exception review process, and ownership model for Continuum changes |
-| F-028 | todo | Enforce single-theme consistency across all app and public pages | Ensure every surface (public marketing pages + authenticated app) adheres to one shared theme system and remove any remaining theme drift |
+| F-029 | todo | Re-evaluate learner confidence input model | Determine whether quiz confidence should remain user-entered or be inferred dynamically from observable answer signals, then document how confidence should affect SRS quality, strength, and learner UX |
 | F-005 | todo | Revisit next-round performance optimization candidates | Leaderboard pushdown, distractor-pool sizing, cluster-query consolidation, and client-payload inspection |
 | F-014 | todo | Investigate frequent logout behavior | Document session expiry criteria and reduce unexpected logouts without weakening security |
 | F-019 | todo | Reduce Docker image sizes | Shrink frontend and backend images to speed up deploys and lower bandwidth usage |
 | F-008 | todo | Add visual regression coverage for Continuum | Lock key public and app surfaces across phone and desktop viewports with screenshot-based checks |
 | F-009 | todo | Increase semantic component adoption on feature surfaces | Replace acceptable tokenized one-off compositions with higher-level shared primitives where patterns have stabilized |
-| F-012 | todo | Expand vocabulary coverage | Add more reviewed vocabulary, examples, and cluster coverage without lowering content-quality gates |
-| F-013 | todo | Fix macOS audio quality and playback reliability | Identify why audio is distorted or fails on macOS and harden the audio pipeline and permissions flow |
 | F-020 | todo | Improve Telugu audio quality | Evaluate better Telugu TTS options while keeping the current English audio setup |
+| F-030 | todo | Add language filter to admin vocab export | Let admins download repo-style `words.json` and `sentences.json` for a specific language instead of always exporting the full dataset |
+| F-032 | todo | Add in-place rejected-word edit and resubmit flow | Replace the current revised-draft workaround with true editing of rejected vocabulary and a direct move back into approval |
+| F-033 | todo | Add first-class sentence review workflow | Give example sentences their own review/edit lifecycle instead of governing them only through the parent word status |
 | F-021 | todo | Add German language support | Extend vocab, audio, and UI to support German learning flows |
 | F-017 | todo | Add support for additional OAuth providers | Extend auth to cover more OAuth options beyond Google without breaking existing flows |
 | F-023 | todo | Add Language Hub pages | Add `/learn-<language>` SEO landing pages (starting with Telugu) with native-reviewer and word-bucket previews |
-| F-024 | todo | Add Methodology page | Publish the “Active Recall & Spaced Repetition” science page contrasting recognition vs recall |
 | F-025 | todo | Add Review Process page | Document the native-verified vocabulary review workflow and quality guarantees |
 | F-026 | todo | Add Roadmap/Waitlist page | Collect interest for upcoming languages with a waitlist or voting flow |
 | F-027 | todo | Add FAQ page | SEO-focused FAQ addressing pricing, browser-only usage, and flashcard differences |

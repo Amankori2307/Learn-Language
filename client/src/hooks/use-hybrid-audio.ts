@@ -1,6 +1,9 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { LanguageEnum } from "@shared/domain/enums";
-import { isMostlyAscii } from "@/lib/text-script";
+import {
+  resolveSpeechVoiceMatch,
+  shouldUseSpeechFallback,
+} from "@/lib/audio-playback";
 import { useAudioResolution } from "@/hooks/use-audio-resolution";
 import { getAudioPlaybackMode, isQuizAudioEnabled } from "@/config/runtime";
 
@@ -14,41 +17,40 @@ interface IPlayHybridAudioInput {
   language?: LanguageEnum | null;
 }
 
-function resolveSpeechLang(inputLanguage?: LanguageEnum | null): string {
-  if (!inputLanguage) return "en-US";
-  switch (inputLanguage) {
-    case LanguageEnum.TELUGU:
-      return "te-IN";
-    case LanguageEnum.HINDI:
-      return "hi-IN";
-    case LanguageEnum.TAMIL:
-      return "ta-IN";
-    case LanguageEnum.KANNADA:
-      return "kn-IN";
-    case LanguageEnum.MALAYALAM:
-      return "ml-IN";
-    case LanguageEnum.SPANISH:
-      return "es-ES";
-    case LanguageEnum.FRENCH:
-      return "fr-FR";
-    case LanguageEnum.GERMAN:
-      return "de-DE";
-    default:
-      return "en-US";
-  }
-}
-
 export function useHybridAudio() {
   const [activeKey, setActiveKey] = useState<string | null>(null);
+  const [voices, setVoices] = useState<SpeechSynthesisVoice[]>([]);
   const htmlAudioRef = useRef<HTMLAudioElement | null>(null);
   const utteranceRef = useRef<SpeechSynthesisUtterance | null>(null);
+  const speechTimeoutRef = useRef<number | null>(null);
+  const speechKeepAliveRef = useRef<number | null>(null);
   const { resolveAudioUrl } = useAudioResolution();
+
+  const ensureHtmlAudio = useCallback(() => {
+    if (htmlAudioRef.current) {
+      return htmlAudioRef.current;
+    }
+
+    const audio = new Audio();
+    audio.preload = "auto";
+    audio.setAttribute("playsinline", "true");
+    htmlAudioRef.current = audio;
+    return audio;
+  }, []);
 
   const stop = useCallback(() => {
     if (htmlAudioRef.current) {
       htmlAudioRef.current.pause();
       htmlAudioRef.current.src = "";
-      htmlAudioRef.current = null;
+      htmlAudioRef.current.load();
+    }
+    if (speechTimeoutRef.current !== null && typeof window !== "undefined") {
+      window.clearTimeout(speechTimeoutRef.current);
+      speechTimeoutRef.current = null;
+    }
+    if (speechKeepAliveRef.current !== null && typeof window !== "undefined") {
+      window.clearInterval(speechKeepAliveRef.current);
+      speechKeepAliveRef.current = null;
     }
     if (typeof window !== "undefined" && "speechSynthesis" in window) {
       window.speechSynthesis.cancel();
@@ -102,15 +104,66 @@ export function useHybridAudio() {
           return;
         }
 
+        const availableVoices = voices.length > 0 ? voices : window.speechSynthesis.getVoices();
+        if (
+          !shouldUseSpeechFallback({
+            text: resolvedSpeechText,
+            language,
+            voices: availableVoices,
+            platform: window.navigator.platform,
+            userAgent: window.navigator.userAgent,
+          })
+        ) {
+          setActiveKey(null);
+          return;
+        }
+
+        const voiceMatch = resolveSpeechVoiceMatch(
+          resolvedSpeechText,
+          language,
+          availableVoices,
+          window.navigator.platform,
+          window.navigator.userAgent,
+        );
+
         const utterance = new SpeechSynthesisUtterance(resolvedSpeechText);
-        utterance.lang = isMostlyAscii(resolvedSpeechText) ? "en-US" : resolveSpeechLang(language);
+        utterance.lang = voiceMatch.lang;
+        if (voiceMatch.voice) {
+          utterance.voice = voiceMatch.voice;
+        }
         utterance.rate = 0.95;
-        utterance.onend = () => setActiveKey(null);
-        utterance.onerror = () => setActiveKey(null);
+        utterance.onend = () => {
+          if (speechKeepAliveRef.current !== null && typeof window !== "undefined") {
+            window.clearInterval(speechKeepAliveRef.current);
+            speechKeepAliveRef.current = null;
+          }
+          setActiveKey(null);
+        };
+        utterance.onerror = () => {
+          if (speechKeepAliveRef.current !== null && typeof window !== "undefined") {
+            window.clearInterval(speechKeepAliveRef.current);
+            speechKeepAliveRef.current = null;
+          }
+          setActiveKey(null);
+        };
         utteranceRef.current = utterance;
         window.speechSynthesis.cancel();
         window.speechSynthesis.resume();
-        window.speechSynthesis.speak(utterance);
+        speechTimeoutRef.current = window.setTimeout(() => {
+          speechKeepAliveRef.current = window.setInterval(() => {
+            if (!window.speechSynthesis.speaking) {
+              if (speechKeepAliveRef.current !== null) {
+                window.clearInterval(speechKeepAliveRef.current);
+                speechKeepAliveRef.current = null;
+              }
+              return;
+            }
+            window.speechSynthesis.pause();
+            window.speechSynthesis.resume();
+          }, 14_000);
+          window.speechSynthesis.speak(utterance);
+          speechTimeoutRef.current = null;
+        }, 0);
       };
 
       if (playbackMode === "tts_only" || !resolvedAudioUrl) {
@@ -119,20 +172,51 @@ export function useHybridAudio() {
       }
 
       try {
-        const audio = new Audio(resolvedAudioUrl);
-        audio.preload = "auto";
-        audio.crossOrigin = "anonymous";
-        htmlAudioRef.current = audio;
+        const audio = ensureHtmlAudio();
+        audio.onended = null;
+        audio.onerror = null;
+        audio.onabort = null;
+        audio.pause();
+        audio.src = "";
+        audio.load();
+        if (typeof window !== "undefined") {
+          const audioUrlObject = new URL(resolvedAudioUrl, window.location.href);
+          audio.crossOrigin = audioUrlObject.origin !== window.location.origin ? "anonymous" : null;
+        }
         audio.onended = () => setActiveKey(null);
         audio.onerror = () => fallbackToSpeech();
         audio.onabort = () => fallbackToSpeech();
+        audio.src = resolvedAudioUrl;
+        audio.load();
         await audio.play();
       } catch {
         fallbackToSpeech();
       }
     },
-    [activeKey, resolveAudioUrl, stop],
+    [activeKey, ensureHtmlAudio, resolveAudioUrl, stop, voices],
   );
+
+  useEffect(() => {
+    if (typeof window === "undefined" || !("speechSynthesis" in window)) {
+      return;
+    }
+
+    const hydrateVoices = () => {
+      const nextVoices = window.speechSynthesis.getVoices();
+      if (nextVoices.length > 0) {
+        setVoices(nextVoices);
+      }
+    };
+
+    hydrateVoices();
+    window.speechSynthesis.onvoiceschanged = hydrateVoices;
+
+    return () => {
+      if (window.speechSynthesis.onvoiceschanged === hydrateVoices) {
+        window.speechSynthesis.onvoiceschanged = null;
+      }
+    };
+  }, []);
 
   useEffect(() => stop, [stop]);
 

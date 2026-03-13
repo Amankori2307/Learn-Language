@@ -6,7 +6,9 @@
     "english": "Hello, how are you?",
     "contextTag": "daily-use",
     "difficulty": 1,
-    "wordRefs": ["telugu::namaste::hello"]
+    "wordRefs": [
+      "telugu::namaste::hello"
+    ]
   },
   {
     "language": "telugu",
@@ -15,7 +17,9 @@
     "english": "Thank you for your help.",
     "contextTag": "daily-use",
     "difficulty": 1,
-    "wordRefs": ["telugu::dhanyavaadalu::thank you"]
+    "wordRefs": [
+      "telugu::dhanyavaadalu::thank you"
+    ]
   },
   {
     "language": "telugu",
@@ -24,7 +28,9 @@
     "english": "Please sit down.",
     "contextTag": "daily-use",
     "difficulty": 1,
-    "wordRefs": ["telugu::dayachesi::please"]
+    "wordRefs": [
+      "telugu::dayachesi::please"
+    ]
   },
   {
     "language": "telugu",
@@ -33,7 +39,9 @@
     "english": "Sorry, I did not understand.",
     "contextTag": "daily-use",
     "difficulty": 1,
-    "wordRefs": ["telugu::kshaminchandi::sorry / excuse me"]
+    "wordRefs": [
+      "telugu::kshaminchandi::sorry / excuse me"
+    ]
   },
   {
     "language": "telugu",
@@ -42,7 +50,9 @@
     "english": "Yes, I will come.",
     "contextTag": "daily-use",
     "difficulty": 1,
-    "wordRefs": ["telugu::avunu::yes"]
+    "wordRefs": [
+      "telugu::avunu::yes"
+    ]
   },
   {
     "language": "telugu",
@@ -51,7 +61,9 @@
     "english": "No, that is not my book.",
     "contextTag": "daily-use",
     "difficulty": 1,
-    "wordRefs": ["telugu::kaadu::no / not"]
+    "wordRefs": [
+      "telugu::kaadu::no / not"
+    ]
   },
   {
     "language": "telugu",
@@ -60,7 +72,9 @@
     "english": "Okay, let us go.",
     "contextTag": "daily-use",
     "difficulty": 1,
-    "wordRefs": ["telugu::sare::okay"]
+    "wordRefs": [
+      "telugu::sare::okay"
+    ]
   },
   {
     "language": "telugu",
@@ -69,7 +83,9 @@
     "english": "This idea is good.",
     "contextTag": "daily-use",
     "difficulty": 1,
-    "wordRefs": ["telugu::bagundi::it is good"]
+    "wordRefs": [
+      "telugu::bagundi::it is good"
+    ]
   },
   {
     "language": "telugu",
@@ -78,7 +94,9 @@
     "english": "I am learning the language.",
     "contextTag": "daily-use",
     "difficulty": 1,
-    "wordRefs": ["telugu::nenu::i"]
+    "wordRefs": [
+      "telugu::nenu::i"
+    ]
   },
   {
     "language": "telugu",
@@ -87,7 +105,9 @@
     "english": "Where do you live?",
     "contextTag": "daily-use",
     "difficulty": 1,
-    "wordRefs": ["telugu::nuvvu::you (informal)"]
+    "wordRefs": [
+      "telugu::nuvvu::you (informal)"
+    ]
   },
   {
     "language": "telugu",
@@ -96,7 +116,9 @@
     "english": "What do you do?",
     "contextTag": "daily-use",
     "difficulty": 1,
-    "wordRefs": ["telugu::meeru::you (formal/plural)"]
+    "wordRefs": [
+      "telugu::meeru::you (formal/plural)"
+    ]
   },
   {
     "language": "telugu",
@@ -105,7 +127,9 @@
     "english": "He is my friend.",
     "contextTag": "daily-use",
     "difficulty": 1,
-    "wordRefs": ["telugu::atanu::he"]
+    "wordRefs": [
+      "telugu::atanu::he"
+    ]
   },
   {
     "language": "telugu",
@@ -114,7 +138,9 @@
     "english": "She is a good teacher.",
     "contextTag": "daily-use",
     "difficulty": 1,
-    "wordRefs": ["telugu::aame::she"]
+    "wordRefs": [
+      "telugu::aame::she"
+    ]
   },
   {
     "language": "telugu",
@@ -123,7 +149,9 @@
     "english": "This is my phone.",
     "contextTag": "daily-use",
     "difficulty": 1,
-    "wordRefs": ["telugu::idi::this"]
+    "wordRefs": [
+      "telugu::idi::this"
+    ]
   },
   {
     "language": "telugu",
@@ -132,7 +160,9 @@
     "english": "That is our house.",
     "contextTag": "daily-use",
     "difficulty": 1,
-    "wordRefs": ["telugu::adi::that"]
+    "wordRefs": [
+      "telugu::adi::that"
+    ]
   },
   {
     "language": "telugu",
@@ -141,7 +171,9 @@
     "english": "Let us start now.",
     "contextTag": "daily-use",
     "difficulty": 1,
-    "wordRefs": ["telugu::manam::we (inclusive)"]
+    "wordRefs": [
+      "telugu::manam::we (inclusive)"
+    ]
   },
   {
     "language": "telugu",
@@ -150,7 +182,9 @@
     "english": "We live in Hyderabad.",
     "contextTag": "daily-use",
     "difficulty": 1,
-    "wordRefs": ["telugu::memu::we (exclusive)"]
+    "wordRefs": [
+      "telugu::memu::we (exclusive)"
+    ]
   },
   {
     "language": "telugu",
@@ -159,7 +193,9 @@
     "english": "They went to school.",
     "contextTag": "daily-use",
     "difficulty": 1,
-    "wordRefs": ["telugu::vaallu::they"]
+    "wordRefs": [
+      "telugu::vaallu::they"
+    ]
   },
   {
     "language": "telugu",
@@ -168,7 +204,9 @@
     "english": "What is this?",
     "contextTag": "daily-use",
     "difficulty": 1,
-    "wordRefs": ["telugu::emi::what"]
+    "wordRefs": [
+      "telugu::emi::what"
+    ]
   },
   {
     "language": "telugu",
@@ -177,7 +215,9 @@
     "english": "Who is he?",
     "contextTag": "daily-use",
     "difficulty": 1,
-    "wordRefs": ["telugu::evaru::who"]
+    "wordRefs": [
+      "telugu::evaru::who"
+    ]
   },
   {
     "language": "telugu",
@@ -186,7 +226,9 @@
     "english": "Where is your house?",
     "contextTag": "daily-use",
     "difficulty": 1,
-    "wordRefs": ["telugu::ekkada::where"]
+    "wordRefs": [
+      "telugu::ekkada::where"
+    ]
   },
   {
     "language": "telugu",
@@ -195,7 +237,9 @@
     "english": "When will you come?",
     "contextTag": "daily-use",
     "difficulty": 1,
-    "wordRefs": ["telugu::eppudu::when"]
+    "wordRefs": [
+      "telugu::eppudu::when"
+    ]
   },
   {
     "language": "telugu",
@@ -204,7 +248,9 @@
     "english": "How does this work?",
     "contextTag": "daily-use",
     "difficulty": 1,
-    "wordRefs": ["telugu::ela::how"]
+    "wordRefs": [
+      "telugu::ela::how"
+    ]
   },
   {
     "language": "telugu",
@@ -213,7 +259,9 @@
     "english": "Why did you come late?",
     "contextTag": "daily-use",
     "difficulty": 1,
-    "wordRefs": ["telugu::enduku::why"]
+    "wordRefs": [
+      "telugu::enduku::why"
+    ]
   },
   {
     "language": "telugu",
@@ -222,7 +270,9 @@
     "english": "I have one book.",
     "contextTag": "daily-use",
     "difficulty": 1,
-    "wordRefs": ["telugu::okati::one"]
+    "wordRefs": [
+      "telugu::okati::one"
+    ]
   },
   {
     "language": "telugu",
@@ -231,7 +281,9 @@
     "english": "We have two children.",
     "contextTag": "daily-use",
     "difficulty": 1,
-    "wordRefs": ["telugu::rendu::two"]
+    "wordRefs": [
+      "telugu::rendu::two"
+    ]
   },
   {
     "language": "telugu",
@@ -240,7 +292,9 @@
     "english": "Come after three days.",
     "contextTag": "daily-use",
     "difficulty": 1,
-    "wordRefs": ["telugu::moodu::three"]
+    "wordRefs": [
+      "telugu::moodu::three"
+    ]
   },
   {
     "language": "telugu",
@@ -249,7 +303,9 @@
     "english": "We need four chairs.",
     "contextTag": "daily-use",
     "difficulty": 1,
-    "wordRefs": ["telugu::naalugu::four"]
+    "wordRefs": [
+      "telugu::naalugu::four"
+    ]
   },
   {
     "language": "telugu",
@@ -258,7 +314,9 @@
     "english": "Please wait five minutes.",
     "contextTag": "daily-use",
     "difficulty": 1,
-    "wordRefs": ["telugu::aidu::five"]
+    "wordRefs": [
+      "telugu::aidu::five"
+    ]
   },
   {
     "language": "telugu",
@@ -267,7 +325,9 @@
     "english": "There is a meeting at ten o'clock.",
     "contextTag": "daily-use",
     "difficulty": 1,
-    "wordRefs": ["telugu::padi::ten"]
+    "wordRefs": [
+      "telugu::padi::ten"
+    ]
   },
   {
     "language": "telugu",
@@ -276,7 +336,9 @@
     "english": "There are twenty students.",
     "contextTag": "daily-use",
     "difficulty": 1,
-    "wordRefs": ["telugu::iravai::twenty"]
+    "wordRefs": [
+      "telugu::iravai::twenty"
+    ]
   },
   {
     "language": "telugu",
@@ -285,7 +347,9 @@
     "english": "Today the weather is cool.",
     "contextTag": "daily-use",
     "difficulty": 1,
-    "wordRefs": ["telugu::ee roju::today"]
+    "wordRefs": [
+      "telugu::ee roju::today"
+    ]
   },
   {
     "language": "telugu",
@@ -294,7 +358,9 @@
     "english": "Let us meet tomorrow.",
     "contextTag": "daily-use",
     "difficulty": 1,
-    "wordRefs": ["telugu::repu::tomorrow"]
+    "wordRefs": [
+      "telugu::repu::tomorrow"
+    ]
   },
   {
     "language": "telugu",
@@ -303,7 +369,9 @@
     "english": "Yesterday I stayed at home.",
     "contextTag": "daily-use",
     "difficulty": 1,
-    "wordRefs": ["telugu::ninna::yesterday"]
+    "wordRefs": [
+      "telugu::ninna::yesterday"
+    ]
   },
   {
     "language": "telugu",
@@ -312,7 +380,9 @@
     "english": "Let us start now.",
     "contextTag": "daily-use",
     "difficulty": 1,
-    "wordRefs": ["telugu::ippudu::now"]
+    "wordRefs": [
+      "telugu::ippudu::now"
+    ]
   },
   {
     "language": "telugu",
@@ -321,7 +391,9 @@
     "english": "I will call later.",
     "contextTag": "daily-use",
     "difficulty": 1,
-    "wordRefs": ["telugu::taruvata::later / after"]
+    "wordRefs": [
+      "telugu::taruvata::later / after"
+    ]
   },
   {
     "language": "telugu",
@@ -330,7 +402,9 @@
     "english": "I go for a walk in the morning.",
     "contextTag": "daily-use",
     "difficulty": 1,
-    "wordRefs": ["telugu::udayam::morning"]
+    "wordRefs": [
+      "telugu::udayam::morning"
+    ]
   },
   {
     "language": "telugu",
@@ -339,7 +413,9 @@
     "english": "Let us drink tea in the evening.",
     "contextTag": "daily-use",
     "difficulty": 1,
-    "wordRefs": ["telugu::saayantram::evening"]
+    "wordRefs": [
+      "telugu::saayantram::evening"
+    ]
   },
   {
     "language": "telugu",
@@ -348,7 +424,9 @@
     "english": "Sleep early at night.",
     "contextTag": "daily-use",
     "difficulty": 1,
-    "wordRefs": ["telugu::raatri::night"]
+    "wordRefs": [
+      "telugu::raatri::night"
+    ]
   },
   {
     "language": "telugu",
@@ -357,7 +435,9 @@
     "english": "Your time is valuable.",
     "contextTag": "daily-use",
     "difficulty": 1,
-    "wordRefs": ["telugu::samayam::time"]
+    "wordRefs": [
+      "telugu::samayam::time"
+    ]
   },
   {
     "language": "telugu",
@@ -366,7 +446,9 @@
     "english": "My mother is very kind.",
     "contextTag": "daily-use",
     "difficulty": 1,
-    "wordRefs": ["telugu::amma::mother"]
+    "wordRefs": [
+      "telugu::amma::mother"
+    ]
   },
   {
     "language": "telugu",
@@ -375,7 +457,9 @@
     "english": "My father went to the office.",
     "contextTag": "daily-use",
     "difficulty": 1,
-    "wordRefs": ["telugu::nanna::father"]
+    "wordRefs": [
+      "telugu::nanna::father"
+    ]
   },
   {
     "language": "telugu",
@@ -384,7 +468,9 @@
     "english": "My elder brother lives in Hyderabad.",
     "contextTag": "daily-use",
     "difficulty": 1,
-    "wordRefs": ["telugu::anna::elder brother"]
+    "wordRefs": [
+      "telugu::anna::elder brother"
+    ]
   },
   {
     "language": "telugu",
@@ -393,7 +479,9 @@
     "english": "My elder sister is a doctor.",
     "contextTag": "daily-use",
     "difficulty": 1,
-    "wordRefs": ["telugu::akka::elder sister"]
+    "wordRefs": [
+      "telugu::akka::elder sister"
+    ]
   },
   {
     "language": "telugu",
@@ -402,7 +490,9 @@
     "english": "My younger brother plays cricket.",
     "contextTag": "daily-use",
     "difficulty": 1,
-    "wordRefs": ["telugu::tammudu::younger brother"]
+    "wordRefs": [
+      "telugu::tammudu::younger brother"
+    ]
   },
   {
     "language": "telugu",
@@ -411,7 +501,9 @@
     "english": "My younger sister sings songs.",
     "contextTag": "daily-use",
     "difficulty": 1,
-    "wordRefs": ["telugu::chelli::younger sister"]
+    "wordRefs": [
+      "telugu::chelli::younger sister"
+    ]
   },
   {
     "language": "telugu",
@@ -420,7 +512,9 @@
     "english": "Our family is big.",
     "contextTag": "daily-use",
     "difficulty": 1,
-    "wordRefs": ["telugu::kutumbam::family"]
+    "wordRefs": [
+      "telugu::kutumbam::family"
+    ]
   },
   {
     "language": "telugu",
@@ -429,7 +523,9 @@
     "english": "He is my good friend.",
     "contextTag": "daily-use",
     "difficulty": 1,
-    "wordRefs": ["telugu::snehitudu::friend (male)"]
+    "wordRefs": [
+      "telugu::snehitudu::friend (male)"
+    ]
   },
   {
     "language": "telugu",
@@ -438,7 +534,9 @@
     "english": "She is my friend.",
     "contextTag": "daily-use",
     "difficulty": 1,
-    "wordRefs": ["telugu::snehituralu::friend (female)"]
+    "wordRefs": [
+      "telugu::snehituralu::friend (female)"
+    ]
   },
   {
     "language": "telugu",
@@ -447,7 +545,9 @@
     "english": "Our house is big.",
     "contextTag": "daily-use",
     "difficulty": 1,
-    "wordRefs": ["telugu::illu::house"]
+    "wordRefs": [
+      "telugu::illu::house"
+    ]
   },
   {
     "language": "telugu",
@@ -456,7 +556,9 @@
     "english": "I am reading a the language book.",
     "contextTag": "daily-use",
     "difficulty": 1,
-    "wordRefs": ["telugu::pustakam::book"]
+    "wordRefs": [
+      "telugu::pustakam::book"
+    ]
   },
   {
     "language": "telugu",
@@ -465,7 +567,9 @@
     "english": "The children went to school.",
     "contextTag": "daily-use",
     "difficulty": 1,
-    "wordRefs": ["telugu::paathashaala::school"]
+    "wordRefs": [
+      "telugu::paathashaala::school"
+    ]
   },
   {
     "language": "telugu",
@@ -474,7 +578,9 @@
     "english": "I need water.",
     "contextTag": "daily-use",
     "difficulty": 1,
-    "wordRefs": ["telugu::neeru::water"]
+    "wordRefs": [
+      "telugu::neeru::water"
+    ]
   },
   {
     "language": "telugu",
@@ -483,7 +589,9 @@
     "english": "The rice is hot.",
     "contextTag": "daily-use",
     "difficulty": 1,
-    "wordRefs": ["telugu::annam::cooked rice / meal"]
+    "wordRefs": [
+      "telugu::annam::cooked rice / meal"
+    ]
   },
   {
     "language": "telugu",
@@ -492,7 +600,9 @@
     "english": "I eat fruit every day.",
     "contextTag": "daily-use",
     "difficulty": 1,
-    "wordRefs": ["telugu::pandu::fruit"]
+    "wordRefs": [
+      "telugu::pandu::fruit"
+    ]
   },
   {
     "language": "telugu",
@@ -501,7 +611,9 @@
     "english": "The bus arrived on time.",
     "contextTag": "daily-use",
     "difficulty": 1,
-    "wordRefs": ["telugu::bassu::bus"]
+    "wordRefs": [
+      "telugu::bassu::bus"
+    ]
   },
   {
     "language": "telugu",
@@ -510,7 +622,9 @@
     "english": "This road goes to the city.",
     "contextTag": "daily-use",
     "difficulty": 1,
-    "wordRefs": ["telugu::roadu::road"]
+    "wordRefs": [
+      "telugu::roadu::road"
+    ]
   },
   {
     "language": "telugu",
@@ -519,7 +633,9 @@
     "english": "My village is very beautiful.",
     "contextTag": "daily-use",
     "difficulty": 1,
-    "wordRefs": ["telugu::graamam::village"]
+    "wordRefs": [
+      "telugu::graamam::village"
+    ]
   },
   {
     "language": "telugu",
@@ -528,7 +644,9 @@
     "english": "Hyderabad is a big city.",
     "contextTag": "daily-use",
     "difficulty": 1,
-    "wordRefs": ["telugu::nagaram::city"]
+    "wordRefs": [
+      "telugu::nagaram::city"
+    ]
   },
   {
     "language": "telugu",
@@ -537,7 +655,9 @@
     "english": "I have a lot of work today.",
     "contextTag": "daily-use",
     "difficulty": 1,
-    "wordRefs": ["telugu::pani::work"]
+    "wordRefs": [
+      "telugu::pani::work"
+    ]
   },
   {
     "language": "telugu",
@@ -546,7 +666,9 @@
     "english": "I need some money.",
     "contextTag": "daily-use",
     "difficulty": 1,
-    "wordRefs": ["telugu::dabbu::money"]
+    "wordRefs": [
+      "telugu::dabbu::money"
+    ]
   },
   {
     "language": "telugu",
@@ -555,7 +677,9 @@
     "english": "the language is a beautiful language.",
     "contextTag": "daily-use",
     "difficulty": 1,
-    "wordRefs": ["telugu::bhaasha::language"]
+    "wordRefs": [
+      "telugu::bhaasha::language"
+    ]
   },
   {
     "language": "telugu",
@@ -564,7 +688,9 @@
     "english": "I need your help.",
     "contextTag": "daily-use",
     "difficulty": 1,
-    "wordRefs": ["telugu::sahaayam::help"]
+    "wordRefs": [
+      "telugu::sahaayam::help"
+    ]
   },
   {
     "language": "telugu",
@@ -573,7 +699,9 @@
     "english": "Let us go to the market.",
     "contextTag": "daily-use",
     "difficulty": 1,
-    "wordRefs": ["telugu::vellu::go"]
+    "wordRefs": [
+      "telugu::vellu::go"
+    ]
   },
   {
     "language": "telugu",
@@ -582,7 +710,9 @@
     "english": "Come here.",
     "contextTag": "daily-use",
     "difficulty": 1,
-    "wordRefs": ["telugu::raa::come"]
+    "wordRefs": [
+      "telugu::raa::come"
+    ]
   },
   {
     "language": "telugu",
@@ -591,7 +721,9 @@
     "english": "Eat your meal on time.",
     "contextTag": "daily-use",
     "difficulty": 1,
-    "wordRefs": ["telugu::tinu::eat"]
+    "wordRefs": [
+      "telugu::tinu::eat"
+    ]
   },
   {
     "language": "telugu",
@@ -600,7 +732,9 @@
     "english": "Drink more water daily.",
     "contextTag": "daily-use",
     "difficulty": 1,
-    "wordRefs": ["telugu::taagu::drink"]
+    "wordRefs": [
+      "telugu::taagu::drink"
+    ]
   },
   {
     "language": "telugu",
@@ -609,7 +743,9 @@
     "english": "Study the language every day.",
     "contextTag": "daily-use",
     "difficulty": 1,
-    "wordRefs": ["telugu::chaduvu::study / read"]
+    "wordRefs": [
+      "telugu::chaduvu::study / read"
+    ]
   },
   {
     "language": "telugu",
@@ -618,7 +754,9 @@
     "english": "Write your name here.",
     "contextTag": "daily-use",
     "difficulty": 1,
-    "wordRefs": ["telugu::raayi::write"]
+    "wordRefs": [
+      "telugu::raayi::write"
+    ]
   },
   {
     "language": "telugu",
@@ -627,7 +765,9 @@
     "english": "Look at this picture.",
     "contextTag": "daily-use",
     "difficulty": 1,
-    "wordRefs": ["telugu::choodu::see / look"]
+    "wordRefs": [
+      "telugu::choodu::see / look"
+    ]
   },
   {
     "language": "telugu",
@@ -636,7 +776,9 @@
     "english": "Speak slowly.",
     "contextTag": "daily-use",
     "difficulty": 1,
-    "wordRefs": ["telugu::maatlaadu::speak / talk"]
+    "wordRefs": [
+      "telugu::maatlaadu::speak / talk"
+    ]
   },
   {
     "language": "telugu",
@@ -645,7 +787,9 @@
     "english": "Listen carefully.",
     "contextTag": "daily-use",
     "difficulty": 1,
-    "wordRefs": ["telugu::vinu::listen / hear"]
+    "wordRefs": [
+      "telugu::vinu::listen / hear"
+    ]
   },
   {
     "language": "telugu",
@@ -654,7 +798,9 @@
     "english": "Sleep early at night.",
     "contextTag": "daily-use",
     "difficulty": 1,
-    "wordRefs": ["telugu::nidrapo::sleep"]
+    "wordRefs": [
+      "telugu::nidrapo::sleep"
+    ]
   },
   {
     "language": "telugu",
@@ -663,7 +809,9 @@
     "english": "Sit here.",
     "contextTag": "daily-use",
     "difficulty": 1,
-    "wordRefs": ["telugu::koorcho::sit"]
+    "wordRefs": [
+      "telugu::koorcho::sit"
+    ]
   },
   {
     "language": "telugu",
@@ -672,7 +820,9 @@
     "english": "Stand in the line.",
     "contextTag": "daily-use",
     "difficulty": 1,
-    "wordRefs": ["telugu::nilabadu::stand"]
+    "wordRefs": [
+      "telugu::nilabadu::stand"
+    ]
   },
   {
     "language": "telugu",
@@ -681,7 +831,9 @@
     "english": "Please give me your book.",
     "contextTag": "daily-use",
     "difficulty": 1,
-    "wordRefs": ["telugu::ivvu::give"]
+    "wordRefs": [
+      "telugu::ivvu::give"
+    ]
   },
   {
     "language": "telugu",
@@ -690,7 +842,9 @@
     "english": "Take this pen.",
     "contextTag": "daily-use",
     "difficulty": 1,
-    "wordRefs": ["telugu::teesuko::take"]
+    "wordRefs": [
+      "telugu::teesuko::take"
+    ]
   },
   {
     "language": "telugu",
@@ -699,7 +853,9 @@
     "english": "Do this work now.",
     "contextTag": "daily-use",
     "difficulty": 1,
-    "wordRefs": ["telugu::cheyi::do"]
+    "wordRefs": [
+      "telugu::cheyi::do"
+    ]
   },
   {
     "language": "telugu",
@@ -708,7 +864,9 @@
     "english": "I know this word.",
     "contextTag": "daily-use",
     "difficulty": 1,
-    "wordRefs": ["telugu::telusu::know"]
+    "wordRefs": [
+      "telugu::telusu::know"
+    ]
   },
   {
     "language": "telugu",
@@ -717,7 +875,9 @@
     "english": "Now I understood.",
     "contextTag": "daily-use",
     "difficulty": 1,
-    "wordRefs": ["telugu::artham avu::understand"]
+    "wordRefs": [
+      "telugu::artham avu::understand"
+    ]
   },
   {
     "language": "telugu",
@@ -726,7 +886,9 @@
     "english": "He is a good person.",
     "contextTag": "daily-use",
     "difficulty": 1,
-    "wordRefs": ["telugu::manchi::good"]
+    "wordRefs": [
+      "telugu::manchi::good"
+    ]
   },
   {
     "language": "telugu",
@@ -735,7 +897,9 @@
     "english": "This is a bad habit.",
     "contextTag": "daily-use",
     "difficulty": 1,
-    "wordRefs": ["telugu::chedu::bad"]
+    "wordRefs": [
+      "telugu::chedu::bad"
+    ]
   },
   {
     "language": "telugu",
@@ -744,7 +908,9 @@
     "english": "This is a big house.",
     "contextTag": "daily-use",
     "difficulty": 1,
-    "wordRefs": ["telugu::pedda::big"]
+    "wordRefs": [
+      "telugu::pedda::big"
+    ]
   },
   {
     "language": "telugu",
@@ -753,7 +919,9 @@
     "english": "That is a small book.",
     "contextTag": "daily-use",
     "difficulty": 1,
-    "wordRefs": ["telugu::chinna::small"]
+    "wordRefs": [
+      "telugu::chinna::small"
+    ]
   },
   {
     "language": "telugu",
@@ -762,7 +930,9 @@
     "english": "I bought a new phone.",
     "contextTag": "daily-use",
     "difficulty": 1,
-    "wordRefs": ["telugu::kotta::new"]
+    "wordRefs": [
+      "telugu::kotta::new"
+    ]
   },
   {
     "language": "telugu",
@@ -771,7 +941,9 @@
     "english": "This is an old house.",
     "contextTag": "daily-use",
     "difficulty": 1,
-    "wordRefs": ["telugu::paata::old"]
+    "wordRefs": [
+      "telugu::paata::old"
+    ]
   },
   {
     "language": "telugu",
@@ -780,7 +952,9 @@
     "english": "She is very smart.",
     "contextTag": "daily-use",
     "difficulty": 1,
-    "wordRefs": ["telugu::chaala::very / much"]
+    "wordRefs": [
+      "telugu::chaala::very / much"
+    ]
   },
   {
     "language": "telugu",
@@ -789,7 +963,9 @@
     "english": "Please speak slowly.",
     "contextTag": "daily-use",
     "difficulty": 1,
-    "wordRefs": ["telugu::nemmadiga::slowly"]
+    "wordRefs": [
+      "telugu::nemmadiga::slowly"
+    ]
   },
   {
     "language": "telugu",
@@ -798,7 +974,9 @@
     "english": "He ran quickly.",
     "contextTag": "daily-use",
     "difficulty": 1,
-    "wordRefs": ["telugu::veganga::quickly"]
+    "wordRefs": [
+      "telugu::veganga::quickly"
+    ]
   },
   {
     "language": "telugu",
@@ -807,7 +985,9 @@
     "english": "Wait here.",
     "contextTag": "daily-use",
     "difficulty": 1,
-    "wordRefs": ["telugu::ikkada::here"]
+    "wordRefs": [
+      "telugu::ikkada::here"
+    ]
   },
   {
     "language": "telugu",
@@ -816,7 +996,9 @@
     "english": "There is a shop there.",
     "contextTag": "daily-use",
     "difficulty": 1,
-    "wordRefs": ["telugu::akkada::there"]
+    "wordRefs": [
+      "telugu::akkada::there"
+    ]
   },
   {
     "language": "telugu",
@@ -825,7 +1007,9 @@
     "english": "My mother is at home.",
     "contextTag": "family",
     "difficulty": 1,
-    "wordRefs": ["telugu::talli::mother"]
+    "wordRefs": [
+      "telugu::talli::mother"
+    ]
   },
   {
     "language": "telugu",
@@ -834,7 +1018,9 @@
     "english": "My father is working.",
     "contextTag": "family",
     "difficulty": 1,
-    "wordRefs": ["telugu::tandri::father"]
+    "wordRefs": [
+      "telugu::tandri::father"
+    ]
   },
   {
     "language": "telugu",
@@ -843,7 +1029,9 @@
     "english": "That child is smiling.",
     "contextTag": "family",
     "difficulty": 1,
-    "wordRefs": ["telugu::bidda::child"]
+    "wordRefs": [
+      "telugu::bidda::child"
+    ]
   },
   {
     "language": "telugu",
@@ -852,7 +1040,9 @@
     "english": "This road is very long.",
     "contextTag": "travel",
     "difficulty": 1,
-    "wordRefs": ["telugu::rahadaari::road"]
+    "wordRefs": [
+      "telugu::rahadaari::road"
+    ]
   },
   {
     "language": "telugu",
@@ -861,7 +1051,9 @@
     "english": "She went to the market.",
     "contextTag": "shopping",
     "difficulty": 1,
-    "wordRefs": ["telugu::bazaaru::market"]
+    "wordRefs": [
+      "telugu::bazaaru::market"
+    ]
   },
   {
     "language": "telugu",
@@ -870,7 +1062,9 @@
     "english": "Our teacher teaches Telugu.",
     "contextTag": "education",
     "difficulty": 1,
-    "wordRefs": ["telugu::guruvu::teacher"]
+    "wordRefs": [
+      "telugu::guruvu::teacher"
+    ]
   },
   {
     "language": "telugu",
@@ -879,7 +1073,9 @@
     "english": "He is a good student.",
     "contextTag": "education",
     "difficulty": 1,
-    "wordRefs": ["telugu::vidyarthi::student"]
+    "wordRefs": [
+      "telugu::vidyarthi::student"
+    ]
   },
   {
     "language": "telugu",
@@ -888,7 +1084,9 @@
     "english": "She bought fresh vegetables.",
     "contextTag": "food",
     "difficulty": 1,
-    "wordRefs": ["telugu::kooragayalu::vegetables"]
+    "wordRefs": [
+      "telugu::kooragayalu::vegetables"
+    ]
   },
   {
     "language": "telugu",
@@ -897,7 +1095,9 @@
     "english": "I want milk.",
     "contextTag": "food",
     "difficulty": 1,
-    "wordRefs": ["telugu::paalu::milk"]
+    "wordRefs": [
+      "telugu::paalu::milk"
+    ]
   },
   {
     "language": "telugu",
@@ -906,7 +1106,9 @@
     "english": "I have a question.",
     "contextTag": "education",
     "difficulty": 1,
-    "wordRefs": ["telugu::prashna::question"]
+    "wordRefs": [
+      "telugu::prashna::question"
+    ]
   },
   {
     "language": "telugu",
@@ -915,7 +1117,9 @@
     "english": "Your answer is correct.",
     "contextTag": "education",
     "difficulty": 1,
-    "wordRefs": ["telugu::samaadhaanam::answer"]
+    "wordRefs": [
+      "telugu::samaadhaanam::answer"
+    ]
   },
   {
     "language": "telugu",
@@ -924,7 +1128,9 @@
     "english": "Good morning! Have a good day.",
     "contextTag": "greetings",
     "difficulty": 1,
-    "wordRefs": ["telugu::shubhodayam::good morning"]
+    "wordRefs": [
+      "telugu::shubhodayam::good morning"
+    ]
   },
   {
     "language": "telugu",
@@ -933,7 +1139,9 @@
     "english": "Good night, see you tomorrow.",
     "contextTag": "greetings",
     "difficulty": 1,
-    "wordRefs": ["telugu::shubharaatri::good night"]
+    "wordRefs": [
+      "telugu::shubharaatri::good night"
+    ]
   },
   {
     "language": "telugu",
@@ -942,7 +1150,9 @@
     "english": "Welcome to our home.",
     "contextTag": "home",
     "difficulty": 1,
-    "wordRefs": ["telugu::swaagatam::welcome"]
+    "wordRefs": [
+      "telugu::swaagatam::welcome"
+    ]
   },
   {
     "language": "telugu",
@@ -951,7 +1161,9 @@
     "english": "How much is this?",
     "contextTag": "shopping",
     "difficulty": 1,
-    "wordRefs": ["telugu::enta::how much"]
+    "wordRefs": [
+      "telugu::enta::how much"
+    ]
   },
   {
     "language": "telugu",
@@ -960,7 +1172,9 @@
     "english": "Turn left.",
     "contextTag": "travel",
     "difficulty": 1,
-    "wordRefs": ["telugu::edama::left"]
+    "wordRefs": [
+      "telugu::edama::left"
+    ]
   },
   {
     "language": "telugu",
@@ -969,7 +1183,9 @@
     "english": "Turn right.",
     "contextTag": "travel",
     "difficulty": 1,
-    "wordRefs": ["telugu::kudi::right"]
+    "wordRefs": [
+      "telugu::kudi::right"
+    ]
   },
   {
     "language": "telugu",
@@ -978,7 +1194,9 @@
     "english": "Go straight.",
     "contextTag": "travel",
     "difficulty": 1,
-    "wordRefs": ["telugu::neruga::straight"]
+    "wordRefs": [
+      "telugu::neruga::straight"
+    ]
   },
   {
     "language": "telugu",
@@ -987,7 +1205,9 @@
     "english": "Come quickly.",
     "contextTag": "daily-use",
     "difficulty": 1,
-    "wordRefs": ["telugu::tvaraga::quickly"]
+    "wordRefs": [
+      "telugu::tvaraga::quickly"
+    ]
   },
   {
     "language": "telugu",
@@ -996,7 +1216,9 @@
     "english": "Please wait one minute.",
     "contextTag": "time",
     "difficulty": 1,
-    "wordRefs": ["telugu::oka nimisham::one minute"]
+    "wordRefs": [
+      "telugu::oka nimisham::one minute"
+    ]
   },
   {
     "language": "telugu",
@@ -1005,7 +1227,9 @@
     "english": "Where is my pen?",
     "contextTag": "education",
     "difficulty": 1,
-    "wordRefs": ["telugu::kalam::pen"]
+    "wordRefs": [
+      "telugu::kalam::pen"
+    ]
   },
   {
     "language": "telugu",
@@ -1014,7 +1238,9 @@
     "english": "There is a lot of work today.",
     "contextTag": "time",
     "difficulty": 1,
-    "wordRefs": ["telugu::roju::day"]
+    "wordRefs": [
+      "telugu::roju::day"
+    ]
   },
   {
     "language": "telugu",
@@ -1023,7 +1249,9 @@
     "english": "The exam is after one week.",
     "contextTag": "time",
     "difficulty": 1,
-    "wordRefs": ["telugu::vaaram::week"]
+    "wordRefs": [
+      "telugu::vaaram::week"
+    ]
   },
   {
     "language": "telugu",
@@ -1032,7 +1260,9 @@
     "english": "We will travel this month.",
     "contextTag": "time",
     "difficulty": 1,
-    "wordRefs": ["telugu::nela::month"]
+    "wordRefs": [
+      "telugu::nela::month"
+    ]
   },
   {
     "language": "telugu",
@@ -1041,7 +1271,9 @@
     "english": "I am learning Telugu this year.",
     "contextTag": "time",
     "difficulty": 1,
-    "wordRefs": ["telugu::samvatsaram::year"]
+    "wordRefs": [
+      "telugu::samvatsaram::year"
+    ]
   },
   {
     "language": "telugu",
@@ -1050,7 +1282,9 @@
     "english": "What is your name?",
     "contextTag": "people",
     "difficulty": 1,
-    "wordRefs": ["telugu::peru::name"]
+    "wordRefs": [
+      "telugu::peru::name"
+    ]
   },
   {
     "language": "telugu",
@@ -1059,7 +1293,9 @@
     "english": "What is the price of this item?",
     "contextTag": "shopping",
     "difficulty": 1,
-    "wordRefs": ["telugu::dhara::price"]
+    "wordRefs": [
+      "telugu::dhara::price"
+    ]
   },
   {
     "language": "telugu",
@@ -1068,7 +1304,9 @@
     "english": "The bus stop is near.",
     "contextTag": "places",
     "difficulty": 1,
-    "wordRefs": ["telugu::daggara::near"]
+    "wordRefs": [
+      "telugu::daggara::near"
+    ]
   },
   {
     "language": "telugu",
@@ -1077,7 +1315,9 @@
     "english": "The school is not far from here.",
     "contextTag": "places",
     "difficulty": 1,
-    "wordRefs": ["telugu::dooram::far"]
+    "wordRefs": [
+      "telugu::dooram::far"
+    ]
   },
   {
     "language": "telugu",
@@ -1086,7 +1326,9 @@
     "english": "Please come inside.",
     "contextTag": "home",
     "difficulty": 1,
-    "wordRefs": ["telugu::lopala::inside"]
+    "wordRefs": [
+      "telugu::lopala::inside"
+    ]
   },
   {
     "language": "telugu",
@@ -1095,7 +1337,9 @@
     "english": "Children are playing outside.",
     "contextTag": "home",
     "difficulty": 1,
-    "wordRefs": ["telugu::bayata::outside"]
+    "wordRefs": [
+      "telugu::bayata::outside"
+    ]
   },
   {
     "language": "telugu",
@@ -1104,7 +1348,9 @@
     "english": "Wash your hands before food.",
     "contextTag": "daily-use",
     "difficulty": 1,
-    "wordRefs": ["telugu::mundu::before"]
+    "wordRefs": [
+      "telugu::mundu::before"
+    ]
   },
   {
     "language": "telugu",
@@ -1113,7 +1359,9 @@
     "english": "Please open the door.",
     "contextTag": "home",
     "difficulty": 1,
-    "wordRefs": ["telugu::teravu::open"]
+    "wordRefs": [
+      "telugu::teravu::open"
+    ]
   },
   {
     "language": "telugu",
@@ -1122,7 +1370,9 @@
     "english": "Close the door.",
     "contextTag": "home",
     "difficulty": 1,
-    "wordRefs": ["telugu::muuyi::close"]
+    "wordRefs": [
+      "telugu::muuyi::close"
+    ]
   },
   {
     "language": "telugu",
@@ -1131,7 +1381,9 @@
     "english": "Wait for one minute.",
     "contextTag": "daily-use",
     "difficulty": 1,
-    "wordRefs": ["telugu::aagu::wait"]
+    "wordRefs": [
+      "telugu::aagu::wait"
+    ]
   },
   {
     "language": "telugu",
@@ -1140,7 +1392,9 @@
     "english": "Turn left at the end of the road.",
     "contextTag": "travel",
     "difficulty": 1,
-    "wordRefs": ["telugu::tirugu::turn"]
+    "wordRefs": [
+      "telugu::tirugu::turn"
+    ]
   },
   {
     "language": "telugu",
@@ -1149,7 +1403,9 @@
     "english": "Stop right here.",
     "contextTag": "travel",
     "difficulty": 1,
-    "wordRefs": ["telugu::aapu::stop"]
+    "wordRefs": [
+      "telugu::aapu::stop"
+    ]
   },
   {
     "language": "telugu",
@@ -1158,7 +1414,9 @@
     "english": "I am learning the word \"hello\".",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::namaste::hello"]
+    "wordRefs": [
+      "telugu::namaste::hello"
+    ]
   },
   {
     "language": "telugu",
@@ -1167,7 +1425,9 @@
     "english": "I use the word \"hello\" every day.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::namaste::hello"]
+    "wordRefs": [
+      "telugu::namaste::hello"
+    ]
   },
   {
     "language": "telugu",
@@ -1176,7 +1436,9 @@
     "english": "I am learning the word \"thank you\".",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::dhanyavaadalu::thank you"]
+    "wordRefs": [
+      "telugu::dhanyavaadalu::thank you"
+    ]
   },
   {
     "language": "telugu",
@@ -1185,7 +1447,9 @@
     "english": "I use the word \"thank you\" every day.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::dhanyavaadalu::thank you"]
+    "wordRefs": [
+      "telugu::dhanyavaadalu::thank you"
+    ]
   },
   {
     "language": "telugu",
@@ -1194,7 +1458,9 @@
     "english": "I am learning the word \"please\".",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::dayachesi::please"]
+    "wordRefs": [
+      "telugu::dayachesi::please"
+    ]
   },
   {
     "language": "telugu",
@@ -1203,7 +1469,9 @@
     "english": "I use the word \"please\" every day.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::dayachesi::please"]
+    "wordRefs": [
+      "telugu::dayachesi::please"
+    ]
   },
   {
     "language": "telugu",
@@ -1212,7 +1480,9 @@
     "english": "I am learning the word \"sorry / excuse me\".",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::kshaminchandi::sorry / excuse me"]
+    "wordRefs": [
+      "telugu::kshaminchandi::sorry / excuse me"
+    ]
   },
   {
     "language": "telugu",
@@ -1221,7 +1491,9 @@
     "english": "I use the word \"sorry / excuse me\" every day.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::kshaminchandi::sorry / excuse me"]
+    "wordRefs": [
+      "telugu::kshaminchandi::sorry / excuse me"
+    ]
   },
   {
     "language": "telugu",
@@ -1230,7 +1502,9 @@
     "english": "I am learning the word \"yes\".",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::avunu::yes"]
+    "wordRefs": [
+      "telugu::avunu::yes"
+    ]
   },
   {
     "language": "telugu",
@@ -1239,7 +1513,9 @@
     "english": "I use the word \"yes\" every day.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::avunu::yes"]
+    "wordRefs": [
+      "telugu::avunu::yes"
+    ]
   },
   {
     "language": "telugu",
@@ -1248,7 +1524,9 @@
     "english": "I am learning the word \"no / not\".",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::kaadu::no / not"]
+    "wordRefs": [
+      "telugu::kaadu::no / not"
+    ]
   },
   {
     "language": "telugu",
@@ -1257,7 +1535,9 @@
     "english": "I use the word \"no / not\" every day.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::kaadu::no / not"]
+    "wordRefs": [
+      "telugu::kaadu::no / not"
+    ]
   },
   {
     "language": "telugu",
@@ -1266,7 +1546,9 @@
     "english": "I am learning the word \"okay\".",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::sare::okay"]
+    "wordRefs": [
+      "telugu::sare::okay"
+    ]
   },
   {
     "language": "telugu",
@@ -1275,7 +1557,9 @@
     "english": "I use the word \"okay\" every day.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::sare::okay"]
+    "wordRefs": [
+      "telugu::sare::okay"
+    ]
   },
   {
     "language": "telugu",
@@ -1284,7 +1568,9 @@
     "english": "I am learning the word \"it is good\".",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::bagundi::it is good"]
+    "wordRefs": [
+      "telugu::bagundi::it is good"
+    ]
   },
   {
     "language": "telugu",
@@ -1293,7 +1579,9 @@
     "english": "I use the word \"it is good\" every day.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::bagundi::it is good"]
+    "wordRefs": [
+      "telugu::bagundi::it is good"
+    ]
   },
   {
     "language": "telugu",
@@ -1302,7 +1590,9 @@
     "english": "I am learning the word \"I\".",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::nenu::i"]
+    "wordRefs": [
+      "telugu::nenu::i"
+    ]
   },
   {
     "language": "telugu",
@@ -1311,7 +1601,9 @@
     "english": "I use the word \"I\" every day.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::nenu::i"]
+    "wordRefs": [
+      "telugu::nenu::i"
+    ]
   },
   {
     "language": "telugu",
@@ -1320,7 +1612,9 @@
     "english": "I am learning the word \"you (informal)\".",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::nuvvu::you (informal)"]
+    "wordRefs": [
+      "telugu::nuvvu::you (informal)"
+    ]
   },
   {
     "language": "telugu",
@@ -1329,7 +1623,9 @@
     "english": "I use the word \"you (informal)\" every day.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::nuvvu::you (informal)"]
+    "wordRefs": [
+      "telugu::nuvvu::you (informal)"
+    ]
   },
   {
     "language": "telugu",
@@ -1338,7 +1634,9 @@
     "english": "I am learning the word \"you (formal/plural)\".",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::meeru::you (formal/plural)"]
+    "wordRefs": [
+      "telugu::meeru::you (formal/plural)"
+    ]
   },
   {
     "language": "telugu",
@@ -1347,7 +1645,9 @@
     "english": "I use the word \"you (formal/plural)\" every day.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::meeru::you (formal/plural)"]
+    "wordRefs": [
+      "telugu::meeru::you (formal/plural)"
+    ]
   },
   {
     "language": "telugu",
@@ -1356,7 +1656,9 @@
     "english": "I am learning the word \"he\".",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::atanu::he"]
+    "wordRefs": [
+      "telugu::atanu::he"
+    ]
   },
   {
     "language": "telugu",
@@ -1365,7 +1667,9 @@
     "english": "I use the word \"he\" every day.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::atanu::he"]
+    "wordRefs": [
+      "telugu::atanu::he"
+    ]
   },
   {
     "language": "telugu",
@@ -1374,7 +1678,9 @@
     "english": "I am learning the word \"she\".",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::aame::she"]
+    "wordRefs": [
+      "telugu::aame::she"
+    ]
   },
   {
     "language": "telugu",
@@ -1383,7 +1689,9 @@
     "english": "I use the word \"she\" every day.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::aame::she"]
+    "wordRefs": [
+      "telugu::aame::she"
+    ]
   },
   {
     "language": "telugu",
@@ -1392,7 +1700,9 @@
     "english": "I am learning the word \"this\".",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::idi::this"]
+    "wordRefs": [
+      "telugu::idi::this"
+    ]
   },
   {
     "language": "telugu",
@@ -1401,7 +1711,9 @@
     "english": "I use the word \"this\" every day.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::idi::this"]
+    "wordRefs": [
+      "telugu::idi::this"
+    ]
   },
   {
     "language": "telugu",
@@ -1410,7 +1722,9 @@
     "english": "I am learning the word \"that\".",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::adi::that"]
+    "wordRefs": [
+      "telugu::adi::that"
+    ]
   },
   {
     "language": "telugu",
@@ -1419,7 +1733,9 @@
     "english": "I use the word \"that\" every day.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::adi::that"]
+    "wordRefs": [
+      "telugu::adi::that"
+    ]
   },
   {
     "language": "telugu",
@@ -1428,7 +1744,9 @@
     "english": "I am learning the word \"we (inclusive)\".",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::manam::we (inclusive)"]
+    "wordRefs": [
+      "telugu::manam::we (inclusive)"
+    ]
   },
   {
     "language": "telugu",
@@ -1437,7 +1755,9 @@
     "english": "I use the word \"we (inclusive)\" every day.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::manam::we (inclusive)"]
+    "wordRefs": [
+      "telugu::manam::we (inclusive)"
+    ]
   },
   {
     "language": "telugu",
@@ -1446,7 +1766,9 @@
     "english": "I am learning the word \"we (exclusive)\".",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::memu::we (exclusive)"]
+    "wordRefs": [
+      "telugu::memu::we (exclusive)"
+    ]
   },
   {
     "language": "telugu",
@@ -1455,7 +1777,9 @@
     "english": "I use the word \"we (exclusive)\" every day.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::memu::we (exclusive)"]
+    "wordRefs": [
+      "telugu::memu::we (exclusive)"
+    ]
   },
   {
     "language": "telugu",
@@ -1464,7 +1788,9 @@
     "english": "I am learning the word \"they\".",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::vaallu::they"]
+    "wordRefs": [
+      "telugu::vaallu::they"
+    ]
   },
   {
     "language": "telugu",
@@ -1473,7 +1799,9 @@
     "english": "I use the word \"they\" every day.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::vaallu::they"]
+    "wordRefs": [
+      "telugu::vaallu::they"
+    ]
   },
   {
     "language": "telugu",
@@ -1482,7 +1810,9 @@
     "english": "I am learning the word \"what\".",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::emi::what"]
+    "wordRefs": [
+      "telugu::emi::what"
+    ]
   },
   {
     "language": "telugu",
@@ -1491,7 +1821,9 @@
     "english": "I use the word \"what\" every day.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::emi::what"]
+    "wordRefs": [
+      "telugu::emi::what"
+    ]
   },
   {
     "language": "telugu",
@@ -1500,7 +1832,9 @@
     "english": "I am learning the word \"who\".",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::evaru::who"]
+    "wordRefs": [
+      "telugu::evaru::who"
+    ]
   },
   {
     "language": "telugu",
@@ -1509,7 +1843,9 @@
     "english": "I use the word \"who\" every day.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::evaru::who"]
+    "wordRefs": [
+      "telugu::evaru::who"
+    ]
   },
   {
     "language": "telugu",
@@ -1518,7 +1854,9 @@
     "english": "I am learning the word \"where\".",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::ekkada::where"]
+    "wordRefs": [
+      "telugu::ekkada::where"
+    ]
   },
   {
     "language": "telugu",
@@ -1527,7 +1865,9 @@
     "english": "I use the word \"where\" every day.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::ekkada::where"]
+    "wordRefs": [
+      "telugu::ekkada::where"
+    ]
   },
   {
     "language": "telugu",
@@ -1536,7 +1876,9 @@
     "english": "I am learning the word \"when\".",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::eppudu::when"]
+    "wordRefs": [
+      "telugu::eppudu::when"
+    ]
   },
   {
     "language": "telugu",
@@ -1545,7 +1887,9 @@
     "english": "I use the word \"when\" every day.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::eppudu::when"]
+    "wordRefs": [
+      "telugu::eppudu::when"
+    ]
   },
   {
     "language": "telugu",
@@ -1554,7 +1898,9 @@
     "english": "I am learning the word \"how\".",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::ela::how"]
+    "wordRefs": [
+      "telugu::ela::how"
+    ]
   },
   {
     "language": "telugu",
@@ -1563,7 +1909,9 @@
     "english": "I use the word \"how\" every day.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::ela::how"]
+    "wordRefs": [
+      "telugu::ela::how"
+    ]
   },
   {
     "language": "telugu",
@@ -1572,7 +1920,9 @@
     "english": "I am learning the word \"why\".",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::enduku::why"]
+    "wordRefs": [
+      "telugu::enduku::why"
+    ]
   },
   {
     "language": "telugu",
@@ -1581,7 +1931,9 @@
     "english": "I use the word \"why\" every day.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::enduku::why"]
+    "wordRefs": [
+      "telugu::enduku::why"
+    ]
   },
   {
     "language": "telugu",
@@ -1590,7 +1942,9 @@
     "english": "I am learning the word \"one\".",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::okati::one"]
+    "wordRefs": [
+      "telugu::okati::one"
+    ]
   },
   {
     "language": "telugu",
@@ -1599,7 +1953,9 @@
     "english": "I use the word \"one\" every day.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::okati::one"]
+    "wordRefs": [
+      "telugu::okati::one"
+    ]
   },
   {
     "language": "telugu",
@@ -1608,7 +1964,9 @@
     "english": "I am learning the word \"two\".",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::rendu::two"]
+    "wordRefs": [
+      "telugu::rendu::two"
+    ]
   },
   {
     "language": "telugu",
@@ -1617,7 +1975,9 @@
     "english": "I use the word \"two\" every day.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::rendu::two"]
+    "wordRefs": [
+      "telugu::rendu::two"
+    ]
   },
   {
     "language": "telugu",
@@ -1626,7 +1986,9 @@
     "english": "I am learning the word \"three\".",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::moodu::three"]
+    "wordRefs": [
+      "telugu::moodu::three"
+    ]
   },
   {
     "language": "telugu",
@@ -1635,7 +1997,9 @@
     "english": "I use the word \"three\" every day.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::moodu::three"]
+    "wordRefs": [
+      "telugu::moodu::three"
+    ]
   },
   {
     "language": "telugu",
@@ -1644,7 +2008,9 @@
     "english": "I am learning the word \"four\".",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::naalugu::four"]
+    "wordRefs": [
+      "telugu::naalugu::four"
+    ]
   },
   {
     "language": "telugu",
@@ -1653,7 +2019,9 @@
     "english": "I use the word \"four\" every day.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::naalugu::four"]
+    "wordRefs": [
+      "telugu::naalugu::four"
+    ]
   },
   {
     "language": "telugu",
@@ -1662,7 +2030,9 @@
     "english": "I am learning the word \"five\".",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::aidu::five"]
+    "wordRefs": [
+      "telugu::aidu::five"
+    ]
   },
   {
     "language": "telugu",
@@ -1671,7 +2041,9 @@
     "english": "I use the word \"five\" every day.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::aidu::five"]
+    "wordRefs": [
+      "telugu::aidu::five"
+    ]
   },
   {
     "language": "telugu",
@@ -1680,7 +2052,9 @@
     "english": "I am learning the word \"ten\".",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::padi::ten"]
+    "wordRefs": [
+      "telugu::padi::ten"
+    ]
   },
   {
     "language": "telugu",
@@ -1689,7 +2063,9 @@
     "english": "I use the word \"ten\" every day.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::padi::ten"]
+    "wordRefs": [
+      "telugu::padi::ten"
+    ]
   },
   {
     "language": "telugu",
@@ -1698,7 +2074,9 @@
     "english": "I am learning the word \"twenty\".",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::iravai::twenty"]
+    "wordRefs": [
+      "telugu::iravai::twenty"
+    ]
   },
   {
     "language": "telugu",
@@ -1707,7 +2085,9 @@
     "english": "I use the word \"twenty\" every day.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::iravai::twenty"]
+    "wordRefs": [
+      "telugu::iravai::twenty"
+    ]
   },
   {
     "language": "telugu",
@@ -1716,7 +2096,9 @@
     "english": "I am learning the word \"today\".",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::ee roju::today"]
+    "wordRefs": [
+      "telugu::ee roju::today"
+    ]
   },
   {
     "language": "telugu",
@@ -1725,7 +2107,9 @@
     "english": "I use the word \"today\" every day.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::ee roju::today"]
+    "wordRefs": [
+      "telugu::ee roju::today"
+    ]
   },
   {
     "language": "telugu",
@@ -1734,7 +2118,9 @@
     "english": "I am learning the word \"tomorrow\".",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::repu::tomorrow"]
+    "wordRefs": [
+      "telugu::repu::tomorrow"
+    ]
   },
   {
     "language": "telugu",
@@ -1743,7 +2129,9 @@
     "english": "I use the word \"tomorrow\" every day.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::repu::tomorrow"]
+    "wordRefs": [
+      "telugu::repu::tomorrow"
+    ]
   },
   {
     "language": "telugu",
@@ -1752,7 +2140,9 @@
     "english": "I am learning the word \"yesterday\".",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::ninna::yesterday"]
+    "wordRefs": [
+      "telugu::ninna::yesterday"
+    ]
   },
   {
     "language": "telugu",
@@ -1761,7 +2151,9 @@
     "english": "I use the word \"yesterday\" every day.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::ninna::yesterday"]
+    "wordRefs": [
+      "telugu::ninna::yesterday"
+    ]
   },
   {
     "language": "telugu",
@@ -1770,7 +2162,9 @@
     "english": "I am learning the word \"now\".",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::ippudu::now"]
+    "wordRefs": [
+      "telugu::ippudu::now"
+    ]
   },
   {
     "language": "telugu",
@@ -1779,7 +2173,9 @@
     "english": "I use the word \"now\" every day.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::ippudu::now"]
+    "wordRefs": [
+      "telugu::ippudu::now"
+    ]
   },
   {
     "language": "telugu",
@@ -1788,7 +2184,9 @@
     "english": "I am learning the word \"later / after\".",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::taruvata::later / after"]
+    "wordRefs": [
+      "telugu::taruvata::later / after"
+    ]
   },
   {
     "language": "telugu",
@@ -1797,7 +2195,9 @@
     "english": "I use the word \"later / after\" every day.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::taruvata::later / after"]
+    "wordRefs": [
+      "telugu::taruvata::later / after"
+    ]
   },
   {
     "language": "telugu",
@@ -1806,7 +2206,9 @@
     "english": "I am learning the word \"morning\".",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::udayam::morning"]
+    "wordRefs": [
+      "telugu::udayam::morning"
+    ]
   },
   {
     "language": "telugu",
@@ -1815,7 +2217,9 @@
     "english": "I use the word \"morning\" every day.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::udayam::morning"]
+    "wordRefs": [
+      "telugu::udayam::morning"
+    ]
   },
   {
     "language": "telugu",
@@ -1824,7 +2228,9 @@
     "english": "I am learning the word \"evening\".",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::saayantram::evening"]
+    "wordRefs": [
+      "telugu::saayantram::evening"
+    ]
   },
   {
     "language": "telugu",
@@ -1833,7 +2239,9 @@
     "english": "I use the word \"evening\" every day.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::saayantram::evening"]
+    "wordRefs": [
+      "telugu::saayantram::evening"
+    ]
   },
   {
     "language": "telugu",
@@ -1842,7 +2250,9 @@
     "english": "I am learning the word \"night\".",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::raatri::night"]
+    "wordRefs": [
+      "telugu::raatri::night"
+    ]
   },
   {
     "language": "telugu",
@@ -1851,7 +2261,9 @@
     "english": "I use the word \"night\" every day.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::raatri::night"]
+    "wordRefs": [
+      "telugu::raatri::night"
+    ]
   },
   {
     "language": "telugu",
@@ -1860,7 +2272,9 @@
     "english": "I am learning the word \"time\".",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::samayam::time"]
+    "wordRefs": [
+      "telugu::samayam::time"
+    ]
   },
   {
     "language": "telugu",
@@ -1869,7 +2283,9 @@
     "english": "I use the word \"time\" every day.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::samayam::time"]
+    "wordRefs": [
+      "telugu::samayam::time"
+    ]
   },
   {
     "language": "telugu",
@@ -1878,7 +2294,9 @@
     "english": "I am learning the word \"mother\".",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::amma::mother"]
+    "wordRefs": [
+      "telugu::amma::mother"
+    ]
   },
   {
     "language": "telugu",
@@ -1887,7 +2305,9 @@
     "english": "I use the word \"mother\" every day.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::amma::mother"]
+    "wordRefs": [
+      "telugu::amma::mother"
+    ]
   },
   {
     "language": "telugu",
@@ -1896,7 +2316,9 @@
     "english": "I am learning the word \"father\".",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::nanna::father"]
+    "wordRefs": [
+      "telugu::nanna::father"
+    ]
   },
   {
     "language": "telugu",
@@ -1905,7 +2327,9 @@
     "english": "I use the word \"father\" every day.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::nanna::father"]
+    "wordRefs": [
+      "telugu::nanna::father"
+    ]
   },
   {
     "language": "telugu",
@@ -1914,7 +2338,9 @@
     "english": "I am learning the word \"elder brother\".",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::anna::elder brother"]
+    "wordRefs": [
+      "telugu::anna::elder brother"
+    ]
   },
   {
     "language": "telugu",
@@ -1923,7 +2349,9 @@
     "english": "I use the word \"elder brother\" every day.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::anna::elder brother"]
+    "wordRefs": [
+      "telugu::anna::elder brother"
+    ]
   },
   {
     "language": "telugu",
@@ -1932,7 +2360,9 @@
     "english": "I am learning the word \"elder sister\".",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::akka::elder sister"]
+    "wordRefs": [
+      "telugu::akka::elder sister"
+    ]
   },
   {
     "language": "telugu",
@@ -1941,7 +2371,9 @@
     "english": "I use the word \"elder sister\" every day.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::akka::elder sister"]
+    "wordRefs": [
+      "telugu::akka::elder sister"
+    ]
   },
   {
     "language": "telugu",
@@ -1950,7 +2382,9 @@
     "english": "I am learning the word \"younger brother\".",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::tammudu::younger brother"]
+    "wordRefs": [
+      "telugu::tammudu::younger brother"
+    ]
   },
   {
     "language": "telugu",
@@ -1959,7 +2393,9 @@
     "english": "I use the word \"younger brother\" every day.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::tammudu::younger brother"]
+    "wordRefs": [
+      "telugu::tammudu::younger brother"
+    ]
   },
   {
     "language": "telugu",
@@ -1968,7 +2404,9 @@
     "english": "I am learning the word \"younger sister\".",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::chelli::younger sister"]
+    "wordRefs": [
+      "telugu::chelli::younger sister"
+    ]
   },
   {
     "language": "telugu",
@@ -1977,7 +2415,9 @@
     "english": "I use the word \"younger sister\" every day.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::chelli::younger sister"]
+    "wordRefs": [
+      "telugu::chelli::younger sister"
+    ]
   },
   {
     "language": "telugu",
@@ -1986,7 +2426,9 @@
     "english": "I am learning the word \"family\".",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::kutumbam::family"]
+    "wordRefs": [
+      "telugu::kutumbam::family"
+    ]
   },
   {
     "language": "telugu",
@@ -1995,7 +2437,9 @@
     "english": "I use the word \"family\" every day.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::kutumbam::family"]
+    "wordRefs": [
+      "telugu::kutumbam::family"
+    ]
   },
   {
     "language": "telugu",
@@ -2004,7 +2448,9 @@
     "english": "I am learning the word \"friend (male)\".",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::snehitudu::friend (male)"]
+    "wordRefs": [
+      "telugu::snehitudu::friend (male)"
+    ]
   },
   {
     "language": "telugu",
@@ -2013,7 +2459,9 @@
     "english": "I use the word \"friend (male)\" every day.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::snehitudu::friend (male)"]
+    "wordRefs": [
+      "telugu::snehitudu::friend (male)"
+    ]
   },
   {
     "language": "telugu",
@@ -2022,7 +2470,9 @@
     "english": "I am learning the word \"friend (female)\".",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::snehituralu::friend (female)"]
+    "wordRefs": [
+      "telugu::snehituralu::friend (female)"
+    ]
   },
   {
     "language": "telugu",
@@ -2031,7 +2481,9 @@
     "english": "I use the word \"friend (female)\" every day.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::snehituralu::friend (female)"]
+    "wordRefs": [
+      "telugu::snehituralu::friend (female)"
+    ]
   },
   {
     "language": "telugu",
@@ -2040,7 +2492,9 @@
     "english": "I am learning the word \"house\".",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::illu::house"]
+    "wordRefs": [
+      "telugu::illu::house"
+    ]
   },
   {
     "language": "telugu",
@@ -2049,7 +2503,9 @@
     "english": "I use the word \"house\" every day.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::illu::house"]
+    "wordRefs": [
+      "telugu::illu::house"
+    ]
   },
   {
     "language": "telugu",
@@ -2058,7 +2514,9 @@
     "english": "I am learning the word \"book\".",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::pustakam::book"]
+    "wordRefs": [
+      "telugu::pustakam::book"
+    ]
   },
   {
     "language": "telugu",
@@ -2067,7 +2525,9 @@
     "english": "I use the word \"book\" every day.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::pustakam::book"]
+    "wordRefs": [
+      "telugu::pustakam::book"
+    ]
   },
   {
     "language": "telugu",
@@ -2076,7 +2536,9 @@
     "english": "I am learning the word \"school\".",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::paathashaala::school"]
+    "wordRefs": [
+      "telugu::paathashaala::school"
+    ]
   },
   {
     "language": "telugu",
@@ -2085,7 +2547,9 @@
     "english": "I use the word \"school\" every day.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::paathashaala::school"]
+    "wordRefs": [
+      "telugu::paathashaala::school"
+    ]
   },
   {
     "language": "telugu",
@@ -2094,7 +2558,9 @@
     "english": "I am learning the word \"water\".",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::neeru::water"]
+    "wordRefs": [
+      "telugu::neeru::water"
+    ]
   },
   {
     "language": "telugu",
@@ -2103,7 +2569,9 @@
     "english": "I use the word \"water\" every day.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::neeru::water"]
+    "wordRefs": [
+      "telugu::neeru::water"
+    ]
   },
   {
     "language": "telugu",
@@ -2112,7 +2580,9 @@
     "english": "I am learning the word \"cooked rice / meal\".",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::annam::cooked rice / meal"]
+    "wordRefs": [
+      "telugu::annam::cooked rice / meal"
+    ]
   },
   {
     "language": "telugu",
@@ -2121,7 +2591,9 @@
     "english": "I use the word \"cooked rice / meal\" every day.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::annam::cooked rice / meal"]
+    "wordRefs": [
+      "telugu::annam::cooked rice / meal"
+    ]
   },
   {
     "language": "telugu",
@@ -2130,7 +2602,9 @@
     "english": "I am learning the word \"fruit\".",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::pandu::fruit"]
+    "wordRefs": [
+      "telugu::pandu::fruit"
+    ]
   },
   {
     "language": "telugu",
@@ -2139,7 +2613,9 @@
     "english": "I use the word \"fruit\" every day.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::pandu::fruit"]
+    "wordRefs": [
+      "telugu::pandu::fruit"
+    ]
   },
   {
     "language": "telugu",
@@ -2148,7 +2624,9 @@
     "english": "I am learning the word \"bus\".",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::bassu::bus"]
+    "wordRefs": [
+      "telugu::bassu::bus"
+    ]
   },
   {
     "language": "telugu",
@@ -2157,7 +2635,9 @@
     "english": "I use the word \"bus\" every day.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::bassu::bus"]
+    "wordRefs": [
+      "telugu::bassu::bus"
+    ]
   },
   {
     "language": "telugu",
@@ -2166,7 +2646,9 @@
     "english": "I am learning the word \"road\".",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::roadu::road"]
+    "wordRefs": [
+      "telugu::roadu::road"
+    ]
   },
   {
     "language": "telugu",
@@ -2175,7 +2657,9 @@
     "english": "I use the word \"road\" every day.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::roadu::road"]
+    "wordRefs": [
+      "telugu::roadu::road"
+    ]
   },
   {
     "language": "telugu",
@@ -2184,7 +2668,9 @@
     "english": "I am learning the word \"village\".",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::graamam::village"]
+    "wordRefs": [
+      "telugu::graamam::village"
+    ]
   },
   {
     "language": "telugu",
@@ -2193,7 +2679,9 @@
     "english": "I use the word \"village\" every day.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::graamam::village"]
+    "wordRefs": [
+      "telugu::graamam::village"
+    ]
   },
   {
     "language": "telugu",
@@ -2202,7 +2690,9 @@
     "english": "I am learning the word \"city\".",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::nagaram::city"]
+    "wordRefs": [
+      "telugu::nagaram::city"
+    ]
   },
   {
     "language": "telugu",
@@ -2211,7 +2701,9 @@
     "english": "I use the word \"city\" every day.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::nagaram::city"]
+    "wordRefs": [
+      "telugu::nagaram::city"
+    ]
   },
   {
     "language": "telugu",
@@ -2220,7 +2712,9 @@
     "english": "I am learning the word \"work\".",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::pani::work"]
+    "wordRefs": [
+      "telugu::pani::work"
+    ]
   },
   {
     "language": "telugu",
@@ -2229,7 +2723,9 @@
     "english": "I use the word \"work\" every day.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::pani::work"]
+    "wordRefs": [
+      "telugu::pani::work"
+    ]
   },
   {
     "language": "telugu",
@@ -2238,7 +2734,9 @@
     "english": "I am learning the word \"money\".",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::dabbu::money"]
+    "wordRefs": [
+      "telugu::dabbu::money"
+    ]
   },
   {
     "language": "telugu",
@@ -2247,7 +2745,9 @@
     "english": "I use the word \"money\" every day.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::dabbu::money"]
+    "wordRefs": [
+      "telugu::dabbu::money"
+    ]
   },
   {
     "language": "telugu",
@@ -2256,7 +2756,9 @@
     "english": "I am learning the word \"language\".",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::bhaasha::language"]
+    "wordRefs": [
+      "telugu::bhaasha::language"
+    ]
   },
   {
     "language": "telugu",
@@ -2265,7 +2767,9 @@
     "english": "I use the word \"language\" every day.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::bhaasha::language"]
+    "wordRefs": [
+      "telugu::bhaasha::language"
+    ]
   },
   {
     "language": "telugu",
@@ -2274,7 +2778,9 @@
     "english": "I am learning the word \"help\".",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::sahaayam::help"]
+    "wordRefs": [
+      "telugu::sahaayam::help"
+    ]
   },
   {
     "language": "telugu",
@@ -2283,7 +2789,9 @@
     "english": "I use the word \"help\" every day.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::sahaayam::help"]
+    "wordRefs": [
+      "telugu::sahaayam::help"
+    ]
   },
   {
     "language": "telugu",
@@ -2292,7 +2800,9 @@
     "english": "I am learning the word \"go\".",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::vellu::go"]
+    "wordRefs": [
+      "telugu::vellu::go"
+    ]
   },
   {
     "language": "telugu",
@@ -2301,7 +2811,9 @@
     "english": "I use the word \"go\" every day.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::vellu::go"]
+    "wordRefs": [
+      "telugu::vellu::go"
+    ]
   },
   {
     "language": "telugu",
@@ -2310,7 +2822,9 @@
     "english": "I am learning the word \"come\".",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::raa::come"]
+    "wordRefs": [
+      "telugu::raa::come"
+    ]
   },
   {
     "language": "telugu",
@@ -2319,7 +2833,9 @@
     "english": "I use the word \"come\" every day.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::raa::come"]
+    "wordRefs": [
+      "telugu::raa::come"
+    ]
   },
   {
     "language": "telugu",
@@ -2328,7 +2844,9 @@
     "english": "I am learning the word \"eat\".",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::tinu::eat"]
+    "wordRefs": [
+      "telugu::tinu::eat"
+    ]
   },
   {
     "language": "telugu",
@@ -2337,7 +2855,9 @@
     "english": "I use the word \"eat\" every day.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::tinu::eat"]
+    "wordRefs": [
+      "telugu::tinu::eat"
+    ]
   },
   {
     "language": "telugu",
@@ -2346,7 +2866,9 @@
     "english": "I am learning the word \"drink\".",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::taagu::drink"]
+    "wordRefs": [
+      "telugu::taagu::drink"
+    ]
   },
   {
     "language": "telugu",
@@ -2355,7 +2877,9 @@
     "english": "I use the word \"drink\" every day.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::taagu::drink"]
+    "wordRefs": [
+      "telugu::taagu::drink"
+    ]
   },
   {
     "language": "telugu",
@@ -2364,7 +2888,9 @@
     "english": "I am learning the word \"study / read\".",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::chaduvu::study / read"]
+    "wordRefs": [
+      "telugu::chaduvu::study / read"
+    ]
   },
   {
     "language": "telugu",
@@ -2373,7 +2899,9 @@
     "english": "I use the word \"study / read\" every day.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::chaduvu::study / read"]
+    "wordRefs": [
+      "telugu::chaduvu::study / read"
+    ]
   },
   {
     "language": "telugu",
@@ -2382,7 +2910,9 @@
     "english": "I am learning the word \"write\".",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::raayi::write"]
+    "wordRefs": [
+      "telugu::raayi::write"
+    ]
   },
   {
     "language": "telugu",
@@ -2391,7 +2921,9 @@
     "english": "I use the word \"write\" every day.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::raayi::write"]
+    "wordRefs": [
+      "telugu::raayi::write"
+    ]
   },
   {
     "language": "telugu",
@@ -2400,7 +2932,9 @@
     "english": "I am learning the word \"see / look\".",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::choodu::see / look"]
+    "wordRefs": [
+      "telugu::choodu::see / look"
+    ]
   },
   {
     "language": "telugu",
@@ -2409,7 +2943,9 @@
     "english": "I use the word \"see / look\" every day.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::choodu::see / look"]
+    "wordRefs": [
+      "telugu::choodu::see / look"
+    ]
   },
   {
     "language": "telugu",
@@ -2418,7 +2954,9 @@
     "english": "I am learning the word \"speak / talk\".",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::maatlaadu::speak / talk"]
+    "wordRefs": [
+      "telugu::maatlaadu::speak / talk"
+    ]
   },
   {
     "language": "telugu",
@@ -2427,7 +2965,9 @@
     "english": "I use the word \"speak / talk\" every day.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::maatlaadu::speak / talk"]
+    "wordRefs": [
+      "telugu::maatlaadu::speak / talk"
+    ]
   },
   {
     "language": "telugu",
@@ -2436,7 +2976,9 @@
     "english": "I am learning the word \"listen / hear\".",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::vinu::listen / hear"]
+    "wordRefs": [
+      "telugu::vinu::listen / hear"
+    ]
   },
   {
     "language": "telugu",
@@ -2445,7 +2987,9 @@
     "english": "I use the word \"listen / hear\" every day.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::vinu::listen / hear"]
+    "wordRefs": [
+      "telugu::vinu::listen / hear"
+    ]
   },
   {
     "language": "telugu",
@@ -2454,7 +2998,9 @@
     "english": "I am learning the word \"sleep\".",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::nidrapo::sleep"]
+    "wordRefs": [
+      "telugu::nidrapo::sleep"
+    ]
   },
   {
     "language": "telugu",
@@ -2463,7 +3009,9 @@
     "english": "I use the word \"sleep\" every day.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::nidrapo::sleep"]
+    "wordRefs": [
+      "telugu::nidrapo::sleep"
+    ]
   },
   {
     "language": "telugu",
@@ -2472,7 +3020,9 @@
     "english": "I am learning the word \"sit\".",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::koorcho::sit"]
+    "wordRefs": [
+      "telugu::koorcho::sit"
+    ]
   },
   {
     "language": "telugu",
@@ -2481,7 +3031,9 @@
     "english": "I use the word \"sit\" every day.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::koorcho::sit"]
+    "wordRefs": [
+      "telugu::koorcho::sit"
+    ]
   },
   {
     "language": "telugu",
@@ -2490,7 +3042,9 @@
     "english": "I am learning the word \"stand\".",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::nilabadu::stand"]
+    "wordRefs": [
+      "telugu::nilabadu::stand"
+    ]
   },
   {
     "language": "telugu",
@@ -2499,7 +3053,9 @@
     "english": "I use the word \"stand\" every day.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::nilabadu::stand"]
+    "wordRefs": [
+      "telugu::nilabadu::stand"
+    ]
   },
   {
     "language": "telugu",
@@ -2508,7 +3064,9 @@
     "english": "I am learning the word \"give\".",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::ivvu::give"]
+    "wordRefs": [
+      "telugu::ivvu::give"
+    ]
   },
   {
     "language": "telugu",
@@ -2517,7 +3075,9 @@
     "english": "I use the word \"give\" every day.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::ivvu::give"]
+    "wordRefs": [
+      "telugu::ivvu::give"
+    ]
   },
   {
     "language": "telugu",
@@ -2526,7 +3086,9 @@
     "english": "I am learning the word \"take\".",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::teesuko::take"]
+    "wordRefs": [
+      "telugu::teesuko::take"
+    ]
   },
   {
     "language": "telugu",
@@ -2535,7 +3097,9 @@
     "english": "I use the word \"take\" every day.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::teesuko::take"]
+    "wordRefs": [
+      "telugu::teesuko::take"
+    ]
   },
   {
     "language": "telugu",
@@ -2544,7 +3108,9 @@
     "english": "I am learning the word \"do\".",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::cheyi::do"]
+    "wordRefs": [
+      "telugu::cheyi::do"
+    ]
   },
   {
     "language": "telugu",
@@ -2553,7 +3119,9 @@
     "english": "I use the word \"do\" every day.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::cheyi::do"]
+    "wordRefs": [
+      "telugu::cheyi::do"
+    ]
   },
   {
     "language": "telugu",
@@ -2562,7 +3130,9 @@
     "english": "I am learning the word \"know\".",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::telusu::know"]
+    "wordRefs": [
+      "telugu::telusu::know"
+    ]
   },
   {
     "language": "telugu",
@@ -2571,7 +3141,9 @@
     "english": "I use the word \"know\" every day.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::telusu::know"]
+    "wordRefs": [
+      "telugu::telusu::know"
+    ]
   },
   {
     "language": "telugu",
@@ -2580,7 +3152,9 @@
     "english": "I am learning the word \"understand\".",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::artham avu::understand"]
+    "wordRefs": [
+      "telugu::artham avu::understand"
+    ]
   },
   {
     "language": "telugu",
@@ -2589,7 +3163,9 @@
     "english": "I use the word \"understand\" every day.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::artham avu::understand"]
+    "wordRefs": [
+      "telugu::artham avu::understand"
+    ]
   },
   {
     "language": "telugu",
@@ -2598,7 +3174,9 @@
     "english": "I am learning the word \"good\".",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::manchi::good"]
+    "wordRefs": [
+      "telugu::manchi::good"
+    ]
   },
   {
     "language": "telugu",
@@ -2607,7 +3185,9 @@
     "english": "I use the word \"good\" every day.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::manchi::good"]
+    "wordRefs": [
+      "telugu::manchi::good"
+    ]
   },
   {
     "language": "telugu",
@@ -2616,7 +3196,9 @@
     "english": "I am learning the word \"bad\".",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::chedu::bad"]
+    "wordRefs": [
+      "telugu::chedu::bad"
+    ]
   },
   {
     "language": "telugu",
@@ -2625,7 +3207,9 @@
     "english": "I use the word \"bad\" every day.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::chedu::bad"]
+    "wordRefs": [
+      "telugu::chedu::bad"
+    ]
   },
   {
     "language": "telugu",
@@ -2634,7 +3218,9 @@
     "english": "I am learning the word \"big\".",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::pedda::big"]
+    "wordRefs": [
+      "telugu::pedda::big"
+    ]
   },
   {
     "language": "telugu",
@@ -2643,7 +3229,9 @@
     "english": "I use the word \"big\" every day.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::pedda::big"]
+    "wordRefs": [
+      "telugu::pedda::big"
+    ]
   },
   {
     "language": "telugu",
@@ -2652,7 +3240,9 @@
     "english": "I am learning the word \"small\".",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::chinna::small"]
+    "wordRefs": [
+      "telugu::chinna::small"
+    ]
   },
   {
     "language": "telugu",
@@ -2661,7 +3251,9 @@
     "english": "I use the word \"small\" every day.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::chinna::small"]
+    "wordRefs": [
+      "telugu::chinna::small"
+    ]
   },
   {
     "language": "telugu",
@@ -2670,7 +3262,9 @@
     "english": "I am learning the word \"new\".",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::kotta::new"]
+    "wordRefs": [
+      "telugu::kotta::new"
+    ]
   },
   {
     "language": "telugu",
@@ -2679,7 +3273,9 @@
     "english": "I use the word \"new\" every day.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::kotta::new"]
+    "wordRefs": [
+      "telugu::kotta::new"
+    ]
   },
   {
     "language": "telugu",
@@ -2688,7 +3284,9 @@
     "english": "I am learning the word \"old\".",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::paata::old"]
+    "wordRefs": [
+      "telugu::paata::old"
+    ]
   },
   {
     "language": "telugu",
@@ -2697,7 +3295,9 @@
     "english": "I use the word \"old\" every day.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::paata::old"]
+    "wordRefs": [
+      "telugu::paata::old"
+    ]
   },
   {
     "language": "telugu",
@@ -2706,7 +3306,9 @@
     "english": "I am learning the word \"very / much\".",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::chaala::very / much"]
+    "wordRefs": [
+      "telugu::chaala::very / much"
+    ]
   },
   {
     "language": "telugu",
@@ -2715,7 +3317,9 @@
     "english": "I use the word \"very / much\" every day.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::chaala::very / much"]
+    "wordRefs": [
+      "telugu::chaala::very / much"
+    ]
   },
   {
     "language": "telugu",
@@ -2724,7 +3328,9 @@
     "english": "I am learning the word \"slowly\".",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::nemmadiga::slowly"]
+    "wordRefs": [
+      "telugu::nemmadiga::slowly"
+    ]
   },
   {
     "language": "telugu",
@@ -2733,7 +3339,9 @@
     "english": "I use the word \"slowly\" every day.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::nemmadiga::slowly"]
+    "wordRefs": [
+      "telugu::nemmadiga::slowly"
+    ]
   },
   {
     "language": "telugu",
@@ -2742,7 +3350,9 @@
     "english": "I am learning the word \"quickly\".",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::veganga::quickly"]
+    "wordRefs": [
+      "telugu::veganga::quickly"
+    ]
   },
   {
     "language": "telugu",
@@ -2751,7 +3361,9 @@
     "english": "I use the word \"quickly\" every day.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::veganga::quickly"]
+    "wordRefs": [
+      "telugu::veganga::quickly"
+    ]
   },
   {
     "language": "telugu",
@@ -2760,7 +3372,9 @@
     "english": "I am learning the word \"here\".",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::ikkada::here"]
+    "wordRefs": [
+      "telugu::ikkada::here"
+    ]
   },
   {
     "language": "telugu",
@@ -2769,7 +3383,9 @@
     "english": "I use the word \"here\" every day.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::ikkada::here"]
+    "wordRefs": [
+      "telugu::ikkada::here"
+    ]
   },
   {
     "language": "telugu",
@@ -2778,7 +3394,9 @@
     "english": "I am learning the word \"there\".",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::akkada::there"]
+    "wordRefs": [
+      "telugu::akkada::there"
+    ]
   },
   {
     "language": "telugu",
@@ -2787,7 +3405,9 @@
     "english": "I use the word \"there\" every day.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::akkada::there"]
+    "wordRefs": [
+      "telugu::akkada::there"
+    ]
   },
   {
     "language": "telugu",
@@ -2796,7 +3416,9 @@
     "english": "I am learning the word \"mother\".",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::talli::mother"]
+    "wordRefs": [
+      "telugu::talli::mother"
+    ]
   },
   {
     "language": "telugu",
@@ -2805,7 +3427,9 @@
     "english": "I use the word \"mother\" every day.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::talli::mother"]
+    "wordRefs": [
+      "telugu::talli::mother"
+    ]
   },
   {
     "language": "telugu",
@@ -2814,7 +3438,9 @@
     "english": "I am learning the word \"father\".",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::tandri::father"]
+    "wordRefs": [
+      "telugu::tandri::father"
+    ]
   },
   {
     "language": "telugu",
@@ -2823,7 +3449,9 @@
     "english": "I use the word \"father\" every day.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::tandri::father"]
+    "wordRefs": [
+      "telugu::tandri::father"
+    ]
   },
   {
     "language": "telugu",
@@ -2832,7 +3460,9 @@
     "english": "I am learning the word \"child\".",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::bidda::child"]
+    "wordRefs": [
+      "telugu::bidda::child"
+    ]
   },
   {
     "language": "telugu",
@@ -2841,7 +3471,9 @@
     "english": "I use the word \"child\" every day.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::bidda::child"]
+    "wordRefs": [
+      "telugu::bidda::child"
+    ]
   },
   {
     "language": "telugu",
@@ -2850,7 +3482,9 @@
     "english": "I am learning the word \"road\".",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::rahadaari::road"]
+    "wordRefs": [
+      "telugu::rahadaari::road"
+    ]
   },
   {
     "language": "telugu",
@@ -2859,7 +3493,9 @@
     "english": "I use the word \"road\" every day.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::rahadaari::road"]
+    "wordRefs": [
+      "telugu::rahadaari::road"
+    ]
   },
   {
     "language": "telugu",
@@ -2868,7 +3504,9 @@
     "english": "I am learning the word \"market\".",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::bazaaru::market"]
+    "wordRefs": [
+      "telugu::bazaaru::market"
+    ]
   },
   {
     "language": "telugu",
@@ -2877,7 +3515,9 @@
     "english": "I use the word \"market\" every day.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::bazaaru::market"]
+    "wordRefs": [
+      "telugu::bazaaru::market"
+    ]
   },
   {
     "language": "telugu",
@@ -2886,7 +3526,9 @@
     "english": "I am learning the word \"teacher\".",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::guruvu::teacher"]
+    "wordRefs": [
+      "telugu::guruvu::teacher"
+    ]
   },
   {
     "language": "telugu",
@@ -2895,7 +3537,9 @@
     "english": "I use the word \"teacher\" every day.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::guruvu::teacher"]
+    "wordRefs": [
+      "telugu::guruvu::teacher"
+    ]
   },
   {
     "language": "telugu",
@@ -2904,7 +3548,9 @@
     "english": "I am learning the word \"student\".",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::vidyarthi::student"]
+    "wordRefs": [
+      "telugu::vidyarthi::student"
+    ]
   },
   {
     "language": "telugu",
@@ -2913,7 +3559,9 @@
     "english": "I use the word \"student\" every day.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::vidyarthi::student"]
+    "wordRefs": [
+      "telugu::vidyarthi::student"
+    ]
   },
   {
     "language": "telugu",
@@ -2922,7 +3570,9 @@
     "english": "I am learning the word \"vegetables\".",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::kooragayalu::vegetables"]
+    "wordRefs": [
+      "telugu::kooragayalu::vegetables"
+    ]
   },
   {
     "language": "telugu",
@@ -2931,7 +3581,9 @@
     "english": "I use the word \"vegetables\" every day.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::kooragayalu::vegetables"]
+    "wordRefs": [
+      "telugu::kooragayalu::vegetables"
+    ]
   },
   {
     "language": "telugu",
@@ -2940,7 +3592,9 @@
     "english": "I am learning the word \"milk\".",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::paalu::milk"]
+    "wordRefs": [
+      "telugu::paalu::milk"
+    ]
   },
   {
     "language": "telugu",
@@ -2949,7 +3603,9 @@
     "english": "I use the word \"milk\" every day.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::paalu::milk"]
+    "wordRefs": [
+      "telugu::paalu::milk"
+    ]
   },
   {
     "language": "telugu",
@@ -2958,7 +3614,9 @@
     "english": "I am learning the word \"question\".",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::prashna::question"]
+    "wordRefs": [
+      "telugu::prashna::question"
+    ]
   },
   {
     "language": "telugu",
@@ -2967,7 +3625,9 @@
     "english": "I use the word \"question\" every day.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::prashna::question"]
+    "wordRefs": [
+      "telugu::prashna::question"
+    ]
   },
   {
     "language": "telugu",
@@ -2976,7 +3636,9 @@
     "english": "I am learning the word \"answer\".",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::samaadhaanam::answer"]
+    "wordRefs": [
+      "telugu::samaadhaanam::answer"
+    ]
   },
   {
     "language": "telugu",
@@ -2985,7 +3647,9 @@
     "english": "I use the word \"answer\" every day.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::samaadhaanam::answer"]
+    "wordRefs": [
+      "telugu::samaadhaanam::answer"
+    ]
   },
   {
     "language": "telugu",
@@ -2994,7 +3658,9 @@
     "english": "I am learning the word \"good morning\".",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::shubhodayam::good morning"]
+    "wordRefs": [
+      "telugu::shubhodayam::good morning"
+    ]
   },
   {
     "language": "telugu",
@@ -3003,7 +3669,9 @@
     "english": "I use the word \"good morning\" every day.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::shubhodayam::good morning"]
+    "wordRefs": [
+      "telugu::shubhodayam::good morning"
+    ]
   },
   {
     "language": "telugu",
@@ -3012,7 +3680,9 @@
     "english": "I am learning the word \"good night\".",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::shubharaatri::good night"]
+    "wordRefs": [
+      "telugu::shubharaatri::good night"
+    ]
   },
   {
     "language": "telugu",
@@ -3021,7 +3691,9 @@
     "english": "I use the word \"good night\" every day.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::shubharaatri::good night"]
+    "wordRefs": [
+      "telugu::shubharaatri::good night"
+    ]
   },
   {
     "language": "telugu",
@@ -3030,7 +3702,9 @@
     "english": "I am learning the word \"welcome\".",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::swaagatam::welcome"]
+    "wordRefs": [
+      "telugu::swaagatam::welcome"
+    ]
   },
   {
     "language": "telugu",
@@ -3039,7 +3713,9 @@
     "english": "I use the word \"welcome\" every day.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::swaagatam::welcome"]
+    "wordRefs": [
+      "telugu::swaagatam::welcome"
+    ]
   },
   {
     "language": "telugu",
@@ -3048,7 +3724,9 @@
     "english": "I am learning the word \"how much\".",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::enta::how much"]
+    "wordRefs": [
+      "telugu::enta::how much"
+    ]
   },
   {
     "language": "telugu",
@@ -3057,7 +3735,9 @@
     "english": "I use the word \"how much\" every day.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::enta::how much"]
+    "wordRefs": [
+      "telugu::enta::how much"
+    ]
   },
   {
     "language": "telugu",
@@ -3066,7 +3746,9 @@
     "english": "I am learning the word \"left\".",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::edama::left"]
+    "wordRefs": [
+      "telugu::edama::left"
+    ]
   },
   {
     "language": "telugu",
@@ -3075,7 +3757,9 @@
     "english": "I use the word \"left\" every day.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::edama::left"]
+    "wordRefs": [
+      "telugu::edama::left"
+    ]
   },
   {
     "language": "telugu",
@@ -3084,7 +3768,9 @@
     "english": "I am learning the word \"right\".",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::kudi::right"]
+    "wordRefs": [
+      "telugu::kudi::right"
+    ]
   },
   {
     "language": "telugu",
@@ -3093,7 +3779,9 @@
     "english": "I use the word \"right\" every day.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::kudi::right"]
+    "wordRefs": [
+      "telugu::kudi::right"
+    ]
   },
   {
     "language": "telugu",
@@ -3102,7 +3790,9 @@
     "english": "I am learning the word \"straight\".",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::neruga::straight"]
+    "wordRefs": [
+      "telugu::neruga::straight"
+    ]
   },
   {
     "language": "telugu",
@@ -3111,7 +3801,9 @@
     "english": "I use the word \"straight\" every day.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::neruga::straight"]
+    "wordRefs": [
+      "telugu::neruga::straight"
+    ]
   },
   {
     "language": "telugu",
@@ -3120,7 +3812,9 @@
     "english": "I am learning the word \"quickly\".",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::tvaraga::quickly"]
+    "wordRefs": [
+      "telugu::tvaraga::quickly"
+    ]
   },
   {
     "language": "telugu",
@@ -3129,7 +3823,9 @@
     "english": "I use the word \"quickly\" every day.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::tvaraga::quickly"]
+    "wordRefs": [
+      "telugu::tvaraga::quickly"
+    ]
   },
   {
     "language": "telugu",
@@ -3138,7 +3834,9 @@
     "english": "I am learning the word \"one minute\".",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::oka nimisham::one minute"]
+    "wordRefs": [
+      "telugu::oka nimisham::one minute"
+    ]
   },
   {
     "language": "telugu",
@@ -3147,7 +3845,9 @@
     "english": "I use the word \"one minute\" every day.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::oka nimisham::one minute"]
+    "wordRefs": [
+      "telugu::oka nimisham::one minute"
+    ]
   },
   {
     "language": "telugu",
@@ -3156,7 +3856,9 @@
     "english": "I am learning the word \"pen\".",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::kalam::pen"]
+    "wordRefs": [
+      "telugu::kalam::pen"
+    ]
   },
   {
     "language": "telugu",
@@ -3165,7 +3867,9 @@
     "english": "I use the word \"pen\" every day.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::kalam::pen"]
+    "wordRefs": [
+      "telugu::kalam::pen"
+    ]
   },
   {
     "language": "telugu",
@@ -3174,7 +3878,9 @@
     "english": "I am learning the word \"day\".",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::roju::day"]
+    "wordRefs": [
+      "telugu::roju::day"
+    ]
   },
   {
     "language": "telugu",
@@ -3183,7 +3889,9 @@
     "english": "I use the word \"day\" every day.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::roju::day"]
+    "wordRefs": [
+      "telugu::roju::day"
+    ]
   },
   {
     "language": "telugu",
@@ -3192,7 +3900,9 @@
     "english": "I am learning the word \"week\".",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::vaaram::week"]
+    "wordRefs": [
+      "telugu::vaaram::week"
+    ]
   },
   {
     "language": "telugu",
@@ -3201,7 +3911,9 @@
     "english": "I use the word \"week\" every day.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::vaaram::week"]
+    "wordRefs": [
+      "telugu::vaaram::week"
+    ]
   },
   {
     "language": "telugu",
@@ -3210,7 +3922,9 @@
     "english": "I am learning the word \"month\".",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::nela::month"]
+    "wordRefs": [
+      "telugu::nela::month"
+    ]
   },
   {
     "language": "telugu",
@@ -3219,7 +3933,9 @@
     "english": "I use the word \"month\" every day.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::nela::month"]
+    "wordRefs": [
+      "telugu::nela::month"
+    ]
   },
   {
     "language": "telugu",
@@ -3228,7 +3944,9 @@
     "english": "I am learning the word \"year\".",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::samvatsaram::year"]
+    "wordRefs": [
+      "telugu::samvatsaram::year"
+    ]
   },
   {
     "language": "telugu",
@@ -3237,7 +3955,9 @@
     "english": "I use the word \"year\" every day.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::samvatsaram::year"]
+    "wordRefs": [
+      "telugu::samvatsaram::year"
+    ]
   },
   {
     "language": "telugu",
@@ -3246,7 +3966,9 @@
     "english": "I am learning the word \"name\".",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::peru::name"]
+    "wordRefs": [
+      "telugu::peru::name"
+    ]
   },
   {
     "language": "telugu",
@@ -3255,7 +3977,9 @@
     "english": "I use the word \"name\" every day.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::peru::name"]
+    "wordRefs": [
+      "telugu::peru::name"
+    ]
   },
   {
     "language": "telugu",
@@ -3264,7 +3988,9 @@
     "english": "I am learning the word \"price\".",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::dhara::price"]
+    "wordRefs": [
+      "telugu::dhara::price"
+    ]
   },
   {
     "language": "telugu",
@@ -3273,7 +3999,9 @@
     "english": "I use the word \"price\" every day.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::dhara::price"]
+    "wordRefs": [
+      "telugu::dhara::price"
+    ]
   },
   {
     "language": "telugu",
@@ -3282,7 +4010,9 @@
     "english": "I am learning the word \"near\".",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::daggara::near"]
+    "wordRefs": [
+      "telugu::daggara::near"
+    ]
   },
   {
     "language": "telugu",
@@ -3291,7 +4021,9 @@
     "english": "I use the word \"near\" every day.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::daggara::near"]
+    "wordRefs": [
+      "telugu::daggara::near"
+    ]
   },
   {
     "language": "telugu",
@@ -3300,7 +4032,9 @@
     "english": "I am learning the word \"far\".",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::dooram::far"]
+    "wordRefs": [
+      "telugu::dooram::far"
+    ]
   },
   {
     "language": "telugu",
@@ -3309,7 +4043,9 @@
     "english": "I use the word \"far\" every day.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::dooram::far"]
+    "wordRefs": [
+      "telugu::dooram::far"
+    ]
   },
   {
     "language": "telugu",
@@ -3318,7 +4054,9 @@
     "english": "I am learning the word \"inside\".",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::lopala::inside"]
+    "wordRefs": [
+      "telugu::lopala::inside"
+    ]
   },
   {
     "language": "telugu",
@@ -3327,7 +4065,9 @@
     "english": "I use the word \"inside\" every day.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::lopala::inside"]
+    "wordRefs": [
+      "telugu::lopala::inside"
+    ]
   },
   {
     "language": "telugu",
@@ -3336,7 +4076,9 @@
     "english": "I am learning the word \"outside\".",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::bayata::outside"]
+    "wordRefs": [
+      "telugu::bayata::outside"
+    ]
   },
   {
     "language": "telugu",
@@ -3345,7 +4087,9 @@
     "english": "I use the word \"outside\" every day.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::bayata::outside"]
+    "wordRefs": [
+      "telugu::bayata::outside"
+    ]
   },
   {
     "language": "telugu",
@@ -3354,7 +4098,9 @@
     "english": "I am learning the word \"before\".",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::mundu::before"]
+    "wordRefs": [
+      "telugu::mundu::before"
+    ]
   },
   {
     "language": "telugu",
@@ -3363,7 +4109,9 @@
     "english": "I use the word \"before\" every day.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::mundu::before"]
+    "wordRefs": [
+      "telugu::mundu::before"
+    ]
   },
   {
     "language": "telugu",
@@ -3372,7 +4120,9 @@
     "english": "I am learning the word \"open\".",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::teravu::open"]
+    "wordRefs": [
+      "telugu::teravu::open"
+    ]
   },
   {
     "language": "telugu",
@@ -3381,7 +4131,9 @@
     "english": "I use the word \"open\" every day.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::teravu::open"]
+    "wordRefs": [
+      "telugu::teravu::open"
+    ]
   },
   {
     "language": "telugu",
@@ -3390,7 +4142,9 @@
     "english": "I am learning the word \"close\".",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::muuyi::close"]
+    "wordRefs": [
+      "telugu::muuyi::close"
+    ]
   },
   {
     "language": "telugu",
@@ -3399,7 +4153,9 @@
     "english": "I use the word \"close\" every day.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::muuyi::close"]
+    "wordRefs": [
+      "telugu::muuyi::close"
+    ]
   },
   {
     "language": "telugu",
@@ -3408,7 +4164,9 @@
     "english": "I am learning the word \"wait\".",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::aagu::wait"]
+    "wordRefs": [
+      "telugu::aagu::wait"
+    ]
   },
   {
     "language": "telugu",
@@ -3417,7 +4175,9 @@
     "english": "I use the word \"wait\" every day.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::aagu::wait"]
+    "wordRefs": [
+      "telugu::aagu::wait"
+    ]
   },
   {
     "language": "telugu",
@@ -3426,7 +4186,9 @@
     "english": "I am learning the word \"turn\".",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::tirugu::turn"]
+    "wordRefs": [
+      "telugu::tirugu::turn"
+    ]
   },
   {
     "language": "telugu",
@@ -3435,7 +4197,9 @@
     "english": "I use the word \"turn\" every day.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::tirugu::turn"]
+    "wordRefs": [
+      "telugu::tirugu::turn"
+    ]
   },
   {
     "language": "telugu",
@@ -3444,7 +4208,9 @@
     "english": "I am learning the word \"stop\".",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::aapu::stop"]
+    "wordRefs": [
+      "telugu::aapu::stop"
+    ]
   },
   {
     "language": "telugu",
@@ -3453,7 +4219,9 @@
     "english": "I use the word \"stop\" every day.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::aapu::stop"]
+    "wordRefs": [
+      "telugu::aapu::stop"
+    ]
   },
   {
     "language": "telugu",
@@ -3462,7 +4230,10 @@
     "english": "hello and thank you are both important words.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::namaste::hello", "telugu::dhanyavaadalu::thank you"]
+    "wordRefs": [
+      "telugu::namaste::hello",
+      "telugu::dhanyavaadalu::thank you"
+    ]
   },
   {
     "language": "telugu",
@@ -3471,7 +4242,10 @@
     "english": "please and sorry / excuse me are both important words.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::dayachesi::please", "telugu::kshaminchandi::sorry / excuse me"]
+    "wordRefs": [
+      "telugu::dayachesi::please",
+      "telugu::kshaminchandi::sorry / excuse me"
+    ]
   },
   {
     "language": "telugu",
@@ -3480,7 +4254,10 @@
     "english": "yes and no / not are both important words.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::avunu::yes", "telugu::kaadu::no / not"]
+    "wordRefs": [
+      "telugu::avunu::yes",
+      "telugu::kaadu::no / not"
+    ]
   },
   {
     "language": "telugu",
@@ -3489,7 +4266,10 @@
     "english": "okay and it is good are both important words.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::sare::okay", "telugu::bagundi::it is good"]
+    "wordRefs": [
+      "telugu::sare::okay",
+      "telugu::bagundi::it is good"
+    ]
   },
   {
     "language": "telugu",
@@ -3498,7 +4278,10 @@
     "english": "I and you (informal) are both important words.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::nenu::i", "telugu::nuvvu::you (informal)"]
+    "wordRefs": [
+      "telugu::nenu::i",
+      "telugu::nuvvu::you (informal)"
+    ]
   },
   {
     "language": "telugu",
@@ -3507,7 +4290,10 @@
     "english": "you (formal/plural) and he are both important words.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::meeru::you (formal/plural)", "telugu::atanu::he"]
+    "wordRefs": [
+      "telugu::meeru::you (formal/plural)",
+      "telugu::atanu::he"
+    ]
   },
   {
     "language": "telugu",
@@ -3516,7 +4302,10 @@
     "english": "she and this are both important words.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::aame::she", "telugu::idi::this"]
+    "wordRefs": [
+      "telugu::aame::she",
+      "telugu::idi::this"
+    ]
   },
   {
     "language": "telugu",
@@ -3525,7 +4314,10 @@
     "english": "that and we (inclusive) are both important words.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::adi::that", "telugu::manam::we (inclusive)"]
+    "wordRefs": [
+      "telugu::adi::that",
+      "telugu::manam::we (inclusive)"
+    ]
   },
   {
     "language": "telugu",
@@ -3534,7 +4326,10 @@
     "english": "we (exclusive) and they are both important words.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::memu::we (exclusive)", "telugu::vaallu::they"]
+    "wordRefs": [
+      "telugu::memu::we (exclusive)",
+      "telugu::vaallu::they"
+    ]
   },
   {
     "language": "telugu",
@@ -3543,7 +4338,10 @@
     "english": "what and who are both important words.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::emi::what", "telugu::evaru::who"]
+    "wordRefs": [
+      "telugu::emi::what",
+      "telugu::evaru::who"
+    ]
   },
   {
     "language": "telugu",
@@ -3552,7 +4350,10 @@
     "english": "where and when are both important words.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::ekkada::where", "telugu::eppudu::when"]
+    "wordRefs": [
+      "telugu::ekkada::where",
+      "telugu::eppudu::when"
+    ]
   },
   {
     "language": "telugu",
@@ -3561,7 +4362,10 @@
     "english": "how and why are both important words.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::ela::how", "telugu::enduku::why"]
+    "wordRefs": [
+      "telugu::ela::how",
+      "telugu::enduku::why"
+    ]
   },
   {
     "language": "telugu",
@@ -3570,7 +4374,10 @@
     "english": "one and two are both important words.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::okati::one", "telugu::rendu::two"]
+    "wordRefs": [
+      "telugu::okati::one",
+      "telugu::rendu::two"
+    ]
   },
   {
     "language": "telugu",
@@ -3579,7 +4386,10 @@
     "english": "three and four are both important words.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::moodu::three", "telugu::naalugu::four"]
+    "wordRefs": [
+      "telugu::moodu::three",
+      "telugu::naalugu::four"
+    ]
   },
   {
     "language": "telugu",
@@ -3588,7 +4398,10 @@
     "english": "five and ten are both important words.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::aidu::five", "telugu::padi::ten"]
+    "wordRefs": [
+      "telugu::aidu::five",
+      "telugu::padi::ten"
+    ]
   },
   {
     "language": "telugu",
@@ -3597,7 +4410,10 @@
     "english": "twenty and today are both important words.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::iravai::twenty", "telugu::ee roju::today"]
+    "wordRefs": [
+      "telugu::iravai::twenty",
+      "telugu::ee roju::today"
+    ]
   },
   {
     "language": "telugu",
@@ -3606,7 +4422,10 @@
     "english": "tomorrow and yesterday are both important words.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::repu::tomorrow", "telugu::ninna::yesterday"]
+    "wordRefs": [
+      "telugu::repu::tomorrow",
+      "telugu::ninna::yesterday"
+    ]
   },
   {
     "language": "telugu",
@@ -3615,7 +4434,10 @@
     "english": "now and later / after are both important words.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::ippudu::now", "telugu::taruvata::later / after"]
+    "wordRefs": [
+      "telugu::ippudu::now",
+      "telugu::taruvata::later / after"
+    ]
   },
   {
     "language": "telugu",
@@ -3624,7 +4446,10 @@
     "english": "morning and evening are both important words.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::udayam::morning", "telugu::saayantram::evening"]
+    "wordRefs": [
+      "telugu::udayam::morning",
+      "telugu::saayantram::evening"
+    ]
   },
   {
     "language": "telugu",
@@ -3633,7 +4458,10 @@
     "english": "night and time are both important words.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::raatri::night", "telugu::samayam::time"]
+    "wordRefs": [
+      "telugu::raatri::night",
+      "telugu::samayam::time"
+    ]
   },
   {
     "language": "telugu",
@@ -3642,7 +4470,10 @@
     "english": "mother and father are both important words.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::amma::mother", "telugu::nanna::father"]
+    "wordRefs": [
+      "telugu::amma::mother",
+      "telugu::nanna::father"
+    ]
   },
   {
     "language": "telugu",
@@ -3651,7 +4482,10 @@
     "english": "elder brother and elder sister are both important words.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::anna::elder brother", "telugu::akka::elder sister"]
+    "wordRefs": [
+      "telugu::anna::elder brother",
+      "telugu::akka::elder sister"
+    ]
   },
   {
     "language": "telugu",
@@ -3660,7 +4494,10 @@
     "english": "younger brother and younger sister are both important words.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::tammudu::younger brother", "telugu::chelli::younger sister"]
+    "wordRefs": [
+      "telugu::tammudu::younger brother",
+      "telugu::chelli::younger sister"
+    ]
   },
   {
     "language": "telugu",
@@ -3669,7 +4506,10 @@
     "english": "family and friend (male) are both important words.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::kutumbam::family", "telugu::snehitudu::friend (male)"]
+    "wordRefs": [
+      "telugu::kutumbam::family",
+      "telugu::snehitudu::friend (male)"
+    ]
   },
   {
     "language": "telugu",
@@ -3678,7 +4518,10 @@
     "english": "friend (female) and house are both important words.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::snehituralu::friend (female)", "telugu::illu::house"]
+    "wordRefs": [
+      "telugu::snehituralu::friend (female)",
+      "telugu::illu::house"
+    ]
   },
   {
     "language": "telugu",
@@ -3687,7 +4530,10 @@
     "english": "book and school are both important words.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::pustakam::book", "telugu::paathashaala::school"]
+    "wordRefs": [
+      "telugu::pustakam::book",
+      "telugu::paathashaala::school"
+    ]
   },
   {
     "language": "telugu",
@@ -3696,7 +4542,10 @@
     "english": "water and cooked rice / meal are both important words.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::neeru::water", "telugu::annam::cooked rice / meal"]
+    "wordRefs": [
+      "telugu::neeru::water",
+      "telugu::annam::cooked rice / meal"
+    ]
   },
   {
     "language": "telugu",
@@ -3705,7 +4554,10 @@
     "english": "fruit and bus are both important words.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::pandu::fruit", "telugu::bassu::bus"]
+    "wordRefs": [
+      "telugu::pandu::fruit",
+      "telugu::bassu::bus"
+    ]
   },
   {
     "language": "telugu",
@@ -3714,7 +4566,10 @@
     "english": "road and village are both important words.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::roadu::road", "telugu::graamam::village"]
+    "wordRefs": [
+      "telugu::roadu::road",
+      "telugu::graamam::village"
+    ]
   },
   {
     "language": "telugu",
@@ -3723,7 +4578,10 @@
     "english": "city and work are both important words.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::nagaram::city", "telugu::pani::work"]
+    "wordRefs": [
+      "telugu::nagaram::city",
+      "telugu::pani::work"
+    ]
   },
   {
     "language": "telugu",
@@ -3732,7 +4590,10 @@
     "english": "money and language are both important words.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::dabbu::money", "telugu::bhaasha::language"]
+    "wordRefs": [
+      "telugu::dabbu::money",
+      "telugu::bhaasha::language"
+    ]
   },
   {
     "language": "telugu",
@@ -3741,7 +4602,10 @@
     "english": "help and go are both important words.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::sahaayam::help", "telugu::vellu::go"]
+    "wordRefs": [
+      "telugu::sahaayam::help",
+      "telugu::vellu::go"
+    ]
   },
   {
     "language": "telugu",
@@ -3750,7 +4614,10 @@
     "english": "come and eat are both important words.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::raa::come", "telugu::tinu::eat"]
+    "wordRefs": [
+      "telugu::raa::come",
+      "telugu::tinu::eat"
+    ]
   },
   {
     "language": "telugu",
@@ -3759,7 +4626,10 @@
     "english": "drink and study / read are both important words.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::taagu::drink", "telugu::chaduvu::study / read"]
+    "wordRefs": [
+      "telugu::taagu::drink",
+      "telugu::chaduvu::study / read"
+    ]
   },
   {
     "language": "telugu",
@@ -3768,7 +4638,10 @@
     "english": "write and see / look are both important words.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::raayi::write", "telugu::choodu::see / look"]
+    "wordRefs": [
+      "telugu::raayi::write",
+      "telugu::choodu::see / look"
+    ]
   },
   {
     "language": "telugu",
@@ -3777,7 +4650,10 @@
     "english": "speak / talk and listen / hear are both important words.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::maatlaadu::speak / talk", "telugu::vinu::listen / hear"]
+    "wordRefs": [
+      "telugu::maatlaadu::speak / talk",
+      "telugu::vinu::listen / hear"
+    ]
   },
   {
     "language": "telugu",
@@ -3786,7 +4662,10 @@
     "english": "sleep and sit are both important words.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::nidrapo::sleep", "telugu::koorcho::sit"]
+    "wordRefs": [
+      "telugu::nidrapo::sleep",
+      "telugu::koorcho::sit"
+    ]
   },
   {
     "language": "telugu",
@@ -3795,7 +4674,10 @@
     "english": "stand and give are both important words.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::nilabadu::stand", "telugu::ivvu::give"]
+    "wordRefs": [
+      "telugu::nilabadu::stand",
+      "telugu::ivvu::give"
+    ]
   },
   {
     "language": "telugu",
@@ -3804,7 +4686,10 @@
     "english": "take and do are both important words.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::teesuko::take", "telugu::cheyi::do"]
+    "wordRefs": [
+      "telugu::teesuko::take",
+      "telugu::cheyi::do"
+    ]
   },
   {
     "language": "telugu",
@@ -3813,7 +4698,10 @@
     "english": "know and understand are both important words.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::telusu::know", "telugu::artham avu::understand"]
+    "wordRefs": [
+      "telugu::telusu::know",
+      "telugu::artham avu::understand"
+    ]
   },
   {
     "language": "telugu",
@@ -3822,7 +4710,10 @@
     "english": "good and bad are both important words.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::manchi::good", "telugu::chedu::bad"]
+    "wordRefs": [
+      "telugu::manchi::good",
+      "telugu::chedu::bad"
+    ]
   },
   {
     "language": "telugu",
@@ -3831,7 +4722,10 @@
     "english": "big and small are both important words.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::pedda::big", "telugu::chinna::small"]
+    "wordRefs": [
+      "telugu::pedda::big",
+      "telugu::chinna::small"
+    ]
   },
   {
     "language": "telugu",
@@ -3840,7 +4734,10 @@
     "english": "new and old are both important words.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::kotta::new", "telugu::paata::old"]
+    "wordRefs": [
+      "telugu::kotta::new",
+      "telugu::paata::old"
+    ]
   },
   {
     "language": "telugu",
@@ -3849,7 +4746,10 @@
     "english": "very / much and slowly are both important words.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::chaala::very / much", "telugu::nemmadiga::slowly"]
+    "wordRefs": [
+      "telugu::chaala::very / much",
+      "telugu::nemmadiga::slowly"
+    ]
   },
   {
     "language": "telugu",
@@ -3858,7 +4758,10 @@
     "english": "quickly and here are both important words.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::veganga::quickly", "telugu::ikkada::here"]
+    "wordRefs": [
+      "telugu::veganga::quickly",
+      "telugu::ikkada::here"
+    ]
   },
   {
     "language": "telugu",
@@ -3867,7 +4770,10 @@
     "english": "there and mother are both important words.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::akkada::there", "telugu::talli::mother"]
+    "wordRefs": [
+      "telugu::akkada::there",
+      "telugu::talli::mother"
+    ]
   },
   {
     "language": "telugu",
@@ -3876,7 +4782,10 @@
     "english": "father and child are both important words.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::tandri::father", "telugu::bidda::child"]
+    "wordRefs": [
+      "telugu::tandri::father",
+      "telugu::bidda::child"
+    ]
   },
   {
     "language": "telugu",
@@ -3885,7 +4794,10 @@
     "english": "road and market are both important words.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::rahadaari::road", "telugu::bazaaru::market"]
+    "wordRefs": [
+      "telugu::rahadaari::road",
+      "telugu::bazaaru::market"
+    ]
   },
   {
     "language": "telugu",
@@ -3894,7 +4806,10 @@
     "english": "teacher and student are both important words.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::guruvu::teacher", "telugu::vidyarthi::student"]
+    "wordRefs": [
+      "telugu::guruvu::teacher",
+      "telugu::vidyarthi::student"
+    ]
   },
   {
     "language": "telugu",
@@ -3903,7 +4818,10 @@
     "english": "vegetables and milk are both important words.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::kooragayalu::vegetables", "telugu::paalu::milk"]
+    "wordRefs": [
+      "telugu::kooragayalu::vegetables",
+      "telugu::paalu::milk"
+    ]
   },
   {
     "language": "telugu",
@@ -3912,7 +4830,10 @@
     "english": "question and answer are both important words.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::prashna::question", "telugu::samaadhaanam::answer"]
+    "wordRefs": [
+      "telugu::prashna::question",
+      "telugu::samaadhaanam::answer"
+    ]
   },
   {
     "language": "telugu",
@@ -3921,7 +4842,10 @@
     "english": "good morning and good night are both important words.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::shubhodayam::good morning", "telugu::shubharaatri::good night"]
+    "wordRefs": [
+      "telugu::shubhodayam::good morning",
+      "telugu::shubharaatri::good night"
+    ]
   },
   {
     "language": "telugu",
@@ -3930,7 +4854,10 @@
     "english": "welcome and how much are both important words.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::swaagatam::welcome", "telugu::enta::how much"]
+    "wordRefs": [
+      "telugu::swaagatam::welcome",
+      "telugu::enta::how much"
+    ]
   },
   {
     "language": "telugu",
@@ -3939,7 +4866,10 @@
     "english": "left and right are both important words.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::edama::left", "telugu::kudi::right"]
+    "wordRefs": [
+      "telugu::edama::left",
+      "telugu::kudi::right"
+    ]
   },
   {
     "language": "telugu",
@@ -3948,7 +4878,10 @@
     "english": "straight and quickly are both important words.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::neruga::straight", "telugu::tvaraga::quickly"]
+    "wordRefs": [
+      "telugu::neruga::straight",
+      "telugu::tvaraga::quickly"
+    ]
   },
   {
     "language": "telugu",
@@ -3957,7 +4890,10 @@
     "english": "one minute and pen are both important words.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::oka nimisham::one minute", "telugu::kalam::pen"]
+    "wordRefs": [
+      "telugu::oka nimisham::one minute",
+      "telugu::kalam::pen"
+    ]
   },
   {
     "language": "telugu",
@@ -3966,7 +4902,10 @@
     "english": "day and week are both important words.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::roju::day", "telugu::vaaram::week"]
+    "wordRefs": [
+      "telugu::roju::day",
+      "telugu::vaaram::week"
+    ]
   },
   {
     "language": "telugu",
@@ -3975,7 +4914,10 @@
     "english": "month and year are both important words.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::nela::month", "telugu::samvatsaram::year"]
+    "wordRefs": [
+      "telugu::nela::month",
+      "telugu::samvatsaram::year"
+    ]
   },
   {
     "language": "telugu",
@@ -3984,7 +4926,10 @@
     "english": "name and price are both important words.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::peru::name", "telugu::dhara::price"]
+    "wordRefs": [
+      "telugu::peru::name",
+      "telugu::dhara::price"
+    ]
   },
   {
     "language": "telugu",
@@ -3993,7 +4938,10 @@
     "english": "near and far are both important words.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::daggara::near", "telugu::dooram::far"]
+    "wordRefs": [
+      "telugu::daggara::near",
+      "telugu::dooram::far"
+    ]
   },
   {
     "language": "telugu",
@@ -4002,7 +4950,10 @@
     "english": "inside and outside are both important words.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::lopala::inside", "telugu::bayata::outside"]
+    "wordRefs": [
+      "telugu::lopala::inside",
+      "telugu::bayata::outside"
+    ]
   },
   {
     "language": "telugu",
@@ -4011,7 +4962,10 @@
     "english": "before and open are both important words.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::mundu::before", "telugu::teravu::open"]
+    "wordRefs": [
+      "telugu::mundu::before",
+      "telugu::teravu::open"
+    ]
   },
   {
     "language": "telugu",
@@ -4020,7 +4974,10 @@
     "english": "close and wait are both important words.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::muuyi::close", "telugu::aagu::wait"]
+    "wordRefs": [
+      "telugu::muuyi::close",
+      "telugu::aagu::wait"
+    ]
   },
   {
     "language": "telugu",
@@ -4029,7 +4986,10 @@
     "english": "turn and stop are both important words.",
     "contextTag": "vocabulary-building",
     "difficulty": 1,
-    "wordRefs": ["telugu::tirugu::turn", "telugu::aapu::stop"]
+    "wordRefs": [
+      "telugu::tirugu::turn",
+      "telugu::aapu::stop"
+    ]
   },
   {
     "language": "telugu",
@@ -4038,7 +4998,9 @@
     "english": "I need this.",
     "contextTag": "daily-use",
     "difficulty": 1,
-    "wordRefs": ["telugu::avasaram::need"]
+    "wordRefs": [
+      "telugu::avasaram::need"
+    ]
   },
   {
     "language": "telugu",
@@ -4047,7 +5009,9 @@
     "english": "I need your help.",
     "contextTag": "daily-use",
     "difficulty": 1,
-    "wordRefs": ["telugu::avasaram::need"]
+    "wordRefs": [
+      "telugu::avasaram::need"
+    ]
   },
   {
     "language": "telugu",
@@ -4056,7 +5020,9 @@
     "english": "There is a hospital nearby.",
     "contextTag": "health",
     "difficulty": 1,
-    "wordRefs": ["telugu::aasupatri::hospital"]
+    "wordRefs": [
+      "telugu::aasupatri::hospital"
+    ]
   },
   {
     "language": "telugu",
@@ -4065,7 +5031,9 @@
     "english": "Take him to the hospital immediately.",
     "contextTag": "health",
     "difficulty": 1,
-    "wordRefs": ["telugu::aasupatri::hospital"]
+    "wordRefs": [
+      "telugu::aasupatri::hospital"
+    ]
   },
   {
     "language": "telugu",
@@ -4074,7 +5042,9 @@
     "english": "That shop is open now.",
     "contextTag": "shopping",
     "difficulty": 1,
-    "wordRefs": ["telugu::dukaanam::shop"]
+    "wordRefs": [
+      "telugu::dukaanam::shop"
+    ]
   },
   {
     "language": "telugu",
@@ -4083,7 +5053,9 @@
     "english": "This shop stays open until night.",
     "contextTag": "shopping",
     "difficulty": 1,
-    "wordRefs": ["telugu::dukaanam::shop"]
+    "wordRefs": [
+      "telugu::dukaanam::shop"
+    ]
   },
   {
     "language": "telugu",
@@ -4092,7 +5064,9 @@
     "english": "I need a ticket to Hyderabad.",
     "contextTag": "travel",
     "difficulty": 1,
-    "wordRefs": ["telugu::tiket::ticket"]
+    "wordRefs": [
+      "telugu::tiket::ticket"
+    ]
   },
   {
     "language": "telugu",
@@ -4101,7 +5075,9 @@
     "english": "Book two tickets.",
     "contextTag": "travel",
     "difficulty": 1,
-    "wordRefs": ["telugu::tiket::ticket"]
+    "wordRefs": [
+      "telugu::tiket::ticket"
+    ]
   },
   {
     "language": "telugu",
@@ -4110,7 +5086,9 @@
     "english": "Our journey starts tomorrow.",
     "contextTag": "travel",
     "difficulty": 1,
-    "wordRefs": ["telugu::prayaanam::journey"]
+    "wordRefs": [
+      "telugu::prayaanam::journey"
+    ]
   },
   {
     "language": "telugu",
@@ -4119,7 +5097,9 @@
     "english": "This journey is very long.",
     "contextTag": "travel",
     "difficulty": 1,
-    "wordRefs": ["telugu::prayaanam::journey"]
+    "wordRefs": [
+      "telugu::prayaanam::journey"
+    ]
   },
   {
     "language": "telugu",
@@ -4128,7 +5108,9 @@
     "english": "This is only a small problem.",
     "contextTag": "work",
     "difficulty": 1,
-    "wordRefs": ["telugu::samasya::problem"]
+    "wordRefs": [
+      "telugu::samasya::problem"
+    ]
   },
   {
     "language": "telugu",
@@ -4137,7 +5119,10 @@
     "english": "A solution was found for that problem.",
     "contextTag": "work",
     "difficulty": 1,
-    "wordRefs": ["telugu::samasya::problem", "telugu::parishkaaram::solution"]
+    "wordRefs": [
+      "telugu::samasya::problem",
+      "telugu::parishkaaram::solution"
+    ]
   },
   {
     "language": "telugu",
@@ -4146,7 +5131,9 @@
     "english": "Your solution is very good.",
     "contextTag": "work",
     "difficulty": 1,
-    "wordRefs": ["telugu::parishkaaram::solution"]
+    "wordRefs": [
+      "telugu::parishkaaram::solution"
+    ]
   },
   {
     "language": "telugu",
@@ -4155,7 +5142,10 @@
     "english": "Every problem has a solution.",
     "contextTag": "work",
     "difficulty": 1,
-    "wordRefs": ["telugu::samasya::problem", "telugu::parishkaaram::solution"]
+    "wordRefs": [
+      "telugu::samasya::problem",
+      "telugu::parishkaaram::solution"
+    ]
   },
   {
     "language": "telugu",
@@ -4164,7 +5154,9 @@
     "english": "There is a meeting at 3 PM.",
     "contextTag": "work",
     "difficulty": 1,
-    "wordRefs": ["telugu::samaavesam::meeting"]
+    "wordRefs": [
+      "telugu::samaavesam::meeting"
+    ]
   },
   {
     "language": "telugu",
@@ -4173,7 +5165,9 @@
     "english": "Tomorrow’s meeting is very important.",
     "contextTag": "work",
     "difficulty": 1,
-    "wordRefs": ["telugu::samaavesam::meeting"]
+    "wordRefs": [
+      "telugu::samaavesam::meeting"
+    ]
   },
   {
     "language": "telugu",
@@ -4182,7 +5176,9 @@
     "english": "He is my classmate and friend.",
     "contextTag": "education",
     "difficulty": 1,
-    "wordRefs": ["telugu::sahapaathi::classmate"]
+    "wordRefs": [
+      "telugu::sahapaathi::classmate"
+    ]
   },
   {
     "language": "telugu",
@@ -4191,7 +5187,9 @@
     "english": "My classmate speaks Telugu well.",
     "contextTag": "education",
     "difficulty": 1,
-    "wordRefs": ["telugu::sahapaathi::classmate"]
+    "wordRefs": [
+      "telugu::sahapaathi::classmate"
+    ]
   },
   {
     "language": "telugu",
@@ -4200,7 +5198,9 @@
     "english": "If you practice every day, you will learn quickly.",
     "contextTag": "education",
     "difficulty": 1,
-    "wordRefs": ["telugu::abhyaasam::practice"]
+    "wordRefs": [
+      "telugu::abhyaasam::practice"
+    ]
   },
   {
     "language": "telugu",
@@ -4209,7 +5209,9 @@
     "english": "Practice a little before speaking.",
     "contextTag": "education",
     "difficulty": 1,
-    "wordRefs": ["telugu::abhyaasam::practice"]
+    "wordRefs": [
+      "telugu::abhyaasam::practice"
+    ]
   },
   {
     "language": "telugu",
@@ -4218,7 +5220,9 @@
     "english": "I am in a hurry now.",
     "contextTag": "daily-use",
     "difficulty": 1,
-    "wordRefs": ["telugu::tvaram::hurry"]
+    "wordRefs": [
+      "telugu::tvaram::hurry"
+    ]
   },
   {
     "language": "telugu",
@@ -4227,7 +5231,9 @@
     "english": "He is in a lot of hurry.",
     "contextTag": "daily-use",
     "difficulty": 1,
-    "wordRefs": ["telugu::tvaram::hurry"]
+    "wordRefs": [
+      "telugu::tvaram::hurry"
+    ]
   },
   {
     "language": "telugu",
@@ -4236,7 +5242,9 @@
     "english": "I need a little calm.",
     "contextTag": "daily-use",
     "difficulty": 1,
-    "wordRefs": ["telugu::nemmadi::calm"]
+    "wordRefs": [
+      "telugu::nemmadi::calm"
+    ]
   },
   {
     "language": "telugu",
@@ -4245,7 +5253,9 @@
     "english": "Calm is good after work.",
     "contextTag": "daily-use",
     "difficulty": 1,
-    "wordRefs": ["telugu::nemmadi::calm"]
+    "wordRefs": [
+      "telugu::nemmadi::calm"
+    ]
   },
   {
     "language": "telugu",
@@ -4254,7 +5264,9 @@
     "english": "She gave cold water.",
     "contextTag": "food",
     "difficulty": 1,
-    "wordRefs": ["telugu::challani::cold"]
+    "wordRefs": [
+      "telugu::challani::cold"
+    ]
   },
   {
     "language": "telugu",
@@ -4263,7 +5275,9 @@
     "english": "Today there is a cold breeze.",
     "contextTag": "weather",
     "difficulty": 1,
-    "wordRefs": ["telugu::challani::cold"]
+    "wordRefs": [
+      "telugu::challani::cold"
+    ]
   },
   {
     "language": "telugu",
@@ -4272,7 +5286,9 @@
     "english": "Drink hot tea.",
     "contextTag": "food",
     "difficulty": 1,
-    "wordRefs": ["telugu::vedi::hot"]
+    "wordRefs": [
+      "telugu::vedi::hot"
+    ]
   },
   {
     "language": "telugu",
@@ -4281,7 +5297,9 @@
     "english": "Hot rice is very tasty.",
     "contextTag": "food",
     "difficulty": 1,
-    "wordRefs": ["telugu::vedi::hot"]
+    "wordRefs": [
+      "telugu::vedi::hot"
+    ]
   },
   {
     "language": "telugu",
@@ -4290,7 +5308,10 @@
     "english": "Not cold water, give hot water.",
     "contextTag": "food",
     "difficulty": 1,
-    "wordRefs": ["telugu::challani::cold", "telugu::vedi::hot"]
+    "wordRefs": [
+      "telugu::challani::cold",
+      "telugu::vedi::hot"
+    ]
   },
   {
     "language": "telugu",
@@ -4312,7 +5333,9 @@
     "english": "If you have a doubt, ask.",
     "contextTag": "education",
     "difficulty": 1,
-    "wordRefs": ["telugu::adagandi::ask"]
+    "wordRefs": [
+      "telugu::adagandi::ask"
+    ]
   },
   {
     "language": "telugu",
@@ -4321,7 +5344,9 @@
     "english": "Ask what you need.",
     "contextTag": "daily-use",
     "difficulty": 1,
-    "wordRefs": ["telugu::adagandi::ask"]
+    "wordRefs": [
+      "telugu::adagandi::ask"
+    ]
   },
   {
     "language": "telugu",
@@ -4330,7 +5355,9 @@
     "english": "Please listen carefully.",
     "contextTag": "daily-use",
     "difficulty": 1,
-    "wordRefs": ["telugu::vinandi::listen-formal"]
+    "wordRefs": [
+      "telugu::vinandi::listen-formal"
+    ]
   },
   {
     "language": "telugu",
@@ -4339,7 +5366,9 @@
     "english": "First listen to what I say.",
     "contextTag": "daily-use",
     "difficulty": 1,
-    "wordRefs": ["telugu::vinandi::listen-formal"]
+    "wordRefs": [
+      "telugu::vinandi::listen-formal"
+    ]
   },
   {
     "language": "telugu",
@@ -4348,7 +5377,9 @@
     "english": "Please tell your name.",
     "contextTag": "daily-use",
     "difficulty": 1,
-    "wordRefs": ["telugu::chappandi::tell-formal"]
+    "wordRefs": [
+      "telugu::chappandi::tell-formal"
+    ]
   },
   {
     "language": "telugu",
@@ -4357,7 +5388,9 @@
     "english": "Tell the answer.",
     "contextTag": "education",
     "difficulty": 1,
-    "wordRefs": ["telugu::chappandi::tell-formal"]
+    "wordRefs": [
+      "telugu::chappandi::tell-formal"
+    ]
   },
   {
     "language": "telugu",
@@ -4366,7 +5399,9 @@
     "english": "Come again.",
     "contextTag": "daily-use",
     "difficulty": 1,
-    "wordRefs": ["telugu::tirigi::again"]
+    "wordRefs": [
+      "telugu::tirigi::again"
+    ]
   },
   {
     "language": "telugu",
@@ -4375,7 +5410,9 @@
     "english": "He went back home.",
     "contextTag": "daily-use",
     "difficulty": 1,
-    "wordRefs": ["telugu::tirigi::again"]
+    "wordRefs": [
+      "telugu::tirigi::again"
+    ]
   },
   {
     "language": "telugu",
@@ -4384,7 +5421,9 @@
     "english": "This is the first lesson.",
     "contextTag": "education",
     "difficulty": 1,
-    "wordRefs": ["telugu::modati::first"]
+    "wordRefs": [
+      "telugu::modati::first"
+    ]
   },
   {
     "language": "telugu",
@@ -4393,7 +5432,9 @@
     "english": "The first question is easy.",
     "contextTag": "education",
     "difficulty": 1,
-    "wordRefs": ["telugu::modati::first"]
+    "wordRefs": [
+      "telugu::modati::first"
+    ]
   },
   {
     "language": "telugu",
@@ -4402,7 +5443,9 @@
     "english": "The exam is on the second day.",
     "contextTag": "education",
     "difficulty": 1,
-    "wordRefs": ["telugu::rendava::second"]
+    "wordRefs": [
+      "telugu::rendava::second"
+    ]
   },
   {
     "language": "telugu",
@@ -4411,7 +5454,9 @@
     "english": "Read the second page.",
     "contextTag": "education",
     "difficulty": 1,
-    "wordRefs": ["telugu::rendava::second"]
+    "wordRefs": [
+      "telugu::rendava::second"
+    ]
   },
   {
     "language": "telugu",
@@ -4420,7 +5465,9 @@
     "english": "Read the third chapter.",
     "contextTag": "education",
     "difficulty": 1,
-    "wordRefs": ["telugu::moodava::third"]
+    "wordRefs": [
+      "telugu::moodava::third"
+    ]
   },
   {
     "language": "telugu",
@@ -4429,7 +5476,9 @@
     "english": "The third question is difficult.",
     "contextTag": "education",
     "difficulty": 1,
-    "wordRefs": ["telugu::moodava::third"]
+    "wordRefs": [
+      "telugu::moodava::third"
+    ]
   },
   {
     "language": "telugu",
@@ -4438,7 +5487,9 @@
     "english": "Let us have lunch in the afternoon.",
     "contextTag": "time",
     "difficulty": 1,
-    "wordRefs": ["telugu::madhyaahnam::afternoon"]
+    "wordRefs": [
+      "telugu::madhyaahnam::afternoon"
+    ]
   },
   {
     "language": "telugu",
@@ -4447,7 +5498,9 @@
     "english": "Let us meet at three in the afternoon.",
     "contextTag": "time",
     "difficulty": 1,
-    "wordRefs": ["telugu::madhyaahnam::afternoon"]
+    "wordRefs": [
+      "telugu::madhyaahnam::afternoon"
+    ]
   },
   {
     "language": "telugu",
@@ -4456,7 +5509,9 @@
     "english": "Everyone is in the class.",
     "contextTag": "education",
     "difficulty": 1,
-    "wordRefs": ["telugu::andaroo::everyone"]
+    "wordRefs": [
+      "telugu::andaroo::everyone"
+    ]
   },
   {
     "language": "telugu",
@@ -4465,7 +5520,10 @@
     "english": "Everyone sang together.",
     "contextTag": "daily-use",
     "difficulty": 1,
-    "wordRefs": ["telugu::andaroo::everyone", "telugu::kalisi::together"]
+    "wordRefs": [
+      "telugu::andaroo::everyone",
+      "telugu::kalisi::together"
+    ]
   },
   {
     "language": "telugu",
@@ -4474,7 +5532,9 @@
     "english": "Let us study together.",
     "contextTag": "education",
     "difficulty": 1,
-    "wordRefs": ["telugu::kalisi::together"]
+    "wordRefs": [
+      "telugu::kalisi::together"
+    ]
   },
   {
     "language": "telugu",
@@ -4483,6 +5543,187 @@
     "english": "They worked together.",
     "contextTag": "work",
     "difficulty": 1,
-    "wordRefs": ["telugu::kalisi::together"]
+    "wordRefs": [
+      "telugu::kalisi::together"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "మా రైలు ఉదయం ఆరు గంటలకు వస్తుంది.",
+    "pronunciation": "Maa railu udayam aaru gantalaki vastundi.",
+    "english": "Our train arrives at six in the morning.",
+    "contextTag": "travel",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::railu::train"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "రైలు ఇప్పుడే స్టేషన్ నుంచి బయలుదేరింది.",
+    "pronunciation": "Railu ippude steshan nunchi bayaluderindi.",
+    "english": "The train just left the station.",
+    "contextTag": "travel",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::railu::train",
+      "telugu::railvay steshan::railway station"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "నేను రైల్వే స్టేషన్ దగ్గర వేచి ఉన్నాను.",
+    "pronunciation": "Nenu railvay steshan daggara vechi unnaanu.",
+    "english": "I am waiting near the railway station.",
+    "contextTag": "travel",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::railvay steshan::railway station"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "రైల్వే స్టేషన్ చాలా రద్దీగా ఉంది.",
+    "pronunciation": "Railvay steshan chaalaa raddigaa undi.",
+    "english": "The railway station is very crowded.",
+    "contextTag": "travel",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::railvay steshan::railway station"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "బస్ స్టాప్ మా ఇంటికి దగ్గరగా ఉంది.",
+    "pronunciation": "Bas staap maa intiki daggaragaa undi.",
+    "english": "The bus stop is close to our house.",
+    "contextTag": "travel",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::bas staap::bus stop"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "మనము బస్ స్టాప్ వద్ద ఐదు నిమిషాలు ఆగుదాం.",
+    "pronunciation": "Manamu bas staap vadda aidu nimishaalu aagudaam.",
+    "english": "Let us wait at the bus stop for five minutes.",
+    "contextTag": "travel",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::bas staap::bus stop"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "మీ బండి మూడో ప్లాట్‌ఫారం వద్ద ఉంది.",
+    "pronunciation": "Mee bandi moodo plaatfaam vadda undi.",
+    "english": "Your train is at platform three.",
+    "contextTag": "travel",
+    "difficulty": 2,
+    "wordRefs": [
+      "telugu::plaatfaam::platform"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "ప్లాట్‌ఫారం మీద జాగ్రత్తగా నడవండి.",
+    "pronunciation": "Plaatfaam meeda jaagrattagaa nadavandi.",
+    "english": "Walk carefully on the platform.",
+    "contextTag": "travel",
+    "difficulty": 2,
+    "wordRefs": [
+      "telugu::plaatfaam::platform"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "నా సామాను ఈ సీటు కింద ఉంది.",
+    "pronunciation": "Naa saamaanu ee seetu kinda undi.",
+    "english": "My luggage is under this seat.",
+    "contextTag": "travel",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::saamaanu::luggage",
+      "telugu::seetu::seat"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "దయచేసి మీ సామాను ఇక్కడ పెట్టండి.",
+    "pronunciation": "Dayachesi mee saamaanu ikkada pettandi.",
+    "english": "Please place your luggage here.",
+    "contextTag": "travel",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::saamaanu::luggage"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "ఈ సీటు ఖాళీగా ఉందా?",
+    "pronunciation": "Ee seetu khaaleegaa undaa?",
+    "english": "Is this seat empty?",
+    "contextTag": "travel",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::seetu::seat"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "నేను కిటికీ పక్క సీటు కోరుకుంటున్నాను.",
+    "pronunciation": "Nenu kitiki pakka seetu korukuntunnaanu.",
+    "english": "I want a seat by the window.",
+    "contextTag": "travel",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::seetu::seat"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "మనం సమయానికి చేరాలి.",
+    "pronunciation": "Manam samayaaniki cheraali.",
+    "english": "We should reach on time.",
+    "contextTag": "travel",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::cheru::reach"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "ఆమె సాయంత్రానికి ఇంటికి చేరుతుంది.",
+    "pronunciation": "Aame saayantraaniki intiki cherutundi.",
+    "english": "She reaches home by evening.",
+    "contextTag": "travel",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::cheru::reach"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "బస్సు పది నిమిషాల్లో బయలుదేరుతుంది.",
+    "pronunciation": "Bassu padi nimishallo bayaluderutundi.",
+    "english": "The bus leaves in ten minutes.",
+    "contextTag": "travel",
+    "difficulty": 1,
+    "wordRefs": [
+      "telugu::bayaluderu::leave / depart",
+      "telugu::bassu::bus"
+    ]
+  },
+  {
+    "language": "telugu",
+    "originalScript": "మనం త్వరగా బయలుదేరితే ట్రాఫిక్ తప్పించవచ్చు.",
+    "pronunciation": "Manam tvaragaa bayaluderite traffic tappinchavacchu.",
+    "english": "If we leave early, we can avoid traffic.",
+    "contextTag": "travel",
+    "difficulty": 2,
+    "wordRefs": [
+      "telugu::bayaluderu::leave / depart"
+    ]
   }
 ]

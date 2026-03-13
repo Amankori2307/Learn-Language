@@ -12,6 +12,7 @@ Current route classes:
   - `/`
   - `/features`
   - `/how-it-works`
+  - `/methodology`
   - `/languages/telugu`
   - `/topics`
   - `/auth`
@@ -52,7 +53,7 @@ Primary files:
 ## Current sitemap policy
 
 - sitemap now includes only intentionally public routes
-- the current sitemap contains `/`, `/features`, `/how-it-works`, `/languages/telugu`, `/topics`, and `/auth`
+- the current sitemap contains `/`, `/features`, `/how-it-works`, `/methodology`, `/languages/telugu`, `/topics`, and `/auth`
 - protected learner/reviewer surfaces are intentionally excluded
 - sitemap entries are now generated from the same shared route-definition registry that owns route metadata
 
@@ -64,7 +65,7 @@ Primary file:
 
 - `/api/*` remains disallowed
 - authenticated/private app routes are disallowed
-- the crawler is allowed to access `/`, `/features`, `/how-it-works`, `/languages/telugu`, `/topics`, and `/auth`
+- the crawler is allowed to access `/`, `/features`, `/how-it-works`, `/methodology`, `/languages/telugu`, `/topics`, and `/auth`
 
 Primary file:
 
@@ -92,6 +93,7 @@ Primary file:
    - `https://learn-lang.amankori.me/`
    - `https://learn-lang.amankori.me/features`
    - `https://learn-lang.amankori.me/how-it-works`
+   - `https://learn-lang.amankori.me/methodology`
    - `https://learn-lang.amankori.me/languages/telugu`
    - `https://learn-lang.amankori.me/topics`
    - `https://learn-lang.amankori.me/auth`
@@ -99,5 +101,5 @@ Primary file:
 
 ## Known limitations
 
-- the application is still primarily an authenticated SPA, so public crawlable surface is limited to the landing, feature, explainer, public language/topic pages, and sign-in entry routes
+- the application is still primarily an authenticated SPA, so public crawlable surface is limited to the landing, product explainer and methodology pages, public language/topic pages, and sign-in entry routes
 - if GTM container ownership or analytics policy changes, update the shared SEO constants and this document together

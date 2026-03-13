@@ -53,6 +53,14 @@ Current canonical app truth lives in:
 - Active backlog: [backlog.md](/Users/aman/Projects/personal-projects/Learn-Language/context/active-tasks/backlog.md)
 - Future candidate work belongs in [future-tasks/backlog.md](/Users/aman/Projects/personal-projects/Learn-Language/context/future-tasks/backlog.md)
 - Recent completed work:
+  - admins can now download repo-style vocabulary exports from the review surface, with the backend emitting `words.json` and `sentences.json` payloads from the live database
+  - review queue actions are now status-aware: approved items show un-approve, rejected items show revised-draft recovery plus move-for-approval, and the queue header explains what `draft` means in the lifecycle
+  - browser speech synthesis now ranks higher-quality English and Telugu-family voices instead of taking the first acceptable system voice, improving macOS fallback quality when better local voices exist
+  - browser speech fallback now warms the voice list, prefers better Indian-language voice matches for Telugu-family playback, and avoids generic English fallback that caused distorted macOS pronunciation
+  - public app-router pages and the authenticated SPA now share one root runtime theme provider instead of drifting between public fallback styling and app-selected themes
+  - Telugu vocabulary coverage now includes an additional transport/transit slice with linked example sentences for train, station, bus-stop, platform, luggage, seat, reach, and depart usage
+  - hybrid quiz audio playback now reuses a hardened HTML audio path and avoids unsupported speech-synthesis fallback on macOS/Apple browsers when no compatible voice exists
+  - public methodology page now explains active recall versus recognition and spaced repetition as an indexable discovery route
   - quiz session mobile viewport sizing now follows the feedback-screen fixed-shell pattern using shared viewport-safe sizing tokens
   - repo-wide Continuum enforcement hardening across shared UI primitives with no remaining checker folder escape hatch
   - shared primitive width/height/radius/hairline values migrated onto named Continuum size tokens

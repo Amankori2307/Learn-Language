@@ -1,5 +1,6 @@
 import { Layout } from "@/components/layout";
 import { useAuth } from "@/hooks/use-auth";
+import { useDownloadVocabularyExport } from "@/hooks/use-admin";
 import { UserTypeEnum } from "@shared/domain/enums";
 import { ReviewQueuePanel } from "@/features/review/review-queue-panel";
 import { ReviewHistoryPanel } from "@/features/review/review-history-panel";
@@ -14,6 +15,8 @@ import {
 export default function ReviewPage() {
   const { user } = useAuth();
   const canReview = user?.role === UserTypeEnum.REVIEWER || user?.role === UserTypeEnum.ADMIN;
+  const canDownloadVocabularyExport = user?.role === UserTypeEnum.ADMIN;
+  const downloadVocabularyExport = useDownloadVocabularyExport();
   const {
     status,
     setStatus,
@@ -53,9 +56,13 @@ export default function ReviewPage() {
           status={status}
           setStatus={setStatus}
           statusOptions={REVIEW_STATUS_OPTIONS}
+          canDownloadVocabularyExport={canDownloadVocabularyExport}
+          onDownloadVocabularyExport={() => downloadVocabularyExport.mutate()}
+          isDownloadingVocabularyExport={downloadVocabularyExport.isPending}
         />
 
         <ReviewBulkActions
+          status={status}
           notes={notes}
           setNotes={setNotes}
           selectedCount={selectedIds.length}

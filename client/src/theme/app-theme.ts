@@ -72,7 +72,7 @@ export const APP_THEME_DEFINITIONS: readonly AppThemeDefinition[] = [
   },
 ] as const;
 
-export const DEFAULT_APP_THEME = AppThemeId.CURRENT;
+export const DEFAULT_APP_THEME = AppThemeId.WARM;
 
 export const IMPLEMENTED_APP_THEMES = APP_THEME_DEFINITIONS.filter(
   (theme) => theme.availability === "implemented",

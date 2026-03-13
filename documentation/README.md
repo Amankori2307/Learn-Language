@@ -8,6 +8,7 @@ This folder contains canonical current-state documentation only.
 
 - [core-features.md](/Users/aman/Projects/personal-projects/Learn-Language/documentation/product/core-features.md)
 - [analytics-event-taxonomy.md](/Users/aman/Projects/personal-projects/Learn-Language/documentation/product/analytics-event-taxonomy.md)
+- [quiz-confidence-hybrid-model.md](/Users/aman/Projects/personal-projects/Learn-Language/documentation/product/quiz-confidence-hybrid-model.md)
 
 ### Architecture
 

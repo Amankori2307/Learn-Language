@@ -6,7 +6,6 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { useAuth } from "@/hooks/use-auth";
 import { AppAsyncIndicator } from "@/components/app-async-indicator";
-import { AppThemeProvider } from "@/theme/app-theme-provider";
 import { APP_BRAND_NAME } from "@shared/domain/constants/app-brand";
 import { getSeoRouteDefinition } from "@shared/domain/constants/seo";
 
@@ -73,20 +72,17 @@ function App() {
   const [location] = useLocation();
 
   useEffect(() => {
-    const path = location.split(/[?#]/)[0] || "/";
-    const routeMetadata = getSeoRouteDefinition(path);
+    const routeMetadata = getSeoRouteDefinition(location);
     document.title = routeMetadata?.title ?? `Not Found | ${APP_BRAND_NAME}`;
   }, [location]);
 
   return (
     <QueryClientProvider client={queryClient}>
-      <AppThemeProvider>
-        <TooltipProvider>
-          <AppAsyncIndicator />
-          <Toaster />
-          <Router />
-        </TooltipProvider>
-      </AppThemeProvider>
+      <TooltipProvider>
+        <AppAsyncIndicator />
+        <Toaster />
+        <Router />
+      </TooltipProvider>
     </QueryClientProvider>
   );
 }

@@ -4,6 +4,7 @@ import { PendingButton } from "@/components/ui/pending-button";
 import { SurfaceMessage, TableSurfaceSkeleton } from "@/components/ui/page-states";
 import { ReviewStatusEnum } from "@shared/domain/enums";
 import { formatReviewDate } from "@/features/review/use-review-page-view-model";
+import { Link } from "wouter";
 
 type ReviewWord = {
   id: number;
@@ -17,6 +18,55 @@ type ReviewWord = {
   reviewedBy?: string | null;
   reviewedAt?: string | null;
 };
+
+function getRowActions(reviewStatus: string) {
+  if (reviewStatus === ReviewStatusEnum.APPROVED) {
+    return [
+      {
+        type: "transition" as const,
+        toStatus: ReviewStatusEnum.REJECTED,
+        label: "Un-approve",
+        pendingLabel: "Updating...",
+        variant: "destructive" as const,
+      },
+    ];
+  }
+
+  if (reviewStatus === ReviewStatusEnum.REJECTED) {
+    return [
+      {
+        type: "link" as const,
+        href: "/review/add",
+        label: "Create Revised Draft",
+        variant: "outline" as const,
+      },
+      {
+        type: "transition" as const,
+        toStatus: ReviewStatusEnum.PENDING_REVIEW,
+        label: "Move for Approval",
+        pendingLabel: "Updating...",
+        variant: "outline" as const,
+      },
+    ];
+  }
+
+  return [
+    {
+      type: "transition" as const,
+      toStatus: ReviewStatusEnum.APPROVED,
+      label: "Approve",
+      pendingLabel: "Approving...",
+      variant: "default" as const,
+    },
+    {
+      type: "transition" as const,
+      toStatus: ReviewStatusEnum.REJECTED,
+      label: "Reject",
+      pendingLabel: "Rejecting...",
+      variant: "destructive" as const,
+    },
+  ];
+}
 
 export function ReviewQueuePanel({
   queueItems,
@@ -74,6 +124,9 @@ export function ReviewQueuePanel({
       ) : (
         <div className="overflow-auto md:max-h-[var(--pane-review-max-height)]">
           {queueItems.map((word) => (
+            (() => {
+              const rowActions = getRowActions(word.reviewStatus);
+              return (
             <div
               key={word.id}
               className={`border-b border-border/30 p-4 last:border-b-0 ${activeWordId === word.id ? "bg-secondary/50" : ""}`}
@@ -106,39 +159,36 @@ export function ReviewQueuePanel({
                     >
                       View History
                     </Button>
-                    <PendingButton
-                      size="sm"
-                      onClick={() =>
-                        transitionWord({
-                          id: word.id,
-                          toStatus: ReviewStatusEnum.APPROVED,
-                        })
-                      }
-                      pending={isTransitionPending}
-                      pendingLabel="Approving..."
-                      className="w-full sm:w-auto"
-                    >
-                      Approve
-                    </PendingButton>
-                    <PendingButton
-                      size="sm"
-                      variant="destructive"
-                      onClick={() =>
-                        transitionWord({
-                          id: word.id,
-                          toStatus: ReviewStatusEnum.REJECTED,
-                        })
-                      }
-                      pending={isTransitionPending}
-                      pendingLabel="Rejecting..."
-                      className="w-full sm:w-auto"
-                    >
-                      Reject
-                    </PendingButton>
+                    {rowActions.map((action) =>
+                      action.type === "link" ? (
+                        <Button key={action.label} size="sm" variant={action.variant} asChild className="w-full sm:w-auto">
+                          <Link href={action.href}>{action.label}</Link>
+                        </Button>
+                      ) : (
+                        <PendingButton
+                          key={action.label}
+                          size="sm"
+                          variant={action.variant}
+                          onClick={() =>
+                            transitionWord({
+                              id: word.id,
+                              toStatus: action.toStatus,
+                            })
+                          }
+                          pending={isTransitionPending}
+                          pendingLabel={action.pendingLabel}
+                          className="w-full sm:w-auto"
+                        >
+                          {action.label}
+                        </PendingButton>
+                      ),
+                    )}
                   </div>
                 </div>
               </div>
             </div>
+              );
+            })()
           ))}
         </div>
       )}

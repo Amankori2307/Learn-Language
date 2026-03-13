@@ -57,3 +57,22 @@ export const requireReviewer: RequestHandler = async (req, res, next) => {
   });
   return next();
 };
+
+export const requireAdmin: RequestHandler = async (req, res, next) => {
+  appLogger.debug("auth.permissions.requireAdmin.start", {
+    requestId: req.requestId ?? "unknown",
+  });
+  const role = await getCurrentUserRole(req);
+  if (role !== UserTypeEnum.ADMIN) {
+    appLogger.warn("auth.permissions.requireAdmin.reject", {
+      requestId: req.requestId ?? "unknown",
+      role: role ?? null,
+    });
+    return sendError(req, res, 403, "FORBIDDEN", "Admin access required");
+  }
+  appLogger.debug("auth.permissions.requireAdmin.end", {
+    requestId: req.requestId ?? "unknown",
+    role,
+  });
+  return next();
+};

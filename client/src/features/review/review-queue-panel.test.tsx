@@ -73,4 +73,67 @@ describe("ReviewQueuePanel", () => {
     });
     expect(container.querySelector(".md\\:max-h-\\[var\\(--pane-review-max-height\\)\\]")).toBeTruthy();
   });
+
+  it("shows status-specific actions for approved and rejected rows", () => {
+    const { rerender } = render(
+      <ReviewQueuePanel
+        queueItems={[
+          {
+            id: 21,
+            transliteration: "namaste",
+            originalScript: "నమస్తే",
+            english: "hello",
+            partOfSpeech: "phrase",
+            reviewStatus: "approved",
+            submittedBy: "reviewer@example.com",
+            submittedAt: "2026-03-10T10:00:00.000Z",
+            reviewedBy: "admin@example.com",
+            reviewedAt: "2026-03-11T10:00:00.000Z",
+          },
+        ]}
+        queueLoading={false}
+        queueError={false}
+        retryQueue={vi.fn()}
+        selectedSet={new Set<number>()}
+        toggleSelected={vi.fn()}
+        setActiveWordId={vi.fn()}
+        isTransitionPending={false}
+        transitionWord={vi.fn()}
+      />,
+    );
+
+    expect(screen.getByRole("button", { name: "Un-approve" })).toBeTruthy();
+    expect(screen.queryByRole("button", { name: "Approve" })).toBeNull();
+
+    rerender(
+      <ReviewQueuePanel
+        queueItems={[
+          {
+            id: 22,
+            transliteration: "namaste",
+            originalScript: "నమస్తే",
+            english: "hello",
+            partOfSpeech: "phrase",
+            reviewStatus: "rejected",
+            submittedBy: "reviewer@example.com",
+            submittedAt: "2026-03-10T10:00:00.000Z",
+            reviewedBy: "admin@example.com",
+            reviewedAt: "2026-03-11T10:00:00.000Z",
+          },
+        ]}
+        queueLoading={false}
+        queueError={false}
+        retryQueue={vi.fn()}
+        selectedSet={new Set<number>()}
+        toggleSelected={vi.fn()}
+        setActiveWordId={vi.fn()}
+        isTransitionPending={false}
+        transitionWord={vi.fn()}
+      />,
+    );
+
+    expect(screen.getByRole("button", { name: "Move for Approval" })).toBeTruthy();
+    expect(screen.getByRole("link", { name: "Create Revised Draft" })).toBeTruthy();
+    expect(screen.queryByRole("button", { name: "Reject" })).toBeNull();
+  });
 });

@@ -65,10 +65,19 @@ export const SEO_ROUTE_DEFINITIONS: readonly ISeoRouteDefinition[] = [
     path: "/mastery",
     title: `Mastery Guide | ${APP_BRAND_NAME}`,
     description:
-      "Learn how mastery is earned in Learn-Lang, the streak thresholds, and how review timing adapts to your recall quality.",
+      "Learn what Mastered, Learning, and Needs Review mean in Learn-Lang, how a word reaches mastery, and what action to take for each state.",
     index: true,
     changeFrequency: "monthly",
     priority: 0.78,
+  },
+  {
+    path: "/methodology",
+    title: `Active Recall And Spaced Repetition | ${APP_BRAND_NAME}`,
+    description:
+      "Understand the Learn-Lang methodology: why active recall beats passive recognition and how spaced repetition improves long-term vocabulary retention.",
+    index: true,
+    changeFrequency: "monthly",
+    priority: 0.8,
   },
   {
     path: "/languages/telugu",
@@ -175,6 +184,28 @@ export const APP_PUBLIC_ROUTES = SEO_ROUTE_DEFINITIONS.filter((route) => route.i
 
 export const APP_PROTECTED_ROUTES = SEO_ROUTE_DEFINITIONS.filter((route) => !route.index).map((route) => route.path);
 
+export function normalizeSeoPath(input?: string | null) {
+  const raw = (input ?? "").trim();
+  const withoutQuery = raw.split(/[?#]/)[0];
+
+  if (!withoutQuery || withoutQuery === "/") {
+    return "/";
+  }
+
+  const withLeadingSlash = withoutQuery.startsWith("/") ? withoutQuery : `/${withoutQuery}`;
+  return withLeadingSlash.length > 1 ? withLeadingSlash.replace(/\/+$/, "") : withLeadingSlash;
+}
+
 export function getSeoRouteDefinition(path: string) {
-  return SEO_ROUTE_DEFINITIONS.find((route) => route.path === path);
+  const normalizedPath = normalizeSeoPath(path);
+  const exactMatch = SEO_ROUTE_DEFINITIONS.find((route) => route.path === normalizedPath);
+  if (exactMatch) {
+    return exactMatch;
+  }
+
+  const prefixMatch = SEO_ROUTE_DEFINITIONS.filter(
+    (route) => route.path !== "/" && normalizedPath.startsWith(`${route.path}/`),
+  ).sort((a, b) => b.path.length - a.path.length)[0];
+
+  return prefixMatch;
 }

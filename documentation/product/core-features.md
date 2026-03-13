@@ -68,6 +68,7 @@ Implemented behavior:
 - confidence level capture on answers, with the quiz-side selector available behind an explicit learner preference
 - response-time capture on answers
 - completion flows with next recommended session
+- hybrid-confidence evaluation is documented as a planned decision model, not a shipped behavior
 
 Implementation references:
 
@@ -77,6 +78,7 @@ Implementation references:
 - [client/src/components/quiz-card.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/components/quiz-card.tsx)
 - [server/src/modules/quiz/quiz.controller.ts](/Users/aman/Projects/personal-projects/Learn-Language/server/src/modules/quiz/quiz.controller.ts)
 - [shared/routes.ts](/Users/aman/Projects/personal-projects/Learn-Language/shared/routes.ts)
+- [documentation/product/quiz-confidence-hybrid-model.md](/Users/aman/Projects/personal-projects/Learn-Language/documentation/product/quiz-confidence-hybrid-model.md)
 
 ### 4. Spaced repetition and mastery tracking
 
@@ -141,8 +143,11 @@ Implemented behavior:
 
 - reviewer/admin-only review surfaces
 - vocabulary draft submission
-- review queue by status
-- approve/reject actions
+- review queue by status with lifecycle-specific guidance
+- status-aware review actions:
+  - `draft` means created but not yet ready for sign-off
+  - `approved` items can be un-approved instead of re-approved
+  - `rejected` items offer revised-draft recovery plus move-for-approval
 - bulk review transitions
 - review notes and audit trail
 - review history per word
@@ -162,11 +167,12 @@ Implementation references:
 These are implemented, but they are not the primary product backbone:
 
 - profile editing
-- optional audio resolution/generation support
+- optional audio resolution/generation support, with browser speech fallback used only when a compatible local voice is available
 - optional image hints
 - text-only tutor mode
 - admin seed endpoint
 - admin SRS drift monitoring endpoint
+- admin vocabulary export endpoint that emits repo-style `words.json` and `sentences.json` payloads
 
 ## Domain backbone
 

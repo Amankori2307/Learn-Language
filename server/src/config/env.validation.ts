@@ -20,6 +20,8 @@ export const envSchema = z
     APP_LOG_LEVEL: z.string().optional(),
     APP_LOG_RETENTION_DAYS: z.coerce.number().int().positive().optional(),
     APP_LOG_MAX_SIZE: z.string().optional(),
+    NEXT_PUBLIC_ANALYTICS_PROVIDER: z.string().optional(),
+    NEXT_PUBLIC_MIXPANEL_PROJECT_TOKEN: z.string().optional(),
     ENABLE_GCP_TTS: z
       .string()
       .optional()

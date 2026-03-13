@@ -3,6 +3,7 @@ import type { Metadata, Viewport } from "next";
 import Script from "next/script";
 import "../client/src/index.css";
 import { APP_BRAND_NAME } from "@shared/domain/constants/app-brand";
+import { AppThemeProvider } from "../client/src/theme/app-theme-provider";
 import {
   APP_DEFAULT_DESCRIPTION,
   APP_GOOGLE_TAG_MANAGER_ID,
@@ -130,44 +131,46 @@ export default function RootLayout({
   };
 
   return (
-    <html lang="en" className="theme-current">
+    <html lang="en" suppressHydrationWarning>
       <body className="bg-background text-foreground">
-        {APP_GOOGLE_TAG_MANAGER_ID ? (
-          <>
-            <Script
-              id="google-tag-manager"
-              strategy="afterInteractive"
-              dangerouslySetInnerHTML={{
-                __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        <AppThemeProvider>
+          {APP_GOOGLE_TAG_MANAGER_ID ? (
+            <>
+              <Script
+                id="google-tag-manager"
+                strategy="afterInteractive"
+                dangerouslySetInnerHTML={{
+                  __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
 j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
 })(window,document,'script','dataLayer','${APP_GOOGLE_TAG_MANAGER_ID}');`,
-              }}
-            />
-            <noscript>
-              <iframe
-                src={`https://www.googletagmanager.com/ns.html?id=${APP_GOOGLE_TAG_MANAGER_ID}`}
-                height="0"
-                width="0"
-                style={{ display: "none", visibility: "hidden" }}
+                }}
               />
-            </noscript>
-          </>
-        ) : null}
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteStructuredData) }}
-        />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(softwareStructuredData) }}
-        />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationStructuredData) }}
-        />
-        {children}
+              <noscript>
+                <iframe
+                  src={`https://www.googletagmanager.com/ns.html?id=${APP_GOOGLE_TAG_MANAGER_ID}`}
+                  height="0"
+                  width="0"
+                  style={{ display: "none", visibility: "hidden" }}
+                />
+              </noscript>
+            </>
+          ) : null}
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteStructuredData) }}
+          />
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{ __html: JSON.stringify(softwareStructuredData) }}
+          />
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationStructuredData) }}
+          />
+          {children}
+        </AppThemeProvider>
       </body>
     </html>
   );

@@ -8,6 +8,7 @@ import {
   APP_DEFAULT_DESCRIPTION,
   APP_SITE_URL,
   getSeoRouteDefinition,
+  normalizeSeoPath,
 } from "@shared/domain/constants/seo";
 
 export const dynamic = "force-dynamic";
@@ -16,7 +17,7 @@ function normalizeRoutePath(slug?: string[]) {
   if (!slug || slug.length === 0) {
     return "/";
   }
-  return `/${slug.join("/")}`;
+  return normalizeSeoPath(`/${slug.join("/")}`);
 }
 
 export async function generateMetadata({

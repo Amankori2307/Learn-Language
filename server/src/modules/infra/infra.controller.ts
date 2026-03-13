@@ -3,6 +3,7 @@ import type { Request, Response } from "express";
 import { InfraService } from "./infra.service";
 import { AuthenticatedGuard } from "../../common/guards/authenticated.guard";
 import { ReviewerGuard } from "../../common/guards/reviewer.guard";
+import { AdminGuard } from "../../common/guards/admin.guard";
 import { SrsDriftQueryDto } from "./infra.dto";
 import { AppError } from "../../common/errors/app-error";
 import { sendError, sendSuccess } from "../../common/http";
@@ -27,6 +28,17 @@ export class InfraApiController {
   async getSrsDrift(@Req() req: Request, @Res() res: Response, @Query() query: SrsDriftQueryDto) {
     try {
       const result = await this.infraService.getSrsDrift(query.language);
+      sendSuccess(req, res, result);
+    } catch (error) {
+      this.handleError(req, res, error);
+    }
+  }
+
+  @Get("/admin/vocabulary/export")
+  @UseGuards(AuthenticatedGuard, AdminGuard)
+  async exportVocabularyData(@Req() req: Request, @Res() res: Response) {
+    try {
+      const result = await this.infraService.exportVocabularyData();
       sendSuccess(req, res, result);
     } catch (error) {
       this.handleError(req, res, error);

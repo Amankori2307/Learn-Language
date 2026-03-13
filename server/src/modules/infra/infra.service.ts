@@ -15,4 +15,8 @@ export class InfraService {
     const parsed = api.admin.srsDrift.input?.parse({ language }) ?? {};
     return this.repository.getSrsDriftSummary(parsed.language);
   }
+
+  async exportVocabularyData() {
+    return this.repository.exportVocabularyData();
+  }
 }

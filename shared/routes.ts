@@ -60,6 +60,39 @@ export const errorSchemas = {
   rateLimited: errorResponseSchema("RATE_LIMITED"),
 };
 
+const seedWordSchema = z.object({
+  key: z.string(),
+  language: z.nativeEnum(LanguageEnum),
+  originalScript: z.string(),
+  transliteration: z.string(),
+  english: z.string(),
+  partOfSpeech: z.nativeEnum(PartOfSpeechEnum),
+  difficulty: z.number(),
+  difficultyLevel: z.string(),
+  frequencyScore: z.number(),
+  cefrLevel: z.string().nullable().optional(),
+  tags: z.array(z.nativeEnum(VocabularyTagEnum)).optional(),
+  clusters: z.array(z.string()).optional(),
+  source: z
+    .object({
+      type: z.string().optional(),
+      generatedAt: z.string().optional(),
+      reviewStatus: z.nativeEnum(ReviewStatusEnum).optional(),
+      sourceUrl: z.string().optional(),
+    })
+    .optional(),
+});
+
+const seedSentenceSchema = z.object({
+  language: z.nativeEnum(LanguageEnum),
+  originalScript: z.string(),
+  pronunciation: z.string(),
+  english: z.string(),
+  contextTag: z.string(),
+  difficulty: z.number(),
+  wordRefs: z.array(z.string()),
+});
+
 // ============================================
 // API CONTRACT
 // ============================================
@@ -792,6 +825,21 @@ export const api = {
                 message: z.string(),
               }),
             ),
+          }),
+        ),
+        401: errorSchemas.unauthorized,
+        403: errorSchemas.forbidden,
+      },
+    },
+    vocabExport: {
+      method: "GET" as const,
+      path: "/api/admin/vocabulary/export" as const,
+      responses: {
+        200: successResponseSchema(
+          z.object({
+            generatedAt: z.string(),
+            words: z.array(seedWordSchema),
+            sentences: z.array(seedSentenceSchema),
           }),
         ),
         401: errorSchemas.unauthorized,

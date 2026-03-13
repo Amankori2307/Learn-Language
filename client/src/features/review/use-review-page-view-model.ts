@@ -15,6 +15,20 @@ export const REVIEW_STATUS_OPTIONS: ReviewStatus[] = [
   ReviewStatusEnum.REJECTED,
 ];
 
+export function getReviewStatusDescription(status: ReviewStatus) {
+  switch (status) {
+    case ReviewStatusEnum.DRAFT:
+      return "Draft items are created but not yet ready for reviewer sign-off. Edit them in Add Vocabulary, then move them into review when the content is ready.";
+    case ReviewStatusEnum.APPROVED:
+      return "Approved items are already cleared for learner-facing use. Review here is for reversal only.";
+    case ReviewStatusEnum.REJECTED:
+      return "Rejected items should be revised before another review pass. Create a revised draft, then move the item back for approval when ready.";
+    case ReviewStatusEnum.PENDING_REVIEW:
+    default:
+      return "Pending review items are ready for reviewer decision before learner exposure.";
+  }
+}
+
 export function formatReviewDate(value?: string | null) {
   if (!value) return "n/a";
   const date = new Date(value);

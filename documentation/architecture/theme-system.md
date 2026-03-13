@@ -8,6 +8,7 @@ Theme tokens are one foundation layer of the broader [Continuum Design System](/
 
 Theme ownership lives in:
 
+- [app/layout.tsx](/Users/aman/Projects/personal-projects/Learn-Language/app/layout.tsx)
 - [client/src/theme/app-theme.ts](/Users/aman/Projects/personal-projects/Learn-Language/client/src/theme/app-theme.ts)
 - [client/src/theme/app-theme-provider.tsx](/Users/aman/Projects/personal-projects/Learn-Language/client/src/theme/app-theme-provider.tsx)
 - [client/src/index.css](/Users/aman/Projects/personal-projects/Learn-Language/client/src/index.css)
@@ -44,6 +45,8 @@ Required token groups:
 
 ## Current implementation notes
 
+- the root Next.js layout now owns the shared `AppThemeProvider`, so public app-router pages and the authenticated SPA resolve from the same runtime theme source
+- the default runtime theme is now `warm`
 - `dark` is the user-facing label for app theme id `current`, which maps to provider theme `dark`
 - `light` maps to provider theme `minimal`
 - `warm` maps to provider theme `warm`
@@ -66,3 +69,4 @@ Required token groups:
 
 - some feature surfaces still carry one-off emphasis styling that should move toward shared variants
 - theme switching is shell-owned; there is not yet a dedicated end-user settings surface
+- public pages do not expose a separate theme picker yet, but they now inherit the same selected theme and token set as the authenticated shell

@@ -65,6 +65,54 @@ function assertPartOfSpeech(value: string): PartOfSpeechEnum {
   throw new Error(`Invalid partOfSpeech value: ${value}`);
 }
 
+export type SeedWordExport = {
+  key: string;
+  originalScript: string;
+  transliteration: string;
+  english: string;
+  partOfSpeech: PartOfSpeechEnum;
+  language: LanguageEnum;
+  difficulty: number;
+  difficultyLevel: string;
+  frequencyScore: number;
+  cefrLevel?: string | null;
+  tags?: VocabularyTagEnum[];
+  clusters?: string[];
+  source?: {
+    type?: string;
+    generatedAt?: string;
+    reviewStatus?: ReviewStatusEnum;
+    sourceUrl?: string;
+  };
+};
+
+export type SeedSentenceExport = {
+  language: LanguageEnum;
+  originalScript: string;
+  pronunciation: string;
+  english: string;
+  contextTag: string;
+  difficulty: number;
+  wordRefs: string[];
+};
+
+function buildSeedWordKey(language: LanguageEnum, transliteration: string, english: string): string {
+  return `${language}::${transliteration.trim().toLowerCase()}::${english.trim().toLowerCase()}`;
+}
+
+function resolveSeedSourceType(input: {
+  tags: VocabularyTagEnum[];
+  sourceUrl: string | null;
+}): string {
+  if (input.tags.includes(VocabularyTagEnum.MODEL_SEED)) {
+    return "model-knowledge";
+  }
+  if (input.sourceUrl) {
+    return "reviewed-source";
+  }
+  return "manual-review";
+}
+
 export interface IStorage {
   // Words & Clusters
   getWords(limit?: number, language?: LanguageEnum): Promise<Word[]>;
@@ -303,6 +351,11 @@ export interface IStorage {
   }): Promise<{ word: Word; examplesCreated: number }>;
 
   // Admin/Seed
+  exportVocabularyData(): Promise<{
+    generatedAt: string;
+    words: SeedWordExport[];
+    sentences: SeedSentenceExport[];
+  }>;
   seedInitialData(): Promise<void>;
 }
 
@@ -1105,6 +1158,114 @@ export class DatabaseStorage implements IStorage {
 
       return { word: created, examplesCreated: input.examples.length };
     });
+  }
+
+  async exportVocabularyData(): Promise<{
+    generatedAt: string;
+    words: SeedWordExport[];
+    sentences: SeedSentenceExport[];
+  }> {
+    const allWords = await db.select().from(words);
+    const allClusters = await db.select().from(clusters);
+    const allWordClusterLinks = await db.select().from(wordClusters);
+    const allExamples = await db.select().from(wordExamples);
+
+    const clusterNameById = new Map(allClusters.map((cluster) => [cluster.id, cluster.name]));
+    const clusterNamesByWordId = new Map<number, string[]>();
+
+    for (const link of allWordClusterLinks) {
+      const clusterName = clusterNameById.get(link.clusterId);
+      if (!clusterName) {
+        continue;
+      }
+      const names = clusterNamesByWordId.get(link.wordId) ?? [];
+      names.push(clusterName);
+      clusterNamesByWordId.set(link.wordId, names);
+    }
+
+    const wordKeyById = new Map<number, string>();
+    const exportedWords = allWords
+      .map((word) => {
+        const key = buildSeedWordKey(word.language, word.transliteration, word.english);
+        wordKeyById.set(word.id, key);
+        const tags = word.tags ?? [];
+        const clusterNames = Array.from(new Set(clusterNamesByWordId.get(word.id) ?? [])).sort();
+        const generatedAt = word.sourceCapturedAt?.toISOString() ?? word.createdAt?.toISOString();
+
+        return {
+          key,
+          language: word.language,
+          originalScript: word.originalScript,
+          transliteration: word.transliteration,
+          english: word.english,
+          partOfSpeech: assertPartOfSpeech(word.partOfSpeech),
+          difficulty: word.difficulty,
+          difficultyLevel: word.difficultyLevel,
+          frequencyScore: word.frequencyScore,
+          cefrLevel: word.cefrLevel ?? undefined,
+          tags,
+          clusters: clusterNames,
+          source: {
+            type: resolveSeedSourceType({
+              tags,
+              sourceUrl: word.sourceUrl ?? null,
+            }),
+            generatedAt,
+            reviewStatus: word.reviewStatus,
+            sourceUrl: word.sourceUrl ?? undefined,
+          },
+        } satisfies SeedWordExport;
+      })
+      .sort((left, right) => left.key.localeCompare(right.key));
+
+    const sentenceMap = new Map<string, SeedSentenceExport>();
+
+    for (const example of allExamples) {
+      const wordRef = wordKeyById.get(example.wordId);
+      if (!wordRef) {
+        continue;
+      }
+
+      const sentenceKey = [
+        example.language,
+        example.originalScript,
+        example.pronunciation,
+        example.englishSentence,
+        example.contextTag,
+        example.difficulty,
+      ].join("::");
+
+      const existing = sentenceMap.get(sentenceKey);
+      if (existing) {
+        if (!existing.wordRefs.includes(wordRef)) {
+          existing.wordRefs.push(wordRef);
+          existing.wordRefs.sort();
+        }
+        continue;
+      }
+
+      sentenceMap.set(sentenceKey, {
+        language: example.language,
+        originalScript: example.originalScript,
+        pronunciation: example.pronunciation,
+        english: example.englishSentence,
+        contextTag: example.contextTag,
+        difficulty: example.difficulty,
+        wordRefs: [wordRef],
+      });
+    }
+
+    const exportedSentences = Array.from(sentenceMap.values()).sort((left, right) =>
+      `${left.language}::${left.originalScript}`.localeCompare(
+        `${right.language}::${right.originalScript}`,
+      ),
+    );
+
+    return {
+      generatedAt: new Date().toISOString(),
+      words: exportedWords,
+      sentences: exportedSentences,
+    };
   }
 
   async getLearningInsights(
