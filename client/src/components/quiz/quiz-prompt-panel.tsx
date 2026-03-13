@@ -14,6 +14,8 @@ export function QuizPromptPanel({
   onToggleEffects,
   onPlayQuestionAudio,
 }: QuizPromptPanelProps) {
+  const isSourceToTarget = type === QuizQuestionTypeEnum.SOURCE_TO_TARGET;
+
   return (
     <section className="border-b border-border/60 bg-gradient-to-br from-primary/10 via-primary/5 to-transparent p-3 sm:p-4 md:p-6 lg:border-b-0 lg:border-r">
       <div className="flex items-start justify-between gap-3">
@@ -21,15 +23,22 @@ export function QuizPromptPanel({
           <h2
             className={cn(
               "break-words font-bold leading-tight text-foreground",
-              type === QuizQuestionTypeEnum.SOURCE_TO_TARGET
-                ? "text-3xl sm:text-4xl md:text-5xl"
+              isSourceToTarget
+                ? "text-3xl sm:text-4xl md:text-[3.25rem]"
                 : "text-2xl sm:text-3xl md:text-4xl",
             )}
           >
             {question}
           </h2>
           {pronunciation ? (
-            <p className="mt-1 break-words text-sm italic text-muted-foreground md:text-base">
+            <p
+              className={cn(
+                "break-words italic text-muted-foreground",
+                isSourceToTarget
+                  ? "mt-2 text-xl font-medium text-foreground/80 sm:text-2xl md:text-3xl"
+                  : "mt-1 text-sm md:text-base",
+              )}
+            >
               {pronunciation}
             </p>
           ) : null}

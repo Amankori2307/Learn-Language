@@ -428,4 +428,31 @@ describe("QuizCard", () => {
 
     expect(screen.getByText("Could not submit your answer. Please try again.")).toBeTruthy();
   });
+
+  it("keeps pronunciation prominent for source-to-target prompts", () => {
+    render(
+      <QuizCard
+        question="వాళ్లు"
+        pronunciation="vaallu"
+        imageUrl={null}
+        type={QuizQuestionTypeEnum.SOURCE_TO_TARGET}
+        options={[
+          { id: 1, text: "they" },
+          { id: 2, text: "we (inclusive)" },
+        ]}
+        showConfidenceControl={false}
+        confidenceLevel={2}
+        onConfidenceChange={vi.fn()}
+        onAnswer={vi.fn()}
+        isSubmitting={false}
+        submitError={null}
+        result={null}
+        onNext={vi.fn()}
+      />,
+    );
+
+    expect(screen.getByText("వాళ్లు").className.includes("md:text-[3.25rem]")).toBe(true);
+    expect(screen.getByText("vaallu").className.includes("md:text-3xl")).toBe(true);
+    expect(screen.getByText("vaallu").className.includes("text-foreground/80")).toBe(true);
+  });
 });
